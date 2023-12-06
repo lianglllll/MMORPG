@@ -1,0 +1,192 @@
+syntax = "proto3";
+
+package proto;
+
+
+message HeartBeatRequest{
+
+}
+
+message HeartBeatResponse{
+
+}
+
+
+//网络三维向量
+message Vec3 {
+	int32 x = 1;
+	int32 y = 2;
+	int32 z = 3;
+}
+
+//位置信息
+message NetEntity {
+	int32 id = 1;
+    int32 speed = 2;
+	Vec3 position = 3;
+	Vec3 direction = 4;
+}
+
+enum EntityState{
+	NONE = 0;
+	IDLE = 1;
+	MOVE = 2;
+	JUMP = 3;
+	SWORDFLIGHT = 4;
+}
+
+//同步entity信息
+message NEntitySync{
+	NetEntity entity = 1;
+	EntityState state = 2;
+	bool force = 3;
+}
+
+
+//进入场景请求
+//进入哪一个请求要表示出来吧，todo
+message GameEnterRequest{
+	int32 characterId = 1;
+}
+//进入场景响应
+message GameEnterResponse{
+	bool success = 1;
+	NetActor character =2;
+}
+
+//新角色进入场景响应(其他人的)
+message SpaceCharactersEnterResponse{
+	int32 spaceId = 1;
+	repeated NetActor characterList = 2;
+}
+
+//角色离开场景
+message SpaceCharactersLeaveResponse{
+	int32 entityId = 1;
+}
+
+//同步请求
+message SpaceEntitySyncRequest{
+	NEntitySync entitySync = 1;
+}
+//同步响应
+message SpaceEntitySyncResponse{
+	NEntitySync entitySync = 1;
+}
+
+
+//注册
+message UserRegisterRequest{
+	string username = 1;
+	string password = 2;
+}
+message UserRegisterResponse{
+	int32 code = 1;
+	string message = 2;
+}
+
+//登录
+message UserLoginRequest{
+	string username = 1;
+	string password = 2;
+}
+message UserLoginResponse{
+	int32 code = 1;
+	string message = 2;
+	bool success = 3;
+}
+
+//角色创建
+message CharacterCreateRequest{
+	string name = 1;
+	int32 jobType = 2;
+}
+message CharacterCreateResponse{
+	bool success = 1;
+	string message = 2;
+	NetActor character = 3;
+}
+
+//actor信息
+message NetActor{
+	int32 id = 1;
+	int32 tid = 2;//单位类型
+	NetEntity entity = 3;
+	string name = 4;
+	int32 level = 5;
+	int64 exp = 6;
+	int32 spaceId = 7;
+	int64 gold = 8;
+	int32 hp=9;
+	int32 mp=10;
+	EntityType entityType = 11; 
+	repeated SkillInfo skills = 12;
+}
+// 查询角色列表的请求
+message CharacterListRequest{
+}
+// 角色列表的响应
+message CharacterListResponse{
+	repeated NetActor characterList = 1;
+}
+// 删除角色的请求
+message CharacterDeleteRequest{
+	int32 characterId = 1;
+}
+message CharacterDeleteResponse{
+	bool success = 1;
+	string message = 2;
+}
+
+
+//实体类型
+enum EntityType
+{
+    Character=0;
+    Monster=1;
+    NPC=2;
+}
+
+//技能信息
+message SkillInfo{
+	int32 id = 1;
+}
+
+//技能释放结果
+enum CastResult{
+	Success 			= 0;	//成功		
+	IsPassive			= 1;	//被动技能
+	MpLack				= 2;	//MP不足
+	EntityDead			= 3;	//entity已经死亡
+	OutOfRange			= 4;	//超出范围
+	Running				= 5;	//进行中
+	ColdDown			= 6;	//冷却中
+	TargetError			= 7;	//目标错误	
+}
+
+//施法信息
+message CastInfo{
+	int32 casterId = 1;
+	int32 skillId = 2;
+	int32 targetId = 3;
+	Vec3 point = 4;	//技能施法点
+	CastResult result = 5;//技能释放结果
+}
+
+
+//释放技能请求
+message SpellCastRequest{
+	CastInfo info = 1;
+}
+
+//释放技能响应,有些群攻的技能，这里用list做优化
+message SpellCastResponse{
+	repeated CastInfo list = 1;
+}
+
+//技能释放错误
+message SpellFailResponse{
+	int32 casterId = 1;
+	int32 skillId = 2;
+	CastResult reason = 3;
+}
