@@ -109,8 +109,6 @@ namespace GameServer.Combat
         {
             Log.Information("Spell::SpellPosition():Caster[{0}]:Pos[{1}]", Owner.EntityId, position);
             SCObject sco = new SCPosition(position);
-            
-
         }
 
 

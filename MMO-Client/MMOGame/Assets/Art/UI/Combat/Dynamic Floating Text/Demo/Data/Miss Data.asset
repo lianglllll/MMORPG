@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcff3a5a705644c4e9a3068b0236a108, type: 3}
+  m_Name: Miss Data
+  m_EditorClassIdentifier: 
+  id: 10
+  colours:
+  - {r: 1, g: 0.93247044, b: 0, a: 1}
+  - {r: 1, g: 0.7870383, b: 0, a: 1}
+  sizes:
+  - 1.1
+  - 3
+  font: {fileID: 0}
+  bold: 0
+  italic: 0
+  underline: 0
+  strikethrough: 0
+  lifetime: 2
+  numberOfColourAlternations: 10
+  numberOfSizeAlternations: 10
+  colourAlternationDuration: 0.1
+  sizeAlternationDuration: 0.1
+  enterDuration: 0.1
+  exitDuration: 0.1
+  maxDrift: 0
+  maxHeight: 3
+  popModifier: 2.5
+  colourAlternationMode: 1
+  sizeAlternationMode: 1
+  enterType: 0200000004000000
+  exitType: 2

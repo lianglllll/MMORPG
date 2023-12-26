@@ -21,7 +21,6 @@ namespace GameServer.Manager
         private bool reviving;          //是否处于复活倒计时
         private float reviveTime;       
 
-
         public Vector3Int SpawnPoint { get; private set; }  //刷怪位置
         public Vector3Int SpawnDir { get; private set; }    //刷怪方向
 
@@ -33,6 +32,7 @@ namespace GameServer.Manager
             SpawnDir = ParsePoint(define.Dir);
             Log.Debug("New Spawner:场景[{0}],坐标[{1}],单位类型[{2}]", space.Name, SpawnPoint, define.TID);
             this.spawn();
+            reviving = false;
         }
 
         private Vector3Int ParsePoint(string text)
@@ -52,7 +52,7 @@ namespace GameServer.Manager
         //刷怪
         private void spawn()
         {
-            this.Space.monsterManager.Create(Define.TID,Define.Level, SpawnPoint, SpawnDir);
+            this.monster = this.Space.monsterManager.Create(Define.TID,Define.Level, SpawnPoint, SpawnDir);
         }
 
         public void Update()
@@ -64,10 +64,10 @@ namespace GameServer.Manager
             }
             if(reviving && reviveTime < Time.time)
             {
-                reviving = false;
                 this.monster?.Revive();
+                reviving = false;
             }
-            
+
         }
     }
 }

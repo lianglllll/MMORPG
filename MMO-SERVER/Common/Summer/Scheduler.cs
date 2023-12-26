@@ -81,6 +81,8 @@ namespace Summer
                 {
                     tasks.Add(item);
                 }
+
+
                 //执行任务
                 foreach(Task task in tasks)
                 {
@@ -235,7 +237,6 @@ namespace Summer
     }
 
 
-
     public class Time
     {
 
@@ -249,7 +250,6 @@ namespace Summer
             private set { }
         }
 
-
         /// <summary>
         /// 获取上一帧运行所用的时间
         /// </summary>
@@ -260,6 +260,7 @@ namespace Summer
 
         /// <summary>
         /// 由Schedule调用，请不要自行调用，除非你知道自己在做什么！！！
+        /// 更新deltaTime
         /// </summary>
         public static void Tick()
         {

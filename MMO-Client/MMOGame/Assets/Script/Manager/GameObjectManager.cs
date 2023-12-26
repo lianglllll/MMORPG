@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Proto;
+using GameClient.Entities;
 
 /*
  管理游戏场景中的对象，我们使用entityid
@@ -48,9 +49,14 @@ public class GameObjectManager:MonoBehaviour
         Vector3 initPosition = V3.Of(chr.Entity.Position) / 1000; //设置出生点
         if (initPosition.y == 0)
         {
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition).y;//计算地面坐标,//todo有点问题
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition).y+10;//计算地面坐标,//todo有点问题
         }
         GameObject chrObj = Instantiate(prefab,initPosition,Quaternion.identity,this.transform);//将实例化的角色放到gamemanager下面
+
+        //actor 和 gameobj关联
+        Actor actor = EntityManager.Instance.GetEntity<Actor>(chr.Entity.Id);
+        actor.renderObj = chrObj;
+
 
         //gameobjectName
         if (chr.EntityType == EntityType.Character)

@@ -26,6 +26,7 @@ namespace GameServer.Model
         //当前地图中所有的Character<角色id，角色引用>
         private Dictionary<int, Character> characterDict = new Dictionary<int, Character>();
         private Dictionary<Connection, Character> connCharacter = new Dictionary<Connection, Character>();
+        
 
         public MonsterManager monsterManager = new MonsterManager();
         public SpawnManager spawnManager = new SpawnManager();

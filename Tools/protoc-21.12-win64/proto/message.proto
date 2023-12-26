@@ -117,8 +117,8 @@ message NetActor{
 	int64 exp = 6;
 	int32 spaceId = 7;
 	int64 gold = 8;
-	int32 hp=9;
-	int32 mp=10;
+	float hp=9;
+	float mp=10;
 	EntityType entityType = 11; 
 	repeated SkillInfo skills = 12;
 }
@@ -189,4 +189,136 @@ message SpellFailResponse{
 	int32 casterId = 1;
 	int32 skillId = 2;
 	CastResult reason = 3;
+}
+
+
+//伤害类型
+enum DameageType{
+	UNKNOWN = 0;		//默认值,表示未知或未设置
+	PHYSICAL = 1;		
+	MAGICAL = 2;
+	REAL = 3;			//真伤,不受任何防御属性影响
+}
+
+//伤害数据
+message Damage{
+	int32 attackerId = 1;
+	int32 targetId = 2;
+	int32 skillId = 3;
+	float amount = 4;		//伤害数值
+	DameageType damageType = 5;
+	bool isCrit = 6;		//是否暴击
+	bool isMiss = 7;
+}
+
+//通知客户端有人收到伤害
+message DamageResponse{
+	repeated Damage list = 1;
+}
+
+//actor属性更新
+message PropertyUpdate{
+
+	enum Prop{
+		HP = 0;
+		MP = 1;
+		HPMax = 2;
+		MPMax = 3;
+		State = 4;
+		Level = 5;
+		Name = 6;
+	}
+
+	//为了可以存放不同的类型的数据
+	message PropertyValue{
+		oneof value{
+			int32 int_value = 1;
+			float float_value = 2;
+			string string_value = 3;
+			UnitState state_value = 4;
+		}
+	}
+
+	int32 entity_id = 1;
+	Prop property = 2;
+	PropertyValue oldValue = 3;
+	PropertyValue newValue = 4;
+
+}
+//actor属性更新响应
+message PropertyUpdateRsponse{
+	repeated PropertyUpdate list = 1;
+}
+
+enum UnitState{
+	FREE = 0;		//自由进行任何操作
+	DEAD = 1;
+	REST = 2;		//休息，挂机 回血回蓝
+	FIGHT = 3;		//持续一段时间
+	MAX = 4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//########聊天系统##########
+
+enum Result{
+	SUCCESS = 0;
+	FAULT = 1;
+}
+
+
+enum ChatChannel{
+	ALL = 0;				
+	LOCAL = 1;
+	WORLD = 2;
+	SYSTEM = 4;
+	PRIVATE = 8;
+	TEAM = 16;
+	GUILD = 32;
+}
+
+message ChatMessage{
+	ChatChannel channel = 1;
+	int32 id = 2;
+	int32 from_id = 3;
+	string from_name = 4;			//假设两个玩家在不同的地图私聊，因为客户端只记录本地图的玩家信息，所以找不到name。
+									//也可以拿着这个id去问服务端，但是这样会加大服务端的压力
+	int32 to_id = 5;
+	string to_name = 6;
+	string content = 7;
+	double time = 8;				//时间，来拿做判断啊。比如说排序，聊天时能拿最近5分钟的消息....
+}
+
+message ChatRequest{
+	ChatMessage message = 1;
+}
+
+message ChatResponseOne{
+	Result result = 1;
+	string errormsg = 2;
+	ChatMessage message = 3;
+}
+
+message ChatResponse{
+	Result result = 1;			//响应码，错误码
+	string errormsg = 2;
+	repeated ChatMessage localMessages = 3;
+	repeated ChatMessage worldMessages = 4;
+	repeated ChatMessage systemMessages = 5;
+	repeated ChatMessage privateMessages = 6;
+	repeated ChatMessage teamMessages = 7;
+	repeated ChatMessage guildMessages = 8;
 }

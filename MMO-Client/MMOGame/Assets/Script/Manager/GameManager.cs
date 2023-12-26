@@ -25,8 +25,19 @@ public class GameManager : MonoBehaviour
         //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
         Physics.IgnoreLayerCollision(6, 6, true);
 
-        //初始化datamanager,加载文件数据
-        DataManager.Instance.init();
+
+        //初始化服务
+        DataManager.Instance.init();                //初始化datamanager,加载文件数据
+        CombatService.Instance.Init();
+        ChatService.Instance.Init();
+
+
+
+
+
+
+
+
 
         UIManager.Instance.OpenPanel("LoginPanel");
     }
@@ -52,5 +63,8 @@ public class GameManager : MonoBehaviour
     {
         EntityManager.Instance.OnUpdate(Time.fixedDeltaTime);
     }
+
+
+
 
 }

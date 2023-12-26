@@ -19,10 +19,16 @@ namespace GameServer.Combat
             this.realObj = realobj;
         }
 
-        public virtual int GetId => 0;
-        public virtual object RealObj => realObj;
-        public virtual Vector3 GetPosition() => Vector3.zero;
-        public virtual Vector3 GetDirection() => Vector3.zero;
+        public int Id => GetId();
+        public object RealObj => GetRealObj();
+        public Vector3 Position => GetPosition();
+        public Vector3 Direction => GetDirection();
+
+
+        protected virtual int GetId() => 0;
+        protected virtual object GetRealObj() => realObj;
+        protected virtual Vector3 GetPosition() => Vector3.zero;
+        protected virtual Vector3 GetDirection() => Vector3.zero;
 
     }
 
@@ -35,13 +41,9 @@ namespace GameServer.Combat
         {
         }
 
-        public override int GetId => Obj.EntityId;
-
-
-        public override Vector3 GetDirection() => Obj.Direction;
-
-
-        public override Vector3 GetPosition() => Obj.Position;
+        protected override int GetId() => Obj.EntityId;
+        protected override Vector3 GetDirection() => Obj.Direction;
+        protected override Vector3 GetPosition() => Obj.Position;
 
     }
 
@@ -50,7 +52,7 @@ namespace GameServer.Combat
         public SCPosition(Vector3 realobj) : base(realobj)
         {
         }
-        public override Vector3 GetDirection() => (Vector3)realObj;
+        protected override Vector3 GetPosition() => (Vector3)realObj;
 
     }
 

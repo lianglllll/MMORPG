@@ -12,7 +12,7 @@ using UnityEngine;
 namespace GameClient.Combat
 {
     //技能施法的过程：
-    //开始 - 前摇 - 激活 - 结束
+    //开始 - 蓄气 - 激活 - 结束
     public enum Stage
     {
         None,               //无状态
@@ -29,6 +29,9 @@ namespace GameClient.Combat
         private float RunTime;              //技能运行时间
         public Stage State;                 //当前技能状态
         public bool IsPassive;              //是否是被动技能
+
+        private SCObject _sco;              //技能的目标,Use触发时设置
+
         public float IntonateProgress => RunTime / Define.IntonateTime; //聚气进度 0-1
 
 
@@ -43,7 +46,6 @@ namespace GameClient.Combat
         public void OnUpdate(float deltatime)
         {
             if (State == Stage.None && ColdDown == 0) return;
-
 
             if (ColdDown > 0) ColdDown -= Time.deltaTime;
             if (ColdDown < 0) ColdDown = 0;
@@ -100,28 +102,83 @@ namespace GameClient.Combat
         //使用技能
         public void Use(SCObject target)
         {
+            //只有本机玩家才会用到这个值
+            if (Owner.EntityId == GameApp.character.EntityId)
+            {
+                GameApp.CurrSkill = this;
+            }
+            _sco = target;
             RunTime = 0;
             State = Stage.Intonate;
-            GameApp.CurrSkill = this;
             OnIntonate();
         }
 
         public void OnIntonate()
         {
+            //蓄气转向
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                if(_sco is SCEntity)
+                {
+                    var actor = _sco.RealObj as Actor;
+                    Owner.renderObj.transform.LookAt(actor.renderObj.transform);
+                }
+            });
+            //播放蓄气动作
             Kaiyun.Event.FireOut("OnSkillIntonate", this);
         }
 
 
+        //技能激活
         private void OnActive()
         {
             Log.Information("Skill Active Owner[{0}],skill[{1}]", Owner.EntityId, Define.Name);
-        }
 
+
+            //如果有飞行物,就生成飞行物
+            if (Define.IsMissile)
+            {
+                var target = _sco.RealObj as Actor;
+                GameObject myObjcet = new GameObject("MyMissile");
+                var missile = myObjcet.AddComponent<Missile>();
+                missile.Init(this, Owner.renderObj.transform.position, target.renderObj);
+            }
+
+
+        }
 
         private void OnFinish()
         {
             Log.Information("技能结束：Owner[{0}],skill[{1}]", Owner.EntityId, Define.Name);
         }
+
+
+        private void OnHit()
+        {
+            ParticleSystem ps = Resources.Load<ParticleSystem>(Define.HitArt);//加载hit粒子系统
+            if (ps != null)
+            {
+                //目标是entity
+                if (_sco is SCEntity)
+                {
+                    var target = _sco.RealObj as Actor;
+                    var pos = target.renderObj.transform.position + Vector3.up * 0.9f;
+                    var dir = target.renderObj.transform.rotation;
+                    ParticleSystem newPs = GameObject.Instantiate(ps, pos, dir);        //初始化这个粒子
+                    newPs.Play();
+                    GameObject.Destroy(newPs.gameObject, newPs.main.duration);          //播放完就销毁
+
+                }
+                else if (_sco is SCPosition)
+                {
+                    ParticleSystem newPs = GameObject.Instantiate(ps, _sco.GetPosition(), Quaternion.identity);        //初始化这个粒子
+                    newPs.Play();
+                    GameObject.Destroy(newPs.gameObject, newPs.main.duration);          //播放完就销毁
+                }
+
+            }
+        }
+
 
     }
 }

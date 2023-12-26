@@ -18,16 +18,31 @@ namespace GameServer.Combat
     {
         private Space space;
 
-        //技能施法队列
-        //等到下一帧开始运行的时候再处理
+
+        //等待处理的施法请求队列,等到下一帧开始运行的时候再处理
         public ConcurrentQueue<CastInfo> castInfoQueue = new ConcurrentQueue<CastInfo>();
 
-        //技能的等待广播队列
+        //等待广播的技能施法队列
         public ConcurrentQueue<CastInfo> spellQueue = new ConcurrentQueue<CastInfo>();
-
-        //施法信息响应包,每帧发送一次
+        //等待广播的施法信息==响应包
         private SpellCastResponse spellCastResponse = new SpellCastResponse();
 
+        //当前场景下的投射物列表
+        public List<Missile> missiles = new List<Missile>();
+
+        //等待广播的伤害队列
+        public ConcurrentQueue<Damage> damageQueue = new ConcurrentQueue<Damage>();
+        private DamageResponse damageResponse = new DamageResponse();
+        
+        //等待广播：人物属性更新的队列
+        public ConcurrentQueue<PropertyUpdate> propertyUpdateQueue = new ConcurrentQueue<PropertyUpdate>();
+        private PropertyUpdateRsponse propertyUpdateRsponse = new PropertyUpdateRsponse();
+        
+
+        public void Init(Space space)
+        {
+            this.space = space;
+        }
 
         public void OnUpdate(float deltaTime)
         {
@@ -36,7 +51,17 @@ namespace GameServer.Combat
                 Log.Information("执行施法：{0}", cast);
                 RunCast(cast);
             }
+
             BroadcastSpellInfo();
+            BroadcastDamage();
+            BroadcastProperties();
+
+            for (int i = 0; i < missiles.Count; i++)
+            {
+                missiles[i].OnUpdate(deltaTime);
+            }
+
+
         }
 
         //广播施法信息
@@ -47,18 +72,46 @@ namespace GameServer.Combat
                 spellCastResponse.List.Add(item);
             }
 
-            if(spellCastResponse.List.Count() == 0)
+            if(spellCastResponse.List.Count() > 0)
             {
-                return;
+                space.Broadcast(spellCastResponse);
+                spellCastResponse.List.Clear();
             }
-            space.Broadcast(spellCastResponse);
-            spellCastResponse.List.Clear();
+
         }
 
-        public void Init(Space space)
+        //广播伤害信息
+        private void BroadcastDamage()
         {
-            this.space = space;
+            while(damageQueue.TryDequeue(out var item))
+            {
+                damageResponse.List.Add(item);
+            }
+            if(damageResponse.List.Count > 0)
+            {
+                space.Broadcast(damageResponse);
+                damageResponse.List.Clear();
+            }
+
         }
+
+        //广播人物某个属性
+        private void BroadcastProperties()
+        {
+            while (propertyUpdateQueue.TryDequeue(out var item))
+            {
+                propertyUpdateRsponse.List.Add(item);
+            }
+            if (propertyUpdateRsponse.List.Count > 0)
+            {
+                space.Broadcast(propertyUpdateRsponse);
+                propertyUpdateRsponse.List.Clear();
+            }
+
+        }
+
+
+
 
 
         private void RunCast(CastInfo cast)

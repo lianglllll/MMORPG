@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcff3a5a705644c4e9a3068b0236a108, type: 3}
+  m_Name: Demo_7
+  m_EditorClassIdentifier: 
+  id: 7
+  colours:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  sizes: []
+  font: {fileID: 11400000, guid: 771487ef4a9a6d841940ac945d21ee16, type: 2}
+  bold: 0
+  italic: 1
+  underline: 0
+  strikethrough: 0
+  lifetime: 1
+  numberOfColourAlternations: 8
+  numberOfSizeAlternations: 0
+  colourAlternationDuration: 0.1
+  sizeAlternationDuration: 0
+  enterDuration: 0.5
+  exitDuration: 0.1
+  maxDrift: 0.5
+  maxHeight: 1
+  popModifier: 1.5
+  colourAlternationMode: 0
+  sizeAlternationMode: 0
+  enterType: 0100000004000000
+  exitType: 2

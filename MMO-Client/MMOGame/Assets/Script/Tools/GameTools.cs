@@ -1,10 +1,11 @@
+using GameClient.Entities;
+using Summer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameTools 
+public class GameTools
 {
-
     //推测地面坐标点
     public static Vector3 CaculateGroundPosition(Vector3 position,float up = 1000,int ignoreLayer = 6)
     {
@@ -21,4 +22,16 @@ public class GameTools
         }
          
     }
+
+    /// <summary>
+    /// 根据entityid获取actor
+    /// </summary>
+    /// <param name="entityId"></param>
+    /// <returns></returns>
+    public static Actor GetUnit(int entityId)
+    {
+        return EntityManager.Instance.GetEntity<Actor>(entityId);
+    }
+    
+
 }

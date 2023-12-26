@@ -49,7 +49,7 @@ namespace GameClient
         public SCPosition(Vector3 realobj) : base(realobj)
         {
         }
-        public override Vector3 GetDirection() => (Vector3)realObj;
+        public override Vector3 GetPosition() => (Vector3)realObj;
 
     }
 }

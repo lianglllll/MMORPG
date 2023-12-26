@@ -40,9 +40,10 @@ public class HeroAnimations : MonoBehaviour
 
     private void Update()
     {
-        if(state == HState.Intonate && skill.State != Stage.Intonate)
+        if(state == HState.Intonate &&  skill != null &&skill.State != Stage.Intonate)
         {
             state = HState.Idle;
+            PlayIdle();
         }
     }
 
@@ -52,8 +53,10 @@ public class HeroAnimations : MonoBehaviour
         if (gameEntity.entityId != skill.Owner.EntityId) return;
         this.skill = skill;
         this.state = HState.Intonate;
-        Play("Intonate");
+        Play(skill.Define.AnimName);
     }
+
+
 
 
     //todo 用于网络同步使用
@@ -107,7 +110,7 @@ public class HeroAnimations : MonoBehaviour
 
     public void PlayRun()
     {
-        if (state == HState.Attack)
+        if (state == HState.Attack || state == HState.Intonate)
             return;
         Play("RunForward");
         state = HState.Run;
@@ -142,5 +145,8 @@ public class HeroAnimations : MonoBehaviour
         state = HState.None;
         PlayIdle();
     }
+
+
+
 
 }

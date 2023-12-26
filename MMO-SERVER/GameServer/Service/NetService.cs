@@ -92,7 +92,7 @@ namespace GameServer.Network
                 {
                     //关闭超时的客户端连接
                     Connection conn = kv.Key;
-                    Log.Information("[心跳检查]心跳超时==>");
+                    Log.Information("[心跳检查]心跳超时==>");//移除相关的资源
                     conn.Close();
                     heartBeatPairs.Remove(kv.Key);
                 }
@@ -112,6 +112,7 @@ namespace GameServer.Network
             heartBeatPairs[conn] = DateTime.Now;
             //给conn添加一个session
             conn.Set<Session>(new Session());
+
         }
 
         /*
@@ -119,6 +120,10 @@ namespace GameServer.Network
          */
         private  void OnDisconnected(Connection conn)
         {
+
+            //到这里的时候，socket已经是null了
+
+
 
             //如果玩家在场景中就让其离开场景
             Character chr = conn.Get<Session>().character;

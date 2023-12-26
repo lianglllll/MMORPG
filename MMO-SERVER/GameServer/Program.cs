@@ -51,12 +51,16 @@ namespace GameServer
             CombatService.Instance.Start();
             Log.Debug("[战斗服务启动完成]");
 
+            //开启频道聊天服务
+            ChatService.Instance.start();
+            Log.Debug("[频道服务启动完成]");
+
 
             //中心计时器任务加载
             Scheduler.Instance.Start();
             Log.Debug("[中心计时器任务加载完成]");
 
-            //中心计时器任务：
+            //添加中心计时器任务：
             Scheduler.Instance.AddTask(() => {
                 EntityManager.Instance.Update();
                 SpaceManager.Instance.Update();
@@ -66,10 +70,7 @@ namespace GameServer
             //服务器启动完毕，开始工作
             Log.Debug("[mmorpg服务器启动成功]");
 
-            //test
-            Space space = SpaceService.Instance.GetSpaceById(1);
-            Monster mon =  space.monsterManager.Create(1, 100, new Core.Vector3Int(150000, 0, 150000), Core.Vector3Int.zero);
-            mon.AI = new MonsterAI(mon);
+
 
 
             Console.ReadKey();//防止进程结束

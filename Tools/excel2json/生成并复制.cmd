@@ -3,12 +3,10 @@
 @SET CODE_FOLDER=.\out
 @SET EXE=.\excel2json.exe
 
-#复制到目录
 @SET DEST_FOLDER_1=E:\MyProject\MMORPG\MMO-Client\MMOGame\Assets\Resources\Data
 @SET DEST_FOLDER_2=E:\MyProject\MMORPG\MMO-SERVER\GameServer\bin\Release\net5.0\Data
 @SET DEST_FOLDER_3=E:\MyProject\MMORPG\MMO-SERVER\GameServer\bin\Debug\net5.0\Data
 
-# ----------------------------------------------------------------------------
 
 @ECHO Converting excel files in folder %EXCEL_FOLDER% ...
 for /f "delims=" %%i in ('dir /b /a-d /s %EXCEL_FOLDER%\*.xlsx') do (

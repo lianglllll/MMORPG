@@ -228,6 +228,10 @@ namespace GameServer.Service
 
             //将数据库角色类转为游戏角色类，添加进管理器管理
             Character character = CharacterManager.Instance.CreateCharacter(dbCharacter);
+
+            //将characterId 与 session 进行关联
+
+
              
             //响应通知客户端加入游戏的结果
             GameEnterResponse resp = new GameEnterResponse();

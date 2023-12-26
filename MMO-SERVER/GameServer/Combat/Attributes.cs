@@ -41,6 +41,9 @@ namespace GameServer.Combat
             Initial.MDEF  = define.MDEF;
             Initial.CRI   = define.CRI;
             Initial.CRD   = define.CRD;
+            Initial.HitRate = define.HitRate;
+            Initial.DodgeRate = define.DodgeRate;
+            Initial.HpSteal = define.HpSteal;
             Initial.STR   = define.STR;
             Initial.INT   = define.INT;
             Initial.AGI   = define.AGI;

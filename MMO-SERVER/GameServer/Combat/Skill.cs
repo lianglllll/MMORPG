@@ -1,4 +1,5 @@
-﻿using GameServer.Core;
+﻿using GameServer.core;
+using GameServer.Core;
 using GameServer.Model;
 using Proto;
 using Serilog;
@@ -30,10 +31,29 @@ namespace GameServer.Combat
         public Stage State;                 //当前技能状态
         public bool IsPassive;              //是否是被动技能
 
+        //未触发暴击的次数
+        private int notCrit = 0;
+        //强制触发暴击的次数(理论的暴击次数，如果你是百分之10的暴击率，那么你10次攻击会有一次暴击)（这里给你保底）（+2是宽限一点）
+        private int forceCritAfer =>  (int) (100f / Owner.Attr.final.CRI) + 2;
+
+
+
+
+
+        public SCObject Target { get; private set; }
+
+
         public Skill(Actor owner,int skid)
         {
             this.Owner = owner;
             Define = DataManager.Instance.skillDefineDict[skid];
+
+            if(Define.HitDelay.Length == 0)
+            {
+                Array.Resize(ref Define.HitDelay, 1);
+            }
+
+
         }
 
         public void Update()
@@ -113,7 +133,7 @@ namespace GameServer.Combat
             else if (sco is SCEntity && (sco.RealObj as Actor).IsDeath)
                 return CastResult.EntityDead;
             //施法者和目标的距离超过限制
-            var dist = Vector3Int.Distance(Owner.EntityData.Position, sco.GetPosition());
+            var dist = Vector3Int.Distance(Owner.EntityData.Position, sco.Position);
             if (dist > Define.SpellRange)
                 return CastResult.OutOfRange;
 
@@ -124,6 +144,7 @@ namespace GameServer.Combat
         //使用技能
         public CastResult Use(SCObject sco)
         {
+            Target = sco;
             RunTime = 0;
             State = Stage.Intonate;
             return CastResult.Success;
@@ -133,11 +154,123 @@ namespace GameServer.Combat
         private void OnActive()
         {
             Log.Information("Skill Active Owner[{0}],skill[{1}]", Owner.EntityId,Define.Name);
+
+            //如果是投射物
+            if (Define.IsMissile)
+            {
+                var missile = new Missile(this, Owner.Position, Target);
+                Owner.currentSpace.fightManager.missiles.Add(missile);
+            }
+            //如果不是投射物，
+            else
+            {
+                Log.Information("Def.HitDelay.Length=" + Define.HitDelay.Length);
+                for(int i = 0; i < Define.HitDelay.Length; i++)
+                {
+                    Scheduler.Instance.AddTask(_hitTrigger, Define.HitDelay[i], 1);
+                }
+            }
         }
+
+        /// <summary>
+        /// 触发延迟伤害
+        /// </summary>
+        private void _hitTrigger()
+        {
+            Log.Information("_hitTrigger:Owner[{0}],Skill[{1}]", Owner.EntityData.Id, Define.Name);
+            OnHit(Target);
+        }
+
+
+
         private void OnFinish()
         {
             Log.Information("技能结束：Owner[{0}],skill[{1}]",Owner.EntityId, Define.Name);
         }
 
+
+        /// <summary>
+        /// 技能打到目标
+        /// </summary>
+        /// <param name="sco"></param>
+        public void OnHit(SCObject targetSco)
+        {
+            Log.Information("OnHit:Owner[{0}],Skill[{1}],SCO[{2}]", Owner.EntityData.Id, Define.Name, targetSco);
+
+            //单体伤害
+            if(Define.Area  == 0)
+            {
+                if(targetSco is SCEntity)
+                {
+                    var acotr = targetSco.RealObj as Actor;
+                    TakeDamage(acotr);
+                }
+            }
+            //范围伤害
+            else
+            {
+                var list = GameTools.RangUnit(Owner.SpaceId, targetSco.Position, Define.Area);
+                foreach(var item in list)
+                {
+                    TakeDamage(item);
+                }
+            }
+
+
+        }
+
+
+        /// <summary>
+        /// 对目标造成伤害
+        /// </summary>
+        /// <param name="acotr"></param>
+        private void TakeDamage(Actor targetActor)
+        {
+            if (targetActor.IsDeath || targetActor == Owner) return;
+
+            Log.Information("skill:TakeDamage:attacker[{0}],Target[{1}]", Owner.EntityId, targetActor.EntityId);
+            //1.计算伤害、闪避、暴击
+            //人物的属性
+            var attackerAttr = Owner.Attr.final;
+            var targetAttr = targetActor.Attr.final;
+            //伤害信息
+            Damage damage = new Damage();
+            damage.AttackerId = Owner.EntityId;
+            damage.TargetId = targetActor.EntityId;
+            damage.SkillId = Define.ID;
+            //技能的物攻和法攻
+            //技能本身的攻击力+人物的攻击力*加成百分比
+            var ad = Define.AD + attackerAttr.AD * Define.ADC;
+            var ap = Define.AP + attackerAttr.AP * Define.APC;
+            //计算伤害
+            //伤害 = 攻击[攻] × ( 1 - 护甲[守] / ( 护甲[守] + 400 + 85 × 等级[敌人] ) )
+            var ads = ad * (1 - targetAttr.DEF / (targetAttr.DEF + 400 + 85 * Owner.info.Level));
+            var aps = ap * (1 - targetAttr.MDEF / (targetAttr.MDEF + 400 + 85 * Owner.info.Level));
+            Log.Information("ads=[{0}],aps=[{1}]", ads, aps);
+            damage.Amount = ads + aps;
+            //计算暴击
+            notCrit++;
+            Random random = new Random();
+            double randCri = random.NextDouble();
+            double cri = attackerAttr.CRI * 0.01f;
+            Log.Information("暴击率计算：{0}/{1} | [{2}/{3}]", randCri, cri,notCrit,forceCritAfer);
+            if(randCri < cri || notCrit > forceCritAfer)
+            {
+                notCrit = 0;
+                damage.IsCrit = true;
+                damage.Amount *= attackerAttr.CRD * 0.01f;
+            }
+            //计算是否命中
+            var hitRate = (attackerAttr.HitRate - targetAttr.DodgeRate) * 0.01f;
+            Log.Information("Hit rate : {0}", hitRate);
+            if(random.NextDouble() > hitRate)
+            {
+                damage.IsMiss = true;
+                damage.Amount = 0;
+            }
+
+            //2.扣除目标Hp
+            targetActor.RecvDamage(damage);
+        }
     }
 }
