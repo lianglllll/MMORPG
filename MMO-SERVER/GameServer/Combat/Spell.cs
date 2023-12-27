@@ -59,7 +59,7 @@ namespace GameServer.Combat
         }
 
         //释放单体目标技能
-        private void SpellTarget(int skill_id,int target_id)
+        public void SpellTarget(int skill_id,int target_id)
         {
             Log.Information("Spell::SpellTarget():Caster[{0}]:Skill[{1}]：Targert[{2}]", Owner.EntityId, skill_id, target_id);
 
@@ -100,8 +100,6 @@ namespace GameServer.Combat
                 SkillId = skill_id
             };
             Owner.currentSpace.fightManager.spellQueue.Enqueue(info);
-
-
         }
 
         //释放点目标技能

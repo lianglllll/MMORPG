@@ -21,14 +21,17 @@ public class SkillDefine
 	public float CD;				// 冷却时间
 	public int SpellRange;			// 施法距离
 	public float IntonateTime;		// 施法前摇
-	public int Cost;				// 魔法消耗
-	public string AnimName;			// 施法动作
+	public int Cost;                // 魔法消耗
+	public string IntonateAnimName; // 前摇动作
+	public string ActiveAnimName;	// 激活动作
 	public int ReqLevel;			// 等级要求
 	public bool IsMissile;			// 是否是投射物
 	public string Missile;			// 投射物
 	public int MissileSpeed;		// 投射速度
 	public string HitArt;			// 击中效果，粒子特效
-	public int Area;				// 影响区域
+	public int Area;                // 影响区域
+	public float Duration;			// 整个技能的持续时间
+	public float Interval;			// 伤害间隔
 	public float[] HitDelay;		// 命中时间，动作开始到命中
 	public int[] BUFF;				// 附加效果如流血效果
 	public float AD;				// 物理攻击

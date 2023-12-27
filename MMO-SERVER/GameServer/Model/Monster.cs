@@ -104,6 +104,16 @@ namespace GameServer.Model
             }
         }
 
+        public void Attack(Actor target)
+        {
+            var skill = skillManager.Skills.FirstOrDefault(s => s.IsNormal);
+            if (skill == null) return;
+            if (skill.State != Combat.Stage.None) return;
+            spell.SpellTarget(skill.Define.ID, target.EntityId);
+        }
+
+
+        //停止移动
         public void StopMove()
         {
             State = EntityState.Idle;

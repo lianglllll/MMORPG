@@ -2,6 +2,7 @@ using Assets.Script.Entities;
 using GameClient.Combat;
 using GameClient.Entities;
 using Proto;
+using Serilog;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ using UnityEngine;
 //方便调用罢了
 public class GameApp 
 {
+    //角色的entityid
     public static int entityId;
     //全局角色
     public static Character character;
@@ -20,4 +22,42 @@ public class GameApp
     public static GameObject myCharacter = null;
     //当前技能
     public static Skill CurrSkill;
+    //战斗面板
+    public static CombatPanelScript combatPanelScript;
+
+    //是否正在输入
+    public static bool IsInputtingChatBox
+    {
+        get => combatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
+    }
+
+
+
+
+    public static void Spell(Skill skill)
+    {
+        if (skill.IsUnitTarget && GameApp.target == null)
+        {
+            
+            Log.Information("无效的技能目标");
+            return;
+        }
+
+        //向服务器发送施法请求
+        SpellCastRequest req = new SpellCastRequest() { Info = new CastInfo() };
+        req.Info.SkillId = skill.Define.ID;
+        req.Info.CasterId = GameApp.character.EntityId;
+        if (skill.IsUnitTarget)
+        {
+            req.Info.TargetId = GameApp.target.EntityId;
+
+        }
+        else if (skill.IsPointTarget)
+        {
+            req.Info.Point = V3.ToVec3(GameApp.target.Position);
+        }
+        NetClient.Send(req);
+    }
+
+
 }

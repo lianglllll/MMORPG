@@ -12,17 +12,23 @@ public class CombatPanelScript : BasePanel
     private EliteScript myElite;
     private EliteScript targetElite;
     private Slider intonateSlider;
+    private Button reviveBtn;
+    private Image DeathBox;
+    public ChatBoxScript chatBoxScript;
 
     private void Awake()
     {
         myElite = transform.Find("MyElite").GetComponent<EliteScript>();
         targetElite = transform.Find("TargetElite").GetComponent<EliteScript>();
         intonateSlider = transform.Find("IntonateSlider/Slider").GetComponent<Slider>();
+        DeathBox = transform.Find("DeathBox").GetComponent<Image>();
+        reviveBtn = transform.Find("DeathBox/ReviveBtn").GetComponent<Button>();
+        chatBoxScript = transform.Find("ChatBox").GetComponent<ChatBoxScript>();
     }
 
     private void Start()
     {
-
+        reviveBtn.onClick.AddListener(OnReviveBtn);
     }
 
     private void OnDestroy()
@@ -42,7 +48,7 @@ public class CombatPanelScript : BasePanel
 
         //技能释放进度条UI
         var sk = GameApp.CurrSkill;
-        if(sk != null && sk.State == Stage.Intonate)
+        if(sk != null && sk.State == Stage.Intonate && sk.Define.IntonateTime > 0.1f)
         {
             intonateSlider.gameObject.SetActive(true);
             intonateSlider.value = sk.IntonateProgress;
@@ -56,6 +62,16 @@ public class CombatPanelScript : BasePanel
     }
 
 
+    public void ShowDeathBox()
+    {
+        DeathBox.gameObject.SetActive(true);
+    }
+
+    private void OnReviveBtn()
+    {
+        DeathBox.gameObject.SetActive(false);
+        GameApp.character._Revive();
+    }
 
 
 }

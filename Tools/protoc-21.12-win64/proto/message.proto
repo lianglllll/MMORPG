@@ -3,6 +3,8 @@ syntax = "proto3";
 package proto;
 
 
+
+//====================心跳检测================================
 message HeartBeatRequest{
 
 }
@@ -12,6 +14,7 @@ message HeartBeatResponse{
 }
 
 
+//======================entity=================================
 //网络三维向量
 message Vec3 {
 	int32 x = 1;
@@ -19,7 +22,7 @@ message Vec3 {
 	int32 z = 3;
 }
 
-//位置信息
+//entity位置信息
 message NetEntity {
 	int32 id = 1;
     int32 speed = 2;
@@ -27,6 +30,7 @@ message NetEntity {
 	Vec3 direction = 4;
 }
 
+//entity的状态
 enum EntityState{
 	NONE = 0;
 	IDLE = 1;
@@ -35,19 +39,46 @@ enum EntityState{
 	SWORDFLIGHT = 4;
 }
 
-//同步entity信息
+//同步entity:位置+状态
 message NEntitySync{
 	NetEntity entity = 1;
 	EntityState state = 2;
 	bool force = 3;
 }
 
+//=======================actor===============================
 
+//actor类型
+enum EntityType
+{
+    Character=0;
+    Monster=1;
+    NPC=2;
+}
+
+//actor信息
+message NetActor{
+	int32 id = 1;
+	int32 tid = 2;//单位类型
+	NetEntity entity = 3;
+	string name = 4;
+	int32 level = 5;
+	int64 exp = 6;
+	int32 spaceId = 7;
+	int64 gold = 8;
+	float hp=9;
+	float mp=10;
+	EntityType entityType = 11; 
+	repeated SkillInfo skills = 12;
+}
+
+
+//=======================space================================
 //进入场景请求
-//进入哪一个请求要表示出来吧，todo
 message GameEnterRequest{
 	int32 characterId = 1;
 }
+
 //进入场景响应
 message GameEnterResponse{
 	bool success = 1;
@@ -65,15 +96,16 @@ message SpaceCharactersLeaveResponse{
 	int32 entityId = 1;
 }
 
-//同步请求
+//场景内的同步请求
 message SpaceEntitySyncRequest{
 	NEntitySync entitySync = 1;
 }
-//同步响应
+//场景内的同步响应
 message SpaceEntitySyncResponse{
 	NEntitySync entitySync = 1;
 }
 
+//======================user=====================================
 
 //注册
 message UserRegisterRequest{
@@ -107,25 +139,9 @@ message CharacterCreateResponse{
 	NetActor character = 3;
 }
 
-//actor信息
-message NetActor{
-	int32 id = 1;
-	int32 tid = 2;//单位类型
-	NetEntity entity = 3;
-	string name = 4;
-	int32 level = 5;
-	int64 exp = 6;
-	int32 spaceId = 7;
-	int64 gold = 8;
-	float hp=9;
-	float mp=10;
-	EntityType entityType = 11; 
-	repeated SkillInfo skills = 12;
-}
 // 查询角色列表的请求
 message CharacterListRequest{
 }
-// 角色列表的响应
 message CharacterListResponse{
 	repeated NetActor characterList = 1;
 }
@@ -139,15 +155,9 @@ message CharacterDeleteResponse{
 }
 
 
-//实体类型
-enum EntityType
-{
-    Character=0;
-    Monster=1;
-    NPC=2;
-}
+//====================skill=================================
 
-//技能信息
+//技能信息:skillid
 message SkillInfo{
 	int32 id = 1;
 }
@@ -164,7 +174,7 @@ enum CastResult{
 	TargetError			= 7;	//目标错误	
 }
 
-//施法信息
+//施法信息：谁发的，要打谁
 message CastInfo{
 	int32 casterId = 1;
 	int32 skillId = 2;
@@ -173,12 +183,10 @@ message CastInfo{
 	CastResult result = 5;//技能释放结果
 }
 
-
 //释放技能请求
 message SpellCastRequest{
 	CastInfo info = 1;
 }
-
 //释放技能响应,有些群攻的技能，这里用list做优化
 message SpellCastResponse{
 	repeated CastInfo list = 1;
@@ -190,7 +198,6 @@ message SpellFailResponse{
 	int32 skillId = 2;
 	CastResult reason = 3;
 }
-
 
 //伤害类型
 enum DameageType{
@@ -258,21 +265,14 @@ enum UnitState{
 	MAX = 4;
 }
 
+//复活请求
+message ReviveRequest{
+	int32 entityId = 1;
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-//########聊天系统##########
+//==================chat====================
 
 enum Result{
 	SUCCESS = 0;

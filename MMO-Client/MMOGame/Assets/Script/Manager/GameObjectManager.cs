@@ -61,12 +61,11 @@ public class GameObjectManager:MonoBehaviour
         //gameobjectName
         if (chr.EntityType == EntityType.Character)
         {
-            chrObj.name = "Character_" + chr.Id;  
-
+            chrObj.name = "Character_" + chr.Entity.Id;  
         }
         else if(chr.EntityType == EntityType.Monster)
         {
-            chrObj.name = "Monster_" + chr.Id;
+            chrObj.name = "Monster_" + chr.Entity.Id;
         }
         chrObj.layer = 6;//加入actor图层
 

@@ -17,7 +17,9 @@ namespace GameServer.AI
     //这个就相当于我们客户端的controller脚本，用于控制我们的fsm
     public class MonsterAI : AIBase
     {
-
+        /// <summary>
+        /// 状态间共享数据
+        /// </summary>
         public class Param
         {
             public Monster owner;               //AI拥有者
@@ -68,8 +70,9 @@ namespace GameServer.AI
             {
                 var monster = param.owner;
                 //查询8000范围内(8米)的玩家
-                var chr = EntityManager.Instance.GetNearestEntity<Character>(monster.SpaceId,monster.Position,param.viewRange);
-                if(chr != null)
+                //var chr = EntityManager.Instance.GetNearestEntity<Character>(monster.SpaceId,monster.Position,param.viewRange);
+                var chr = EntityManager.Instance.GetGetNearEntitys(monster.SpaceId, monster.Position, param.viewRange).FirstOrDefault(a => !a.IsDeath);
+                if (chr != null)
                 {
                     //Log.Information("最近的目标对象：{0}", chr);
                     monster.target = chr;
@@ -122,13 +125,14 @@ namespace GameServer.AI
                 }
 
                 //符合攻击条件
-                if(targetDistance < 1200)
+                if(targetDistance < 1500)
                 {
                     if(monster.State == Proto.EntityState.Move)
                     {
                         monster.StopMove();
                     }
-                    Log.Information("发起攻击");
+                    //Log.Information("发起攻击");
+                    monster.Attack(monster.target);
                 }
                 else
                 {

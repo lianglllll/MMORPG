@@ -36,12 +36,21 @@ namespace GameServer.Combat
         //强制触发暴击的次数(理论的暴击次数，如果你是百分之10的暴击率，那么你10次攻击会有一次暴击)（这里给你保底）（+2是宽限一点）
         private int forceCritAfer =>  (int) (100f / Owner.Attr.final.CRI) + 2;
 
-
-
-
-
         public SCObject Target { get; private set; }
 
+        public bool IsNoneTarget
+        {
+            get => Define.TargetType == "None";
+        }
+        public bool IsUnitTarget
+        {
+            get => Define.TargetType == "单位";
+        }
+        public bool IsPointTarget
+        {
+            get => Define.TargetType == "点";
+        }
+        public bool IsNormal => Define.Type == "普通攻击";
 
         public Skill(Actor owner,int skid)
         {
@@ -56,11 +65,12 @@ namespace GameServer.Combat
 
         }
 
+        /// <summary>
+        /// 驱动技能运转
+        /// </summary>
         public void Update()
         {
             if (State == Stage.None && ColdDown == 0) return;
-
-
             if (ColdDown > 0) ColdDown -= Time.deltaTime;
             if (ColdDown < 0) ColdDown = 0;
             RunTime += Time.deltaTime;
@@ -72,7 +82,6 @@ namespace GameServer.Combat
                 ColdDown = Define.CD;//此时真正进入冷却
                 OnActive();
             }
-
 
             //active状态达到最大值,进入冷却
             if(State == Stage.Active)
@@ -94,24 +103,13 @@ namespace GameServer.Combat
                 }
             }
 
-
         }
 
-
-        public bool IsNoneTarget
-        {
-            get => Define.TargetType == "None";
-        }
-        public bool IsUnitTarget
-        {
-            get => Define.TargetType == "单位";
-        }
-        public bool IsPointTarget
-        {
-            get => Define.TargetType == "点";
-        }
-
-        //检查技能是否可用
+        /// <summary>
+        /// 检查技能是否可用
+        /// </summary>
+        /// <param name="sco"></param>
+        /// <returns></returns>
         public CastResult CanUse(SCObject sco)
         {
             //被动技能
@@ -141,7 +139,11 @@ namespace GameServer.Combat
             return CastResult.Success;
         }
 
-        //使用技能
+        /// <summary>
+        /// 使用技能
+        /// </summary>
+        /// <param name="sco"></param>
+        /// <returns></returns>
         public CastResult Use(SCObject sco)
         {
             Target = sco;
@@ -150,7 +152,9 @@ namespace GameServer.Combat
             return CastResult.Success;
         }
 
-
+        /// <summary>
+        /// 技能激活
+        /// </summary>
         private void OnActive()
         {
             Log.Information("Skill Active Owner[{0}],skill[{1}]", Owner.EntityId,Define.Name);
@@ -173,6 +177,14 @@ namespace GameServer.Combat
         }
 
         /// <summary>
+        /// 技能施法完成，并且冷却也完成了
+        /// </summary>
+        private void OnFinish()
+        {
+            Log.Information("技能结束：Owner[{0}],skill[{1}]",Owner.EntityId, Define.Name);
+        }
+
+        /// <summary>
         /// 触发延迟伤害
         /// </summary>
         private void _hitTrigger()
@@ -180,14 +192,6 @@ namespace GameServer.Combat
             Log.Information("_hitTrigger:Owner[{0}],Skill[{1}]", Owner.EntityData.Id, Define.Name);
             OnHit(Target);
         }
-
-
-
-        private void OnFinish()
-        {
-            Log.Information("技能结束：Owner[{0}],skill[{1}]",Owner.EntityId, Define.Name);
-        }
-
 
         /// <summary>
         /// 技能打到目标
@@ -218,7 +222,6 @@ namespace GameServer.Combat
 
 
         }
-
 
         /// <summary>
         /// 对目标造成伤害

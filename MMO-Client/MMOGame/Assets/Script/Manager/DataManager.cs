@@ -18,6 +18,12 @@ public class DataManager : Singleton<DataManager>
     //技能信息
     public Dictionary<int, SkillDefine> skillDefineDict = null;
 
+
+    public DataManager()
+    {
+        init();
+    }
+
     //初始化，就是将文件中的数据读入
     public void init()
     {
@@ -26,7 +32,6 @@ public class DataManager : Singleton<DataManager>
         unitDict = Load<UnitDefine>("Data/UnitDefine");
         panelDict = Load2<PanelDefine>("Data/PanelDefine");
         skillDefineDict = Load<SkillDefine>("Data/SkillDefine");
-
     }
 
 

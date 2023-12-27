@@ -93,6 +93,7 @@ namespace GameServer.Model
         /// </summary>
         public void Revive()
         {
+            if (!IsDeath) return;
             SetHp(Attr.final.HPMax);
             SetMP(Attr.final.MPMax);
             SetState(UnitState.Free);

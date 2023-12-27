@@ -39,7 +39,6 @@ public class CombatService : Singleton<CombatService>, IDisposable
 
     private void _PropertyUpdateRsponse(Connection conn, PropertyUpdateRsponse msg)
     {
-        Log.Debug("=========test");
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
             foreach (PropertyUpdate item in msg.List)

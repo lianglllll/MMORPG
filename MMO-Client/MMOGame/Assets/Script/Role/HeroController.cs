@@ -80,6 +80,28 @@ public class HeroController : MonoBehaviour
         this.speed = GetComponent<GameEntity>().speed;
 
 
+        HeroMove();
+
+
+        //用射线检测摄像机与英雄之间是否有障碍物,如果有需要将摄像机位置重置
+        RaycastHit hit;
+        int index = LayerMask.NameToLayer("Actor"); 
+        LayerMask layerMask = 1<<LayerMask.NameToLayer("Actor");
+
+        //射线检测摄像机和角色之间不能有除actor以外的东西
+        if (Physics.Linecast(hero.transform.position + Vector3.up * 0.5f, rCamera.transform.position - Vector3.up * 0.3f, out hit,~layerMask))
+        {
+            //临时移动摄像机到障碍物的位置上面一丢丢
+            rCamera.transform.position = hit.point + Vector3.up * 0.5f;
+        }
+
+
+        SelectTargetObject();
+    }
+
+    private void HeroMove()
+    {
+        if (GameApp.IsInputtingChatBox) return;//todo 耦合度太高，我们使用inputsystem切换来解决这个问题
         //控制英雄移动
         float h = 0;
         float v = 0;
@@ -105,24 +127,7 @@ public class HeroController : MonoBehaviour
             //播放待机动画
             anim.PlayIdle();
         }
-
-
-        //用射线检测摄像机与英雄之间是否有障碍物,如果有需要将摄像机位置重置
-        RaycastHit hit;
-        int index = LayerMask.NameToLayer("Actor"); 
-        LayerMask layerMask = 1<<LayerMask.NameToLayer("Actor");
-
-        //射线检测摄像机和角色之间不能有除actor以外的东西
-        if (Physics.Linecast(hero.transform.position + Vector3.up * 0.5f, rCamera.transform.position - Vector3.up * 0.3f, out hit,~layerMask))
-        {
-            //临时移动摄像机到障碍物的位置上面一丢丢
-            rCamera.transform.position = hit.point + Vector3.up * 0.5f;
-        }
-
-
-        SelectTargetObject();
     }
-
 
     public void SelectTargetObject()
     {

@@ -29,11 +29,21 @@ namespace GameClient.Combat
         private float RunTime;              //技能运行时间
         public Stage State;                 //当前技能状态
         public bool IsPassive;              //是否是被动技能
-
         private SCObject _sco;              //技能的目标,Use触发时设置
-
         public float IntonateProgress => RunTime / Define.IntonateTime; //聚气进度 0-1
 
+        public bool IsNoneTarget
+        {
+            get => Define.TargetType == "None";
+        }
+        public bool IsUnitTarget
+        {
+            get => Define.TargetType == "单位";
+        }
+        public bool IsPointTarget
+        {
+            get => Define.TargetType == "点";
+        }
 
 
 
@@ -63,7 +73,7 @@ namespace GameClient.Combat
             //active状态达到最大值,进入冷却
             if (State == Stage.Active)
             {
-                if (RunTime >= Define.IntonateTime + Define.HitDelay.Max())
+                if (RunTime >= Define.IntonateTime + Define.Duration)
                 {
                     State = Stage.Colding;
                 }
@@ -84,18 +94,7 @@ namespace GameClient.Combat
         }
 
 
-        public bool IsNoneTarget
-        {
-            get => Define.TargetType == "None";
-        }
-        public bool IsUnitTarget
-        {
-            get => Define.TargetType == "单位";
-        }
-        public bool IsPointTarget
-        {
-            get => Define.TargetType == "点";
-        }
+
 
 
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Proto;
+using GameClient.Entities;
 
 /// <summary>
 /// 用于存储entity对象信息
@@ -21,6 +22,7 @@ public class GameEntity : MonoBehaviour
     public float FALLSPEEDMAX = 30f;//最大下落速度
     public float speed = 3f;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);//同步时间控制
+    public Actor actor { get; private set; }
 
 
     private void Awake()
@@ -29,6 +31,7 @@ public class GameEntity : MonoBehaviour
     }
     private void Start()
     {
+        //actor = EntityManager.Instance.GetEntity<Actor>(entityId);
         entityState = EntityState.Idle;
     }
 

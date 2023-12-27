@@ -13,11 +13,11 @@ public class ChatBoxScript : MonoBehaviour
     private GridLayoutGroup contentGridLayoutGroup;
     public Scrollbar scrollbarVertical;                 //Scrollbar
     public GameObject chatTextObj;                      //显示单条message的text
-    private InputField chatMsgInputField;
+    public InputField chatMsgInputField;
 
     private float InitMaskHeight;                       //初始的mask高度
     private float oneMaskHeight;                        //一条消息的mask高度
-    private float currentMaskHeight;                       //初始的mask高度
+    private float currentMaskHeight;                    //初始的mask高度
     private int singleRawCharNum = 28;
 
     private void Awake()

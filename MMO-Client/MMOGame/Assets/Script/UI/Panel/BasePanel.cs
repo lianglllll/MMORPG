@@ -7,6 +7,11 @@ public class BasePanel : MonoBehaviour
     protected bool isRemove = false;
     protected  string panelName;
 
+    protected virtual  void Awake()
+    {
+        
+    }
+
     public virtual void OpenPanel(string name)
     {
         this.name = name;

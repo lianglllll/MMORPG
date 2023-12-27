@@ -85,7 +85,14 @@ namespace GameServer.Manager
         }
 
 
-        //查找坐标点最近的对象
+        /// <summary>
+        /// 查找坐标点最近的对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sapceId"></param>
+        /// <param name="center"></param>
+        /// <param name="range"></param>
+        /// <returns></returns>
         public T GetNearestEntity<T>(int sapceId,Vector3Int center,int range) where T:Entity
         {
             Predicate<T> match = (e) =>
@@ -100,7 +107,27 @@ namespace GameServer.Manager
             return entity;
         }
 
-        //某个entity是否存在
+        /// <summary>
+        /// 寻找目标点范围内的character
+        /// </summary>
+        /// <param name="sapceId"></param>
+        /// <param name="center"></param>
+        /// <param name="range"></param>
+        /// <returns></returns>
+        public List<Character> GetGetNearEntitys(int sapceId, Vector3Int center, int range) 
+        {
+            Predicate<Character> match = (e) =>
+            {
+                return Vector3Int.Distance(center, e.Position) <= range;
+            };
+            return GetEntityList<Character>(sapceId, match);
+        }
+
+        /// <summary>
+        /// 判断某个entity是否存在
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
         public bool Exist(int entityId)
         {
             return allEntitiesDict.ContainsKey(entityId);

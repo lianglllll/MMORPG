@@ -34,7 +34,7 @@ public class EliteScript : MonoBehaviour
         if (actor == null) return;
         Level.text = actor.info.Level + "";
         float hp = actor.info.Hp / actor.define.HPMax;
-        float mp = actor.info.Mp / actor.define.HPMax;
+        float mp = actor.info.Mp / actor.define.MPMax;
         Healthbar.fillAmount = hp;
         Manabar.fillAmount = mp;
         Name.text = actor.info.Name;

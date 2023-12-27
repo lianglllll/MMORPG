@@ -16,7 +16,8 @@ public class HeroAnimations : MonoBehaviour
         Attack = 3,
         Die = 4,
         Gethit = 5,
-        Intonate,
+        SkillIntonate,      //技能蓄气
+        SkillActive,        //技能激活
     }
 
     public HState state = HState.Idle;    //当前角色的状态
@@ -32,6 +33,7 @@ public class HeroAnimations : MonoBehaviour
     private void Start()
     {
         Kaiyun.Event.RegisterOut("OnSkillIntonate", this, "OnSkillIntonate");
+        Kaiyun.Event.RegisterOut("OnSkillActive", this, "OnSkillActive");
     }
     private void OnDestroy()
     {
@@ -40,21 +42,54 @@ public class HeroAnimations : MonoBehaviour
 
     private void Update()
     {
-        if(state == HState.Intonate &&  skill != null &&skill.State != Stage.Intonate)
+        if(skill != null)
         {
-            state = HState.Idle;
-            PlayIdle();
+            //施法动作
+            if(skill.State == Stage.Intonate)
+            {
+                Play(skill.Define.IntonateAnimName);
+            }else if(skill.State == Stage.Active)
+            {
+                Play(skill.Define.ActiveAnimName);
+            }
+            //恢复动作
+            if(state == HState.SkillIntonate && skill.State != Stage.Intonate)
+            {
+                state = HState.Idle;
+                PlayIdle();
+            }
+            else if (state == HState.SkillActive && skill.State != Stage.Active)
+            {
+                state = HState.Idle;
+                PlayIdle();
+            }
         }
+
     }
 
 
+    /// <summary>
+    /// 技能蓄气
+    /// </summary>
+    /// <param name="skill"></param>
     public void OnSkillIntonate(Skill skill)
     {
         if (gameEntity.entityId != skill.Owner.EntityId) return;
         this.skill = skill;
-        this.state = HState.Intonate;
-        Play(skill.Define.AnimName);
+        this.state = HState.SkillIntonate;
     }
+
+    /// <summary>
+    /// 技能激活
+    /// </summary>
+    /// <param name="skill"></param>
+    public void OnSkillActive(Skill skill)
+    {
+        if (gameEntity.entityId != skill.Owner.EntityId) return;
+        this.skill = skill;
+        this.state = HState.SkillActive;
+    }
+
 
 
 
@@ -77,9 +112,6 @@ public class HeroAnimations : MonoBehaviour
         gameEntity.lastEntityState = entityState;
     }
 
-
-
-
     //通用的播放动画
     public void Play(string animationName,Action OnEnd=null)
     {
@@ -101,7 +133,7 @@ public class HeroAnimations : MonoBehaviour
 
     public void PlayIdle()
     {
-        if (state == HState.Attack || state == HState.Gethit || state == HState.Intonate)
+        if (state == HState.Attack || state == HState.Gethit || state == HState.SkillIntonate)
             return;
         Play("Idle");
         state = HState.Idle;
@@ -110,7 +142,7 @@ public class HeroAnimations : MonoBehaviour
 
     public void PlayRun()
     {
-        if (state == HState.Attack || state == HState.Intonate)
+        if (state == HState.Attack || state == HState.SkillIntonate)
             return;
         Play("RunForward");
         state = HState.Run;

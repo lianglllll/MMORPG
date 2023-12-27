@@ -40,8 +40,6 @@ namespace GameClient.Entities
         public void recvDamage(Damage damage)
         {
             //ui
-
-
             var _textPos = renderObj.transform.position;
 
             //闪避了，显示一下闪避ui
@@ -92,28 +90,24 @@ namespace GameClient.Entities
         /// <param name="newHp"></param>
         public void OnHpChanged(float oldHp,float newHp)
         {
-            Debug.Log("hp-change");
             this.info.Hp = newHp;
         }
 
 
         public void OnMpChanged(float old_value, float new_value)
         {
-            Debug.Log("mp-change");
             this.info.Mp = new_value;
         }
 
 
-        public void OnStateChanged(UnitState old_value, UnitState new_value)
+        public virtual void OnStateChanged(UnitState old_value, UnitState new_value)
         {
-            Debug.Log("状态-change");
             this.unitState = new_value;
             if (IsDeath)
             {
                 if (renderObj == null) return;
                 var ani = renderObj.GetComponent<HeroAnimations>();
                 ani.PlayDie();
-                GameTimerManager.Instance.TryUseOneTimer(3f, _HideElement);
             }
             else
             {
@@ -122,18 +116,7 @@ namespace GameClient.Entities
 
         }
 
-        /// <summary>
-        /// 隐藏当前有限对象
-        /// </summary>
-        /// <returns></returns>
-        public void  _HideElement()
-        {
-            //如果单位死亡，将其隐藏
-            //这里判断是防止在死亡的3秒内本actor复活了
-            if (IsDeath) {
-                renderObj?.SetActive(false);
-            }
-        }
+
 
 
     }

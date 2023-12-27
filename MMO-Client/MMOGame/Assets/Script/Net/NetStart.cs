@@ -105,7 +105,7 @@ public class NetStart : MonoBehaviour
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
                 UIManager.Instance.ShowMessage("进入游戏，开始你的冒险");
-                UIManager.Instance.OpenPanel("CombatPanel");
+                GameApp.combatPanelScript = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
             });
 
         }

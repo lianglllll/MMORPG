@@ -100,27 +100,7 @@ public class AbilityBarScript : MonoBehaviour
     {
         if (skill == null) return;
         Log.Information("技能点击:{0}",skill.Define.Name);
-
-        if(GameApp.target == null)
-        {
-            Log.Information("无效的技能目标");
-            return;
-        }
-
-        //向服务器发送施法请求
-        SpellCastRequest req = new SpellCastRequest() {Info = new CastInfo()};
-        req.Info.SkillId = skill.Define.ID;
-        req.Info.CasterId = GameApp.character.EntityId;
-        if(skill.IsUnitTarget)
-        {
-            req.Info.TargetId = GameApp.target.EntityId;
-
-        }
-        else if(skill.IsPointTarget)
-        {
-            req.Info.Point = V3.ToVec3(GameApp.target.Position);
-        }
-        NetClient.Send(req);
+        GameApp.Spell(skill);
     }
 
 }

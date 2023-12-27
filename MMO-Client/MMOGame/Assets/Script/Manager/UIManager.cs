@@ -12,7 +12,7 @@ public class UIManager
 
     private Dictionary<string, PanelDefine> pathDict = null;           //panelname  -> paneldefine  
     private Dictionary<string, GameObject> prefabsDict = null;         //panelname  -> prefab
-    private Dictionary<string, BasePanel> panelScriptDict = null;      //panelname   -> panelscript
+    private Dictionary<string, BasePanel> panelScriptDict = null;      //panelname  -> panelscript    这是打开的面板
 
     //如果有需要可以将panel的实例保存起来使用
 
@@ -41,7 +41,15 @@ public class UIManager
         {
             if (_uiRoot == null)
             {
-                _uiRoot = GameObject.Find("Panel").transform;
+                _uiRoot = GameObject.Find("Panel")?.transform;
+                if(_uiRoot == null)
+                {
+                    GameObject emptyObject = new GameObject("Panel");
+                    // 可选：你可以设置空物体的位置、旋转等属性
+                    emptyObject.transform.position = new Vector3(0f, 0f, 0f);
+                    emptyObject.transform.rotation = Quaternion.identity;
+                    _uiRoot = emptyObject.transform;
+                }
             }
 
             return _uiRoot;
@@ -65,9 +73,6 @@ public class UIManager
         pathDict = DataManager.Instance.panelDict;
         prefabsDict = new Dictionary<string, GameObject>();
         panelScriptDict = new Dictionary<string, BasePanel>();
-
-
-
     }
 
     //打开panel
