@@ -56,8 +56,10 @@
     <Analyzer Include="D:\vs2019\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Editor\DynamicTextDataEditor.cs" />
+    <Compile Include="Assets\Art\CharacterModel\Picola\Toon\Editor\UTS2GUI.cs" />
     <Compile Include="Assets\Editor\GMCmd.cs" />
+    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Editor\DynamicTextDataEditor.cs" />
+    <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Editor\CreateLocatorHere.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

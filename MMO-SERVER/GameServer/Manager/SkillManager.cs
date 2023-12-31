@@ -15,19 +15,27 @@ namespace GameServer.Manager
     /// </summary>
     public class SkillManager
     {
-        private Actor owner;        //归属者
-        public List<Skill> Skills = new List<Skill>();
+        private Actor owner;                                //管理器的归属者
+        public List<Skill> Skills = new List<Skill>();      //技能队列
         
-        
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="owner"></param>
         public SkillManager(Actor owner)
         {
             this.owner = owner;
             InitSkills();
         }
         
+        /// <summary>
+        /// 初始化技能管理器
+        /// </summary>
         public void InitSkills()
         {
-            //初始化技能信息，正常是通过读取数据库来加载技能信息的
+            //todo 初始化技能信息，正常是通过读取数据库来加载技能信息的
+            //应该开一个表，每个user的character或者monster有那些技能
+            //因为这个属于动态数据
 
             if(this.owner.Define.TID == 0)      //战士
             {
@@ -41,6 +49,10 @@ namespace GameServer.Manager
             }
         }
 
+        /// <summary>
+        /// 根据技能编号来加载技能
+        /// </summary>
+        /// <param name="ids"></param>
         private void loadSkill(params int[] ids)
         {
             foreach(int skid in ids)
@@ -52,7 +64,11 @@ namespace GameServer.Manager
             }
         }
 
-
+        /// <summary>
+        /// 根据技能id获取某个技能
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <returns></returns>
         public Skill GetSkill(int skillId)
         {
             foreach (var skill in Skills) { 
@@ -64,7 +80,9 @@ namespace GameServer.Manager
             return null;
         }
 
-        //推动技能运转    
+        /// <summary>
+        /// 推动每一个技能运转  
+        /// </summary>
         public void Update()
         {
             foreach(Skill skill in Skills)

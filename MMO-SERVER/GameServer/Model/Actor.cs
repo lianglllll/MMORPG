@@ -16,30 +16,43 @@ namespace GameServer.Model
 
     public class Actor : Entity
     {
-        public UnitDefine Define;                                                                   //怪物中：山贼，土匪？
-        public NetActor info  = new NetActor();                                                     //作为存放网络信息的tmp
-        public EntityState State;                                                                   //actor状态：跑、走、跳
-        public Space currentSpace;                                                                  //todo,可以修改space的同时去修改info.spaceid
+        public UnitDefine Define;                                                                   //单位的一些静态数据
+        public Space currentSpace;                                                                  //当前的场景
+        public NetActor info  = new NetActor();                                                     //NetActor 网络对象
+        public EntityState State;                                                                   //actor状态：跑、走、跳、死亡、
         public Attributes Attr = new Attributes();                                                  //actor属性
         public SkillManager skillManager;                                                           //actor技能管理器
         public Spell spell;                                                                         //actor技能释放器
         public UnitState unitState;                                                                 //单位状态:死亡、空闲、战斗
-        public bool IsDeath => unitState == UnitState.Dead;                                         //判断actor死亡看的是状态而不是hp
 
-
-
+        /// <summary>
+        /// 判断actor死亡看的是状态而不是hp
+        /// </summary>
+        public bool IsDeath => unitState == UnitState.Dead;                                         
+        /// <summary>
+        /// actorId:characterId、monsterId因为它们都在同一个unit配置文件里面
+        /// </summary>
         public int Id { 
             get { return info.Id; } 
             set { info.Id = value; } 
-        }                                                                           //actorId
+        }                                                                           
+        /// <summary>
+        /// actor的名
+        /// </summary>
         public string Name { 
             get { return info.Name; } 
             set { info.Name = value; } 
         }
+        /// <summary>
+        /// actor的类型：角色、怪物、npc
+        /// </summary>
         public EntityType Type { 
             get { return info.EntityType; } 
             set { info.EntityType = value; }
-        }                                                                  //角色，怪物，npc？
+        }                                                                  
+        /// <summary>
+        /// 场景id
+        /// </summary>
         public int SpaceId
         {
             get
@@ -47,32 +60,49 @@ namespace GameServer.Model
                 return currentSpace.SpaceId;
             }
         }
+        /// <summary>
+        /// acotr的Hp
+        /// </summary>
         public float Hp { get { return info.Hp; }}
+        /// <summary>
+        /// actor的Mp
+        /// </summary>
         public float Mp { get { return info.Mp; }}
 
-
-
-
-        //TID:区分相同实体类型，不同身份。可以通过tid去找define
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="TID"></param>
+        /// <param name="level"></param>
+        /// <param name="position"></param>
+        /// <param name="direction"></param>
         public Actor( EntityType type,int TID,int level,Vector3Int position, Vector3Int direction) : base(position, direction)
         {
             //加载define的默认数据
-            this.Define = DataManager.Instance.unitDefineDict[TID];//todo 可能会空，可能会有人篡改json配置文件
-            this.info.Tid = TID;
-            this.info.EntityType = type;
-            this.info.Entity = this.EntityData;
-            this.info.Name = Define.Name;               //默认名，可以给子类进行覆盖
-            this.info.Hp = (int)this.Define.HPMax;
-            this.info.Mp = (int)this.Define.MPMax;
-            this.info.Level = level;
-            this.Speed = this.Define.Speed;
+            this.Define = DataManager.Instance.unitDefineDict[TID];     //todo 可能会空，可能会有人篡改json配置文件
             
+            //先更新entity中的speed字段
+            this.Speed = this.Define.Speed;
 
-            this.skillManager = new SkillManager(this);
-            this.Attr.Init(this);
-            this.spell = new Spell(this);
+            //再更新NetActor网络对象的信息
+            this.info.Tid = TID;                                        //TID:区分相同实体类型，不同身份。可以通过tid去找define
+            this.info.EntityType = type;                                //unit类型
+            this.info.Entity = this.EntityData;                         //entity的基本数据：pos dir speed entityId
+            this.info.Name = Define.Name;                               //defind中的角色默认名字，可以给子类进行覆盖
+            this.info.Hp = (int)this.Define.HPMax;                      //hp
+            this.info.Mp = (int)this.Define.MPMax;                      //mp
+            this.info.Level = level;                                    //level
+
+            //给当前actor添加相对应的组件
+            this.skillManager = new SkillManager(this);                 //技能管理器
+            this.spell = new Spell(this);                               //技能施法器
+            this.Attr.Init(this);                                       //actor属性初始化
         }
 
+        /// <summary>
+        /// 推动actor再mmo世界的运行
+        /// </summary>
         public override void Update()
         {
             this.skillManager.Update();//驱动技能系统
@@ -211,13 +241,24 @@ namespace GameServer.Model
             SetMP(0);
             OnAfterDie(killerID);
         }
+
+        /// <summary>
+        /// 死亡前的处理
+        /// </summary>
+        /// <param name="killerID"></param>
         protected virtual void OnBeforeDie(int killerID)
         {
 
         }
+
+        /// <summary>
+        /// 死亡后的处理
+        /// </summary>
+        /// <param name="killerID"></param>
         protected virtual void OnAfterDie(int killerID)
         {
 
         }
+
     }
 }

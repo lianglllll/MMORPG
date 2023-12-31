@@ -18,20 +18,24 @@ namespace GameServer.Combat
     /// </summary>
     public class Spell
     {
-        public Actor Owner { get; private set; }
+        /// <summary>
+        /// 技能施法器的归属者
+        /// </summary>
+        public Actor Owner { get; private set; }               
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="Owner"></param>
         public Spell(Actor Owner)
         {
             this.Owner = Owner;
         }
 
-
-        //吟唱技能
-        public void Intonate(Skill skill)
-        {
-
-        }
-
-        //同一施法
+        /// <summary>
+        /// 同一施法，处理各种类型的施法请求
+        /// </summary>
+        /// <param name="castInfo"></param>
         public void RunCast(CastInfo castInfo)
         {
             var skill = Owner.skillManager.GetSkill(castInfo.SkillId);
@@ -51,14 +55,20 @@ namespace GameServer.Combat
 
         }
 
-
-        //释放无目标技能
+        /// <summary>
+        /// 释放无目标技能
+        /// </summary>
+        /// <param name="skill_id"></param>
         private void SpellNoTarget(int skill_id)
         {
             Log.Information("Spell::SpellNoTarget():Caster[{0}]:Skill[{1}]", Owner.EntityId, skill_id);
         }
 
-        //释放单体目标技能
+        /// <summary>
+        /// 释放单体目标技能
+        /// </summary>
+        /// <param name="skill_id"></param>
+        /// <param name="target_id"></param>
         public void SpellTarget(int skill_id,int target_id)
         {
             Log.Information("Spell::SpellTarget():Caster[{0}]:Skill[{1}]：Targert[{2}]", Owner.EntityId, skill_id, target_id);
@@ -102,15 +112,31 @@ namespace GameServer.Combat
             Owner.currentSpace.fightManager.spellQueue.Enqueue(info);
         }
 
-        //释放点目标技能
+        /// <summary>
+        /// 释放点目标技能
+        /// </summary>
+        /// <param name="skill_id"></param>
+        /// <param name="position"></param>
         private void SpellPosition(int skill_id,Vector3 position)
         {
             Log.Information("Spell::SpellPosition():Caster[{0}]:Pos[{1}]", Owner.EntityId, position);
             SCObject sco = new SCPosition(position);
         }
 
+        /// <summary>
+        /// 吟唱技能
+        /// </summary>
+        /// <param name="skill"></param>
+        public void Intonate(Skill skill)
+        {
 
-        //通知玩家技能施法失败 
+        }
+
+        /// <summary>
+        /// 通知玩家技能施法失败 
+        /// </summary>
+        /// <param name="skill_id"></param>
+        /// <param name="reason"></param>
         public void OnSpellFailure(int skill_id,CastResult reason)
         {
             if(Owner is Character chr)
@@ -124,8 +150,6 @@ namespace GameServer.Combat
                 chr.conn.Send(resp);
             }
         }
-
-
 
     }
 }

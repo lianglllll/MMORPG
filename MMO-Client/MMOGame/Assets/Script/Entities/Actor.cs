@@ -46,7 +46,6 @@ namespace GameClient.Entities
             if (damage.IsMiss)
             {
                 DynamicTextManager.CreateText(_textPos, "Miss", DynamicTextManager.missData);
-
             }
             else{
                 //伤害飘字

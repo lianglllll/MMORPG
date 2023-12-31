@@ -14,6 +14,11 @@ namespace Summer.core
     {
         private Dictionary<string, object> _dict = new Dictionary<string, object>();
         
+        /// <summary>
+        /// 根据类型存放属性
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
         public void Set<T>(T value)
         {
             string key = typeof(T).FullName;
@@ -27,6 +32,11 @@ namespace Summer.core
             }
         }
 
+        /// <summary>
+        /// 根据类型获取属性
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Get<T>()
         {
             string key = typeof(T).FullName;

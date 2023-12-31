@@ -24,9 +24,8 @@ namespace GameServer.Network
     /// </summary>
     public class NetService
     {
-        //负责监听TCP网络端口
+        //负责监听TCP连接
         TcpServer tcpServer;
-
         //记录conn最后一次心跳包的时间
         private Dictionary<Connection, DateTime> heartBeatPairs = new Dictionary<Connection, DateTime>();
         //心跳超时时间
@@ -34,10 +33,6 @@ namespace GameServer.Network
         //服务器查询心跳字典的间隔时间
         private static int HEARTBEATQUERYTIME = 5;
 
-
-        /*
-         构造方法
-         */
         public NetService()
         {
             tcpServer = new TcpServer("127.0.0.1", 6666);
@@ -45,9 +40,9 @@ namespace GameServer.Network
             tcpServer.Disconnected += OnDisconnected;            
         }
 
-        /*
-         开始服务
-         */
+        /// <summary>
+        /// 开启当前服务
+        /// </summary>
         public void Start()
         {
             //启动网络监听
@@ -64,45 +59,11 @@ namespace GameServer.Network
 
         }
 
-
-        //心跳包处理
-        public void _HeartBeatRequest(Connection conn, HeartBeatRequest message)
-        {
-            //更新心跳时间
-            heartBeatPairs[conn] = DateTime.Now;
-            
-            //知道当前连接还活着
-            //Log.Information("[消息]收到心跳包：" + conn);
-
-            //响应
-            HeartBeatResponse resp = new HeartBeatResponse();
-            conn.Send(resp);
-        }
-
-        //定时检查心跳包的情况
-        private void TimerCallback(object state)
-        {
-            //Log.Information("[心跳检查]执行心跳检查");
-            DateTime nowTime = DateTime.Now;
-            //这里规定心跳包超过30秒没用更新就将连接清理
-            foreach(var kv in heartBeatPairs)
-            {
-                 TimeSpan gap =  nowTime - kv.Value;
-                if(gap.TotalSeconds> HEARTBEATTIMEOUT)
-                {
-                    //关闭超时的客户端连接
-                    Connection conn = kv.Key;
-                    Log.Information("[心跳检查]心跳超时==>");//移除相关的资源
-                    conn.Close();
-                    heartBeatPairs.Remove(kv.Key);
-                }
-            }
-        }
-
-        /*
-        客户端连接成功的回调
-        */
-        private  void OnConnected(Connection conn)
+        /// <summary>
+        /// 客户端连接成功的回调
+        /// </summary>
+        /// <param name="conn"></param>
+        private void OnConnected(Connection conn)
         {
             //接收到客户端的socket
            var ipe = conn.Socket.RemoteEndPoint as IPEndPoint;//向下转型
@@ -115,10 +76,11 @@ namespace GameServer.Network
 
         }
 
-        /*
-         客户端断开连接回调
-         */
-        private  void OnDisconnected(Connection conn)
+        /// <summary>
+        /// 客户端断开连接回调
+        /// </summary>
+        /// <param name="conn"></param>
+        private void OnDisconnected(Connection conn)
         {
 
             //到这里的时候，socket已经是null了
@@ -149,6 +111,47 @@ namespace GameServer.Network
             else
             {
                 Log.Information("[连接断开]未知用户");
+            }
+        }
+
+        /// <summary>
+        /// 接收到心跳包的处理
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="message"></param>
+        public void _HeartBeatRequest(Connection conn, HeartBeatRequest message)
+        {
+            //更新心跳时间
+            heartBeatPairs[conn] = DateTime.Now;
+
+            //知道当前连接还活着
+            //Log.Information("[消息]收到心跳包：" + conn);
+
+            //响应
+            HeartBeatResponse resp = new HeartBeatResponse();
+            conn.Send(resp);
+        }
+
+        //todo应该转交给中心计时器处理
+        /// <summary>
+        /// 检查心跳包的回调。 
+        /// </summary>
+        /// <param name="state"></param>
+        private void TimerCallback(object state)
+        {
+            DateTime nowTime = DateTime.Now;
+            //这里规定心跳包超过30秒没用更新就将连接清理
+            foreach (var kv in heartBeatPairs)
+            {
+                TimeSpan gap = nowTime - kv.Value;
+                if (gap.TotalSeconds > HEARTBEATTIMEOUT)
+                {
+                    //关闭超时的客户端连接
+                    Connection conn = kv.Key;
+                    Log.Information("[心跳检查]心跳超时==>");//移除相关的资源
+                    conn.Close();
+                    heartBeatPairs.Remove(kv.Key);
+                }
             }
         }
     }

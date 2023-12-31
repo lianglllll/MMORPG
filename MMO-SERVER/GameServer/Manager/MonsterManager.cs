@@ -23,7 +23,6 @@ namespace GameServer.Manager
             this.curSpace = space;
         }
 
-
         public Monster Create(int tid,int level,Vector3Int pos,Vector3Int dir)
         {
             Monster monster = new Monster(tid,level, pos, dir);
@@ -45,7 +44,6 @@ namespace GameServer.Manager
 
             return monster;
         }
-
 
     }
 }

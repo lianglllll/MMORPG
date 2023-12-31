@@ -15,39 +15,37 @@ namespace Summer.Network
     /// 使用方法：
     ///     var lfd  = new LengthFieldDecoder(socket,64*64,0,4,0,4)
     /// </summary>
+    /// 这里我们的数据格式是：4字节长度字段+数据部分
+    ///                     而数据部分的前两个字节是我们的proto协议的编号
     public class LengthFieldDecoder
     {
-        private bool isStart = false;
-        private Socket mSocket;
-
-        private int lengthFieldOffset =0;  //第几个是长度字段
-        private int lengthFieldLength = 4; //长度字段本身占几个字节
-        private int lengthAdjustment = 0;//长度字段和内容之间距离几个字节（也就是长度字段记录了整一个数据包的长度，负数代表向前偏移，body实际长度要减去这个绝对值）
-        private int initialBytesToStrip = 4;//表示获取完一个完整的数据包之后，舍弃前面的多少个字节
-
-        private byte[] mBuffer;   //接收数据的缓存空间
-        private int mOffect = 0;    //缓冲区目前的长度
-
-        /// <summary>
-        ///	一次性接收数据的最大字节，默认1Mb
-        /// </summary>
-        private int mSize = 64 * 1024;
+        private bool isStart = false;           //解码器是否已经启动
+        private Socket mSocket;                 //连接客户端的socket
+        private int lengthFieldOffset =0;       //第几个字节是长度字段
+        private int lengthFieldLength = 4;      //长度字段本身占几个字节
+        private int lengthAdjustment = 0;       //长度字段和内容之间距离几个字节（也就是长度字段记录了整一个数据包的长度，负数代表向前偏移，body实际长度要减去这个绝对值）
+        private int initialBytesToStrip = 4;    //表示获取完一个完整的数据包之后，舍弃前面的多少个字节
+        private byte[] mBuffer;                 //接收数据的缓存空间
+        private int mOffect = 0;                //缓冲区目前的长度
+        private int mSize = 64 * 1024;          //一次性接收数据的最大字节，默认64kMb
 
         //成功收到消息的委托事件
         public delegate void ReceivedHandler(byte[] data);
         public event ReceivedHandler Received;
-
-        //连接失败的委托事件
+        //连接断开的委托事件
         public delegate void DisconnectedHandler();
         public event DisconnectedHandler disconnected;
 
-
-
-        /*
-        构造方法
-        */
-        public LengthFieldDecoder(Socket socket, int maxBufferLength, int lengthFieldOffset, int lengthFieldLength,
-            int lengthAdjustment, int initialBytesToStrip)
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        /// <param name="socket">客户端socket</param>
+        /// <param name="maxBufferLength"></param>
+        /// <param name="lengthFieldOffset"></param>
+        /// <param name="lengthFieldLength"></param>
+        /// <param name="lengthAdjustment"></param>
+        /// <param name="initialBytesToStrip"></param>
+        public LengthFieldDecoder(Socket socket, int maxBufferLength, int lengthFieldOffset, int lengthFieldLength,int lengthAdjustment, int initialBytesToStrip)
         {
             mSocket = socket;
             mSize = maxBufferLength;
@@ -58,10 +56,9 @@ namespace Summer.Network
             mBuffer = new byte[mSize];
         }
 
-
-        /*
-         启动解码器
-         */
+        /// <summary>
+        /// 启动解码器
+        /// </summary>
         public void Start()
         {
             if (mSocket != null && !isStart)
@@ -69,13 +66,12 @@ namespace Summer.Network
                 mSocket.BeginReceive(mBuffer, mOffect, mSize - mOffect, SocketFlags.None, new AsyncCallback(Receive), null);
                 isStart = true;
             }
-            
         }
 
-
-        /*
-         异步接收的回调
-         */
+        /// <summary>
+        /// 异步接收的回调
+        /// </summary>
+        /// <param name="result"></param>
         public void Receive(IAsyncResult result)
         {
             try
@@ -89,7 +85,6 @@ namespace Summer.Network
                     _disconnected();
                     return;
                 }
-
 
                 //处理信息
                 ReadMessage(len);
@@ -112,9 +107,9 @@ namespace Summer.Network
 
         }
 
-
-
-        //处理连接断开，并且向上传递消息断开信息
+        /// <summary>
+        /// 连接断开，并且向上传递消息断开信息
+        /// </summary>
         private void _disconnected()
         {
             try
@@ -127,9 +122,10 @@ namespace Summer.Network
             mSocket = null;
         }
 
-        /*
-         处理数据，并且进行转发处理
-         */
+        /// <summary>
+        /// 处理数据，并且进行转发处理
+        /// </summary>
+        /// <param name="len"></param>
         private void ReadMessage(int len)
         {
 
@@ -190,7 +186,12 @@ namespace Summer.Network
 
         }
 
-        //获取大端模式int值
+        /// <summary>
+        /// 获取大端模式int值
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         private int GetInt32BE(byte[] data, int index)
         {
             return (data[index] << 0x18) | (data[index + 1] << 0x10) | (data[index + 2] << 8) | (data[index + 3]);

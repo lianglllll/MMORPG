@@ -32,7 +32,7 @@ public class SkillDefine
 	public int Area;                // 影响区域
 	public float Duration;			// 整个技能的持续时间
 	public float Interval;			// 伤害间隔
-	public float[] HitDelay;		// 命中时间，动作开始到命中
+	public float[] HitDelay;		// 命中时间，动作开始到命中。比如说 0.3 0.6 0.9 他就会在这三个时间段造成伤害
 	public int[] BUFF;				// 附加效果如流血效果
 	public float AD;				// 物理攻击
 	public float AP;				// 法术攻击

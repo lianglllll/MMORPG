@@ -25,6 +25,9 @@ namespace GameServer.Service
         //一位用户拥有的角色上限
         int maxRoleCount = 4;
 
+        /// <summary>
+        /// 启动当前服务
+        /// </summary>
         public void Start()
         {
             MessageRouter.Instance.Subscribe<Proto.GameEnterRequest>(_GameEnterRequest);
@@ -33,12 +36,13 @@ namespace GameServer.Service
             MessageRouter.Instance.Subscribe<Proto.CharacterListRequest>(_CharacterListRequest);
             MessageRouter.Instance.Subscribe<Proto.CharacterDeleteRequest>(_CharacterDeleteRequest);
             MessageRouter.Instance.Subscribe<Proto.UserRegisterRequest>(_UserRegisterRequest);
-
         }
 
-
-        //用户创建请求
-
+        /// <summary>
+        /// 用户创建请求
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="message"></param>
         private void _UserRegisterRequest(Connection conn, UserRegisterRequest message)
         {
 
@@ -67,8 +71,11 @@ namespace GameServer.Service
             conn.Send(resp);
         }
 
-
-        //用户登录请求
+        /// <summary>
+        /// 用户登录请求
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="message"></param>
         private void _UserLoginRequest(Connection conn, UserLoginRequest message)
         {
             //获取username password
@@ -101,7 +108,11 @@ namespace GameServer.Service
             conn.Send(resp);
         }
 
-        //用户创建角色请求
+        /// <summary>
+        /// 用户创建角色请求
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="message"></param>
         private void _CharacterCreateRequest(Connection conn, CharacterCreateRequest message)
         {
             CharacterCreateResponse resp = new CharacterCreateResponse();
@@ -208,45 +219,38 @@ namespace GameServer.Service
 
         }
 
-        //进入游戏请求
-        private void _GameEnterRequest(Connection conn, GameEnterRequest msg)
+        /// <summary>
+        /// 删除角色请求
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="message"></param>
+        private void _CharacterDeleteRequest(Connection conn, CharacterDeleteRequest message)
         {
+            CharacterDeleteResponse resp = new CharacterDeleteResponse();
 
-            Log.Information($"有玩家进入游戏,角色id={msg.CharacterId}");
-
-            //获取当前用户，通过userid寻找有无这个角色
+            //获取当前用户id
             DbUser dbUser = conn.Get<Session>().dbUser;
-            if (dbUser == null)
+            if (null == dbUser)
             {
+                Log.Information("未登录，删除角色");
+
                 return;
             }
-            //查询数据库中角色的信息
-            DbCharacter dbCharacter =  DbManager.fsql.Select<DbCharacter>()
-                .Where(t => t.Id == msg.CharacterId)
-                .Where(t => t.PlayerId == dbUser.Id)
-                .First();
 
-            //将数据库角色类转为游戏角色类，添加进管理器管理
-            Character character = CharacterManager.Instance.CreateCharacter(dbCharacter);
-
-            //将characterId 与 session 进行关联
-
-
-             
-            //响应通知客户端加入游戏的结果
-            GameEnterResponse resp = new GameEnterResponse();
-            resp.Success = true;
-            character.info.Entity = character.EntityData;
-            resp.Character = character.info;
-            conn.Send(resp);
-
-            //告知场景新加入了一个entity,进行广播
-            Space space = SpaceService.Instance.GetSpaceById(dbCharacter.SpaceId);
-            space?.CharaterJoin(conn, character);
-
+            int affCount = DbManager.fsql.Delete<DbCharacter>().Where(t => t.Id == message.CharacterId).Where(t => t.PlayerId == dbUser.Id).ExecuteAffrows();
+            if (affCount > 0)
+            {//返回
+                resp.Success = true;
+                resp.Message = "删除成功";
+                conn.Send(resp);
+            }
         }
 
-        //角色列表请求
+        /// <summary>
+        /// 角色列表请求
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="message"></param>
         private void _CharacterListRequest(Connection conn, CharacterListRequest message)
         {
 
@@ -282,27 +286,44 @@ namespace GameServer.Service
             conn.Send(resp);
         }
 
-        //删除角色请求
-        private void _CharacterDeleteRequest(Connection conn, CharacterDeleteRequest message)
+        /// <summary>
+        /// 进入游戏请求
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="msg"></param>
+        private void _GameEnterRequest(Connection conn, GameEnterRequest msg)
         {
-            CharacterDeleteResponse resp = new CharacterDeleteResponse();
 
-            //获取当前用户id
+            Log.Information($"有玩家进入游戏,角色id={msg.CharacterId}");
+
+            //获取当前用户，通过userid寻找有无这个角色
             DbUser dbUser = conn.Get<Session>().dbUser;
-            if(null== dbUser)
+            if (dbUser == null)
             {
-                Log.Information("未登录，删除角色");
-
                 return;
             }
+            //查询数据库中角色的信息
+            DbCharacter dbCharacter = DbManager.fsql.Select<DbCharacter>()
+                .Where(t => t.Id == msg.CharacterId)
+                .Where(t => t.PlayerId == dbUser.Id)
+                .First();
 
-            int affCount  = DbManager.fsql.Delete<DbCharacter>().Where(t => t.Id == message.CharacterId).Where(t => t.PlayerId == dbUser.Id).ExecuteAffrows();
-            if (affCount > 0)
-            {//返回
-                resp.Success = true;
-                resp.Message = "删除成功";
-                conn.Send(resp);
-            }
+            //将数据库角色类转为游戏角色类，添加进管理器管理
+            Character character = CharacterManager.Instance.CreateCharacter(dbCharacter);
+
+            //将characterId 与 session 进行关联
+
+            //响应通知客户端加入游戏的结果
+            GameEnterResponse resp = new GameEnterResponse();
+            resp.Success = true;
+            character.info.Entity = character.EntityData;
+            resp.Character = character.info;
+            conn.Send(resp);
+
+            //告知场景新加入了一个entity,进行广播
+            Space space = SpaceService.Instance.GetSpaceById(dbCharacter.SpaceId);
+            space?.CharaterJoin(conn, character);
+
         }
     }
 }

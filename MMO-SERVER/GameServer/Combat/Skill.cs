@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace GameServer.Combat
 {
+    // todo 改个名叫SkillStage;
     //技能施法的过程：
     //开始 - 前摇 - 激活 - 结束
     public enum Stage
@@ -30,39 +31,53 @@ namespace GameServer.Combat
         private float RunTime;              //技能运行时间
         public Stage State;                 //当前技能状态
         public bool IsPassive;              //是否是被动技能
-
-        //未触发暴击的次数
-        private int notCrit = 0;
+        private int notCrit = 0;            //未触发暴击的次数
         //强制触发暴击的次数(理论的暴击次数，如果你是百分之10的暴击率，那么你10次攻击会有一次暴击)（这里给你保底）（+2是宽限一点）
         private int forceCritAfer =>  (int) (100f / Owner.Attr.final.CRI) + 2;
 
+        /// <summary>
+        /// 技能的目标：pos、actor
+        /// </summary>
         public SCObject Target { get; private set; }
-
+        /// <summary>
+        /// 是不是一个无目标类型
+        /// </summary>
         public bool IsNoneTarget
         {
             get => Define.TargetType == "None";
         }
+        /// <summary>
+        /// 是不是一个单位类型
+        /// </summary>
         public bool IsUnitTarget
         {
             get => Define.TargetType == "单位";
         }
+        /// <summary>
+        /// 是不是一个点目标类型
+        /// </summary>
         public bool IsPointTarget
         {
             get => Define.TargetType == "点";
         }
+        /// <summary>
+        /// 是不是普通攻击
+        /// </summary>
         public bool IsNormal => Define.Type == "普通攻击";
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <param name="skid"></param>
         public Skill(Actor owner,int skid)
         {
             this.Owner = owner;
             Define = DataManager.Instance.skillDefineDict[skid];
-
             if(Define.HitDelay.Length == 0)
             {
                 Array.Resize(ref Define.HitDelay, 1);
             }
-
-
         }
 
         /// <summary>
@@ -185,10 +200,12 @@ namespace GameServer.Combat
         }
 
         /// <summary>
-        /// 触发延迟伤害
+        /// 触发打到目标的延迟伤害
+        /// 这个就是技能进入active状态后的hitdelay秒后触发伤害
         /// </summary>
         private void _hitTrigger()
         {
+            //这里还是需要做一些actor和target直接的距离运算再觉得触不触发的
             Log.Information("_hitTrigger:Owner[{0}],Skill[{1}]", Owner.EntityData.Id, Define.Name);
             OnHit(Target);
         }
@@ -224,7 +241,7 @@ namespace GameServer.Combat
         }
 
         /// <summary>
-        /// 对目标造成伤害
+        /// 对目标造成伤害，计算伤害并且通知目标它被伤害了
         /// </summary>
         /// <param name="acotr"></param>
         private void TakeDamage(Actor targetActor)

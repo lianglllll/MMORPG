@@ -28,17 +28,10 @@ namespace GameServer.Model
         private Dictionary<Connection, Character> connCharacter = new Dictionary<Connection, Character>();
         
 
-        public MonsterManager monsterManager = new MonsterManager();
-        public SpawnManager spawnManager = new SpawnManager();
-        public FightManager fightManager = new FightManager();
+        public MonsterManager monsterManager = new MonsterManager();                //怪物管理器，负责当前场景的怪物创建和销毁
+        public SpawnManager spawnManager = new SpawnManager();                      //怪物孵化器，负责怪物的孵化
+        public FightManager fightManager = new FightManager();                      //战斗管理器，负责技能、投射物、伤害、actor信息的更新
 
-
-
-        public void Update()
-        {
-            spawnManager.Update();
-            fightManager.OnUpdate(Time.deltaTime);
-        }
 
 
         public Space(){}
@@ -53,8 +46,20 @@ namespace GameServer.Model
             fightManager.Init(this);
         }
 
+        /// <summary>
+        /// 推动场景下的各个管理器运行
+        /// </summary>
+        public void Update()
+        {
+            spawnManager.Update();
+            fightManager.OnUpdate(Time.deltaTime);
+        }
 
-        //角色进入地图
+        /// <summary>
+        /// 角色进入地图，会给对应的client发送当前场景的monster和其他client
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="character"></param>
         public void CharaterJoin(Connection conn, Character character)
         {
             Log.Information("有角色进入场景:"+ SpaceId + ",他的id为：" + character.Id);
@@ -106,8 +111,11 @@ namespace GameServer.Model
 
         }
 
-
-        //角色离开地图(客户端离线、切换地图)
+        /// <summary>
+        /// 角色离开地图(客户端离线、切换地图)
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="character"></param>
         public void CharacterLeave(Connection conn,Character character)
         {
             Log.Information("角色离开场景，id：" + character.Id);
@@ -126,9 +134,10 @@ namespace GameServer.Model
 
         }
 
-
+        /// <summary>
         /// 更新服务器目标entity的信息，并且给其他玩家进行转发
-        /// <param name="entitySync">位置+状态</param>
+        /// </summary>
+        /// <param name="entitySync">位置+状态信息</param>
         public void UpdateEntity(NEntitySync entitySync)
         {
             foreach (var kv in characterDict)
@@ -146,8 +155,10 @@ namespace GameServer.Model
             }
         }
 
-
-        //怪物进入地图
+        /// <summary>
+        /// 怪物进入地图,广播给场景内的client
+        /// </summary>
+        /// <param name="monster"></param>
         public void MonsterJoin(Monster monster)
         {
             //修改切换场景后的参数（新创建的，切换地图的）
@@ -161,7 +172,10 @@ namespace GameServer.Model
             Broadcast(resp);
         }
 
-        //广播一个proto消息，给场景的全体玩家
+        /// <summary>
+        /// 广播一个proto消息，给场景的全体玩家
+        /// </summary>
+        /// <param name="msg"></param>
         public void Broadcast(IMessage msg)
         {
             foreach(var kv in characterDict)
@@ -169,7 +183,6 @@ namespace GameServer.Model
                 kv.Value.conn.Send(msg);
             }
         }
-
 
     }
 }

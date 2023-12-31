@@ -28,22 +28,15 @@ namespace GameServer.Manager
             {
                 ruleList.Add(new Spawner(r, space));
             }
-
-
-
         }
 
-
+        /// <summary>
+        /// 推动刷怪器
+        /// </summary>
         public void Update()
         {
             ruleList.ForEach(r => r.Update());
         }
-
-
-
-
-
-
 
     }
 }
