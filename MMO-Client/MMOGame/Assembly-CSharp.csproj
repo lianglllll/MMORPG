@@ -56,10 +56,13 @@
     <Analyzer Include="D:\vs2019\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimBulletPhysics.cs" />
     <Compile Include="Assets\Script\Manager\UIManager.cs" />
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimMorphHelper.cs" />
     <Compile Include="Assets\Script\UI\Package\PackageLocalDate.cs" />
     <Compile Include="Assets\Script\UI\Panel\RegisterPanelScript.cs" />
     <Compile Include="Assets\Resources\Model\UI\ChibiDialog\ChibiDialogDemo\Scripts\ChibiDialogMain.cs" />
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimRigidBody.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\SpringCollider.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\ExitType.cs" />
     <Compile Include="Assets\Script\Tools\UnityMainThreadDispatcher.cs" />
@@ -73,16 +76,19 @@
     <Compile Include="Assets\Script\Tools\DevelopmentTool\DevelopmentToos.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
+    <Compile Include="Assets\Script\Mechanism\BackInTime\Boomer.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\SpringManager.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Billboard.cs" />
     <Compile Include="Assets\Script\Manager\GameApp.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimIKTarget.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextData.cs" />
     <Compile Include="Assets\Script\Tools\Timer\GameTimer.cs" />
     <Compile Include="Assets\Script\UI\Package\PackagePanelScript.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\AbilityBarScript.cs" />
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimBone.cs" />
     <Compile Include="Assets\Script\UI\Panel\CreateRolePanelScript.cs" />
     <Compile Include="Assets\Script\Input\PlayerInputActions.cs" />
     <Compile Include="Assets\Script\Service\ChatService.cs" />
@@ -122,9 +128,11 @@
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\AutoBlink.cs" />
     <Compile Include="Assets\Script\Service\CombatService.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\AlternationMode.cs" />
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimModel.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\UnityChanControlScriptWithRgidBody.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Script\Entities\Monster.cs" />
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimSpeechHelper.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Script\Net\NetStart.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\EliteScript.cs" />
@@ -138,6 +146,7 @@
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextManager.cs" />
     <Compile Include="Assets\Script\UI\Utils\MyDialog.cs" />
     <Compile Include="Assets\Script\UI\Panel\CombatPanelScript.cs" />
+    <Compile Include="Assets\Script\Mechanism\BackInTime\TimeMachineManager.cs" />
     <Compile Include="Assets\Script\Entities\Entity.cs" />
     <Compile Include="Assets\Script\Combat\Missile.cs" />
     <Compile Include="Assets\Script\UI\Panel\BasePanel.cs" />
@@ -145,6 +154,7 @@
     <Compile Include="Assets\Script\Tools\GameTools.cs" />
     <Compile Include="Assets\Script\Net\V3.cs" />
     <Compile Include="Assets\Script\Animation\HeroAnimations.cs" />
+    <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimAnimMorphHelper.cs" />
     <Compile Include="Assets\Script\Manager\GameManager.cs" />
     <Compile Include="Assets\Script\UI\Package\GameController.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
@@ -152,13 +162,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
+    <None Include="Assets\Art\CharacterModel\明日香紧身作战服\明日香.MMD4Mecanim.xml" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_TransClipping_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_Mobile_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess_Light_StencilMask.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-Transparent.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-Transparent-Edge.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-ForwardAdd.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_TransClipping_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\UCTS_DoubleShadeWithFeather.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Scripts\Internal\MMD4Mecanim.dll" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-BothFaces-Edge.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces-Transparent.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics\x86\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Clipping_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_AngelRing_TransClipping_Tess_StencilOut.shader" />
@@ -166,23 +185,35 @@
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_Clipping_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_AngelRing_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics\WSA\X86\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_Tess_Light.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\UCTS_Outline_Tess.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_AngelRing_TransClipping_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NEXTEdge-ForwardBase.cginc" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-SurfaceEdge-Lighting.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_OutlineObject.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Transparent-Edge.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\UCTS_ShadowCaster_Tess.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-BothFaces-Transparent.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics\x86_64\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_AngelRing_TransClipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_Transparent_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\UCTS_Tess.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_AngelRing_Mobile.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4Mecanim.dll" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-Transparent-Edge.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-Edge.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather_TransClipping_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces-Edge.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess_Light.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-BothFaces-Edge.shader" />
     <None Include="Assets\Resources\Model\Role\WizardPolyArt\Shader\PolyArtMaskTint.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
@@ -195,20 +226,32 @@
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Clipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_TransClipping_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_StencilMask.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-Transparent.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Clipping_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_TransClipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_TransClipping_Tess_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics\WSA\X64\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_Light.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_StencilOut.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.xml" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_AngelRing_TransClipping_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics 2.75\WSA\X86\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_OutlineObject_Tess_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-Tessellation.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-ShadowCaster.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather_TransClipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather_TransClipping_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather.shader" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Edge.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-Edge.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-Edge.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics 2.75\WSA\ARM\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NEXTEdge-Lighting.cginc" />
+    <None Include="Assets\Art\CharacterModel\明日香紧身作战服\明日香.xml" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_TransClipping_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_Transparent.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather_Transparent.shader" />
@@ -219,6 +262,7 @@
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_TransClipping_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_OutlineObject_Tess.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-SurfaceEdge-ForwardAdd.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
@@ -226,45 +270,66 @@
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_Clipping_Tess_StencilMask.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NEXTEdge-Pass4.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_Clipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_TransClipping_Tess_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_Light_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces-Transparent-Edge.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_Mobile_TransClipping_StencilMask.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces-Transparent-Edge.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_TransClipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_Transparent_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_AngelRing_TransClipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_AngelRing.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics 2.75\x86_64\MMD4MecanimBulletPhysics.dll" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-ShadowCollector.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_Tess_Light_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_TransClipping_StencilMask.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces-Edge.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics 2.75\x86\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_Tess.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Transparent.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Audio\Voice\unity-chan_voice_list.txt" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_Mobile.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_TransClipping_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_StencilOut.shader" />
+    <None Include="Assets\Art\CharacterModel\明日香紧身作战服\使用规则.txt" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_TransClipping_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_TransClipping_Tess_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Clipping_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-Transparent.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_AngelRing.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-ForwardBase.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting.shader" />
     <None Include="Assets\Resources\Model\Environment\FantasyEnvironments\Environments\README.txt" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-AutoLight.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather_Transparent_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-BothFaces-Transparent.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_Clipping_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_TransClipping_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Compatible.cginc" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Dummy.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-BothFaces-Transparent-Edge.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-BothFaces-Transparent-Edge.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_TransClipping_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_DoubleShadeWithFeather_Transparent_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_TransClipping_Tess.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\README.txt" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-Transparent-Edge.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_AngelRing_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Clipping_Tess_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_Tess_StencilOut.shader" />
@@ -274,33 +339,43 @@
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_Mobile_TransClipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\UCTS_ShadingGradeMap.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\UCTS_Outline.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_Transparent_Tess_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\UCTS_DoubleShadeWithFeather_tess.cginc" />
+    <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.MMD4Mecanim.xml" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_TransClipping_Tess_StencilMask.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_AngelRing_Mobile_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\Stage\Shader\AlphaMask.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-BothFaces.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\UCTS_ShadingGradeMap_tess.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_TransClipping.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Clipping_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-SurfaceEdge-ForwardBase.cginc" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics 2.75\WSA\X64\MMD4MecanimBulletPhysics.dll" />
+    <None Include="Assets\Animation\MMD4Mecanim\Plugins\MMD4MecanimBulletPhysics\WSA\ARM\MMD4MecanimBulletPhysics.dll" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_DoubleShadeWithFeather_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_OutlineObject_StencilOut.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess_Light_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_TransClipping_Tess_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-BothFaces.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\UCTS_ShadowCaster.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_TransClipping.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap_Transparent_StencilOut.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces-Transparent.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_StencilMask.shader" />
     <None Include="Assets\Resources\Model\Role\WizardPolyArt\SRP\HowToTestSRPs.txt" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Lighting.cginc" />
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_TransClipping_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess.shader" />
     <None Include="Assets\Art\Effects\Hovl Studio\Magic effects pack\Demo scene\Readme.txt" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-Lighting.cginc" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_TransClipping_Tess.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\ToonColor_ShadingGradeMap.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\ToonColor_ShadingGradeMap_TransClipping_Tess_StencilMask.shader" />
@@ -308,6 +383,7 @@
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Toon_ShadingGradeMap_Mobile_StencilOut.shader" />
     <None Include="Assets\Art\CharacterModel\Picola\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_Light_StencilMask.shader" />
+    <None Include="Assets\Animation\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NEXTEdge-Pass8.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -553,23 +629,26 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\MygameTools\2021.3.5f1c1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="MMD4Mecanim">
+      <HintPath>Assets\Animation\MMD4Mecanim\Scripts\MMD4Mecanim.dll</HintPath>
+    </Reference>
+    <Reference Include="Animancer.Lite">
+      <HintPath>Assets\Plugins\Animancer\Internal\Core\Animancer.Lite.dll</HintPath>
+    </Reference>
+    <Reference Include="ReportGeneratorMerged">
+      <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.0.1\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog">
       <HintPath>Assets\Plugins\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Plugins\Newtonsoft\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Animancer.Lite">
-      <HintPath>Assets\Plugins\Animancer\Internal\Core\Animancer.Lite.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
       <HintPath>Assets\Plugins\protobuf\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="ReportGeneratorMerged">
-      <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.0.1\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Assets\Plugins\protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>

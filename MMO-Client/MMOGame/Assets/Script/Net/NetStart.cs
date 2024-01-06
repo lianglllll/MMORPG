@@ -60,7 +60,6 @@ public class NetStart : MonoBehaviour
             yield return waitForSeconds;
             NetClient.Send(beatReq);
             lastBeatTime = DateTime.Now;
-            
         }
     }
 

@@ -18,7 +18,6 @@ namespace GameServer
     {
         static void Main(string[] args)
         {
-
             //初始化日志环境
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
@@ -56,22 +55,18 @@ namespace GameServer
             Log.Debug("[频道服务启动完成]");
 
 
-            //中心计时器任务加载
+            //中心计时器任务加载(使用了Timer)
             Scheduler.Instance.Start();
-            Log.Debug("[中心计时器任务加载完成]");
-
             //添加中心计时器任务：
             Scheduler.Instance.AddTask(() => {
                 EntityManager.Instance.Update();
                 SpaceManager.Instance.Update();
             }, 0.02f);
+            Log.Debug("[中心计时器任务加载完成]");
 
 
             //服务器启动完毕，开始工作
             Log.Debug("[mmorpg服务器启动成功]");
-
-
-
 
             Console.ReadKey();//防止进程结束
         }
