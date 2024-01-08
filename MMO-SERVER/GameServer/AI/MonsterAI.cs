@@ -24,8 +24,8 @@ namespace GameServer.AI
         {
             public Monster owner;               //AI拥有者
             public int viewRange = 8000;        //视野范围
-            public int walkRange = 8000;        //相对于出生点的活动范围
-            public int chaseRange = 12000;      //追击范围
+            public int walkRange = 12000;        //相对于出生点的活动范围
+            public int chaseRange = 15000;      //追击范围
             public Random rand = new Random();
         }
 
@@ -41,20 +41,22 @@ namespace GameServer.AI
             fsm.AddState("walk",new WalkState());
             fsm.AddState("chase",new ChaseState());
             fsm.AddState("return",new ReturnState());
+            fsm.AddState("death",new DeathState());
 
             //设置初始状态
-            //目前在addstate中设置了，需要修改
         }
 
-
+        /// <summary>
+        /// 驱动状态机
+        /// </summary>
         public override void Update()
         {
             fsm.Update();
         }
 
-
-
-        //巡逻状态
+        /// <summary>
+        /// 巡逻状态
+        /// </summary>
         class WalkState : IState<Param>
         {
 
@@ -69,12 +71,10 @@ namespace GameServer.AI
             public override void OnUpdate()
             {
                 var monster = param.owner;
-                //查询8000范围内(8米)的玩家
-                //var chr = EntityManager.Instance.GetNearestEntity<Character>(monster.SpaceId,monster.Position,param.viewRange);
+                //查询viewRange内的玩家
                 var chr = EntityManager.Instance.GetGetNearEntitys(monster.SpaceId, monster.Position, param.viewRange).FirstOrDefault(a => !a.IsDeath);
                 if (chr != null)
                 {
-                    //Log.Information("最近的目标对象：{0}", chr);
                     monster.target = chr;
                     fsm.ChangeState("chase");
                     return;
@@ -95,8 +95,10 @@ namespace GameServer.AI
             }
 
         }
-        
-        //追击状态
+
+        /// <summary>
+        /// 追击状态
+        /// </summary>
         class ChaseState : IState<Param>
         {
             public override void OnUpdate()
@@ -104,7 +106,7 @@ namespace GameServer.AI
                 var monster = param.owner;
 
                 //切换return状态
-                if(monster.target == null || monster.IsDeath ||
+                if(monster.target == null || monster.target.IsDeath ||
                     !EntityManager.Instance.Exist(monster.target.EntityId))
                 {
                     fsm.ChangeState("return");
@@ -127,7 +129,7 @@ namespace GameServer.AI
                 //符合攻击条件
                 if(targetDistance < 1500)
                 {
-                    if(monster.State == Proto.EntityState.Move)
+                    if(monster.State == Proto.EntityState.Walk)
                     {
                         monster.StopMove();
                     }
@@ -145,8 +147,9 @@ namespace GameServer.AI
             }
         }
 
-
-        //返回状态
+        /// <summary>
+        /// 返回状态
+        /// </summary>
         class ReturnState : IState<Param>
         {
 
@@ -165,6 +168,25 @@ namespace GameServer.AI
             }
 
         }
+
+        /// <summary>
+        /// 死亡状态
+        /// </summary>
+        class DeathState : IState<Param>
+        {
+
+            public override void OnEnter()
+            {
+
+            }
+
+            public override void OnUpdate()
+            {
+
+            }
+
+        }
+
 
     }
 }

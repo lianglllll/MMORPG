@@ -15,14 +15,15 @@ namespace GameServer.Service
 {
     public class CombatService : Singleton<CombatService>
     {
-
+        /// <summary>
+        /// 开启服务
+        /// </summary>
         public void Start()
         {
             MessageRouter.Instance.Subscribe<SpellCastRequest>(_SpellCastRequest);
             MessageRouter.Instance.Subscribe<ReviveRequest>(_ReviveRequest);
 
         }
-
 
         /// <summary>
         /// 复活请求
@@ -41,12 +42,12 @@ namespace GameServer.Service
                 SpaceEntitySyncResponse resp = new SpaceEntitySyncResponse();
                 NEntitySync nEntitySync = new NEntitySync();
                 nEntitySync.Entity = conn.Get<Session>().character.EntityData;
-                nEntitySync.State = EntityState.Idle;
+                nEntitySync.State = EntityState.None;//客户端会处理复活逻辑，状态就无需关心了
                 resp.EntitySync = nEntitySync;
+                resp.EntitySync.Force = true;
                 conn.Send(resp);
             }
         }
-
 
         /// <summary>
         /// 施法技能请求

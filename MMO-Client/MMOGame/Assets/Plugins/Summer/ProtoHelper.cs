@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Google.Protobuf;
 using System.IO;
@@ -29,6 +29,8 @@ namespace Summer
                 return result;
             }
         }
+
+
         /// <summary>
         /// 解析
         /// </summary>
@@ -42,7 +44,6 @@ namespace Summer
             return msg;
         }
 
-
         private static Dictionary<string, Type> _registry = new Dictionary<string, Type>();
         private static Dictionary<int, Type> mDict1 = new Dictionary<int, Type>();
         private static Dictionary<Type, int> mDict2 = new Dictionary<Type,int>();
@@ -50,7 +51,9 @@ namespace Summer
         static ProtoHelper()
         {
             List<string> list = new List<string>();
-            var q = from t in Assembly.GetExecutingAssembly().GetTypes() select t;
+            //var q = from t in Assembly.GetExecutingAssembly().GetTypes() select t;
+            var q = Assembly.GetExecutingAssembly().GetTypes();
+
             q.ToList().ForEach(t =>
             {
                 if (typeof(IMessage).IsAssignableFrom(t))
@@ -94,8 +97,6 @@ namespace Summer
         }
 
 
-
-
         /// <summary>
         /// 根据消息编码进行解析
         /// </summary>
@@ -109,7 +110,7 @@ namespace Summer
             Type t = ProtoHelper.SeqType(typeCode);
             var desc = t.GetProperty("Descriptor").GetValue(t) as MessageDescriptor;
             var msg = desc.Parser.ParseFrom(data, offset, len);
-            Log.Information("解析消息：code={0} - {1}", typeCode, msg);
+            //Log.Information("解析消息：code={0} - {1}", typeCode, msg);
             return msg;
         }
 

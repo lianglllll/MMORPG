@@ -15,15 +15,20 @@ namespace Assets.Script.Entities
 
         }
 
+        /// <summary>
+        /// 角色的状态发生变化
+        /// </summary>
+        /// <param name="old_value"></param>
+        /// <param name="new_value"></param>
         public override void OnStateChanged(UnitState old_value, UnitState new_value)
         {
             base.OnStateChanged(old_value, new_value);
+            //本机玩家死亡要显示消息面板
             if (IsDeath && GameApp.character == this)
             {
                 GameApp.combatPanelScript.ShowDeathBox();
             }
         }
-
 
         /// <summary>
         /// 发送玩家复活请求
@@ -34,7 +39,6 @@ namespace Assets.Script.Entities
             req.EntityId = EntityId;
             NetClient.Send(req);
         }
-
 
     }
 }

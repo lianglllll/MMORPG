@@ -109,9 +109,9 @@ namespace Summer.Network
             using (var ds = DataStream.Allocate())
             {
                 int code = ProtoHelper.SeqCode(message.GetType());
-                ds.WriteInt(message.CalculateSize()+2);
-                ds.WriteUShort((ushort)code);
-                message.WriteTo(ds);
+                ds.WriteInt(message.CalculateSize()+2);             //长度字段
+                ds.WriteUShort((ushort)code);                       //协议编号字段
+                message.WriteTo(ds);                                //数据
                 SocketSend(ds.ToArray());
             }
         }

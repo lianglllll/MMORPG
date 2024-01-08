@@ -5,34 +5,31 @@ using Proto;
 using GameClient.Entities;
 
 /// <summary>
-/// 用于存储entity对象信息
+/// entity网络同步对象
+/// todo 这个脚本职责不单一，抽离重力功能，抽离摄像机的功能，只留下pos+dir+state的同步设置
 /// </summary>
 public class GameEntity : MonoBehaviour
 {
+
+    private PlayerStateMachine stateMachine;
+
     public int entityId;
     public string entityName;
     public Vector3 position;
     public Vector3 direction;
-    public EntityState entityState;
-    public EntityState lastEntityState = EntityState.None;    //上次的状态    //proto中none值默认不发
+    public float speed = 2f;
 
     public bool isMine;
     private CharacterController characterController;
     public float fallSpeed = 0f;//下落速度
     public float FALLSPEEDMAX = 30f;//最大下落速度
-    public float speed = 3f;
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);//同步时间控制
-    public Actor actor { get; private set; }
 
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);//同步时间控制
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();//放在start里面取不到或者说取慢了
-    }
-    private void Start()
-    {
-        //actor = EntityManager.Instance.GetEntity<Actor>(entityId);
-        entityState = EntityState.Idle;
+        characterController = GetComponent<CharacterController>();
+        stateMachine = GetComponent<PlayerStateMachine>();
     }
 
     private void Update()
@@ -43,14 +40,14 @@ public class GameEntity : MonoBehaviour
             //因为我们是0.2秒同步一次信息所以是5帧
             Move(Vector3.Lerp(transform.position, position, Time.deltaTime * 5f));
             
-
             //四元数，插值处理
             Quaternion targetQuaternion = Quaternion.Euler(direction);
             this.transform.rotation = Quaternion.Lerp(transform.rotation, targetQuaternion, Time.deltaTime * 10f);
         }
         else
         {
-            //获取玩家控制的角色的位置和角度
+            //获取玩家控制的角色的位置和角度，我们自己的角色不受网络控制
+            //只做记录用
             this.position = transform.position;
             this.direction = transform.rotation.eulerAngles;//记录的是欧拉角
         }
@@ -75,12 +72,11 @@ public class GameEntity : MonoBehaviour
             fallSpeed = 0f;
         }
 
-
-
-
-
     }
 
+    /// <summary>
+    /// 用于显示角色名
+    /// </summary>
     private void OnGUI()
     {
         if (!isView(gameObject))
@@ -122,8 +118,20 @@ public class GameEntity : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 立刻移动到指定位置
+    /// </summary>
+    /// <param name="target"></param>
+    public void Move(Vector3 target)
+    {
+        characterController.Move(target - transform.position);
+    }
 
-    //判断一个对象是否在摄像机的显示范围内
+    /// <summary>
+    /// 判断一个对象是否在摄像机的显示范围内
+    /// </summary>
+    /// <param name="targetObj"></param>
+    /// <returns></returns>
     public bool isView(GameObject targetObj)
     {
         Vector3 worldPos = targetObj.transform.position;
@@ -147,16 +155,9 @@ public class GameEntity : MonoBehaviour
         }
     }
 
-
-    //发送：同步信息设置//todo
-    private void SetValueTo(Vector3 a, Vec3 b)
-    {
-        b.X = (int)a.x;
-        b.Y = (int)a.y;
-        b.Z = (int)a.z;
-    }
-
-    //开启同步信息功能
+    /// <summary>
+    /// 开启同步信息功能的协程
+    /// </summary>
     public void startSync()
     {
         if (isMine)
@@ -166,7 +167,10 @@ public class GameEntity : MonoBehaviour
         }
     }
 
-    //发送同步信息
+    /// <summary>
+    /// 发送同步信息协程
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SyncRequest()
     {
         //优化,防止不断在堆中创建新对象
@@ -182,8 +186,6 @@ public class GameEntity : MonoBehaviour
             }
         };
 
-
-
         while (true)
         {
             //只有当主角移动的时候才会发生同步信息
@@ -192,11 +194,7 @@ public class GameEntity : MonoBehaviour
                 SetValueTo(this.position * 1000, req.EntitySync.Entity.Position);
                 SetValueTo(this.direction * 1000, req.EntitySync.Entity.Direction);
                 req.EntitySync.Entity.Id = entityId;
-                if (lastEntityState != entityState)
-                {
-                    req.EntitySync.State = entityState;
-                    lastEntityState = entityState;
-                }
+                req.EntitySync.State = TranslateState(stateMachine.currentActorState);
                 NetClient.Send(req);
                 transform.hasChanged = false;
                 req.EntitySync.State = EntityState.None;
@@ -206,8 +204,46 @@ public class GameEntity : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 我们只传玩家在移动时候的状态，其他状态一律不由entity来进行处理，传none就行了
+    /// </summary>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    private EntityState TranslateState(ActorState state)
+    {
+        switch (state)
+        {
+            case ActorState.Idle:
+                return EntityState.Idle;
+            case ActorState.Walk:
+                return EntityState.Walk;
+            case ActorState.Run:
+                return EntityState.Run;
+            case ActorState.Jump:
+                return EntityState.Jump;
+            case ActorState.Swordflight:
+                return EntityState.Swordflight;
+            default:
+                return EntityState.None;
+        }
+    }
 
-    /// 响应：设置同步信息
+    /// <summary>
+    /// 设置同步包中的方向和位置vec数据
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    private void SetValueTo(Vector3 a, Vec3 b)
+    {
+        b.X = (int)a.x;
+        b.Y = (int)a.y;
+        b.Z = (int)a.z;
+    }
+
+    /// <summary>
+    /// 响应：同步位置+方向+速度信息
+    /// </summary>
+    /// <param name="nEntity"></param>
     /// <param name="instantMove">是否直接设置到transform.position</param>
     public void SetData(NetEntity nEntity, bool instantMove = false)
     {
@@ -218,19 +254,16 @@ public class GameEntity : MonoBehaviour
         if (instantMove)
         {
             transform.rotation = Quaternion.Euler(direction);
-            transform.position = position;                  //charactercontrller组件会导致transform.position赋值起冲突
+            transform.position = position;                          //charactercontrller组件会导致transform.position赋值起冲突
         }
 
     }
 
-    //立刻移动到指定位置
-    public void Move(Vector3 target)
-    {
-        characterController.Move(target - transform.position);
-    }
-
-
-    //将Nvector3转换为unity的vector3，数值缩小1000倍
+    /// <summary>
+    /// 将Nvector3转换为unity的vector3，数值缩小1000倍
+    /// </summary>
+    /// <param name="v3"></param>
+    /// <returns></returns>
     private Vector3 ToVector3(Vec3 v3)
     {
         return new Vector3 { x = v3.X * 0.001f, y = v3.Y * 0.001f, z = v3.Z * 0.001f };

@@ -23,7 +23,6 @@ namespace GameServer.core.FSM
             this.param = param;
         }
 
-
         //添加状态
         public void AddState(string stateId, IState<T> state)
         {
@@ -61,7 +60,6 @@ namespace GameServer.core.FSM
             curState = stateDict[stateId];
             curState.OnEnter();
         }
-
 
         public  void Update()
         {

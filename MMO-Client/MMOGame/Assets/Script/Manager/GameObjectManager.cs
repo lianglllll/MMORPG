@@ -5,20 +5,16 @@ using UnityEngine;
 using Proto;
 using GameClient.Entities;
 
-/*
- 管理游戏场景中的对象，我们使用entityid
- 
- 
- */
 
+/// <summary>
+/// 游戏对象管理器，管理当前场景中的Gameobject
+/// </summary>
 public class GameObjectManager:MonoBehaviour
 {
 
     public static GameObjectManager Instance;
 
-    //<entityid,gameobject>
-    private static Dictionary<int, GameObject> currentGameObjectDict = new Dictionary<int, GameObject>();
-
+    private static Dictionary<int, GameObject> currentGameObjectDict = new Dictionary<int, GameObject>();    //<entityid,gameobject>  entity和gameobject的映射
 
     private void Start()
     {
@@ -35,96 +31,101 @@ public class GameObjectManager:MonoBehaviour
         Kaiyun.Event.UnregisterOut("EntitySync", this, "EntitySync");
     }
 
-    //向当前场景中创建角色/怪物/npc/陷阱
-    public void CreateActorObject(NetActor chr)
+    /// <summary>
+    /// 事件驱动：向当前场景中创建角色/怪物/npc/陷阱
+    /// </summary>
+    /// <param name="chr"></param>
+    public void CreateActorObject(NetActor nActor)
     {
 
-        //先判断当前character是否还保存在dict中
-        if (currentGameObjectDict.ContainsKey(chr.Entity.Id)) return;
+        //1.先判断当前character是否还保存在dict中
+        if (currentGameObjectDict.ContainsKey(nActor.Entity.Id)) return;
 
-
-        //entity类型
-        UnitDefine unitDefine =  DataManager.Instance.unitDict[chr.Tid];
+        //2.判断entity类型，获取prefab
+        UnitDefine unitDefine =  DataManager.Instance.unitDict[nActor.Tid];
         var prefab = Resources.Load<GameObject>(unitDefine.Resource);
-        Vector3 initPosition = V3.Of(chr.Entity.Position) / 1000; //设置出生点
+
+        //3.获取坐标和方向
+        Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000; 
         if (initPosition.y == 0)
         {
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition).y+10;//计算地面坐标,//todo有点问题
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition,10,7).y;//计算地面坐标
         }
+
+        //4.实例化
         GameObject chrObj = Instantiate(prefab,initPosition,Quaternion.identity,this.transform);//将实例化的角色放到gamemanager下面
 
-        //actor 和 gameobj关联
-        Actor actor = EntityManager.Instance.GetEntity<Actor>(chr.Entity.Id);
+        //5.actor 和 gameobj关联
+        Actor actor = EntityManager.Instance.GetEntity<Actor>(nActor.Entity.Id);
         actor.renderObj = chrObj;
+        actor.StateMachine = chrObj.GetComponent<PlayerStateMachine>();
+        actor.StateMachine.parameter.owner = actor;
+        //放入dict管理
+        currentGameObjectDict[nActor.Entity.Id] = chrObj;
 
-
-        //gameobjectName
-        if (chr.EntityType == EntityType.Character)
+        //6.修改一下obj的设置
+        if (nActor.EntityType == EntityType.Character)
         {
-            chrObj.name = "Character_" + chr.Entity.Id;  
+            chrObj.name = "Character_" + nActor.Entity.Id;  
         }
-        else if(chr.EntityType == EntityType.Monster)
+        else if(nActor.EntityType == EntityType.Monster)
         {
-            chrObj.name = "Monster_" + chr.Entity.Id;
+            chrObj.name = "Monster_" + nActor.Entity.Id;
         }
         chrObj.layer = 6;//加入actor图层
 
-        bool isMine = (chr.Entity.Id == GameApp.entityId);                      //判断是否为本机角色
+        //7.设置一下同步脚本
         GameEntity gameEntity = chrObj.GetComponent<GameEntity>();
-        gameEntity.entityName = chr.Name;
-        gameEntity.isMine = isMine;
-        gameEntity.SetData(chr.Entity);
+        gameEntity.entityName = nActor.Name;
+        gameEntity.SetData(nActor.Entity);
 
+        //8.根据是否为本机操纵的角色添加控制脚本，开启同步协程
+        bool isMine = (nActor.Entity.Id == GameApp.entityId);
+        gameEntity.isMine = isMine;
         //如果是本机角色,给它添加控制脚本，并且开启信息同步协程
         if (isMine)
         {
             gameEntity.startSync();//协程，角色开始信息的同步
-            chrObj.AddComponent<HeroController>();//给当前用户控制的角色添加控制脚本
-
+            chrObj.AddComponent<CameraManager>();                                           //给当前用户控制的视角
+            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();//给当前用户控制的角色添加控制脚本
             GameApp.myCharacter = chrObj;                   //给gameapp当前角色的引用，方便而已
         }
 
-        //放入dict管理
-        currentGameObjectDict[chr.Entity.Id] = chrObj;
-
     }
 
-    //角色离开场景
+    /// <summary>
+    /// 事件驱动：角色离开场景//可以改造成对象池
+    /// </summary>
+    /// <param name="entityId"></param>
     public void CharacterLeave(int entityId)
     {
         if (!currentGameObjectDict.ContainsKey(entityId)) return;
         GameObject obj = currentGameObjectDict[entityId];
         Destroy(obj);
         currentGameObjectDict.Remove(entityId);
-
     }
 
-
-    //角色信息同步
+    /// <summary>
+    /// 事件驱动：角色位置+动画状态信息同步
+    /// </summary>
+    /// <param name="nEntitySync"></param>
     public void EntitySync(NEntitySync nEntitySync)
     {
+        //1.设置位置+方向+speed
         int entityId = nEntitySync.Entity.Id;
         GameObject obj = currentGameObjectDict.GetValueOrDefault(entityId, null);
         if (obj == null) return;
         GameEntity gameEntity = obj.GetComponent<GameEntity>();
-        gameEntity.SetData(nEntitySync.Entity);//设置数据到entity中
+        //设置数据到entity中
+        gameEntity.SetData(nEntitySync.Entity);
 
-        //通过动画状态机设置动画状态
-        if(nEntitySync.State == EntityState.None)
+        //2.设置动画状态,不是常规的动画一律不传
+        if(nEntitySync.State != EntityState.None)
         {
-            obj.GetComponent<HeroAnimations>().switchState(gameEntity.lastEntityState);
-        }
-        else
-        {
-            obj.GetComponent<HeroAnimations>().switchState(nEntitySync.State);
-
+            obj.GetComponent<PlayerStateMachine>().SwitchState(TranslateState(nEntitySync.State));
         }
 
-        //通过事件驱动更新相对应的ui
-        //Kaiyun.Event.FireOut("Local")
-
-
-        //安全校验
+        //3.安全校验
         //强制回到目标位置
         if (nEntitySync.Force)
         {
@@ -134,4 +135,24 @@ public class GameObjectManager:MonoBehaviour
             gameEntity.Move(target);
         }
     }
+
+    public ActorState TranslateState(EntityState state)
+    {
+        switch (state)
+        {
+            case EntityState.Idle:
+                return ActorState.Idle;
+            case EntityState.Walk:
+                return ActorState.Walk;
+            case EntityState.Run:
+                return ActorState.Run;
+            case EntityState.Jump:
+                return ActorState.Jump;
+            case EntityState.Swordflight:
+                return ActorState.Swordflight;
+            default:
+                return ActorState.None;
+        }
+    }
+
 }

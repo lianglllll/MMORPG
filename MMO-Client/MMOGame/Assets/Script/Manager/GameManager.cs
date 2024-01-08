@@ -4,41 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+
+
+/// <summary>
+/// 全局游戏管理器
+/// </summary>
 public class GameManager : MonoBehaviour
 {
 
-    //切换场景不销毁的对象
-    public List<GameObject> keepAlive;
+    public List<GameObject> keepAlive;          //切换场景时不销毁的对象
 
     void Start()
     {
-
-        //设置初始优先窗口大小
-        Screen.SetResolution(1920, 1080, false);
-
-        //设置游戏对象不被销毁
-        foreach(GameObject obj in keepAlive)
-        {
-            DontDestroyOnLoad(obj);
-        }
-
-        //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
-        Physics.IgnoreLayerCollision(6, 6, true);
-
+        Init();
 
         //初始化服务
-        DataManager.Instance.init();                //初始化datamanager,加载文件数据
+        DataManager.Instance.init();
+        UserService.Instance.Init();
         CombatService.Instance.Init();
         ChatService.Instance.Init();
 
-
-
-
-
-
-
-
-
+        //推入第一个面板
         UIManager.Instance.OpenPanel("LoginPanel");
     }
 
@@ -48,8 +35,33 @@ public class GameManager : MonoBehaviour
         Kaiyun.Event.Tick();
     }
 
+    private void FixedUpdate()
+    {
+        EntityManager.Instance.OnUpdate(Time.fixedDeltaTime);
+    }
 
-    //加载场景 //todo manager的工作到时候结合一下
+    /// <summary>
+    /// 初始化游戏内的一些设置
+    /// </summary>
+    private void Init()
+    {
+        //设置初始优先窗口大小
+        Screen.SetResolution(1920, 1080, false);
+
+        //设置游戏对象不被销毁
+        foreach (GameObject obj in keepAlive)
+        {
+            DontDestroyOnLoad(obj);
+        }
+
+        //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
+        Physics.IgnoreLayerCollision(6, 6, true);
+    }
+
+    /// <summary>
+    /// 加载场景
+    /// </summary>
+    /// <param name="spaceId"></param>
     public static void LoadSpace(int spaceId)
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() => {
@@ -58,13 +70,5 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(space.Resource);
         });
     }
-
-    private void FixedUpdate()
-    {
-        EntityManager.Instance.OnUpdate(Time.fixedDeltaTime);
-    }
-
-
-
 
 }

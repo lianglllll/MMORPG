@@ -25,6 +25,10 @@ namespace GameServer.Model
         //当前角色对应的数据库对象信息
         public DbCharacter Data;
         
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="dbCharacter"></param>
         public Character(DbCharacter dbCharacter) : base(EntityType.Character,dbCharacter.JobId,dbCharacter.Level,new Vector3Int(dbCharacter.X, dbCharacter.Y, dbCharacter.Z), Vector3Int.zero)
         {
 
@@ -46,17 +50,16 @@ namespace GameServer.Model
             //this.info.Entity.Id;
             //this.EntityId;        entityid 等待entitymanager分配id
 
-
         }
 
-        //重载运算符=,隐式类型转换
+        /// <summary>
+        /// 重载运算符=,隐式类型转换
+        /// </summary>
+        /// <param name="dbCharacter"></param>
         public static implicit operator Character(DbCharacter dbCharacter)
         {
             return new Character(dbCharacter);
         }
-
-
-
 
     }
 

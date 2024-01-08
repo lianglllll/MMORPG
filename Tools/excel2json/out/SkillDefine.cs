@@ -30,7 +30,8 @@ public class SkillDefine
 	public int MissileSpeed; // 投射速度
 	public string HitArt; // 击中效果，粒子特效
 	public int Area; // 影响区域
-	public float Duration; // 整个技能的持续时间
+	public float Duration; // 整个技能的持续时间,
+也就是激活状态持续的时间
 	public float Interval; // 伤害间隔
 	public float[] HitDelay; // 命中时间，动作开始到命中
 	public int[] BUFF; // 附加效果

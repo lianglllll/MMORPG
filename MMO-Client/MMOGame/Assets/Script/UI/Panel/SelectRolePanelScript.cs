@@ -64,6 +64,9 @@ public class SelectRolePanelScript : BasePanel
         UIManager.Instance.OpenPanel("CreateRolePanel");
     }
 
+    /// <summary>
+    /// 点击开始按钮回调
+    /// </summary>
     public void OnstartBtn()
     {
         if(curSelectedItem == null)

@@ -18,20 +18,21 @@ namespace GameClient.Entities
         public SkillManager skillManager;
         public GameObject renderObj;        //actor中对应的游戏对象
         public UnitState unitState;
+        public PlayerStateMachine StateMachine;
+
+
         public bool IsDeath => unitState == UnitState.Dead;
 
-
-
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="info"></param>
         public Actor(NetActor info) :base(info.Entity)
         {
             this.info = info;
             this.define = DataManager.Instance.unitDict[info.Tid];
             this.skillManager = new SkillManager(this);
         }
-
-
-
 
         /// <summary>
         /// 受伤了，改一下ui，播放一下动画
@@ -77,13 +78,8 @@ namespace GameClient.Entities
 
         }
 
-
-
-
-
-
         /// <summary>
-        /// 设置当前actor的hp
+        /// 更新当前actor的hp
         /// </summary>
         /// <param name="oldHp"></param>
         /// <param name="newHp"></param>
@@ -92,21 +88,31 @@ namespace GameClient.Entities
             this.info.Hp = newHp;
         }
 
-
+        /// <summary>
+        /// 更新当前actor的mp
+        /// </summary>
+        /// <param name="old_value"></param>
+        /// <param name="new_value"></param>
         public void OnMpChanged(float old_value, float new_value)
         {
             this.info.Mp = new_value;
         }
 
-
+        /// <summary>
+        /// 状态更改
+        /// </summary>
+        /// <param name="old_value"></param>
+        /// <param name="new_value"></param>
         public virtual void OnStateChanged(UnitState old_value, UnitState new_value)
         {
             this.unitState = new_value;
+
+            //处理死亡逻辑
             if (IsDeath)
             {
                 if (renderObj == null) return;
-                var ani = renderObj.GetComponent<HeroAnimations>();
-                ani.PlayDie();
+                var stateMachine = renderObj.GetComponent<PlayerStateMachine>();
+                stateMachine.SwitchState(ActorState.Death);
             }
             else
             {
@@ -114,9 +120,6 @@ namespace GameClient.Entities
             }
 
         }
-
-
-
 
     }
 }

@@ -16,8 +16,9 @@ public class CombatPanelScript : BasePanel
     private Image DeathBox;
     public ChatBoxScript chatBoxScript;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         myElite = transform.Find("MyElite").GetComponent<EliteScript>();
         targetElite = transform.Find("TargetElite").GetComponent<EliteScript>();
         intonateSlider = transform.Find("IntonateSlider/Slider").GetComponent<Slider>();
@@ -36,7 +37,6 @@ public class CombatPanelScript : BasePanel
         
     }
 
-
     private void Update()
     {
         //敌我头像UI
@@ -48,7 +48,7 @@ public class CombatPanelScript : BasePanel
 
         //技能释放进度条UI
         var sk = GameApp.CurrSkill;
-        if(sk != null && sk.State == Stage.Intonate && sk.Define.IntonateTime > 0.1f)
+        if(sk != null && sk.Stage == SkillStage.Intonate && sk.Define.IntonateTime > 0.1f)
         {
             intonateSlider.gameObject.SetActive(true);
             intonateSlider.value = sk.IntonateProgress;

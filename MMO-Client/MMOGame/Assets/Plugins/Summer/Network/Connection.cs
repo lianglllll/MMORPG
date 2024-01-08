@@ -19,71 +19,71 @@ namespace Summer.Network
     public class Connection
     {
 
-        public delegate void DataReceivedCallback(Connection sender, IMessage data);
-        public delegate void DisconnectedCallback(Connection sender);
-
         private Socket _socket;
-        
-        public Socket Socket
-        {
-            get { return _socket; }
-        }
-        
+        private SocketReceiver lfd;
+
+        public delegate void DataReceivedCallback(Connection sender, IMessage data);   
+        public delegate void DisconnectedCallback(Connection sender);
+        public DataReceivedCallback OnDataReceived;         //接收到数据的委托，现在没啥用
+        public DisconnectedCallback OnDisconnected;         //连接断开的委托
 
         /// <summary>
-        /// 接收到数据
+        /// 构造函数
+        /// 创建消息解码器
         /// </summary>
-        public DataReceivedCallback OnDataReceived;
-        /// <summary>
-        /// 连接断开
-        /// </summary>
-        public DisconnectedCallback OnDisconnected;
-
+        /// <param name="socket"></param>
         public Connection(Socket socket)
         {
             this._socket = socket;
             //创建解码器
-            var lfd = new SocketReceiver(socket);
+            lfd = new SocketReceiver(socket);
             lfd.DataReceived += _received;
-            lfd.Disconnected += ()=> OnDisconnected?.Invoke(this);
-            lfd.Start();//启动解码器
+            lfd.Disconnected += _OnDisconnected;
+            //启动解码器
+            lfd.Start();
         }
 
-
+        /// <summary>
+        /// 消息接收回调
+        /// </summary>
+        /// <param name="data"></param>
         private void _received(byte[] data)
         {
-            //Log.Debug("收到消息：len={0}", data.Length);
             //获取消息序列号
             ushort code = GetUShort(data, 0);
             var msg = ProtoHelper.ParseFrom(code, data, 2, data.Length - 2);
-
+            //交付消息路由处理
             if (MessageRouter.Instance.Running)
             {
                 MessageRouter.Instance.AddMessage(this,msg);
             }
-
+            //通知上层
             OnDataReceived?.Invoke(this, msg);
-
         }
 
-
+        /// <summary>
+        /// 连接端口回调
+        /// </summary>
+        private void _OnDisconnected()
+        {
+            OnDisconnected?.Invoke(this);
+        }
 
         /// <summary>
         /// 主动关闭连接
         /// </summary>
-        public void Close()
+        public void _Close()
         {
-            try { _socket.Shutdown(SocketShutdown.Both); } catch { }
-            _socket.Close();
             _socket = null;
-            OnDisconnected?.Invoke(this);
+            lfd._Close();
         }
-
 
         #region 发送网络数据包
 
-
-
+        /// <summary>
+        /// 发送proto包
+        /// </summary>
+        /// <param name="message"></param>
         public void Send(IMessage message)
         {
             using(var ds = DataStream.Allocate())
@@ -97,12 +97,21 @@ namespace Summer.Network
             
         }
 
-        //通过socket发送原生数据
+        /// <summary>
+        /// 通过socket发送原生数据
+        /// </summary>
+        /// <param name="data"></param>
         private void SocketSend(byte[] data)
         {
             this.SocketSend(data,0, data.Length);
         }
-        //通过socket发送原生数据
+
+        /// <summary>
+        /// 通过socket异步发送原生数据
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="offset"></param>
+        /// <param name="len"></param>
         private void SocketSend(byte[] data, int offset, int len)
         {
             lock (this)
@@ -113,19 +122,11 @@ namespace Summer.Network
                 }
             }
         }
-        //前提是data必须是大端字节序
-        private ushort GetUShort(byte[] data,int offset)
-        {
-            if (BitConverter.IsLittleEndian)
-            {
-                return (ushort)((data[offset] << 8) | data[offset+1]);
-            }
-            else
-            {
-                return (ushort)((data[offset+1] << 8) | data[offset]);
-            }
-        }
 
+        /// <summary>
+        /// 通过socket异步发送原生数据回调
+        /// </summary>
+        /// <param name="ar"></param>
         private void SendCallback(IAsyncResult ar)
         {
             // 发送的字节数
@@ -133,5 +134,24 @@ namespace Summer.Network
         }
 
         #endregion
+
+        /// <summary>
+        /// 通过小端方式获取data的前两个字节, 前提是data必须是大端字节序
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        private ushort GetUShort(byte[] data, int offset)
+        {
+            if (BitConverter.IsLittleEndian)
+            {
+                return (ushort)((data[offset] << 8) | data[offset + 1]);
+            }
+            else
+            {
+                return (ushort)((data[offset + 1] << 8) | data[offset]);
+            }
+        }
+
     }
 }

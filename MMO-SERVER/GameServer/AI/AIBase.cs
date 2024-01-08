@@ -1,9 +1,11 @@
-﻿using GameServer.Model;
+﻿using GameServer.core.FSM;
+using GameServer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GameServer.AI.MonsterAI;
 
 namespace GameServer.AI
 {
@@ -14,13 +16,13 @@ namespace GameServer.AI
     {
         public Monster owner;
 
+
         public AIBase(Monster owner)
         {
             this.owner = owner;
         }
 
         public abstract void Update();
-
 
     }
 }

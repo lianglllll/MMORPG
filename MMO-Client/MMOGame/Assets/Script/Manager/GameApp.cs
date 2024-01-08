@@ -15,9 +15,11 @@ public class GameApp
 {
     //角色的entityid
     public static int entityId;
+
     //全局角色
     public static Character character;
     public static Actor target;
+
     //当前角色对象引用
     public static GameObject myCharacter = null;
     //当前技能
@@ -25,15 +27,18 @@ public class GameApp
     //战斗面板
     public static CombatPanelScript combatPanelScript;
 
-    //是否正在输入
+    /// <summary>
+    /// 是否正在输入
+    /// </summary>
     public static bool IsInputtingChatBox
     {
         get => combatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
     }
 
-
-
-
+    /// <summary>
+    /// 技能释放的发包
+    /// </summary>
+    /// <param name="skill"></param>
     public static void Spell(Skill skill)
     {
         if (skill.IsUnitTarget && GameApp.target == null)
@@ -58,6 +63,4 @@ public class GameApp
         }
         NetClient.Send(req);
     }
-
-
 }

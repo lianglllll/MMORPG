@@ -127,7 +127,18 @@ namespace GameServer.Model
             SetHp(Attr.final.HPMax);
             SetMP(Attr.final.MPMax);
             SetState(UnitState.Free);
+            OnAfterRevive();
         }
+
+        /// <summary>
+        /// 复活后处理
+        /// </summary>
+        /// <param name="killerID"></param>
+        protected virtual void OnAfterRevive()
+        {
+
+        }
+
 
         /// <summary>
         /// 当前actor收到扣血通知
@@ -248,7 +259,6 @@ namespace GameServer.Model
         /// <param name="killerID"></param>
         protected virtual void OnBeforeDie(int killerID)
         {
-
         }
 
         /// <summary>

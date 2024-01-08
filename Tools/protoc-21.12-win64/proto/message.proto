@@ -34,9 +34,10 @@ message NetEntity {
 enum EntityState{
 	NONE = 0;
 	IDLE = 1;
-	MOVE = 2;
-	JUMP = 3;
-	SWORDFLIGHT = 4;
+	WALK = 2;
+	RUN = 3;
+	JUMP = 4;
+	SWORDFLIGHT = 5;
 }
 
 //同步entity:位置+状态
@@ -268,6 +269,11 @@ enum UnitState{
 //复活请求
 message ReviveRequest{
 	int32 entityId = 1;
+}
+
+//复活响应
+message ReviveResponse{
+	NEntitySync nEntitySycn = 1;
 }
 
 

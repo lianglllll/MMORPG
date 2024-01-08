@@ -9,19 +9,19 @@ using System;
 using Google.Protobuf;
 
 /// <summary>
-/// 网络客户端
+/// 网络客户端操作对象
+/// 主要是发送数据用
+/// 接收数据通过con对象交付消息路由转发了
 /// </summary>
 public class NetClient
 {
-
     private static Connection conn = null;
-
 
     /// <summary>
     /// 连接到服务器
     /// </summary>
-    /// <param name="host"></param>
-    /// <param name="port"></param>
+    /// <param name="host">ip</param>
+    /// <param name="port">端口</param>
     public static void ConnectToServer(string host, int port)
     {
 
@@ -34,8 +34,8 @@ public class NetClient
             Debug.Log("连接到服务端");
             conn = new Connection(socket);
             conn.OnDisconnected += OnDisconnected;
-            //启动消息分发器，单线程即可//为什么单线程
-            MessageRouter.Instance.Start(2);
+            //启动消息分发器，单线程即可
+            MessageRouter.Instance.Start(1);
         }
         catch (SocketException e)
         {
@@ -44,25 +44,28 @@ public class NetClient
 
     }
 
-    //连接断开
+    /// <summary>
+    /// 与服务器连接断开回调
+    /// </summary>
+    /// <param name="sender"></param>
     private static void OnDisconnected(Connection sender)
     {
         Debug.Log("与服务器断开");
     }
 
-    //关闭网络客户端
+    /// <summary>
+    /// 关闭网络客户端
+    /// </summary>
     public static void Close()
     {
-        try
-        {
-            conn?.Close();
-        }
-        catch
-        {
-
-        }
+        conn?._Close();
+        conn = null;
     }
 
+    /// <summary>
+    /// 发送poto协议包
+    /// </summary>
+    /// <param name="message"></param>
     public static void Send(IMessage message)
     {
         if (conn != null)

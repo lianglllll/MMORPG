@@ -55,6 +55,9 @@ namespace GameServer.Manager
             this.monster = this.Space.monsterManager.Create(Define.TID,Define.Level, SpawnPoint, SpawnDir);
         }
 
+        /// <summary>
+        /// 这里可以修改用事件来做把，当ai死亡就开一个定时事件，来复活它。
+        /// </summary>
         public void Update()
         {
             if(monster != null && monster.IsDeath && !reviving)

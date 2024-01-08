@@ -40,6 +40,31 @@ namespace Summer.Core
             return stream;
         }
 
+        /// <summary>
+        /// 当流释放的时候就会回调这个方法
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            //Log.Information("DataStream自动释放");
+            lock (pool)
+            {
+                if (pool.Count < PoolMaxCount)
+                {
+                    this.Position = 0;
+                    this.SetLength(0);
+                    pool.Enqueue(this);
+                    //Console.WriteLine("DataStream池子长度：" + pool.Count);
+                }
+                else
+                {
+                    this.Dispose(disposing);
+                    this.Close();
+                }
+            }
+
+        }
+
 
         public ushort ReadUShort()
         {
@@ -95,25 +120,6 @@ namespace Summer.Core
         }
 
 
-        protected override void Dispose(bool disposing)
-        {
-            //Log.Information("DataStream自动释放");
-            lock (pool)
-            {
-                if (pool.Count < PoolMaxCount)
-                {
-                    this.Position = 0;
-                    this.SetLength(0);
-                    pool.Enqueue(this);
-                    //Console.WriteLine("DataStream池子长度：" + pool.Count);
-                }
-                else
-                {
-                    this.Dispose(disposing);
-                    this.Close();
-                }
-            }
 
-        }
     }
 }

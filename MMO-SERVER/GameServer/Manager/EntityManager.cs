@@ -74,8 +74,14 @@ namespace GameServer.Manager
             }
         }
 
-        //根据条件match查找entity对象(T),T:character||monster||...
-        //比如说：生命值为0的，在某个范围内的，
+        /// <summary>
+        /// 根据条件match查找entity对象(T),T:character||monster||...
+        /// 比如说：生命值为0的，在某个范围内的，
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="spaceId"></param>
+        /// <param name="match"></param>
+        /// <returns></returns>
         public List<T> GetEntityList<T>(int spaceId,Predicate<T> match)where T : Entity
         {
             return spaceEntitiesDict[spaceId]
@@ -83,7 +89,6 @@ namespace GameServer.Manager
                 .Where(entity => match.Invoke(entity))  //根据条件赛选
                 .ToList();
         }
-
 
         /// <summary>
         /// 查找坐标点最近的对象

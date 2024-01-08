@@ -13,15 +13,14 @@ namespace GameServer.Model
     public class Monster : Actor
     {
          
-        public Vector3 moveTarget;//将要要移动的目标位置（tmp）
-        public Vector3 movePosition;//当前移动中的位置(tmp)
+        public Vector3 targetPos;  //将要要移动的目标位置（tmp）
+        public Vector3 curPos;//当前移动中的位置(tmp)
         public Vector3 initPosition;//出生点
-        public AIBase AI;
+        public MonsterAI AI;
         private Random random = new Random();
 
         public Actor target;        //追击的目标
         private static Vector3Int Y1000 = new Vector3Int(0, 1000, 0);
-
 
         public Monster(int Tid,int level,Vector3Int position, Vector3Int direction) : base(EntityType.Monster, Tid,level, position, direction)
         {
@@ -37,7 +36,7 @@ namespace GameServer.Model
             //任务2,monster位置同步
             Scheduler.Instance.AddTask(() =>
             {
-                if (State != EntityState.Move) return;
+                if (State != EntityState.Walk) return;
                 //广播消息
                 NEntitySync nEntitySync = new NEntitySync();
                 nEntitySync.Entity = EntityData;
@@ -57,19 +56,22 @@ namespace GameServer.Model
 
         }
 
-        //计算出方向，客户端需要发送请求过来，经过服务端计算之后响应，客户端才能真正的移动
+        /// <summary>
+        /// 移动到某个点
+        /// </summary>
+        /// <param name="target"></param>
         public void MoveTo(Vector3 target)
         {
             if(this.State == EntityState.Idle)
             {
-                State = EntityState.Move;//这个能触发下面的update
+                State = EntityState.Walk;//这个能触发下面的update
             }
-            if(moveTarget != target)
+            if(targetPos != target)
             {
-                moveTarget = target;
-                movePosition = Position;
-                var dir = (moveTarget - movePosition).normalized;//计算方向
-                Direction = LookRotation(dir)* Y1000;
+                targetPos = target;
+                curPos = Position;
+                var dir = (targetPos - curPos).normalized;//计算方向
+                Direction = LookRotation(dir) * Y1000;
                 //广播消息
                 NEntitySync nEntitySync = new NEntitySync();
                 nEntitySync.Entity = EntityData;
@@ -78,46 +80,60 @@ namespace GameServer.Model
             }
         }
 
-        //主要是计算服务端位移的数据，每秒50次
+        /// <summary>
+        /// 主要是计算服务端位移的数据，每秒50次
+        /// </summary>
         public override void Update()
         {
             base.Update();      //技能更新
             AI?.Update();
 
             //monster移动实现
-            if(State == EntityState.Move)
+            if(State == EntityState.Walk)
             {
                 //移动方向
-                var dir = (moveTarget - movePosition).normalized;
+                var dir = (targetPos - curPos).normalized;
                 this.Direction = LookRotation(dir)* Y1000;
                 float dist = Speed * Time.deltaTime;
-                if (Vector3.Distance(moveTarget, movePosition) < dist)
+                if (Vector3.Distance(targetPos, curPos) < dist)
                 {
                     StopMove();
                 }
                 else
                 {
-                    movePosition += dist * dir;
+                    curPos += dist * dir;
                 }
-                this.Position = movePosition;
+                this.Position = curPos;
 
             }
         }
 
+        /// <summary>
+        /// 怪物攻击
+        /// </summary>
+        /// <param name="target"></param>
         public void Attack(Actor target)
         {
+            if (target.IsDeath)
+            {
+                target = null;
+                return;
+            }
+
+            //拿一个普通攻击来放
             var skill = skillManager.Skills.FirstOrDefault(s => s.IsNormal);
             if (skill == null) return;
             if (skill.State != Combat.Stage.None) return;
             spell.SpellTarget(skill.Define.ID, target.EntityId);
         }
 
-
-        //停止移动
+        /// <summary>
+        /// 停止移动
+        /// </summary>
         public void StopMove()
         {
             State = EntityState.Idle;
-            movePosition = moveTarget;
+            curPos = targetPos;
             //广播消息
             NEntitySync nEntitySync = new NEntitySync();
             nEntitySync.Entity = EntityData;
@@ -125,7 +141,11 @@ namespace GameServer.Model
             this.currentSpace.UpdateEntity(nEntitySync);
         }
 
-        //计算出生点附近的随机坐标
+        /// <summary>
+        /// 计算出生点附近的随机坐标
+        /// </summary>
+        /// <param name="range"></param>
+        /// <returns></returns>
         public Vector3 RandomPointWithBirth(float range)
         {
             double x = random.NextDouble()*2f-1f;//[-1,1]
@@ -133,8 +153,12 @@ namespace GameServer.Model
             Vector3 dir = new Vector3(((float)x), 0, ((float)z)).normalized;
             return initPosition + dir * range * ((float)random.NextDouble());
         }
-        
-        //方向向量转换位欧拉角
+
+        /// <summary>
+        /// 方向向量转换位欧拉角
+        /// </summary>
+        /// <param name="fromDir"></param>
+        /// <returns></returns>
         public Vector3 LookRotation(Vector3 fromDir)
         {
             float Rad2Deg = 57.29578f;
@@ -157,6 +181,29 @@ namespace GameServer.Model
 
             return eulerAngles;
         }
+
+
+        /// <summary>
+        /// 死亡前处理
+        /// </summary>
+        /// <param name="killerID"></param>
+        protected override void OnBeforeDie(int killerID)
+        {
+            //状态机切换
+            AI.fsm.ChangeState("death");
+
+        }
+
+        /// <summary>
+        /// 复活后处理
+        /// </summary>
+        /// <param name="killerID"></param>
+        protected override void OnAfterRevive()
+        {
+            //状态机切换
+            AI.fsm.ChangeState("walk");
+        }
+
     }
 }
  

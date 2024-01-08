@@ -17,7 +17,9 @@ namespace GameServer.Service
     public class SpaceService:Singleton<SpaceService>
     {
 
-
+        /// <summary>
+        /// 开启服务
+        /// </summary>
         public void Start()
         {
             //初始化全部地图
@@ -28,13 +30,15 @@ namespace GameServer.Service
            
         }
 
-
-        // 获取地图
+        /// <summary>
+        /// 根据spaceId获取地图
+        /// </summary>
+        /// <param name="spaceId"></param>
+        /// <returns></returns>
         public Space GetSpaceById(int spaceId)
         {
             return SpaceManager.Instance.GetSpaceById(spaceId);          
         }
-
 
         /// <summary>
         /// 角色信息同步请求
@@ -75,8 +79,6 @@ namespace GameServer.Service
 
                 return;
             }
-
-
 
             //更新信息并且转发
             connSpace.UpdateEntity(msg.EntitySync);

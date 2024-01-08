@@ -45,20 +45,20 @@ public class HeroAnimations : MonoBehaviour
         if(skill != null)
         {
             //施法动作
-            if(skill.State == Stage.Intonate)
+            if(skill.Stage == SkillStage.Intonate)
             {
                 Play(skill.Define.IntonateAnimName);
-            }else if(skill.State == Stage.Active)
+            }else if(skill.Stage == SkillStage.Active)
             {
                 Play(skill.Define.ActiveAnimName);
             }
             //恢复动作
-            if(state == HState.SkillIntonate && skill.State != Stage.Intonate)
+            if(state == HState.SkillIntonate && skill.Stage != SkillStage.Intonate)
             {
                 state = HState.Idle;
                 PlayIdle();
             }
-            else if (state == HState.SkillActive && skill.State != Stage.Active)
+            else if (state == HState.SkillActive && skill.Stage != SkillStage.Active)
             {
                 state = HState.Idle;
                 PlayIdle();
@@ -90,10 +90,6 @@ public class HeroAnimations : MonoBehaviour
         this.state = HState.SkillActive;
     }
 
-
-
-
-
     //todo 用于网络同步使用
     public void switchState(EntityState entityState)
     {
@@ -102,14 +98,14 @@ public class HeroAnimations : MonoBehaviour
             case EntityState.Idle:
                 PlayIdle();
                 break;
-            case EntityState.Move:
+            case EntityState.Walk:
                 PlayRun();
                 break;
             default:
                 PlayIdle();
                 break;
         }
-        gameEntity.lastEntityState = entityState;
+        //gameEntity.lastEntityState = entityState;
     }
 
     //通用的播放动画
@@ -137,16 +133,16 @@ public class HeroAnimations : MonoBehaviour
             return;
         Play("Idle");
         state = HState.Idle;
-        gameEntity.entityState = EntityState.Idle;
+        //gameEntity.entityState = EntityState.Idle;
     }
 
     public void PlayRun()
     {
         if (state == HState.Attack || state == HState.SkillIntonate)
             return;
-        Play("RunForward");
+        Play("Walk");
         state = HState.Run;
-        gameEntity.entityState = EntityState.Move;
+        //gameEntity.entityState = EntityState.Walk;
     }
 
     public void PlayAttack1()

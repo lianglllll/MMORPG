@@ -17,26 +17,43 @@ namespace Summer
     {
 
         //字典用于保存message的所有类型,用于拆包时进行类型转换
+        //<fullName,Type>
         private static Dictionary<string, Type> _registry = new Dictionary<string, Type>();
 
         //考虑到每次输送类型名太长了，所以当扫描完imessage类型后给每一个类型一个序号
         private static Dictionary<int, Type> mDict1 = new Dictionary<int, Type>();
         private static Dictionary<Type, int> mDict2 = new Dictionary<Type, int>();
 
+        /// <summary>
+        /// 根据类型获取协议在中网络传输的id值
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static int SeqCode(Type type)
         {
             return mDict2[type];
         }
+
+        /// <summary>
+        /// 根据协议在中网络传输的id值获取协议的类型
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public static Type SeqType(int code)
         {
             return mDict1[code];
         }
 
-        //用静态代码块加载注册
+        /// <summary>
+        /// 用静态代码块加载注册
+        /// </summary>
         static ProtoHelper()
         {
             List<string> list = new List<string>();
-            var q = from t in Assembly.GetExecutingAssembly().GetTypes() select t;
+            //  LINQ 查询语法，获取当前正在执行的程序集中的所有类型。
+            //var q = from t in Assembly.GetExecutingAssembly().GetTypes() select t;
+            var q = Assembly.GetExecutingAssembly().GetTypes();
+
             q.ToList().ForEach(t =>
             {
                 if (typeof(IMessage).IsAssignableFrom(t))
@@ -48,6 +65,7 @@ namespace Summer
                 }
             });
 
+            //根据协议名的字符串进行排序
             list.Sort((x, y) =>
             {
                 //根据字符串长度排序
@@ -56,7 +74,8 @@ namespace Summer
                     return x.Length - y.Length;
                 }
                 //如果长度相同
-                return string.Compare(x, y, StringComparison.Ordinal);//x和y以二进制的形式进行比较
+                //则使用x和y基于 Unicode码点值的排序规则进行字符串比较，保证了排序的稳定性(大白话就算对应的整型值，x<y就返回负数)
+                return string.Compare(x, y, StringComparison.Ordinal);
             });
 
             //打印信息
@@ -72,7 +91,7 @@ namespace Summer
         }
 
         /// <summary>
-        /// 根据消息中的序号进行解析成一个imassage
+        /// 根据协议在中网络传输的id值解析成一个imassage
         /// </summary>
         /// <param name="typeCode"></param>
         /// <param name="data"></param>
@@ -92,6 +111,7 @@ namespace Summer
         {
 
         }
+
 
         #region 弃用
 
