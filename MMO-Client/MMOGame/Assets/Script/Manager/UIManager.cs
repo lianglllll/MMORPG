@@ -15,7 +15,6 @@ public class UIManager
     private Dictionary<string, BasePanel> panelScriptDict = null;      //panelname  -> panelscript    这是打开的面板
 
     //如果有需要可以将panel的实例保存起来使用
-
     private MessagePanelScript messagePanel;                            //用于展示消息的面板
 
 
@@ -66,6 +65,9 @@ public class UIManager
             return messagePanel;
         }
     }
+
+
+
 
     private void InitDicts()
     {
@@ -164,8 +166,6 @@ public class UIManager
             MessagePanel.ShowMessage(str);
         });
     }
-
-    //
 
 }
 

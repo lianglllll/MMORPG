@@ -29,6 +29,7 @@ public class CombatPanelScript : BasePanel
 
     private void Start()
     {
+        DeathBox.gameObject.SetActive(false);
         reviveBtn.onClick.AddListener(OnReviveBtn);
     }
 

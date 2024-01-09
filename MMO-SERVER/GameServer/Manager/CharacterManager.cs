@@ -89,6 +89,7 @@ namespace GameServer.Manager
                 chr.Data.Z = chr.Position.z;
                 chr.Data.Hp = (int)chr.Hp;
                 chr.Data.Mp = (int)chr.Mp;
+                chr.Data.SpaceId = chr.SpaceId;
                 //保存进入数据库
                 repo.UpdateAsync(chr.Data);//异步更新
             }

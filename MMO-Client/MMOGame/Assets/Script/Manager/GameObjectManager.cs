@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Proto;
 using GameClient.Entities;
+using Unity.VisualScripting;
 
 
 /// <summary>
@@ -89,6 +90,9 @@ public class GameObjectManager:MonoBehaviour
             chrObj.AddComponent<CameraManager>();                                           //给当前用户控制的视角
             PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();//给当前用户控制的角色添加控制脚本
             GameApp.myCharacter = chrObj;                   //给gameapp当前角色的引用，方便而已
+
+            //打标签
+            chrObj.tag = "CtlPlayer";
         }
 
     }
@@ -100,8 +104,11 @@ public class GameObjectManager:MonoBehaviour
     public void CharacterLeave(int entityId)
     {
         if (!currentGameObjectDict.ContainsKey(entityId)) return;
-        GameObject obj = currentGameObjectDict[entityId];
-        Destroy(obj);
+        var obj = currentGameObjectDict[entityId];
+        if(obj != null && !obj.IsDestroyed())
+        {
+            Destroy(obj);
+        }
         currentGameObjectDict.Remove(entityId);
     }
 

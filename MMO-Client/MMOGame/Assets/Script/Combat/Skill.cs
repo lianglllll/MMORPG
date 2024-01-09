@@ -11,6 +11,11 @@ using UnityEngine;
 
 namespace GameClient.Combat
 {
+    //todo   蓄气技能在蓄气阶段被其他人打死，如果有投射物还是会发出。
+    // 
+
+
+
     //技能施法的阶段
     //开始 - 蓄气 - 激活 - 结束
     public enum SkillStage
@@ -112,8 +117,6 @@ namespace GameClient.Combat
                     OnFinish();
                 }
             }
-
-
         }
 
         /// <summary>
@@ -156,7 +159,6 @@ namespace GameClient.Combat
                 }
 
             });
-
         }
 
         /// <summary>

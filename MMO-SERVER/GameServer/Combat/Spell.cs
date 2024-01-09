@@ -61,7 +61,35 @@ namespace GameServer.Combat
         /// <param name="skill_id"></param>
         private void SpellNoTarget(int skill_id)
         {
-            Log.Information("Spell::SpellNoTarget():Caster[{0}]:Skill[{1}]", Owner.EntityId, skill_id);
+
+            //判断owner是否拥有这个技能
+            var skill = Owner.skillManager.GetSkill(skill_id);
+            if (skill == null)
+            {
+                Log.Warning("Spell::SpellTarget():Owner[{0}]:Skill[{1}] not found", Owner.EntityId, skill_id);
+                return;
+            }
+
+            //执行技能,目标选择自己得了
+            SCObject sco = new SCEntity(Owner);
+            var res = skill.CanUse(sco);
+            //通知施法者,执行失败
+            if (res != CastResult.Success)
+            {
+                Log.Warning("Cast Fail Skill {0} {1}", skill.Define.ID, res);
+                OnSpellFailure(skill_id, res);
+                return;
+            }
+            //执行技能
+            skill.Use(sco);
+
+            //广播，可能本帧有很多人施法节能，那就收集本帧的info，等到下一帧再发出去
+            CastInfo info = new CastInfo()
+            {
+                CasterId = Owner.EntityId,
+                SkillId = skill_id
+            };
+            Owner.currentSpace.fightManager.spellQueue.Enqueue(info);
         }
 
         /// <summary>

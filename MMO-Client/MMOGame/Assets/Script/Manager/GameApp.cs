@@ -6,6 +6,7 @@ using Serilog;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 //主要记录一下全局唯一的数据
@@ -28,7 +29,7 @@ public class GameApp
     public static CombatPanelScript combatPanelScript;
 
     /// <summary>
-    /// 是否正在输入
+    /// 是否正在输入,//todo 改成用事件来触发：聊天事件====》角色控制失效、聊天框跳出、
     /// </summary>
     public static bool IsInputtingChatBox
     {
@@ -63,4 +64,27 @@ public class GameApp
         }
         NetClient.Send(req);
     }
+
+    /// <summary>
+    /// 加载场景
+    /// </summary>
+    /// <param name="spaceId"></param>
+    public static void LoadSpace(int spaceId)
+    {
+        //切换到对于的场景
+        SpaceDefine space = DataManager.Instance.spaceDict[spaceId];
+        SceneManager.LoadScene(space.Resource);
+    }
+
+    /// <summary>
+    /// 传送请求发包
+    /// </summary>
+    /// <param name="spaceId"></param>
+    public static void SpaceDeliver(int spaceId)
+    {
+        SpaceDeliverRequest req = new SpaceDeliverRequest();
+        req.SpaceId = spaceId;
+        NetClient.Send(req);
+    }
+
 }

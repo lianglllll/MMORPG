@@ -18,13 +18,17 @@ public class DataManager : Singleton<DataManager>
     //技能信息
     public Dictionary<int, SkillDefine> skillDefineDict = null;
 
-
+    /// <summary>
+    /// 构造函数
+    /// </summary>
     public DataManager()
     {
         init();
     }
 
-    //初始化，就是将文件中的数据读入
+    /// <summary>
+    /// 初始化，就是将文件中的数据读入
+    /// </summary>
     public void init()
     {
         //获取SpaceDefine场景文件对象，
@@ -34,8 +38,12 @@ public class DataManager : Singleton<DataManager>
         skillDefineDict = Load<SkillDefine>("Data/SkillDefine");
     }
 
-
-    //json -> dictionary
+    /// <summary>
+    /// json -> dictionary
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="path"></param>
+    /// <returns></returns>
     private Dictionary<int,T> Load<T>(string path)
     {
         string sceneJson = Resources.Load<TextAsset>(path).text;
@@ -48,12 +56,21 @@ public class DataManager : Singleton<DataManager>
         };
         return JsonConvert.DeserializeObject<Dictionary<int, T>>(sceneJson, settings);
     }
-
-
     private Dictionary<string,T> Load2<T>(string path)
     {
         string sceneJson = Resources.Load<TextAsset>(path).text;
         return JsonConvert.DeserializeObject<Dictionary<string, T>>(sceneJson);
+    }
+
+
+    /// <summary>
+    /// 通过spaceid拿spaceDefine信息
+    /// </summary>
+    /// <param name="spaceId"></param>
+    /// <returns></returns>
+    public SpaceDefine GetSpaceDefineById(int spaceId)
+    {
+        return spaceDict.GetValueOrDefault(spaceId,null);
     }
 
 

@@ -64,6 +64,21 @@ namespace GameClient.Entities
         }
 
         /// <summary>
+        /// 清除全部东西
+        /// </summary>
+        public void Clear()
+        {
+            foreach(var entity in entityDict.Values)
+            {
+                if(entity is Actor actor)
+                {
+                    GameObjectManager.Instance.CharacterLeave(actor.EntityId);
+                }
+            }
+            entityDict.Clear();
+        }
+
+        /// <summary>
         /// 有一个entity进入当前场景
         /// </summary>
         /// <param name="nCharacter"></param>

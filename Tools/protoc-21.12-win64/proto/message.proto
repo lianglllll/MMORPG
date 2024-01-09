@@ -80,17 +80,20 @@ message GameEnterRequest{
 	int32 characterId = 1;
 }
 
-//进入场景响应
-message GameEnterResponse{
-	bool success = 1;
-	NetActor character =2;
-}
+
 
 //新角色进入场景响应(其他人的)
 message SpaceCharactersEnterResponse{
 	int32 spaceId = 1;
 	repeated NetActor characterList = 2;
 }
+
+//角色进入场景响应
+message SpaceEnterResponse{
+	NetActor character = 1;
+	repeated NetActor characterList = 2;
+}
+
 
 //角色离开场景
 message SpaceCharactersLeaveResponse{
@@ -105,6 +108,12 @@ message SpaceEntitySyncRequest{
 message SpaceEntitySyncResponse{
 	NEntitySync entitySync = 1;
 }
+
+//传送请求
+message SpaceDeliverRequest{
+	int32 spaceId = 1;
+}
+
 
 //======================user=====================================
 

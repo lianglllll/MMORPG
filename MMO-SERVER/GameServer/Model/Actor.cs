@@ -139,7 +139,6 @@ namespace GameServer.Model
 
         }
 
-
         /// <summary>
         /// 当前actor收到扣血通知
         /// </summary>
@@ -270,5 +269,28 @@ namespace GameServer.Model
 
         }
 
+        /// <summary>
+        /// 传送
+        /// </summary>
+        public virtual void TransmitSpace(Space targetSpace,Vector3Int pos,Vector3Int dir = new Vector3Int())
+        {
+            if (this is not Character chr) return;
+            //传送的不是同一场景
+            if(currentSpace != targetSpace)
+            {
+                //1.退出当前场景
+                currentSpace.CharacterLeave(chr);
+                //设置坐标
+                chr.Position = pos;
+                chr.Direction = dir;
+                //2.进入新场景
+                targetSpace.CharaterJoin(chr);
+            }
+            //传送的是同一场景
+            else
+            {
+
+            }
+        }
     }
 }

@@ -25,14 +25,11 @@ namespace GameServer.Model
 
         //当前地图中所有的Character<角色id，角色引用>
         private Dictionary<int, Character> characterDict = new Dictionary<int, Character>();
-        private Dictionary<Connection, Character> connCharacter = new Dictionary<Connection, Character>();
         
 
         public MonsterManager monsterManager = new MonsterManager();                //怪物管理器，负责当前场景的怪物创建和销毁
         public SpawnManager spawnManager = new SpawnManager();                      //怪物孵化器，负责怪物的孵化
         public FightManager fightManager = new FightManager();                      //战斗管理器，负责技能、投射物、伤害、actor信息的更新
-
-
 
         public Space(){}
 
@@ -60,25 +57,14 @@ namespace GameServer.Model
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="character"></param>
-        public void CharaterJoin(Connection conn, Character character)
+        public void CharaterJoin(Character character)
         {
             Log.Information("有角色进入场景:"+ SpaceId + ",他的id为：" + character.Id);
-
-            //将角色引用放入conn连接当中
-            conn.Get<Session>().character = character;
 
             character.OnEnterSpace(this);
 
             //将新加入的character交给当前场景来管理
             characterDict[character.Id] = character;
-            character.conn = conn;
-
-
-            if (!connCharacter.ContainsKey(conn))
-            {
-                connCharacter[conn] = character;
-            }
-
 
             //新加入的character广播给场景中的其他玩家(排除自己) 
             var resp = new SpaceCharactersEnterResponse();
@@ -86,28 +72,26 @@ namespace GameServer.Model
             resp.CharacterList.Add(character.info);
             foreach (var kv in characterDict)
             {
-                if (kv.Value.conn != conn)
+                if (kv.Value.EntityId != character.EntityId)
                 {
                     kv.Value.conn.Send(resp);
                 }
             }
 
-
             //新上线的玩家需要获取场景中全部的角色消息(排除自己) 
-            //新上线的玩家需要获取场景中全部的怪物信息
-            resp.CharacterList.Clear();
+            SpaceEnterResponse spaceEnterResponse = new SpaceEnterResponse();
+            spaceEnterResponse.Character = character.info;
             foreach (var kv in characterDict)
             {
-                if (kv.Value.conn == conn) continue;
-                resp.CharacterList.Add(kv.Value.info);
+                if (kv.Value.EntityId != character.EntityId) continue;
+                spaceEnterResponse.CharacterList.Add(kv.Value.info);
             }
-
+            //新上线的玩家需要获取场景中全部的怪物信息
             foreach (var kv in monsterManager.monsterDict)
             {
-                resp.CharacterList.Add(kv.Value.info);
-                conn.Send(resp);
+                spaceEnterResponse.CharacterList.Add(kv.Value.info);
             }
-            conn.Send(resp); 
+            character.conn.Send(spaceEnterResponse); 
 
         }
 
@@ -116,12 +100,11 @@ namespace GameServer.Model
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="character"></param>
-        public void CharacterLeave(Connection conn,Character character)
+        public void CharacterLeave(Character character)
         {
             Log.Information("角色离开场景，id：" + character.Id);
 
             characterDict.Remove(character.Id);
-            connCharacter.Remove(conn);
 
             SpaceCharactersLeaveResponse resp = new SpaceCharactersLeaveResponse();
             resp.EntityId = character.EntityId;

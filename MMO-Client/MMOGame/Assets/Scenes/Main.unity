@@ -971,6 +971,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1519200466}
     m_Modifications:
+    - target: {fileID: 4037759079814209559, guid: c12045ea97af8ac498902da60dfd24bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5230803727455402112, guid: c12045ea97af8ac498902da60dfd24bc, type: 3}
       propertyPath: m_Name
       value: InfoPanel
@@ -1026,6 +1030,10 @@ PrefabInstance:
     - target: {fileID: 7421974393266854390, guid: c12045ea97af8ac498902da60dfd24bc, type: 3}
       propertyPath: m_SortingOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857922290999269599, guid: c12045ea97af8ac498902da60dfd24bc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c12045ea97af8ac498902da60dfd24bc, type: 3}

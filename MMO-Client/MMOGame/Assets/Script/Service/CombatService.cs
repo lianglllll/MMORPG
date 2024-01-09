@@ -18,7 +18,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     /// </summary>
     public void Init()
     {
-        MessageRouter.Instance.Subscribe<GameEnterResponse>(_GameEnterResponse);
+        MessageRouter.Instance.Subscribe<SpaceEnterResponse>(_SpaceEnterResponse);
         MessageRouter.Instance.Subscribe<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
         MessageRouter.Instance.Subscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<SpaceCharactersLeaveResponse>(_SpaceCharactersLeaveResponse);
@@ -32,7 +32,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     /// </summary>
     public void Dispose()
     {
-        MessageRouter.Instance.Off<GameEnterResponse>(_GameEnterResponse);
+        MessageRouter.Instance.Off<SpaceEnterResponse>(_SpaceEnterResponse);
         MessageRouter.Instance.Off<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
         MessageRouter.Instance.Off<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Off<SpaceCharactersLeaveResponse>(_SpaceCharactersLeaveResponse);
@@ -42,30 +42,58 @@ public class CombatService : Singleton<CombatService>, IDisposable
     }
 
     /// <summary>
-    /// 加入游戏的响应结果（entity是自己）
+    /// 进入场景的响应
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="msg"></param>
-    private void _GameEnterResponse(Connection sender, GameEnterResponse msg)
+    private void _SpaceEnterResponse(Connection sender, SpaceEnterResponse msg)
     {
-        if (msg.Success)
+
+
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            NetActor character = msg.Character;
-
-            //加载场景
-            GameApp.entityId = character.Entity.Id;                                                     //记录本机user的entityid
-            GameManager.LoadSpace(character.SpaceId);
-            EntityManager.Instance.OnEntityEnterScene(msg.Character);
-            GameApp.character = EntityManager.Instance.GetEntity<Character>(character.Entity.Id);  
-
-            //combatui推入
-            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            if(GameApp.character==null )
             {
+                //切换场景
+                GameApp.LoadSpace(msg.Character.SpaceId);
+                //加载其他角色和ai
+                foreach(var item in msg.CharacterList)
+                {
+                    EntityManager.Instance.OnEntityEnterScene(item);
+                }
+                //最后生成自己的角色,记录本机的数据
+                EntityManager.Instance.OnEntityEnterScene(msg.Character);
+                GameApp.entityId = msg.Character.Entity.Id;
+                GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+
+                //推入combatUI
                 UIManager.Instance.ShowMessage("进入游戏，开始你的冒险");
                 GameApp.combatPanelScript = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
-            });
 
-        }
+            }else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)
+            {
+                //清理旧场景的对象
+                EntityManager.Instance.Clear();
+                //切换场景
+                GameApp.LoadSpace(msg.Character.SpaceId);
+                //加载其他角色和ai
+                foreach (var item in msg.CharacterList)
+                {
+                    EntityManager.Instance.OnEntityEnterScene(item);
+                }
+                //最后生成自己的角色,记录本机的数据
+                EntityManager.Instance.OnEntityEnterScene(msg.Character);
+                GameApp.entityId = msg.Character.Entity.Id;
+                GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+            }
+            else
+            {
+
+            }
+
+            
+        });
+
     }
 
     /// <summary>
@@ -127,6 +155,9 @@ public class CombatService : Singleton<CombatService>, IDisposable
             else if (skill.IsPointTarget)
             {
 
+            }else if (skill.IsNoneTarget)
+            {
+                skill.Use(new SCEntity(caster));
             }
         }
     }

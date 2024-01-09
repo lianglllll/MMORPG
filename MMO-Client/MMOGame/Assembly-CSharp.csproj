@@ -81,6 +81,7 @@
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\SpringManager.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Billboard.cs" />
     <Compile Include="Assets\Script\Camera\CameraManager.cs" />
+    <Compile Include="Assets\Script\StateMachineSystem\PlayerStates\State\PlayerState_SkillActive.cs" />
     <Compile Include="Assets\Script\Manager\GameApp.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\ThirdPersonCamera.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimBone.cs" />
     <Compile Include="Assets\Script\UI\Panel\CreateRolePanelScript.cs" />
     <Compile Include="Assets\Script\StateMachineSystem\PlayerStates\State\PlayerState_Idle.cs" />
+    <Compile Include="Assets\Script\Interactive\Portal.cs" />
     <Compile Include="Assets\Script\Service\ChatService.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\FaceUpdate.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\SplashScreen\Scripts\SplashScreen.cs" />
@@ -110,11 +112,12 @@
     <Compile Include="Assets\Script\Net\NetClient.cs" />
     <Compile Include="Assets\Script\StateMachineSystem\Base\IState.cs" />
     <Compile Include="Assets\Script\Tools\Event.cs" />
-    <Compile Include="Assets\Script\UI\Panel\MessagePanelScript.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Info\MessagePanelScript.cs" />
     <Compile Include="Assets\Script\StateMachineSystem\PlayerStates\PlayerStateMachine.cs" />
     <Compile Include="Assets\Script\UI\Panel\RoleListItemScript.cs" />
+    <Compile Include="Assets\Script\Interactive\IInteraction.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Demo\Scripts\Movement.cs" />
-    <Compile Include="Assets\Script\Character\HeroController.cs" />
+    <Compile Include="Assets\Script\Character\Old\HeroController.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText.cs" />
     <Compile Include="Assets\Script\Tools\Singleton\SingletonNonMono.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\EnterType.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="Assets\Script\StateMachineSystem\Base\StateMachine.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\RandomWind.cs" />
     <Compile Include="Assets\Script\Manager\EntityManager.cs" />
+    <Compile Include="Assets\Script\Character\PlayerMovementController.cs" />
     <Compile Include="Assets\Script\Entities\Character.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\IKCtrlRightHand.cs" />
     <Compile Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Scripts\IdleChanger.cs" />
@@ -143,6 +147,7 @@
     <Compile Include="Assets\Script\Net\NetStart.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\EliteScript.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\Dialog.cs" />
+    <Compile Include="Assets\Script\StateMachineSystem\PlayerStates\State\PlayerState_SkillIntonate.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\SpaceDefine.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\SkillDefine.cs" />
     <Compile Include="Assets\Script\UI\Panel\LoginPanelScript.cs" />
@@ -159,15 +164,12 @@
     <Compile Include="Assets\Script\UI\Panel\BasePanel.cs" />
     <Compile Include="Assets\Script\Tools\GameTools.cs" />
     <Compile Include="Assets\Script\Net\V3.cs" />
-    <Compile Include="Assets\Script\Animation\HeroAnimations.cs" />
+    <Compile Include="Assets\Script\Animation\Old\HeroAnimations.cs" />
     <Compile Include="Assets\Animation\MMD4Mecanim\Scripts\MMD4MecanimAnimMorphHelper.cs" />
     <Compile Include="Assets\Script\Manager\GameManager.cs" />
     <Compile Include="Assets\Script\UI\Package\GameController.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Script\Character\PlayerMovementController.cs" />
-    <Compile Include="Assets\Script\StateMachineSystem\PlayerStates\State\PlayerState_SkillIntonate.cs" />
-    <Compile Include="Assets\Script\StateMachineSystem\PlayerStates\State\PlayerState_SkillActive.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\CharacterModel\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

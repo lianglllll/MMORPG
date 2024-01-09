@@ -22,6 +22,7 @@ namespace GameServer.Service
         {
             MessageRouter.Instance.Subscribe<SpellCastRequest>(_SpellCastRequest);
             MessageRouter.Instance.Subscribe<ReviveRequest>(_ReviveRequest);
+            MessageRouter.Instance.Subscribe<SpaceDeliverRequest>(_SpaceDeliverRequest);
 
         }
 
@@ -67,6 +68,29 @@ namespace GameServer.Service
             }
             //成功，则将其放入当前场景的战斗管理器的缓冲队列中
             chr.currentSpace.fightManager.castInfoQueue.Enqueue(message.Info);
+        }
+
+        /// <summary>
+        /// 传送请求
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="message"></param>
+        private void _SpaceDeliverRequest(Connection conn, SpaceDeliverRequest message)
+        {
+            var chr = conn.Get<Session>().character;
+            if (chr == null) return;
+
+            //todo 这应该在表中取静态数据复活点的
+            var sp = SpaceManager.Instance.GetSpaceById(message.SpaceId);
+            if(message.SpaceId == 0)
+            {
+                chr.TransmitSpace(sp, new Core.Vector3Int(-20700, 2000, -3127));
+            }
+            else if(message.SpaceId == 1)
+            {
+                chr.TransmitSpace(sp, new Core.Vector3Int(275425, 2000, 186176));
+            }
+
         }
 
     }

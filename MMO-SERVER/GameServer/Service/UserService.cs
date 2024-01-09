@@ -312,17 +312,13 @@ namespace GameServer.Service
             Character character = CharacterManager.Instance.CreateCharacter(dbCharacter);
 
             //将characterId 与 session 进行关联
-
-            //响应通知客户端加入游戏的结果
-            GameEnterResponse resp = new GameEnterResponse();
-            resp.Success = true;
-            character.info.Entity = character.EntityData;
-            resp.Character = character.info;
-            conn.Send(resp);
+            character.conn = conn;
+            //将角色引用放入conn连接当中
+            conn.Get<Session>().character = character;
 
             //告知场景新加入了一个entity,进行广播
             Space space = SpaceService.Instance.GetSpaceById(dbCharacter.SpaceId);
-            space?.CharaterJoin(conn, character);
+            space?.CharaterJoin(character);
 
         }
     }
