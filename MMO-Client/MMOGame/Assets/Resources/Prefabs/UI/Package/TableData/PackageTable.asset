@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa60fba74b7d7c640a73bfbcf15aa63f, type: 3}
+  m_Name: PackageTable
+  m_EditorClassIdentifier: 
+  dataList:
+  - id: 0
+    type: 1
+    star: 1
+    name: "\u98CE\u66B4\u5DE8\u5251"
+    descriptions: "\u6714\u98CE\u51DB\u51BD\uFF0C\u675C\u7EDD\u5BD2\u51B0"
+    detailDescriptions: "\u6714\u98CE\u51DB\u51BD\uFF0C\u675C\u7EDD\u5BD2\u51B0---\u987E\u6E05\u5BD2"
+    imagePath: "Texture/PackageImage/Weapon/\u6B66\u5668_01"
+  - id: 1
+    type: 1
+    star: 1
+    name: "\u65B9\u5929\u753B\u621F"
+    descriptions: "\u5C0F\u5C0F\u5BB6\u5974"
+    detailDescriptions: "\u4EBA\u4E2D\u5415\u5E03\uFF0C\u9A6C\u4E2D\u8D64\u5154"
+    imagePath: "Texture/PackageImage/Weapon/\u6B66\u5668_04"
+  - id: 2
+    type: 1
+    star: 1
+    name: "\u5C0F\u5315\u9996"
+    descriptions: "\u6211tm\u6233\u6413"
+    detailDescriptions: "\u950B\u5229\u65E0\u6BD4\u7684\u6697\u6740\u795E\u5668"
+    imagePath: "Texture/PackageImage/Weapon/\u6B66\u5668_03"
