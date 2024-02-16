@@ -23,8 +23,10 @@ public class GameApp
 
     //当前角色对象引用
     public static GameObject myCharacter = null;
+
     //当前技能
     public static Skill CurrSkill;
+
     //战斗面板
     public static CombatPanelScript combatPanelScript;
 

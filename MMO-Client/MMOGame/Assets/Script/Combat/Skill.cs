@@ -100,8 +100,8 @@ namespace GameClient.Combat
             {
                 if (RunTime >= Define.IntonateTime + Define.Duration)
                 {
-                    ColdDown = Define.CD;//此时真正进入冷却
                     Stage = SkillStage.Colding;
+                    ColdDown = Define.CD;//此时真正进入冷却
                 }
             }
 
@@ -120,7 +120,7 @@ namespace GameClient.Combat
         }
 
         /// <summary>
-        /// 使用技能,技能阶段从none切换到蓄气阶段
+        /// 使用技能
         /// </summary>
         /// <param name="target"></param>
         public void Use(SCObject target)
@@ -133,6 +133,8 @@ namespace GameClient.Combat
             Owner.StateMachine.parameter.skill = this;
             _sco = target;
             RunTime = 0;
+
+            //技能阶段从none切换到蓄气阶段
             Stage = SkillStage.Intonate;
             OnIntonate();
         }
@@ -157,6 +159,7 @@ namespace GameClient.Combat
                 {
                     Owner.StateMachine.SwitchState(ActorState.SkillIntonate);
                 }
+
 
             });
         }

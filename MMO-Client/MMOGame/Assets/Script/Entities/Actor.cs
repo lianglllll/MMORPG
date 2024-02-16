@@ -32,12 +32,8 @@ namespace GameClient.Entities
             this.skillManager = new SkillManager(this);
         }
 
-        
-
-
-
         /// <summary>
-        /// 受伤了，改一下ui，播放一下动画
+        /// 受伤
         /// </summary>
         /// <param name="damage"></param>
         public void recvDamage(Damage damage)
@@ -81,34 +77,82 @@ namespace GameClient.Entities
         }
 
         /// <summary>
-        /// 更新当前actor的hp
+        /// HP更新
         /// </summary>
         /// <param name="oldHp"></param>
         /// <param name="newHp"></param>
         public void OnHpChanged(float oldHp,float newHp)
         {
+            //Debug.Log($"current hp = {newHp}");
             this.info.Hp = newHp;
+            LocalOrTargetAcotrPropertyChange();
         }
 
         /// <summary>
-        /// 更新当前actor的mp
+        /// MP更新
         /// </summary>
         /// <param name="old_value"></param>
         /// <param name="new_value"></param>
         public void OnMpChanged(float old_value, float new_value)
         {
             this.info.Mp = new_value;
+            LocalOrTargetAcotrPropertyChange();
         }
 
         /// <summary>
-        /// 状态更改
+        /// 状态更新
         /// </summary>
         /// <param name="old_value"></param>
         /// <param name="new_value"></param>
         public virtual void OnStateChanged(UnitState old_value, UnitState new_value)
         {
             this.unitState = new_value;
+
+            if (IsDeath)
+            {
+                if (GameApp.target == this)
+                {
+                    Kaiyun.Event.FireOut("CancelSelectTarget");
+                }
+            }
         }
 
+        /// <summary>
+        /// 等级更新
+        /// </summary>
+        /// <param name="intValue1"></param>
+        /// <param name="intValue2"></param>
+        public void OnLevelChanged(int old_value, int new_value)
+        {
+            //更新当前actor的数据
+            this.info.Level = new_value;
+            //事件通知，level数据发送变化（可能某些ui组件需要这个信息）
+            LocalOrTargetAcotrPropertyChange();
+        }
+
+        /// <summary>
+        /// 经验值更新
+        /// </summary>
+        /// <param name="longValue1"></param>
+        /// <param name="longValue2"></param>
+        public void onExpChanged(long old_value, long new_value)
+        {
+            //更新当前actor的数据
+            this.info.Exp = new_value;
+            //事件通知，exp数据发送变化（可能某些ui组件需要这个信息）
+            LocalOrTargetAcotrPropertyChange();
+        }
+
+        /// <summary>
+        /// 工具：用于触发UI的更新
+        /// </summary>
+        public void LocalOrTargetAcotrPropertyChange()
+        {
+            if(this == GameApp.character || this == GameApp.target)
+            {
+                //CombatPanelScript、
+                Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate",this);
+            }
+        }
     }
 }

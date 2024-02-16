@@ -4,7 +4,7 @@ package proto;
 
 
 
-//====================心跳检测================================
+//============================================心跳检测==========================================
 message HeartBeatRequest{
 
 }
@@ -14,7 +14,7 @@ message HeartBeatResponse{
 }
 
 
-//======================entity=================================
+//====================================entity=================================================
 //网络三维向量
 message Vec3 {
 	int32 x = 1;
@@ -47,7 +47,7 @@ message NEntitySync{
 	bool force = 3;
 }
 
-//=======================actor===============================
+//=======================================actor==============================================
 
 //actor类型todo改名
 enum EntityType
@@ -65,7 +65,7 @@ message NetActor{
 	string name = 4;
 	int32 level = 5;
 	int64 exp = 6;
-	int32 spaceId = 7;
+	int32 spaceId = 7; 
 	int64 gold = 8;
 	float hp=9;
 	float mp=10;
@@ -76,7 +76,7 @@ message NetActor{
 }
 
 
-//=======================space================================
+//==================================================space=========================================
 //进入游戏请求
 message GameEnterRequest{
 	int32 characterId = 1;
@@ -117,7 +117,7 @@ message SpaceDeliverRequest{
 }
 
 
-//======================user=====================================
+//===================================user=================================================
 
 //注册
 message UserRegisterRequest{
@@ -167,7 +167,7 @@ message CharacterDeleteResponse{
 }
 
 
-//====================skill=================================
+//========================================skill========================================
 
 //技能信息:skillid
 message SkillInfo{
@@ -235,17 +235,22 @@ message DamageResponse{
 	repeated Damage list = 1;
 }
 
-//actor属性更新
+//actor属性更新消息类型
 message PropertyUpdate{
 
+	//属性类型枚举
 	enum Prop{
-		HP = 0;
+		HP = 0;		
 		MP = 1;
 		HPMax = 2;
 		MPMax = 3;
 		State = 4;
 		Level = 5;
 		Name = 6;
+		Golds = 7;
+		Exp = 8;		//经验
+		Energy = 9;		//活力
+		//幸运、罪恶、技能点
 	}
 
 	//为了可以存放不同的类型的数据
@@ -255,6 +260,7 @@ message PropertyUpdate{
 			float float_value = 2;
 			string string_value = 3;
 			UnitState state_value = 4;
+			int64 long_value = 5;
 		}
 	}
 
@@ -262,8 +268,8 @@ message PropertyUpdate{
 	Prop property = 2;
 	PropertyValue oldValue = 3;
 	PropertyValue newValue = 4;
-
 }
+
 //actor属性更新响应
 message PropertyUpdateRsponse{
 	repeated PropertyUpdate list = 1;
@@ -289,7 +295,7 @@ message ReviveResponse{
 
 
 
-//==================chat====================
+//==========================================chat==================================
 
 enum Result{
 	SUCCESS = 0;
@@ -342,7 +348,7 @@ message ChatResponse{
 
 
 
-//==================背包系统===================================
+//======================================背包系统=========================================
 
 //Net itemEntity信息
 message NetItemEntity{
@@ -436,3 +442,5 @@ message ItemUseResponse{
 	int32 slotIndex = 2;
 	int32 count = 3;
 }
+
+

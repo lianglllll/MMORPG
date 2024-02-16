@@ -12,11 +12,9 @@ public class EliteScript : MonoBehaviour
     private Text Name;
     private Text Level;
 
-    private Actor actor;
+    private Actor actor;                //UI显示要的目标
 
-
-
-    void Start()
+    private void Awake()
     {
         Healthbar = transform.Find("Bars/Healthbar").GetComponent<Image>();
         Manabar = transform.Find("Bars/Manabar").GetComponent<Image>();
@@ -24,12 +22,21 @@ public class EliteScript : MonoBehaviour
         Level = transform.Find("Level/Text").GetComponent<Text>();
     }
 
-    private void Update()
-    {
-        UpdateEliteInfo();
+    /// <summary>
+    /// 设置状态栏归属者
+    /// </summary>
+    /// <param name="actor"></param>
+    public void SetOwner(Actor actor)
+    {   
+        this.actor = actor;
+        if (this.actor == null) return;
+        RefreshUI();
     }
 
-    public void UpdateEliteInfo()
+    /// <summary>
+    /// 刷新UI
+    /// </summary>
+    public void RefreshUI()
     {
         if (actor == null) return;
         Level.text = actor.info.Level + "";
@@ -39,18 +46,5 @@ public class EliteScript : MonoBehaviour
         Manabar.fillAmount = mp;
         Name.text = actor.info.Name;
     }
-
-    public void SetOwner(Actor actor)
-    {
-        this.actor = actor;
-    }
-
-
-
-
-
-
-
-
 
 }

@@ -33,7 +33,6 @@ namespace Assets.Script.Entities
                         renderObj?.SetActive(false);
                     }
                 });
-
             }
             else if(old_value == UnitState.Dead)
             {

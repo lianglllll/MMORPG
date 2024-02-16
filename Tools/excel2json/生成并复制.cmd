@@ -7,7 +7,10 @@
 @SET DEST_FOLDER_2=E:\MyProject\MMORPG\MMO-SERVER\GameServer\bin\Release\net5.0\Data
 @SET DEST_FOLDER_3=E:\MyProject\MMORPG\MMO-SERVER\GameServer\bin\Debug\net5.0\Data
 
+@SET DEST_FOLDER_4=E:\MyProject\MMORPG\MMO-Client\MMOGame\Assets\Script\Manager\DataDefine
+@SET DEST_FOLDER_5=E:\MyProject\MMORPG\MMO-SERVER\GameServer\DataDefine
 
+Assets/Script/Manager/DataDefine
 @ECHO Converting excel files in folder %EXCEL_FOLDER% ...
 for /f "delims=" %%i in ('dir /b /a-d /s %EXCEL_FOLDER%\*.xlsx') do (
     @echo   processing %%~nxi 
@@ -22,6 +25,14 @@ for /r %JSON_FOLDER% %%i in (*.json) do (
     @COPY "%%i" "%DEST_FOLDER_2%\%%~nxi"
     @COPY "%%i" "%DEST_FOLDER_3%\%%~nxi"
 )
+
+for /r %CODE_FOLDER% %%i in (*.cs) do (
+    @echo   copying %%~nxi 
+    @COPY "%%i" "%DEST_FOLDER_4%\%%~nxi"
+    @COPY "%%i" "%DEST_FOLDER_5%\%%~nxi"
+)
+
+
 
 echo "OK"
 pause

@@ -224,8 +224,12 @@ public class CombatService : Singleton<CombatService>, IDisposable
                         actor.OnStateChanged(item.OldValue.StateValue, item.NewValue.StateValue);
                         break;
                     case PropertyUpdate.Types.Prop.Level:
+                        actor.OnLevelChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
                     case PropertyUpdate.Types.Prop.Name:
+                        break;
+                    case PropertyUpdate.Types.Prop.Exp:
+                        actor.onExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
                         break;
                 }
 

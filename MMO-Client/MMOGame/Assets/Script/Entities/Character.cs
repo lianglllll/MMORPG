@@ -37,7 +37,6 @@ namespace Assets.Script.Entities
                 if(GameApp.character == this)
                 {
                     GameApp.combatPanelScript.ShowDeathBox();
-
                 }
             }
 

@@ -100,7 +100,7 @@ namespace Summer.Network
         {
             if (_running) return;
             _running = true;
-            ThreadCount = Math.Min(Math.Max(_ThreadCount, 1), 200);
+            ThreadCount = Math.Min(Math.Max(_ThreadCount, 1), 8);
             ThreadPool.SetMinThreads(ThreadCount+20, ThreadCount+20);
             for (int i = 0; i < ThreadCount; i++)
             {

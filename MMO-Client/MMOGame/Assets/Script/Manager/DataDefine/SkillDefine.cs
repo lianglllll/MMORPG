@@ -22,21 +22,21 @@ public class SkillDefine
 	public int SpellRange; // 施法距离
 	public float IntonateTime; // 施法前摇
 	public int Cost; // 魔法消耗
-    public string IntonateAnimName; // 前摇动作
-    public string ActiveAnimName; // 激活动作
-    public int ReqLevel; // 等级要求
+	public string IntonateAnimName; // 前摇动作
+	public string ActiveAnimName; // 激活动作
+	public int ReqLevel; // 等级要求
 	public bool IsMissile; // 是否是投射物
 	public string Missile; // 投射物
 	public int MissileSpeed; // 投射速度
 	public string HitArt; // 击中效果，粒子特效
 	public int Area; // 影响区域
-    public float Duration; // 整个技能的持续时间
-    public float Interval; // 伤害间隔
-    public float[] HitDelay; // 命中时间，动作开始到命中
-	public int[] BUFF; // 附加效果如流血效果
+	public float Duration; // 激活状态动画持续的时间
+	public float Interval; // 伤害间隔，没用到
+	public float[] HitDelay; // 命中时间，激活动作开始多少时间会对敌人造成伤害
+	public int[] BUFF; // 附加效果，这里面填buffId如流血效果
 	public float AD; // 物理攻击
 	public float AP; // 法术攻击
-	public float ADC; // 物攻加成百分比
+	public float ADC; // 物攻加成(百分比)
 	public float APC; // 法攻加成
 }
 

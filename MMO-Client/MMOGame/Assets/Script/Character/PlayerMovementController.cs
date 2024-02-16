@@ -89,7 +89,12 @@ public class PlayerMovementController : MonoBehaviour
 
                 int entityId = clickedObject.GetComponent<GameEntity>().entityId;
                 GameApp.target = EntityManager.Instance.GetEntity<Actor>(entityId);
+                Kaiyun.Event.FireOut("SelectTarget");
             }
+        }else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameApp.target = null;
+            Kaiyun.Event.FireOut("CancelSelectTarget");
         }
     }
 
