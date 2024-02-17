@@ -3,22 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//管理技能栏
-
+/// <summary>
+/// 管理技能栏
+/// </summary>
 public class AbilityGroupScript : MonoBehaviour
 {
     public List<AbilityBarScript> bars = new List<AbilityBarScript>();
 
-    void Start()
+    private void Start()
     {
-        Init();
+        
     }
 
+    private void OnDestroy()
+    {
+        
+    }
 
-    //初始化技能栏
+    /// <summary>
+    /// 初始化技能格子
+    /// </summary>
     public void Init()
     {
-        if (GameApp.character == null) return;//todo 是否可以使用事件系统来进行延迟？
+        if (GameApp.character == null) return;
+
         var skillList = GameApp.character.skillManager.Skills;
         for (int i = 0; i < bars.Count; i++)
         {
@@ -26,12 +34,16 @@ public class AbilityGroupScript : MonoBehaviour
             if (i < skillList.Count)
             {
                 var skill = skillList[i];
-                bar.InitSetInfo(skill);
+                bar.SetAbilityBar(skill);
             }
             else
             {
-                bar.InitSetInfo(null);
+                bar.SetAbilityBar(null);
             }
         }
     }
+
+    //添加一个
+
+    //删除一个
 }

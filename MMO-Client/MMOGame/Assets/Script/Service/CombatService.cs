@@ -26,7 +26,6 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Subscribe<SpellCastResponse>(_SpellCastResponse);
         MessageRouter.Instance.Subscribe<DamageResponse>(_DamageResponse);
         MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
-        MessageRouter.Instance.Subscribe<NetItemEntitySync>(_NetItemEntitySync);
     }
 
     /// <summary>
@@ -42,8 +41,6 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Off<SpellCastResponse>(_SpellCastResponse);
         MessageRouter.Instance.Off<DamageResponse>(_DamageResponse);
         MessageRouter.Instance.Off<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
-        MessageRouter.Instance.Off<NetItemEntitySync>(_NetItemEntitySync);
-
     }
 
     /// <summary>
@@ -103,6 +100,10 @@ public class CombatService : Singleton<CombatService>, IDisposable
                 EntityManager.Instance.OnActorEnterScene(msg.Character);
                 GameApp.entityId = msg.Character.Entity.Id;
                 GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+
+                //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
+                UIManager.Instance.ClosePanel("CombatPanel");
+                UIManager.Instance.OpenPanel("CombatPanel");
             }
             else
             {
@@ -174,6 +175,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
             {
                 skill.Use(new SCEntity(caster));
             }
+
         }
     }
 
@@ -247,13 +249,5 @@ public class CombatService : Singleton<CombatService>, IDisposable
         EntityManager.Instance.OnItemEnterScene(msg.NetItemEntity);
     }
 
-    /// <summary>
-    /// itementity同步信息
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="msg"></param>
-    private void _NetItemEntitySync(Connection conn, NetItemEntitySync msg)
-    {
-        EntityManager.Instance.OnItemEntitySync(msg.NetItemEntity);
-    }
+
 }

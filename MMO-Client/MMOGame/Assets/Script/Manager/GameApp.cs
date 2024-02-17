@@ -44,13 +44,6 @@ public class GameApp
     /// <param name="skill"></param>
     public static void Spell(Skill skill)
     {
-        if (skill.IsUnitTarget && GameApp.target == null)
-        {
-            
-            Log.Information("无效的技能目标");
-            return;
-        }
-
         //向服务器发送施法请求
         SpellCastRequest req = new SpellCastRequest() { Info = new CastInfo() };
         req.Info.SkillId = skill.Define.ID;

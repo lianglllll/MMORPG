@@ -14,8 +14,6 @@ public class PickUpItemCell : MonoBehaviour
     private Text itemName;
     private Text itemAmount;
 
-
-
     private void Awake()
     {
         pickupBtn = transform.GetComponent<Button>();
@@ -28,7 +26,6 @@ public class PickUpItemCell : MonoBehaviour
     {
         pickupBtn.onClick.AddListener(OnPickupBtn);
     }
-
 
     /// <summary>
     /// 初始化

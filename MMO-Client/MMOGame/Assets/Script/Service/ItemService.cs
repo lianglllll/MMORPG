@@ -1,3 +1,4 @@
+using GameClient.Entities;
 using Proto;
 using Summer;
 using Summer.Network;
@@ -23,6 +24,7 @@ public class ItemService : Singleton<ItemService>, IDisposable
     {
         MessageRouter.Instance.Off<InventoryInfoResponse>(_InventoryInfoResponse);
         MessageRouter.Instance.Off<ItemPlacementResponse>(_ItemPlacementResponse);
+        MessageRouter.Instance.Off<NetItemEntitySync>(_NetItemEntitySync);
         MessageRouter.Instance.Off<ItemUseResponse>(_ItemUseResponse);
 
     }
@@ -99,7 +101,7 @@ public class ItemService : Singleton<ItemService>, IDisposable
     /// <param name="msg"></param>
     private void _NetItemEntitySync(Connection sender, NetItemEntitySync msg)
     {
-        throw new NotImplementedException();
+        EntityManager.Instance.OnItemEntitySync(msg.NetItemEntity);
     }
 
     /// <summary>

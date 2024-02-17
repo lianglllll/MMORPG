@@ -22,89 +22,138 @@ public class AbilityBarScript : MonoBehaviour
     public float coldDown;
     public float maxColdDown;
 
-    private Image iconImag;
-    private Image coldDownImag;          //冷却图层
-    private Text coldDownTimeText;
+    private Image iconImag;                 //技能图标
+    private Image coldDownImag;             //冷却图层
+    private Text coldDownTimeText;          //冷却数字文字
 
-    public Skill skill;
+    private Skill _skill;
+    private bool isUpdate;
 
-
-    void Start()
+    private void Awake()
     {
         iconImag = transform.Find("Icon").GetComponent<Image>();
         coldDownImag = transform.Find("ColdDown").GetComponent<Image>();
         coldDownTimeText = transform.Find("ColdDownTime").GetComponent<Text>();
-
         //添加一个btn
         var btn = gameObject.AddComponent<Button>();
         btn.onClick.AddListener(OnClick);
-
     }
 
-    void Update()//todo
+    private void Start()
     {
-        UpdateInfo();
+        isUpdate = false;
+        coldDownImag.enabled = false;
+        Kaiyun.Event.RegisterIn("SkillEnterColdDown", this, "_SkillEnterColdDown");
     }
 
-    public void InitSetInfo(Skill skillInfo)
+    private void OnDestroy()
     {
-        skill = skillInfo;
-        if(skillInfo == null)
+        Kaiyun.Event.UnregisterIn("SkillEnterColdDown", this, "_SkillEnterColdDown");
+    }
+
+
+    private void Update()
+    {
+        if (isUpdate)
         {
+            Debug.Log($"isupdate={isUpdate},skill={_skill.ColddownTime}");
+            UpdateAbilityBar();
+        }
+    }
+
+    /// <summary>
+    /// 设置技能格中的信息
+    /// </summary>
+    /// <param name="skillInfo"></param>
+    public void SetAbilityBar(Skill skillInfo)
+    {
+        if(skillInfo != null)
+        {
+            _skill = skillInfo;
+            icon = Resources.Load<Sprite>(skillInfo.Define.Icon);
+            aName = skillInfo.Define.Name;
+            maxColdDown = skillInfo.Define.CD;
+            coldDown = skillInfo.ColddownTime;
+            desc = skillInfo.Define.Description;
+        }
+        else
+        {
+            _skill = null;
             icon = null;
             aName = "";
             maxColdDown = 1;
             coldDown = 0;
             desc = "";
-            return;
         }
-        icon = Resources.Load<Sprite>(skillInfo.Define.Icon);
-        aName = skillInfo.Define.Name;
-        maxColdDown = skillInfo.Define.CD;
-        coldDown = skillInfo.ColdDown;
-        desc = skillInfo.Define.Description;
+
+        //初始化一下技能格子的ui
+        iconImag.enabled = icon != null;                        //是否显示技能图标  
+        iconImag.sprite = icon;
+        isUpdate = false;
+
     }
 
-    //todo 委托+3个状态函数即可使用事件来进行触发，而不是一直update
-    void UpdateInfo()
+    /// <summary>
+    /// 技能进入冷却事件回调
+    /// </summary>
+    public void _SkillEnterColdDown()
     {
-        //todo 进入倒计时的时候才update
-        if (skill != null)
+
+        if (_skill != null && _skill.ColddownTime != 0)
         {
-            coldDown = skill.ColdDown;
+            isUpdate = true;
+        }
+
+    }
+
+    /// <summary>
+    /// 更新技能格的信息，主要是冷却的信息
+    /// 根据skill来进行更新ui
+    /// </summary>
+    void UpdateAbilityBar()
+    {
+
+        coldDown = _skill.ColddownTime;                         //设置当前的冷却时间
+        if (coldDown <= 0)
+        {
+            isUpdate = false;
+            coldDownImag.enabled = false;
+            coldDownTimeText.enabled = false;
+            return;
+        }
+        coldDownImag.enabled = true;
+        coldDownTimeText.enabled = true;                        //是否显示冷却text
+        coldDownImag.fillAmount = coldDown / maxColdDown;       //冷却图层,遮罩
+        //冷却数字                                                        
+        if (coldDown >= 1.0f)
+        {
+            coldDownTimeText.text = coldDown.ToString("F0");//大于等于1秒不显示小数
         }
         else
         {
-            coldDown = 0;
+            coldDownTimeText.text = coldDown.ToString("F1");//小于1秒显示小数
         }
 
-
-        iconImag.enabled = icon != null;                        //是否显示技能图标  
-        iconImag.sprite = icon;
-        coldDownImag.fillAmount = coldDown / maxColdDown;       //冷却图层，为0就相当于不显示了
-
-        coldDownTimeText.enabled = coldDown > 0;                //是否显示冷却text
-        if (coldDownTimeText)
-        {
-            if (coldDown >= 1.0f)
-            {
-                coldDownTimeText.text = coldDown.ToString("F0");//大于等于1秒不显示小数
-            }
-            else
-            {
-                coldDownTimeText.text = coldDown.ToString("F1");//小于1秒显示小数
-            }
-        }
     }
 
-
-
-
+    /// <summary>
+    /// 技能格被点击事件
+    /// </summary>
     private void OnClick()
     {
-        if (skill == null) return;
-        Log.Information("技能点击:{0}",skill.Define.Name);
-        GameApp.Spell(skill);
+        if (_skill == null) return;
+        if (_skill.IsUnitTarget && GameApp.target == null)
+        {
+            Log.Information("当前没有选中目标");
+            return;
+        }
+        if (isUpdate)
+        {
+            Log.Information("技能冷却中");
+            return;
+        }
+
+        GameApp.Spell(_skill);
     }
 
 }

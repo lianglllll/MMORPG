@@ -17,6 +17,8 @@ public class CombatPanelScript : BasePanel
     private Image DeathBox;
     private Button KnapsackBtn;
     public ChatBoxScript chatBoxScript;
+    private ExpBoxScript expBoxScript;
+    private AbilityGroupScript abilityGroupScript;
 
     protected override void Awake()
     {
@@ -28,16 +30,20 @@ public class CombatPanelScript : BasePanel
         reviveBtn = transform.Find("DeathBox/ReviveBtn").GetComponent<Button>();
         KnapsackBtn = transform.Find("KnapsackBtn").GetComponent<Button>();
         chatBoxScript = transform.Find("ChatBox").GetComponent<ChatBoxScript>();
+        expBoxScript = transform.Find("ExpBox").GetComponent<ExpBoxScript>();
+        abilityGroupScript = transform.Find("AbilityGroup").GetComponent<AbilityGroupScript>();
     }
 
     private void Start()
     {
+        Init();
+
         //监听事件
         Kaiyun.Event.RegisterOut("SelectTarget", this, "_SelectTarget");
         Kaiyun.Event.RegisterOut("TargetDeath", this, "_CancelSelectTarget");
         Kaiyun.Event.RegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
-        Kaiyun.Event.RegisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI");
-        Init();
+        Kaiyun.Event.RegisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI"); 
+        Kaiyun.Event.RegisterOut("ExpChange", this, "ExpBoxREfreshUI"); 
 
     }
 
@@ -47,6 +53,7 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.UnregisterOut("TargetDeath", this, "_CancelSelectTarget");
         Kaiyun.Event.UnregisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
         Kaiyun.Event.UnregisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI");
+        Kaiyun.Event.UnregisterOut("ExpChange", this, "ExpBoxREfreshUI");
     }
 
     private void Update()
@@ -77,9 +84,9 @@ public class CombatPanelScript : BasePanel
         KnapsackBtn.onClick.AddListener(OnKnaspackBtn);
         DeathBox.gameObject.SetActive(false);
         targetElite.gameObject.SetActive(false);
-
-        //设置一下我们主角的状态栏
-        myElite.SetOwner(GameApp.character);
+        myElite.SetOwner(GameApp.character);                    //设置一下我们主角的状态栏
+        expBoxScript.Init(GameApp.character);                   //初始化经验条
+        abilityGroupScript.Init();
     }
 
     /// <summary>
@@ -139,6 +146,14 @@ public class CombatPanelScript : BasePanel
         {
             targetElite.RefreshUI();
         }
+    }
+
+    /// <summary>
+    /// 刷新经验条
+    /// </summary>
+    public void ExpBoxREfreshUI()
+    {
+        expBoxScript.RefrashUI();
     }
 
 }

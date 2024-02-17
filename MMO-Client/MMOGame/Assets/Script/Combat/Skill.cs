@@ -30,11 +30,12 @@ namespace GameClient.Combat
     {
         public SkillDefine Define;          //技能定义
         public Actor Owner;                 //技能归属者
-        public float ColdDown;              //冷却倒计时，0表示技能可用
+        public float ColddownTime;          //冷却倒计时，0表示技能可用
         private float RunTime;              //技能运行时间
         public SkillStage Stage;            //当前技能执行到的阶段
         public bool IsPassive;              //是否是被动技能
         private SCObject _sco;              //技能的目标,Use触发时设置
+
 
         /// <summary>
         /// 聚气进度 0-1
@@ -83,7 +84,7 @@ namespace GameClient.Combat
         public void OnUpdate(float deltatime)
         {
             //1.技能从被使用那一阶段开始推动
-            if (Stage == SkillStage.None && ColdDown == 0) return;
+            if (Stage == SkillStage.None && ColddownTime == 0) return;
 
             //2.记录技能的运行时间
             RunTime += deltatime;
@@ -101,17 +102,23 @@ namespace GameClient.Combat
                 if (RunTime >= Define.IntonateTime + Define.Duration)
                 {
                     Stage = SkillStage.Colding;
-                    ColdDown = Define.CD;//此时真正进入冷却
+                    ColddownTime = Define.CD;//此时真正进入冷却
+
+                    //需要刷新一些个ui
+                    if(Owner == GameApp.character)
+                    {
+                        Kaiyun.Event.FireIn("SkillEnterColdDown");
+                    }
                 }
             }
 
             //5.技能处于激活状态时，冷却就开始倒计时了
             if (Stage == SkillStage.Colding)
             {
-                if (ColdDown > 0) ColdDown -= Time.deltaTime;
-                if (ColdDown <= 0)
+                if (ColddownTime > 0) ColddownTime -= Time.deltaTime;
+                if (ColddownTime <= 0)
                 {
-                    ColdDown = 0;
+                    ColddownTime = 0;
                     RunTime = 0;
                     Stage = SkillStage.None;
                     OnFinish();

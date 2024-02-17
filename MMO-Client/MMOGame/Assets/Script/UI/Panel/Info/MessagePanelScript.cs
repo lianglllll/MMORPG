@@ -8,8 +8,9 @@ public class MessagePanelScript : MonoBehaviour
 {
 
     //文本组件
-    private Text msgText;
+    private Text topMsgBoxText;
     private Text NDelayText;
+    private GameObject topMsgBox;
 
     //提示信息的停留时间
     private float showTime = 3f;
@@ -26,7 +27,9 @@ public class MessagePanelScript : MonoBehaviour
     private void Awake()
     {
         //获取自身身上的Text组件
-        msgText = transform.Find("MessageBox").GetComponent<Text>();
+        topMsgBoxText = transform.Find("MessageBoxTop/MessageText").GetComponent<Text>();
+        topMsgBox = transform.Find("MessageBoxTop").gameObject;
+
         NDelayText = transform.Find("NetworkDelay").GetComponent<Text>();
 
         DeliverBox = transform.Find("DeliverBox");
@@ -38,7 +41,7 @@ public class MessagePanelScript : MonoBehaviour
     private void Start()
     {
         //因为消息提示默认是不显示的
-        msgText.enabled = false;
+        topMsgBox.SetActive(false);
         //设置按钮回调
         DeliverBtn.onClick.AddListener(OnDeliverBtn);
         //初始化数据
@@ -54,8 +57,8 @@ public class MessagePanelScript : MonoBehaviour
     {
 
         //设置提示信息并且启动text
-        msgText.text = msg;
-        msgText.enabled = true;
+        topMsgBoxText.text = msg;
+        topMsgBox.SetActive(true);
         //停留showTime秒后调用Hide方法
         Invoke("Hide", showTime);
 
@@ -66,7 +69,7 @@ public class MessagePanelScript : MonoBehaviour
     /// </summary>
     private void Hide()
     {
-        msgText.enabled = false;
+        topMsgBox.SetActive(false);
     }
 
     /// <summary>
@@ -103,6 +106,10 @@ public class MessagePanelScript : MonoBehaviour
         //显示面板
         DeliverBox.gameObject.SetActive(true);
     }
+
+    /// <summary>
+    /// 关闭传送面板
+    /// </summary>
     public void CloseDeliverBox()
     {
         DeliverBox.gameObject.SetActive(false);

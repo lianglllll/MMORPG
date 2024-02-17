@@ -19,7 +19,10 @@ namespace GameClient.Entities
         public GameObject renderObj;        //actor中对应的游戏对象
         public UnitState unitState;
         public PlayerStateMachine StateMachine;
+
         public bool IsDeath => unitState == UnitState.Dead;
+        public int Level => info.Level;
+        public long Exp => info.Exp;
 
         /// <summary>
         /// 构造函数
@@ -140,7 +143,8 @@ namespace GameClient.Entities
             //更新当前actor的数据
             this.info.Exp = new_value;
             //事件通知，exp数据发送变化（可能某些ui组件需要这个信息）
-            LocalOrTargetAcotrPropertyChange();
+            //LocalOrTargetAcotrPropertyChange();
+            Kaiyun.Event.FireOut("ExpChange");
         }
 
         /// <summary>

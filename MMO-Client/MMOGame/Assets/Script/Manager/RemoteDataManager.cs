@@ -95,7 +95,6 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
         }
 
         ItemService.Instance.ItemPlacementRequeset(req);
-
     }
 
     /// <summary>
@@ -106,6 +105,10 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
         ItemService.Instance.ItemUseRequest(slotIndex, count);
     }
 
+    /// <summary>
+    /// 更新背包ui中某个itemui的数量显示
+    /// </summary>
+    /// <param name="resp"></param>
     public void UpdateKnapsackItemAmount(ItemUseResponse resp)
     {
         var item = localCharacterKnapsack.GetItemByIndex(resp.SlotIndex);

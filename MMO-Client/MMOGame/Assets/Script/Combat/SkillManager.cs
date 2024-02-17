@@ -23,18 +23,17 @@ namespace GameClient.Manager
         public SkillManager(Actor owner)
         {
             this.owner = owner;
-            InitSkills();
+            Init();
         }
         
-        public void InitSkills()
+        private void Init()
         {
             //初始化技能信息，处理服务器传送过来的
-
             foreach(var info in owner.info.Skills)
             {
                 var skill = new Skill(owner, info.Id);
                 Skills.Add(skill);
-                Log.Information($"角色[{owner.define.Name}]加载技能[{skill.Define.ID}-{skill.Define.Name}]");
+                //Log.Information($"角色[{owner.define.Name}]加载技能[{skill.Define.ID}-{skill.Define.Name}]");
             }
         }
 

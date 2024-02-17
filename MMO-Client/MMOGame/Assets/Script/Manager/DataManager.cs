@@ -19,6 +19,9 @@ public class DataManager : Singleton<DataManager>
     public Dictionary<int, SkillDefine> skillDefineDict = null;
     //物品信息
     public Dictionary<int, ItemDefine> itemDefineDict = null;
+    //等级经验信息
+    public Dictionary<int, LevelDefine> levelDefindeDict = null;
+
 
 
     /// <summary>
@@ -39,6 +42,7 @@ public class DataManager : Singleton<DataManager>
         panelDict = Load2<PanelDefine>("Data/PanelDefine");
         skillDefineDict = Load<SkillDefine>("Data/SkillDefine");
         itemDefineDict = Load<ItemDefine>("Data/ItemDefine");
+        levelDefindeDict = Load<LevelDefine>("Data/LevelDefine");
     }
 
     /// <summary>
