@@ -6,7 +6,6 @@ using System;
 
 public class MessagePanelScript : MonoBehaviour
 {
-
     //文本组件
     private Text topMsgBoxText;
     private Text NDelayText;
@@ -15,38 +14,27 @@ public class MessagePanelScript : MonoBehaviour
     //提示信息的停留时间
     private float showTime = 3f;
 
-    //传送面板相关的
-    private Transform DeliverBox;
-    private Button DeliverBtn;
-    private Text DeliverText;
-
-    //临时数据
-    private int spaceId;
-
+    //确认面板
+    private ConfirmBox confirmBox;
+    private bool confirmBoxActive;
 
     private void Awake()
     {
         //获取自身身上的Text组件
         topMsgBoxText = transform.Find("MessageBoxTop/MessageText").GetComponent<Text>();
         topMsgBox = transform.Find("MessageBoxTop").gameObject;
-
         NDelayText = transform.Find("NetworkDelay").GetComponent<Text>();
-
-        DeliverBox = transform.Find("DeliverBox");
-        DeliverBtn = transform.Find("DeliverBox/DeliverBtn").GetComponent<Button>();
-        DeliverText = transform.Find("DeliverBox/TipsBox/Text").GetComponent<Text>();
-
+        confirmBox = transform.Find("ConfirmBox").GetComponent<ConfirmBox>();
     }
 
     private void Start()
     {
         //因为消息提示默认是不显示的
         topMsgBox.SetActive(false);
-        //设置按钮回调
-        DeliverBtn.onClick.AddListener(OnDeliverBtn);
-        //初始化数据
-        spaceId = -1;
-
+        //初始化确认面板
+        confirmBox.Init(CloseConfirmBox);
+        confirmBox.gameObject.SetActive(false);
+        confirmBoxActive = false;
     }
 
     /// <summary>
@@ -82,54 +70,33 @@ public class MessagePanelScript : MonoBehaviour
     }
 
     /// <summary>
-    /// 显示传送面板
+    /// 显示确认面板
     /// </summary>
     /// <param name="spaceid"></param>
     /// <param name="desc"></param>
-    public void ShowDeliverBox(int spaceid)
+    public void ShowConfirmBox(string tipsContent, string btnContent,bool btnActive, Action onClickBtnCallback)
     {
-        //设置数据
-        var spaceDefine = DataManager.Instance.GetSpaceDefineById(spaceid);
-        if(spaceDefine != null)
-        {
-            DeliverText.text = "目标：" + spaceDefine.Name;
-            DeliverBtn.enabled = true;
-            this.spaceId = spaceid;
-
-        }
-        else
-        {
-            DeliverText.text = "由于空间乱流，目标点暂时无法传送";
-            DeliverBtn.enabled = false;
-        }
-
-        //显示面板
-        DeliverBox.gameObject.SetActive(true);
+        if (confirmBoxActive == true) return;
+        //显示面板、设置ui
+        SetConfirmBoxActive(true);
+        confirmBox.ShowBox(tipsContent, btnContent, btnActive, onClickBtnCallback);
     }
 
     /// <summary>
-    /// 关闭传送面板
+    /// 关闭确认面板
     /// </summary>
-    public void CloseDeliverBox()
+    public void CloseConfirmBox()
     {
-        DeliverBox.gameObject.SetActive(false);
+        if (confirmBoxActive == false) return;
+        SetConfirmBoxActive(false);
+        confirmBox.CloseBox();
     }
 
-    /// <summary>
-    /// 点击传送按钮回调
-    /// </summary>
-    private void OnDeliverBtn()
+    private void SetConfirmBoxActive(bool active)
     {
-        if(spaceId < 0)
-        {
-            ShowMessage("传送失败,无法搜寻坐标点");
-            return;
-        }
-
-        //给服务器发送请求
-        GameApp.SpaceDeliver(spaceId);
-
-        CloseDeliverBox();
+        confirmBox.gameObject.SetActive(active);
+        confirmBoxActive = active;
     }
+
 
 }

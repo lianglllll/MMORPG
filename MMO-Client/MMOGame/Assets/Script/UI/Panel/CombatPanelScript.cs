@@ -2,6 +2,7 @@ using Assets.Script.Entities;
 using GameClient.Combat;
 using GameClient.Entities;
 using Proto;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,6 @@ public class CombatPanelScript : BasePanel
     private EliteScript myElite;                            //自己的角色的状态栏
     private EliteScript targetElite;                        //目标的角色的状态栏
     private Slider intonateSlider;
-    private Button reviveBtn;
-    private Image DeathBox;
     private Button KnapsackBtn;
     public ChatBoxScript chatBoxScript;
     private ExpBoxScript expBoxScript;
@@ -26,8 +25,6 @@ public class CombatPanelScript : BasePanel
         myElite = transform.Find("MyElite").GetComponent<EliteScript>();
         targetElite = transform.Find("TargetElite").GetComponent<EliteScript>();
         intonateSlider = transform.Find("IntonateSlider/Slider").GetComponent<Slider>();
-        DeathBox = transform.Find("DeathBox").GetComponent<Image>();
-        reviveBtn = transform.Find("DeathBox/ReviveBtn").GetComponent<Button>();
         KnapsackBtn = transform.Find("KnapsackBtn").GetComponent<Button>();
         chatBoxScript = transform.Find("ChatBox").GetComponent<ChatBoxScript>();
         expBoxScript = transform.Find("ExpBox").GetComponent<ExpBoxScript>();
@@ -80,9 +77,7 @@ public class CombatPanelScript : BasePanel
     private void Init()
     {
         //ui
-        reviveBtn.onClick.AddListener(OnReviveBtn);
         KnapsackBtn.onClick.AddListener(OnKnaspackBtn);
-        DeathBox.gameObject.SetActive(false);
         targetElite.gameObject.SetActive(false);
         myElite.SetOwner(GameApp.character);                    //设置一下我们主角的状态栏
         expBoxScript.Init(GameApp.character);                   //初始化经验条
@@ -94,17 +89,17 @@ public class CombatPanelScript : BasePanel
     /// </summary>
     public void ShowDeathBox()
     {
-        DeathBox.gameObject.SetActive(true);
+        //设置数据
+        string deathText = "你已死亡，将会在最近的出生点复活";     //提示语句
+        Action onBtnAction = () =>
+        {
+            GameApp.character._Revive();
+        };
+
+        UIManager.Instance.MessagePanel.ShowConfirmBox(deathText, "复活", true, onBtnAction);
     }
 
-    /// <summary>
-    /// 复活
-    /// </summary>
-    private void OnReviveBtn()
-    {
-        DeathBox.gameObject.SetActive(false);
-        GameApp.character._Revive();
-    }
+
 
     /// <summary>
     /// 背包

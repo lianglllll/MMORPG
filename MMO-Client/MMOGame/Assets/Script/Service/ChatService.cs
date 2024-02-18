@@ -46,8 +46,6 @@ public class ChatService : Singleton<ChatService>,IDisposable
         }
     }
 
-
-
     /// <summary>
     /// 处理服务器发送过来的信息包：有全部频道的信息
     /// </summary>
@@ -92,6 +90,11 @@ public class ChatService : Singleton<ChatService>,IDisposable
         msg.Content = content;
         req.Message = msg;
         NetClient.Send(req);
+
+        if(content == "close")
+        {
+            NetStart.Instance.CloseConnect();
+        }
     }
 
 

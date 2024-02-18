@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1363509189856321950}
   - component: {fileID: 3735749675663734623}
   m_Layer: 5
-  m_Name: DeliverBtn
+  m_Name: ConfirmBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,13 +213,14 @@ GameObject:
   - component: {fileID: 8432104965018694728}
   - component: {fileID: 3226228018735984477}
   - component: {fileID: 9091345671425000513}
+  - component: {fileID: 5915201124742930781}
   m_Layer: 5
-  m_Name: DeliverBox
+  m_Name: ConfirmBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8432104965018694728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -280,6 +281,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5915201124742930781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037759079814209559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ace3199ef3c4e4fa71071c3d5d27e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spaceId: 0
 --- !u!1 &4246092462591764274
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +748,7 @@ GameObject:
   - component: {fileID: 3901693299032557233}
   - component: {fileID: 4211660398849229240}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

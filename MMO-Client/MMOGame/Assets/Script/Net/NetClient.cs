@@ -20,7 +20,6 @@ public class NetClient
     private static Connection conn = null;
     private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
-
     /// <summary>
     /// 连接到服务器
     /// </summary>
@@ -28,8 +27,9 @@ public class NetClient
     /// <param name="port">端口</param>
     public static void ConnectToServer(string serverIP, int serverPort)
     {
-        if (conn != null) return;
+        if (clientSocket != null && clientSocket.Connected) return;
 
+        //新的socket对象
         clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         // 创建SocketAsyncEventArgs对象
@@ -54,7 +54,6 @@ public class NetClient
     {
         if (e.SocketError == SocketError.Success)
         {
-            Debug.Log("连接到服务端");
             conn = new Connection(clientSocket);
             conn.OnDisconnected += OnDisconnected;
             Kaiyun.Event.FireOut("SuccessConnectServer");
@@ -62,6 +61,7 @@ public class NetClient
         else
         {
             Debug.Log("连接服务器失败==>" + e);
+            Kaiyun.Event.FireOut("FailedConnectServer");
         }
 
         // 释放连接完成的信号
@@ -75,7 +75,8 @@ public class NetClient
     private static void OnDisconnected(Connection sender)
     {
         conn = null;
-        Debug.Log("与服务器断开");
+        //网络连接断开
+        Kaiyun.Event.FireOut("Disconnected");
     }
 
     /// <summary>
@@ -99,4 +100,11 @@ public class NetClient
         }
     }
 
+    /// <summary>
+    /// 模拟异常断开网络
+    /// </summary>
+    public static void SimulateAbnormalDisconnection()
+    {
+        clientSocket?.Close();
+    }
 }
