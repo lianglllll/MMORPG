@@ -138,6 +138,7 @@ message UserLoginResponse{
 	int32 code = 1;
 	string message = 2;
 	bool success = 3;
+	string sessionId = 4;
 }
 
 //角色创建
@@ -164,6 +165,11 @@ message CharacterDeleteRequest{
 message CharacterDeleteResponse{
 	bool success = 1;
 	string message = 2;
+}
+
+//重连请求
+message ReconnectRequest{
+	string sessionId = 1;
 }
 
 

@@ -14,6 +14,9 @@ using UnityEngine.SceneManagement;
 //方便调用罢了
 public class GameApp 
 {
+    //SessionId
+    public static string SessionId;
+
     //角色的entityid
     public static int entityId;
 

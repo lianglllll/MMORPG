@@ -34,9 +34,6 @@ public class NetStart : MonoBehaviour
         Instance = this;
     }
 
-    /// <summary>
-    /// 初始化
-    /// </summary>
     void Start()
     {
         //消息分发注册
@@ -72,7 +69,7 @@ public class NetStart : MonoBehaviour
     }
 
     /// <summary>
-    /// 连接到服务器
+    /// 尝试连接到服务器
     /// </summary>
     public void ConnectToServer()
     {
@@ -86,11 +83,24 @@ public class NetStart : MonoBehaviour
     /// </summary>
     public void ConnectToServerSuccessfulCallback()
     {
-        UIManager.Instance.MessagePanel.ShowMessage("成功连接到服务器.....");
         isConnectServer = true;
-        //心跳包
+        //显示ui
+        UIManager.Instance.MessagePanel.ShowMessage("成功连接到服务器.....");
+        //发送心跳包
         isEnableHeartBeat = true;
         StartCoroutine(SendHeartMessage());
+
+        //需要判断是否是重连的
+        if (GameApp.SessionId != null)
+        {
+            //发送重新连接的清请求
+            ReconnectRequest req = new ReconnectRequest
+            {
+                SessionId = GameApp.SessionId
+            };
+            NetClient.Send(req);
+        }
+
     }
 
     /// <summary>
@@ -112,6 +122,8 @@ public class NetStart : MonoBehaviour
             StopCoroutine(SendHeartMessage());
             isEnableHeartBeat = false;
         }
+
+        //重连
         ReConnect();
     }
 
@@ -123,7 +135,6 @@ public class NetStart : MonoBehaviour
         if (!isReconnecting)
         {
             isReconnecting = true;
-            Log.Information("重新连接服务器");
             Task.Delay(5000).ContinueWith(t =>
             {
                 ConnectToServer();
@@ -167,7 +178,7 @@ public class NetStart : MonoBehaviour
     }
 
     /// <summary>
-    /// 关闭与服务器的连接
+    /// 主动关闭与服务器的连接
     /// </summary>
     public void CloseConnect()
     {

@@ -91,9 +91,10 @@ public class ChatService : Singleton<ChatService>,IDisposable
         req.Message = msg;
         NetClient.Send(req);
 
+        //测试用
         if(content == "close")
         {
-            NetStart.Instance.CloseConnect();
+            NetStart.Instance.SimulateAbnormalDisconnection();
         }
     }
 

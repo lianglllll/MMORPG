@@ -41,7 +41,6 @@ public class LoginPanelScript : BasePanel
             return;
         }
 
-
         //防止多次连续点击
         if (isOnClickLoginBtn) return;
 
@@ -72,13 +71,16 @@ public class LoginPanelScript : BasePanel
         //登录成功，切换到角色选择scene
         if (msg.Success)
         {
+            //保存SessionId
+            GameApp.SessionId = msg.SessionId;
+            //切换面板
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
                 UIManager.Instance.ShowMessage("登录成功");
                 UIManager.Instance.OpenPanel("SelectRolePanel");
                 UIManager.Instance.ClosePanel("LoginPanel");
             });
-        }
+        } 
         else
         {
             isOnClickLoginBtn = false;
