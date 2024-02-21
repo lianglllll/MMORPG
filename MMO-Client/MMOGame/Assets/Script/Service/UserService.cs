@@ -23,8 +23,8 @@ public class UserService : Singleton<UserService>, IDisposable
     {
         //注册特殊事件
         Kaiyun.Event.RegisterIn("GameEnter", this, "GameEnter");
-
     }
+
 
     /// <summary>
     /// 脚本销毁时操作
@@ -36,7 +36,7 @@ public class UserService : Singleton<UserService>, IDisposable
     }
 
     /// <summary>
-    /// 加入游戏请求
+    /// 加入游戏事件回调
     /// </summary>
     /// <param name="roleId"></param>
     public void GameEnter(int roleId)
@@ -48,5 +48,7 @@ public class UserService : Singleton<UserService>, IDisposable
         request.CharacterId = roleId;
         NetClient.Send(request);
     }
+
+
 
 }

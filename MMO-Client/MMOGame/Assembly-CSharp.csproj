@@ -98,11 +98,13 @@
     <Compile Include="Assets\Script\Service\ChatService.cs" />
     <Compile Include="Assets\Script\UI\MingUI\Scripts\ToolTip.cs" />
     <Compile Include="Assets\Script\Manager\ChatManager.cs" />
+    <Compile Include="Assets\Script\Effect\GameEffectManager.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Script\UI\Panel\SelectRolePanelScript.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\PlayerState.cs" />
     <Compile Include="Assets\Script\UI\Panel\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
+    <Compile Include="Assets\Script\Effect\GameEffect.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Script\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Script\Entities\Actor.cs" />
@@ -166,8 +168,11 @@
     <Compile Include="Assets\Script\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\Script\Manager\GameManager.cs" />
     <Compile Include="Assets\Script\UI\Package\GameController.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Info\LoadingBox.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
+    <Compile Include="Assets\Art\Character\牛头人\DemoScene\Action_Manage.cs" />
+    <Compile Include="Assets\Art\Character\牛头人\DemoScene\demo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Character\明日香紧身作战服\明日香.MMD4Mecanim.xml" />
@@ -187,11 +192,13 @@
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Art\Character\牛头人\BOSS\Bull\Shader\Cartoon.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Art\Character\明日香紧身作战服\使用规则.txt" />
     <None Include="Assets\Art\Environment\FantasyEnvironments\Environments\README.txt" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Art\Fonts\zh-cn.txt" />
     <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.MMD4Mecanim.xml" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />

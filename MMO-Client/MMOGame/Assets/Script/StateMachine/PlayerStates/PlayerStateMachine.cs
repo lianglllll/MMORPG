@@ -74,10 +74,13 @@ public class PlayerStateMachine : StateMachine
     {
         //空
         if (state == ActorState.None) return;
+
         //相同的
         if (currentActorState == state) return;
+
         //action状态，不可打断状态，之间返回不允许切换。
-        if (currentActorState == ActorState.SkillActive) return;
+        //这里再优化吧
+        if (currentActorState == ActorState.SkillActive && parameter.skill != null) return;
 
         //切换
         currentState?.Exit();

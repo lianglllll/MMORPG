@@ -38,6 +38,8 @@ public class NetStart : MonoBehaviour
     {
         //消息分发注册
         MessageRouter.Instance.Subscribe<HeartBeatResponse>(_HeartBeatResponse);
+        MessageRouter.Instance.Subscribe<ReconnectResponse>(_ReconnectResponse);
+
 
         //事件监听
         Kaiyun.Event.RegisterOut("SuccessConnectServer", this, "ConnectToServerSuccessfulCallback");
@@ -57,6 +59,7 @@ public class NetStart : MonoBehaviour
     private void OnDestroy()
     {
         MessageRouter.Instance.Off<HeartBeatResponse>(_HeartBeatResponse);
+        MessageRouter.Instance.Off<ReconnectResponse>(_ReconnectResponse);
         Kaiyun.Event.UnregisterOut("SuccessConnectServer", this, "ConnectToServerCallback");
         Kaiyun.Event.UnregisterOut("FailedConnectServer", this, "ConnectToServerFailedCallback");
         Kaiyun.Event.UnregisterOut("Disconnected", this, "OnDisconnected");
@@ -93,6 +96,7 @@ public class NetStart : MonoBehaviour
         //需要判断是否是重连的
         if (GameApp.SessionId != null)
         {
+
             //发送重新连接的清请求
             ReconnectRequest req = new ReconnectRequest
             {
@@ -125,6 +129,7 @@ public class NetStart : MonoBehaviour
 
         //重连
         ReConnect();
+        UIManager.Instance.MessagePanel.ShowLoadingBox("断线重连中...");
     }
 
     /// <summary>
@@ -141,6 +146,46 @@ public class NetStart : MonoBehaviour
                 isReconnecting = false;
             });
         }
+    }
+
+    /// <summary>
+    /// 断线重连响应
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="msg"></param>
+    private void _ReconnectResponse(Connection sender, ReconnectResponse msg)
+    {
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            //关闭ui
+            UIManager.Instance.MessagePanel.HideLoadingBox();
+
+            if (!msg.Success)
+            {
+                //没有登录信息可能是session超时了，跳回到登录界面
+                GameApp.ClearGameAppData();
+                EntityManager.Instance.Clear();
+                UIManager.Instance.ClearAllOpenPanel();
+                UIManager.Instance.OpenPanel("LoginPanel");
+                return;
+            }
+
+            if(msg.EntityId == 0)
+            {
+                //没有选择角色，我们跳回到选择角色的界面
+                string sessionId = GameApp.SessionId;
+                GameApp.ClearGameAppData();
+                GameApp.SessionId = sessionId;
+                EntityManager.Instance.Clear();
+                UIManager.Instance.ClearAllOpenPanel();
+                UIManager.Instance.OpenPanel("SelectRolePanel");
+                return;
+            }
+
+            //重连成功
+            //这里不需要做任何操作
+
+        });
     }
 
     /// <summary>

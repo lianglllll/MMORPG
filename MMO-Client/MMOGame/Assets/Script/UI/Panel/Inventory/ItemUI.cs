@@ -37,6 +37,14 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         AmountText.raycastTarget = false;
     }
 
+    private void OnDisable()
+    {
+        //防止提示框没关
+        ToolTip.Instance?.Hide();
+
+    }
+
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -201,7 +209,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ToolTip.Instance.Hide();
+        ToolTip.Instance?.Hide();
     }
 
     /// <summary>

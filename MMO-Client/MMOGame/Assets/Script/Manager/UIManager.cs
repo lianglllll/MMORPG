@@ -12,11 +12,10 @@ public class UIManager
 
     private Dictionary<string, PanelDefine> pathDict = null;           //panelname  -> paneldefine  
     private Dictionary<string, GameObject> prefabsDict = null;         //panelname  -> prefab
-    private Dictionary<string, BasePanel> panelScriptDict = null;      //panelname  -> panelscript    这是打开的面板
+    private Dictionary<string, BasePanel> panelScriptDict = null;      //panelname  -> panelscript    这是当前打开的面板
 
-    //如果有需要可以将panel的实例保存起来使用
-    private MessagePanelScript messagePanel;                            //用于展示消息的面板
-
+    //用于展示消息的面板（如果有需要可以将panel的实例保存起来使用）
+    private MessagePanelScript messagePanel;                            
 
     private UIManager()
     {
@@ -34,6 +33,7 @@ public class UIManager
             return _instance;
         }
     }
+
     public Transform UIRoot
     {
         get
@@ -54,6 +54,10 @@ public class UIManager
             return _uiRoot;
         }
     }
+
+    /// <summary>
+    /// 消息面板
+    /// </summary>
     public MessagePanelScript MessagePanel
     {
         get
@@ -66,9 +70,9 @@ public class UIManager
         }
     }
 
-
-
-
+    /// <summary>
+    /// 管理器初始化
+    /// </summary>
     private void InitDicts()
     {
         //获取各个面板的数据
@@ -77,8 +81,12 @@ public class UIManager
         panelScriptDict = new Dictionary<string, BasePanel>();
     }
 
-    //打开panel
-    public  BasePanel OpenPanel(string name)
+    /// <summary>
+    /// 打开panel
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public BasePanel OpenPanel(string name)
     {
         //1.检查name是否有误
         PanelDefine define = null;
@@ -110,7 +118,11 @@ public class UIManager
         return panel;
     }
 
-    //关闭panel
+    /// <summary>
+    /// 关闭panel
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public bool ClosePanel(string name)
     {
 
@@ -129,8 +141,11 @@ public class UIManager
 
     }
 
-
-    //获取某个prefab
+    /// <summary>
+    /// 获取某个prefab
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public GameObject GetPanelPrefab(string name)
     {
         //1.检查name是否有误
@@ -152,13 +167,19 @@ public class UIManager
         return panelPrefab;
     }
 
-    //通过消息面板显示消息
+    /// <summary>
+    /// 通过消息面板显示消息
+    /// </summary>
+    /// <param name="str"></param>
     public void ShowMessage(string str)
     {
         MessagePanel.ShowMessage(str);
     }
 
-    //异步通过消息面板显示消息
+    /// <summary>
+    /// 异步通过消息面板显示消息
+    /// </summary>
+    /// <param name="str"></param>
     public void AsyncShowMessage(string str)
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
@@ -166,6 +187,19 @@ public class UIManager
             MessagePanel.ShowMessage(str);
         });
     }
+
+    /// <summary>
+    /// 清空当前打开的所有面板
+    /// </summary>
+    public void ClearAllOpenPanel()
+    {
+        foreach(var p in panelScriptDict.Values)
+        {
+            p.ClosePanel();
+        }
+        panelScriptDict.Clear();
+    }
+
 
 }
 

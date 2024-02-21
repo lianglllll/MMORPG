@@ -19,6 +19,10 @@ public class KnapsackPanel:BasePanel
     public PickUpItemListBox pickUpItemListBox;
     public List<InventorySlot> slotList;
 
+    //currency
+    private Text goldText;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,6 +34,7 @@ public class KnapsackPanel:BasePanel
         numberInputBox = transform.Find("NumberInputBox").GetComponent<NumberInputBox>();
         pickUpItemListBox = transform.Find("PickUpItemListBox").GetComponent<PickUpItemListBox>();
 
+        goldText = transform.Find("Right/Currency/Gold/IconBar/GoldNumberText").GetComponent<Text>();
     }
 
     private void Start()
@@ -37,9 +42,10 @@ public class KnapsackPanel:BasePanel
         Init();
 
         //监听一些个事件
-        Kaiyun.Event.RegisterOut("UpdataCharacterKnapsackData", this, "UpdataKnapsackUI");
-        Kaiyun.Event.RegisterOut("UpdataCharacterKnapsackSingletonItemAmount", this, "UpdataKnapsackSingletonItemAmount");
-        Kaiyun.Event.RegisterOut("UpdataCharacterKnapsackPickupItemBox", this, "UpdatePickUpBox");
+        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackData", this, "UpdateKnapsackUI");
+        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackSingletonItemAmount", this, "UpdateKnapsackSingletonItemAmount");
+        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackPickupItemBox", this, "UpdatePickUpBox");
+        Kaiyun.Event.RegisterOut("GoldChange", this, "UpdateCurrency");
 
     }
 
@@ -53,9 +59,10 @@ public class KnapsackPanel:BasePanel
 
     private void OnDestroy()
     {
-        Kaiyun.Event.UnregisterOut("UpdataCharacterKnapsackData", this, "UpdataKnapsackUI");
-        Kaiyun.Event.UnregisterOut("UpdataCharacterKnapsackSingletonItemAmount", this, "UpdataKnapsackSingletonItemAmount");
-        Kaiyun.Event.UnregisterOut("UpdataCharacterKnapsackPickupItemBox", this, "UpdatePickUpBox");
+        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackData", this, "UpdateKnapsackUI");
+        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackSingletonItemAmount", this, "UpdateKnapsackSingletonItemAmount");
+        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackPickupItemBox", this, "UpdatePickUpBox");
+        Kaiyun.Event.UnregisterOut("GoldChange", this, "UpdateCurrency");
     }
 
     /// <summary>
@@ -69,6 +76,8 @@ public class KnapsackPanel:BasePanel
 
         UpdatePickUpBox();
 
+        UpdateCurrency();
+
         //先确定是否获取了背包信息，如果没有就向服务器拿
         var chr = GameApp.character;
         if (chr == null) return;
@@ -80,13 +89,13 @@ public class KnapsackPanel:BasePanel
             return;
         }
 
-        UpdataKnapsackUI();
+        UpdateKnapsackUI();
     }
 
     /// <summary>
     /// 加载背包数据
     /// </summary>
-    public void UpdataKnapsackUI()
+    public void UpdateKnapsackUI()
     {
         //加载插槽
         var knapsack = RemoteDataManager.Instance.localCharacterKnapsack;
@@ -196,10 +205,21 @@ public class KnapsackPanel:BasePanel
     /// 更加某个slot中物品的数量ui
     /// </summary>
     /// <param name="slotIndex"></param>
-    public void UpdataKnapsackSingletonItemAmount(int slotIndex)
+    public void UpdateKnapsackSingletonItemAmount(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= slotList.Count) return;
         var slot = slotList[slotIndex];
         slot.UpdateItemUIAmount();
     }
+
+    /// <summary>
+    /// 更新金币数量
+    /// </summary>
+    public void UpdateCurrency()
+    {
+        if (GameApp.character == null) return;
+        goldText.text = GameApp.character.info.Gold + "";
+    }
+
+
 }

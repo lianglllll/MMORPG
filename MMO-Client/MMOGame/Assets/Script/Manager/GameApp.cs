@@ -33,6 +33,19 @@ public class GameApp
     //战斗面板
     public static CombatPanelScript combatPanelScript;
 
+    //清空当前存储的数据
+    public static void ClearGameAppData()
+    {
+        SessionId = null;
+        entityId = -1;
+        character = null;
+        target = null;
+        myCharacter = null;
+        CurrSkill = null;
+        combatPanelScript = null;
+    }
+
+
     /// <summary>
     /// 是否正在输入,//todo 改成用事件来触发：聊天事件====》角色控制失效、聊天框跳出、
     /// </summary>

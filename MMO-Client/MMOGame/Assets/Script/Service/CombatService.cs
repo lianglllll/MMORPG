@@ -210,6 +210,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
             {
 
                 var actor = GameTools.GetUnit(item.EntityId);
+                Character chr;
                 switch (item.Property)
                 {
                     case PropertyUpdate.Types.Prop.Hp:
@@ -231,7 +232,12 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     case PropertyUpdate.Types.Prop.Name:
                         break;
                     case PropertyUpdate.Types.Prop.Exp:
-                        actor.onExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                        chr = actor as Character;
+                        chr.onExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                        break;
+                    case PropertyUpdate.Types.Prop.Golds:
+                        chr = actor as Character;
+                        chr.onGoldChanged(item.OldValue.LongValue, item.NewValue.LongValue);
                         break;
                 }
 

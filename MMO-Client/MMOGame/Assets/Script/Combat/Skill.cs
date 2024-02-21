@@ -137,9 +137,10 @@ namespace GameClient.Combat
             {
                 GameApp.CurrSkill = this;
             }
-            Owner.StateMachine.parameter.skill = this;
             _sco = target;
             RunTime = 0;
+
+            Owner.StateMachine.parameter.skill = this;
 
             //技能阶段从none切换到蓄气阶段
             Stage = SkillStage.Intonate;

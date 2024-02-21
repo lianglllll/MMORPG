@@ -53,9 +53,10 @@ public class SelectRolePanelScript : BasePanel
 
     private void OnDestroy()
     {
-        Kaiyun.Event.UnregisterIn("OnSelectedRoleItem", this, "OnSelectedRoleItem");
         MessageRouter.Instance.Off<CharacterListResponse>(_CharacterListResponse);
         MessageRouter.Instance.Off<CharacterDeleteResponse>(_CharacterDeleteResponse);
+        Kaiyun.Event.UnregisterIn("OnSelectedRoleItem", this, "OnSelectedRoleItem");
+
     }
 
     public void OnCreateBtn()
@@ -77,7 +78,7 @@ public class SelectRolePanelScript : BasePanel
         Debug.Log("开始游戏："+ curSelectedItem.name);
 
         //通过事件系统来执行
-        //NetStart中实现了
+        //Userservice中实现了
         Kaiyun.Event.FireIn("GameEnter", curSelectedItem.ChrId);
 
 

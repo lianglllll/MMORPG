@@ -54,7 +54,7 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
         localCharacterKnapsack = new Inventory(GameApp.character);
         localCharacterKnapsack.Init(knapsackInfo);
         //发出背包更新的事件，如果背包面板存在就会处理这个事件
-        Kaiyun.Event.FireOut("UpdataCharacterKnapsackData");
+        Kaiyun.Event.FireOut("UpdateCharacterKnapsackData");
     }
 
     /// <summary>
@@ -118,13 +118,13 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
             if(item.Amount <= 0)
             {
                 localCharacterKnapsack.removeSlot(resp.SlotIndex);
-                Kaiyun.Event.FireOut("UpdataCharacterKnapsackData");
+                Kaiyun.Event.FireOut("UpdateCharacterKnapsackData");
 
             }
             else
             {
                 //通知更新，小范围刷新即可
-                Kaiyun.Event.FireOut("UpdataCharacterKnapsackSingletonItemAmount", resp.SlotIndex);
+                Kaiyun.Event.FireOut("UpdateCharacterKnapsackSingletonItemAmount", resp.SlotIndex);
             }
 
         }
@@ -178,7 +178,7 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
                 {
 
                 }
-                else if (action.req.OriginInventoryTpey == InventoryType.Equipment)
+                else if (action.req.OriginInventoryTpey == InventoryType.EquipmentColumn)
                 {
 
                 }else if(action.req.OriginInventoryTpey == InventoryType.CurrentScene)
@@ -196,7 +196,7 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
         }
 
         //刷新一下ui
-        Kaiyun.Event.FireOut("UpdataCharacterKnapsackData");
+        Kaiyun.Event.FireOut("UpdateCharacterKnapsackData");
     }
 
     /// <summary>
@@ -213,14 +213,14 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
         else if(req.TargetInventoryTpey == InventoryType.Warehouse)
         {
             
-        }else if(req.TargetInventoryTpey == InventoryType.Equipment)
+        }else if(req.TargetInventoryTpey == InventoryType.EquipmentColumn)
         {
 
         }else if(req.TargetInventoryTpey == InventoryType.CurrentScene)
         {
             //丢弃了count个物品，对应的item数据要减去count个
             localCharacterKnapsack.SetItemAmount(req.OriginIndex,-(req.TargetIndex));
-            Kaiyun.Event.FireOut("UpdataCharacterKnapsackPickupItemBox");
+            Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
         }
     }
 
@@ -234,13 +234,13 @@ public class RemoteDataManager : Singleton<RemoteDataManager>
         {
             //其实就是拾起操作，这里我们将数据刷新到背包中
             localCharacterKnapsack.AddItem(action.req.TargetIndex,action.AuxiliarySpace);
-            Kaiyun.Event.FireOut("UpdataCharacterKnapsackPickupItemBox");
+            Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
         }
         else if (action.req.TargetInventoryTpey == InventoryType.Warehouse)
         {
 
         }
-        else if (action.req.TargetInventoryTpey == InventoryType.Equipment)
+        else if (action.req.TargetInventoryTpey == InventoryType.EquipmentColumn)
         {
 
         }

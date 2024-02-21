@@ -18,6 +18,9 @@ public class MessagePanelScript : MonoBehaviour
     private ConfirmBox confirmBox;
     private bool confirmBoxActive;
 
+    //loading面板
+    private LoadingBox loadingBox;
+
     private void Awake()
     {
         //获取自身身上的Text组件
@@ -25,6 +28,7 @@ public class MessagePanelScript : MonoBehaviour
         topMsgBox = transform.Find("MessageBoxTop").gameObject;
         NDelayText = transform.Find("NetworkDelay").GetComponent<Text>();
         confirmBox = transform.Find("ConfirmBox").GetComponent<ConfirmBox>();
+        loadingBox = transform.Find("LoadingBox").GetComponent<LoadingBox>();
     }
 
     private void Start()
@@ -35,6 +39,8 @@ public class MessagePanelScript : MonoBehaviour
         confirmBox.Init(CloseConfirmBox);
         confirmBox.gameObject.SetActive(false);
         confirmBoxActive = false;
+        //初始化loading面板
+        loadingBox.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -92,11 +98,32 @@ public class MessagePanelScript : MonoBehaviour
         confirmBox.CloseBox();
     }
 
+    /// <summary>
+    /// 是否激活显示面板
+    /// </summary>
+    /// <param name="active"></param>
     private void SetConfirmBoxActive(bool active)
     {
         confirmBox.gameObject.SetActive(active);
         confirmBoxActive = active;
     }
 
+    /// <summary>
+    /// 展示loadingbox
+    /// </summary>
+    /// <param name="value"></param>
+    public void  ShowLoadingBox(string value)
+    {
+        loadingBox.gameObject.SetActive(true);
+        loadingBox.Show(value);
+    }
+
+    /// <summary>
+    /// 隐藏loadingbox
+    /// </summary>
+    public void HideLoadingBox()
+    {
+        loadingBox.gameObject.SetActive(false);
+    }
 
 }

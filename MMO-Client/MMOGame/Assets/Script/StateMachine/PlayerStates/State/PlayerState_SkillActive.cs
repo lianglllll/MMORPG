@@ -12,9 +12,16 @@ public class PlayerState_SkillActive : PlayerState
 
     public override void Enter()
     {
+        if(stateMachine.parameter.skill == null)
+        {
+            stateMachine.SwitchState(ActorState.Idle);
+            return;
+        }
         animator.Play(stateMachine.parameter.skill.Define.ActiveAnimName);
     }
 
+    
+    
 
     public override void LogicUpdate()
     {
@@ -24,6 +31,12 @@ public class PlayerState_SkillActive : PlayerState
             stateMachine.SwitchState(ActorState.Idle);
         }
     }
+
+    public override void PhysicUpdate()
+    {
+
+    }
+
     public override void Exit()
     {
         stateMachine.parameter.skill = null;

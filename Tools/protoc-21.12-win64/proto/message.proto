@@ -172,6 +172,11 @@ message ReconnectRequest{
 	string sessionId = 1;
 }
 
+message  ReconnectResponse{
+	bool success = 1;
+	int32 entityId = 2;//重连的角色，0代表为选择角色
+}
+
 
 //========================================skill========================================
 
@@ -368,11 +373,45 @@ message NetItemEntitySync{
 	NetItemEntity  netItemEntity =  1;
 }
 
+
+//物品类型
+enum ItemType{
+    Material=0;       //材料&道具
+    Consumable=1;     //消耗品
+    Equipment=2;      //武器&装备
+}
+
+//品质
+enum Quality {
+    Common=0;     // 普通
+    Fine=1;   	  // 非凡
+    Rare=2;       // 稀有
+    Epic=3;       // 史诗
+    Legendary=4;  // 传说
+    Artifact=5;   // 神器
+}
+
+//装备类型
+enum EquipsType{
+	UNSET = 0;      // 无
+    Weapon = 1;    // 武器
+    Chest = 2;     // 胸甲
+    Belt = 4;      // 腰带
+    Legs = 5;      // 裤子
+    Boots = 6;     // 鞋子
+    Ring = 7;      // 戒指
+    Neck = 8;      // 项链
+    Wings = 10;    // 翅膀
+}
+
+
+
 //物品信息
 message ItemInfo{
-	int32 itemId = 1;		//物品id
-	int32 amount = 2;		//物品数量
-	int32 position = 3;		//物品所处位置,在哪个格子
+	int32 itemId = 1;			//物品id
+	int32 amount = 2;			//物品数量
+	int32 position = 3;			//物品所处位置,在哪个格子
+	EquipData equipdata = 4; 	//装备信息，物品有这个属性，说明是武器。
 }
 
 //库存对象信息:背包/仓库
@@ -413,10 +452,11 @@ message InventoryInfoResponse{
 	InventoryInfo EquipmentInfo = 4;
 }
 
+//仓库类型
 enum InventoryType{
 	Knapsack = 0;
 	Warehouse = 1;
-	Equipment = 2;
+	EquipmentColumn = 2;
 	CurrentScene = 3;
 }
 
@@ -448,5 +488,12 @@ message ItemUseResponse{
 	int32 slotIndex = 2;
 	int32 count = 3;
 }
+
+
+//装备数据
+message EquipData{
+	//打孔、镶嵌、强化
+}
+
 
 

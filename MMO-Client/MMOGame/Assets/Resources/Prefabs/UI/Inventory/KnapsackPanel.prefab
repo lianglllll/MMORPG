@@ -1211,7 +1211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 9999999999
+  m_Text: 1
 --- !u!1 &2882192451415215828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,6 +2546,8 @@ MonoBehaviour:
   itemUIPrefab: {fileID: 0}
   ItemUITmpParent: {fileID: 0}
   numberInputBox: {fileID: 0}
+  pickUpItemListBox: {fileID: 0}
+  slotList: []
 --- !u!114 &5402792069985115208
 MonoBehaviour:
   m_ObjectHideFlags: 0
