@@ -205,7 +205,7 @@ public class GameEntity : MonoBehaviour
     }
 
     /// <summary>
-    /// 我们只传玩家在移动时候的状态，其他状态一律不由entity来进行处理，传none就行了
+    /// 状态翻译：状态机的状态->net状态
     /// </summary>
     /// <param name="state"></param>
     /// <returns></returns>

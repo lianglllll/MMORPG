@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameClient.Entities;
-
+using TMPro;
 
 public class EliteScript : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class EliteScript : MonoBehaviour
     private Image Manabar;
     private Text Name;
     private Text Level;
+    private TextMeshProUGUI HpText;
+    private TextMeshProUGUI MpText;
+
 
     private Actor actor;                //UI显示要的目标
 
@@ -20,6 +23,8 @@ public class EliteScript : MonoBehaviour
         Manabar = transform.Find("Bars/Manabar").GetComponent<Image>();
         Name = transform.Find("Name").GetComponent<Text>();
         Level = transform.Find("Level/Text").GetComponent<Text>();
+        HpText = transform.Find("Bars/HpTxext").GetComponent<TextMeshProUGUI>();
+        MpText = transform.Find("Bars/MpText").GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>
@@ -40,11 +45,14 @@ public class EliteScript : MonoBehaviour
     {
         if (actor == null) return;
         Level.text = actor.info.Level + "";
-        float hp = actor.info.Hp / actor.define.HPMax;
-        float mp = actor.info.Mp / actor.define.MPMax;
+        float hp = actor.info.Hp / actor.info.HpMax;
+        float mp = actor.info.Mp / actor.info.MpMax;
         Healthbar.fillAmount = hp;
         Manabar.fillAmount = mp;
         Name.text = actor.info.Name;
+        HpText.text = (int)actor.info.Hp + "/" + actor.info.HpMax;
+        MpText.text = (int)actor.info.Mp + "/" + actor.info.MpMax;
+        
     }
 
 }

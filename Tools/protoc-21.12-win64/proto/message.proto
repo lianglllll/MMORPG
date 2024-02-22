@@ -72,7 +72,8 @@ message NetActor{
 	EntityType entityType = 11; 
 	repeated SkillInfo skills = 12;
 	InventoryInfo equipsInfo = 13;	 //穿戴装备
-
+	float hpMax = 14;
+	float mpMax = 15;
 }
 
 
@@ -261,6 +262,7 @@ message PropertyUpdate{
 		Golds = 7;
 		Exp = 8;		//经验
 		Energy = 9;		//活力
+		Speed = 10;
 		//幸运、罪恶、技能点
 	}
 

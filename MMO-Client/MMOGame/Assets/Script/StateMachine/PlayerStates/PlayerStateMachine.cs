@@ -82,6 +82,8 @@ public class PlayerStateMachine : StateMachine
         //这里再优化吧
         if (currentActorState == ActorState.SkillActive && parameter.skill != null) return;
 
+        Debug.Log(parameter.owner.define.Name + "切换=" + state); 
+
         //切换
         currentState?.Exit();
         currentActorState = state;

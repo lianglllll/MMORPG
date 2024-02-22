@@ -140,7 +140,15 @@ namespace GameClient.Combat
             _sco = target;
             RunTime = 0;
 
-            Owner.StateMachine.parameter.skill = this;
+            if (Owner.StateMachine.parameter.skill == null)
+            {
+                Owner.StateMachine.parameter.skill = this;
+            }
+            else
+            {
+                //有东西要中断当前技能active
+                return;
+            }
 
             //技能阶段从none切换到蓄气阶段
             Stage = SkillStage.Intonate;
@@ -188,15 +196,7 @@ namespace GameClient.Combat
             }
 
             //切换动画 skill激活阶段的动画
-            if (Define.Duration >0)
-            {
-                Owner.StateMachine.SwitchState(ActorState.SkillActive);
-            }
-            else
-            {
-                Owner.StateMachine.SwitchState(ActorState.Idle);
-            }
-
+            Owner.StateMachine.SwitchState(ActorState.SkillActive);
 
         }
 

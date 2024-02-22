@@ -133,20 +133,44 @@ namespace GameClient.Entities
             LocalOrTargetAcotrPropertyChange();
         }
 
-
-
         /// <summary>
-        /// 工具：用于触发UI的更新
+        /// 本地玩家或者目标玩家的属性发送变化
         /// </summary>
         public void LocalOrTargetAcotrPropertyChange()
         {
             if(this == GameApp.character || this == GameApp.target)
             {
-                //CombatPanelScript、
+                //CombatPanelScript、这个事件给需要更新本地chr和targetChr的UI用的
                 Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate",this);
             }
         }
 
+        /// <summary>
+        /// 生命值上限更新
+        /// </summary>
+        public void OnHpmaxChanged(float old_value, float new_value)
+        {
+            this.info.HpMax = new_value;
+            LocalOrTargetAcotrPropertyChange();
+        }
 
+        /// <summary>
+        /// 法力值上限更新
+        /// </summary>
+        public void OnMpmaxChanged(float old_value, float new_value)
+        {
+            this.info.MpMax = new_value;
+            LocalOrTargetAcotrPropertyChange();
+        }
+
+        /// <summary>
+        /// 速度更新
+        /// </summary>
+        /// <param name="intValue1"></param>
+        /// <param name="intValue2"></param>
+        public void OnSpeedChanged(int old_value, int new_value)
+        {
+            this.Speed = new_value;
+        }
     }
 }

@@ -99,8 +99,6 @@ public class CombatPanelScript : BasePanel
         UIManager.Instance.MessagePanel.ShowConfirmBox(deathText, "复活", true, onBtnAction);
     }
 
-
-
     /// <summary>
     /// 背包
     /// </summary>
@@ -130,7 +128,7 @@ public class CombatPanelScript : BasePanel
     }
 
     /// <summary>
-    /// 刷新EliteUI
+    /// SpecificAcotrPropertyUpdate事件回调,刷新EliteUI
     /// </summary>
     public void EliteRefreshUI(Actor actor)
     {

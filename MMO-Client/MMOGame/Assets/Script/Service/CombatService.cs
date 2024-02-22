@@ -129,7 +129,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     }
 
     /// <summary>
-    /// 同步信息接收，去找到这个entity对象，然后更新//todo 用字典<id,gameobject>来取
+    /// 同步信息接收，去找到这个entity对象，然后更新
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="msg"></param>
@@ -220,8 +220,10 @@ public class CombatService : Singleton<CombatService>, IDisposable
                         actor.OnMpChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
                         break;
                     case PropertyUpdate.Types.Prop.Hpmax:
+                        actor.OnHpmaxChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
                         break;
                     case PropertyUpdate.Types.Prop.Mpmax:
+                        actor.OnMpmaxChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
                         break;
                     case PropertyUpdate.Types.Prop.State:
                         actor.OnStateChanged(item.OldValue.StateValue, item.NewValue.StateValue);
@@ -238,6 +240,9 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     case PropertyUpdate.Types.Prop.Golds:
                         chr = actor as Character;
                         chr.onGoldChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                        break;
+                    case PropertyUpdate.Types.Prop.Speed:
+                        actor.OnSpeedChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
                 }
 
