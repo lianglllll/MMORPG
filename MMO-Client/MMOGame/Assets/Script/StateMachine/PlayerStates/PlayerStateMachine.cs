@@ -1,5 +1,6 @@
 using GameClient.Combat;
 using GameClient.Entities;
+using Serilog;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ using UnityEngine;
 public enum ActorState
 {
     None = 0,
+
     Idle = 1,
     Walk = 2,
     Run = 3,
@@ -70,7 +72,7 @@ public class PlayerStateMachine : StateMachine
     }
 
     //公有的状态切换
-    public  void SwitchState(ActorState state)
+    public void SwitchState(ActorState state, bool enforce = false)
     {
         //空
         if (state == ActorState.None) return;
@@ -78,12 +80,13 @@ public class PlayerStateMachine : StateMachine
         //相同的
         if (currentActorState == state) return;
 
-        //action状态，不可打断状态，之间返回不允许切换。
-        //这里再优化吧
-        if (currentActorState == ActorState.SkillActive && parameter.skill != null) return;
+        //
+        if (currentActorState == ActorState.Death && enforce == false) return;
+
+        //技能action状态，除了死亡状态，其他状态不可打断
+        if (state != ActorState.Death && currentActorState == ActorState.SkillActive && parameter.skill != null) return;
 
         //Debug.Log(parameter.owner.define.Name + "切换=" + state); 
-
         //切换
         currentState?.Exit();
         currentActorState = state;

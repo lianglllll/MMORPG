@@ -73,10 +73,11 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
+            //如果死了就别切换了
+            if (gameEntity.owner.IsDeath) return;
 
             //播放待机动画
             stateMachine.SwitchState(ActorState.Idle);
- 
         }
     }
 

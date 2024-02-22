@@ -7,6 +7,7 @@ using GameClient.Entities;
 using Unity.VisualScripting;
 using GameServer.Model;
 using Assets.Script.Entities;
+using Serilog;
 
 
 /// <summary>
@@ -54,7 +55,7 @@ public class GameObjectManager:MonoBehaviour
         Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000; 
         if (initPosition.y == 0)
         {
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition,1f,7).y;//计算地面坐标
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition,1.5f,7).y;//计算地面坐标
         }
 
         //4.实例化
@@ -162,7 +163,7 @@ public class GameObjectManager:MonoBehaviour
         //设置数据到entity中
         gameEntity.SetData(nEntitySync.Entity);
 
-        //2.设置动画状态,不是常规的动画一律不传
+        //2.设置动画状态,不是常规的动画也就是None,一律不作处理
         if(nEntitySync.State != EntityState.None)
         {
             obj.GetComponent<PlayerStateMachine>().SwitchState(TranslateState(nEntitySync.State));
@@ -174,7 +175,7 @@ public class GameObjectManager:MonoBehaviour
         {
             Vector3 target = V3.Of(nEntitySync.Entity.Position)*0.001f;
             //获取位移向量
-            //不能直接使用trasforme的原因是，存在charactercontroller会默认覆盖transform、
+            //不能直接使用trasforme的原因是，存在charactercontroller会默认覆盖transform
             gameEntity.Move(target);
         }
     }

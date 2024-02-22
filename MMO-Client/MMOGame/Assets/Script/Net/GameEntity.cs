@@ -27,7 +27,7 @@ public class GameEntity : MonoBehaviour
 
 
     private PlayerStateMachine stateMachine;
-    private Actor owner;
+    public Actor owner;
 
     //重力
     private CharacterController characterController;
@@ -52,6 +52,7 @@ public class GameEntity : MonoBehaviour
 
         if (!isMine)
         {
+            if (owner.IsDeath) return;
             //进行插值处理，而不是之间瞬移，看上去更加平滑
             //因为我们是0.2秒同步一次信息所以是5帧
             Move(Vector3.Lerp(transform.position, position, Time.deltaTime * 5f));
@@ -232,6 +233,7 @@ public class GameEntity : MonoBehaviour
                 SetValueTo(this.position * 1000, req.EntitySync.Entity.Position);
                 SetValueTo(this.direction * 1000, req.EntitySync.Entity.Direction);
                 req.EntitySync.Entity.Id = entityId;
+                //如果角色现在的动画处于不是常规的motion动作时，同一传none
                 req.EntitySync.State = TranslateState(stateMachine.currentActorState);
                 NetClient.Send(req);
                 transform.hasChanged = false;

@@ -29,7 +29,7 @@ message NetEntity {
 	Vec3 direction = 3;
 }
 
-//entity的状态
+//entity的motion状态
 enum EntityState{
 	NONE = 0;
 	IDLE = 1;

@@ -205,7 +205,7 @@ namespace GameClient.Combat
         /// </summary>
         private void OnFinish()
         {
-            Log.Information("技能结束：Owner[{0}],skill[{1}]", Owner.EntityId, Define.Name);
+            //Log.Information("技能结束：Owner[{0}],skill[{1}]", Owner.EntityId, Define.Name);
         }
 
         private void OnHit()

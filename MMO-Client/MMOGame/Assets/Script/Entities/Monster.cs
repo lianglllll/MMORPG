@@ -1,5 +1,6 @@
 using GameClient.Entities;
 using Proto;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,11 @@ namespace Assets.Script.Entities
             //处理死亡逻辑
             if (IsDeath)
             {
+                Log.Information("1.死亡状态更新");
                 if (renderObj == null) return;
                 StateMachine.SwitchState(ActorState.Death);
-                GameTimerManager.Instance.TryUseOneTimer(3f, ()=> {
+
+                GameTimerManager.Instance.TryUseOneTimer(5f, ()=> {
                     //如果单位死亡，将其隐藏
                     //这里判断是防止在死亡的3秒内本actor复活了
                     if (IsDeath)
@@ -33,6 +36,7 @@ namespace Assets.Script.Entities
                         renderObj?.SetActive(false);
                     }
                 });
+
             }
             else if(old_value == UnitState.Dead)
             {
