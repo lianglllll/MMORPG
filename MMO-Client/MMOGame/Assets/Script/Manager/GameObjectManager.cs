@@ -6,6 +6,7 @@ using Proto;
 using GameClient.Entities;
 using Unity.VisualScripting;
 using GameServer.Model;
+using Assets.Script.Entities;
 
 
 /// <summary>
@@ -53,7 +54,7 @@ public class GameObjectManager:MonoBehaviour
         Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000; 
         if (initPosition.y == 0)
         {
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition,10,7).y;//计算地面坐标
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition,1f,7).y;//计算地面坐标
         }
 
         //4.实例化
@@ -80,22 +81,15 @@ public class GameObjectManager:MonoBehaviour
 
         //7.设置一下同步脚本
         GameEntity gameEntity = chrObj.GetComponent<GameEntity>();
-        gameEntity.entityName = nActor.Name;
-        gameEntity.SetData(nActor.Entity);
-
-        //8.根据是否为本机操纵的角色添加控制脚本，开启同步协程
         bool isMine = (nActor.Entity.Id == GameApp.entityId);
-        gameEntity.isMine = isMine;
-        //如果是本机角色,给它添加控制脚本，并且开启信息同步协程
+        gameEntity._Start(actor, isMine,initPosition,Vector3.zero);
+    
+        //8.给我们控制的角色添加一些控制脚本
         if (isMine)
         {
-            gameEntity.startSync();//协程，角色开始信息的同步
-            chrObj.AddComponent<CameraManager>();                                           //给当前用户控制的视角
-            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();//给当前用户控制的角色添加控制脚本
-            GameApp.myCharacter = chrObj;                   //给gameapp当前角色的引用，方便而已
-
-            //打标签
-            chrObj.tag = "CtlPlayer";
+            chrObj.AddComponent<CameraManager>();                                               //给当前用户控制的视角
+            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();     //给当前用户控制的角色添加控制脚本
+            chrObj.tag = "CtlPlayer";                                                           //打标签
         }
 
     }

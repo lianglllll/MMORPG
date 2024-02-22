@@ -10,21 +10,30 @@ using GameClient.Entities;
 /// </summary>
 public class GameEntity : MonoBehaviour
 {
+    //标志
+    private bool startFlag;
+    private bool isStartCoroutine;
 
-    private PlayerStateMachine stateMachine;
+    private bool isMine;
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);//同步时间控制
 
-    public int entityId;
-    public string entityName;
+    //entity信息
+    public int entityId => owner.EntityId;
+    public float speed => owner.info.Speed;
+    public string entityName => owner.info.Name;
+
     public Vector3 position;
     public Vector3 direction;
-    public float speed = 2f;
 
-    public bool isMine;
+
+    private PlayerStateMachine stateMachine;
+    private Actor owner;
+
+    //重力
     private CharacterController characterController;
     public float fallSpeed = 0f;//下落速度
     public float FALLSPEEDMAX = 30f;//最大下落速度
 
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);//同步时间控制
 
     private void Awake()
     {
@@ -32,8 +41,15 @@ public class GameEntity : MonoBehaviour
         stateMachine = GetComponent<PlayerStateMachine>();
     }
 
+    private void Start()
+    {
+        isStartCoroutine = false;
+    }
+
     private void Update()
     {
+        if (!startFlag) return;
+
         if (!isMine)
         {
             //进行插值处理，而不是之间瞬移，看上去更加平滑
@@ -51,7 +67,6 @@ public class GameEntity : MonoBehaviour
             this.position = transform.position;
             this.direction = transform.rotation.eulerAngles;//记录的是欧拉角
         }
-
 
         //模拟重力
         if (!characterController.isGrounded)
@@ -85,10 +100,7 @@ public class GameEntity : MonoBehaviour
         }
 
         float height = 1.8f;
-        if (entityName == null || entityName == "")
-        {
-            entityName = "获取中";
-        }
+
         Camera playerCamera = Camera.main;
         //计算角色头顶往上一点的世界坐标
         Vector3 targetPos = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
@@ -116,6 +128,44 @@ public class GameEntity : MonoBehaviour
         Rect nameLabel = new Rect(guiPos.x-(nameSize.x/2),guiPos.y-nameSize.y,nameSize.x,nameSize.y);
         GUI.Label(nameLabel,entityName,labelStyle);
 
+    }
+
+    /// <summary>
+    /// 启动GameEntity
+    /// </summary>
+    /// <param name="actor"></param>
+    public void _Start(Actor actor,bool ismine, Vector3 pos,Vector3 dir)
+    {
+        if (startFlag) return;
+        if (actor == null) return;
+
+        owner = actor;
+        isMine = ismine;
+        startFlag = true;
+
+        this.position = pos;
+        this.direction = dir;
+
+        if (ismine)
+        {
+            //开启同步信息功能的协程
+            //开启协程，每秒发送10次向服务器上传hero的属性
+            StartCoroutine(SyncRequest());
+        }
+
+    }
+
+    /// <summary>
+    /// 关闭GameEntity
+    /// </summary>
+    public void _Stop()
+    {
+        if (!startFlag) return;
+        startFlag = false;
+        if (isStartCoroutine)
+        {
+            StopCoroutine(SyncRequest());
+        }
     }
 
     /// <summary>
@@ -152,18 +202,6 @@ public class GameEntity : MonoBehaviour
         else
         {
             return false;
-        }
-    }
-
-    /// <summary>
-    /// 开启同步信息功能的协程
-    /// </summary>
-    public void startSync()
-    {
-        if (isMine)
-        {
-            //开启协程，每秒发送10次向服务器上传hero的属性
-            StartCoroutine(SyncRequest());
         }
     }
 
@@ -247,14 +285,16 @@ public class GameEntity : MonoBehaviour
     /// <param name="instantMove">是否直接设置到transform.position</param>
     public void SetData(NetEntity nEntity, bool instantMove = false)
     {
-        this.entityId = nEntity.Id;
-        this.position = ToVector3(nEntity.Position);
-        this.direction = ToVector3(nEntity.Direction);
-        this.speed = nEntity.Speed*0.001f;
-        if (instantMove)
+        if (startFlag)
         {
-            transform.rotation = Quaternion.Euler(direction);
-            transform.position = position;                          //charactercontrller组件会导致transform.position赋值起冲突
+            this.position = ToVector3(nEntity.Position);
+            this.direction = ToVector3(nEntity.Direction);
+            if (instantMove)
+            {
+                transform.rotation = Quaternion.Euler(direction);
+                transform.position = position;
+            }
+
         }
 
     }

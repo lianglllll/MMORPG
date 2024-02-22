@@ -25,9 +25,8 @@ message Vec3 {
 //entity位置信息
 message NetEntity {
 	int32 id = 1;
-    int32 speed = 2;
-	Vec3 position = 3;
-	Vec3 direction = 4;
+	Vec3 position = 2;
+	Vec3 direction = 3;
 }
 
 //entity的状态
@@ -74,6 +73,7 @@ message NetActor{
 	InventoryInfo equipsInfo = 13;	 //穿戴装备
 	float hpMax = 14;
 	float mpMax = 15;
+	int32 speed = 16;
 }
 
 

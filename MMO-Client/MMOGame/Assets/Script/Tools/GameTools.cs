@@ -17,11 +17,11 @@ public class GameTools
     /// <param name="up"></param>
     /// <param name="ignoreLayer"></param>
     /// <returns></returns>
-    public static Vector3 CaculateGroundPosition(Vector3 position,float upOffset,int ignoreLayer)
+    public static Vector3 CaculateGroundPosition(Vector3 position,float upOffset,int targetLayer)
     {
         Vector3 tmp = position + new Vector3(0, 1000f, 0);//物体位置上面1000个单位
         RaycastHit hit;
-        int layerMask = ~(1 << ignoreLayer);
+        int layerMask = ~(1 << targetLayer);
         //向下发送射线
         if(Physics.Raycast(tmp, Vector3.down, out hit,Mathf.Infinity, layerMask))//Mathf.Infinity表示无穷远
         {

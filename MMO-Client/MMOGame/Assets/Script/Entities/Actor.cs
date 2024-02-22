@@ -23,6 +23,8 @@ namespace GameClient.Entities
         public bool IsDeath => unitState == UnitState.Dead;
         public int Level => info.Level;
         public long Exp => info.Exp;
+        public int Speed { get => info.Speed; set => info.Speed = value; }
+
 
         /// <summary>
         /// 构造函数

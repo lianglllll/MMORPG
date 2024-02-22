@@ -40,7 +40,6 @@ public class GameApp
         entityId = -1;
         character = null;
         target = null;
-        myCharacter = null;
         CurrSkill = null;
         combatPanelScript = null;
     }

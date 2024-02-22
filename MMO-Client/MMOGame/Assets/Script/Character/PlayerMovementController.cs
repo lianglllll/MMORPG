@@ -9,20 +9,32 @@ public class PlayerMovementController : MonoBehaviour
 {
     private CharacterController characterController;
     private PlayerStateMachine stateMachine;
-    public float CurrentSpeed;
-    private float Walkpeed;
     private CameraManager cameraManager;
+    private GameEntity gameEntity;
+    public float CurrentSpeed
+    {
+        get
+        {
+            if (gameEntity != null)
+            {
+                return gameEntity.speed * 0.001f;
+            }
+            return 3f;
+        }
+    }
+
 
     private void Awake()
     {
         stateMachine = GetComponent<PlayerStateMachine>();
         characterController = GetComponent<CharacterController>();
         cameraManager = GetComponent<CameraManager>();
+        gameEntity = GetComponent<GameEntity>();
     }
 
     private void Start()
     {
-        Walkpeed = 2f;
+        //CurrentSpeed = 3f;
     }
 
     void Update()
@@ -55,8 +67,7 @@ public class PlayerMovementController : MonoBehaviour
                 Vector3 dir = cameraManager.rCamera.transform.forward * v + cameraManager.rCamera.transform.right * h;
                 dir.y = 0;
                 dir.Normalize();
-                //hero.transform.position += dir * speed * Time.deltaTime;
-                characterController.Move(dir * Walkpeed * Time.deltaTime);
+                characterController.Move(dir * CurrentSpeed * Time.deltaTime);
                 gameObject.transform.forward = dir;
             }
         }

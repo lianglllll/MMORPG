@@ -141,6 +141,7 @@ namespace GameClient.Entities
             if (entity == null) return;
             entity.State = nEntitySync.State;
             entity.EntityData = nEntitySync.Entity;
+
             //根据更新的信息调整游戏对象的位置
             Kaiyun.Event.FireOut("EntitySync", nEntitySync);    //GameObjectManager中实现
         }

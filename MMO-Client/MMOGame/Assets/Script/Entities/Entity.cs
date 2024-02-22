@@ -17,7 +17,6 @@ namespace GameClient.Entities
 
         private Vector3 position;
         private Vector3 direction;
-        private int speed;
         private NetEntity netObj;                 //网络对象NetEntity
         public EntityState State;
 
@@ -41,15 +40,7 @@ namespace GameClient.Entities
                 netObj.Direction = V3.ToVec3(value);
             }
         }
-        public int Speed
-        {
-            get { return speed; }
-            set
-            {
-                speed = value;
-                netObj.Speed = speed;
-            }
-        }
+
         public Proto.NetEntity EntityData
         {
             get {
@@ -59,11 +50,13 @@ namespace GameClient.Entities
             {
                 Position = V3.ToVector3(value.Position);
                 Direction = V3.ToVector3(value.Direction);
-                Speed = value.Speed;
             }
         }
 
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="nEntity"></param>
         public Entity(NetEntity nEntity)
         {
             netObj = new NetEntity();

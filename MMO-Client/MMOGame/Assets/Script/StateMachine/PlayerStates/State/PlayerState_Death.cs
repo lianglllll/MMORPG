@@ -12,6 +12,7 @@ public class PlayerState_Death : PlayerState
     public override void Enter()
     {
         animator.Play("Death");
+        //如果是我们控制的角色嘎了
         if(GameApp.entityId == stateMachine.parameter.owner.EntityId)
         {
             stateMachine.parameter.owner.renderObj.GetComponent<PlayerMovementController>().enabled = false;

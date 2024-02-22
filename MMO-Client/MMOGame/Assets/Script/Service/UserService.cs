@@ -36,13 +36,13 @@ public class UserService : Singleton<UserService>, IDisposable
     }
 
     /// <summary>
-    /// 加入游戏事件回调
+    /// 加入游戏响应事件回调
     /// </summary>
     /// <param name="roleId"></param>
     public void GameEnter(int roleId)
     {
         //安全校验
-        if (GameApp.myCharacter != null) return;
+        if (GameApp.character != null) return;
         //发送请求 
         GameEnterRequest request = new GameEnterRequest();
         request.CharacterId = roleId;
