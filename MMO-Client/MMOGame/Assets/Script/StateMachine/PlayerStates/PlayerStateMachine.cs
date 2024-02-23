@@ -71,6 +71,15 @@ public class PlayerStateMachine : StateMachine
         SwitchOn(stateTable[ActorState.Idle]);
     }
 
+    protected override void Update()
+    {
+        if (parameter.owner.IsDeath)
+        {
+            SwitchState(ActorState.Death);
+        }
+        base.Update();
+    }
+
     //公有的状态切换
     public void SwitchState(ActorState state, bool enforce = false)
     {
@@ -80,7 +89,7 @@ public class PlayerStateMachine : StateMachine
         //相同的
         if (currentActorState == state) return;
 
-        //
+        //当前为死亡状态，不可被切换
         if (currentActorState == ActorState.Death && enforce == false) return;
 
         //技能action状态，除了死亡状态，其他状态不可打断

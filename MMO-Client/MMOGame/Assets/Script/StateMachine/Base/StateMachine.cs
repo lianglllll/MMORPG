@@ -9,12 +9,12 @@ public class StateMachine : MonoBehaviour
 {
     protected IState currentState;
 
-    private void Update()
+    protected virtual void Update()
     {
         currentState.LogicUpdate();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         currentState.PhysicUpdate();
     }

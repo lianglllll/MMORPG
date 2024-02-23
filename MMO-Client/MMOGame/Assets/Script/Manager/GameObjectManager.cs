@@ -77,10 +77,16 @@ public class GameObjectManager:MonoBehaviour
         else if(nActor.EntityType == EntityType.Monster)
         {
             chrObj.name = "Monster_" + nActor.Entity.Id;
+            //如果怪物死亡，就不要显示了
+            if (Mathf.Approximately(nActor.Hp, 0))
+            {
+                chrObj.SetActive(false);
+                actor.unitState = UnitState.Dead;
+            }
         }
         chrObj.layer = 6;//加入actor图层
 
-        //7.设置一下同步脚本
+        //7.设置一下同步脚本gameentity
         GameEntity gameEntity = chrObj.GetComponent<GameEntity>();
         bool isMine = (nActor.Entity.Id == GameApp.entityId);
         gameEntity._Start(actor, isMine,initPosition,Vector3.zero);

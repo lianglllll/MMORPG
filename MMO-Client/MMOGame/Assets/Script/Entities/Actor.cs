@@ -113,6 +113,7 @@ namespace GameClient.Entities
         {
             this.unitState = new_value;
 
+            //目标嘎了
             if (IsDeath)
             {
                 if (GameApp.target == this)
