@@ -6,28 +6,6 @@ using System.Collections.Generic;
 
 
 
-/// <summary>
-/// 物品类型
-/// </summary>
-public enum ItemType
-{
-    Consumable,  //消耗品
-    Equipment,  //武器&装备
-    Material,   //材料
-}
-
-/// <summary>
-/// 物品品质
-/// </summary>
-public enum Quality
-{
-    Common,         //普通
-    Uncommon,       //非凡
-    Rare,           //稀有
-    Epic,           //史诗
-    Legendary,      //传说
-    Artifact,       //神器  
-}
 
 /// <summary>
 /// 物品基类
@@ -131,7 +109,7 @@ public class Item
         switch (Define.Quality)
         {
             case "普通": return Quality.Common;
-            case "非凡": return Quality.Uncommon;
+            case "非凡": return Quality.Fine;
             case "稀有": return Quality.Rare;
             case "史诗": return Quality.Epic;
             case "传说": return Quality.Legendary;
@@ -151,7 +129,6 @@ public class Item
                      $"<color=bulue>堆叠上限：{this.Define.Capicity}</color>";
         return content;
     }
-
 
 }
 

@@ -12,6 +12,11 @@ public class BasePanel : MonoBehaviour
         
     }
 
+    protected virtual void Start()
+    {
+        
+    }
+
     public virtual void OpenPanel(string name)
     {
         this.name = name;

@@ -1,5 +1,7 @@
 using GameClient.Entities;
+using GameServer.Model;
 using Summer;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +49,21 @@ public class GameTools
     {
         return EntityManager.Instance.GetEntity<Actor>(entityId);
     }
-    
+
+    /// <summary>
+    /// 返回指定范围内的itementity
+    /// </summary>
+    /// <param name="spaceId"></param>
+    /// <param name="pos"></param>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    public static List<ItemEntity> RangeItem(Vector3 pos, int range)
+    {
+        Predicate<ItemEntity> match = (e) =>
+        {
+            return Vector3.Distance(pos, e.Position) <= range;
+        };
+        return EntityManager.Instance.GetEntityList(match);
+    }
 
 }

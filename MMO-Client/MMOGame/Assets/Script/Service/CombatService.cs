@@ -28,6 +28,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
 
+
     /// <summary>
     /// 脚本销毁时操作
     /// </summary>
@@ -44,7 +45,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     }
 
     /// <summary>
-    /// 进入场景的响应
+    /// 进入场景的响应(entity是自己)
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="msg"></param>
@@ -129,7 +130,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     }
 
     /// <summary>
-    /// 同步信息接收，去找到这个entity对象，然后更新
+    /// entity同步信息接收
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="msg"></param>
@@ -152,7 +153,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     }
 
     /// <summary>
-    /// 施法通知，自己施法响应的也是从这里来的
+    /// actor施法通知
     /// </summary>
     /// <param name="conn"></param>
     /// <param name="msg"></param>
@@ -180,7 +181,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     }
 
     /// <summary>
-    /// 伤害响应包，播放一下特效或者ui。不做数值更新
+    /// actor的伤害响应包
     /// </summary>
     /// <param name="conn"></param>
     /// <param name="msg"></param>
@@ -259,6 +260,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     {
         EntityManager.Instance.OnItemEnterScene(msg.NetItemEntity);
     }
+
 
 
 }

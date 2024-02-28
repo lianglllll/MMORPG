@@ -59,6 +59,7 @@
     <Compile Include="Assets\Script\UI\Panel\Inventory\KnapsackPanel.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\ItemDefine.cs" />
     <Compile Include="Assets\Script\Manager\UIManager.cs" />
+    <Compile Include="Assets\Script\UI\MingUI\ItemMenu\ItemMenu.cs" />
     <Compile Include="Assets\Script\UI\Package\PackageLocalDate.cs" />
     <Compile Include="Assets\Script\UI\Panel\RegisterPanelScript.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\ChibiDialogDemo\Scripts\ChibiDialogMain.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Script\Tools\Singleton\Singleton.cs" />
     <Compile Include="Assets\Script\UI\Package\PackageDetailPanelScript.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Inventory\UISlot.cs" />
     <Compile Include="Assets\Script\Net\GameEntity.cs" />
     <Compile Include="Assets\Script\Tools\DevelopmentTool\DevelopmentToos.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\UnitDefine.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Assets\Script\Camera\CameraManager.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_SkillActive.cs" />
     <Compile Include="Assets\Script\Manager\GameApp.cs" />
+    <Compile Include="Assets\Script\Inventory\Equipment.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextData.cs" />
@@ -90,14 +93,15 @@
     <Compile Include="Assets\Script\UI\Panel\Combat\AbilityBarScript.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\ExpBoxScript.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\LevelDefine.cs" />
-    <Compile Include="Assets\Script\UI\MingUI\Scripts\DragHolder.cs" />
-    <Compile Include="Assets\Script\Manager\RemoteDataManager.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Inventory\EquipSlot.cs" />
+    <Compile Include="Assets\Script\UI\MingUI\DragHolder\DragHolder.cs" />
+    <Compile Include="Assets\Script\Combat\Attributes.cs" />
     <Compile Include="Assets\Script\UI\Panel\CreateRolePanelScript.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Idle.cs" />
     <Compile Include="Assets\Script\Interactive\Portal.cs" />
     <Compile Include="Assets\Script\Service\ChatService.cs" />
     <Compile Include="Assets\Art\Character\牛头人\DemoScene\demo.cs" />
-    <Compile Include="Assets\Script\UI\MingUI\Scripts\ToolTip.cs" />
+    <Compile Include="Assets\Script\UI\MingUI\DragHolder\ToolTip.cs" />
     <Compile Include="Assets\Script\Manager\ChatManager.cs" />
     <Compile Include="Assets\Script\Effect\GameEffectManager.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\AbilityGroupScript.cs" />
@@ -106,11 +110,13 @@
     <Compile Include="Assets\Script\UI\Panel\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
     <Compile Include="Assets\Script\Effect\GameEffect.cs" />
+    <Compile Include="Assets\Script\Inventory\MaterialItem.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Script\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Script\Entities\Actor.cs" />
     <Compile Include="Assets\Script\Combat\Skill.cs" />
     <Compile Include="Assets\Script\Service\ItemService.cs" />
+    <Compile Include="Assets\Script\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\Script\Net\NetClient.cs" />
     <Compile Include="Assets\Script\StateMachine\Base\IState.cs" />
     <Compile Include="Assets\Script\Tools\Event.cs" />
@@ -120,6 +126,7 @@
     <Compile Include="Assets\Script\Interactive\IInteraction.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Demo\Scripts\Movement.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText.cs" />
+    <Compile Include="Assets\Script\Inventory\Consumable.cs" />
     <Compile Include="Assets\Script\Tools\Singleton\SingletonNonMono.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\EnterType.cs" />
     <Compile Include="Assets\Script\Service\UserService.cs" />
@@ -136,6 +143,7 @@
     <Compile Include="Assets\Script\UI\Panel\Inventory\NumberInputBox.cs" />
     <Compile Include="Assets\Script\Entities\Character.cs" />
     <Compile Include="Assets\Script\Service\CombatService.cs" />
+    <Compile Include="Assets\Script\UI\MingUI\ItemMenu\ItemMenuOption.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\AlternationMode.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Death.cs" />
@@ -162,6 +170,7 @@
     <Compile Include="Assets\Script\UI\Panel\BasePanel.cs" />
     <Compile Include="Assets\Script\Tools\GameTools.cs" />
     <Compile Include="Assets\Script\Net\V3.cs" />
+    <Compile Include="Assets\Script\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Script\Animation\Old\HeroAnimations.cs" />
     <Compile Include="Assets\Art\Character\牛头人\DemoScene\Action_Manage.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\ConfirmBox.cs" />
@@ -178,6 +187,7 @@
     <None Include="Assets\Art\Character\明日香紧身作战服\明日香.MMD4Mecanim.xml" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Art\Environment\Fantasy Forest Environment Free Sample\StandardNoCulling.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Art\Character\WizardPolyArt\Shader\PolyArtMaskTint.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />

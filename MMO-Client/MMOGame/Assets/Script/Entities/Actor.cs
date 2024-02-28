@@ -1,8 +1,11 @@
+using GameClient.InventorySystem;
 using GameClient.Manager;
+using Google.Protobuf.Collections;
 using Proto;
 using Serilog;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,7 @@ namespace GameClient.Entities
         public GameObject renderObj;        //actor中对应的游戏对象
         public UnitState unitState;
         public PlayerStateMachine StateMachine;
+        public ConcurrentDictionary<EquipsType, Equipment> equipsDict = new ConcurrentDictionary<EquipsType, Equipment>();
 
         public bool IsDeath => unitState == UnitState.Dead;
         public int Level => info.Level;
@@ -35,10 +39,11 @@ namespace GameClient.Entities
             this.info = info;
             this.define = DataManager.Instance.unitDict[info.Tid];
             this.skillManager = new SkillManager(this);
+            this.LoadEquips(info.EquipList);
         }
 
         /// <summary>
-        /// 受伤
+        /// 受伤，被别人打了，播放一下特效或者ui。不做数值更新
         /// </summary>
         /// <param name="damage"></param>
         public void recvDamage(Damage damage)
@@ -175,5 +180,19 @@ namespace GameClient.Entities
         {
             this.Speed = new_value;
         }
+
+        /// <summary>
+        /// 加载装备
+        /// </summary>
+        public void LoadEquips(RepeatedField<ItemInfo> itemInfos)
+        {
+            equipsDict.Clear();
+            foreach(var itemInfo in itemInfos)
+            {
+                var item = new Equipment(itemInfo);
+                equipsDict[item.EquipsType] = item;
+            }
+        }
+
     }
 }

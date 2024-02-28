@@ -142,7 +142,21 @@ public class UIManager
     }
 
     /// <summary>
-    /// 获取某个prefab
+    /// 获取某个打开的penel
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public BasePanel GetPanelByName(string name)
+    {
+        if (panelScriptDict.TryGetValue(name, out BasePanel panel))
+        {
+            return panel;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// 获取某个uiprefab
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
@@ -199,7 +213,6 @@ public class UIManager
         }
         panelScriptDict.Clear();
     }
-
 
 }
 

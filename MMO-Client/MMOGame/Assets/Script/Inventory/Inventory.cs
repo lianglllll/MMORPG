@@ -1,5 +1,6 @@
 using Assets.Script.Entities;
 using GameClient.Entities;
+using GameClient.InventorySystem;
 using Proto;
 using Serilog;
 using System;
@@ -16,9 +17,9 @@ using System.Threading.Tasks;
 /// </summary>
 public class Inventory
 {
-    protected Actor actor;                                                                      //归属者
-    protected int capacity;                                                                     //背包/仓库的大小
-    protected ConcurrentDictionary<int, Item> itemDict = new ConcurrentDictionary<int, Item>(); //<插槽索引，物品对象> 
+    protected Actor actor;                                                                   //归属者
+    protected int capacity;                                                                  //背包/仓库的大小
+    public ConcurrentDictionary<int, Item> itemDict = new ConcurrentDictionary<int, Item>(); //<插槽索引，物品对象> 
 
     public int Capacity
     {
@@ -55,8 +56,22 @@ public class Inventory
         this.capacity = info.Capacity;
         foreach(var iteminfo in info.List)
         {
-            //格子没东西的就没有存进去，在拿的时候自然也就只能拿默认值null
-            var item = new Item(iteminfo);
+            var def = DataManager.Instance.itemDefineDict[iteminfo.ItemId];
+            Item item = null;
+            switch (def.ItemType)
+            {
+                case "消耗品":
+                    item = new Consumable(iteminfo);
+                    break;
+                case "道具":
+                    item = new MaterialItem(iteminfo);
+                    break;
+                case "装备":
+                    item = new Equipment(iteminfo);
+                    break;
+                default:
+                    throw new Exception("物品初始化失败");
+            }
             itemDict.TryAdd(item.Position, item);
         }
 
@@ -128,6 +143,7 @@ public class Inventory
             SetItem(targetIndex, originItem);
             removeSlot(originIndex);
         }
+
         //3.查找目标物品不为空
         else
         {

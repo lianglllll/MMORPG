@@ -38,8 +38,11 @@ public class NumberInputBox : MonoBehaviour
     }
 
 
-    public void Show(string title,int limitCount, Action<int> ok)
+    public void Show(Vector3 pos, string title,int limitCount, Action<int> ok)
     {
+        //位置
+        transform.position = pos;
+
         //初始化为1
         currentCount = 1;
         MaxCount = limitCount;

@@ -7,6 +7,7 @@ using UnityEngine;
 using Proto;
 using System;
 using GameClient.Entities;
+using Serilog;
 
 public class KnapsackPanel:BasePanel
 {
@@ -15,12 +16,15 @@ public class KnapsackPanel:BasePanel
     private GameObject inventoryCellPrefab;         //插槽的预制体
     public GameObject itemUIPrefab;                 //itemui的预制体，给插槽调用的
     public Transform ItemUITmpParent;               //移动itemui时，itemui临时存放的父对象
-    public NumberInputBox numberInputBox;          //丢弃物品时的输入数量框
+    public NumberInputBox numberInputBox;           //丢弃物品时的输入数量框
     public PickUpItemListBox pickUpItemListBox;
-    public List<InventorySlot> slotList;
+    public List<InventorySlot> slotList;            //背包的slot
 
     //currency
     private Text goldText;
+
+    //equips slot
+    public Dictionary<EquipsType, EquipSlot> equipSlots = new Dictionary<EquipsType, EquipSlot>();
 
 
     protected override void Awake()
@@ -31,38 +35,49 @@ public class KnapsackPanel:BasePanel
         itemUIPrefab = Resources.Load<GameObject>("Prefabs/UI/Inventory/ItemUI");
         closeBtn = transform.Find("Right/CloseBtn").GetComponent<Button>();
         ItemUITmpParent = transform.Find("ItemUITmpParent").transform;
-        numberInputBox = transform.Find("NumberInputBox").GetComponent<NumberInputBox>();
+        numberInputBox = transform.Find("ItemUITmpParent/NumberInputBox").GetComponent<NumberInputBox>();
         pickUpItemListBox = transform.Find("PickUpItemListBox").GetComponent<PickUpItemListBox>();
 
         goldText = transform.Find("Right/Currency/Gold/IconBar/GoldNumberText").GetComponent<Text>();
+
     }
 
-    private void Start()
+    protected  override void Start()
     {
+        base.Start();
+
+
+
+        //拿到装备slot的对象，因为我们不是动态生成的
+        var slots = transform.Find("CharacterInfoBox/EquipSlotAres").GetComponentsInChildren<EquipSlot>();
+        foreach (var slot in slots)
+        {
+            equipSlots.Add(slot.equipsType, slot);
+        }
+
         Init();
 
         //监听一些个事件
-        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackData", this, "UpdateKnapsackUI");
-        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackSingletonItemAmount", this, "UpdateKnapsackSingletonItemAmount");
-        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackPickupItemBox", this, "UpdatePickUpBox");
+        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackData", this, "RefreshKnapsackUI");
+        Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackPickupItemBox", this, "RefreshPickUpBox");
         Kaiyun.Event.RegisterOut("GoldChange", this, "UpdateCurrency");
-
+        Kaiyun.Event.RegisterOut("UpdateCharacterEquipmentData", this, "RefreshEquipsUI");
     }
 
     private void FixedUpdate()
     {
         if (GameApp.character.renderObj.transform.hasChanged)
         {
-            UpdatePickUpBox();
+            RefreshPickUpBox();
         }
     }
 
     private void OnDestroy()
     {
-        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackData", this, "UpdateKnapsackUI");
-        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackSingletonItemAmount", this, "UpdateKnapsackSingletonItemAmount");
-        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackPickupItemBox", this, "UpdatePickUpBox");
+        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackData", this, "RefreshKnapsackUI");
+        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackPickupItemBox", this, "RefreshPickUpBox");
         Kaiyun.Event.UnregisterOut("GoldChange", this, "UpdateCurrency");
+        Kaiyun.Event.UnregisterOut("UpdateCharacterEquipmentData", this, "RefreshEquipsUI");
     }
 
     /// <summary>
@@ -74,53 +89,108 @@ public class KnapsackPanel:BasePanel
         slotList = new List<InventorySlot>();
         closeBtn.onClick.AddListener(OnCloseBtn);
 
-        UpdatePickUpBox();
-
+        //刷新背包ui
+        RefreshKnapsackUI();
+        //刷新装备栏ui
+        RefreshEquipsUI();
+        //刷新拾取栏ui
+        RefreshPickUpBox();
+        //刷新货币ui
         UpdateCurrency();
+    }
 
-        //先确定是否获取了背包信息，如果没有就向服务器拿
-        var chr = GameApp.character;
-        if (chr == null) return;
-        var knapsack = RemoteDataManager.Instance.localCharacterKnapsack;
-        if (knapsack == null)
-        {
-            RemoteDataManager.Instance.GetLocalChasracterKnapsack();
+    /// <summary>
+    /// 关闭背包面板
+    /// </summary>
+    private void OnCloseBtn()
+    {
+        UIManager.Instance.ClosePanel("KnapsackPanel");
+    }
+
+    /// <summary>
+    /// 重新刷新背包ui
+    /// </summary>
+    public void RefreshKnapsackUI()
+    {
+        var knapsack = ItemDataManager.Instance.GetLocalCharacterKnapsack();
+        if (knapsack == null) {
             SetCellCount(10);
             return;
         }
 
-        UpdateKnapsackUI();
-    }
-
-    /// <summary>
-    /// 加载背包数据
-    /// </summary>
-    public void UpdateKnapsackUI()
-    {
         //加载插槽
-        var knapsack = RemoteDataManager.Instance.localCharacterKnapsack;
         SetCellCount(knapsack.Capacity);
+
         //清空一下插槽里面的东西
-        var slotList = transform.GetComponentsInChildren<InventorySlot>();
-        foreach(var slot in slotList)
+        foreach (var slot in slotList)
         {
-            var itemUi =  slot.GetComponentInChildren<ItemUI>();
-            if(itemUi != null)
+            var itemUi = slot.GetComponentInChildren<ItemUI>();
+            if (itemUi != null)
             {
                 Destroy(itemUi.gameObject);
             }
         }
+
         //将itemui加载进各个插槽
-        for (int i = 0; i < slotList.Length; ++i)
+        for (int i = 0; i < slotList.Count; ++i)
         {
             var slot = slotList[i];
             var item = knapsack.GetItemByIndex(i);
             if (item != null)
             {
-                slot.CreateItemUI(item);
+                slot.CreateItemUI(item, itemUIPrefab);
             }
         }
 
+
+    }
+
+    /// <summary>
+    /// 重新刷新拾取面板的UI
+    /// </summary>
+    public void RefreshPickUpBox()
+    {
+        //我们控制的角色的entity数据是垃圾数据，因为我们根本就不更新它
+
+        var list = GameTools.RangeItem(GameApp.character.renderObj.transform.position * 1000, 2 * 1000);
+        if (list != null)
+        {
+            pickUpItemListBox.Reset(list);
+        }
+    }
+
+    /// <summary>
+    /// 重新刷新装备栏的ui
+    /// </summary>
+    public void RefreshEquipsUI()
+    {
+        //删除slot下的ui
+        foreach(var s in equipSlots.Values)
+        {
+            s.DeleteItemUI();
+        }
+
+        //获取数据
+        var itemList = ItemDataManager.Instance.GetEquipmentDict();
+        if (itemList == null) return;
+
+        //生成itemui
+        foreach(var item in itemList.Values)
+        {
+            EquipSlot slot = equipSlots[item.EquipsType];
+            slot.CreateItemUI(item, itemUIPrefab);
+            slot.UpdateItemUIAmount(-1);
+        }
+
+    }
+
+    /// <summary>
+    /// 刷新货币ui
+    /// </summary>
+    public void UpdateCurrency()
+    {
+        if (GameApp.character == null) return;
+        goldText.text = GameApp.character.info.Gold + "";
     }
 
     /// <summary>
@@ -163,63 +233,5 @@ public class KnapsackPanel:BasePanel
             //不干活
         }
     }
-
-    /// <summary>
-    /// 关闭背包面板
-    /// </summary>
-    private void OnCloseBtn()
-    {
-        UIManager.Instance.ClosePanel("KnapsackPanel");
-    }
-
-    /// <summary>
-    /// 返回指定范围内的itementity
-    /// </summary>
-    /// <param name="spaceId"></param>
-    /// <param name="pos"></param>
-    /// <param name="range"></param>
-    /// <returns></returns>
-    public List<ItemEntity> RangeItem(Vector3 pos, int range)
-    {
-        Predicate<ItemEntity> match = (e) =>
-        {
-            return Vector3.Distance(pos, e.Position) <= range;
-        };
-        return EntityManager.Instance.GetEntityList(match);
-    }
-
-    /// <summary>
-    /// 更新pickupbox
-    /// </summary>
-    public void UpdatePickUpBox()
-    {
-        //我们控制的角色的entity数据是垃圾数据，因为我们根本就不更新它
-        var list = RangeItem(GameApp.character.renderObj.transform.position*1000, 2*1000);
-        if (list != null)
-        {
-            pickUpItemListBox.Reset(list);
-        }
-    }
-
-    /// <summary>
-    /// 更加某个slot中物品的数量ui
-    /// </summary>
-    /// <param name="slotIndex"></param>
-    public void UpdateKnapsackSingletonItemAmount(int slotIndex)
-    {
-        if (slotIndex < 0 || slotIndex >= slotList.Count) return;
-        var slot = slotList[slotIndex];
-        slot.UpdateItemUIAmount();
-    }
-
-    /// <summary>
-    /// 更新金币数量
-    /// </summary>
-    public void UpdateCurrency()
-    {
-        if (GameApp.character == null) return;
-        goldText.text = GameApp.character.info.Gold + "";
-    }
-
 
 }

@@ -70,7 +70,7 @@ message NetActor{
 	float mp=10;
 	EntityType entityType = 11; 
 	repeated SkillInfo skills = 12;
-	InventoryInfo equipsInfo = 13;	 //穿戴装备
+	repeated ItemInfo equipList = 13;	 //穿戴装备
 	float hpMax = 14;
 	float mpMax = 15;
 	int32 speed = 16;
@@ -363,19 +363,6 @@ message ChatResponse{
 
 //======================================背包系统=========================================
 
-//Net itemEntity信息
-message NetItemEntity{
-	ItemInfo ItemInfo = 1;
-	int32 spaceId = 2;
-	NetEntity entity = 3;
-}
-
-//itemEntity 信息同步
-message NetItemEntitySync{
-	NetItemEntity  netItemEntity =  1;
-}
-
-
 //物品类型
 enum ItemType{
     Material=0;       //材料&道具
@@ -395,18 +382,20 @@ enum Quality {
 
 //装备类型
 enum EquipsType{
-	UNSET = 0;      // 无
-    Weapon = 1;    // 武器
-    Chest = 2;     // 胸甲
-    Belt = 4;      // 腰带
-    Legs = 5;      // 裤子
-    Boots = 6;     // 鞋子
-    Ring = 7;      // 戒指
-    Neck = 8;      // 项链
-    Wings = 10;    // 翅膀
+	UNSET = 0;      	//无
+    Weapon = 1;    		//武器
+	SecondaryWeapon = 2;//副武器
+	Helmet = 3;			//头盔
+    Neck = 4;      		//项链
+    Chest = 5;     		//胸甲
+	Wristband = 6;		//护腕
+    Belt = 7;      		//腰带
+    Bracelet = 8;		//手镯
+	Legs = 9;      		//裤子
+    Ring = 10;      	//戒指
+    Boots = 11;     	//鞋子
+    Wings = 12;    		//翅膀
 }
-
-
 
 //物品信息
 message ItemInfo{
@@ -416,13 +405,30 @@ message ItemInfo{
 	EquipData equipdata = 4; 	//装备信息，物品有这个属性，说明是武器。
 }
 
+//装备数据
+message EquipData{
+	//打孔、镶嵌、强化
+}
+
+//Net itemEntity信息(用于场景中物品的同步)
+message NetItemEntity{
+	ItemInfo ItemInfo = 1;
+	int32 spaceId = 2;
+	NetEntity entity = 3;
+}
+
 //库存对象信息:背包/仓库
 message InventoryInfo{
 	int32 capacity = 1;//格子数量
 	repeated ItemInfo list = 2;
 }
 
-//物品更新
+//itemEntity 信息同步响应包
+message NetItemEntitySync{
+	NetItemEntity  netItemEntity =  1;
+}
+
+//场景中物品更新响应包
 message ItemUpdate{
 	enum UpdateType{
 		ADD = 0;
@@ -433,7 +439,7 @@ message ItemUpdate{
 	ItemInfo itme = 2;
 }
 
-//item进入场景
+//item进入场景响应
 message SpaceItemEnterResponse{
 	NetItemEntity  netItemEntity =  1;
 }
@@ -447,6 +453,7 @@ message InventoryInfoRequest{
 	bool queryEquipment = 4;
 }
 
+//获取角色的Inventory信息响应
 message InventoryInfoResponse{
 	int32 entityId = 1;
 	InventoryInfo KnapsackInfo = 2;
@@ -462,20 +469,12 @@ enum InventoryType{
 	CurrentScene = 3;
 }
 
-//物品放置请求
+//背包物品放置请求
 message ItemPlacementRequest{
 	int32 entityId = 1;
 	InventoryType originInventoryTpey = 2;
-	InventoryType targetInventoryTpey = 3;
-	int32 originIndex = 4;
-	int32 targetIndex = 5;
-	int32 actionId = 6;
-}
-
-message ItemPlacementResponse{
-	bool result = 1;
-	int32 actionId = 2;
-	int32 auxiliarySpace = 3;
+	int32 originIndex = 3;
+	int32 targetIndex = 4;
 }
 
 //使用物品请求
@@ -485,17 +484,56 @@ message ItemUseRequest{
 	int32 count = 3;
 }
 
+//使用物品响应
 message ItemUseResponse{
 	bool result = 1;
 	int32 slotIndex = 2;
 	int32 count = 3;
 }
 
-
-//装备数据
-message EquipData{
-	//打孔、镶嵌、强化
+//物品丢弃
+message ItemDiscardRequest{
+	int32 slotIndex = 1;
+	int32 number = 2;
+	InventoryType type = 3;
+}
+message ItemDiscardResponse{
+	Result result = 1;
 }
 
 
 
+//物品拾起
+message ItemPickUpRequest{
+	int32 entityId = 1;
+}
+message ItemPickupResponse{
+	Result result = 1;
+}
+
+//拉取全部装备信息请求
+message EquipsRequest{
+
+}
+
+//拉取全部装备信息响应
+message EquipsResponse{
+	int32 entityId = 1;
+	repeated ItemInfo equipsList = 2;
+}
+
+//装备信息更新响应,变化的装备发送给各个客户端
+message EquipsUpdateResponse{
+	int32 entityId = 1;
+	repeated ItemInfo equipsList = 2;
+}
+
+//背包中的装备穿戴请求
+message WearEquipmentRequest{
+	int32 slotIndex = 1;
+}
+
+//装备栏中的装备卸载请求
+message UnloadEquipmentRequest{
+	EquipsType type = 1;
+}

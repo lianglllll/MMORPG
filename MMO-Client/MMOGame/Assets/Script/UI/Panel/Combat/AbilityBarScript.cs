@@ -56,7 +56,7 @@ public class AbilityBarScript : MonoBehaviour
     {
         if (isUpdate)
         {
-            Debug.Log($"isupdate={isUpdate},skill={_skill.ColddownTime}");
+            //Debug.Log($"isupdate={isUpdate},skill={_skill.ColddownTime}");
             UpdateAbilityBar();
         }
     }

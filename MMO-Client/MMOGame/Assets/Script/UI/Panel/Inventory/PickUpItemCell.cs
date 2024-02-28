@@ -54,7 +54,7 @@ public class PickUpItemCell : MonoBehaviour
     private void OnPickupBtn()
     {
         //发包
-        RemoteDataManager.Instance.ItemPickup(itemEntity.EntityId,itemEntity.itemId);
+        ItemDataManager.Instance.ItemPickup(itemEntity.EntityId);
     }
 
 }
