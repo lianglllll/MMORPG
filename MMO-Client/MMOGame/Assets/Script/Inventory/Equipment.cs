@@ -57,7 +57,10 @@ namespace GameClient.InventorySystem
             }
         }
 
-
+        /// <summary>
+        /// 加载装备数据
+        /// </summary>
+        /// <param name="itemInfo"></param>
         private void LoadAttrubuteData(ItemInfo itemInfo)
         {
             attrubuteData = new AttrubuteData
@@ -85,6 +88,53 @@ namespace GameClient.InventorySystem
             //itemInfo.Equipdata;
 
         }
+
+        /// <summary>
+        /// 获取描述文本
+        /// </summary>
+        /// <returns></returns>
+        public override string GetDescText()
+        {
+            var content = $"<color=#ffffff>{this.Define.Name}</color>\n" +
+              $"<color=yellow>{this.Define.Description}</color>\n\n" +
+              $"<color=bulue>堆叠上限：{this.Define.Capicity}</color>\n";
+            var attr = attrubuteData;
+            if (attr.Speed != 0)
+                content += $"<color=green>速度: {attr.Speed}</color>\n";
+            if (attr.HPMax != 0)
+                content += $"<color=green>最大生命值: {attr.HPMax}</color>\n";
+            if (attr.MPMax != 0)
+                content += $"<color=green>最大法力值: {attr.MPMax}</color>\n";
+            if (attr.AD != 0)
+                content += $"<color=green>物理攻击: {attr.AD}</color>\n";
+            if (attr.AP != 0)
+                content += $"<color=green>法力强度: {attr.AP}</color>\n";
+            if (attr.DEF != 0)
+                content += $"<color=green>物理防御: {attr.DEF}</color>\n";
+            if (attr.MDEF != 0)
+                content += $"<color=green>魔法防御: {attr.MDEF}</color>\n";
+            if (attr.CRI != 0)
+                content += $"<color=green>暴击率: {attr.CRI}</color>\n";
+            if (attr.CRD != 0)
+                content += $"<color=green>暴击伤害: {attr.CRD}</color>\n";
+            if (attr.HitRate != 0)
+                content += $"<color=green>命中率: {attr.HitRate}</color>\n";
+            if (attr.DodgeRate != 0)
+                content += $"<color=green>闪避率: {attr.DodgeRate}</color>\n";
+            if (attr.HpRegen != 0)
+                content += $"<color=green>生命回复: {attr.HpRegen}</color>\n";
+            if (attr.HpSteal != 0)
+                content += $"<color=green>生命偷取: {attr.HpSteal}</color>\n";
+            if (attr.STR != 0)
+                content += $"<color=green>力量: {attr.STR}</color>\n";
+            if (attr.INT != 0)
+                content += $"<color=green>智力: {attr.INT}</color>\n";
+            if (attr.AGI != 0)
+                content += $"<color=green>敏捷: {attr.AGI}</color>\n";
+
+            return content;
+        }
+
 
 
     }

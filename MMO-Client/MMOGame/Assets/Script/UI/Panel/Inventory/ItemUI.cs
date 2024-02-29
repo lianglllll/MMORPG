@@ -20,7 +20,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private Text AmountText;
 
     private Vector3 offset;
-    private InventorySlot originSlot;
+    private UISlot originSlot;
     private Vector3 originPosition;
     private bool isDragging;
 
@@ -95,7 +95,8 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     {
         // 记录初始位置和偏移量
         offset = transform.position - Input.mousePosition;
-        originSlot = transform.parent.GetComponent<InventorySlot>();
+        originSlot = transform.parent.GetComponent<UISlot>();
+        if (originSlot.gameObject.CompareTag("EquipSlot")) return;
         originPosition = transform.position;
 
         // 将物品UI从原来的格子中移除
@@ -110,12 +111,16 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isDragging) return;
         // 更新物品位置
         transform.position = Input.mousePosition + offset;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+
+        if (!isDragging) return;
+
         //是否指向UI组件
         if (EventSystem.current.IsPointerOverGameObject()) 
         {
@@ -223,8 +228,6 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         if (opt.Length == 0) return;
         ItemMenu.Show(Input.mousePosition, opt, OnClickAction);
     }
-
-
 
     /// <summary>
     /// 行为
