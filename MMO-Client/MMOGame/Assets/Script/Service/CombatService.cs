@@ -24,6 +24,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Subscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
         MessageRouter.Instance.Subscribe<SpellCastResponse>(_SpellCastResponse);
+        MessageRouter.Instance.Subscribe<SpellFailResponse>(_SpellFailResponse);
         MessageRouter.Instance.Subscribe<DamageResponse>(_DamageResponse);
         MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
@@ -40,6 +41,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Off<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Off<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
         MessageRouter.Instance.Off<SpellCastResponse>(_SpellCastResponse);
+        MessageRouter.Instance.Off<SpellFailResponse>(_SpellFailResponse);
         MessageRouter.Instance.Off<DamageResponse>(_DamageResponse);
         MessageRouter.Instance.Off<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
@@ -153,6 +155,46 @@ public class CombatService : Singleton<CombatService>, IDisposable
     }
 
     /// <summary>
+    /// 施法失败的响应
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="msg"></param>
+    private void _SpellFailResponse(Connection sender, SpellFailResponse msg)
+    {
+        string msgContext = "";
+        switch (msg.Reason)
+        {
+            case CastResult.Success:
+                break;
+            case CastResult.IsPassive:
+                msgContext = "被动技能";
+                break;
+            case CastResult.MpLack:
+                msgContext = "MP不足";
+                break;
+            case CastResult.EntityDead:
+                msgContext = "目标已经死亡";
+                break;
+            case CastResult.OutOfRange:
+                msgContext = "目标超出范围";
+                break;
+            case CastResult.Running:
+                msgContext = "技能正在释放";
+                break;
+            case CastResult.ColdDown:
+                msgContext = "技能正在冷却";
+                break;
+            case CastResult.TargetError:
+                msgContext = "目标错误";
+                break;
+        }
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            UIManager.Instance.MessagePanel.ShowBottonMsg(msgContext);
+        });
+    }
+
+    /// <summary>
     /// actor施法通知
     /// </summary>
     /// <param name="conn"></param>
@@ -176,6 +218,16 @@ public class CombatService : Singleton<CombatService>, IDisposable
             {
                 skill.Use(new SCEntity(caster));
             }
+
+            //ui
+            if (GameApp.character.EntityId == skill.Owner.EntityId)
+            {
+                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                {
+                    UIManager.Instance.MessagePanel.ShowBottonMsg(skill.Define.Name,Color.green);
+                });
+            }
+
 
         }
     }
@@ -260,7 +312,5 @@ public class CombatService : Singleton<CombatService>, IDisposable
     {
         EntityManager.Instance.OnItemEnterScene(msg.NetItemEntity);
     }
-
-
 
 }

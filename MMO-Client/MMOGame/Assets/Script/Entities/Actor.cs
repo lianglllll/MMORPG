@@ -49,39 +49,30 @@ namespace GameClient.Entities
         public void recvDamage(Damage damage)
         {
             //ui
-            var _textPos = renderObj.transform.position;
+            var ownerPos = renderObj.transform.position;
 
-            //闪避了，显示一下闪避ui
             if (damage.IsMiss)
-            {
-                DynamicTextManager.CreateText(_textPos, "Miss", DynamicTextManager.missData);
+            {   //闪避了，显示一下闪避ui
+                DynamicTextManager.CreateText(ownerPos, "Miss", DynamicTextManager.missData);
             }
             else{
                 //伤害飘字
-                DynamicTextManager.CreateText(_textPos, damage.Amount.ToString("0"));
+                DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"));
                 if (damage.IsCrit)
                 {
                     //暴击做一些处理，震屏..
-                    DynamicTextManager.CreateText(_textPos, "Crit!", DynamicTextManager.critData);
+                    DynamicTextManager.CreateText(ownerPos, "Crit!", DynamicTextManager.critData);
                 }
             }
 
+            //粒子效果
+            var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
+            if (skillDef != null)
+            {
+                GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj);
+            }
 
-            var attacker = GameTools.GetUnit(damage.AttackerId);
-            var skill = attacker.skillManager.GetSkill(damage.SkillId);
-            //这个skill的hit特效
-            var ps = Resources.Load<ParticleSystem>(skill.Define.HitArt);
-            if(ps != null)
-            {
-                var pos = renderObj.transform.position;
-                var dir = renderObj.transform.rotation;
-                ParticleSystem psObj = GameObject.Instantiate(ps, pos, dir);
-                GameObject.Destroy(psObj.gameObject, psObj.main.duration);
-            }
-            else
-            {
-                Log.Error("Failed to load particle system");
-            }
+            //音效
 
 
         }

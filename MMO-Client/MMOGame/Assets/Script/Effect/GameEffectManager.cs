@@ -12,12 +12,12 @@ public class GameEffectManager
     /// <param name="path">资源路径.</param>
     /// <param name="pos">世界坐标.</param>
     /// <param name="scale">缩放.</param>
-    public static GameEffect AddEffectLoc(string path, Vector3 pos, float scale=1f)
+    public static GameEffect AddEffectLoc(string path, Vector3 pos, float scale=1f,float duration = -1f)
     {
         GameEffect ge = CreateEffect(path);
         if (ge == null) return null;
         ge.transform.position = pos;
-        ge.Play(scale);
+        ge.Play(scale, duration);
         return ge;
     }
 
@@ -29,7 +29,7 @@ public class GameEffectManager
     /// <param name="offset">相对于目标的偏移</param>
     /// <param name="scale">缩放</param>
     /// <returns></returns>
-    public static GameEffect AddEffectTarget(string path, GameObject target, Vector3 offset=default, float scale=1f)
+    public static GameEffect AddEffectTarget(string path, GameObject target, Vector3 offset=default, float scale=1f, float duration = -1f)
     {
         if (target == null)
         {
@@ -39,7 +39,7 @@ public class GameEffectManager
         if (ge == null) return null;
         ge.SetTarget(target);
         ge.offset = offset;
-        ge.Play(scale);
+        ge.Play(scale, duration);
         return ge;
     }
 

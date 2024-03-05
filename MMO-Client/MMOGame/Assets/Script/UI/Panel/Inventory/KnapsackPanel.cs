@@ -46,22 +46,14 @@ public class KnapsackPanel:BasePanel
     {
         base.Start();
 
-
-
-        //拿到装备slot的对象，因为我们不是动态生成的
-        var slots = transform.Find("CharacterInfoBox/EquipSlotAres").GetComponentsInChildren<EquipSlot>();
-        foreach (var slot in slots)
-        {
-            equipSlots.Add(slot.equipsType, slot);
-        }
-
-        Init();
-
         //监听一些个事件
         Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackData", this, "RefreshKnapsackUI");
         Kaiyun.Event.RegisterOut("UpdateCharacterKnapsackPickupItemBox", this, "RefreshPickUpBox");
         Kaiyun.Event.RegisterOut("GoldChange", this, "UpdateCurrency");
         Kaiyun.Event.RegisterOut("UpdateCharacterEquipmentData", this, "RefreshEquipsUI");
+
+        Init();
+
     }
 
     private void FixedUpdate()
@@ -86,6 +78,14 @@ public class KnapsackPanel:BasePanel
     /// <param name="itemEntity"></param>
     public void Init()
     {
+        //拿到装备slot的对象，因为我们不是动态生成的
+        var slots = transform.Find("CharacterInfoBox/EquipSlotAres").GetComponentsInChildren<EquipSlot>();
+        foreach (var slot in slots)
+        {
+            equipSlots.Add(slot.equipsType, slot);
+        }
+
+        //背包的slot
         slotList = new List<InventorySlot>();
         closeBtn.onClick.AddListener(OnCloseBtn);
 

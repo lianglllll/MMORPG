@@ -187,7 +187,7 @@ public class UIManager
     /// <param name="str"></param>
     public void ShowMessage(string str)
     {
-        MessagePanel.ShowMessage(str);
+        MessagePanel.ShowTopMsg(str);
     }
 
     /// <summary>
@@ -198,7 +198,7 @@ public class UIManager
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            MessagePanel.ShowMessage(str);
+            MessagePanel.ShowTopMsg(str);
         });
     }
 

@@ -199,7 +199,15 @@ public class ItemService : Singleton<ItemService>, IDisposable
     public void _ItemDiscardResponse(Connection sender, ItemDiscardResponse msg)
     {
         //刷一下ui
-        Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
+        if(msg.Result == Result.Success)
+        {
+            Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
+            var item = DataManager.Instance.itemDefineDict[msg.ItemId];
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                UIManager.Instance.MessagePanel.ShowItemIOInfo($"丢弃物品:{item.Name}X{msg.Amout}");
+            });
+        }
 
     }
 

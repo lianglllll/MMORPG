@@ -61,6 +61,7 @@ namespace Summer.Network
             }
             delegateMap[key] = (MessageHandler<T>)delegateMap[key] - handler;
         }
+
         //触发
         private void Fire<T>(Connection sender, T msg)
         {
@@ -174,7 +175,7 @@ namespace Summer.Network
 
 
             //可弃用
-            var t = message.GetType();
+/*            var t = message.GetType();
             foreach (var p in t.GetProperties())
             {
                 //过滤属性
@@ -188,7 +189,7 @@ namespace Summer.Network
                         executeMessage(conn, (Google.Protobuf.IMessage)value);
                     }
                 }
-            }
+            }*/
         }
 
 

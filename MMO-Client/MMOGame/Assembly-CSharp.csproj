@@ -121,6 +121,7 @@
     <Compile Include="Assets\Script\StateMachine\Base\IState.cs" />
     <Compile Include="Assets\Script\Tools\Event.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\MessagePanelScript.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\PlayerStateMachine.cs" />
     <Compile Include="Assets\Script\UI\Panel\RoleListItemScript.cs" />
     <Compile Include="Assets\Script\Interactive\IInteraction.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Assets\Script\Manager\DataDefine\SkillDefine.cs" />
     <Compile Include="Assets\Script\UI\Panel\LoginPanelScript.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\DialogButton.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Info\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Script\UI\Package\PackageCell.cs" />
     <Compile Include="Assets\Script\Manager\DataManager.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextManager.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="Assets\Script\Animation\Old\HeroAnimations.cs" />
     <Compile Include="Assets\Art\Character\牛头人\DemoScene\Action_Manage.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\ConfirmBox.cs" />
+    <Compile Include="Assets\Script\Manager\DataDefine\BuffDefine.cs" />
     <Compile Include="Assets\Script\Inventory\Item.cs" />
     <Compile Include="Assets\Script\UI\Panel\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Script\UI\Panel\Inventory\PickUpItemListBox.cs" />

@@ -499,6 +499,8 @@ message ItemDiscardRequest{
 }
 message ItemDiscardResponse{
 	Result result = 1;
+	int32 itemId = 2;
+	int32 amout = 3;
 }
 
 
@@ -509,6 +511,7 @@ message ItemPickUpRequest{
 }
 message ItemPickupResponse{
 	Result result = 1;
+	int32 itemId = 2;
 }
 
 //拉取全部装备信息请求
@@ -536,4 +539,21 @@ message WearEquipmentRequest{
 //装备栏中的装备卸载请求
 message UnloadEquipmentRequest{
 	EquipsType type = 1;
+}
+
+
+//======buff========================================================
+
+//buff类型
+enum BuffType{
+	None = 0;
+	Buff = 1;
+	Debuff = 2;
+}
+
+//buff叠加方式
+enum BuffConflict{
+	Combine = 0;		//合并为一个buff，叠层(提升等级)
+	Separate = 1;		//独立存在
+	Cover = 2;			//覆盖，后者覆盖前者
 }

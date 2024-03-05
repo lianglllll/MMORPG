@@ -88,7 +88,7 @@ public class NetStart : MonoBehaviour
     {
         isConnectServer = true;
         //显示ui
-        UIManager.Instance.MessagePanel.ShowMessage("成功连接到服务器.....");
+        UIManager.Instance.MessagePanel.ShowTopMsg("成功连接到服务器.....");
         //发送心跳包
         isEnableHeartBeat = true;
         StartCoroutine(SendHeartMessage());

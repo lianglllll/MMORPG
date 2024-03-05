@@ -144,12 +144,12 @@ public class AbilityBarScript : MonoBehaviour
         if (_skill == null) return;
         if (_skill.IsUnitTarget && GameApp.target == null)
         {
-            Log.Information("当前没有选中目标");
+            UIManager.Instance.MessagePanel.ShowBottonMsg("当前没有选中目标");
             return;
         }
         if (isUpdate)
         {
-            Log.Information("技能冷却中");
+            UIManager.Instance.MessagePanel.ShowBottonMsg("技能冷却中");
             return;
         }
 

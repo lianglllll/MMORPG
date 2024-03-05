@@ -36,7 +36,7 @@ public class LoginPanelScript : BasePanel
         //与服务器没有建立连接时
         if (!NetStart.Instance.isConnectServer)
         {
-            UIManager.Instance.MessagePanel.ShowMessage("正在帮您连接服务器.....");
+            UIManager.Instance.MessagePanel.ShowTopMsg("正在帮您连接服务器.....");
             NetStart.Instance.ConnectToServer();
             return;
         }
@@ -48,7 +48,7 @@ public class LoginPanelScript : BasePanel
         string password = passwordInputField.text;
         if (username.Equals("") ||password.Equals(""))
         {
-            UIManager.Instance.MessagePanel.ShowMessage("登录名或密码不能为空！");
+            UIManager.Instance.MessagePanel.ShowTopMsg("登录名或密码不能为空！");
             return;
         }
 

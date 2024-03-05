@@ -53,8 +53,6 @@ public class ItemDataManager : Singleton<ItemDataManager>
         return GameApp.character.equipsDict;
     }
 
-
-
     /// <summary>
     /// 重新缓存缓存背包数据
     /// </summary>

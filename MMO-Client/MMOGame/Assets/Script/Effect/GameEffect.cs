@@ -39,13 +39,21 @@ public class GameEffect : MonoBehaviour
     /// 播放特效
     /// </summary>
     /// <param name="scale"></param>
-    public void Play(float scale=1)
+    public void Play(float scale=1, float duration = -1)
     {
+        if (particle == null) return;
         gameObject.SetActive(true);
-
         SetScale(transform, scale);
+        particle.Play();
+        //设置持续时间
+        if (Mathf.Approximately(duration, -1f)){
+            SetLifeTime(particle.main.duration);
+        }
+        else
+        {
+            SetLifeTime(duration);
+        }
 
-        particle?.Play();
     }
 
     /// <summary>
