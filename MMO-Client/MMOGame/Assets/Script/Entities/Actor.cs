@@ -22,7 +22,8 @@ namespace GameClient.Entities
         public GameObject renderObj;        //actor中对应的游戏对象
         public UnitState unitState;
         public PlayerStateMachine StateMachine;
-        public ConcurrentDictionary<EquipsType, Equipment> equipsDict = new ConcurrentDictionary<EquipsType, Equipment>();
+        public ConcurrentDictionary<EquipsType, Equipment> equipsDict = new();  //actor持有的装备
+        public ConcurrentDictionary<int, Buff> buffsDict = new();          //actor持有的buff<实例id,buff>
 
         public bool IsDeath => unitState == UnitState.Dead;
         public int Level => info.Level;

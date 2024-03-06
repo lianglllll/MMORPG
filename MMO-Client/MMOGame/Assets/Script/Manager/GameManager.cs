@@ -1,3 +1,4 @@
+using Assets.Script.Service;
 using GameClient.Entities;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
         CombatService.Instance.Init();
         ChatService.Instance.Init();
         ItemService.Instance.Init();
-
+        BuffService.Instance.Init();
 
         //推入第一个面板
         UIManager.Instance.OpenPanel("LoginPanel");
@@ -59,7 +60,5 @@ public class GameManager : MonoBehaviour
         //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
         Physics.IgnoreLayerCollision(6, 6, true);
     }
-
-
 
 }

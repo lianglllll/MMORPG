@@ -69,11 +69,12 @@ message NetActor{
 	float hp=9;
 	float mp=10;
 	EntityType entityType = 11; 
-	repeated SkillInfo skills = 12;
-	repeated ItemInfo equipList = 13;	 //穿戴装备
+	repeated SkillInfo skills = 12;			//技能列表
+	repeated ItemInfo equipList = 13;	 	//穿戴装备
 	float hpMax = 14;
 	float mpMax = 15;
 	int32 speed = 16;
+	repeated BuffInfo buffsList = 17;		//actor的buff
 }
 
 
@@ -172,11 +173,24 @@ message CharacterDeleteResponse{
 message ReconnectRequest{
 	string sessionId = 1;
 }
-
 message  ReconnectResponse{
 	bool success = 1;
 	int32 entityId = 2;//重连的角色，0代表为选择角色
 }
+
+//退出游戏
+message ExitRequest{
+
+}
+message ExitResponse{
+
+}
+
+//重新选择角色
+
+
+//重新登录
+
 
 
 //========================================skill========================================
@@ -556,4 +570,28 @@ enum BuffConflict{
 	Combine = 0;		//合并为一个buff，叠层(提升等级)
 	Separate = 1;		//独立存在
 	Cover = 2;			//覆盖，后者覆盖前者
+}
+
+message BuffInfo{
+	int32 id = 1;	//实例id
+	int32 bid = 2;
+	int32 ownerId = 3;
+	int32 providerId = 4;
+	int32 currentLevel = 5;		//当前等级
+	float ResidualDuration = 6;	//当前剩余时间
+}
+
+//buff添加响应
+message BuffsAddResponse{
+	repeated BuffInfo list = 1;
+}
+
+//buff移除响应
+message BuffsRemoveResponse{
+	repeated BuffInfo list = 1;
+}
+
+//buff更新响应
+message BuffsUpdateResponse{
+	repeated BuffInfo list = 1;
 }
