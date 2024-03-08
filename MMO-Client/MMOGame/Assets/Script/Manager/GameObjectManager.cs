@@ -169,10 +169,11 @@ public class GameObjectManager:MonoBehaviour
         //设置数据到entity中
         gameEntity.SetData(nEntitySync.Entity);
 
-        //2.设置动画状态,不是常规的动画也就是None,一律不作处理
-        if(nEntitySync.State != EntityState.None)
+        //2.设置动画状态
+        //如果是None,一律不作处理，将维持原来的动画状态
+        if (nEntitySync.State != EntityState.NoneState)
         {
-            obj.GetComponent<PlayerStateMachine>().SwitchState(TranslateState(nEntitySync.State));
+            obj.GetComponent<PlayerStateMachine>().SwitchState(nEntitySync.State);
         }
 
         //3.安全校验
@@ -183,30 +184,6 @@ public class GameObjectManager:MonoBehaviour
             //获取位移向量
             //不能直接使用trasforme的原因是，存在charactercontroller会默认覆盖transform
             gameEntity.Move(target);
-        }
-    }
-
-    /// <summary>
-    /// 工具方法：网络状态和本地状态的转换
-    /// </summary>
-    /// <param name="state"></param>
-    /// <returns></returns>
-    public ActorState TranslateState(EntityState state)
-    {
-        switch (state)
-        {
-            case EntityState.Idle:
-                return ActorState.Idle;
-            case EntityState.Walk:
-                return ActorState.Walk;
-            case EntityState.Run:
-                return ActorState.Run;
-            case EntityState.Jump:
-                return ActorState.Jump;
-            case EntityState.Swordflight:
-                return ActorState.Swordflight;
-            default:
-                return ActorState.None;
         }
     }
 

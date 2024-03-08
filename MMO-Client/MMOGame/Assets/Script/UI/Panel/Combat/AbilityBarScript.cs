@@ -8,7 +8,6 @@ using UnityEngine.UI;
 using Proto;
 
 
-
 /// <summary>
 /// 当skill使用的时候就来这里触发倒计时，然后就不管了
 /// 让当前这个脚本自己管自己，skill只提供了触发和倒计时
@@ -56,7 +55,6 @@ public class AbilityBarScript : MonoBehaviour
     {
         if (isUpdate)
         {
-            //Debug.Log($"isupdate={isUpdate},skill={_skill.ColddownTime}");
             UpdateAbilityBar();
         }
     }

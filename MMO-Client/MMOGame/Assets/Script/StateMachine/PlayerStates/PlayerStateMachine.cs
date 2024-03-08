@@ -1,5 +1,6 @@
 using GameClient.Combat;
 using GameClient.Entities;
+using Proto;
 using Serilog;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,25 +14,6 @@ using UnityEngine;
 //状态机可以分离state之间的逻辑，让其只关注本state的情况
 //反正比之前那个好看一点(本质其实没啥变化)，再不济也可以当成一个动画切换器来使用
 
-
-/// <summary>
-/// actor的状态
-/// </summary>
-public enum ActorState
-{
-    None = 0,
-
-    Idle = 1,
-    Walk = 2,
-    Run = 3,
-    Jump = 4,
-
-    Death = 5,
-    Hit = 6,
-    SkillIntonate = 7,      //技能蓄气
-    SkillActive = 8,        //技能激活
-    Swordflight = 9,
-}
 
 /// <summary>
 /// 状态间共享的参数
@@ -48,65 +30,67 @@ public class Parameter
 /// </summary>
 public class PlayerStateMachine : StateMachine
 {
-    public ActorState currentActorState;
-    private Dictionary<ActorState, IState> stateTable = new Dictionary<ActorState, IState>();
+    public EntityState currentEntityState;
+    private Dictionary<EntityState, IState> stateTable = new();
     public Parameter parameter;
     private void Awake()
     {
         parameter = new Parameter();
         parameter.animator = GetComponent<Animator>();
         //添加状态
-        stateTable.Add(ActorState.Idle, new PlayerState_Idle(this));
-        stateTable.Add(ActorState.Walk, new PlayerState_Walk(this));
-        stateTable.Add(ActorState.Death, new PlayerState_Death(this));
-        stateTable.Add(ActorState.SkillIntonate, new PlayerState_SkillIntonate(this));
-        stateTable.Add(ActorState.SkillActive, new PlayerState_SkillActive(this));
+        stateTable.Add(EntityState.Idle, new PlayerState_Idle(this));
+        stateTable.Add(EntityState.Motion, new PlayerState_Motion(this));
+        stateTable.Add(EntityState.Hit, null);
+        stateTable.Add(EntityState.Death, new PlayerState_Death(this));
+        stateTable.Add(EntityState.SkillIntonate, new PlayerState_SkillIntonate(this));
+        stateTable.Add(EntityState.SkillActive, new PlayerState_SkillActive(this));
 
     }
 
     private void Start()
     {
         //空闲状态启动
-        currentActorState = ActorState.Idle;
-        SwitchOn(stateTable[ActorState.Idle]);
+        currentEntityState = EntityState.Idle;
+        SwitchOn(stateTable[EntityState.Idle]);
     }
 
     protected override void Update()
     {
+        //死人就不更新了，等强制退出死亡状态
         if (parameter.owner.IsDeath)
         {
-            SwitchState(ActorState.Death);
+            SwitchState(EntityState.Death);
         }
         base.Update();
     }
 
     //公有的状态切换
-    public void SwitchState(ActorState state, bool enforce = false)
+    public void SwitchState(EntityState state, bool enforce = false)
     {
         //空
-        if (state == ActorState.None) return;
+        if (state == EntityState.NoneState) return;
 
         //相同的
-        if (currentActorState == state) return;
+        if (currentEntityState == state) return;
 
         //当前为死亡状态，不可被切换
-        if (currentActorState == ActorState.Death && enforce == false) return;
+        if (currentEntityState == EntityState.Death && enforce == false) return;
 
         //技能action状态，除了死亡状态，其他状态不可打断
-        if (state != ActorState.Death && currentActorState == ActorState.SkillActive && parameter.skill != null) return;
+        if (state != EntityState.Death && currentEntityState == EntityState.SkillActive && parameter.skill != null) return;
 
         //Debug.Log(parameter.owner.define.Name + "切换=" + state); 
         //切换
         currentState?.Exit();
-        currentActorState = state;
-        IState newState = stateTable[currentActorState];
+        currentEntityState = state;
+        IState newState = stateTable[currentEntityState];
         SwitchOn(newState);
     }
 
     //是否在特殊状态
     public bool IsSpecialState()
     {
-        if(currentActorState == ActorState.Death || currentActorState == ActorState.SkillIntonate || currentActorState == ActorState.SkillActive)
+        if(currentEntityState == EntityState.Death || currentEntityState == EntityState.SkillIntonate || currentEntityState == EntityState.SkillActive)
         {
             return true;
         }

@@ -31,7 +31,7 @@ public class CombatPanelScript : BasePanel
         abilityGroupScript = transform.Find("AbilityGroup").GetComponent<AbilityGroupScript>();
     }
 
-    private void Start()
+    protected override void Start()
     {
         Init();
 

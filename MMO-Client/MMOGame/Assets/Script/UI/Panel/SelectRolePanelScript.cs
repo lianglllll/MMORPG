@@ -24,7 +24,7 @@ public class SelectRolePanelScript : BasePanel
     //从网络中接收到的Ncharacter列表(缓冲)
     private List<NetActor> characterInfoList = new List<NetActor>();
 
-    private void Start()
+    protected override void Start()
     {
         createBtn = transform.Find("CreateRoleBtn").GetComponent<Button>();
         startBtn = transform.Find("StartBtn").GetComponent<Button>();

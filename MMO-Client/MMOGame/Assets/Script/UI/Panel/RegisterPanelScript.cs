@@ -14,7 +14,7 @@ public class RegisterPanelScript : BasePanel
     public Button returnButton;
     public Button registerButton;
 
-    void Start()
+    protected override void  Start()
     {
         returnButton.onClick.AddListener(OnReturn);
         registerButton.onClick.AddListener(OnRegister);

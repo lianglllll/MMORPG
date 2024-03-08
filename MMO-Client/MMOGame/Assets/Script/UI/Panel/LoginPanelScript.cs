@@ -16,7 +16,7 @@ public class LoginPanelScript : BasePanel
 
     private bool isOnClickLoginBtn;
 
-    void Start()
+    protected override void Start()
     {
         loginButton.onClick.AddListener(OnLogin);
         registerButton.onClick.AddListener(OnRegister);

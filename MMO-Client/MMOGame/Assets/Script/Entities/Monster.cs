@@ -26,7 +26,7 @@ namespace Assets.Script.Entities
             {
                 Log.Information("1.死亡状态更新");
                 if (renderObj == null) return;
-                StateMachine.SwitchState(ActorState.Death);
+                StateMachine.SwitchState(EntityState.Death);
 
                 GameTimerManager.Instance.TryUseOneTimer(5f, ()=> {
                     //如果单位死亡，将其隐藏
@@ -41,7 +41,7 @@ namespace Assets.Script.Entities
             else if(old_value == UnitState.Dead)
             {
                 renderObj?.SetActive(true);
-                StateMachine.SwitchState(ActorState.Idle);
+                StateMachine.SwitchState(EntityState.Idle);
             }
 
 

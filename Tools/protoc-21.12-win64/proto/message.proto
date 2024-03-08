@@ -31,12 +31,18 @@ message NetEntity {
 
 //entity的motion状态
 enum EntityState{
-	NONE = 0;
-	IDLE = 1;
-	WALK = 2;
-	RUN = 3;
-	JUMP = 4;
-	SWORDFLIGHT = 5;
+	NoneState = 0;
+	Idle = 1;
+	Motion = 2;			//walk or run or 其他速度比较快的行为，这个motion状态我们使用speed来驱动变换
+	Hit = 3;
+	Jump = 4;
+	Death = 5;			//这个状态可能用不上,因为我们在其他地方也定义了死亡
+	Shift = 6;			//闪步
+	SWORDFLIGHT = 7;	//御剑飞行
+	StrikeAndFly = 8;	//击飞
+	StrikeAndBack = 9;	//击退
+	SkillIntonate = 10;  //技能蓄气
+    SkillActive = 11;    //技能激活
 }
 
 //同步entity:位置+状态
@@ -116,6 +122,11 @@ message SpaceEntitySyncResponse{
 //传送请求
 message SpaceDeliverRequest{
 	int32 spaceId = 1;
+	int32 pointId = 2;	//场景中哪一个点的id
+}
+message SpaceDeliverResponse{
+	Result result = 1;
+	string context = 2;
 }
 
 

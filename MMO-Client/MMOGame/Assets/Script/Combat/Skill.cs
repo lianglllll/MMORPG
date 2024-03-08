@@ -173,7 +173,7 @@ namespace GameClient.Combat
                 //蓄气动画
                 if(Define.IntonateTime > 0)
                 {
-                    Owner.StateMachine.SwitchState(ActorState.SkillIntonate);
+                    Owner.StateMachine.SwitchState(EntityState.SkillIntonate);
                 }
 
 
@@ -196,7 +196,7 @@ namespace GameClient.Combat
             }
 
             //切换动画 skill激活阶段的动画
-            Owner.StateMachine.SwitchState(ActorState.SkillActive);
+            Owner.StateMachine.SwitchState(EntityState.SkillActive);
 
         }
 

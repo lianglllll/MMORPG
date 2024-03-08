@@ -1,4 +1,5 @@
 using GameClient.Combat;
+using Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,21 +15,18 @@ public class PlayerState_SkillActive : PlayerState
     {
         if(stateMachine.parameter.skill == null)
         {
-            stateMachine.SwitchState(ActorState.Idle);
+            stateMachine.SwitchState(EntityState.Idle);
             return;
         }
         animator.Play(stateMachine.parameter.skill.Define.ActiveAnimName);
     }
 
-    
-    
-
     public override void LogicUpdate()
     {
         if (stateMachine.parameter.skill.Stage != SkillStage.Active)
         {
-            stateMachine.currentActorState = ActorState.None;
-            stateMachine.SwitchState(ActorState.Idle);
+            stateMachine.currentEntityState = EntityState.NoneState;
+            stateMachine.SwitchState(EntityState.Idle);
         }
     }
 

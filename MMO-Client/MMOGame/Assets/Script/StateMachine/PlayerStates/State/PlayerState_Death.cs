@@ -1,3 +1,4 @@
+using Proto;
 using Serilog;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ public class PlayerState_Death : PlayerState
 
         if (!stateMachine.parameter.owner.IsDeath)
         {
-            stateMachine.SwitchState(ActorState.Idle,true);
+            stateMachine.SwitchState(EntityState.Idle,true);
         }
     }
 

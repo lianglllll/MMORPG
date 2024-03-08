@@ -20,7 +20,7 @@ public class CreateRolePanelScript : BasePanel
 
     private int jobid = -1;                 //选择的职业id
 
-    private void Awake()
+    protected override void Awake()
     {
         SelectedJobInfo = transform.Find("Canvas/SelectedJobInfo/Text").GetComponent<Text>();
         usernameFileid = transform.Find("Canvas/HeroNameInputField").GetComponent<InputField>();
@@ -42,7 +42,7 @@ public class CreateRolePanelScript : BasePanel
 
     }
 
-    private void Start()
+    protected override void Start()
     {
         SelectedJobInfo.text = "未选中职业";
 

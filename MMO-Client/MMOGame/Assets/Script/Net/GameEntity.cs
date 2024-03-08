@@ -234,38 +234,16 @@ public class GameEntity : MonoBehaviour
                 SetValueTo(this.direction * 1000, req.EntitySync.Entity.Direction);
                 req.EntitySync.Entity.Id = entityId;
                 //如果角色现在的动画处于不是常规的motion动作时，同一传none
-                req.EntitySync.State = TranslateState(stateMachine.currentActorState);
+                req.EntitySync.State = stateMachine.currentEntityState;
                 NetClient.Send(req);
+
+                //重置
                 transform.hasChanged = false;
-                req.EntitySync.State = EntityState.None;
+                req.EntitySync.State = EntityState.NoneState;
             }
             yield return waitForSeconds;
         }
 
-    }
-
-    /// <summary>
-    /// 状态翻译：状态机的状态->net状态
-    /// </summary>
-    /// <param name="state"></param>
-    /// <returns></returns>
-    private EntityState TranslateState(ActorState state)
-    {
-        switch (state)
-        {
-            case ActorState.Idle:
-                return EntityState.Idle;
-            case ActorState.Walk:
-                return EntityState.Walk;
-            case ActorState.Run:
-                return EntityState.Run;
-            case ActorState.Jump:
-                return EntityState.Jump;
-            case ActorState.Swordflight:
-                return EntityState.Swordflight;
-            default:
-                return EntityState.None;
-        }
     }
 
     /// <summary>

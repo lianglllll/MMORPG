@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -15,13 +15,14 @@ public class csShurikenEffectEditor : EditorWindow
     static csShurikenEffectEditor myWindow;
 
 	[MenuItem("Window/Shuriken System Effect Editor")]
-
-	public static void Init()
+    [System.Obsolete]
+    public static void Init()
 	{
         myWindow = EditorWindow.GetWindowWithRect<csShurikenEffectEditor>(new Rect(100, 100, 300, 220)); //set Editor Position and Size
 		myWindow.title = "Scale Editor";
 	}
 
+    [System.Obsolete]
     void OnGUI()
     {
         GUILayout.Box("Shuriken System Effect Scale Editor", GUILayout.Width(295));

@@ -11,6 +11,7 @@ public class PlayerMovementController : MonoBehaviour
     private PlayerStateMachine stateMachine;
     private CameraManager cameraManager;
     private GameEntity gameEntity;
+
     public float CurrentSpeed
     {
         get
@@ -59,9 +60,9 @@ public class PlayerMovementController : MonoBehaviour
         if (v == 0) v = Input.GetAxis("Vertical");
         if (h != 0 || v != 0)
         {
-            //播放跑步动画
-            stateMachine.SwitchState(ActorState.Walk);
-            if (stateMachine.currentActorState == ActorState.Walk)
+            //播放跑步动画,设置motion需要的speed参数
+            stateMachine.SwitchState(EntityState.Motion);
+            if (stateMachine.currentEntityState == EntityState.Motion)
             {
                 //摇杆控制英雄沿着摄像机的方向移动
                 Vector3 dir = cameraManager.rCamera.transform.forward * v + cameraManager.rCamera.transform.right * h;
@@ -74,7 +75,7 @@ public class PlayerMovementController : MonoBehaviour
         else
         {
             //播放待机动画
-            stateMachine.SwitchState(ActorState.Idle);
+            stateMachine.SwitchState(EntityState.Idle);
         }
     }
 

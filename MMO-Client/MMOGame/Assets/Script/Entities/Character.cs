@@ -33,7 +33,7 @@ namespace Assets.Script.Entities
             if (IsDeath)
             {
                 if (renderObj == null) return;
-                StateMachine.SwitchState(ActorState.Death);
+                StateMachine.SwitchState(EntityState.Death);
                 if(GameApp.character == this)
                 {
                     GameApp.combatPanelScript.ShowDeathBox();

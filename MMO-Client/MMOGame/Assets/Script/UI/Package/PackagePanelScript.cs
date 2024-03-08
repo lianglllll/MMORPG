@@ -70,7 +70,7 @@ public class PackagePanelScript : BasePanel
         InitClick();
     }
 
-    private void Start()
+    protected override void Start()
     {
         RefreshUI();
     }
