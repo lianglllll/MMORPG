@@ -24,41 +24,38 @@ public class SelectRolePanelScript : BasePanel
     //从网络中接收到的Ncharacter列表(缓冲)
     private List<NetActor> characterInfoList = new List<NetActor>();
 
-    protected override void Start()
+    protected override void Awake()
     {
+        roleListItemMountPoint = transform.Find("RoleList");
         createBtn = transform.Find("CreateRoleBtn").GetComponent<Button>();
         startBtn = transform.Find("StartBtn").GetComponent<Button>();
         deleteBtn = transform.Find("DeleteBtn").GetComponent<Button>();
+    }
+
+    protected override void Start()
+    {
+
         createBtn.onClick.AddListener(OnCreateBtn);
         startBtn.onClick.AddListener(OnstartBtn);
         deleteBtn.onClick.AddListener(OnDeleteRoleBtn);
 
-        roleListItemMountPoint = transform.Find("RoleList");
-
-
-        //订阅各种网络消息
-        //订阅角色列表响应消息
-        MessageRouter.Instance.Subscribe<CharacterListResponse>(_CharacterListResponse);
-        //订阅删除角色响应消息
-        MessageRouter.Instance.Subscribe<CharacterDeleteResponse>(_CharacterDeleteResponse);
-
         //订阅选中角色item的事件
         Kaiyun.Event.RegisterIn("OnSelectedRoleItem",this, "OnSelectedRoleItem");
 
-        //发包拉取rolelist信息
-        CharacterListRequest req = new CharacterListRequest();
-        NetClient.Send(req);
+        //拉取角色列表
+        UserService.Instance._CharacterListRequest();
     }
 
 
     private void OnDestroy()
     {
-        MessageRouter.Instance.Off<CharacterListResponse>(_CharacterListResponse);
-        MessageRouter.Instance.Off<CharacterDeleteResponse>(_CharacterDeleteResponse);
         Kaiyun.Event.UnregisterIn("OnSelectedRoleItem", this, "OnSelectedRoleItem");
 
     }
 
+    /// <summary>
+    /// 点击创建角色按钮回调
+    /// </summary>
     public void OnCreateBtn()
     {
         //切换创建角色面板
@@ -74,18 +71,18 @@ public class SelectRolePanelScript : BasePanel
         {
             return;
         }
+
         //获取当前roleItemId对应的role信息，将角色id发送到服务端进行处理
-        Debug.Log("开始游戏："+ curSelectedItem.name);
-
-        //通过事件系统来执行
-        //Userservice中实现了
-        Kaiyun.Event.FireIn("GameEnter", curSelectedItem.ChrId);
-
+        //发送网络请求
+        UserService.Instance._GameEnterRequest(curSelectedItem.ChrId);
 
         //关闭当前ui
         UIManager.Instance.ClosePanel("SelectRolePanel");
     }
 
+    /// <summary>
+    /// 点击删除按钮回调
+    /// </summary>
     public void OnDeleteRoleBtn()
     {
         if(curSelectedItem == null)
@@ -96,28 +93,14 @@ public class SelectRolePanelScript : BasePanel
         //todo 需要进行弹窗，确认删除
 
         //发送请求
-        CharacterDeleteRequest req = new CharacterDeleteRequest();
-        req.CharacterId = curSelectedItem.ChrId;
-        NetClient.Send(req);
+        UserService.Instance._CharacterDeleteRequest(curSelectedItem.ChrId);
 
-        /*
-        //再次询问是否删除
-        //ui设置按钮
-        var ok = new Chibi.Free.Dialog.ActionButton("确定", () => {
-            //发送请求
-            CharacterDeleteRequest req = new CharacterDeleteRequest();
-            req.CharacterId = roleInfos[roleItemId].roleId;
-            NetClient.Send(req);
-        }, new Color(0f, 0.9f, 0.9f));
-        var cannel = new Chibi.Free.Dialog.ActionButton("取消", () => { }, new Color(0f, 0.9f, 0.9f));
-        Chibi.Free.Dialog.ActionButton[] buttons = { ok, cannel };
-        //调用工具类进行弹窗,工具类mydialog里面实现了异步
-        MyDialog.Show("系统提升", "是否确定删除该角色", buttons);
-        */
     }
 
-
-    //选中roleitem回调
+    /// <summary>
+    /// 选中roleitem回调
+    /// </summary>
+    /// <param name="roleListItemScript"></param>
     public void OnSelectedRoleItem(RoleListItemScript roleListItemScript)
     {
         if(curSelectedItem != null)
@@ -127,11 +110,11 @@ public class SelectRolePanelScript : BasePanel
         //选中效果
         curSelectedItem = roleListItemScript;
         curSelectedItem.SelectedEffect();
-
-
     }
 
-    //加载rolelist
+    /// <summary>
+    /// 加载rolelist 的 UI
+    /// </summary>
     public void LoadRoleList()
     {
         //清理挂载点下的全部item
@@ -159,7 +142,9 @@ public class SelectRolePanelScript : BasePanel
 
     }
 
-    //清理全部item
+    /// <summary>
+    /// 清理全部itemUI
+    /// </summary>
     public void ClearRoleListItem()
     {
         if (roleListItemList == null) return;
@@ -171,10 +156,11 @@ public class SelectRolePanelScript : BasePanel
         roleListItemList.Clear();
     }
 
-
-    //====================================网络=====================================================
-    //角色列表请求响应
-    private void _CharacterListResponse(Connection sender, CharacterListResponse msg)
+    /// <summary>
+    /// 重新刷新rolelist UI
+    /// </summary>
+    /// <param name="msg"></param>
+    public void RefreshRoleListUI(CharacterListResponse msg)
     {
 
         characterInfoList.Clear();
@@ -185,22 +171,7 @@ public class SelectRolePanelScript : BasePanel
         }
 
         //调用加载rolelist
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            LoadRoleList();
-        });
+        LoadRoleList();
     }
-
-    //角色删除响应
-    private void _CharacterDeleteResponse(Connection sender, CharacterDeleteResponse msg)
-    {
-
-        //发起角色列表的请求
-        CharacterListRequest req = new CharacterListRequest();
-        NetClient.Send(req);
-
-    }
-
-
 
 }

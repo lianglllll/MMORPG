@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RoleListItemScript : MonoBehaviour
 {
     private int index;                                      //ui列表中的序号
-    private NetActor characterInfo;
+    private NetActor characterInfo;                         //角色信息的网络对象
     private SelectRolePanelScript selectRolePanelScript;
     private UnitDefine define;
     private RectTransform rectTransform;

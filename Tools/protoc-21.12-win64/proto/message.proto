@@ -89,6 +89,10 @@ message NetActor{
 message GameEnterRequest{
 	int32 characterId = 1;
 }
+message GameEnterResponse{
+	Result result = 1;
+	string content = 2;
+}
 
 //有其他角色进入场景响应
 message SpaceCharactersEnterResponse{

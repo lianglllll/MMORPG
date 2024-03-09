@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 3577067833564092429}
   - component: {fileID: 3577067833564092418}
   m_Layer: 5
-  m_Name: 'PasswordInputField '
+  m_Name: PasswordInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,8 +244,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3577067833564092429}
   m_TextComponent: {fileID: 3577067835176137761}
   m_Placeholder: {fileID: 3577067834613321928}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -880,10 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0139ff3aa0ca22942bc04749c299d5f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usernameInputField: {fileID: 3577067835098770422}
-  passwordInputField: {fileID: 3577067833564092418}
-  loginButton: {fileID: 3577067835139078800}
-  registerButton: {fileID: 1293032811753620046}
 --- !u!223 &-7838610827506862632
 Canvas:
   m_ObjectHideFlags: 0

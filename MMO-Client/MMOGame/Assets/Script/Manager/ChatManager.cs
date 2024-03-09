@@ -151,7 +151,11 @@ public class ChatManager : Singleton<ChatManager>
             Content = message,
             FromName = ""
         });
-        OnChat?.Invoke(LocalChannel.All);
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            OnChat?.Invoke(LocalChannel.All);
+        });
+
     }
 
     /// <summary>

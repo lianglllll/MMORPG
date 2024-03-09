@@ -8,25 +8,33 @@ using UnityEngine.UI;
 
 public class RegisterPanelScript : BasePanel
 {
-    public InputField usernameInputField;
-    public InputField passwordInputField;
-    public InputField confirmPasswordInputField;
-    public Button returnButton;
-    public Button registerButton;
+    private InputField usernameInputField;
+    private InputField passwordInputField;
+    private InputField confirmPasswordInputField;
+    private Button returnButton;
+    private Button registerButton;
+
+    protected override void Awake()
+    {
+        usernameInputField = transform.Find("Register-box/UsernameInputField").GetComponent<InputField>();
+        passwordInputField = transform.Find("Register-box/PasswordInputField").GetComponent<InputField>();
+        confirmPasswordInputField = transform.Find("Register-box/ConfirmPasswordInputField").GetComponent<InputField>();
+        returnButton = transform.Find("ReturnBtn").GetComponent<Button>();
+        registerButton = transform.Find("Register-box/RegisterButton").GetComponent<Button>();
+
+    }
 
     protected override void  Start()
     {
+        passwordInputField.contentType = InputField.ContentType.Password;
+        confirmPasswordInputField.contentType = InputField.ContentType.Password;
         returnButton.onClick.AddListener(OnReturn);
         registerButton.onClick.AddListener(OnRegister);
-        MessageRouter.Instance.Subscribe<UserRegisterResponse>(OnRegisterResponse);
     }
 
-
-
-    private void OnDestroy()
-    {
-        MessageRouter.Instance.Off<UserRegisterResponse>(OnRegisterResponse);
-    }
+    /// <summary>
+    /// 注册按钮回调
+    /// </summary>
     private void OnRegister()
     {
         string username = usernameInputField.text;
@@ -34,30 +42,25 @@ public class RegisterPanelScript : BasePanel
         string confirmPassword = confirmPasswordInputField.text;
         if (username.Equals("") || password.Equals("") || confirmPassword.Equals(""))
         {
-            UIManager.Instance.ShowMessage("用户名或密码不能为空！");
+            UIManager.Instance.ShowTopMessage("用户名或密码不能为空！");
             return;
         }
 
         if(password.Equals(confirmPassword) == false)
         {
-            UIManager.Instance.ShowMessage("二次密码不一致");
+            UIManager.Instance.ShowTopMessage("二次密码不一致");
             return;
         }
 
-        UserRegisterRequest req = new UserRegisterRequest();
-        req.Username = username;
-        req.Password = password;
-        NetClient.Send(req);
-    }
-    private void OnRegisterResponse(Connection sender, UserRegisterResponse msg)
-    {
-        UIManager.Instance.AsyncShowMessage(msg.Message);
+        UserService.Instance._UserRegisterRequest(username, password);
     }
 
+    /// <summary>
+    /// 返回按钮回调
+    /// </summary>
     private void OnReturn()
     {
         UIManager.Instance.ClosePanel("RegisterPanel");
     }
-
 
 }

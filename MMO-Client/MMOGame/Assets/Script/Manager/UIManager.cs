@@ -185,7 +185,7 @@ public class UIManager
     /// 通过消息面板显示消息
     /// </summary>
     /// <param name="str"></param>
-    public void ShowMessage(string str)
+    public void ShowTopMessage(string str)
     {
         MessagePanel.ShowTopMsg(str);
     }
@@ -194,7 +194,7 @@ public class UIManager
     /// 异步通过消息面板显示消息
     /// </summary>
     /// <param name="str"></param>
-    public void AsyncShowMessage(string str)
+    public void AsyncShowTopMessage(string str)
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {

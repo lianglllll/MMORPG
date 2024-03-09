@@ -46,7 +46,7 @@ public class Portal : MonoBehaviour,IInteraction
             int spaceId = tagetId;//闭包
             if (spaceId < 0)
             {
-                UIManager.Instance.ShowMessage("传送失败,无法搜寻坐标点");
+                UIManager.Instance.ShowTopMessage("传送失败,无法搜寻坐标点");
                 return;
             }
             //给服务器发送请求

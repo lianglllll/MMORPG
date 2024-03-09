@@ -79,7 +79,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
                 GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
 
                 //推入combatUI
-                UIManager.Instance.ShowMessage("进入游戏，开始你的冒险");
+                UIManager.Instance.ShowTopMessage("进入游戏，开始你的冒险");
                 GameApp.combatPanelScript = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
 
             }else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)

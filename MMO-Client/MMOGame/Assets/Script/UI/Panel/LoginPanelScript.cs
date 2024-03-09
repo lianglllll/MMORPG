@@ -9,30 +9,40 @@ using UnityEngine.UI;
 public class LoginPanelScript : BasePanel
 {
 
-    public InputField usernameInputField;
-    public InputField passwordInputField;
-    public Button loginButton;
-    public Button registerButton;
+    private InputField usernameInputField;
+    private InputField passwordInputField;
+    private Button loginButton;
+    private Button registerButton;
 
-    private bool isOnClickLoginBtn;
+    private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来
+
+    protected override void Awake()
+    {
+        usernameInputField = transform.Find("Login-box/UsernameInputField").GetComponent<InputField>();
+        passwordInputField = transform.Find("Login-box/PasswordInputField").GetComponent<InputField>();
+        loginButton = transform.Find("Login-box/LoginButton").GetComponent<Button>();
+        registerButton = transform.Find("Login-box/RegisterButton").GetComponent<Button>();
+    }
 
     protected override void Start()
     {
+        passwordInputField.contentType = InputField.ContentType.Password;
         loginButton.onClick.AddListener(OnLogin);
         registerButton.onClick.AddListener(OnRegister);
         isOnClickLoginBtn = false;
 
-        MessageRouter.Instance.Subscribe<UserLoginResponse>(OnLoginResponse);
     }
 
-    private void OnDestroy()
-    {
-        MessageRouter.Instance.Off<UserLoginResponse>(OnLoginResponse);
-    }
 
-    //登录按钮触发
+    /// <summary>
+    /// 登录按钮回调
+    /// </summary>
     private void OnLogin()
     {
+
+        //防止多次连续点击
+        if (isOnClickLoginBtn) return;
+
         //与服务器没有建立连接时
         if (!NetStart.Instance.isConnectServer)
         {
@@ -40,9 +50,6 @@ public class LoginPanelScript : BasePanel
             NetStart.Instance.ConnectToServer();
             return;
         }
-
-        //防止多次连续点击
-        if (isOnClickLoginBtn) return;
 
         string username = usernameInputField.text;
         string password = passwordInputField.text;
@@ -55,17 +62,11 @@ public class LoginPanelScript : BasePanel
         isOnClickLoginBtn = true;
 
         //向server发送登录请求
-        UserLoginRequest loginRequest = new UserLoginRequest();
-        loginRequest.Username = username;
-        loginRequest.Password = password;
-        NetClient.Send(loginRequest);
+        UserService.Instance._UserLoginRequest(username, password);
     }
 
-
-
-
     //登录事件触发的响应
-    private void OnLoginResponse(Connection conn, UserLoginResponse msg)
+    public void OnLoginResponse(UserLoginResponse msg)
     {
 
         //登录成功，切换到角色选择scene
@@ -76,7 +77,7 @@ public class LoginPanelScript : BasePanel
             //切换面板
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
-                UIManager.Instance.ShowMessage("登录成功");
+                UIManager.Instance.ShowTopMessage("登录成功");
                 UIManager.Instance.OpenPanel("SelectRolePanel");
                 UIManager.Instance.ClosePanel("LoginPanel");
             });
@@ -84,7 +85,9 @@ public class LoginPanelScript : BasePanel
         else
         {
             isOnClickLoginBtn = false;
-            UIManager.Instance.AsyncShowMessage("登录失败！！");
+            UnityMainThreadDispatcher.Instance().Enqueue(() => {
+                UIManager.Instance.ShowTopMessage("登录失败！！");
+            });
         }
 
     }

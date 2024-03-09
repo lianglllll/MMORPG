@@ -17,6 +17,7 @@ public class CreateRolePanelScript : BasePanel
     private Button jobType1;
     private Button jobType2;
     private Button jobType3;
+    private Button jobType4;
 
     private int jobid = -1;                 //选择的职业id
 
@@ -30,15 +31,7 @@ public class CreateRolePanelScript : BasePanel
         jobType1 = transform.Find("Canvas/HeroTypePanel/HereTypeItem1").GetComponent<Button>();
         jobType2 = transform.Find("Canvas/HeroTypePanel/HereTypeItem2").GetComponent<Button>();
         jobType3 = transform.Find("Canvas/HeroTypePanel/HereTypeItem3").GetComponent<Button>();
-
-        createBtn.onClick.AddListener(OnCreateBtn);
-        returnBtn.onClick.AddListener(OnReturnBtn);
-
-        //todo  写得有点蠢
-        jobType0.onClick.AddListener(() => { jobid = 0; SelectedJobInfo.text = jobType0.transform.Find("Text").GetComponent<Text>().text; });
-        jobType1.onClick.AddListener(() => { jobid = 1; SelectedJobInfo.text = jobType1.transform.Find("Text").GetComponent<Text>().text; });
-        jobType2.onClick.AddListener(() => { jobid = 2; SelectedJobInfo.text = jobType2.transform.Find("Text").GetComponent<Text>().text; });
-        jobType3.onClick.AddListener(() => { jobid = 3; SelectedJobInfo.text = jobType3.transform.Find("Text").GetComponent<Text>().text; });
+        jobType4 = transform.Find("Canvas/HeroTypePanel/HereTypeItem4").GetComponent<Button>();
 
     }
 
@@ -46,58 +39,45 @@ public class CreateRolePanelScript : BasePanel
     {
         SelectedJobInfo.text = "未选中职业";
 
-        //订阅创建角色响应消息
-        MessageRouter.Instance.Subscribe<CharacterCreateResponse>(_CharacterCreateResponse);
+        //todo  写得有点蠢
+        jobType0.onClick.AddListener(() => { jobid = 0; SelectedJobInfo.text = jobType0.transform.Find("Text").GetComponent<Text>().text; });
+        jobType1.onClick.AddListener(() => { jobid = 1; SelectedJobInfo.text = jobType1.transform.Find("Text").GetComponent<Text>().text; });
+        jobType2.onClick.AddListener(() => { jobid = 2; SelectedJobInfo.text = jobType2.transform.Find("Text").GetComponent<Text>().text; });
+        jobType3.onClick.AddListener(() => { jobid = 3; SelectedJobInfo.text = jobType3.transform.Find("Text").GetComponent<Text>().text; });
+        jobType4.onClick.AddListener(() => { jobid = 4; SelectedJobInfo.text = jobType4.transform.Find("Text").GetComponent<Text>().text; });
+
+        createBtn.onClick.AddListener(OnCreateBtn);
+        returnBtn.onClick.AddListener(OnReturnBtn);
+
     }
 
 
-    private void OnDestroy()
-    {
-        MessageRouter.Instance.Off<CharacterCreateResponse>(_CharacterCreateResponse);
-    }
-
-
+    /// <summary>
+    /// 返回按钮回调
+    /// </summary>
     public void OnReturnBtn()
     {
         UIManager.Instance.ClosePanel("CreateRolePanel");
     }
 
-
+    /// <summary>
+    /// 创建角色按钮回调
+    /// </summary>
     public void OnCreateBtn()
     {
         //安全校验，姓名输入是否合理，有无选择角色
+        if(jobid == -1)
+        {
+            UIManager.Instance.ShowTopMessage("请选择你的角色");
+            return;
+        }
+
 
         //发送网络请求
-        CharacterCreateRequest req = new CharacterCreateRequest();
-        req.Name = usernameFileid.text;
-        req.JobType = jobid;
-        NetClient.Send(req);
+        UserService.Instance._CharacterCreateRequest(usernameFileid.text, jobid);
 
         //善后处理
         jobid = -1;
-
     }
-
-
-
-    //=========================网络响应====================
-
-    //创建角色响应
-    private void _CharacterCreateResponse(Connection sender, CharacterCreateResponse msg)
-    {
-
-        //显示消息内容
-        UIManager.Instance.AsyncShowMessage(msg.Message);
-
-        //如果成功就进行跳转
-        if (msg.Success)
-        {
-            //发起角色列表的请求
-            CharacterListRequest req = new CharacterListRequest();
-            NetClient.Send(req);
-        }
-
-    }
-
 
 }
