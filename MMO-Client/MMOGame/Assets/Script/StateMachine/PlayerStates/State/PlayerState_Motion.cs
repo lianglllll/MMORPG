@@ -19,8 +19,6 @@ public class PlayerState_Motion : PlayerState
     {
         base.LogicUpdate();
         animator.SetFloat("Speed", stateMachine.parameter.owner.Speed * 0.001f);
-
-
     }
 
 }

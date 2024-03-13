@@ -50,6 +50,26 @@ public class GameEntity : MonoBehaviour
     {
         if (!startFlag) return;
 
+        //模拟重力
+        if (!characterController.isGrounded)
+        {
+            //本次的重力加速度向量，也就是重力增量
+            //Physics.gravity   其实就是-9.8f
+            fallSpeed += 9.8f * Time.deltaTime;
+            if (fallSpeed >= FALLSPEEDMAX)
+            {
+                fallSpeed = FALLSPEEDMAX;
+            }
+            //向下移动
+            characterController.Move(new Vector3(0, -fallSpeed * Time.deltaTime, 0));
+        }
+        else
+        {
+            characterController.Move(new Vector3(0, -0.01f, 0));
+            fallSpeed = 0f;
+        }
+
+
         if (!isMine)
         {
             if (owner.IsDeath) return;
@@ -67,25 +87,6 @@ public class GameEntity : MonoBehaviour
             //只做记录用
             this.position = transform.position;
             this.direction = transform.rotation.eulerAngles;//记录的是欧拉角
-        }
-
-        //模拟重力
-        if (!characterController.isGrounded)
-        {
-            //本次的重力加速度向量，也就是重力增量
-            //Physics.gravity   其实就是-9.8f
-            fallSpeed += 9.8f * Time.deltaTime;
-            if (fallSpeed >= FALLSPEEDMAX)
-            {
-                fallSpeed = FALLSPEEDMAX; 
-            }
-            //向下移动
-            characterController.Move(new Vector3(0, -fallSpeed * Time.deltaTime, 0));
-        }
-        else
-        {
-            characterController.Move(new Vector3(0, -0.01f, 0));
-            fallSpeed = 0f;
         }
 
     }
@@ -170,7 +171,7 @@ public class GameEntity : MonoBehaviour
     }
 
     /// <summary>
-    /// 立刻移动到指定位置
+    /// 根据向量立刻移动
     /// </summary>
     /// <param name="target"></param>
     public void Move(Vector3 target)
@@ -269,6 +270,7 @@ public class GameEntity : MonoBehaviour
         {
             this.position = ToVector3(nEntity.Position);
             this.direction = ToVector3(nEntity.Direction);
+
             if (instantMove)
             {
                 transform.rotation = Quaternion.Euler(direction);

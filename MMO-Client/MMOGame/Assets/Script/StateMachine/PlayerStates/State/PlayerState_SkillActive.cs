@@ -18,15 +18,17 @@ public class PlayerState_SkillActive : PlayerState
             stateMachine.SwitchState(EntityState.Idle);
             return;
         }
+        if (stateMachine.parameter.skill.Define.ActiveAnimName.Equals("None")) return; 
         animator.Play(stateMachine.parameter.skill.Define.ActiveAnimName);
     }
 
     public override void LogicUpdate()
     {
+
+        //当技能阶段不是active的时候就退出
         if (stateMachine.parameter.skill.Stage != SkillStage.Active)
         {
-            stateMachine.currentEntityState = EntityState.NoneState;
-            stateMachine.SwitchState(EntityState.Idle);
+            stateMachine.SwitchState(EntityState.Idle,true);
         }
     }
 

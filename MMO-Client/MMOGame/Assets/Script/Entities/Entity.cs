@@ -64,6 +64,15 @@ namespace GameClient.Entities
             this.EntityData = nEntity;
         }
 
+        /// <summary>
+        /// 推动entity的更新
+        /// </summary>
+        /// <param name="deltatime"></param>
+        public virtual void OnUpdate(float deltatime)
+        {
+
+        }
+
     }
 }
 

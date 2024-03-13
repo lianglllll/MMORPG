@@ -202,6 +202,9 @@ public  class Buff
             this.TimeScale = def.TimeScale;
 
         }
+
+        Owner.AddBuff(this);
+
     }
 
     /// <summary>

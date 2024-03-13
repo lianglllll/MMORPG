@@ -21,32 +21,37 @@ namespace Assets.Script.Entities
         {
             base.OnStateChanged(old_value, new_value);
 
-            //处理死亡逻辑
-            if (IsDeath)
+            if(old_value == UnitState.Dead)
             {
-                Log.Information("1.死亡状态更新");
-                if (renderObj == null) return;
-                StateMachine.SwitchState(EntityState.Death);
-
-                GameTimerManager.Instance.TryUseOneTimer(5f, ()=> {
-                    //如果单位死亡，将其隐藏
-                    //这里判断是防止在死亡的3秒内本actor复活了
-                    if (IsDeath)
-                    {
-                        renderObj?.SetActive(false);
-                    }
-                });
-
+                OnRevive();
             }
-            else if(old_value == UnitState.Dead)
-            {
-                renderObj?.SetActive(true);
-                StateMachine.SwitchState(EntityState.Idle);
-            }
-
-
         }
 
+        public override void OnDeath()
+        {
+            base.OnDeath();
+            if (renderObj == null) return;
+            
+            //隐藏怪物实体
+            GameTimerManager.Instance.TryUseOneTimer(115f, () => {
+                //如果单位死亡，将其隐藏
+                //这里判断是防止在死亡的3秒内本actor复活了
+                if (IsDeath)
+                {
+                    renderObj?.SetActive(false);
+                }
+            });
+        }
+
+
+        /// <summary>
+        /// 复活
+        /// </summary>
+        public void OnRevive()
+        {
+            renderObj?.SetActive(true);
+
+        }
 
     }
 }

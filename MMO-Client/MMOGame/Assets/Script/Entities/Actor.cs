@@ -6,6 +6,7 @@ using Serilog;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,9 @@ namespace GameClient.Entities
         public UnitState unitState;
         public PlayerStateMachine StateMachine;
         public ConcurrentDictionary<EquipsType, Equipment> equipsDict = new();  //actor持有的装备
-        public ConcurrentDictionary<int, Buff> buffsDict = new();          //actor持有的buff<实例id,buff>
+        public ConcurrentDictionary<int, Buff> buffsDict = new();               //actor持有的buff<实例id,buff>
+
+        public EntityState entityState;
 
         public bool IsDeath => unitState == UnitState.Dead;
         public int Level => info.Level;
@@ -43,6 +46,13 @@ namespace GameClient.Entities
             this.LoadEquips(info.EquipList);
         }
 
+        public override void OnUpdate(float deltatime)
+        {
+            skillManager.OnUpdate(deltatime);
+            BuffUpdate(deltatime);
+        }
+
+
         /// <summary>
         /// 受伤，被别人打了，播放一下特效或者ui。不做数值更新
         /// </summary>
@@ -51,8 +61,11 @@ namespace GameClient.Entities
         {
             //ui
             var ownerPos = renderObj.transform.position;
-
-            if (damage.IsMiss)
+            if (damage.IsImmune)
+            {
+                DynamicTextManager.CreateText(ownerPos, "免疫", DynamicTextManager.missData);
+            }
+            else if (damage.IsMiss)
             {   //闪避了，显示一下闪避ui
                 DynamicTextManager.CreateText(ownerPos, "Miss", DynamicTextManager.missData);
             }
@@ -67,10 +80,13 @@ namespace GameClient.Entities
             }
 
             //粒子效果
-            var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
-            if (skillDef != null)
+            if(damage.SkillId != 0)
             {
-                GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj);
+                var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
+                if (skillDef != null)
+                {
+                    GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj);
+                }
             }
 
             //音效
@@ -109,15 +125,19 @@ namespace GameClient.Entities
         public virtual void OnStateChanged(UnitState old_value, UnitState new_value)
         {
             this.unitState = new_value;
+        }
 
-            //目标嘎了
-            if (IsDeath)
+        /// <summary>
+        /// 死亡
+        /// </summary>
+        public virtual void OnDeath()
+        {
+            //ui
+            if (GameApp.target == this)
             {
-                if (GameApp.target == this)
-                {
-                    Kaiyun.Event.FireOut("CancelSelectTarget");
-                }
+                Kaiyun.Event.FireOut("CancelSelectTarget");
             }
+
         }
 
         /// <summary>
@@ -184,6 +204,68 @@ namespace GameClient.Entities
                 var item = new Equipment(itemInfo);
                 equipsDict[item.EquipsType] = item;
             }
+        }
+
+        /// <summary>
+        /// 添加buf
+        /// </summary>
+        /// <param name="buff"></param>
+        public void AddBuff(Buff buff)
+        {
+            buffsDict[buff.ID] = buff;
+            if(GameApp.character == this || GameApp.target == this)
+            {
+                Kaiyun.Event.FireOut("SpecialActorAddBuff", buff);
+            }
+        }
+
+        /// <summary>
+        /// 去除buf
+        /// </summary>
+        /// <param name="id"></param>
+        public void RemoveBuff(int id)
+        {
+            if(buffsDict.TryRemove(id, out _))
+            {
+                if (GameApp.character == this || GameApp.target == this)
+                {
+                    Kaiyun.Event.FireOut("SpecialActorRemoveBuff", this, id);
+                }
+            }
+
+        }
+
+        private List<int> removeKey = new();
+        private void BuffUpdate(float deltatime)
+        {
+            if (buffsDict.Count <= 0) return;
+
+            Buff temBuf;
+            removeKey.Clear();
+            foreach (var item in buffsDict)
+            {
+                temBuf = item.Value;
+                temBuf.ResidualDuration -= deltatime;
+                //降级
+                if(temBuf.ResidualDuration <= 0)
+                {
+                    --(temBuf.CurrentLevel);
+                }
+                //删除
+                if (temBuf.CurrentLevel <= 0)
+                {
+                    removeKey.Add(item.Key);
+                    continue;
+                }
+
+            }
+
+            //删除无效的ui
+            foreach (var key in removeKey)
+            {
+                RemoveBuff(key);
+            }
+
         }
 
     }

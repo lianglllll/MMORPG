@@ -20,27 +20,19 @@ namespace Assets.Script.Entities
 
         }
 
+
         /// <summary>
-        /// 角色的状态发生变化
+        /// 处理死亡逻辑
         /// </summary>
-        /// <param name="old_value"></param>
-        /// <param name="new_value"></param>
-        public override void OnStateChanged(UnitState old_value, UnitState new_value)
+        public override void OnDeath()
         {
-            base.OnStateChanged(old_value, new_value);
+            base.OnDeath();
 
-            //处理死亡逻辑
-            if (IsDeath)
+            if (renderObj == null) return;
+            if (GameApp.character == this)
             {
-                if (renderObj == null) return;
-                StateMachine.SwitchState(EntityState.Death);
-                if(GameApp.character == this)
-                {
-                    GameApp.combatPanelScript.ShowDeathBox();
-                }
+                GameApp.combatPanelScript.ShowDeathBox();
             }
-
-
         }
 
         /// <summary>

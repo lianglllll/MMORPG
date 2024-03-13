@@ -25,7 +25,6 @@ namespace GameClient.Entities
         //线程安全字典
         private ConcurrentDictionary <int, Entity> entityDict = new ConcurrentDictionary<int, Entity>();
 
-
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -39,11 +38,7 @@ namespace GameClient.Entities
         {
             foreach (var entity in entityDict.Values)
             {
-                if(entity is Actor)
-                {
-                    var actor = entity as Actor;
-                    actor.skillManager.OnUpdate(deltatime);
-                }
+                entity.OnUpdate(deltatime);
             }
         }
 

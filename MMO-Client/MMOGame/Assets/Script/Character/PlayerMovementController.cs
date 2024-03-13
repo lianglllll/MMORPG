@@ -50,7 +50,6 @@ public class PlayerMovementController : MonoBehaviour
     private void _Move()
     {
         if (stateMachine.IsSpecialState()) return;
-        
         if (GameApp.IsInputtingChatBox) return;//todo 耦合度太高，我们使用inputsystem切换来解决这个问题
 
         //控制英雄移动

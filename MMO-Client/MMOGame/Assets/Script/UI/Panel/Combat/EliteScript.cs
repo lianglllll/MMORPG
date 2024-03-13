@@ -13,7 +13,7 @@ public class EliteScript : MonoBehaviour
     private Text Level;
     private TextMeshProUGUI HpText;
     private TextMeshProUGUI MpText;
-
+    private BuffGroupScript buffGroup;
 
     private Actor actor;                //UI显示要的目标
 
@@ -25,6 +25,7 @@ public class EliteScript : MonoBehaviour
         Level = transform.Find("Level/Text").GetComponent<Text>();
         HpText = transform.Find("Bars/HpTxext").GetComponent<TextMeshProUGUI>();
         MpText = transform.Find("Bars/MpText").GetComponent<TextMeshProUGUI>();
+        buffGroup = transform.Find("BuffGroup").GetComponent<BuffGroupScript>();
     }
 
     /// <summary>
@@ -33,8 +34,10 @@ public class EliteScript : MonoBehaviour
     /// <param name="actor"></param>
     public void SetOwner(Actor actor)
     {   
+        if (actor == null) return;
+        if (this.actor == actor) return;
         this.actor = actor;
-        if (this.actor == null) return;
+        buffGroup.SetOwner(actor);
         RefreshUI();
     }
 

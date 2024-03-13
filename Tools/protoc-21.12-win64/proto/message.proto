@@ -29,20 +29,21 @@ message NetEntity {
 	Vec3 direction = 3;
 }
 
-//entity的motion状态
+//entity状态
 enum EntityState{
-	NoneState = 0;
-	Idle = 1;
-	Motion = 2;			//walk or run or 其他速度比较快的行为，这个motion状态我们使用speed来驱动变换
-	Hit = 3;
-	Jump = 4;
-	Death = 5;			//这个状态可能用不上,因为我们在其他地方也定义了死亡
-	Shift = 6;			//闪步
-	SWORDFLIGHT = 7;	//御剑飞行
-	StrikeAndFly = 8;	//击飞
-	StrikeAndBack = 9;	//击退
-	SkillIntonate = 10;  //技能蓄气
-    SkillActive = 11;    //技能激活
+	NoneState = 0;			//无状态
+	Idle = 1;				//等待状态
+	Motion = 2;				//walk||run||其他速度比较快的行为，这个motion状态我们使用speed来驱动变换
+	Hit = 3;				//受击状态
+	Jump = 4;				//跳跃状态，需要用到pos.y
+	Death = 5;				//死亡状态、这个状态可能用不上,因为我们在其他地方也定义了死亡
+	Shift = 6;				//闪步
+	SWORDFLIGHT = 7;		//御剑飞行
+	StrikeAndFly = 8;		//击飞
+	StrikeAndBack = 9;		//击退
+	Dizzy = 10;				//眩晕
+	SkillIntonate = 11;  	//技能蓄气
+    SkillActive = 12;    	//技能激活
 }
 
 //同步entity:位置+状态
@@ -269,6 +270,7 @@ message Damage{
 	DameageType damageType = 5;
 	bool isCrit = 6;		//是否暴击
 	bool isMiss = 7;
+	bool isImmune = 8;		//免疫伤害
 }
 
 //通知客户端有人收到伤害

@@ -167,23 +167,27 @@ public class GameObjectManager:MonoBehaviour
         if (obj == null) return;
         GameEntity gameEntity = obj.GetComponent<GameEntity>();
         //设置数据到entity中
-        gameEntity.SetData(nEntitySync.Entity);
+        gameEntity.SetData(nEntitySync.Entity,nEntitySync.Force);
 
         //2.设置动画状态
         //如果是None,一律不作处理，将维持原来的动画状态
         if (nEntitySync.State != EntityState.NoneState)
         {
-            obj.GetComponent<PlayerStateMachine>().SwitchState(nEntitySync.State);
+            PlayerStateMachine stateMachine = obj.GetComponent<PlayerStateMachine>();
+            stateMachine.parameter.owner.entityState = nEntitySync.State;//这里也缓存一份，用于状态机退出一些特殊的状态
+            stateMachine.SwitchState(nEntitySync.State);
         }
 
         //3.安全校验
         //强制回到目标位置
         if (nEntitySync.Force)
         {
-            Vector3 target = V3.Of(nEntitySync.Entity.Position)*0.001f;
+            Vector3 target = V3.Of(nEntitySync.Entity.Position) * 0.001f;
             //获取位移向量
             //不能直接使用trasforme的原因是，存在charactercontroller会默认覆盖transform
-            gameEntity.Move(target);
+            UnityMainThreadDispatcher.Instance().Enqueue(() => {
+                gameEntity.Move(target);
+            });
         }
     }
 

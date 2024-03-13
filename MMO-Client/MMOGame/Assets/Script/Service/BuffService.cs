@@ -32,7 +32,7 @@ namespace Assets.Script.Service
                 var buff = new Buff();
                 buff.Init(info);
                 if (buff.Owner == null) continue;
-                buff.Owner.buffsDict[buff.ID] = buff;
+
             }
         }
 
@@ -43,7 +43,7 @@ namespace Assets.Script.Service
             {
                 var actor = GameTools.GetUnit(info.OwnerId);
                 if (actor == null) continue;
-                actor.buffsDict.TryRemove(info.Id, out _);
+                actor.RemoveBuff(info.Id);
             }
         }
 
