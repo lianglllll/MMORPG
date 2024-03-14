@@ -55,7 +55,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            if(GameApp.character==null )
+            if(GameApp.character==null)
             {
 
                 //1.切换场景

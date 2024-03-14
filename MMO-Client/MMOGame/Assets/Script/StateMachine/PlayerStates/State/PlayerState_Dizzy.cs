@@ -9,6 +9,9 @@ using UnityEngine;
 /// </summary>
 public class PlayerState_Dizzy : PlayerState
 {
+    float transitionDuration = 0.3f; // 过渡时间（秒）
+
+
     public PlayerState_Dizzy(PlayerStateMachine stateMachine)
     {
         Initialize(stateMachine);
@@ -16,7 +19,7 @@ public class PlayerState_Dizzy : PlayerState
 
     public override void Enter()
     {
-        animator.Play("Dizzy");
+        animator.CrossFade("Dizzy", transitionDuration);
     }
 
     public override void LogicUpdate()

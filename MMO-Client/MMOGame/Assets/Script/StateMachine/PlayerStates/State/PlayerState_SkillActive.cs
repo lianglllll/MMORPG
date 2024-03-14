@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class PlayerState_SkillActive : PlayerState
 {
+    float transitionDuration = 0.3f; // 过渡时间（秒）
+
+    private bool isTargetSkill;
+
     public PlayerState_SkillActive(PlayerStateMachine stateMachine)
     {
         Initialize(stateMachine);
@@ -19,17 +23,19 @@ public class PlayerState_SkillActive : PlayerState
             return;
         }
         if (stateMachine.parameter.skill.Define.ActiveAnimName.Equals("None")) return; 
-        animator.Play(stateMachine.parameter.skill.Define.ActiveAnimName);
+        animator.CrossFade(stateMachine.parameter.skill.Define.ActiveAnimName, transitionDuration);
+
     }
 
     public override void LogicUpdate()
     {
-
         //当技能阶段不是active的时候就退出
         if (stateMachine.parameter.skill.Stage != SkillStage.Active)
         {
             stateMachine.SwitchState(EntityState.Idle,true);
         }
+
+
     }
 
     public override void PhysicUpdate()

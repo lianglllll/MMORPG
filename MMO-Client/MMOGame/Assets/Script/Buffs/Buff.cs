@@ -165,10 +165,17 @@ public  class Buff
     /// <param name="owner"></param>
     /// <param name="provider"></param>
     /// <exception cref="Exception"></exception>
-    public virtual void Init(BuffInfo info)
+    public virtual void Init(BuffInfo info, Actor actor = null)
     {
         ID = info.Id;
-        Owner = GameTools.GetUnit(info.OwnerId);
+        if (actor != null)
+        {
+            Owner = actor;
+        }
+        else
+        {
+            Owner = GameTools.GetUnit(info.OwnerId);
+        }
         Provider = GameTools.GetUnit(info.ProviderId);
         CurrentLevel = info.CurrentLevel;
         ResidualDuration = info.ResidualDuration;

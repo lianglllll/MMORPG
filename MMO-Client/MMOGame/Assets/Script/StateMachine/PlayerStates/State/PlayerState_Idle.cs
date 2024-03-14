@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerState_Idle : PlayerState
 {
+    float transitionDuration = 0.3f; // 过渡时间（秒）
 
     public PlayerState_Idle(PlayerStateMachine stateMachine)
     {
@@ -12,7 +13,7 @@ public class PlayerState_Idle : PlayerState
 
     public override void Enter()
     {
-        animator.Play("Idle");
+        animator.CrossFade("Idle", transitionDuration);
     }
 
 

@@ -44,8 +44,8 @@ namespace GameClient.Entities
             this.define = DataManager.Instance.unitDict[info.Tid];
             this.skillManager = new SkillManager(this);
             this.LoadEquips(info.EquipList);
+            this.LoadBuffs(info.BuffsList);
         }
-
         public override void OnUpdate(float deltatime)
         {
             skillManager.OnUpdate(deltatime);
@@ -205,6 +205,20 @@ namespace GameClient.Entities
                 equipsDict[item.EquipsType] = item;
             }
         }
+
+
+        /// <summary>
+        /// 加载buff
+        /// </summary>
+        /// <param name="buffsList"></param>
+        private void LoadBuffs(RepeatedField<BuffInfo> buffsList)
+        {
+            foreach(var buffInfo in buffsList)
+            {
+                new Buff().Init(buffInfo,this);
+            }
+        }
+
 
         /// <summary>
         /// 添加buf

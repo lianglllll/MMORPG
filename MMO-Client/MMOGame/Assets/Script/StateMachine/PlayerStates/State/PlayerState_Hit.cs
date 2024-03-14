@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerState_Hit : PlayerState
 {
+    float transitionDuration = 0.3f; // 过渡时间（秒）
+
     public PlayerState_Hit(PlayerStateMachine stateMachine)
     {
         Initialize(stateMachine);
@@ -11,7 +13,7 @@ public class PlayerState_Hit : PlayerState
 
     public override void Enter()
     {
-        animator.Play("Hit");
+        animator.CrossFade("Hit", transitionDuration);
     }
 
     public override void LogicUpdate()

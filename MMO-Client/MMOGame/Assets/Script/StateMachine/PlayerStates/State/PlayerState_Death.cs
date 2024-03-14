@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerState_Death : PlayerState
 {
+    float transitionDuration = 0.3f; // 过渡时间（秒）
+
     public PlayerState_Death(PlayerStateMachine stateMachine)
     {
         Initialize(stateMachine);
@@ -13,7 +15,7 @@ public class PlayerState_Death : PlayerState
 
     public override void Enter()
     {
-        animator.Play("Death");
+        animator.CrossFade("Death", transitionDuration);
         stateMachine.parameter.owner.OnDeath();
 
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerState_SkillIntonate : PlayerState
 {
+    float transitionDuration = 0.3f; // 过渡时间（秒）
+
     public PlayerState_SkillIntonate(PlayerStateMachine stateMachine)
     {
         Initialize(stateMachine);
@@ -13,7 +15,7 @@ public class PlayerState_SkillIntonate : PlayerState
     public override void Enter()
     {
         //动画
-        animator.Play(stateMachine.parameter.skill.Define.IntonateAnimName);
+        animator.CrossFade(stateMachine.parameter.skill.Define.IntonateAnimName, transitionDuration);
 
         //自身特效
         if(stateMachine.parameter.skill.Define.ID == 2002)

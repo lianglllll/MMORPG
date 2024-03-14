@@ -11,6 +11,8 @@ public class PlayerMovementController : MonoBehaviour
     private PlayerStateMachine stateMachine;
     private CameraManager cameraManager;
     private GameEntity gameEntity;
+    private float rotationSpeed = 8f;
+
 
     public float CurrentSpeed
     {
@@ -63,12 +65,28 @@ public class PlayerMovementController : MonoBehaviour
             stateMachine.SwitchState(EntityState.Motion);
             if (stateMachine.currentEntityState == EntityState.Motion)
             {
-                //摇杆控制英雄沿着摄像机的方向移动
+/*                //摇杆控制英雄沿着摄像机的方向移动
                 Vector3 dir = cameraManager.rCamera.transform.forward * v + cameraManager.rCamera.transform.right * h;
                 dir.y = 0;
                 dir.Normalize();
                 characterController.Move(dir * CurrentSpeed * Time.deltaTime);
-                gameObject.transform.forward = dir;
+                gameObject.transform.forward = dir;*/
+
+                //摇杆控制英雄沿着摄像机的方向移动
+
+                // 计算移动方向
+                Vector3 dir = cameraManager.rCamera.transform.forward * v + cameraManager.rCamera.transform.right * h;
+                dir.y = 0;
+                dir.Normalize();
+
+                // 插值计算目标旋转方向
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
+
+                // 平滑地调整角色旋转
+                gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+                // 移动角色
+                characterController.Move(dir * CurrentSpeed * Time.deltaTime);
             }
         }
         else
