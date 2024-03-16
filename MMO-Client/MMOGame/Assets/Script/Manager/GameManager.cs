@@ -16,11 +16,15 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> keepAlive;          //切换场景时不销毁的对象
 
+    private void Awake()
+    {
+    }
     void Start()
     {
         Init();
 
         //初始化服务
+        GameSceneManager.Instance.Init(GameObject.Find("TP_Camera").GetComponent<TP_CameraController>());
         DataManager.Instance.init();
         UserService.Instance.Init();
         CombatService.Instance.Init();

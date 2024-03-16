@@ -45,7 +45,7 @@ public class ToolTip : MonoBehaviour
             }
         }
         transform.position = Input.mousePosition + new Vector3(offsetX,offsetY,0);
-        transform.SetAsLastSibling();
+        //transform.SetAsLastSibling();
     }
 
 

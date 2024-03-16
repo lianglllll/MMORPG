@@ -94,7 +94,6 @@ public class GameObjectManager:MonoBehaviour
         //8.给我们控制的角色添加一些控制脚本
         if (isMine)
         {
-            chrObj.AddComponent<CameraManager>();                                               //给当前用户控制的视角
             PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();     //给当前用户控制的角色添加控制脚本
             chrObj.tag = "CtlPlayer";                                                           //打标签
         }

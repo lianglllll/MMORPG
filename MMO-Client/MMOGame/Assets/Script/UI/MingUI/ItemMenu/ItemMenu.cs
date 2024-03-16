@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 背包中物品交互用的
+/// </summary>
 public class ItemMenu : MonoBehaviour
 {
 
@@ -39,7 +43,7 @@ public class ItemMenu : MonoBehaviour
         }
         // 显示菜单
         Instance.transform.gameObject.SetActive(true);
-        Instance.transform.SetAsLastSibling();
+        //Instance.transform.SetAsLastSibling();
     }
 
     public static void Hide()

@@ -9,9 +9,9 @@ public class PlayerMovementController : MonoBehaviour
 {
     private CharacterController characterController;
     private PlayerStateMachine stateMachine;
-    private CameraManager cameraManager;
     private GameEntity gameEntity;
     private float rotationSpeed = 8f;
+    private Transform mainCamera;
 
 
     public float CurrentSpeed
@@ -31,13 +31,23 @@ public class PlayerMovementController : MonoBehaviour
     {
         stateMachine = GetComponent<PlayerStateMachine>();
         characterController = GetComponent<CharacterController>();
-        cameraManager = GetComponent<CameraManager>();
         gameEntity = GetComponent<GameEntity>();
+        mainCamera = Camera.main.transform;
+
     }
 
     private void Start()
     {
         //CurrentSpeed = 3f;
+
+        //启用第三人称摄像机
+        GameSceneManager.Instance.UseTPCamera(transform.Find("CameraLookTarget").transform);//启用摄像机
+
+    }
+
+    private void OnDestroy()
+    {
+        GameSceneManager.Instance.CloseTPCamera();
     }
 
     void Update()
@@ -65,17 +75,11 @@ public class PlayerMovementController : MonoBehaviour
             stateMachine.SwitchState(EntityState.Motion);
             if (stateMachine.currentEntityState == EntityState.Motion)
             {
-/*                //摇杆控制英雄沿着摄像机的方向移动
-                Vector3 dir = cameraManager.rCamera.transform.forward * v + cameraManager.rCamera.transform.right * h;
-                dir.y = 0;
-                dir.Normalize();
-                characterController.Move(dir * CurrentSpeed * Time.deltaTime);
-                gameObject.transform.forward = dir;*/
 
                 //摇杆控制英雄沿着摄像机的方向移动
 
                 // 计算移动方向
-                Vector3 dir = cameraManager.rCamera.transform.forward * v + cameraManager.rCamera.transform.right * h;
+                Vector3 dir = mainCamera.forward * v + mainCamera.right * h;
                 dir.y = 0;
                 dir.Normalize();
 

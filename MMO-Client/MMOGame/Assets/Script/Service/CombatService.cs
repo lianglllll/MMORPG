@@ -59,7 +59,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
             {
 
                 //1.切换场景
-                GameApp.LoadSpace(msg.Character.SpaceId);
+                GameSceneManager.Instance.LoadSpace(msg.Character.SpaceId);
 
                 //2.加载其他角色和ai
                 foreach(var item in msg.CharacterList)
@@ -87,7 +87,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
                 //清理旧场景的对象
                 EntityManager.Instance.Clear();
                 //切换场景
-                GameApp.LoadSpace(msg.Character.SpaceId);
+                GameSceneManager.Instance.LoadSpace(msg.Character.SpaceId);
                 //加载其他角色和ai
                 foreach (var item in msg.CharacterList)
                 {

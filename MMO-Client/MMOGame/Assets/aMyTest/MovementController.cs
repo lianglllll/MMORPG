@@ -9,7 +9,7 @@ public class MovementController : MonoBehaviour
 {
     private CharacterController characterController;
     private CtlStateMachine stateMachine;
-    private CameraManager cameraManager;
+    private Transform mainCamera;
 
     private float rotationSpeed = 8f;
 
@@ -25,7 +25,7 @@ public class MovementController : MonoBehaviour
     {
         stateMachine = GetComponent<CtlStateMachine>();
         characterController = GetComponent<CharacterController>();
-        cameraManager = GetComponent<CameraManager>();
+        mainCamera = Camera.main.transform;
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class MovementController : MonoBehaviour
                 //摇杆控制英雄沿着摄像机的方向移动
 
                 // 计算移动方向
-                Vector3 dir = cameraManager.rCamera.transform.forward * v + cameraManager.rCamera.transform.right * h;
+                Vector3 dir = mainCamera.forward * v + mainCamera.right * h;
                 dir.y = 0;
                 dir.Normalize();
 

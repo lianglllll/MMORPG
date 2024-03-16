@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Proto;
+using UnityEngine.EventSystems;
 
 
 /// <summary>
@@ -13,7 +14,7 @@ using Proto;
 /// 让当前这个脚本自己管自己，skill只提供了触发和倒计时
 /// 这里设置一个标记为flag来标记是否进入倒计时
 /// </summary>
-public class AbilityBarScript : MonoBehaviour
+public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Sprite icon;
     public string aName;
@@ -154,4 +155,23 @@ public class AbilityBarScript : MonoBehaviour
         GameApp.Spell(_skill);
     }
 
+
+    /// <summary>
+    /// 鼠标掠过的事件
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        var content = "<color=#ffffff>技能信息信息为空</color>";
+        if(_skill != null)
+        {
+            content = _skill.GetDescText();
+        }
+        ToolTip.Instance.Show(content);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ToolTip.Instance?.Hide();
+    }
 }

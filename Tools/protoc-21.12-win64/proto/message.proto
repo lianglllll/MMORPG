@@ -543,6 +543,7 @@ message ItemPickUpRequest{
 message ItemPickupResponse{
 	Result result = 1;
 	int32 itemId = 2;
+	int32 amout = 3;
 }
 
 //拉取全部装备信息请求

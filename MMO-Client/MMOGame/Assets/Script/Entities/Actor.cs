@@ -71,26 +71,41 @@ namespace GameClient.Entities
             }
             else{
                 //伤害飘字
-                DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"));
+                if(damage.DamageType == DameageType.Magical)
+                {
+                    DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"), DynamicTextManager.Spell);
+                }
+                else if(damage.DamageType == DameageType.Physical)
+                {
+                    DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"), DynamicTextManager.Physical);
+                }
+                else if (damage.DamageType == DameageType.Real)
+                {
+                    DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"), DynamicTextManager.Real);
+                }
+                else
+                {
+                    DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"));
+                }
+
+                //暴击做一些处理，震屏..
                 if (damage.IsCrit)
                 {
-                    //暴击做一些处理，震屏..
                     DynamicTextManager.CreateText(ownerPos, "Crit!", DynamicTextManager.critData);
                 }
             }
 
-            //粒子效果
+            //被技能击中的粒子效果
             if(damage.SkillId != 0)
             {
                 var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
                 if (skillDef != null)
                 {
-                    GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj);
+                    GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj,new Vector3(0,1,0));
                 }
             }
 
             //音效
-
 
         }
 

@@ -30,15 +30,15 @@ public class KnapsackPanel:BasePanel
     protected override void Awake()
     {
         base.Awake();
-        gridTransform = transform.Find("Right/Grid").transform;
+        gridTransform = transform.Find("Right/ItemColumn/Grid").transform;
         inventoryCellPrefab = Resources.Load<GameObject>("Prefabs/UI/Inventory/InventoryCell");
         itemUIPrefab = Resources.Load<GameObject>("Prefabs/UI/Inventory/ItemUI");
-        closeBtn = transform.Find("Right/CloseBtn").GetComponent<Button>();
+        closeBtn = transform.Find("Right/ItemColumn/CloseBtn").GetComponent<Button>();
         ItemUITmpParent = transform.Find("ItemUITmpParent").transform;
-        numberInputBox = transform.Find("ItemUITmpParent/NumberInputBox").GetComponent<NumberInputBox>();
+        numberInputBox = transform.Find("NumberInputBox").GetComponent<NumberInputBox>();
         pickUpItemListBox = transform.Find("PickUpItemListBox").GetComponent<PickUpItemListBox>();
 
-        goldText = transform.Find("Right/Currency/Gold/IconBar/GoldNumberText").GetComponent<Text>();
+        goldText = transform.Find("Right/ItemColumn/Currency/Gold/IconBar/GoldNumberText").GetComponent<Text>();
 
     }
 

@@ -234,5 +234,17 @@ namespace GameClient.Combat
             }
         }
 
+        /// <summary>
+        /// 获取描述文本
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetDescText()
+        {
+            var content = $"<color=#ffffff>{this.Define.Name}</color>\n" +
+                          $"<color=yellow>{this.Define.Description}</color>\n\n" +
+                          $"<color=bulue>技能冷却时间：{this.Define.CD}</color>";
+            return content;
+        }
+
     }
 }

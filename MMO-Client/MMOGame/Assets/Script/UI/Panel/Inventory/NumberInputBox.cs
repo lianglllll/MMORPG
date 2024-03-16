@@ -37,6 +37,11 @@ public class NumberInputBox : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        transform.SetAsLastSibling();
+    }
+
 
     public void Show(Vector3 pos, string title,int limitCount, Action<int> ok)
     {

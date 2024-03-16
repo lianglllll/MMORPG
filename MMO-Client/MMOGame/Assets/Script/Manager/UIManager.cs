@@ -40,10 +40,10 @@ public class UIManager
         {
             if (_uiRoot == null)
             {
-                _uiRoot = GameObject.Find("Panel")?.transform;
+                _uiRoot = GameObject.Find("Panel/BasePanel")?.transform;
                 if(_uiRoot == null)
                 {
-                    GameObject emptyObject = new GameObject("Panel");
+                    GameObject emptyObject = new GameObject("Panel/BasePanel");
                     // 可选：你可以设置空物体的位置、旋转等属性
                     emptyObject.transform.position = new Vector3(0f, 0f, 0f);
                     emptyObject.transform.rotation = Quaternion.identity;

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 407619c5c19a54982b3880b5a085c597, type: 3}
+  iconMaxWidth: 192
+  title: Mini Simple Characters | Skeleton | Free Demo
+  sections:
+  - heading: About
+    text: Thank you for downloading the Mini Simple Characters | Skeleton | Free Demo asset.This demo base character is intended to you to test and see if it fit your needs before you buy the other characters or packs derived from this basemesh.
+    linkText: 
+    url: 
+  - heading: ✓ Optimization
+    text: "This character is extremely light and can be used in both pc and mobile
+      games. All models share a single texture file, allowing you to customize the colors
+      according to your needs just by duplicanting materials and adjusting the material offset. \n\n⚠*Many models have primary, secondary, and even tertiary material slots, check the <Materials> option in the [ Inspector > Skinned Mesh Renderer ] to add multiple materials and customize colors to fit your needs."
+    linkText: 
+    url: 
+  - heading: ✓ Textures
+    text: "Diffuse/Albedo:\n-256px (.png)"
+    linkText: 
+    url: 
+  - heading: ✓ Polycount
+    text: "
+- body_arms | 1496 Tris\n
+- body_head | 614 Tris\n
+- body_legs | 2160 Tris\n
+- body_torso | 1552 Tris\n
+- shield_wood | 268 Tris\n
+- sword_wood | 204 Tris"
+    linkText: 
+    url: 
+  - heading: ✓ Blendshapes
+    text:  "Body_Head:\n- Angry\n- Sad\n\n⚠*Make sure that the <Blend Shape Normals>is set to <Import> in [ Inspector > Import Settings > Model Tab ] to avoid artifacts when using the blendshapes"
+    linkText:
+    url:
+  - heading: ✓ Animations
+    text:  "-Idle\n-Walk\n-Run\n-Jump\n-Loose\n\n*All models have Humanoid rigs (Rigged/Skinned and Mecanim ready)\n\n⚠*Remember to adjust <Muscle & Settings> in the model´s [Rig > Configure] to adjust overlapping and clipping depending of your source animations."
+    linkText:
+    url:
+  - heading: ✓ Modular Design
+    text:  "This character is designed to be modular, making it easy to create a variety of combinations, allowing you to create unique characters and scenes."
+    linkText:
+    url:
+  - heading:
+    text:  "Each asset has been carefully crafted to add a unique touch to your game project!"
+    linkText:
+    url:
+  - heading: ☎ Contact/Support
+    text: 
+    linkText: Asset Store Profile 
+    url: https://assetstore.unity.com/publishers/20594
+  - heading: 
+    text: 
+    linkText: Twitter
+    url: https://twitter.com/joaobaltieri
+  loadedLayout: 1

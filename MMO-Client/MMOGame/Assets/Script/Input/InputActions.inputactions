@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Climb",
-                    "type": "Button",
-                    "id": "2fa5cc7d-9677-4649-88d1-695865e8019e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LAttack",
                     "type": "Button",
                     "id": "25d0162b-c3b1-4113-8e51-8928c9e74620",
@@ -54,6 +45,15 @@
                     "name": "RAttack",
                     "type": "Button",
                     "id": "206ebc11-3526-4d70-9392-33453d4c7466",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Climb",
+                    "type": "Button",
+                    "id": "2fa5cc7d-9677-4649-88d1-695865e8019e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -99,6 +99,33 @@
                     "name": "EquipWP",
                     "type": "Button",
                     "id": "3defcaec-03a7-4122-9c72-98341bce3828",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Quit",
+                    "type": "Button",
+                    "id": "f33ab4f1-1921-43b2-bbd1-02fb86e8936c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "5a923448-2431-4793-8970-8fb72c3b4b1e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "587da5ce-91b4-4e91-b7f0-32ed618ecae5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -185,17 +212,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d6c60285-2625-420c-bff5-91d68846df33",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Climb",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1f501986-49e2-4367-9c9d-20116b1e2075",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -268,6 +284,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "EquipWP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6c60285-2625-420c-bff5-91d68846df33",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de6c0fd2-be90-45dd-b61b-dcbd3ab365aa",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d77916b1-8859-4826-b034-41a015ed0c25",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1036a511-87ec-453d-9e02-3b42d0670df1",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

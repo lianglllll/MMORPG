@@ -11,6 +11,12 @@ public class DynamicTextManager : MonoBehaviour
     public static DynamicTextData critData;
     //闪避的飘字效果
     public static DynamicTextData missData;
+    //物理伤害
+    public static DynamicTextData Physical;
+    //法术伤害
+    public static DynamicTextData Spell;
+    //真实伤害
+    public static DynamicTextData Real;
 
 
     //画布对象
@@ -21,14 +27,28 @@ public class DynamicTextManager : MonoBehaviour
     [SerializeField] private DynamicTextData _defaultData;
     [SerializeField] private DynamicTextData _critData;
     [SerializeField] private DynamicTextData _missData;
+    [SerializeField] private DynamicTextData _physical;
+    [SerializeField] private DynamicTextData _spell;
+    [SerializeField] private DynamicTextData _real;
     [SerializeField] private GameObject _canvasPrefab;
 
 
     private void Awake()
     {
         defaultData = _defaultData;
-        canvasPrefab = _canvasPrefab;
         critData = _critData;
+        missData = _missData;
+        Physical = _physical;
+        Spell = _spell;
+        Real = _real;
+
+
+
+        canvasPrefab = _canvasPrefab;
+
+
+
+
     }
 
     public static void CreateText2D(Vector2 position, string text, DynamicTextData data)
@@ -37,6 +57,13 @@ public class DynamicTextManager : MonoBehaviour
         newText.transform.GetComponent<DynamicText2D>().Initialise(text, data);
     }
 
+
+    /// <summary>
+    /// 创建一个伤害飘字
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="text"></param>
+    /// <param name="data"></param>
     public static void CreateText(Vector3 position, string text, DynamicTextData data = null)
     {
         if (data == null)

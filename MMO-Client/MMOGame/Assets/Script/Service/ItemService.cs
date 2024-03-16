@@ -174,8 +174,20 @@ public class ItemService : Singleton<ItemService>, IDisposable
     /// </summary>
     public void _ItemPickupResponse(Connection sender, ItemPickupResponse msg)
     {
+
         //刷一下ui
-        Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
+        if (msg.Result == Result.Success)
+        {
+            Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
+
+            Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
+            var item = DataManager.Instance.itemDefineDict[msg.ItemId];
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                UIManager.Instance.MessagePanel.ShowItemIOInfo($"拾取物品:{item.Name}X{msg.Amout}");
+            });
+        }
+
     }
 
     /// <summary>
