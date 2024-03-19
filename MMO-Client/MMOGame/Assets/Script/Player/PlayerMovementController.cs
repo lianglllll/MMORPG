@@ -53,7 +53,6 @@ public class PlayerMovementController : MonoBehaviour
     void Update()
     {
         _Move();
-        SelectTargetObject();
     }
 
     /// <summary>
@@ -100,33 +99,6 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 选择一个目标
-    /// </summary>
-    public void SelectTargetObject()
-    {
 
-        //选择目标
-        if (Input.GetMouseButtonDown(0))  // 当鼠标左键被按下
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // 从鼠标点击位置发出一条射线
-            RaycastHit hitInfo;  // 存储射线投射结果的数据
-            LayerMask actorLayer = LayerMask.GetMask("Actor");
-            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, actorLayer))  // 检测射线是否与特定图层的物体相交
-            {
-                GameObject clickedObject = hitInfo.collider.gameObject;  // 获取被点击的物体
-                                                                         // 在这里可以对获取到的物体进行处理
-                Debug.Log("选择目标: " + clickedObject.name);
-
-                int entityId = clickedObject.GetComponent<GameEntity>().entityId;
-                GameApp.target = EntityManager.Instance.GetEntity<Actor>(entityId);
-                Kaiyun.Event.FireOut("SelectTarget");
-            }
-        }else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameApp.target = null;
-            Kaiyun.Event.FireOut("CancelSelectTarget");
-        }
-    }
 
 }

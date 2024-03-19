@@ -86,6 +86,7 @@
     <Compile Include="Assets\Script\Camera\CameraManager.cs" />
     <Compile Include="Assets\aMyTest\Action\LightInteraction.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_SkillActive.cs" />
+    <Compile Include="Assets\Script\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Script\Manager\GameApp.cs" />
     <Compile Include="Assets\Script\StateMachine\Base\CtlState.cs" />
     <Compile Include="Assets\Script\Inventory\Equipment.cs" />
@@ -135,9 +136,11 @@
     <Compile Include="Assets\Script\Tools\Event.cs" />
     <Compile Include="Assets\aMyTest\TimeMachineMgr.cs" />
     <Compile Include="Assets\aMyTest\GameTest.cs" />
+    <Compile Include="Assets\Script\Manager\GameSceneManager.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\MessagePanelScript.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\PlayerStateMachine.cs" />
+    <Compile Include="Assets\Script\Camera\TP_CameraController.cs" />
     <Compile Include="Assets\Script\UI\Panel\RoleListItemScript.cs" />
     <Compile Include="Assets\Script\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Demo\Scripts\Movement.cs" />
@@ -158,7 +161,7 @@
     <Compile Include="Assets\Script\Input\GameInputManager.cs" />
     <Compile Include="Assets\Script\StateMachine\Base\StateMachine.cs" />
     <Compile Include="Assets\Script\Manager\EntityManager.cs" />
-    <Compile Include="Assets\Script\Character\PlayerMovementController.cs" />
+    <Compile Include="Assets\Script\Player\PlayerMovementController.cs" />
     <Compile Include="Assets\Script\UI\Panel\Inventory\NumberInputBox.cs" />
     <Compile Include="Assets\Script\Entities\Character.cs" />
     <Compile Include="Assets\Script\Service\CombatService.cs" />
@@ -206,11 +209,9 @@
     <Compile Include="Assets\Script\UI\Panel\Info\LoadingBox.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_StrikeAndFly.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Jump.cs" />
+    <Compile Include="Assets\Script\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Script\Camera\TP_CameraController.cs" />
-    <Compile Include="Assets\Script\Camera\CameraCollider.cs" />
-    <Compile Include="Assets\Script\Manager\GameSceneManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />

@@ -9,6 +9,7 @@ using Serilog;
 using GameClient.Entities;
 using Assets.Script.Entities;
 using GameClient;
+using GameClient.Combat;
 
 public class CombatService : Singleton<CombatService>, IDisposable
 {
@@ -312,5 +313,32 @@ public class CombatService : Singleton<CombatService>, IDisposable
     {
         EntityManager.Instance.OnItemEnterScene(msg.NetItemEntity);
     }
+
+
+    /// <summary>
+    /// 释放技能
+    /// </summary>
+    /// <param name="skill"></param>
+    public  void SpellSkill(Skill skill,Actor target)
+    {
+        //向服务器发送施法请求
+        SpellCastRequest req = new SpellCastRequest() { Info = new CastInfo() };
+        req.Info.SkillId = skill.Define.ID;
+        req.Info.CasterId = skill.Owner.EntityId ;
+        if (skill.IsUnitTarget)
+        {
+            req.Info.TargetId = target.EntityId;
+        }
+        else if (skill.IsPointTarget)
+        {
+            req.Info.Point = V3.ToVec3(target.Position);
+        }else if (skill.IsNoneTarget)
+        {
+            //无目标就啥也不用填了，这种技能类似旋风斩的，跟随主角的范围伤害。在这一点上和点目标技能进行了区分。
+        }
+        NetClient.Send(req);
+    }
+
+
 
 }

@@ -53,28 +53,6 @@ public class GameApp
         get => combatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
     }
 
-    /// <summary>
-    /// 技能释放的发包
-    /// </summary>
-    /// <param name="skill"></param>
-    public static void Spell(Skill skill)
-    {
-        //向服务器发送施法请求
-        SpellCastRequest req = new SpellCastRequest() { Info = new CastInfo() };
-        req.Info.SkillId = skill.Define.ID;
-        req.Info.CasterId = GameApp.character.EntityId;
-        if (skill.IsUnitTarget)
-        {
-            req.Info.TargetId = GameApp.target.EntityId;
-
-        }
-        else if (skill.IsPointTarget)
-        {
-            req.Info.Point = V3.ToVec3(GameApp.target.Position);
-        }
-        NetClient.Send(req);
-    }
-
 
     /// <summary>
     /// 传送请求发包

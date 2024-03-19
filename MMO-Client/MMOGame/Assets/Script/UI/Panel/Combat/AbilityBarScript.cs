@@ -152,7 +152,7 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
             return;
         }
 
-        GameApp.Spell(_skill);
+        CombatService.Instance.SpellSkill(_skill,GameApp.target);
     }
 
 

@@ -36,6 +36,7 @@ namespace GameClient.Combat
         public bool IsPassive;              //是否是被动技能
         private SCObject _sco;              //技能的目标,Use触发时设置
 
+        public int SkillId => Define.ID;
 
         /// <summary>
         /// 聚气进度 0-1
@@ -245,6 +246,17 @@ namespace GameClient.Combat
                           $"<color=bulue>技能冷却时间：{this.Define.CD}</color>";
             return content;
         }
+
+        /// <summary>
+        /// 发起攻击的间隔：skill吟唱+skill执行+skill后摇
+        /// </summary>
+        /// <returns></returns>
+        public float GetAttackColdTime()
+        {
+            return Define.IntonateTime + Define.Duration + Define.PostRockTime; 
+        }
+
+
 
     }
 }
