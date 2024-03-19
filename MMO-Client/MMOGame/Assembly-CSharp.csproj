@@ -83,7 +83,7 @@
     <Compile Include="Assets\Script\Entities\ItemEntity.cs" />
     <Compile Include="Assets\aMyTest\Mechanism\BackInTime\Boomer.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Billboard.cs" />
-    <Compile Include="Assets\Script\Camera\CameraManager.cs" />
+    <Compile Include="Assets\Script\Camera\old\CameraManager.cs" />
     <Compile Include="Assets\aMyTest\Action\LightInteraction.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_SkillActive.cs" />
     <Compile Include="Assets\Script\Camera\CameraCollider.cs" />
@@ -194,6 +194,7 @@
     <Compile Include="Assets\Script\UI\Panel\BasePanel.cs" />
     <Compile Include="Assets\Script\Tools\GameTools.cs" />
     <Compile Include="Assets\aMyTest\ReplayMgr.cs" />
+    <Compile Include="Assets\Script\Player\UnitUIController.cs" />
     <Compile Include="Assets\Script\Net\V3.cs" />
     <Compile Include="Assets\Script\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Art\Unit\牛头人\DemoScene\Action_Manage.cs" />

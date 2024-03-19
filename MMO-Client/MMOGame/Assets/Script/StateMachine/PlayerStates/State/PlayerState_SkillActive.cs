@@ -23,7 +23,8 @@ public class PlayerState_SkillActive : PlayerState
             return;
         }
         if (stateMachine.parameter.skill.Define.ActiveAnimName.Equals("None")) return; 
-        animator.CrossFade(stateMachine.parameter.skill.Define.ActiveAnimName, transitionDuration);
+        //animator.CrossFade(stateMachine.parameter.skill.Define.ActiveAnimName, transitionDuration);
+        animator.Play(stateMachine.parameter.skill.Define.ActiveAnimName);
 
     }
 

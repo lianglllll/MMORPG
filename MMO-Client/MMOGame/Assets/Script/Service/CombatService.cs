@@ -23,13 +23,13 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Subscribe<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
         MessageRouter.Instance.Subscribe<SpaceItemEnterResponse>(_SpaceItemEnterResponse);
         MessageRouter.Instance.Subscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
+        MessageRouter.Instance.Subscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
         MessageRouter.Instance.Subscribe<SpellCastResponse>(_SpellCastResponse);
         MessageRouter.Instance.Subscribe<SpellFailResponse>(_SpellFailResponse);
         MessageRouter.Instance.Subscribe<DamageResponse>(_DamageResponse);
         MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
-
 
     /// <summary>
     /// 脚本销毁时操作
@@ -40,6 +40,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Off<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
         MessageRouter.Instance.Off<SpaceItemEnterResponse>(_SpaceItemEnterResponse);
         MessageRouter.Instance.Off<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
+        MessageRouter.Instance.Off<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.Off<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
         MessageRouter.Instance.Off<SpellCastResponse>(_SpellCastResponse);
         MessageRouter.Instance.Off<SpellFailResponse>(_SpellFailResponse);
@@ -75,8 +76,8 @@ public class CombatService : Singleton<CombatService>, IDisposable
                 }
 
                 //最后生成自己的角色,记录本机的数据
-                EntityManager.Instance.OnActorEnterScene(msg.Character);
                 GameApp.entityId = msg.Character.Entity.Id;
+                EntityManager.Instance.OnActorEnterScene(msg.Character);
                 GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
 
                 //推入combatUI
@@ -142,6 +143,16 @@ public class CombatService : Singleton<CombatService>, IDisposable
         //注意这个由网络线程中的任务，它是并发的
         //所以对游戏对象的获取和访问都需要在主线程中完成
         EntityManager.Instance.OnEntitySync(msg.EntitySync);
+    }
+
+    /// <summary>
+    /// 自己控制的角色，entity同步
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="msg"></param>
+    private void _CtlClientSpaceEntitySyncResponse(Connection sender, CtlClientSpaceEntitySyncResponse msg)
+    {
+        EntityManager.Instance.OnCtlEntitySync(msg.EntitySync);
     }
 
     /// <summary>
@@ -220,7 +231,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
                 skill.Use(new SCEntity(caster));
             }
 
-            //ui
+            //skill ui
             if (GameApp.character.EntityId == skill.Owner.EntityId)
             {
                 UnityMainThreadDispatcher.Instance().Enqueue(() =>
@@ -228,7 +239,6 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     UIManager.Instance.MessagePanel.ShowBottonMsg(skill.Define.Name,Color.green);
                 });
             }
-
 
         }
     }
@@ -314,13 +324,13 @@ public class CombatService : Singleton<CombatService>, IDisposable
         EntityManager.Instance.OnItemEnterScene(msg.NetItemEntity);
     }
 
-
     /// <summary>
     /// 释放技能
     /// </summary>
     /// <param name="skill"></param>
     public  void SpellSkill(Skill skill,Actor target)
     {
+        if (skill == null) return;
         //向服务器发送施法请求
         SpellCastRequest req = new SpellCastRequest() { Info = new CastInfo() };
         req.Info.SkillId = skill.Define.ID;
@@ -338,7 +348,5 @@ public class CombatService : Singleton<CombatService>, IDisposable
         }
         NetClient.Send(req);
     }
-
-
 
 }

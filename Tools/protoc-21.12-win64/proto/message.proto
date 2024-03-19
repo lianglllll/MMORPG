@@ -124,6 +124,13 @@ message SpaceEntitySyncResponse{
 	NEntitySync entitySync = 1;
 }
 
+//场景内的同步响应,和上面那个一样，
+//但是这个是主要给某个客户端自己操作的角色进行强制同步用的
+message CtlClientSpaceEntitySyncResponse{
+	NEntitySync entitySync = 1;
+}
+
+
 //传送请求
 message SpaceDeliverRequest{
 	int32 spaceId = 1;

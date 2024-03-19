@@ -100,16 +100,13 @@ namespace GameClient.Combat
             //4.active状态达到最大值,进入冷却
             if (Stage == SkillStage.Active)
             {
+                //技能执行结束
                 if (RunTime >= Define.IntonateTime + Define.Duration)
                 {
                     Stage = SkillStage.Colding;
-                    ColddownTime = Define.CD;//此时真正进入冷却
 
-                    //需要刷新一些个ui
-                    if(Owner == GameApp.character)
-                    {
-                        Kaiyun.Event.FireIn("SkillEnterColdDown");
-                    }
+                    OnColdDown();
+
                 }
             }
 
@@ -125,6 +122,7 @@ namespace GameClient.Combat
                     OnFinish();
                 }
             }
+
         }
 
         /// <summary>
@@ -138,6 +136,8 @@ namespace GameClient.Combat
             {
                 GameApp.CurrSkill = this;
             }
+
+
             _sco = target;
             RunTime = 0;
 
@@ -186,6 +186,7 @@ namespace GameClient.Combat
         /// </summary>
         private void OnActive()
         {
+            ColddownTime = Define.CD;//此时真正进入冷却
 
             //如果有飞行物,就生成飞行物
             if (Define.IsMissile)
@@ -202,6 +203,21 @@ namespace GameClient.Combat
         }
 
         /// <summary>
+        /// 冷却阶段
+        /// </summary>
+        private void OnColdDown()
+        {
+            //需要刷新一些个ui
+            if (Owner == GameApp.character)
+            {
+                GameApp.CurrSkill = null;
+
+                Kaiyun.Event.FireIn("SkillEnterColdDown");
+                Kaiyun.Event.FireIn("SkillActiveEnd");
+            }
+        }
+
+        /// <summary>
         /// 技能完成了它的生命周期
         /// </summary>
         private void OnFinish()
@@ -209,31 +225,6 @@ namespace GameClient.Combat
             //Log.Information("技能结束：Owner[{0}],skill[{1}]", Owner.EntityId, Define.Name);
         }
 
-        private void OnHit()
-        {
-            ParticleSystem ps = Resources.Load<ParticleSystem>(Define.HitArt);//加载hit粒子系统
-            if (ps != null)
-            {
-                //目标是entity
-                if (_sco is SCEntity)
-                {
-                    var target = _sco.RealObj as Actor;
-                    var pos = target.renderObj.transform.position + Vector3.up * 0.9f;
-                    var dir = target.renderObj.transform.rotation;
-                    ParticleSystem newPs = GameObject.Instantiate(ps, pos, dir);        //初始化这个粒子
-                    newPs.Play();
-                    GameObject.Destroy(newPs.gameObject, newPs.main.duration);          //播放完就销毁
-
-                }
-                else if (_sco is SCPosition)
-                {
-                    ParticleSystem newPs = GameObject.Instantiate(ps, _sco.GetPosition(), Quaternion.identity);        //初始化这个粒子
-                    newPs.Play();
-                    GameObject.Destroy(newPs.gameObject, newPs.main.duration);          //播放完就销毁
-                }
-
-            }
-        }
 
         /// <summary>
         /// 获取描述文本
@@ -246,17 +237,6 @@ namespace GameClient.Combat
                           $"<color=bulue>技能冷却时间：{this.Define.CD}</color>";
             return content;
         }
-
-        /// <summary>
-        /// 发起攻击的间隔：skill吟唱+skill执行+skill后摇
-        /// </summary>
-        /// <returns></returns>
-        public float GetAttackColdTime()
-        {
-            return Define.IntonateTime + Define.Duration + Define.PostRockTime; 
-        }
-
-
 
     }
 }

@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
         //初始化服务
         GameSceneManager.Instance.Init(GameObject.Find("TP_Camera").GetComponent<TP_CameraController>());
         DataManager.Instance.init();
+
+
         UserService.Instance.Init();
         CombatService.Instance.Init();
         ChatService.Instance.Init();

@@ -134,12 +134,28 @@ namespace GameClient.Entities
             //更新entity的信息，做备份
             Entity entity = entityDict.GetValueOrDefault(nEntitySync.Entity.Id);
             if (entity == null) return;
-            entity.State = nEntitySync.State;
             entity.EntityData = nEntitySync.Entity;
 
             //根据更新的信息调整游戏对象的位置
             Kaiyun.Event.FireOut("EntitySync", nEntitySync);    //GameObjectManager中实现
         }
+
+        /// <summary>
+        /// 自己的entity位置信息同步
+        /// </summary>
+        /// <param name="nEntitySync"></param>
+        public void OnCtlEntitySync(NEntitySync nEntitySync)
+        {
+            //更新entity的信息，做备份
+            Actor owner = GameApp.character;
+            if (owner == null) return;
+            owner.EntityData = nEntitySync.Entity;
+
+            //根据更新的信息调整游戏对象的位置
+            Kaiyun.Event.FireOut("CtlEntitySync", nEntitySync);    //GameObjectManager中实现
+        }
+
+
 
         /// <summary>
         /// 根据entityid获取一个entity，可以选择entity的子类类型
@@ -181,7 +197,6 @@ namespace GameClient.Entities
             //暂时不需要同步其他的
 
         }
-
 
     }
 }

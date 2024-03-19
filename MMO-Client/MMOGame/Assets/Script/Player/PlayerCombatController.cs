@@ -9,7 +9,9 @@ using UnityEngine;
 
 
 
-//连招信息
+/// <summary>
+/// 连招信息
+/// </summary>
 public class ComboData
 {
     public Skill skill;
@@ -36,46 +38,62 @@ public class ComboData
 /// </summary>
 public class PlayerCombatController : MonoBehaviour
 {
-    private CtlStateMachine stateMachine;
+    private PlayerStateMachine stateMachine;
     private SkillManager skillManager;
     private Actor owner;
 
-    private Animator _animator;
-    private float _attackColdTime;                          //下次发起攻击的间隔：skill吟唱+skill执行+skill后摇
-    protected bool _applyAttackInput;                       //当前是否可以进行攻击
+    protected bool _applyAttackInput => GameApp.CurrSkill == null;               //当前是否可以进行攻击
 
     //普通攻击连招表(全部连招表第一招都是空的，因为在攻击输入的时候会自动读取下一招)
     //普通攻击全是有目标技能
     private ComboData defaultComboData;
     private ComboData currentComboData;
+    private bool isComboBufferTime;
+    private float remainComboBufferTime;
+    private float comboBufferTime = 1.5f;
 
     //敌人的范围检测
     private Actor _currentEnemy;
     protected float _detectionRange = 8.5f;
-    private LayerMask _enemyLayer = 6;//actor
+    private LayerMask _enemyLayer;
 
 
     private void Start()
     {
-        _attackColdTime = 0f;
-        _applyAttackInput = false;
+        _enemyLayer = 1 << 6;//actor
     }
 
     private void Update()
     {
         SelectTargetObject();
         PlayerAttackInput();
-        OnEndBaseAttack();
+        ComboEnd();
     }
+
+    private void OnEnable()
+    {
+        //目标死亡
+        Kaiyun.Event.RegisterIn("TargetDeath", this, "ClearEnemy");
+        Kaiyun.Event.RegisterIn("SkillActiveEnd", this, "SkillActiveEnd");
+
+    }
+
+    private void OnDisable()
+    {
+        Kaiyun.Event.UnregisterIn("TargetDeath", this, "ClearEnemy");
+        Kaiyun.Event.UnregisterIn("SkillActiveEnd", this, "SkillActiveEnd");
+
+    }
+
 
     /// <summary>
     /// 组件初始化
     /// </summary>
     /// <param name="owner"></param>
-    public void Init(Actor owner, CtlStateMachine stateMachine)
+    public void Init(Actor owner)
     {
         this.owner = owner;
-        this.stateMachine = stateMachine;
+        this.stateMachine = owner.StateMachine;
         this.skillManager = owner.skillManager;
 
         //初始化普通攻击连招表
@@ -92,11 +110,9 @@ public class PlayerCombatController : MonoBehaviour
             lastComboData.next = tmpComboData;
             lastComboData = tmpComboData;
         }
-        lastComboData.next = defaultComboData;
-
-        _applyAttackInput = false;
+        lastComboData.next = defaultComboData.next;
+        currentComboData = defaultComboData;
     }
-
 
 
     /// <summary>
@@ -104,16 +120,17 @@ public class PlayerCombatController : MonoBehaviour
     /// </summary>
     private void PlayerAttackInput()
     {
-        if (!CanAttackInput()) return;
+        if (!CanAttackInput())
+        {
+            return;
+        }
 
         //鼠标左键的base攻击
         if (GameInputManager.Instance.LAttack)             
         {
-            //设置当前的combo信息
             SetComboData(currentComboData.next);
             BaseComboActionExecute();
         }
-
 
         //qefzxc等技能攻击
 
@@ -155,7 +172,6 @@ public class PlayerCombatController : MonoBehaviour
     /// </summary>
     private void BaseComboActionExecute()
     {
-        _applyAttackInput = false;
         //发请求给服务器，施法普通技能
 
         if( _currentEnemy == null || _currentEnemy == owner)
@@ -168,18 +184,38 @@ public class PlayerCombatController : MonoBehaviour
             }
             else
             {
-                //已经锁定了一个最近的目标，如果距离不够的话服务器会响应技能释放失败的
+                //已经锁定了一个最近的目标，计算当前的攻击距离
+                if(Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.SpellRange * 0.001f)
+                {
+                    //打不到敌人，自己原地平啊
+                    //获取移动到可以攻击到敌人的位置
+                    transform.LookAt(_currentEnemy.renderObj.transform.position);
+                    CombatService.Instance.SpellSkill(currentComboData.skill, owner);
+                    return;
+                }
+
+                //剩下就是打敌人的了
+
             }
+        }
+        else
+        {
+            //已经锁定了一个最近的目标，计算当前的攻击距离
+            if (Vector3.Distance(transform.position, _currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.SpellRange *0.001f)
+            {
+                //打不到敌人，自己原地平啊
+                //获取移动到可以攻击到敌人的位置
+                transform.LookAt(_currentEnemy.renderObj.transform.position);
+                CombatService.Instance.SpellSkill(currentComboData.skill, owner);
+                return;
+
+            }
+
+            //剩下就是打敌人的了
         }
 
         CombatService.Instance.SpellSkill(currentComboData.skill,_currentEnemy);
 
-
-        //设置允许下次攻击的时间间隔
-        GameTimerManager.Instance.TryUseOneTimer(currentComboData.skill.GetAttackColdTime(), ()=> {
-            //重置攻击输入标记
-            _applyAttackInput = true;
-        });
     }
 
     /// <summary>
@@ -187,14 +223,28 @@ public class PlayerCombatController : MonoBehaviour
     /// 基础连招->重置为基础连招
     /// 技能->重置为基础连招
     /// </summary>
-    private void OnEndBaseAttack()
+    public void SkillActiveEnd()
     {
-        if(stateMachine.currentEntityState == EntityState.Motion && _applyAttackInput)
-        {
-            currentComboData = defaultComboData;
-        }
+        //开启连招缓存时间
+        remainComboBufferTime = comboBufferTime;
+        isComboBufferTime = true;
     }
 
+    /// <summary>
+    /// 连招结束，重置普通攻击
+    /// </summary>
+    private void ComboEnd()
+    {
+        if (isComboBufferTime)
+        {
+            remainComboBufferTime -= Time.deltaTime;
+            if(remainComboBufferTime <= 0f)
+            {
+                currentComboData = defaultComboData;
+                isComboBufferTime = false;
+            }
+        }
+    }
 
 
     /// <summary>
@@ -203,7 +253,7 @@ public class PlayerCombatController : MonoBehaviour
     public void SelectTargetObject()
     {
         //选择目标
-        if (Input.GetMouseButtonDown(0))  // 当鼠标左键被按下
+        if (Input.GetMouseButtonDown(1))  // 当鼠标左键被按下
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // 从鼠标点击位置发出一条射线
             RaycastHit hitInfo;  // 存储射线投射结果的数据
@@ -233,27 +283,48 @@ public class PlayerCombatController : MonoBehaviour
             _detectionRange, _enemyLayer, QueryTriggerInteraction.Ignore);//没有collider的检测不到
 
         if (enemys == null) return -1;
+        if (enemys.Length <= 1) return -1;
 
-        if (enemys.Length == 0) return -1;
+        for(int i = 1; i < enemys.Length; ++i)
+        {
+            Actor tmpA = enemys[i].GetComponent<GameEntity>().owner;
+            if (!tmpA.IsDeath && tmpA != owner)
+            {
+                LockTarget(tmpA);
+                return 0;
+            }
+        }
 
-        _currentEnemy = enemys[0].GetComponent<Actor>();
+        return -1;
+    }
+
+    /// <summary>
+    /// 锁定目标
+    /// </summary>
+    /// <param name="target"></param>
+    public void LockTarget(Actor target)
+    {
+        _currentEnemy = target;
         GameApp.target = _currentEnemy;
-
-        Kaiyun.Event.FireOut("SelectTarget");
-
-        return 0;
+        _currentEnemy.unitUIController.ShowSelectMark();
+        Kaiyun.Event.FireOut("SelectTarget");//ui
     }
 
     /// <summary>
     /// 清除目标锁定的目标
     /// </summary>
-    private void ClearEnemy()
+    public void ClearEnemy()
     {
+        if (_currentEnemy == null) return;
+
+        //触发一下取消敌人锁定的事件
+        Kaiyun.Event.FireOut("CancelSelectTarget");//ui
+        _currentEnemy.unitUIController.HideSelectMark();
         GameApp.target = null;
         _currentEnemy = null;
-        //触发一下取消敌人锁定的事件
-        Kaiyun.Event.FireOut("CancelSelectTarget");
     }
+
+
 
 
 }

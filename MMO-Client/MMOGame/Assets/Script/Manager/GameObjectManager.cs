@@ -28,6 +28,7 @@ public class GameObjectManager:MonoBehaviour
         Kaiyun.Event.RegisterOut("CreateItemObject", this, "CreateItemObject");
         Kaiyun.Event.RegisterOut("EntityLeave", this, "EntityLeave");
         Kaiyun.Event.RegisterOut("EntitySync", this, "EntitySync");
+        Kaiyun.Event.RegisterOut("CtlEntitySync", this, "CtlEntitySync");
     }
     private void OnDestroy()
     {
@@ -35,6 +36,8 @@ public class GameObjectManager:MonoBehaviour
         Kaiyun.Event.UnregisterOut("CreateItemObject", this, "CreateItemObject");
         Kaiyun.Event.UnregisterOut("EntityLeave", this, "EntityLeave");
         Kaiyun.Event.UnregisterOut("EntitySync", this, "EntitySync");
+        Kaiyun.Event.UnregisterOut("CtlEntitySync", this, "CtlEntitySync");
+
     }
 
     /// <summary>
@@ -69,6 +72,12 @@ public class GameObjectManager:MonoBehaviour
         //放入dict管理
         currentGameObjectDict[nActor.Entity.Id] = chrObj;
 
+        //obj身上的ui
+        var unitui = chrObj.AddComponent<UnitUIController>();
+        unitui.Init(actor);
+        actor.unitUIController = unitui;
+
+
         //6.修改一下obj的设置
         if (nActor.EntityType == EntityType.Character)
         {
@@ -94,9 +103,12 @@ public class GameObjectManager:MonoBehaviour
         //8.给我们控制的角色添加一些控制脚本
         if (isMine)
         {
-            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();     //给当前用户控制的角色添加控制脚本
-            chrObj.tag = "CtlPlayer";                                                           //打标签
+            chrObj.tag = "CtlPlayer";                                                          //打标签
+            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();    //给当前用户控制的角色添加控制脚本
+            PlayerCombatController combat = chrObj.AddComponent<PlayerCombatController>();     //给当前用户控制的角色添加战斗脚本
+            combat.Init(actor);
         }
+
 
     }
 
@@ -154,9 +166,8 @@ public class GameObjectManager:MonoBehaviour
         currentGameObjectDict.Remove(entityId);
     }
 
-
     /// <summary>
-    /// 事件驱动：角色位置+动画状态信息同步
+    /// 事件驱动：其他entity位置+动画状态信息同步
     /// </summary>
     /// <param name="nEntitySync"></param>
     public void EntitySync(NEntitySync nEntitySync)
@@ -191,4 +202,35 @@ public class GameObjectManager:MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 事件驱动：本机角色位置+动画状态信息同步
+    /// </summary>
+    /// <param name="nEntitySync"></param>
+    public void CtlEntitySync(NEntitySync nEntitySync)
+    {
+        GameObject obj = GameApp.character?.renderObj;
+        if (obj == null) return;
+
+        //设置动画状态
+        //如果是None,一律不作处理，将维持原来的动画状态
+        if (nEntitySync.State != EntityState.NoneState)
+        {
+            PlayerStateMachine stateMachine = obj.GetComponent<PlayerStateMachine>();
+            stateMachine.parameter.owner.entityState = nEntitySync.State;//这里也缓存一份，用于状态机退出一些特殊的状态
+            stateMachine.SwitchState(nEntitySync.State);
+        }
+
+        //3.安全校验
+        //强制回到目标位置
+        if (nEntitySync.Force)
+        {
+            GameEntity gameEntity = obj.GetComponent<GameEntity>();
+            Vector3 target = V3.Of(nEntitySync.Entity.Position) * 0.001f;
+            //获取位移向量
+            //不能直接使用trasforme的原因是，存在charactercontroller会默认覆盖transform
+            UnityMainThreadDispatcher.Instance().Enqueue(() => {
+                gameEntity.Move(target);
+            });
+        }
+    }
 }

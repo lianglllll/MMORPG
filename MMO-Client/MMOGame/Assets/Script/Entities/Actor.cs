@@ -28,6 +28,9 @@ namespace GameClient.Entities
 
         public EntityState entityState;
 
+        public UnitUIController unitUIController;
+
+
         public bool IsDeath => unitState == UnitState.Dead;
         public int Level => info.Level;
         public long Exp => info.Exp;
@@ -150,7 +153,7 @@ namespace GameClient.Entities
             //ui
             if (GameApp.target == this)
             {
-                Kaiyun.Event.FireOut("CancelSelectTarget");
+                Kaiyun.Event.FireIn("TargetDeath");
             }
 
         }

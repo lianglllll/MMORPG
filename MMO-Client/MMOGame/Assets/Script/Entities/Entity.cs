@@ -18,7 +18,6 @@ namespace GameClient.Entities
         private Vector3 position;
         private Vector3 direction;
         private NetEntity netObj;                 //网络对象NetEntity
-        public EntityState State;
 
         public int EntityId {
             get { return netObj.Id; }
