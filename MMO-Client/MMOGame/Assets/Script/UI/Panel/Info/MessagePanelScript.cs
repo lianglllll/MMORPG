@@ -30,6 +30,10 @@ public class MessagePanelScript : MonoBehaviour
     //item获取丢弃面板
     private ItemIOInfoBox itemIOInfoBox;
 
+    //准星/鼠标
+    //private Image aimPointUI;
+
+
 
     private void Awake()
     {
@@ -42,6 +46,7 @@ public class MessagePanelScript : MonoBehaviour
         confirmBox = transform.Find("ConfirmBox").GetComponent<ConfirmBox>();
         loadingBox = transform.Find("LoadingBox").GetComponent<LoadingBox>();
         itemIOInfoBox = transform.Find("ItemIOInfoBox").GetComponent<ItemIOInfoBox>();
+
     }
 
     private void Start()
@@ -186,6 +191,40 @@ public class MessagePanelScript : MonoBehaviour
     public void ShowItemIOInfo(string msg)
     {
         itemIOInfoBox.ShowMsg(msg);
+    }
+
+
+
+    /// <summary>
+    /// 设置鼠标的显示
+    /// </summary>
+    /// <param name="enable"></param>
+    public void SetMouseUI(bool enable)
+    {
+        if (enable)
+        {
+            // 显示鼠标光标
+            Cursor.visible = true;
+            // 解除鼠标锁定状态
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            // 隐藏鼠标光标
+            Cursor.visible = false;
+            // 锁定鼠标在屏幕中央
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+    }
+
+    /// <summary>
+    /// 设置瞄准点的ui
+    /// </summary>
+    /// <param name="enable"></param>
+    public void SetAimPointUI(bool enable)
+    {
+        //aimPointUI.enabled = enable;
     }
 
 }

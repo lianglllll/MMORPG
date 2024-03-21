@@ -7,24 +7,16 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
+    private Actor owner;
     private CharacterController characterController;
     private PlayerStateMachine stateMachine;
     private GameEntity gameEntity;
     private float rotationSpeed = 8f;
     private Transform mainCamera;
 
-
-    public float CurrentSpeed
-    {
-        get
-        {
-            if (gameEntity != null)
-            {
-                return gameEntity.speed * 0.001f;
-            }
-            return 3f;
-        }
-    }
+    public float CurrentSpeed => owner.Speed *0.001f;
+    private float acceleration = 5f;//加速度
+    private float maxSpeed => owner.Speed;
 
 
     private void Awake()
@@ -53,6 +45,11 @@ public class PlayerMovementController : MonoBehaviour
         _Move();
     }
 
+    public void Init(Actor owner)
+    {
+        this.owner = owner;
+    }
+
     /// <summary>
     /// 角色移动
     /// </summary>
@@ -68,6 +65,9 @@ public class PlayerMovementController : MonoBehaviour
         if (v == 0) v = Input.GetAxis("Vertical");
         if (h != 0 || v != 0)
         {
+            //CurrentSpeed += acceleration * Time.deltaTime;
+            //CurrentSpeed =  MathF.Min(CurrentSpeed, maxSpeed);
+
             //播放跑步动画,设置motion需要的speed参数
             stateMachine.SwitchState(EntityState.Motion);
             if (stateMachine.currentEntityState == EntityState.Motion)
@@ -93,6 +93,7 @@ public class PlayerMovementController : MonoBehaviour
         else
         {
             //播放待机动画
+            //CurrentSpeed = 0f;
             stateMachine.SwitchState(EntityState.Idle);
         }
     }

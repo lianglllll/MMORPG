@@ -40,7 +40,9 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.RegisterOut("TargetDeath", this, "_CancelSelectTarget");
         Kaiyun.Event.RegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
         Kaiyun.Event.RegisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI"); 
-        Kaiyun.Event.RegisterOut("ExpChange", this, "ExpBoxREfreshUI"); 
+        Kaiyun.Event.RegisterOut("ExpChange", this, "ExpBoxREfreshUI");
+        Kaiyun.Event.RegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
+
 
     }
 
@@ -51,6 +53,8 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.UnregisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
         Kaiyun.Event.UnregisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI");
         Kaiyun.Event.UnregisterOut("ExpChange", this, "ExpBoxREfreshUI");
+        Kaiyun.Event.UnregisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
+
     }
 
     private void Update()
@@ -67,6 +71,16 @@ public class CombatPanelScript : BasePanel
         {
             intonateSlider.gameObject.SetActive(false);
         }
+
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(UIManager.Instance.GetPanelByName("KnapsackPanel") == null)
+            {
+                OnKnaspackBtn();
+            }
+        }
+
 
 
     }
@@ -97,14 +111,24 @@ public class CombatPanelScript : BasePanel
         };
 
         UIManager.Instance.MessagePanel.ShowConfirmBox(deathText, "复活", true, onBtnAction);
+
     }
 
     /// <summary>
     /// 背包
     /// </summary>
-    private void OnKnaspackBtn()
+    public void OnKnaspackBtn()
     {
         UIManager.Instance.OpenPanel("KnapsackPanel");
+
+    }
+
+    /// <summary>
+    /// 关闭背包的回调
+    /// </summary>
+    public void CloseKnaspackCallback()
+    {
+
     }
 
     /// <summary>
@@ -148,5 +172,8 @@ public class CombatPanelScript : BasePanel
     {
         expBoxScript.RefrashUI();
     }
+
+
+
 
 }

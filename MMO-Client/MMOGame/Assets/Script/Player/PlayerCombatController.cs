@@ -50,12 +50,16 @@ public class PlayerCombatController : MonoBehaviour
     private ComboData currentComboData;
     private bool isComboBufferTime;
     private float remainComboBufferTime;
-    private float comboBufferTime = 1.5f;
+    private float comboBufferTime = 2f;
 
     //敌人的范围检测
     private Actor _currentEnemy;
     protected float _detectionRange = 8.5f;
     private LayerMask _enemyLayer;
+
+    //主动技能
+    private Dictionary<char,Skill> ActiveTypeSkills  = new();
+
 
 
     private void Start()
@@ -74,6 +78,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         //目标死亡
         Kaiyun.Event.RegisterIn("TargetDeath", this, "ClearEnemy");
+        Kaiyun.Event.RegisterOut("CtlChrDeath", this, "ClearEnemy");
         Kaiyun.Event.RegisterIn("SkillActiveEnd", this, "SkillActiveEnd");
 
     }
@@ -81,8 +86,8 @@ public class PlayerCombatController : MonoBehaviour
     private void OnDisable()
     {
         Kaiyun.Event.UnregisterIn("TargetDeath", this, "ClearEnemy");
+        Kaiyun.Event.UnregisterOut("CtlChrDeath", this, "ClearEnemy");
         Kaiyun.Event.UnregisterIn("SkillActiveEnd", this, "SkillActiveEnd");
-
     }
 
 
@@ -104,14 +109,24 @@ public class PlayerCombatController : MonoBehaviour
         defaultComboData = new ComboData();
         ComboData lastComboData = defaultComboData;
         ComboData tmpComboData;
-        for (int i = 0; i < count; ++i)
+        foreach (var skill in skillManager.GetCommonSkills())
         {
-            tmpComboData = new ComboData(skillManager.GetSkill(baseSkillIds[i]));
+            tmpComboData = new ComboData(skill);
             lastComboData.next = tmpComboData;
             lastComboData = tmpComboData;
         }
         lastComboData.next = defaultComboData.next;
         currentComboData = defaultComboData;
+
+        //初始化主动技能
+        string Keys = "QEFZXC";
+        int index = 0;
+        foreach(var skill in skillManager.GetActiveSkills())
+        {
+            ActiveTypeSkills.Add(Keys[index], skill);
+            index++;
+        }
+
     }
 
 
@@ -126,13 +141,21 @@ public class PlayerCombatController : MonoBehaviour
         }
 
         //鼠标左键的base攻击
-        if (GameInputManager.Instance.LAttack)             
+        if (Input.GetKeyDown(KeyCode.Alpha1) )            
         {
             SetComboData(currentComboData.next);
             BaseComboActionExecute();
+            //施法范围圈
+            owner.unitUIController.SetSpellRangeCanvas(true, currentComboData.skill.Define.SpellRange * 0.001f);
+            GameTimerManager.Instance.TryUseOneTimer(0.1f, () =>
+            {
+                //关闭攻击范围
+                owner.unitUIController.SetSpellRangeCanvas(false);
+            });
         }
 
         //qefzxc等技能攻击
+        SkillActionExecute();
 
     }
 
@@ -142,7 +165,6 @@ public class PlayerCombatController : MonoBehaviour
     /// <returns></returns>
     private bool CanAttackInput()
     {
-
         if (_applyAttackInput == false) return false;
         if (stateMachine.currentEntityState == EntityState.Hit) return false;
         if (stateMachine.currentEntityState == EntityState.SkillActive) return false;
@@ -179,8 +201,8 @@ public class PlayerCombatController : MonoBehaviour
             //尝试给自己获取一个最近的目标,如果没有成功就讲自己设置为敌人
             if (LockInRecentTargets() != 0)
             {
-                _currentEnemy = owner;
-                GameApp.target = owner;
+                CombatService.Instance.SpellSkill(currentComboData.skill, owner);
+                return;
             }
             else
             {
@@ -189,7 +211,10 @@ public class PlayerCombatController : MonoBehaviour
                 {
                     //打不到敌人，自己原地平啊
                     //获取移动到可以攻击到敌人的位置
-                    transform.LookAt(_currentEnemy.renderObj.transform.position);
+
+                    //transform.LookAt(_currentEnemy.renderObj.transform.position);
+                    LookAtTarget(_currentEnemy);
+
                     CombatService.Instance.SpellSkill(currentComboData.skill, owner);
                     return;
                 }
@@ -205,15 +230,18 @@ public class PlayerCombatController : MonoBehaviour
             {
                 //打不到敌人，自己原地平啊
                 //获取移动到可以攻击到敌人的位置
-                transform.LookAt(_currentEnemy.renderObj.transform.position);
+                //transform.LookAt(_currentEnemy.renderObj.transform.position);
+                LookAtTarget(_currentEnemy);
                 CombatService.Instance.SpellSkill(currentComboData.skill, owner);
                 return;
 
             }
 
             //剩下就是打敌人的了
+
         }
 
+        LookAtTarget(_currentEnemy);
         CombatService.Instance.SpellSkill(currentComboData.skill,_currentEnemy);
 
     }
@@ -253,7 +281,7 @@ public class PlayerCombatController : MonoBehaviour
     public void SelectTargetObject()
     {
         //选择目标
-        if (Input.GetMouseButtonDown(1))  // 当鼠标左键被按下
+        if (Input.GetMouseButtonDown(0))  // 当鼠标左键被按下
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // 从鼠标点击位置发出一条射线
             RaycastHit hitInfo;  // 存储射线投射结果的数据
@@ -261,8 +289,8 @@ public class PlayerCombatController : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, actorLayer))  // 检测射线是否与特定图层的物体相交
             {
                 GameObject clickedObject = hitInfo.collider.gameObject;  // 获取被点击的物体，在这里可以对获取到的物体进行处理
-                int entityId = clickedObject.GetComponent<GameEntity>().entityId;
-                GameApp.target = EntityManager.Instance.GetEntity<Actor>(entityId);
+                ClearEnemy();
+                LockTarget(clickedObject.GetComponent<GameEntity>().owner);
                 Kaiyun.Event.FireOut("SelectTarget");
             }
         }
@@ -306,7 +334,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         _currentEnemy = target;
         GameApp.target = _currentEnemy;
-        _currentEnemy.unitUIController.ShowSelectMark();
+        _currentEnemy.unitUIController.SetSelectMark(true);
         Kaiyun.Event.FireOut("SelectTarget");//ui
     }
 
@@ -315,15 +343,115 @@ public class PlayerCombatController : MonoBehaviour
     /// </summary>
     public void ClearEnemy()
     {
-        if (_currentEnemy == null) return;
-
+        if (_currentEnemy == null || GameApp.target == null) return;
         //触发一下取消敌人锁定的事件
         Kaiyun.Event.FireOut("CancelSelectTarget");//ui
-        _currentEnemy.unitUIController.HideSelectMark();
+        _currentEnemy?.unitUIController.SetSelectMark(false);
         GameApp.target = null;
         _currentEnemy = null;
     }
 
+    /// <summary>
+    /// 释放技能
+    /// </summary>
+    public void SkillActionExecute()
+    {
+        if (_applyAttackInput == false) return;
+
+        Skill skill;
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ActiveTypeSkills.TryGetValue('Q', out  skill);
+            if (skill == null) return;
+
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            ActiveTypeSkills.TryGetValue('E', out skill);
+            if (skill == null) return;
+        }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            ActiveTypeSkills.TryGetValue('F', out skill);
+            if (skill == null) return;
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            ActiveTypeSkills.TryGetValue('Z', out skill);
+            if (skill == null) return;
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            ActiveTypeSkills.TryGetValue('X', out skill);
+            if (skill == null) return;
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            ActiveTypeSkills.TryGetValue('C', out skill);
+            if (skill == null) return;
+        }
+        else
+        {
+            return;
+        }
+
+        if (skill.IsUnitTarget && GameApp.target == null)
+        {
+            UIManager.Instance.MessagePanel.ShowBottonMsg("当前没有选中目标");
+            return;
+        }
+
+        CombatService.Instance.SpellSkill(skill, _currentEnemy);
+
+        //施法范围圈
+        owner.unitUIController.SetSpellRangeCanvas(true, skill.Define.SpellRange * 0.001f);
+        GameTimerManager.Instance.TryUseOneTimer(0.1f, () =>
+        {
+            //关闭攻击范围
+            owner.unitUIController.SetSpellRangeCanvas(false);
+        });
+
+    }
+
+
+    /// <summary>
+    /// 展示技能指示器
+    /// </summary>
+    public void ShowSpellRangeUI(Skill skill)
+    {
+        //技能指示器，最起码有一个释放距离的圈圈
+        //现在先不用这个玩意
+        //我们显示一个技能释放距离的圈圈就行了
+
+
+    }
+
+    /// <summary>
+    /// 看向目标
+    /// </summary>
+    /// <param name="target"></param>
+    public void LookAtTarget(Actor target)
+    {
+        if (target == null) return;
+        //transform.LookAt(target.renderObj.transform.position);
+
+        // 计算角色应该朝向目标点的方向
+        Vector3 targetDirection = target.renderObj.transform.position - transform.position;
+
+        // 限制在Y轴上的旋转
+        targetDirection.y = 0;
+
+        // 计算旋转方向
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+        // 将角色逐渐旋转到目标方向
+        //float rotationSpeed = 5f;
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // 立即将角色转向目标方向
+        transform.rotation = targetRotation;
+
+    }
 
 
 

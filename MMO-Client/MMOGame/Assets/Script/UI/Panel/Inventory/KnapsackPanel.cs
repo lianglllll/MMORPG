@@ -64,6 +64,14 @@ public class KnapsackPanel:BasePanel
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            OnCloseBtn();
+        }
+    }
+
     private void OnDestroy()
     {
         Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackData", this, "RefreshKnapsackUI");
@@ -105,6 +113,7 @@ public class KnapsackPanel:BasePanel
     private void OnCloseBtn()
     {
         UIManager.Instance.ClosePanel("KnapsackPanel");
+        Kaiyun.Event.FireOut("CloseKnaspack");
     }
 
     /// <summary>

@@ -33,7 +33,6 @@ namespace GameClient.Combat
         public float ColddownTime;          //冷却倒计时，0表示技能可用
         private float RunTime;              //技能运行时间
         public SkillStage Stage;            //当前技能执行到的阶段
-        public bool IsPassive;              //是否是被动技能
         private SCObject _sco;              //技能的目标,Use触发时设置
 
         public int SkillId => Define.ID;
@@ -51,6 +50,9 @@ namespace GameClient.Combat
             get => Define.TargetType == "None";
         }
 
+        //无目标但是有指向，估计要归到无目标技能哪里去，到时候服务器直接用那个角色的方向作为施法方向即可
+        //也可以携带方向过去过去哈
+
         /// <summary>
         /// 是否为单位目标技能
         /// </summary>
@@ -66,6 +68,22 @@ namespace GameClient.Combat
         {
             get => Define.TargetType == "点";
         }
+
+        /// <summary>
+        /// 是不是普通攻击
+        /// </summary>
+        public bool IsNormal => Define.Type == "普通攻击";
+        /// <summary>
+        /// 是否是被动技能
+        /// </summary>
+        public bool IsPassive => Define.Type == "被动技能";
+
+        /// <summary>
+        /// 是不是主动技能
+        /// </summary>
+        public bool IsActiveSkill =>  !(IsPassive || IsNormal);
+
+
 
         /// <summary>
         /// 构造函数
@@ -161,24 +179,43 @@ namespace GameClient.Combat
         /// </summary>
         public void OnIntonate()
         {
-            
-            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            if(Define.IntonateTime > 0)
             {
-                //蓄气转向
-                if (_sco is SCEntity)
+                UnityMainThreadDispatcher.Instance().Enqueue(() =>
                 {
-                    var actor = _sco.RealObj as Actor;
-                    Owner.renderObj.transform.LookAt(actor.renderObj.transform);
-                }
+                    //蓄气转向
+                    if (_sco is SCEntity)
+                    {
+                        var target = _sco.RealObj as Actor;
+                        Owner.renderObj.transform.LookAt(target.renderObj.transform);
 
-                //蓄气动画
-                if(Define.IntonateTime > 0)
-                {
-                    Owner.StateMachine.SwitchState(EntityState.SkillIntonate);
-                }
+                        // 计算角色应该朝向目标点的方向
+                        Vector3 targetDirection = target.renderObj.transform.position - Owner.renderObj.transform.position;
 
+                        // 限制在Y轴上的旋转
+                        targetDirection.y = 0;
 
-            });
+                        // 计算旋转方向
+                        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+                        // 将角色逐渐旋转到目标方向
+                        //float rotationSpeed = 5f;
+                        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+                        // 立即将角色转向目标方向
+                        Owner.renderObj.transform.rotation = targetRotation;
+
+                    }
+
+                    //蓄气动画
+                    if (Define.IntonateTime > 0)
+                    {
+                        Owner.StateMachine.SwitchState(EntityState.SkillIntonate);
+                    }
+
+                });
+            }
+
         }
 
         /// <summary>
@@ -211,7 +248,6 @@ namespace GameClient.Combat
             if (Owner == GameApp.character)
             {
                 GameApp.CurrSkill = null;
-
                 Kaiyun.Event.FireIn("SkillEnterColdDown");
                 Kaiyun.Event.FireIn("SkillActiveEnd");
             }

@@ -19,7 +19,6 @@ namespace GameClient.Manager
         private Actor owner;        //归属者
         public List<Skill> Skills = new List<Skill>();
         
-        
         public SkillManager(Actor owner)
         {
             this.owner = owner;
@@ -33,7 +32,6 @@ namespace GameClient.Manager
             {
                 var skill = new Skill(owner, info.Id);
                 Skills.Add(skill);
-                //Log.Information($"角色[{owner.define.Name}]加载技能[{skill.Define.ID}-{skill.Define.Name}]");
             }
         }
 
@@ -47,9 +45,32 @@ namespace GameClient.Manager
             }
         }
 
+        /// <summary>
+        /// 根据id获取技能
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <returns></returns>
         public Skill GetSkill(int skillId)
         {
             return Skills.FirstOrDefault(s => s.Define.ID == skillId);
         }
+
+        /// <summary>
+        /// 获取普通攻击skill
+        /// </summary>
+        /// <returns></returns>
+        public List<Skill> GetCommonSkills()
+        {
+            return Skills.Where(skill => skill.IsNormal).ToList();
+        }
+
+        /// <summary>
+        /// 获取主动技能
+        /// </summary>
+        public List<Skill> GetActiveSkills()
+        {
+            return Skills.Where(skill => skill.IsActiveSkill).ToList();
+        }
+
     }
 }

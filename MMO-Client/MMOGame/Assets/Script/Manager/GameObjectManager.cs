@@ -105,6 +105,7 @@ public class GameObjectManager:MonoBehaviour
         {
             chrObj.tag = "CtlPlayer";                                                          //打标签
             PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();    //给当前用户控制的角色添加控制脚本
+            ctl.Init(actor);
             PlayerCombatController combat = chrObj.AddComponent<PlayerCombatController>();     //给当前用户控制的角色添加战斗脚本
             combat.Init(actor);
         }

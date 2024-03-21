@@ -47,7 +47,7 @@ public class TP_CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (isStart)
+        if (isStart && Input.GetMouseButton(1))
         {
             CameraInput();
         }

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Proto;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 /// <summary>
@@ -26,6 +27,8 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Image coldDownImag;             //冷却图层
     private Text coldDownTimeText;          //冷却数字文字
 
+    private TextMeshProUGUI TipsKeyText;
+
     private Skill _skill;
     private bool isUpdate;
 
@@ -34,6 +37,7 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
         iconImag = transform.Find("Icon").GetComponent<Image>();
         coldDownImag = transform.Find("ColdDown").GetComponent<Image>();
         coldDownTimeText = transform.Find("ColdDownTime").GetComponent<Text>();
+        TipsKeyText = transform.Find("TipsKeyText").GetComponent<TextMeshProUGUI>();
         //添加一个btn
         var btn = gameObject.AddComponent<Button>();
         btn.onClick.AddListener(OnClick);
@@ -64,7 +68,7 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     /// 设置技能格中的信息
     /// </summary>
     /// <param name="skillInfo"></param>
-    public void SetAbilityBar(Skill skillInfo)
+    public void SetAbilityBar(Skill skillInfo,string tipKey = "A")
     {
         if(skillInfo != null)
         {
@@ -74,6 +78,7 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
             maxColdDown = skillInfo.Define.CD;
             coldDown = skillInfo.ColddownTime;
             desc = skillInfo.Define.Description;
+            TipsKeyText.text = tipKey;
         }
         else
         {

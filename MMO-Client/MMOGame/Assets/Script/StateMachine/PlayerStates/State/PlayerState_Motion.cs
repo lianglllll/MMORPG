@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerState_Motion : PlayerState
 {
-    float transitionDuration = 0.3f; // 过渡时间（秒）
+    float transitionDuration = 0.1f; // 过渡时间（秒）
 
     public PlayerState_Motion(PlayerStateMachine stateMachine)
     {
