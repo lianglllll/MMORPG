@@ -23,7 +23,6 @@ public class TP_CameraController : MonoBehaviour
 
     private void Awake()
     {
-        isStart = false;
     }
 
     private void OnEnable()
@@ -135,10 +134,7 @@ public class TP_CameraController : MonoBehaviour
     /// </summary>
     public void OnStop()
     {
-        if (isStart == true)
-        {
-            isStart = false;
-        }
+        isStart = false;
     }
 
 }

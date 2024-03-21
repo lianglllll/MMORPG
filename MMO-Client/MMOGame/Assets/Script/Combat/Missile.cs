@@ -3,6 +3,7 @@ using Serilog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Missile : MonoBehaviour
@@ -30,6 +31,16 @@ public class Missile : MonoBehaviour
 
     private void OnUpdate(float fixedDeltaTime)
     {
+        //如果目标消耗，则飞行物消失
+        //因为我们当前生成飞行物的都是使用有目标的也就是跟踪的飞行物
+        if(Target == null || Target.IsDestroyed())
+        {
+            gameObject.SetActive(false);
+            Destroy(this.gameObject, 0.6f);
+            return;
+        }
+
+
         var a = transform.position;
         var b = Target.transform.position;
         Vector3 direction = (b - a).normalized;

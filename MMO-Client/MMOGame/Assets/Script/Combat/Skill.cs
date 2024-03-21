@@ -183,11 +183,11 @@ namespace GameClient.Combat
             {
                 UnityMainThreadDispatcher.Instance().Enqueue(() =>
                 {
-                    //蓄气转向
+                    //蓄气转向,
                     if (_sco is SCEntity)
                     {
                         var target = _sco.RealObj as Actor;
-                        Owner.renderObj.transform.LookAt(target.renderObj.transform);
+                        //Owner.renderObj.transform.LookAt(target.renderObj.transform);
 
                         // 计算角色应该朝向目标点的方向
                         Vector3 targetDirection = target.renderObj.transform.position - Owner.renderObj.transform.position;
@@ -204,8 +204,8 @@ namespace GameClient.Combat
 
                         // 立即将角色转向目标方向
                         Owner.renderObj.transform.rotation = targetRotation;
-
                     }
+
 
                     //蓄气动画
                     if (Define.IntonateTime > 0)

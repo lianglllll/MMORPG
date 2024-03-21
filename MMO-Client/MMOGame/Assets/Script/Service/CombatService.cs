@@ -84,10 +84,13 @@ public class CombatService : Singleton<CombatService>, IDisposable
                 UIManager.Instance.ShowTopMessage("进入游戏，开始你的冒险");
                 GameApp.combatPanelScript = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
 
-            }else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)
+            }
+            else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)
             {
                 //清理旧场景的对象
                 EntityManager.Instance.Clear();
+                GameApp.ClearGameAppData();
+
                 //切换场景
                 GameSceneManager.Instance.LoadSpace(msg.Character.SpaceId);
                 //加载其他角色和ai
@@ -108,7 +111,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
 
                 //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
                 UIManager.Instance.ClosePanel("CombatPanel");
-                UIManager.Instance.OpenPanel("CombatPanel");
+                GameApp.combatPanelScript  = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
             }
             else
             {

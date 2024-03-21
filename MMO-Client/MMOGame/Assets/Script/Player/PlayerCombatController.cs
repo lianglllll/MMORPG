@@ -54,7 +54,7 @@ public class PlayerCombatController : MonoBehaviour
 
     //敌人的范围检测
     private Actor _currentEnemy;
-    protected float _detectionRange = 8.5f;
+    protected float _detectionRange = 15f;
     private LayerMask _enemyLayer;
 
     //主动技能
@@ -64,7 +64,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Start()
     {
-        _enemyLayer = 1 << 6;//actor
+        _enemyLayer = LayerMask.GetMask("Actor");
     }
 
     private void Update()
@@ -72,6 +72,7 @@ public class PlayerCombatController : MonoBehaviour
         SelectTargetObject();
         PlayerAttackInput();
         ComboEnd();
+        ClearEnemyWhenMotion();
     }
 
     private void OnEnable()
@@ -313,7 +314,7 @@ public class PlayerCombatController : MonoBehaviour
         if (enemys == null) return -1;
         if (enemys.Length <= 1) return -1;
 
-        for(int i = 1; i < enemys.Length; ++i)
+        for(int i = 0; i < enemys.Length; ++i)
         {
             Actor tmpA = enemys[i].GetComponent<GameEntity>().owner;
             if (!tmpA.IsDeath && tmpA != owner)
@@ -350,6 +351,16 @@ public class PlayerCombatController : MonoBehaviour
         GameApp.target = null;
         _currentEnemy = null;
     }
+
+    private void ClearEnemyWhenMotion()
+    {
+        if(_currentEnemy !=null && stateMachine.currentEntityState == EntityState.Motion && 
+            Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > _detectionRange)
+        {
+            ClearEnemy();
+        }
+    }
+
 
     /// <summary>
     /// 释放技能

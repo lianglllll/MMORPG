@@ -108,6 +108,9 @@ public class GameObjectManager:MonoBehaviour
             ctl.Init(actor);
             PlayerCombatController combat = chrObj.AddComponent<PlayerCombatController>();     //给当前用户控制的角色添加战斗脚本
             combat.Init(actor);
+
+            //启用第三人称摄像机
+            GameSceneManager.Instance.UseTPCamera(chrObj.transform.Find("CameraLookTarget").transform);//启用摄像机
         }
 
 

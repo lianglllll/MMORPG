@@ -26,14 +26,14 @@ public class PlayerMovementController : MonoBehaviour
         gameEntity = GetComponent<GameEntity>();
         mainCamera = Camera.main.transform;
 
+
     }
 
     private void Start()
     {
         //CurrentSpeed = 3f;
 
-        //启用第三人称摄像机
-        GameSceneManager.Instance.UseTPCamera(transform.Find("CameraLookTarget").transform);//启用摄像机
+
     }
 
     private void OnDestroy()
