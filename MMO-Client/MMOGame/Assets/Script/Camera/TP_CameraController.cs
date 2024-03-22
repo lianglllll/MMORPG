@@ -129,12 +129,6 @@ public class TP_CameraController : MonoBehaviour
         _isFinish = false;
     }
 
-    /// <summary>
-    /// 关闭第三人才摄像机控制器
-    /// </summary>
-    public void OnStop()
-    {
-        isStart = false;
-    }
+
 
 }

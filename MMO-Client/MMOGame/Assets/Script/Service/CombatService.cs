@@ -220,6 +220,8 @@ public class CombatService : Singleton<CombatService>, IDisposable
         foreach (CastInfo item in msg.List)
         {
             var caster = EntityManager.Instance.GetEntity<Actor>(item.CasterId);
+            if (caster == null) continue;
+
             var skill = caster.skillManager.GetSkill(item.SkillId);
             if (skill.IsUnitTarget)
             {
@@ -258,6 +260,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
             foreach (Damage item in msg.List)
             {
                 var target = GameTools.GetUnit(item.TargetId);
+                if (target == null) continue;
                 target.recvDamage(item);
             }
         });
@@ -277,6 +280,8 @@ public class CombatService : Singleton<CombatService>, IDisposable
             {
 
                 var actor = GameTools.GetUnit(item.EntityId);
+                if (actor == null) continue;                    //防止在aoi体系下，actor突然从我们的视野中消失
+
                 Character chr;
                 switch (item.Property)
                 {
@@ -351,5 +356,18 @@ public class CombatService : Singleton<CombatService>, IDisposable
         }
         NetClient.Send(req);
     }
+
+    /// <summary>
+    /// 传送
+    /// </summary>
+    /// <param name="spaceId"></param>
+    public void  SpaceDeliver(int spaceId,int point)
+    {
+        SpaceDeliverRequest req = new SpaceDeliverRequest();
+        req.SpaceId = spaceId;
+        req.PointId = point;
+        NetClient.Send(req);
+    }
+
 
 }

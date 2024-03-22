@@ -10,7 +10,7 @@ public class ChatManager : Singleton<ChatManager>
 {
     //当前聊天框选中的频道
     private LocalChannel sendChannel;
-    public Action<LocalChannel> OnChat { get; set; }                              //事件，触发ui去更新当前的频道信息
+    public Action<LocalChannel> OnChat { get; set; }                //事件，触发ui去更新当前的频道信息
     public int PrivateID { get; private set; }                      //如果在私聊频道的画，私聊对象的id
     public string PrivateName { get; private set; }                 //如果在私聊频道的画，私聊对象的name
 

@@ -15,7 +15,9 @@ MonoBehaviour:
   id: 16
   colours:
   - {r: 0.5754717, g: 0.117897004, b: 0.008143453, a: 1}
+  - {r: 0.5754717, g: 0.117897004, b: 0.008143453, a: 1}
   sizes:
+  - 1
   - 1
   font: {fileID: 11400000, guid: 6a61efc5f66ef7644bbf7bdfa6bb8357, type: 2}
   bold: 1
@@ -34,5 +36,5 @@ MonoBehaviour:
   popModifier: 3
   colourAlternationMode: 1
   sizeAlternationMode: 1
-  enterType: 0200000004000000
-  exitType: 1
+  enterType: 04000000
+  exitType: 2

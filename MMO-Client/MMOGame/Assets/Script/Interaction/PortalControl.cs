@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class PortalControl : InteractionBehaviour
 {
-
-    public int tagetId;
+    public int tagetSpaceId;
+    public int pointId;
 
     protected override void Interaction()
     {
@@ -20,7 +20,7 @@ public class PortalControl : InteractionBehaviour
         if (!other.CompareTag("CtlPlayer")) return;
 
         //设置数据
-        var spaceDefine = DataManager.Instance.GetSpaceDefineById(tagetId);
+        var spaceDefine = DataManager.Instance.GetSpaceDefineById(tagetSpaceId);
         string DeliverText;     //提示语句
         bool btnActive = false; //是否启用按钮触发回调
 
@@ -38,14 +38,14 @@ public class PortalControl : InteractionBehaviour
         //事件回调
         Action onBtnAction = () =>
         {
-            int spaceId = tagetId;//闭包
+            int spaceId = tagetSpaceId;//闭包
             if (spaceId < 0)
             {
                 UIManager.Instance.ShowTopMessage("传送失败,无法搜寻坐标点");
                 return;
             }
             //给服务器发送请求
-            GameApp.SpaceDeliver(spaceId);
+            CombatService.Instance.SpaceDeliver(spaceId, pointId);
         };
 
         //调用uimananger，显示传送面板

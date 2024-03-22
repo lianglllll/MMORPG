@@ -20,12 +20,11 @@ public class ChatBoxScript : MonoBehaviour
     //Complex
     private Transform _complexBox;
     private Button SendMsgBtn;
-    private RectTransform content;
-    private VerticalLayoutGroup contentVerticalLayoutGroup;
     public Scrollbar scrollbarVertical;                 //Scrollbar
     public GameObject chatTextObj;                      //显示单条message的text
     public InputField chatMsgInputField;
     private Button changeSimpleBoxBtn;
+    private Transform content;
 
     //Simple
     private Transform _simpleBox;
@@ -37,12 +36,10 @@ public class ChatBoxScript : MonoBehaviour
         _complexBox = transform.Find("ComplexBox").transform;
         chatMsgInputField = transform.Find("ComplexBox/ChatInputField").GetComponent<InputField>();
         SendMsgBtn = transform.Find("ComplexBox/SendMsgBtn").GetComponent<Button>();
-        content = transform.Find("ComplexBox/ScrollView/Viewport/Content").GetComponent<RectTransform>();
-        contentVerticalLayoutGroup = content.GetComponent<VerticalLayoutGroup>();
         changeSimpleBoxBtn = transform.Find("ComplexBox/ChangeSimpleBoxBtn").GetComponent<Button>();
-
+        content = transform.Find("ComplexBox/ScrollView/Viewport/Content").transform;
         _simpleBox = transform.Find("SimpleBox");
-        changeComplexBoxBtn = transform.Find("SimpleBox/ChangeComplexBoxBtn").GetComponent<Button>();
+        changeComplexBoxBtn = transform.Find("SimpleBox/SingleMsgConent").GetComponent<Button>();
         SimpleMsgText = transform.Find("SimpleBox/SingleMsgConent/ChatText").GetComponent<Text>();
     }
 
@@ -69,8 +66,15 @@ public class ChatBoxScript : MonoBehaviour
         });
 
         ChatManager.Instance.SetSendChannel(LocalChannel.Local);            //设置默认发送频道为本地
+
         ChatManager.Instance.OnChat += UpdateChatBox;
 
+    }
+
+
+    private void OnDestroy()
+    {
+        ChatManager.Instance.OnChat -= UpdateChatBox;
     }
 
     /// <summary>

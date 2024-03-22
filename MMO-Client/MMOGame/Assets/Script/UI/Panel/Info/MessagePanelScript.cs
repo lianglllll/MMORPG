@@ -7,18 +7,20 @@ using TMPro;
 
 public class MessagePanelScript : MonoBehaviour
 {
-    //文本组件
+
+
+    //网络延迟text面板
     private Text NDelayText;
+
+    //消息提示面板
     private GameObject topMsgBox;
     private GameObject bottonMsgBox;
     private Text topMsgBoxText;
     private TextMeshProUGUI bottonMsgBoxText;
-
     //提示信息的停留时间
     private float showTime = 2f;
     private float topMsgBoxCountdown;
     private float bottonMsgBoxCountdown;
-
 
     //确认面板
     private ConfirmBox confirmBox;
@@ -30,9 +32,8 @@ public class MessagePanelScript : MonoBehaviour
     //item获取丢弃面板
     private ItemIOInfoBox itemIOInfoBox;
 
-    //准星/鼠标
-    //private Image aimPointUI;
-
+    //传送面板
+    private DeliverPanel deliverPanel;
 
 
     private void Awake()
@@ -46,6 +47,7 @@ public class MessagePanelScript : MonoBehaviour
         confirmBox = transform.Find("ConfirmBox").GetComponent<ConfirmBox>();
         loadingBox = transform.Find("LoadingBox").GetComponent<LoadingBox>();
         itemIOInfoBox = transform.Find("ItemIOInfoBox").GetComponent<ItemIOInfoBox>();
+        deliverPanel = transform.Find("DeliverPanel").GetComponent<DeliverPanel>();
 
     }
 
@@ -67,6 +69,9 @@ public class MessagePanelScript : MonoBehaviour
 
         //初始化item获取丢弃面板
         itemIOInfoBox.gameObject.SetActive(true);
+
+        //初始化传送面板
+        deliverPanel.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -89,6 +94,7 @@ public class MessagePanelScript : MonoBehaviour
                 bottonMsgBoxCountdown = 0f;
             }
         }
+
     }
 
     /// <summary>
@@ -194,6 +200,22 @@ public class MessagePanelScript : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 展示传送面板
+    /// </summary>
+    public void ShowDeliverPanel()
+    {
+        deliverPanel.gameObject.SetActive(true);
+        deliverPanel.Show();
+    }
+    public void CloseDeliverPanel()
+    {
+        deliverPanel.Hide(() =>
+        {
+            deliverPanel.gameObject.SetActive(false);
+        });
+    }
+
 
     /// <summary>
     /// 设置鼠标的显示
@@ -218,13 +240,5 @@ public class MessagePanelScript : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// 设置瞄准点的ui
-    /// </summary>
-    /// <param name="enable"></param>
-    public void SetAimPointUI(bool enable)
-    {
-        //aimPointUI.enabled = enable;
-    }
 
 }

@@ -31,11 +31,10 @@ public class PlayerState_SkillActive : PlayerState
     public override void LogicUpdate()
     {
         //当技能阶段不是active的时候就退出
-        if (stateMachine.parameter.skill.Stage != SkillStage.Active)
+        if (stateMachine.parameter.skill == null || stateMachine.parameter.skill.Stage != SkillStage.Active)
         {
             stateMachine.SwitchState(EntityState.Idle,true);
         }
-
 
     }
 

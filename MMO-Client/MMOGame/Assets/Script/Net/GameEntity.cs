@@ -139,7 +139,12 @@ public class GameEntity : MonoBehaviour
     public void _Start(Actor actor,bool ismine, Vector3 pos,Vector3 dir)
     {
         if (startFlag) return;
-        if (actor == null) return;
+
+        if (actor == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         owner = actor;
         isMine = ismine;

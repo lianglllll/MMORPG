@@ -174,6 +174,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3897465965148527527, guid: 0b64537b8168d5348b65315025771e0e, type: 3}
+      propertyPath: _maxDistanceOffset.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3897465965148527530, guid: 0b64537b8168d5348b65315025771e0e, type: 3}
       propertyPath: m_Name
       value: TP_Camera
@@ -1217,6 +1221,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244283390002480781, guid: c12045ea97af8ac498902da60dfd24bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953017535708409770, guid: c12045ea97af8ac498902da60dfd24bc, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

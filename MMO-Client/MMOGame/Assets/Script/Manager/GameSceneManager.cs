@@ -23,7 +23,6 @@ public class GameSceneManager : Singleton<GameSceneManager>
     /// <param name="spaceId"></param>
     public  void LoadSpace(int spaceId)
     {
-        CloseTPCamera();
         //切换到对于的场景
         SpaceDefine space = DataManager.Instance.spaceDict[spaceId];
         SceneManager.LoadScene(space.Resource);
@@ -37,12 +36,6 @@ public class GameSceneManager : Singleton<GameSceneManager>
     {
         //cameraController.transform.position = new Vector3(0, 0, -0.1f);
         cameraController.OnStart(lookTarget);
-    }
-
-
-    public void CloseTPCamera()
-    {
-        cameraController.OnStop();
     }
 
 }
