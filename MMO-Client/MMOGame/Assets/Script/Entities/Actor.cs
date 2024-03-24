@@ -96,20 +96,57 @@ namespace GameClient.Entities
                 {
                     DynamicTextManager.CreateText(ownerPos, "Crit!", DynamicTextManager.critData);
                 }
-            }
 
-            //被技能击中的粒子效果
-            if(damage.SkillId != 0)
-            {
-                var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
-                if (skillDef != null)
+                //被技能击中的粒子效果
+                if (damage.SkillId != 0)
                 {
-                    GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj,new Vector3(0,1,0));
+                    var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
+                    if (skillDef != null)
+                    {
+                        GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj, new Vector3(0, 1, 0));
+                    }
                 }
+
+
+                //被击中的音效
+
+                //动作
+                if(entityState != EntityState.Motion && StateMachine.currentEntityState != EntityState.Motion)
+                {
+                    StateMachine.SwitchState(EntityState.Hit,false,true);
+                    if(GameApp.entityId == EntityId)
+                    {
+                        //看向敌人
+                        var target = GameTools.GetUnit(damage.AttackerId);
+                        if (target != null)
+                        {
+                            LookTarget(target.renderObj.transform.position);
+                        }
+                    }
+                }
+
+
             }
+        }
 
-            //音效
+        public void LookTarget(Vector3 pos)
+        {
 
+            // 计算角色应该朝向目标点的方向
+            Vector3 targetDirection = pos - renderObj.transform.position;
+
+            // 限制在Y轴上的旋转
+            targetDirection.y = 0;
+
+            // 计算旋转方向
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+            // 将角色逐渐旋转到目标方向
+            //float rotationSpeed = 5f;
+            //renderObj.transform.rotation = Quaternion.Slerp(renderObj.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            // 立即将角色转向目标方向
+            renderObj.transform.rotation = targetRotation;
         }
 
         /// <summary>

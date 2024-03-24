@@ -19,7 +19,6 @@ public class UnitUIController : MonoBehaviour
     private void Awake()
     {
         SelectMarkCanvas = transform.Find("MyCanvas/SelectMarkCanvas").GetComponent<Canvas>();
-
         SpellRangeCanvas = transform.Find("MyCanvas/SpellRangeCanvas").GetComponent<Canvas>();
         SpellRangeImage = SpellRangeCanvas.GetComponentInChildren<Image>();
 

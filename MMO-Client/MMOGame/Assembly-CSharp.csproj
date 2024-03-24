@@ -97,6 +97,7 @@
     <Compile Include="Assets\aMyTest\InteractionManager.cs" />
     <Compile Include="Assets\Script\Tools\Timer\GameTimer.cs" />
     <Compile Include="Assets\Script\UI\Package\PackagePanelScript.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Info\DeliverPanel.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\AbilityBarScript.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\ExpBoxScript.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\LevelDefine.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\Script\Inventory\MaterialItem.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Script\Manager\GameObjectManager.cs" />
+    <Compile Include="Assets\Script\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Script\Entities\Actor.cs" />
     <Compile Include="Assets\aMyTest\MovementController.cs" />
     <Compile Include="Assets\Script\Combat\Skill.cs" />
@@ -213,8 +215,6 @@
     <Compile Include="Assets\Script\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Script\UI\Panel\Info\DeliverPanel.cs" />
-    <Compile Include="Assets\Script\UI\Anim\PanelAnim.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />

@@ -18,6 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     private float acceleration = 5f;//加速度
     private float maxSpeed => owner.Speed;
 
+    public EntityState entityState => stateMachine.parameter.owner.entityState;
 
     private void Awake()
     {

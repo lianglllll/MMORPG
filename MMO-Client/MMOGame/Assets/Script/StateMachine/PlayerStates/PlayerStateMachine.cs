@@ -68,13 +68,13 @@ public class PlayerStateMachine : StateMachine
     }
 
     //公有的状态切换
-    public void SwitchState(EntityState state, bool enforce = false)
+    public void SwitchState(EntityState state, bool enforce = false,bool reentry = false)
     {
         //空状态，我们维持当前状态
         if (state == EntityState.NoneState) return;
 
         //相同的状态，我们维持当前状态
-        if (currentEntityState == state) return;
+        if (currentEntityState == state && reentry == false) return;
 
         //技能action状态，不可被切换
         if (currentEntityState == EntityState.SkillActive && enforce == false) return;
