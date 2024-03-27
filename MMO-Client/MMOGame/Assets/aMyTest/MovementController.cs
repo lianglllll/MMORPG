@@ -28,6 +28,11 @@ public class MovementController : MonoBehaviour
         mainCamera = Camera.main.transform;
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     void Update()
     {
         _Move();
@@ -39,10 +44,8 @@ public class MovementController : MonoBehaviour
     private void _Move()
     {
         //控制英雄移动
-        float h = 0;
-        float v = 0;
-        if (h == 0) h = Input.GetAxis("Horizontal");
-        if (v == 0) v = Input.GetAxis("Vertical");
+        float h = GameInputManager.Instance.Movement.x;
+        float v = GameInputManager.Instance.Movement.y;
         if (h != 0 || v != 0)
         {
             //播放跑步动画,设置motion需要的speed参数

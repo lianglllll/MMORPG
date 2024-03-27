@@ -16,6 +16,18 @@ public class PlayerState_Hit : PlayerState
     {
         animator.Play("Hit",-1,0f);
         animator.Update(0f); // 立即更新动画到起始帧
+
+        //将来可以进行分离状态机
+        if (GameApp.entityId == stateMachine.parameter.owner.EntityId)
+        {
+            //看向敌人
+            var target = stateMachine.parameter.attacker;
+            if (target != null)
+            {
+                stateMachine.parameter.owner.LookTarget(target.renderObj.transform.position);
+                stateMachine.parameter.attacker = null;
+            }
+        }
     }
 
     public override void LogicUpdate()

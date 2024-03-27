@@ -113,16 +113,8 @@ namespace GameClient.Entities
                 //动作
                 if(entityState != EntityState.Motion && StateMachine.currentEntityState != EntityState.Motion)
                 {
+                    StateMachine.parameter.attacker = GameTools.GetUnit(damage.AttackerId);
                     StateMachine.SwitchState(EntityState.Hit,false,true);
-                    if(GameApp.entityId == EntityId)
-                    {
-                        //看向敌人
-                        var target = GameTools.GetUnit(damage.AttackerId);
-                        if (target != null)
-                        {
-                            LookTarget(target.renderObj.transform.position);
-                        }
-                    }
                 }
 
 

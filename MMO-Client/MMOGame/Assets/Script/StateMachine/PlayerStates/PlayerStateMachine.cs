@@ -22,6 +22,8 @@ public class Parameter
     public Actor owner;
     public Animator animator;
     public Skill skill;
+    //hit的时候有用
+    public Actor attacker;
 }
 
 /// <summary>
