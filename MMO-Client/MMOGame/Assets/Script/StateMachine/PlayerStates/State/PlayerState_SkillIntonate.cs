@@ -15,12 +15,13 @@ public class PlayerState_SkillIntonate : PlayerState
     public override void Enter()
     {
         //动画
-        animator.CrossFade(stateMachine.parameter.skill.Define.IntonateAnimName, transitionDuration);
+        var skill = stateMachine.parameter.skill;
+        animator.CrossFade(skill.Define.IntonateAnimName, transitionDuration);
 
         //自身特效
-        if(stateMachine.parameter.skill.Define.ID == 2002)
+        if(skill.Define.IntonateArt != "")
         {
-            var prefab = Resources.Load<GameObject>("Effects/MagicCircles/Magic circle");
+            var prefab = Resources.Load<GameObject>(skill.Define.IntonateArt);
             var ins = GameObject.Instantiate(prefab, stateMachine.parameter.owner.renderObj.transform);
             GameObject.Destroy(ins, stateMachine.parameter.skill.Define.IntonateTime);
         }

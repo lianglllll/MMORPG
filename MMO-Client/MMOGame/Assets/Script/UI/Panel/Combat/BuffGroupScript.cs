@@ -12,7 +12,7 @@ public class BuffGroupScript : MonoBehaviour
 
     private void Awake()
     {
-        buffPrefab = Resources.Load<GameObject>("Prefabs/UI/Combat/BuffUI");
+        buffPrefab = Resources.Load<GameObject>("UI/Prefabs/Combat/BuffUI");
     }
 
     private void Start()
