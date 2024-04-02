@@ -3,12 +3,12 @@
 @SET CODE_FOLDER=.\out
 @SET EXE=.\excel2json.exe
 
-@SET DEST_FOLDER_1=E:\MyProject\MMORPG\MMO-Client\MMOGame\Assets\Resources\Data
-@SET DEST_FOLDER_2=E:\MyProject\MMORPG\MMO-SERVER\GameServer\bin\Release\net6.0\Data
-@SET DEST_FOLDER_3=E:\MyProject\MMORPG\MMO-SERVER\GameServer\bin\Debug\net6.0\Data
+@SET DEST_FOLDER_1=..\..\MMO-Client\MMOGame\Assets\Resources\Data
+@SET DEST_FOLDER_2=..\..\MMO-SERVER\GameServer\bin\Release\net6.0\Data
+@SET DEST_FOLDER_3=..\..\MMO-SERVER\GameServer\bin\Debug\net6.0\Data
 
-@SET DEST_FOLDER_4=E:\MyProject\MMORPG\MMO-Client\MMOGame\Assets\Script\Manager\DataDefine
-@SET DEST_FOLDER_5=E:\MyProject\MMORPG\MMO-SERVER\GameServer\DataDefine
+@SET DEST_FOLDER_4=..\..\MMO-Client\MMOGame\Assets\Script\Manager\DataDefine
+@SET DEST_FOLDER_5=..\..\MMO-SERVER\GameServer\DataDefine
 
 Assets/Script/Manager/DataDefine
 @ECHO Converting excel files in folder %EXCEL_FOLDER% ...
