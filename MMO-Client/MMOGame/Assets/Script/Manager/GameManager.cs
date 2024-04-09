@@ -16,26 +16,10 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> keepAlive;          //切换场景时不销毁的对象
 
-    private void Awake()
-    {
-    }
+
     void Start()
     {
         Init();
-
-        //初始化服务
-        GameSceneManager.Instance.Init(GameObject.Find("TP_Camera").GetComponent<TP_CameraController>());
-        DataManager.Instance.init();
-
-
-        UserService.Instance.Init();
-        CombatService.Instance.Init();
-        ChatService.Instance.Init();
-        ItemService.Instance.Init();
-        BuffService.Instance.Init();
-
-        //推入第一个面板
-        UIManager.Instance.OpenPanel("LoginPanel");
     }
 
     void Update()
@@ -65,6 +49,19 @@ public class GameManager : MonoBehaviour
 
         //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
         Physics.IgnoreLayerCollision(6, 6, true);
+
+
+        //初始化服务
+        GameSceneManager.Instance.Init(GameObject.Find("TP_Camera").GetComponent<TP_CameraController>());
+        DataManager.Instance.init();
+        UserService.Instance.Init();
+        CombatService.Instance.Init();
+        ChatService.Instance.Init();
+        ItemService.Instance.Init();
+        BuffService.Instance.Init();
+
+        //推入第一个面板
+        UIManager.Instance.OpenPanel("LoginPanel");
     }
 
 }

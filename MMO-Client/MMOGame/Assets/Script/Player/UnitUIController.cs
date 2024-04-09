@@ -1,4 +1,5 @@
 using GameClient.Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,18 @@ public class UnitUIController : MonoBehaviour
     private Canvas SpellRangeCanvas;        //攻击距离的ui
     private Image SpellRangeImage;
 
+    private Canvas SectorAreaCanvas;        //扇形区域
+    private Image SectorAreaImage;
 
+    private RaycastHit hit;
+    private Ray ray;
+    private Vector3 curPos;
+    private LayerMask groundLayer;
+
+
+    private bool isUse;
+
+    //最后技能指示器拿到的就是一个dir 或者是一个 坐标
 
 
     private void Awake()
@@ -21,13 +33,35 @@ public class UnitUIController : MonoBehaviour
         SelectMarkCanvas = transform.Find("MyCanvas/SelectMarkCanvas").GetComponent<Canvas>();
         SpellRangeCanvas = transform.Find("MyCanvas/SpellRangeCanvas").GetComponent<Canvas>();
         SpellRangeImage = SpellRangeCanvas.GetComponentInChildren<Image>();
-
+        SectorAreaCanvas = transform.Find("MyCanvas/SectorAreaCanvas").GetComponent<Canvas>();
+        SectorAreaImage = SectorAreaCanvas.GetComponentInChildren<Image>();
     }
 
     private void Start()
     {
+        groundLayer = LayerMask.GetMask("Ground");
         SetSelectMark(false);
         SetSpellRangeCanvas(false);
+        SetSectorArea(false,0,0);
+    }
+
+    private void Update()
+    {
+
+        if (SectorAreaImage.enabled)
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+            {
+                curPos = new(hit.point.x, hit.point.y, hit.point.z);
+            }
+
+            //让图标转向我们鼠标指向的地方
+            Quaternion ab1canvas = Quaternion.LookRotation(curPos - transform.position);
+            ab1canvas.eulerAngles = new Vector3(0, ab1canvas.eulerAngles.y, ab1canvas.eulerAngles.z);
+            SectorAreaCanvas.transform.rotation = Quaternion.Lerp(ab1canvas, SectorAreaCanvas.transform.rotation, 0);
+        }
     }
 
     public void Init(Actor actor)
@@ -61,6 +95,41 @@ public class UnitUIController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 设置扇形的攻击范围
+    /// </summary>
+    public void SetSectorArea(bool enable,float radius = 0f,float angle = 0f)
+    {
+        if (enable)
+        {
+            if (isUse) return;
+            isUse = true;
+            SectorAreaImage.enabled = enable;
+            SectorAreaImage.transform.localScale = new Vector3(radius, radius, radius);
+            SectorAreaImage.transform.localPosition = new Vector3(SectorAreaImage.transform.localPosition.x, SectorAreaImage.transform.localPosition.y, radius / 2);
+        }
+        else
+        {
+            isUse = false;
+            SectorAreaImage.enabled = enable;
+        }
+    }
+
+    /// <summary>
+    /// 根据当前运行的技能指示器，获取对应的信息
+    /// </summary>
+    public Quaternion  GetSectorAreaDir()
+    {
+        //扇形：dir
+        //点：pos
+        //圆：没得
+        if (SectorAreaImage.enabled)
+        {
+            return SectorAreaCanvas.transform.rotation;
+        }
+
+        return Quaternion.identity;
+    }
 
     #region 技能指示器ui（还没用上）
     /*

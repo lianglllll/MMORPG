@@ -38,19 +38,17 @@ public class TP_CameraController : MonoBehaviour
 
     private void Start()
     {
-        //鼠标隐藏
-        Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+
 
     }
 
     private void Update()
     {
-        /*        if (isStart && Input.GetMouseButton(1))
-                {
-                    CameraInput();
-                }*/
-        CameraInput();
+        //
+        if (isStart && Input.GetMouseButton(1))
+        {
+            CameraInput();
+        }
 
     }
 
@@ -130,7 +128,5 @@ public class TP_CameraController : MonoBehaviour
         isStart = true;
         _isFinish = false;
     }
-
-
 
 }

@@ -49,7 +49,7 @@ namespace Summer.Network
                 delegateMap[type] = null;
             }
             delegateMap[type] = (MessageHandler<T>)delegateMap[type] + handler;
-            Log.Debug(type+":"+delegateMap[type].GetInvocationList().Length);
+            //Log.Debug(type+":"+delegateMap[type].GetInvocationList().Length);
         }
         //退订
         public void Off<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage

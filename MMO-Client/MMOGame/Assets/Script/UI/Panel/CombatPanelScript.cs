@@ -96,6 +96,7 @@ public class CombatPanelScript : BasePanel
         myElite.SetOwner(GameApp.character);                    //设置一下我们主角的状态栏
         expBoxScript.Init(GameApp.character);                   //初始化经验条
         abilityGroupScript.Init();
+
     }
 
     /// <summary>
@@ -172,6 +173,9 @@ public class CombatPanelScript : BasePanel
     {
         expBoxScript.RefrashUI();
     }
+
+
+
 
 
 

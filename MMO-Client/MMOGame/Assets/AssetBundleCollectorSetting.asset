@@ -12,35 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f6993d5150494d98da50e26cb1c25, type: 3}
   m_Name: AssetBundleCollectorSetting
   m_EditorClassIdentifier: 
-  ShowPackageView: 1
+  ShowPackageView: 0
   ShowEditorAlias: 1
   UniqueBundleName: 0
   Packages:
   - PackageName: DefaultPackage
-    PackageDesc: 
-    EnableAddressable: 0
+    PackageDesc: "\u9ED8\u8BA4\u5305"
+    EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
     IgnoreDefaultType: 1
     AutoCollectShaders: 1
     Groups:
     - GroupName: Combat
-      GroupDesc: "\u6218\u6597\u76F8\u5173\u7684\u8D44\u6E90"
+      GroupDesc: "\u6218\u6597"
       AssetTags: 
       ActiveRuleName: EnableGroup
-      Collectors: []
-    - GroupName: UI
-      GroupDesc: 
-      AssetTags: 
-      ActiveRuleName: EnableGroup
-      Collectors: []
-    - GroupName: Snene
-      GroupDesc: 
-      AssetTags: 
-      ActiveRuleName: EnableGroup
-      Collectors: []
-    - GroupName: Shader
-      GroupDesc: 
-      AssetTags: 
-      ActiveRuleName: EnableGroup
-      Collectors: []
+      Collectors:
+      - CollectPath: Assets/AssetPackage/Combat
+        CollectorGUID: 4453e5b4ab103ad429e558d506fc6a47
+        CollectorType: 0
+        AddressRuleName: AddressByFolderAndFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 

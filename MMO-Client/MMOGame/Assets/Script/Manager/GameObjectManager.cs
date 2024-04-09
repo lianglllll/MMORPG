@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using GameServer.Model;
 using Assets.Script.Entities;
 using Serilog;
-
+using YooAsset;
 
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject
@@ -50,69 +50,8 @@ public class GameObjectManager:MonoBehaviour
         //1.先判断当前character是否还保存在dict中
         if (currentGameObjectDict.ContainsKey(nActor.Entity.Id)) return;
 
-        //2.判断entity类型，获取prefab
-        UnitDefine unitDefine =  DataManager.Instance.unitDict[nActor.Tid];
-        var prefab = Resources.Load<GameObject>(unitDefine.Resource);
-
-        //3.获取坐标和方向
-        Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000; 
-        if (initPosition.y == 0)
-        {
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition,1.5f,7).y;//计算地面坐标
-        }
-
-        //4.实例化
-        GameObject chrObj = Instantiate(prefab,initPosition,Quaternion.identity,this.transform);//将实例化的角色放到gamemanager下面
-
-        //5.actor 和 gameobj关联
-        Actor actor = EntityManager.Instance.GetEntity<Actor>(nActor.Entity.Id);
-        actor.renderObj = chrObj;
-        actor.StateMachine = chrObj.GetComponent<PlayerStateMachine>();
-        actor.StateMachine.parameter.owner = actor;
-        //放入dict管理
-        currentGameObjectDict[nActor.Entity.Id] = chrObj;
-
-        //obj身上的ui
-        var unitui = chrObj.AddComponent<UnitUIController>();
-        unitui.Init(actor);
-        actor.unitUIController = unitui;
-
-
-        //6.修改一下obj的设置
-        if (nActor.EntityType == EntityType.Character)
-        {
-            chrObj.name = "Character_" + nActor.Entity.Id;  
-        }
-        else if(nActor.EntityType == EntityType.Monster)
-        {
-            chrObj.name = "Monster_" + nActor.Entity.Id;
-            //如果怪物死亡，就不要显示了
-            if (Mathf.Approximately(nActor.Hp, 0))
-            {
-                chrObj.SetActive(false);
-                actor.unitState = UnitState.Dead;
-            }
-        }
-        chrObj.layer = 6;//加入actor图层
-
-        //7.设置一下同步脚本gameentity
-        GameEntity gameEntity = chrObj.GetComponent<GameEntity>();
-        bool isMine = (nActor.Entity.Id == GameApp.entityId);
-        gameEntity._Start(actor, isMine,initPosition,Vector3.zero);
-    
-        //8.给我们控制的角色添加一些控制脚本
-        if (isMine)
-        {
-            chrObj.tag = "CtlPlayer";                                                          //打标签
-            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();    //给当前用户控制的角色添加控制脚本
-            ctl.Init(actor);
-            PlayerCombatController combat = chrObj.AddComponent<PlayerCombatController>();     //给当前用户控制的角色添加战斗脚本
-            combat.Init(actor);
-
-            //启用第三人称摄像机
-            GameSceneManager.Instance.UseTPCamera(chrObj.transform.Find("CameraLookTarget").transform);//启用摄像机
-        }
-
+        //2.启动协程异步加载obj
+        StartCoroutine(LoadActor(nActor));
 
     }
 
@@ -154,6 +93,8 @@ public class GameObjectManager:MonoBehaviour
 
     }
 
+
+
     /// <summary>
     /// 事件驱动：entity离开场景
     /// 不同的场景可以创建不同的对象池来使用这个东西
@@ -169,6 +110,8 @@ public class GameObjectManager:MonoBehaviour
         }
         currentGameObjectDict.Remove(entityId);
     }
+
+
 
     /// <summary>
     /// 事件驱动：其他entity位置+动画状态信息同步
@@ -237,4 +180,87 @@ public class GameObjectManager:MonoBehaviour
             });
         }
     }
+
+
+
+    // 协程加载方式
+    private IEnumerator LoadActor(NetActor nActor)
+    {
+        //1.判断合法性
+        Actor actor = EntityManager.Instance.GetEntity<Actor>(nActor.Entity.Id);
+        if (actor == null) yield break;
+        bool isMine = (nActor.Entity.Id == GameApp.entityId);
+
+        //2.获取热更资源包
+        UnitDefine unitDefine = actor.define;
+        var package = YooAssets.GetPackage("DefaultPackage");
+        AssetHandle handle = package.LoadAssetAsync<GameObject>(unitDefine.Resource);
+        yield return handle;
+        var prefab = handle.AssetObject as GameObject;
+
+        //3.获取坐标和方向
+        Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000;
+        if (initPosition.y == 0)
+        {
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;//计算地面坐标
+        }
+
+        //4.实例化obj并初始化
+        GameObject chrObj = Instantiate(prefab, initPosition, Quaternion.identity, this.transform);//将实例化的角色放到gamemanager下面
+        if (!currentGameObjectDict.TryAdd(nActor.Entity.Id,chrObj))
+        {
+            Destroy(chrObj);
+            yield break;
+        }
+
+        if (nActor.EntityType == EntityType.Character)
+        {
+            chrObj.name = "Character_" + nActor.Entity.Id;
+        }
+        else if (nActor.EntityType == EntityType.Monster)
+        {
+            chrObj.name = "Monster_" + nActor.Entity.Id;
+            //如果怪物死亡，就不要显示了
+            if (Mathf.Approximately(nActor.Hp, 0))
+            {
+                chrObj.SetActive(false);
+                actor.unitState = UnitState.Dead;
+            }
+        }
+        chrObj.layer = 6;//加入actor图层
+
+
+        //5.actor 和 gameobj关联
+        actor.renderObj = chrObj;
+        actor.StateMachine = chrObj.GetComponent<PlayerStateMachine>();
+        actor.StateMachine.parameter.owner = actor;
+
+        //obj身上的ui
+        var unitui = chrObj.AddComponent<UnitUIController>();
+        unitui.Init(actor);
+        actor.unitUIController = unitui;
+
+
+
+        //6.设置一下同步脚本gameentity
+        GameEntity gameEntity = chrObj.GetComponent<GameEntity>();
+        gameEntity._Start(actor, isMine, initPosition, Vector3.zero);
+
+
+        //7.给我们控制的角色添加一些控制脚本
+        if (isMine)
+        {
+            chrObj.tag = "CtlPlayer";                                                          //打标签
+            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();    //给当前用户控制的角色添加控制脚本
+            ctl.Init(actor);
+            PlayerCombatController combat = chrObj.AddComponent<PlayerCombatController>();     //给当前用户控制的角色添加战斗脚本
+            combat.Init(actor);
+
+            //启用第三人称摄像机
+            GameSceneManager.Instance.UseTPCamera(chrObj.transform.Find("CameraLookTarget").transform);//启用摄像机
+        }
+
+
+    }
+
 }

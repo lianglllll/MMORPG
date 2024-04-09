@@ -62,6 +62,7 @@ namespace GameClient.Entities
         /// <param name="damage"></param>
         public void recvDamage(Damage damage)
         {
+            if (renderObj == null) return;
             //ui
             var ownerPos = renderObj.transform.position;
             if (damage.IsImmune)
@@ -265,7 +266,6 @@ namespace GameClient.Entities
                 new Buff().Init(buffInfo,this);
             }
         }
-
 
         /// <summary>
         /// 添加buf
