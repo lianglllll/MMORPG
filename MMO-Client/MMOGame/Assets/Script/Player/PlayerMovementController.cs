@@ -14,11 +14,18 @@ public class PlayerMovementController : MonoBehaviour
     private float rotationSpeed = 8f;
     private Transform mainCamera;
 
+    public EntityState entityState => stateMachine.parameter.owner.entityState;
+
     public float CurrentSpeed => owner.Speed *0.001f;
     private float acceleration = 5f;//加速度
     private float maxSpeed => owner.Speed;
 
-    public EntityState entityState => stateMachine.parameter.owner.entityState;
+
+    //自动移动需要的
+    private Vector3 targetPos;
+    private bool isMoveTo;
+    private Action moveToOverAction;
+
 
     private void Awake()
     {
@@ -32,8 +39,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Start()
     {
-        //CurrentSpeed = 3f;
-
+        isMoveTo = false;
 
     }
 
@@ -43,12 +49,19 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
+
+        if (isMoveTo)
+        {
+            MoveTo();
+        }
+
         _Move();
     }
 
     public void Init(Actor owner)
     {
         this.owner = owner;
+        owner.playerMovementController = this;
     }
 
     /// <summary>
@@ -60,10 +73,8 @@ public class PlayerMovementController : MonoBehaviour
         if (GameApp.IsInputtingChatBox) return;//todo 耦合度太高，我们使用inputsystem切换来解决这个问题
 
         //控制英雄移动
-        float h = 0;
-        float v = 0;
-        if (h == 0) h = Input.GetAxis("Horizontal");
-        if (v == 0) v = Input.GetAxis("Vertical");
+        float h = GameInputManager.Instance.Movement.x;
+        float v = GameInputManager.Instance.Movement.y;
         if (h != 0 || v != 0)
         {
             //CurrentSpeed += acceleration * Time.deltaTime;
@@ -90,15 +101,62 @@ public class PlayerMovementController : MonoBehaviour
                 // 移动角色
                 characterController.Move(dir * CurrentSpeed * Time.deltaTime);
             }
+
+            //如果使用鼠标操作了，就停止自动移动了
+            if (isMoveTo)
+            {
+                isMoveTo = false;
+            }
         }
         else
         {
             //播放待机动画
             //CurrentSpeed = 0f;
-            stateMachine.SwitchState(EntityState.Idle);
+            if (!isMoveTo) {
+                stateMachine.SwitchState(EntityState.Idle);
+            }
         }
+
+
+
+
     }
 
 
+    /// <summary>
+    /// 移动到某个点
+    /// </summary>
+    /// <param name="pos"></param>
+    public void MoveToPostion(Vector3 pos,Action action = null)
+    {
+        this.targetPos = pos;
+        moveToOverAction = action;
+        isMoveTo = true;
+    }
+
+
+    private void MoveTo()
+    {
+        if(Vector3.Distance(targetPos,transform.position) < 0.1f)
+        {
+            isMoveTo = false;
+            transform.position = targetPos;
+            stateMachine.SwitchState(EntityState.Idle);
+            moveToOverAction?.Invoke();
+        }
+        else
+        {
+            Vector3 dir = targetPos - transform.position;
+            dir.y = 0;
+            dir.Normalize();
+            // 插值计算目标旋转方向
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
+            // 平滑地调整角色旋转
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            characterController.Move(dir * CurrentSpeed * Time.deltaTime);
+
+            stateMachine.SwitchState(EntityState.Motion);
+        }
+    }
 
 }

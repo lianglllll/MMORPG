@@ -187,7 +187,10 @@ namespace GameClient.Combat
                     if (_sco is SCEntity)
                     {
                         var target = _sco.RealObj as Actor;
-                        Owner.LookTarget(target.renderObj.transform.position);
+                        if(target != Owner)
+                        {
+                            Owner.LookTarget(target.renderObj.transform.position);
+                        }
                     }
 
 

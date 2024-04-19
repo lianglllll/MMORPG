@@ -29,6 +29,7 @@ namespace GameClient.Entities
         public EntityState entityState;
 
         public UnitUIController unitUIController;
+        public PlayerMovementController playerMovementController;
 
 
         public bool IsDeath => unitState == UnitState.Dead;

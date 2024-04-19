@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> keepAlive;          //切换场景时不销毁的对象
 
+    public Texture2D mouseIcon;
 
     void Start()
     {
@@ -38,6 +39,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Init()
     {
+        //设置鼠标光标icon
+        if(mouseIcon != null)
+        {
+            Cursor.SetCursor(mouseIcon, Vector2.zero, CursorMode.Auto);
+        }
+
         //设置初始优先窗口大小
         Screen.SetResolution(1920, 1080, false);
 
@@ -52,7 +59,6 @@ public class GameManager : MonoBehaviour
 
 
         //初始化服务
-        GameSceneManager.Instance.Init(GameObject.Find("TP_Camera").GetComponent<TP_CameraController>());
         DataManager.Instance.init();
         UserService.Instance.Init();
         CombatService.Instance.Init();

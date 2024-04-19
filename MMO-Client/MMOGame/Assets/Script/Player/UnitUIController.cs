@@ -62,6 +62,9 @@ public class UnitUIController : MonoBehaviour
             ab1canvas.eulerAngles = new Vector3(0, ab1canvas.eulerAngles.y, ab1canvas.eulerAngles.z);
             SectorAreaCanvas.transform.rotation = Quaternion.Lerp(ab1canvas, SectorAreaCanvas.transform.rotation, 0);
         }
+
+
+
     }
 
     public void Init(Actor actor)

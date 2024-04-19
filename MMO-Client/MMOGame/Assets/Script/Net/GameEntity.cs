@@ -181,6 +181,7 @@ public class GameEntity : MonoBehaviour
     /// <param name="target"></param>
     public void Move(Vector3 target)
     {
+        if (characterController == null || !characterController.enabled) return;
         characterController.Move(target - transform.position);
     }
 

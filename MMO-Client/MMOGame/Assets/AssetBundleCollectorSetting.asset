@@ -29,10 +29,31 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/AssetPackage/Combat
-        CollectorGUID: 4453e5b4ab103ad429e558d506fc6a47
+      - CollectPath: Assets/AssetPackage/Combat/Prefabs
+        CollectorGUID: 203aaf4c797c5bc428ad643481fd43fb
         CollectorType: 0
         AddressRuleName: AddressByFolderAndFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/AssetPackage/Combat/Effects
+        CollectorGUID: 1cb11d4789ca3cb4b860923618bbdc03
+        CollectorType: 0
+        AddressRuleName: AddressByFolderAndFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Scenes
+      GroupDesc: "\u573A\u666F"
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/AssetPackage/Scenes
+        CollectorGUID: 1cfde826d94eee9478e45047a4bf500b
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 

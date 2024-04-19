@@ -257,7 +257,7 @@ public class GameObjectManager:MonoBehaviour
             combat.Init(actor);
 
             //启用第三人称摄像机
-            GameSceneManager.Instance.UseTPCamera(chrObj.transform.Find("CameraLookTarget").transform);//启用摄像机
+            TP_CameraController.instance.OnStart(chrObj.transform.Find("CameraLookTarget").transform);
         }
 
 

@@ -218,7 +218,7 @@ public class Main : MonoBehaviour
     private void GameStart()
     {
         textPro.text = "进入游戏";
-        SceneManager.LoadScene("Game");
+        SceneLoader.LoadSceneAsync("Game");
     }
 
     /// <summary>

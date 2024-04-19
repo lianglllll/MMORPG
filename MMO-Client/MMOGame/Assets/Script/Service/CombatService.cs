@@ -59,30 +59,34 @@ public class CombatService : Singleton<CombatService>, IDisposable
         {
             if(GameApp.character==null)
             {
-
                 //1.切换场景
-                GameSceneManager.Instance.LoadSpace(msg.Character.SpaceId);
+                SpaceDefine space = DataManager.Instance.spaceDict[msg.Character.SpaceId];
+                GameApp.LoadSpace(msg.Character.SpaceId, (scene) => {
 
-                //2.加载其他角色和ai
-                foreach(var item in msg.CharacterList)
-                {
-                    EntityManager.Instance.OnActorEnterScene(item);
-                }
+                    //2.加载其他角色和ai
+                    foreach (var item in msg.CharacterList)
+                    {
+                        EntityManager.Instance.OnActorEnterScene(item);
+                    }
 
-                //3.加载物品
-                foreach(var item in msg.ItemEntityList)
-                {
-                    EntityManager.Instance.OnItemEnterScene(item);
-                }
+                    //3.加载物品
+                    foreach (var item in msg.ItemEntityList)
+                    {
+                        EntityManager.Instance.OnItemEnterScene(item);
+                    }
 
-                //最后生成自己的角色,记录本机的数据
-                GameApp.entityId = msg.Character.Entity.Id;
-                EntityManager.Instance.OnActorEnterScene(msg.Character);
-                GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+                    //最后生成自己的角色,记录本机的数据
+                    GameApp.entityId = msg.Character.Entity.Id;
+                    EntityManager.Instance.OnActorEnterScene(msg.Character);
+                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
 
-                //推入combatUI
-                UIManager.Instance.ShowTopMessage("进入游戏，开始你的冒险");
-                GameApp.combatPanelScript = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
+                    //推入combatUI
+                    UIManager.Instance.ShowTopMessage("进入游戏，开始你的冒险");
+                    GameApp.combatPanelScript = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
+
+
+                });
+
 
             }
             else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)
@@ -90,28 +94,36 @@ public class CombatService : Singleton<CombatService>, IDisposable
                 //清理旧场景的对象
                 EntityManager.Instance.Clear();
                 GameApp.ClearGameAppData();
+                TP_CameraController.instance.OnStop();
 
                 //切换场景
-                GameSceneManager.Instance.LoadSpace(msg.Character.SpaceId);
-                //加载其他角色和ai
-                foreach (var item in msg.CharacterList)
-                {
-                    EntityManager.Instance.OnActorEnterScene(item);
-                }
-                //3.加载物品
-                foreach (var item in msg.ItemEntityList)
-                {
-                    EntityManager.Instance.OnItemEnterScene(item);
-                }
+                SpaceDefine space = DataManager.Instance.spaceDict[msg.Character.SpaceId];
+                GameApp.LoadSpace(msg.Character.SpaceId, (scene) => {
+                    //加载其他角色和ai
+                    foreach (var item in msg.CharacterList)
+                    {
+                        EntityManager.Instance.OnActorEnterScene(item);
+                    }
+                    //3.加载物品
+                    foreach (var item in msg.ItemEntityList)
+                    {
+                        EntityManager.Instance.OnItemEnterScene(item);
+                    }
 
-                //最后生成自己的角色,记录本机的数据
-                EntityManager.Instance.OnActorEnterScene(msg.Character);
-                GameApp.entityId = msg.Character.Entity.Id;
-                GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+                    //最后生成自己的角色,记录本机的数据
+                    EntityManager.Instance.OnActorEnterScene(msg.Character);
+                    GameApp.entityId = msg.Character.Entity.Id;
+                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
 
-                //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
-                UIManager.Instance.ClosePanel("CombatPanel");
-                GameApp.combatPanelScript  = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
+                    //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
+                    UIManager.Instance.ClosePanel("CombatPanel");
+                    GameApp.combatPanelScript = (CombatPanelScript)UIManager.Instance.OpenPanel("CombatPanel");
+
+                });
+
+
+                    
+
             }
             else
             {
@@ -345,10 +357,12 @@ public class CombatService : Singleton<CombatService>, IDisposable
         req.Info.CasterId = skill.Owner.EntityId ;
         if (skill.IsUnitTarget)
         {
+            //传个目标id
             req.Info.TargetId = target.EntityId;
         }
         else if (skill.IsPointTarget)
         {
+            //传个pos即可
             req.Info.Point = V3.ToVec3(target.Position);
         }else if (skill.IsNoneTarget)
         {

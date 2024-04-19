@@ -6,7 +6,8 @@ using UnityEngine;
 public class TP_CameraController : MonoBehaviour
 {
     [Header("相机参数配置")]
-    private Transform _lookTarget;
+    private Transform _lookTarget;                                                          //注视对象
+
     [SerializeField] private float _positionOffset = 0.1f;                                  //相对于_currentLookTarget的偏移值
     [SerializeField] private float _controllerSpeed = 0.3f;                                 //相机的移动速度
     [SerializeField] private float _positionSmoothTime = 10;                                //相机移动平滑时间
@@ -21,9 +22,8 @@ public class TP_CameraController : MonoBehaviour
 
     private bool isStart;                                                                   //是否启用当前这个控制器
 
-    private void Awake()
-    {
-    }
+    public static TP_CameraController instance;
+
 
     private void OnEnable()
     {
@@ -38,8 +38,7 @@ public class TP_CameraController : MonoBehaviour
 
     private void Start()
     {
-
-
+        instance = this;
     }
 
     private void Update()
@@ -127,6 +126,14 @@ public class TP_CameraController : MonoBehaviour
         _currentLookTarget = _lookTarget;
         isStart = true;
         _isFinish = false;
+    }
+
+    public void OnStop()
+    {
+        isStart = false;
+        _lookTarget = null;
+        _currentLookTarget = _lookTarget;
+
     }
 
 }

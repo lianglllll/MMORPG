@@ -1,0 +1,2697 @@
+{
+    "Summary": {
+        "YooVersion": "2.1.1",
+        "UnityVersion": "2021.3.5f1c1",
+        "BuildDate": "2024/4/19 16:04:27",
+        "BuildSeconds": 0,
+        "BuildTarget": 19,
+        "BuildMode": 1,
+        "BuildPipeline": "BuiltinBuildPipeline",
+        "BuildPackageName": "DefaultPackage",
+        "BuildPackageVersion": "2024-04-19-964",
+        "UniqueBundleName": false,
+        "EnableAddressable": true,
+        "LocationToLower": false,
+        "IncludeAssetGUID": false,
+        "IgnoreDefaultType": true,
+        "AutoCollectShaders": true,
+        "EnableSharePackRule": true,
+        "EncryptionClassName": "null",
+        "FileNameStyle": 0,
+        "CompressOption": 2,
+        "DisableWriteTypeTree": false,
+        "IgnoreTypeTreeChanges": true,
+        "AssetFileTotalCount": 363,
+        "MainAssetTotalCount": 43,
+        "AllBundleTotalCount": 85,
+        "AllBundleTotalSize": 66926420,
+        "EncryptedBundleTotalCount": 0,
+        "EncryptedBundleTotalSize": 0
+    },
+    "AssetInfos": [
+        {
+            "Address": "Entity_DeliveryPoint",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Entity/DeliveryPoint.prefab",
+            "AssetGUID": "3614e0d194999eb4d925ca16e92a6e8e",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_entity.bundle",
+            "MainBundleSize": 29947,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png"
+            ]
+        },
+        {
+            "Address": "Item_Bottle_Endurance",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Item/Bottle_Endurance.prefab",
+            "AssetGUID": "e11c5c41e738e054da24b97897fa4eac",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_item.bundle",
+            "MainBundleSize": 34856,
+            "DependAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_normal.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_red_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_spec.png",
+                "Assets/Art/ItemModel/RPG Pack/Animations/ItemsAC.controller",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Stars_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_green.FBX",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Glow_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_red.mat",
+                "Assets/Art/ItemModel/RPG Pack/Textures/star.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/sprite_radiance.tif",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_green.mat",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_green_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_red.FBX"
+            ]
+        },
+        {
+            "Address": "Item_Bottle_Health",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Item/Bottle_Health.prefab",
+            "AssetGUID": "9348969b6186f8244906d5eb23908a70",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_item.bundle",
+            "MainBundleSize": 34856,
+            "DependAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_normal.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_red_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_spec.png",
+                "Assets/Art/ItemModel/RPG Pack/Animations/ItemsAC.controller",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Stars_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Glow_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_red.mat",
+                "Assets/Art/ItemModel/RPG Pack/Textures/star.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/sprite_radiance.tif",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_red.FBX"
+            ]
+        },
+        {
+            "Address": "Item_Bottle_Mana",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Item/Bottle_Mana.prefab",
+            "AssetGUID": "2b612912f6aaf844b8bcc1b404826b9c",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_item.bundle",
+            "MainBundleSize": 34856,
+            "DependAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_normal.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_red_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_blue.FBX",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_spec.png",
+                "Assets/Art/ItemModel/RPG Pack/Animations/ItemsAC.controller",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Stars_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Glow_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_red.mat",
+                "Assets/Art/ItemModel/RPG Pack/Textures/star.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/sprite_radiance.tif",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_blue.mat",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_blue_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_red.FBX"
+            ]
+        },
+        {
+            "Address": "Item_BoxOfPandora",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Item/BoxOfPandora.prefab",
+            "AssetGUID": "9e302b71780e942469290afa6bf3fd2c",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_item.bundle",
+            "MainBundleSize": 34856,
+            "DependAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Textures/BoxOfPandora_diffuse.png",
+                "Assets/Art/ItemModel/RPG Pack/Animations/BoxCrashAC.controller",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Stars_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Animations/BoxOfPandora_Idle.anim",
+                "Assets/Art/ItemModel/RPG Pack/Models/Box.FBX",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Dust_particles.tif",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Dust_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Textures/star.png",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Box_Of_Pandora.mat"
+            ]
+        },
+        {
+            "Address": "Item_Coin",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Item/Coin.prefab",
+            "AssetGUID": "9f2dc1b1f26658940a12cd3154942a0f",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_item.bundle",
+            "MainBundleSize": 34856,
+            "DependAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_normal.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_red_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_spec.png",
+                "Assets/Art/ItemModel/RPG Pack/Animations/ItemsAC.controller",
+                "Assets/Art/ItemModel/RPG Pack/Models/Coin.FBX",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_red.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Coin.mat",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Coin_diffuse.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Coin_normals.png",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_red.FBX"
+            ]
+        },
+        {
+            "Address": "Unit_Tid-0",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-0.prefab",
+            "AssetGUID": "d11c0957ac74b1f4ea50e2d965985a6e",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_unit.bundle",
+            "MainBundleSize": 86816,
+            "DependAssets": [
+                "Assets/Animation/Tid-0/Dizzy.anim",
+                "Assets/Animation/Tid-0/Run.anim",
+                "Assets/Art/UI/UI Ability Indicators/Heal Indicator.png",
+                "Assets/Art/UI/UI Ability Indicators/Range Indicator.png",
+                "Assets/Art/Unit/DogKnight/Animations/Die.anim",
+                "Assets/Art/Unit/DogKnight/Material/PBR.mat",
+                "Assets/Animation/Tid-0/Tid-0.controller",
+                "Assets/Animation/Tid-0/Attack02.anim",
+                "Assets/Art/Unit/DogKnight/Texture/AO.png",
+                "Assets/Animation/Tid-0/Idle.anim",
+                "Assets/Art/Unit/DogKnight/Mesh/Shield.fbx",
+                "Assets/Art/Unit/DogKnight/Mesh/Sword.fbx",
+                "Assets/Art/Unit/DogKnight/Mesh/DogPBR.fbx",
+                "Assets/Art/Unit/DogKnight/Texture/Normal.png",
+                "Assets/Animation/Tid-0/Hit.anim",
+                "Assets/Animation/Tid-0/Walk.anim",
+                "Assets/Art/Unit/DogKnight/Texture/Albedo.png",
+                "Assets/Animation/Tid-0/Attack.anim",
+                "Assets/Art/UI/UI Ability Indicators/Cone Indicator.png",
+                "Assets/Art/Unit/DogKnight/Texture/MS.png"
+            ]
+        },
+        {
+            "Address": "Unit_Tid-1",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-1.prefab",
+            "AssetGUID": "9363556291ee2db4e8aaa1a176fd4925",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_unit.bundle",
+            "MainBundleSize": 86816,
+            "DependAssets": [
+                "Assets/Art/Unit/WizardPolyArt/Textures/ForStandardShader/polyArtTex.png",
+                "Assets/Animation/Tid-1/Attack.anim",
+                "Assets/Animation/Tid-1/Intonate.anim",
+                "Assets/Art/Unit/WizardPolyArt/Animations/Idle01.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Materials/PolyArtStandardMaterial.mat",
+                "Assets/Art/Unit/WizardPolyArt/Mesh/PolyArtWizardMesh.fbx",
+                "Assets/Art/UI/UI Ability Indicators/Heal Indicator.png",
+                "Assets/Art/UI/UI Ability Indicators/Range Indicator.png",
+                "Assets/Art/Unit/WizardPolyArt/Mesh/Staff03PolyArt.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Mesh/Staff02Polyart.fbx",
+                "Assets/Animation/Tid-1/Tid-1.controller",
+                "Assets/Animation/Tid-1/Hit.anim",
+                "Assets/Art/Unit/WizardPolyArt/Animations/VictoryMaintain.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Animations/VictoryStart.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Mesh/Staff01PolyArt.fbx",
+                "Assets/Animation/Tid-1/BattleWalkForward.anim",
+                "Assets/Animation/Tid-1/Death.anim",
+                "Assets/Animation/Tid-1/Dizzy.anim",
+                "Assets/Animation/Tid-1/BattleRunForward.anim",
+                "Assets/Art/UI/UI Ability Indicators/Cone Indicator.png"
+            ]
+        },
+        {
+            "Address": "Unit_Tid-4",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-4.prefab",
+            "AssetGUID": "96e03b66f7cde554695208ab3e519dc1",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_unit.bundle",
+            "MainBundleSize": 86816,
+            "DependAssets": [
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillD.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@BattleRun.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Yawn.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Hair.png",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@AttackC.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Dead.FBX",
+                "Assets/Art/UI/UI Ability Indicators/Heal Indicator.png",
+                "Assets/Art/UI/UI Ability Indicators/Range Indicator.png",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Enter.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillC.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Revive.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillG.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@JumpC.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Leave.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Spear.png",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@JumpB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/E3D-Cordelia.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@JumpA.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Armor.png",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@BattleStand.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Eyes.png",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Stun.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@AttackB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@AttackA.FBX",
+                "Assets/Animation/Tid-4/Tid-4.controller",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Run.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@DamageB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Walk.FBX",
+                "Assets/Art/UI/UI Ability Indicators/Cone Indicator.png",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Stand.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@DamageA.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Face.png",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@DeadStand.FBX"
+            ]
+        },
+        {
+            "Address": "Unit_Tid-1002",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-1002.prefab",
+            "AssetGUID": "353dba27275b9e24b8e09c6262fd3105",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_unit.bundle",
+            "MainBundleSize": 86816,
+            "DependAssets": [
+                "Assets/Animation/Tid-0/Dizzy.anim",
+                "Assets/Animation/Tid-0/Run.anim",
+                "Assets/Art/UI/UI Ability Indicators/Heal Indicator.png",
+                "Assets/Art/UI/UI Ability Indicators/Range Indicator.png",
+                "Assets/Art/Unit/DogKnight/Animations/Die.anim",
+                "Assets/Animation/Tid-0/Tid-0.controller",
+                "Assets/Animation/Tid-0/Attack02.anim",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat primary.mat",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Materials/Material Variations/Mini Simple Characters Mat Red Eyes.mat",
+                "Assets/Animation/Tid-0/Idle.anim",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters_texture.png",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Prefabs/Props/sword_wood.prefab",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Prefabs/Props/shield_wood.prefab",
+                "Assets/Animation/Tid-0/Walk.anim",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Models/mini simple skeleton demo.fbx",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Models/shield_wood.fbx",
+                "Assets/Animation/Tid-0/Hit.anim",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Models/sword_wood.fbx",
+                "Assets/Art/UI/UI Ability Indicators/Cone Indicator.png",
+                "Assets/Animation/Tid-0/Attack.anim"
+            ]
+        },
+        {
+            "Address": "Unit_Tid-1003",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-1003.prefab",
+            "AssetGUID": "d85db76ad0944cc4ab013f88b2f793cf",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_unit.bundle",
+            "MainBundleSize": 86816,
+            "DependAssets": [
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@walk.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Prefab/Bull.prefab",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@damage.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@attack_02.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Mesh/bull_king.FBX",
+                "Assets/Art/UI/UI Ability Indicators/Range Indicator.png",
+                "Assets/Art/UI/UI Ability Indicators/Heal Indicator.png",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@die.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@dizzy.FBX",
+                "Assets/Animation/Tid-1003/Tid-1003.controller",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@idle.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@jump_left.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@jump.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Mesh/Materials/bull_king.mat",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Materials/bull_king_s.png",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@run.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Bull.controller",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@jump_right.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Materials/M_Bull_Standard.mat",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@attack_01.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@attack_03.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@defy.FBX"
+            ]
+        },
+        {
+            "Address": "Unit_绛雨",
+            "AssetPath": "Assets/AssetPackage/Combat/Prefabs/Unit/绛雨.prefab",
+            "AssetGUID": "1bb46f81257ff194d999ec05c21674b7",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_prefabs_unit.bundle",
+            "MainBundleSize": 86816,
+            "DependAssets": [
+                "Assets/Art/Unit/绛雨/Materials/17.sodekokoukisakimigitoumei.mat",
+                "Assets/Art/Unit/绛雨/toon/hair.png",
+                "Assets/Art/Unit/绛雨/Materials/14.sodekoseijouhidari.mat",
+                "Assets/Art/Unit/绛雨/spa/fresnel_skin.png",
+                "Assets/Art/Unit/绛雨/Materials/22._.mat",
+                "Assets/Art/Unit/绛雨/Materials/12.sodekoseijoumigi.mat",
+                "Assets/Art/Unit/绛雨/Materials/13.sodekoseijoumigitoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/15.sodekoseijouhidaritoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/8.body.mat",
+                "Assets/Art/Unit/绛雨/tex/clothes2.png",
+                "Assets/Art/Unit/绛雨/Materials/5.mae_.mat",
+                "Assets/Art/Unit/绛雨/Materials/0.ifuku.mat",
+                "Assets/Animation/绛雨/idle.fbx",
+                "Assets/Art/Unit/绛雨/Materials/11.__toumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/6.kisaki_.mat",
+                "Assets/Art/Unit/绛雨/Materials/1.__.mat",
+                "Assets/Art/Unit/绛雨/jiangyuNNDV1.fbx",
+                "Assets/Art/Unit/绛雨/Materials/16.sodekokoukisakimigi.mat",
+                "Assets/Art/Unit/绛雨/toon/skin.png",
+                "Assets/Art/Unit/绛雨/Materials/18.migijoutoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/3._ko.mat",
+                "Assets/Art/Unit/绛雨/spa/fresnel_hair.png",
+                "Assets/Art/Unit/绛雨/Materials/19.sodekokoukisakihidari.mat",
+                "Assets/Art/Unit/绛雨/toon/cloth.png",
+                "Assets/Art/Unit/绛雨/Materials/4._ko.mat",
+                "Assets/Art/Unit/绛雨/tex/backhair2.png",
+                "Assets/Art/Unit/绛雨/tex/face5.png",
+                "Assets/Art/Unit/绛雨/tex/fronthair.png",
+                "Assets/Art/Unit/绛雨/Materials/21.hidariuetoumei.mat",
+                "Assets/Art/Unit/绛雨/spa/fresnel_cloth.png",
+                "Assets/Art/Unit/绛雨/tex/clothes1.png",
+                "Assets/Art/Unit/绛雨/Materials/9.__.mat",
+                "Assets/Art/Unit/绛雨/Materials/10.__.mat",
+                "Assets/Art/Unit/绛雨/tex/bodysiwa.png",
+                "Assets/Art/Unit/绛雨/Materials/20.sodekokoukisakihidaritoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/2.shutou.mat",
+                "Assets/Art/Unit/绛雨/Materials/7._ko.mat",
+                "Assets/Art/Unit/绛雨/tex/backhair.png",
+                "Assets/Animation/绛雨/绛雨.controller"
+            ]
+        },
+        {
+            "Address": "Aoe_Meteors AOE",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Aoe/Meteors AOE.prefab",
+            "AssetGUID": "948db4a9be789ab41b3d6d8ce2614a38",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_aoe.bundle",
+            "MainBundleSize": 65001,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Gradient.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Gradient.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Stone.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Stone.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png"
+            ]
+        },
+        {
+            "Address": "Aoe_Snow AOE",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Aoe/Snow AOE.prefab",
+            "AssetGUID": "1c10ef36b0be96a499e4818fdbdb607a",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_aoe.bundle",
+            "MainBundleSize": 65001,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Trail67.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Snowflake.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Trail67.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Snowflake.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png"
+            ]
+        },
+        {
+            "Address": "CharavterAuras_Buff",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/CharavterAuras/Buff.prefab",
+            "AssetGUID": "ec694a54dbc105741bd69ca725570b32",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_charavterauras.bundle",
+            "MainBundleSize": 33135,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Arrow1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Arrow1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flare.png"
+            ]
+        },
+        {
+            "Address": "CharavterAuras_Debuff",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/CharavterAuras/Debuff.prefab",
+            "AssetGUID": "cce9434c5424ce042bc6329069ec5f81",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_charavterauras.bundle",
+            "MainBundleSize": 33135,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Arrow1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Arrow1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png"
+            ]
+        },
+        {
+            "Address": "CharavterAuras_Healing",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/CharavterAuras/Healing.prefab",
+            "AssetGUID": "494687c3f62d41c4ebbf2161dda76aeb",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_charavterauras.bundle",
+            "MainBundleSize": 33135,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flare.png"
+            ]
+        },
+        {
+            "Address": "CharavterAuras_Lightning aura",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/CharavterAuras/Lightning aura.prefab",
+            "AssetGUID": "2a4e26f8366287940bf98bbbc8cbcae5",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_charavterauras.bundle",
+            "MainBundleSize": 33135,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Electro.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Electro.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png"
+            ]
+        },
+        {
+            "Address": "CharavterAuras_Love aura",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/CharavterAuras/Love aura.prefab",
+            "AssetGUID": "1df4dfe87b9aca845af327c3e4e5e358",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_charavterauras.bundle",
+            "MainBundleSize": 33135,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Trail67.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Heart.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Heart.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Trail67.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png"
+            ]
+        },
+        {
+            "Address": "CharavterAuras_Star aura",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/CharavterAuras/Star aura.prefab",
+            "AssetGUID": "80bf83c6ab560c14c9943856a32b74c6",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_charavterauras.bundle",
+            "MainBundleSize": 33135,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Trail67.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Star.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Star.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Trail67.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png"
+            ]
+        },
+        {
+            "Address": "Fly_FireBall",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Fly/FireBall.prefab",
+            "AssetGUID": "e81b674c6d628334d8d98c6b1fc815a8",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_fly.bundle",
+            "MainBundleSize": 28504,
+            "DependAssets": [
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Smoke3.png",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Smoke3.mat",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Core3.png",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Core4.mat",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Core3.mat"
+            ]
+        },
+        {
+            "Address": "Hits_Electro hit",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Electro hit.prefab",
+            "AssetGUID": "9fde37fa6d7ce67478b87b33649ed28c",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Electro.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Electro.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png"
+            ]
+        },
+        {
+            "Address": "Hits_Explosion",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Explosion.prefab",
+            "AssetGUID": "97dfe4c975dd06a4084c98af018b8d26",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png"
+            ]
+        },
+        {
+            "Address": "Hits_Green hit",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Green hit.prefab",
+            "AssetGUID": "c67f1c80fc9ddfb489190061e2ac1742",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flare.png"
+            ]
+        },
+        {
+            "Address": "Hits_Holy hit",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Holy hit.prefab",
+            "AssetGUID": "7d1d1b7d4a47a6847a58ef75f12203d2",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flare.png"
+            ]
+        },
+        {
+            "Address": "Hits_Love hit",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Love hit.prefab",
+            "AssetGUID": "b936462b4ed13684791648dd78083b22",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Heart.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Heart.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png"
+            ]
+        },
+        {
+            "Address": "Hits_Snow hit",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Snow hit.prefab",
+            "AssetGUID": "c4e80c74fb5546942ae0f1c755cab7d3",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Snowflake.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Snowflake.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png"
+            ]
+        },
+        {
+            "Address": "Hits_Star hit",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Star hit.prefab",
+            "AssetGUID": "33c92ce67bb5f6b498f48deaaf9fa4fe",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Star.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Star.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png"
+            ]
+        },
+        {
+            "Address": "Hits_Stones hit",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Hits/Stones hit.prefab",
+            "AssetGUID": "ec414c5e0bac16445b5aece21dd92855",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "MainBundleSize": 36487,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Stone.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Stone.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png"
+            ]
+        },
+        {
+            "Address": "MagicCircles_Freeze circle",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/MagicCircles/Freeze circle.prefab",
+            "AssetGUID": "11de7aa38b2db7d46b4e0312d64fa4a2",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_magiccircles.bundle",
+            "MainBundleSize": 66360,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Mask1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Models/Cylinder.fbx",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Snowflake.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Mask1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Snowflake.png"
+            ]
+        },
+        {
+            "Address": "MagicCircles_Healing circle",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/MagicCircles/Healing circle.prefab",
+            "AssetGUID": "586e41c445f824140874417890b0d9bd",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_magiccircles.bundle",
+            "MainBundleSize": 66360,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Mask1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Models/Cylinder.fbx",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/MagicCircle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Mask1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/MagicCircle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Resources/Combat/Effects/MagicCircles/Magic circle.prefab",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flare.png"
+            ]
+        },
+        {
+            "Address": "MagicCircles_Magic circle 2",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/MagicCircles/Magic circle 2.prefab",
+            "AssetGUID": "07bcaacfebc77564a8024ee94a6c1f96",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_magiccircles.bundle",
+            "MainBundleSize": 66360,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Mask1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Models/Cylinder.fbx",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/MagicCircle2.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Mask1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/MagicCircle2.mat"
+            ]
+        },
+        {
+            "Address": "MagicCircles_Magic circle",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/MagicCircles/Magic circle.prefab",
+            "AssetGUID": "098eb9978cd766843b14f743b9b42842",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_magiccircles.bundle",
+            "MainBundleSize": 66360,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Mask1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Models/Cylinder.fbx",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/MagicCircle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Mask1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/MagicCircle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png"
+            ]
+        },
+        {
+            "Address": "Portals_Portal blue",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Portals/Portal blue.prefab",
+            "AssetGUID": "2b22d6d4b43bedf479e4d7d2a4b3d62f",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_portals.bundle",
+            "MainBundleSize": 30899,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png"
+            ]
+        },
+        {
+            "Address": "Portals_Portal green",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Portals/Portal green.prefab",
+            "AssetGUID": "85322cfdd632a014c8ab942506ff549d",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_portals.bundle",
+            "MainBundleSize": 30899,
+            "DependAssets": [
+                "Assets/Resources/Combat/Effects/Portals/Portal yellow.prefab",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png"
+            ]
+        },
+        {
+            "Address": "Portals_Portal red",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Portals/Portal red.prefab",
+            "AssetGUID": "ac4352beadd8de44eba8e36c4cf2eb5d",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_portals.bundle",
+            "MainBundleSize": 30899,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png"
+            ]
+        },
+        {
+            "Address": "Portals_Portal yellow",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Portals/Portal yellow.prefab",
+            "AssetGUID": "537e827a8a56ca248acc9ccb155fd4a5",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_portals.bundle",
+            "MainBundleSize": 30899,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png"
+            ]
+        },
+        {
+            "Address": "Slash_Electro slash",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Slash/Electro slash.prefab",
+            "AssetGUID": "428f2d030524e874492b24c1b489f553",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_slash.bundle",
+            "MainBundleSize": 30928,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Slash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Electro.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Electro.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Slash.png"
+            ]
+        },
+        {
+            "Address": "Slash_Snow slash",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Slash/Snow slash.prefab",
+            "AssetGUID": "e049f6448d6011e4ca52453f2febab34",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_slash.bundle",
+            "MainBundleSize": 30928,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Slash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Snowflake.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Snowflake.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Slash.png"
+            ]
+        },
+        {
+            "Address": "Slash_Stone slash",
+            "AssetPath": "Assets/AssetPackage/Combat/Effects/Slash/Stone slash.prefab",
+            "AssetGUID": "a05e4089b7c6adc428f9c77f14755b5e",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_combat_effects_slash.bundle",
+            "MainBundleSize": 30928,
+            "DependAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Slash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Stone.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Stone.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Slash.png"
+            ]
+        },
+        {
+            "Address": "Game",
+            "AssetPath": "Assets/AssetPackage/Scenes/Game.unity",
+            "AssetGUID": "9fc0d4010bbf28b4594072e72b8655ab",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_scenes.bundle",
+            "MainBundleSize": 922131,
+            "DependAssets": [
+                "Assets/Art/UI/Combat/Dynamic Floating Text/TextMesh Pro/Shaders/TMP_SDF.shader",
+                "Assets/Art/Fonts/Alibaba-PuHuiTi-Regular SDF.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Resources/Prefabs/Default Canvas Prefab.prefab",
+                "Packages/com.unity.inputsystem/InputSystem/Editor/Icons/InputSystemUIInputModule@64.png",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Default Data.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Miss Data.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Crit Data.asset",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text Component Icon.psd",
+                "Assets/Art/Fonts/Alibaba-PuHuiTi-Regular.ttf",
+                "Assets/Resources/UI/Prefabs/InfoPanel.prefab",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Spell.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Physical.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Resources/Icons/Icon.png",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font Asset Icon.psd",
+                "Assets/Resources/UI/Prefabs/Inventory/ItemMenu/ToolTip.prefab",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Real.asset",
+                "Packages/com.unity.inputsystem/InputSystem/Plugins/PlayerInput/DefaultInputActions.inputactions",
+                "Assets/Resources/UI/Texture/Inventory/TipsTool/Inventory_Box.png"
+            ]
+        },
+        {
+            "Address": "Scene0",
+            "AssetPath": "Assets/AssetPackage/Scenes/Scene0.unity",
+            "AssetGUID": "eda7680d4b702dd46af25da28c945be4",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_scenes.bundle",
+            "MainBundleSize": 922131,
+            "DependAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Ground_Layer_02.terrainlayer",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Flowers/PT_Poppy_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_pears.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Fruit_Tree_Opaque_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_984456c3-d32f-475f-a118-27bb19f92a65.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_dead.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Water_mat.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_88efe361-6f68-4188-bcd0-e9554ca440b9.asset",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Grass_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_Medieval_Buildings_Texture_Mask_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Mushrooms/PT_Caesars_Mushroom_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Fruit_Tree_01_green.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_plums.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_dead.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Generic_Rock_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Water_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_River_Rock_Pile_02.prefab",
+                "Assets/Resources/Combat/Prefabs/Entity/DeliveryPoint.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Flowers/PT_Poppy_02.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Water_NM_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Ground_Generic_03.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Generic_Tree_Leaves_mat 2.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Generic_Rock_01.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_03.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Pine_Tree_Trunk_Mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Fruit_Tree_01_green (1).prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Fruit_Tree_Flowers_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_Medieval_Buildings_Texture_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Wooden_Bridge_02 (1).prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Mushrooms_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Ore_Rock_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Bridge/PT_Wooden_Bridge_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Pine_Tree_Leaves_Mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Shaders/PT_Buildings_Shader_PBR.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_River_Rock_Pile_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Mushrooms_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Materials/PT_Medieval_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Menhir_Rock_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Rock_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_green.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Ore_Rock_01_split.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Generic_Tree_Leaves_mat.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Gate_Wood_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_832163fb-b19c-4118-97c2-cf0a3b224fca.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Tree_Trunk_01.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Shrubs/PT_Generic_Shrub_01_green.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Skybox_Texture_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_dead.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_stump.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Generic_Tree_Leaves_mat 1.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Plants/PT_Grass_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_plums.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_green.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Materials/PT_Buildings_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Menhir_Rock_02.prefab",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_c82c1fc5-a7ad-4f88-a7ff-c071a4dae8e5.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Ground_Layer_01.terrainlayer",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_logs.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Fruit_Tree_Leaves_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Generic_Tree_Trunk_mat.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Skybox_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_ff4b5190-b520-4d46-b960-ee1d0967df26.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Rocks_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Grass_Mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Flowers_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Medieval_Village_Gate_01 1.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_green.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Foliage_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_apples.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Poppy_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_445999c2-5240-4b5c-9394-4cacb62d7eec.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Generic_Leaves_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_6dc76592-a48a-4163-91df-c29ec1a99c66.asset",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/New Terrain.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Rocks_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_texture.tga",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Shrubs/PT_Generic_Shrub_01_dead.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Ground_Grass_Green_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_pears.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_logs.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Poppy_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Fruit_Tree_Foliage_Mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Materials/PT_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Ore_Rock_01_split.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_d3c37e8d-6092-48f4-b81e-93b97326e4d2.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Opaque_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Runes_02.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_apples.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Shrubs/PT_Generic_Shrub_01_dead.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_dead.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/FENCE.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Pine_Tree_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Plants_Shader.shader"
+            ]
+        },
+        {
+            "Address": "Scene1",
+            "AssetPath": "Assets/AssetPackage/Scenes/Scene1.unity",
+            "AssetGUID": "46d73ea194be028418460e9733e856da",
+            "AssetTags": [],
+            "MainBundleName": "assets_assetpackage_scenes.bundle",
+            "MainBundleSize": 922131,
+            "DependAssets": [
+                "Assets/Scenes1.asset",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Resources/Combat/Prefabs/Entity/DeliveryPoint.prefab"
+            ]
+        }
+    ],
+    "BundleInfos": [
+        {
+            "BundleName": "assets_assetpackage_combat_prefabs_entity.bundle",
+            "FileName": "f3ae1d5f3d6a6b553741019d387d4309.bundle",
+            "FileHash": "f3ae1d5f3d6a6b553741019d387d4309",
+            "FileCRC": "11da0437",
+            "FileSize": 29947,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Prefabs/Entity/DeliveryPoint.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_prefabs_item.bundle",
+            "FileName": "48ddb45aa942fed37a75e9c1d4e843bf.bundle",
+            "FileHash": "48ddb45aa942fed37a75e9c1d4e843bf",
+            "FileCRC": "88ad7114",
+            "FileSize": 34856,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_itemmodel_rpg pack_animations.bundle",
+                "share_assets_art_itemmodel_rpg pack_materials.bundle",
+                "share_assets_art_itemmodel_rpg pack_models.bundle",
+                "share_assets_art_itemmodel_rpg pack_models_bottles.bundle",
+                "share_assets_art_itemmodel_rpg pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Prefabs/Item/Bottle_Endurance.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Item/Bottle_Health.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Item/Bottle_Mana.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Item/BoxOfPandora.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Item/Coin.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_prefabs_unit.bundle",
+            "FileName": "a421ded3fc71853fe7ef3b7bd3b10c56.bundle",
+            "FileHash": "a421ded3fc71853fe7ef3b7bd3b10c56",
+            "FileCRC": "7dd239fb",
+            "FileSize": 86816,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_animation_tid-0.bundle",
+                "share_assets_animation_tid-1.bundle",
+                "share_assets_animation_tid-1003.bundle",
+                "share_assets_animation_tid-4.bundle",
+                "share_assets_animation_绛雨.bundle",
+                "share_assets_art_ui_ui ability indicators.bundle",
+                "share_assets_art_unit_dogknight_animations.bundle",
+                "share_assets_art_unit_dogknight_material.bundle",
+                "share_assets_art_unit_dogknight_mesh.bundle",
+                "share_assets_art_unit_dogknight_texture.bundle",
+                "share_assets_art_unit_e3d-cordelia.bundle",
+                "share_assets_art_unit_e3d-cordelia_animation_fbx.bundle",
+                "share_assets_art_unit_mini simple characters skeleton demo_materials.bundle",
+                "share_assets_art_unit_mini simple characters skeleton demo_materials_material variations.bundle",
+                "share_assets_art_unit_mini simple characters skeleton demo_models.bundle",
+                "share_assets_art_unit_mini simple characters skeleton demo_prefabs_props.bundle",
+                "share_assets_art_unit_wizardpolyart_animations.bundle",
+                "share_assets_art_unit_wizardpolyart_materials.bundle",
+                "share_assets_art_unit_wizardpolyart_mesh.bundle",
+                "share_assets_art_unit_wizardpolyart_textures_forstandardshader.bundle",
+                "share_assets_art_unit_牛头人_boss_bull.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_animation.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_materials.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh_materials.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_prefab.bundle",
+                "share_assets_art_unit_绛雨.bundle",
+                "share_assets_art_unit_绛雨_materials.bundle",
+                "share_assets_art_unit_绛雨_spa.bundle",
+                "share_assets_art_unit_绛雨_tex.bundle",
+                "share_assets_art_unit_绛雨_toon.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-0.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-1.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-4.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-1002.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Unit/Tid-1003.prefab",
+                "Assets/AssetPackage/Combat/Prefabs/Unit/绛雨.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_effects_aoe.bundle",
+            "FileName": "9f09296d05568b57f6686ac8f6e8b6d7.bundle",
+            "FileHash": "9f09296d05568b57f6686ac8f6e8b6d7",
+            "FileCRC": "9e004d2d",
+            "FileSize": 65001,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Effects/Aoe/Meteors AOE.prefab",
+                "Assets/AssetPackage/Combat/Effects/Aoe/Snow AOE.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_effects_charavterauras.bundle",
+            "FileName": "3f779d27a109aae328e91c71af7b82c6.bundle",
+            "FileHash": "3f779d27a109aae328e91c71af7b82c6",
+            "FileCRC": "72d6c25a",
+            "FileSize": 33135,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Effects/CharavterAuras/Buff.prefab",
+                "Assets/AssetPackage/Combat/Effects/CharavterAuras/Debuff.prefab",
+                "Assets/AssetPackage/Combat/Effects/CharavterAuras/Healing.prefab",
+                "Assets/AssetPackage/Combat/Effects/CharavterAuras/Lightning aura.prefab",
+                "Assets/AssetPackage/Combat/Effects/CharavterAuras/Love aura.prefab",
+                "Assets/AssetPackage/Combat/Effects/CharavterAuras/Star aura.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_effects_fly.bundle",
+            "FileName": "64adca728c4274b1206fe91cde3ece20.bundle",
+            "FileHash": "64adca728c4274b1206fe91cde3ece20",
+            "FileCRC": "40ae64b4",
+            "FileSize": 28504,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_52specialeffectpack_texture.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Effects/Fly/FireBall.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_effects_hits.bundle",
+            "FileName": "d7836b5a709589c74f3395a65028361f.bundle",
+            "FileHash": "d7836b5a709589c74f3395a65028361f",
+            "FileCRC": "5089ccb0",
+            "FileSize": 36487,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Effects/Hits/Electro hit.prefab",
+                "Assets/AssetPackage/Combat/Effects/Hits/Explosion.prefab",
+                "Assets/AssetPackage/Combat/Effects/Hits/Green hit.prefab",
+                "Assets/AssetPackage/Combat/Effects/Hits/Holy hit.prefab",
+                "Assets/AssetPackage/Combat/Effects/Hits/Love hit.prefab",
+                "Assets/AssetPackage/Combat/Effects/Hits/Snow hit.prefab",
+                "Assets/AssetPackage/Combat/Effects/Hits/Star hit.prefab",
+                "Assets/AssetPackage/Combat/Effects/Hits/Stones hit.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_effects_magiccircles.bundle",
+            "FileName": "fd1f1690743318a606e99231510cf8de.bundle",
+            "FileHash": "fd1f1690743318a606e99231510cf8de",
+            "FileCRC": "db897c6d",
+            "FileSize": 66360,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_models.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle",
+                "share_assets_resources_combat_effects_magiccircles.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Effects/MagicCircles/Freeze circle.prefab",
+                "Assets/AssetPackage/Combat/Effects/MagicCircles/Healing circle.prefab",
+                "Assets/AssetPackage/Combat/Effects/MagicCircles/Magic circle 2.prefab",
+                "Assets/AssetPackage/Combat/Effects/MagicCircles/Magic circle.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_effects_portals.bundle",
+            "FileName": "18550558e7ccb6c9d3ae8d5819c1b37b.bundle",
+            "FileHash": "18550558e7ccb6c9d3ae8d5819c1b37b",
+            "FileCRC": "09530e84",
+            "FileSize": 30899,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle",
+                "share_assets_resources_combat_effects_portals.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Effects/Portals/Portal blue.prefab",
+                "Assets/AssetPackage/Combat/Effects/Portals/Portal green.prefab",
+                "Assets/AssetPackage/Combat/Effects/Portals/Portal red.prefab",
+                "Assets/AssetPackage/Combat/Effects/Portals/Portal yellow.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_combat_effects_slash.bundle",
+            "FileName": "9ee9578ae0cc38dd6926b55d8d022846.bundle",
+            "FileHash": "9ee9578ae0cc38dd6926b55d8d022846",
+            "FileCRC": "5f2ad05d",
+            "FileSize": 30928,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Combat/Effects/Slash/Electro slash.prefab",
+                "Assets/AssetPackage/Combat/Effects/Slash/Snow slash.prefab",
+                "Assets/AssetPackage/Combat/Effects/Slash/Stone slash.prefab"
+            ]
+        },
+        {
+            "BundleName": "assets_assetpackage_scenes.bundle",
+            "FileName": "dfb276481cd49926d84b680adc4e3ee8.bundle",
+            "FileHash": "dfb276481cd49926d84b680adc4e3ee8",
+            "FileCRC": "e42b2933",
+            "FileSize": 922131,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_terrain.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_flowers.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_rocks.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_shrubs.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_trees.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_flowers.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_mushrooms.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_plants.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_rocks.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_shrubs.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_bridge.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_fence.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "share_assets_art_fonts.bundle",
+                "share_assets_art_ui_combat_dynamic floating text_demo_data.bundle",
+                "share_assets_art_ui_combat_dynamic floating text_resources_prefabs.bundle",
+                "share_assets_resources_combat_prefabs_entity.bundle",
+                "share_assets_resources_ui_prefabs.bundle",
+                "share_assets_resources_ui_prefabs_inventory_itemmenu.bundle",
+                "share_assets_resources_ui_texture_inventory_tipstool.bundle",
+                "share_packages_com_unity_inputsystem_inputsystem_plugins_playerinput.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/AssetPackage/Scenes/Game.unity",
+                "Assets/AssetPackage/Scenes/Scene0.unity",
+                "Assets/AssetPackage/Scenes/Scene1.unity"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle",
+            "FileName": "8a6a379411a0d9b80635d010f6712f6b.bundle",
+            "FileHash": "8a6a379411a0d9b80635d010f6712f6b",
+            "FileCRC": "177e3f5e",
+            "FileSize": 1277597,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1n.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Point1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Circle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Gradient.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Stone.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flash.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Trail67.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Snowflake.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Arrow1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Flare.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Electro.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Heart.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Star.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Mask1.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/MagicCircle.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/MagicCircle2.png",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Textures/Slash.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+            "FileName": "a0749933e056b495c40f34d592459246.bundle",
+            "FileHash": "a0749933e056b495c40f34d592459246",
+            "FileCRC": "cca811ab",
+            "FileSize": 28507,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/DistortionPoint.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Point.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Gradient.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Stone.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Trail67.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Snowflake.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Arrow1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Electro.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Heart.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Star.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Mask1.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/MagicCircle.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/MagicCircle2.mat",
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Materials/Slash.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_itemmodel_rpg pack_textures.bundle",
+            "FileName": "29323f305cf75f485d7718cfbb1b77dd.bundle",
+            "FileHash": "29323f305cf75f485d7718cfbb1b77dd",
+            "FileCRC": "a1846d5c",
+            "FileSize": 645436,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_normal.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_red_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottles_spec.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/star.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/sprite_radiance.tif",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_green_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Bottle_blue_diff.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/BoxOfPandora_diffuse.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Dust_particles.tif",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Coin_diffuse.png",
+                "Assets/Art/ItemModel/RPG Pack/Textures/Coin_normals.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_itemmodel_rpg pack_animations.bundle",
+            "FileName": "0696660c27bcee9c40dd3dde28b991b6.bundle",
+            "FileHash": "0696660c27bcee9c40dd3dde28b991b6",
+            "FileCRC": "7607905c",
+            "FileSize": 10212,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_itemmodel_rpg pack_materials.bundle",
+                "share_assets_art_itemmodel_rpg pack_models.bundle",
+                "share_assets_art_itemmodel_rpg pack_models_bottles.bundle",
+                "share_assets_art_itemmodel_rpg pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Animations/ItemsAC.controller",
+                "Assets/Art/ItemModel/RPG Pack/Animations/BoxCrashAC.controller",
+                "Assets/Art/ItemModel/RPG Pack/Animations/BoxOfPandora_Idle.anim"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_itemmodel_rpg pack_materials.bundle",
+            "FileName": "c4e8d1ea7f8090d88aebdd4c59857b5d.bundle",
+            "FileHash": "c4e8d1ea7f8090d88aebdd4c59857b5d",
+            "FileCRC": "f8e7eb04",
+            "FileSize": 75697,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_itemmodel_rpg pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Materials/Stars_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Glow_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_red.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_green.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Bottle_blue.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Dust_particles.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Box_Of_Pandora.mat",
+                "Assets/Art/ItemModel/RPG Pack/Materials/Coin.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_itemmodel_rpg pack_models_bottles.bundle",
+            "FileName": "794fcfd2a3cb645cfdf97dde19f98953.bundle",
+            "FileHash": "794fcfd2a3cb645cfdf97dde19f98953",
+            "FileCRC": "66216dd7",
+            "FileSize": 17804,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_itemmodel_rpg pack_materials.bundle",
+                "share_assets_art_itemmodel_rpg pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_green.FBX",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_red.FBX",
+                "Assets/Art/ItemModel/RPG Pack/Models/Bottles/bottle_blue.FBX"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_itemmodel_rpg pack_models.bundle",
+            "FileName": "f6b62b5a314374515e6f10cefe1e69eb.bundle",
+            "FileHash": "f6b62b5a314374515e6f10cefe1e69eb",
+            "FileCRC": "90afa372",
+            "FileSize": 117092,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_itemmodel_rpg pack_materials.bundle",
+                "share_assets_art_itemmodel_rpg pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/ItemModel/RPG Pack/Models/Box.FBX",
+                "Assets/Art/ItemModel/RPG Pack/Models/Coin.FBX"
+            ]
+        },
+        {
+            "BundleName": "share_assets_animation_tid-0.bundle",
+            "FileName": "fbe417fc979ca35e8109b8e8eb1638ea.bundle",
+            "FileHash": "fbe417fc979ca35e8109b8e8eb1638ea",
+            "FileCRC": "0235fb44",
+            "FileSize": 130260,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_dogknight_animations.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Animation/Tid-0/Dizzy.anim",
+                "Assets/Animation/Tid-0/Run.anim",
+                "Assets/Animation/Tid-0/Tid-0.controller",
+                "Assets/Animation/Tid-0/Attack02.anim",
+                "Assets/Animation/Tid-0/Idle.anim",
+                "Assets/Animation/Tid-0/Hit.anim",
+                "Assets/Animation/Tid-0/Walk.anim",
+                "Assets/Animation/Tid-0/Attack.anim"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_ui_ui ability indicators.bundle",
+            "FileName": "32a05e1ab908f1a112f57b37aa43ec0f.bundle",
+            "FileHash": "32a05e1ab908f1a112f57b37aa43ec0f",
+            "FileCRC": "c2443cea",
+            "FileSize": 440711,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/UI/UI Ability Indicators/Heal Indicator.png",
+                "Assets/Art/UI/UI Ability Indicators/Range Indicator.png",
+                "Assets/Art/UI/UI Ability Indicators/Cone Indicator.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_dogknight_animations.bundle",
+            "FileName": "60a6953deb8eabd82db40ca9356134ee.bundle",
+            "FileHash": "60a6953deb8eabd82db40ca9356134ee",
+            "FileCRC": "7fb2c402",
+            "FileSize": 29544,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/DogKnight/Animations/Die.anim"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_dogknight_material.bundle",
+            "FileName": "0d9f7d462faa6d43748cb5412e8db183.bundle",
+            "FileHash": "0d9f7d462faa6d43748cb5412e8db183",
+            "FileCRC": "e77ea1b0",
+            "FileSize": 63139,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_dogknight_texture.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/DogKnight/Material/PBR.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_dogknight_texture.bundle",
+            "FileName": "20e44e95937ca1eeef88bd17dd01955c.bundle",
+            "FileHash": "20e44e95937ca1eeef88bd17dd01955c",
+            "FileCRC": "3a30adce",
+            "FileSize": 14133186,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/DogKnight/Texture/AO.png",
+                "Assets/Art/Unit/DogKnight/Texture/Normal.png",
+                "Assets/Art/Unit/DogKnight/Texture/Albedo.png",
+                "Assets/Art/Unit/DogKnight/Texture/MS.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_dogknight_mesh.bundle",
+            "FileName": "b06e7055b8a461eff400f88fa9cd4e5b.bundle",
+            "FileHash": "b06e7055b8a461eff400f88fa9cd4e5b",
+            "FileCRC": "b749ed70",
+            "FileSize": 207639,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/DogKnight/Mesh/Shield.fbx",
+                "Assets/Art/Unit/DogKnight/Mesh/Sword.fbx",
+                "Assets/Art/Unit/DogKnight/Mesh/DogPBR.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_wizardpolyart_textures_forstandardshader.bundle",
+            "FileName": "6fde69e67be763493cc8c918b6b65a0f.bundle",
+            "FileHash": "6fde69e67be763493cc8c918b6b65a0f",
+            "FileCRC": "ebe00487",
+            "FileSize": 2987,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/WizardPolyArt/Textures/ForStandardShader/polyArtTex.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_animation_tid-1.bundle",
+            "FileName": "5f821a2c8c8521a2a8720b2bc212fb8d.bundle",
+            "FileHash": "5f821a2c8c8521a2a8720b2bc212fb8d",
+            "FileCRC": "5de39230",
+            "FileSize": 120225,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_wizardpolyart_animations.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Animation/Tid-1/Attack.anim",
+                "Assets/Animation/Tid-1/Intonate.anim",
+                "Assets/Animation/Tid-1/Tid-1.controller",
+                "Assets/Animation/Tid-1/Hit.anim",
+                "Assets/Animation/Tid-1/BattleWalkForward.anim",
+                "Assets/Animation/Tid-1/Death.anim",
+                "Assets/Animation/Tid-1/Dizzy.anim",
+                "Assets/Animation/Tid-1/BattleRunForward.anim"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_wizardpolyart_animations.bundle",
+            "FileName": "b17f2a4c5e94218ba83219d4582a5bfe.bundle",
+            "FileHash": "b17f2a4c5e94218ba83219d4582a5bfe",
+            "FileCRC": "558407e3",
+            "FileSize": 618076,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/WizardPolyArt/Animations/Idle01.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Animations/VictoryMaintain.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Animations/VictoryStart.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_wizardpolyart_materials.bundle",
+            "FileName": "48a5f9d3e70fc84e961ea82fdaf3e8d6.bundle",
+            "FileHash": "48a5f9d3e70fc84e961ea82fdaf3e8d6",
+            "FileCRC": "be69dd5a",
+            "FileSize": 45696,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_wizardpolyart_textures_forstandardshader.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/WizardPolyArt/Materials/PolyArtStandardMaterial.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_wizardpolyart_mesh.bundle",
+            "FileName": "d0a903bce838b5db3ebf2662f0881550.bundle",
+            "FileHash": "d0a903bce838b5db3ebf2662f0881550",
+            "FileCRC": "f8a2397e",
+            "FileSize": 320699,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/WizardPolyArt/Mesh/PolyArtWizardMesh.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Mesh/Staff03PolyArt.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Mesh/Staff02Polyart.fbx",
+                "Assets/Art/Unit/WizardPolyArt/Mesh/Staff01PolyArt.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_e3d-cordelia_animation_fbx.bundle",
+            "FileName": "ce31bcafa783d910362642111806b5e2.bundle",
+            "FileHash": "ce31bcafa783d910362642111806b5e2",
+            "FileCRC": "da60c8a9",
+            "FileSize": 456140,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_e3d-cordelia.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillD.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@BattleRun.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Yawn.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@AttackC.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Dead.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Enter.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillC.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Revive.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@SkillG.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@JumpC.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Leave.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@JumpB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@JumpA.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@BattleStand.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Stun.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@AttackB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@AttackA.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Run.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@DamageB.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Walk.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@Stand.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@DamageA.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Animation/FBX/@DeadStand.FBX"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_e3d-cordelia.bundle",
+            "FileName": "64e552e9771fd85dbd0fff63f6a01757.bundle",
+            "FileHash": "64e552e9771fd85dbd0fff63f6a01757",
+            "FileCRC": "5a10246f",
+            "FileSize": 1596111,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/E3D-Cordelia/Hair.png",
+                "Assets/Art/Unit/E3D-Cordelia/Spear.png",
+                "Assets/Art/Unit/E3D-Cordelia/E3D-Cordelia.FBX",
+                "Assets/Art/Unit/E3D-Cordelia/Armor.png",
+                "Assets/Art/Unit/E3D-Cordelia/Eyes.png",
+                "Assets/Art/Unit/E3D-Cordelia/Face.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_animation_tid-4.bundle",
+            "FileName": "d66c1280afda3df8abe65c59a5fe4ee0.bundle",
+            "FileHash": "d66c1280afda3df8abe65c59a5fe4ee0",
+            "FileCRC": "1d451203",
+            "FileSize": 6103,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_e3d-cordelia.bundle",
+                "share_assets_art_unit_e3d-cordelia_animation_fbx.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Animation/Tid-4/Tid-4.controller"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_mini simple characters skeleton demo_materials.bundle",
+            "FileName": "f1cb5e5fe33bbf297bb03e6b86c3ed3a.bundle",
+            "FileHash": "f1cb5e5fe33bbf297bb03e6b86c3ed3a",
+            "FileCRC": "dab071eb",
+            "FileSize": 195122,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat primary.mat",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters_texture.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_mini simple characters skeleton demo_materials_material variations.bundle",
+            "FileName": "7e1912a17facd5d9cd80b066ae55574e.bundle",
+            "FileHash": "7e1912a17facd5d9cd80b066ae55574e",
+            "FileCRC": "c0e947e9",
+            "FileSize": 43344,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_mini simple characters skeleton demo_materials.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Materials/Material Variations/Mini Simple Characters Mat Red Eyes.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_mini simple characters skeleton demo_prefabs_props.bundle",
+            "FileName": "18b72fc682e8a0c18a3612d2df0b00a7.bundle",
+            "FileHash": "18b72fc682e8a0c18a3612d2df0b00a7",
+            "FileCRC": "7075ba82",
+            "FileSize": 3093,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_mini simple characters skeleton demo_materials.bundle",
+                "share_assets_art_unit_mini simple characters skeleton demo_models.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Prefabs/Props/sword_wood.prefab",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Prefabs/Props/shield_wood.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_mini simple characters skeleton demo_models.bundle",
+            "FileName": "2d5cf40296e1671a117e849d684cabd2.bundle",
+            "FileHash": "2d5cf40296e1671a117e849d684cabd2",
+            "FileCRC": "38b9c141",
+            "FileSize": 210359,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Models/mini simple skeleton demo.fbx",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Models/shield_wood.fbx",
+                "Assets/Art/Unit/Mini Simple Characters Skeleton Demo/Models/sword_wood.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_牛头人_boss_bull_animation.bundle",
+            "FileName": "1da16d3a6c9a1cb6b71c716eb56c22f5.bundle",
+            "FileHash": "1da16d3a6c9a1cb6b71c716eb56c22f5",
+            "FileCRC": "ba374c25",
+            "FileSize": 1128892,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_牛头人_boss_bull_mesh.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh_materials.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@walk.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@damage.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@attack_02.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@die.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@dizzy.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@idle.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@jump_left.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@jump.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@run.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@jump_right.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@attack_01.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@attack_03.FBX",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Animation/bull_king@defy.FBX"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_牛头人_boss_bull_prefab.bundle",
+            "FileName": "7206a8d3346cb41c9325244cc2c7ea5b.bundle",
+            "FileHash": "7206a8d3346cb41c9325244cc2c7ea5b",
+            "FileCRC": "5d41d8c2",
+            "FileSize": 11126,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_牛头人_boss_bull.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_animation.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_materials.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh_materials.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Prefab/Bull.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_牛头人_boss_bull_mesh.bundle",
+            "FileName": "824e5b63a2bf83bc2cf94a7acdcbc1b9.bundle",
+            "FileHash": "824e5b63a2bf83bc2cf94a7acdcbc1b9",
+            "FileCRC": "8dd617cd",
+            "FileSize": 117598,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_牛头人_boss_bull_mesh_materials.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Mesh/bull_king.FBX"
+            ]
+        },
+        {
+            "BundleName": "share_assets_animation_tid-1003.bundle",
+            "FileName": "ceed310b1fc7c8f89d181321b573ee32.bundle",
+            "FileHash": "ceed310b1fc7c8f89d181321b573ee32",
+            "FileCRC": "12902902",
+            "FileSize": 5351,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_牛头人_boss_bull_animation.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh_materials.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Animation/Tid-1003/Tid-1003.controller"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_牛头人_boss_bull_mesh_materials.bundle",
+            "FileName": "1b6c0cc08811f4d1d250d4f3e5090c3e.bundle",
+            "FileHash": "1b6c0cc08811f4d1d250d4f3e5090c3e",
+            "FileCRC": "2061a123",
+            "FileSize": 43251,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Mesh/Materials/bull_king.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_牛头人_boss_bull_materials.bundle",
+            "FileName": "b7b0c1e82927dd2fd2467b43238e5238.bundle",
+            "FileHash": "b7b0c1e82927dd2fd2467b43238e5238",
+            "FileCRC": "c939a96a",
+            "FileSize": 499015,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Materials/bull_king_s.png",
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Materials/M_Bull_Standard.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_牛头人_boss_bull.bundle",
+            "FileName": "9389b8492f99dee3eeca5a62e6dac6d6.bundle",
+            "FileHash": "9389b8492f99dee3eeca5a62e6dac6d6",
+            "FileCRC": "4837e327",
+            "FileSize": 6074,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_牛头人_boss_bull_animation.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh.bundle",
+                "share_assets_art_unit_牛头人_boss_bull_mesh_materials.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/牛头人/BOSS/Bull/Bull.controller"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_绛雨_materials.bundle",
+            "FileName": "602dfa3201dd7946115e2317408c595b.bundle",
+            "FileHash": "602dfa3201dd7946115e2317408c595b",
+            "FileCRC": "61a2f072",
+            "FileSize": 19612,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_绛雨_spa.bundle",
+                "share_assets_art_unit_绛雨_tex.bundle",
+                "share_assets_art_unit_绛雨_toon.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/绛雨/Materials/17.sodekokoukisakimigitoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/14.sodekoseijouhidari.mat",
+                "Assets/Art/Unit/绛雨/Materials/22._.mat",
+                "Assets/Art/Unit/绛雨/Materials/12.sodekoseijoumigi.mat",
+                "Assets/Art/Unit/绛雨/Materials/13.sodekoseijoumigitoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/15.sodekoseijouhidaritoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/8.body.mat",
+                "Assets/Art/Unit/绛雨/Materials/5.mae_.mat",
+                "Assets/Art/Unit/绛雨/Materials/0.ifuku.mat",
+                "Assets/Art/Unit/绛雨/Materials/11.__toumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/6.kisaki_.mat",
+                "Assets/Art/Unit/绛雨/Materials/1.__.mat",
+                "Assets/Art/Unit/绛雨/Materials/16.sodekokoukisakimigi.mat",
+                "Assets/Art/Unit/绛雨/Materials/18.migijoutoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/3._ko.mat",
+                "Assets/Art/Unit/绛雨/Materials/19.sodekokoukisakihidari.mat",
+                "Assets/Art/Unit/绛雨/Materials/4._ko.mat",
+                "Assets/Art/Unit/绛雨/Materials/21.hidariuetoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/9.__.mat",
+                "Assets/Art/Unit/绛雨/Materials/10.__.mat",
+                "Assets/Art/Unit/绛雨/Materials/20.sodekokoukisakihidaritoumei.mat",
+                "Assets/Art/Unit/绛雨/Materials/2.shutou.mat",
+                "Assets/Art/Unit/绛雨/Materials/7._ko.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_绛雨_toon.bundle",
+            "FileName": "447ef3da31cb17c8cbbd9a3eec8a78ae.bundle",
+            "FileHash": "447ef3da31cb17c8cbbd9a3eec8a78ae",
+            "FileCRC": "3e050465",
+            "FileSize": 2907,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/绛雨/toon/hair.png",
+                "Assets/Art/Unit/绛雨/toon/skin.png",
+                "Assets/Art/Unit/绛雨/toon/cloth.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_绛雨_spa.bundle",
+            "FileName": "93216b64c2252054da4acf516ef774ed.bundle",
+            "FileHash": "93216b64c2252054da4acf516ef774ed",
+            "FileCRC": "0c676eba",
+            "FileSize": 329185,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/绛雨/spa/fresnel_skin.png",
+                "Assets/Art/Unit/绛雨/spa/fresnel_hair.png",
+                "Assets/Art/Unit/绛雨/spa/fresnel_cloth.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_绛雨_tex.bundle",
+            "FileName": "7356e76defb6993a2662dbb475e44978.bundle",
+            "FileHash": "7356e76defb6993a2662dbb475e44978",
+            "FileCRC": "345e7460",
+            "FileSize": 4019382,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/绛雨/tex/clothes2.png",
+                "Assets/Art/Unit/绛雨/tex/backhair2.png",
+                "Assets/Art/Unit/绛雨/tex/face5.png",
+                "Assets/Art/Unit/绛雨/tex/fronthair.png",
+                "Assets/Art/Unit/绛雨/tex/clothes1.png",
+                "Assets/Art/Unit/绛雨/tex/bodysiwa.png",
+                "Assets/Art/Unit/绛雨/tex/backhair.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_animation_绛雨.bundle",
+            "FileName": "de83ea304a44bb8c84727fd008a6544a.bundle",
+            "FileHash": "de83ea304a44bb8c84727fd008a6544a",
+            "FileCRC": "bbce2d0a",
+            "FileSize": 976869,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Animation/绛雨/idle.fbx",
+                "Assets/Animation/绛雨/绛雨.controller"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_unit_绛雨.bundle",
+            "FileName": "bb584e6946aba3b36d85d508a67cd766.bundle",
+            "FileHash": "bb584e6946aba3b36d85d508a67cd766",
+            "FileCRC": "a0077532",
+            "FileSize": 14228254,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_unit_绛雨_materials.bundle",
+                "share_assets_art_unit_绛雨_spa.bundle",
+                "share_assets_art_unit_绛雨_tex.bundle",
+                "share_assets_art_unit_绛雨_toon.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Unit/绛雨/jiangyuNNDV1.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_effects_52specialeffectpack_texture.bundle",
+            "FileName": "d0b81ca92d59406accb1cffbd0347508.bundle",
+            "FileHash": "d0b81ca92d59406accb1cffbd0347508",
+            "FileCRC": "48410e97",
+            "FileSize": 38612,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Smoke3.png",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Smoke3.mat",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Core3.png",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Core4.mat",
+                "Assets/Art/Effects/52SpecialEffectPack/Texture/Core3.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_effects_hovl studio_magic effects pack_models.bundle",
+            "FileName": "20d6c0da8e98d1c473a064c39ad4ec08.bundle",
+            "FileHash": "20d6c0da8e98d1c473a064c39ad4ec08",
+            "FileCRC": "869254d4",
+            "FileSize": 51234,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Effects/Hovl Studio/Magic effects pack/Models/Cylinder.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_resources_combat_effects_magiccircles.bundle",
+            "FileName": "aa439239a5642d4718352ae41c88abfa.bundle",
+            "FileHash": "aa439239a5642d4718352ae41c88abfa",
+            "FileCRC": "f573e93a",
+            "FileSize": 61882,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_models.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Resources/Combat/Effects/MagicCircles/Magic circle.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_resources_combat_effects_portals.bundle",
+            "FileName": "ff8bea985e5e75ecff23fb9c3c61da3b.bundle",
+            "FileHash": "ff8bea985e5e75ecff23fb9c3c61da3b",
+            "FileCRC": "6ac78717",
+            "FileSize": 28900,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Resources/Combat/Effects/Portals/Portal yellow.prefab"
+            ]
+        },
+        {
+            "BundleName": "unityshaders.bundle",
+            "FileName": "c534f05a89595d970258e00c9d174594.bundle",
+            "FileHash": "c534f05a89595d970258e00c9d174594",
+            "FileCRC": "291723e3",
+            "FileSize": 160257,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/UI/Combat/Dynamic Floating Text/TextMesh Pro/Shaders/TMP_SDF.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Water_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Shaders/PT_Buildings_Shader_PBR.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Rock_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Flowers_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Foliage_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Opaque_Shader.shader",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Plants_Shader.shader"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_fonts.bundle",
+            "FileName": "461f55a3f21e72df130824d808fa640b.bundle",
+            "FileHash": "461f55a3f21e72df130824d808fa640b",
+            "FileCRC": "b582a6db",
+            "FileSize": 11330095,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Fonts/Alibaba-PuHuiTi-Regular SDF.asset",
+                "Assets/Art/Fonts/Alibaba-PuHuiTi-Regular.ttf"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_ui_combat_dynamic floating text_resources_prefabs.bundle",
+            "FileName": "1b601b5a4e8df79f3ad6966f9ceb04f8.bundle",
+            "FileHash": "1b601b5a4e8df79f3ad6966f9ceb04f8",
+            "FileCRC": "206744b6",
+            "FileSize": 6579,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "share_assets_art_fonts.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Resources/Prefabs/Default Canvas Prefab.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_packages_com_unity_inputsystem_inputsystem_editor_icons.bundle",
+            "FileName": "aadd18f72e0a27c7e96841da89f58494.bundle",
+            "FileHash": "aadd18f72e0a27c7e96841da89f58494",
+            "FileCRC": "17fc8ff7",
+            "FileSize": 3546,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Packages/com.unity.inputsystem/InputSystem/Editor/Icons/InputSystemUIInputModule@64.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_ui_combat_dynamic floating text_demo_data.bundle",
+            "FileName": "236203da840e9e39ad9e159d56099c0b.bundle",
+            "FileHash": "236203da840e9e39ad9e159d56099c0b",
+            "FileCRC": "8d00d643",
+            "FileSize": 2973,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "share_assets_art_fonts.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Default Data.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Miss Data.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Crit Data.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Spell.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Physical.asset",
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Demo/Data/Real.asset"
+            ]
+        },
+        {
+            "BundleName": "share_packages_com_unity_textmeshpro_editor resources_gizmos.bundle",
+            "FileName": "8248be66aa7bd9f5eeb5a3798137da73.bundle",
+            "FileHash": "8248be66aa7bd9f5eeb5a3798137da73",
+            "FileCRC": "9a186577",
+            "FileSize": 5653,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text Component Icon.psd",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font Asset Icon.psd"
+            ]
+        },
+        {
+            "BundleName": "share_assets_resources_ui_prefabs.bundle",
+            "FileName": "a5f45ca3e4b35eea9081065810c2fb7f.bundle",
+            "FileHash": "a5f45ca3e4b35eea9081065810c2fb7f",
+            "FileCRC": "47e51107",
+            "FileSize": 19079,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "share_assets_art_fonts.bundle",
+                "share_assets_resources_ui_prefabs_inventory_itemmenu.bundle",
+                "share_assets_resources_ui_texture_inventory_tipstool.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Resources/UI/Prefabs/InfoPanel.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_ui_combat_dynamic floating text_resources_icons.bundle",
+            "FileName": "e0e17abdd089d3298d97947a0d35e5eb.bundle",
+            "FileHash": "e0e17abdd089d3298d97947a0d35e5eb",
+            "FileCRC": "ef21b1f4",
+            "FileSize": 4446,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/UI/Combat/Dynamic Floating Text/Resources/Icons/Icon.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_resources_ui_prefabs_inventory_itemmenu.bundle",
+            "FileName": "b39edb49aaf0d0120941c694b4d12070.bundle",
+            "FileHash": "b39edb49aaf0d0120941c694b4d12070",
+            "FileCRC": "e568b1f4",
+            "FileSize": 5001,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_resources_ui_texture_inventory_tipstool.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Resources/UI/Prefabs/Inventory/ItemMenu/ToolTip.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_packages_com_unity_inputsystem_inputsystem_plugins_playerinput.bundle",
+            "FileName": "55ba5e2bada91634c2ff5c4c67cd8cce.bundle",
+            "FileHash": "55ba5e2bada91634c2ff5c4c67cd8cce",
+            "FileCRC": "7f6c27b8",
+            "FileSize": 7448,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Packages/com.unity.inputsystem/InputSystem/Plugins/PlayerInput/DefaultInputActions.inputactions"
+            ]
+        },
+        {
+            "BundleName": "share_assets_resources_ui_texture_inventory_tipstool.bundle",
+            "FileName": "4adfb049196d020e589995eab9af024c.bundle",
+            "FileHash": "4adfb049196d020e589995eab9af024c",
+            "FileCRC": "5d1da9f9",
+            "FileSize": 37443,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Resources/UI/Texture/Inventory/TipsTool/Inventory_Box.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers.bundle",
+            "FileName": "231a2ec7a6c68258b60adf5ff1eff1aa.bundle",
+            "FileHash": "231a2ec7a6c68258b60adf5ff1eff1aa",
+            "FileCRC": "56760d43",
+            "FileSize": 77518,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_bridge.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_fence.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Ground_Layer_02.terrainlayer",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Fruit_Tree_01_green.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Generic_Tree_Leaves_mat 2.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Fruit_Tree_01_green (1).prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Wooden_Bridge_02 (1).prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Generic_Tree_Leaves_mat 1.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Ground_Layer_01.terrainlayer",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Medieval_Village_Gate_01 1.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/FENCE.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_flowers.bundle",
+            "FileName": "ae5515eee533d9781e7230ba75bd1a20.bundle",
+            "FileHash": "ae5515eee533d9781e7230ba75bd1a20",
+            "FileCRC": "fd17388e",
+            "FileSize": 8954,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Flowers/PT_Poppy_02.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_trees.bundle",
+            "FileName": "074e9218240243ae96ddde51b10f9226.bundle",
+            "FileHash": "074e9218240243ae96ddde51b10f9226",
+            "FileCRC": "20ea8224",
+            "FileSize": 6406,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_pears.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_dead.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_green.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_plums.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_apples.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_logs.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_dead.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+            "FileName": "ae6ea27ea3820ee1928becfb6c2b3896.bundle",
+            "FileHash": "ae6ea27ea3820ee1928becfb6c2b3896",
+            "FileCRC": "64632345",
+            "FileSize": 21573,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Fruit_Tree_Opaque_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Water_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Pine_Tree_Trunk_Mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Pine_Tree_Leaves_Mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Mushrooms_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Generic_Tree_Leaves_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Generic_Tree_Trunk_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Skybox_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Grass_Mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Rocks_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Poppy_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Fruit_Tree_Foliage_Mat.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_terrain.bundle",
+            "FileName": "7268374833c71fe61b912372d45bd226.bundle",
+            "FileHash": "7268374833c71fe61b912372d45bd226",
+            "FileCRC": "a0fcffb9",
+            "FileSize": 1376776,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_flowers.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_rocks.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_shrubs.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_trees.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_flowers.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_plants.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_rocks.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_shrubs.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_bridge.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_fence.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_984456c3-d32f-475f-a118-27bb19f92a65.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_88efe361-6f68-4188-bcd0-e9554ca440b9.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_832163fb-b19c-4118-97c2-cf0a3b224fca.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_c82c1fc5-a7ad-4f88-a7ff-c071a4dae8e5.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_ff4b5190-b520-4d46-b960-ee1d0967df26.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_445999c2-5240-4b5c-9394-4cacb62d7eec.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_6dc76592-a48a-4163-91df-c29ec1a99c66.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/New Terrain.asset",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_d3c37e8d-6092-48f4-b81e-93b97326e4d2.asset"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+            "FileName": "6ae03ca873d57a6e5a1fe5ab82dfafbf.bundle",
+            "FileHash": "6ae03ca873d57a6e5a1fe5ab82dfafbf",
+            "FileCRC": "366dc77d",
+            "FileSize": 8608395,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Grass_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Water_NM_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Ground_Generic_03.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Fruit_Tree_Flowers_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Mushrooms_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Tree_Trunk_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Skybox_Texture_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Fruit_Tree_Leaves_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Rocks_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Poppy_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Generic_Leaves_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Ground_Grass_Green_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Runes_02.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Pine_Tree_01.png"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+            "FileName": "9e7568a428069c631320ad4923ca7cea.bundle",
+            "FileHash": "9e7568a428069c631320ad4923ca7cea",
+            "FileCRC": "0b53182e",
+            "FileSize": 8013,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_Medieval_Buildings_Texture_Mask_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_Medieval_Buildings_Texture_01.png",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_texture.tga"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_mushrooms.bundle",
+            "FileName": "ee53c0d16650adb3af333ee725b88f4e.bundle",
+            "FileHash": "ee53c0d16650adb3af333ee725b88f4e",
+            "FileCRC": "2937a264",
+            "FileSize": 6960,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Mushrooms/PT_Caesars_Mushroom_01.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle",
+            "FileName": "8cc33ec43f84df3bdb45653913063888.bundle",
+            "FileHash": "8cc33ec43f84df3bdb45653913063888",
+            "FileCRC": "7e3c163d",
+            "FileSize": 912665,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_plums.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_dead.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_dead.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_stump.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_green.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_logs.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_green.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_pears.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_apples.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_rocks.bundle",
+            "FileName": "95639179d1d86908f8c01a905f2b1d0a.bundle",
+            "FileHash": "95639179d1d86908f8c01a905f2b1d0a",
+            "FileCRC": "124a775e",
+            "FileSize": 206800,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Generic_Rock_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Ore_Rock_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_River_Rock_Pile_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Menhir_Rock_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Ore_Rock_01_split.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_rocks.bundle",
+            "FileName": "a4c8db3b8c3d0890d7b1c86a567be4f7.bundle",
+            "FileHash": "a4c8db3b8c3d0890d7b1c86a567be4f7",
+            "FileCRC": "7036a19a",
+            "FileSize": 5257,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_rocks.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_River_Rock_Pile_02.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Generic_Rock_01.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Menhir_Rock_02.prefab",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Ore_Rock_01_split.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_resources_combat_prefabs_entity.bundle",
+            "FileName": "a1b93c0461d2b1c2575d248200ffbd55.bundle",
+            "FileHash": "a1b93c0461d2b1c2575d248200ffbd55",
+            "FileCRC": "617e8893",
+            "FileSize": 29979,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_effects_hovl studio_magic effects pack_materials.bundle",
+                "share_assets_art_effects_hovl studio_magic effects pack_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Resources/Combat/Prefabs/Entity/DeliveryPoint.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_flowers.bundle",
+            "FileName": "13f3031258a644d651aa6446f5f52b95.bundle",
+            "FileHash": "13f3031258a644d651aa6446f5f52b95",
+            "FileCRC": "2cc6c02e",
+            "FileSize": 3725,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_flowers.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Flowers/PT_Poppy_02.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_fence.bundle",
+            "FileName": "c613c60f31b9207b98cb4c22031a1c7e.bundle",
+            "FileHash": "c613c60f31b9207b98cb4c22031a1c7e",
+            "FileCRC": "9f667b6b",
+            "FileSize": 95821,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_03.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_02.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Gate_Wood_01.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_01.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_bridge.bundle",
+            "FileName": "354252ea536f9b52dd7e9e31d217c029.bundle",
+            "FileHash": "354252ea536f9b52dd7e9e31d217c029",
+            "FileCRC": "942e3284",
+            "FileSize": 41325,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Bridge/PT_Wooden_Bridge_02.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_materials.bundle",
+            "FileName": "29c23aa367ff06c0c0daee184f8a9bca.bundle",
+            "FileHash": "29c23aa367ff06c0c0daee184f8a9bca",
+            "FileCRC": "7c055f8a",
+            "FileSize": 43380,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Materials/PT_Medieval_mat.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_shrubs.bundle",
+            "FileName": "d9163ba981604584b9260a1d63dda546.bundle",
+            "FileHash": "d9163ba981604584b9260a1d63dda546",
+            "FileCRC": "5f48ece7",
+            "FileSize": 34780,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Shrubs/PT_Generic_Shrub_01_green.fbx",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Shrubs/PT_Generic_Shrub_01_dead.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_plants.bundle",
+            "FileName": "e73800ab13c97438eb7fa1c302e94f04.bundle",
+            "FileHash": "e73800ab13c97438eb7fa1c302e94f04",
+            "FileCRC": "212f088a",
+            "FileSize": 9918,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Plants/PT_Grass_02.fbx"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle",
+            "FileName": "c42b235b016eb2177d1a11916c510c45.bundle",
+            "FileHash": "c42b235b016eb2177d1a11916c510c45",
+            "FileCRC": "455d5d85",
+            "FileSize": 44499,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Materials/PT_Buildings_mat.mat",
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Village/Sources/Materials/PT_mat.mat"
+            ]
+        },
+        {
+            "BundleName": "share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_shrubs.bundle",
+            "FileName": "ae661fb7c98409f52fe5202528722ef1.bundle",
+            "FileHash": "ae661fb7c98409f52fe5202528722ef1",
+            "FileCRC": "c271f167",
+            "FileSize": 3750,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_shrubs.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle",
+                "share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle",
+                "unityshaders.bundle"
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Art/Environment/Polytope Studio/Lowpoly_Environments/Prefabs/Shrubs/PT_Generic_Shrub_01_dead.prefab"
+            ]
+        },
+        {
+            "BundleName": "share_assets.bundle",
+            "FileName": "cf9e561f8f1b96f1aa20ffdc502c04b8.bundle",
+            "FileHash": "cf9e561f8f1b96f1aa20ffdc502c04b8",
+            "FileCRC": "1935f6ac",
+            "FileSize": 69419,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundles": [],
+            "AllBuiltinAssets": [
+                "Assets/Scenes1.asset"
+            ]
+        }
+    ],
+    "IndependAssets": []
+}

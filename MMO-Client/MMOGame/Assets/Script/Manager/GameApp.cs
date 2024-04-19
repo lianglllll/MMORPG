@@ -3,6 +3,7 @@ using GameClient.Combat;
 using GameClient.Entities;
 using Proto;
 using Serilog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,6 +64,19 @@ public class GameApp
         SpaceDeliverRequest req = new SpaceDeliverRequest();
         req.SpaceId = spaceId;
         NetClient.Send(req);
+    }
+
+    /// <summary>
+    /// 进入对应的场景
+    /// </summary>
+    /// <param name="spaceId"></param>
+    public static void LoadSpace(int spaceId, Action<Scene> action)
+    {
+        var spaceDefine = DataManager.Instance.spaceDict[spaceId];
+        SceneLoader.LoadSceneAsync(spaceDefine.Resource, (s) =>
+        {
+            action?.Invoke(s);
+        });
     }
 
 }

@@ -66,6 +66,7 @@ public class CameraCollider : MonoBehaviour
         float wheel = Input.GetAxis("Mouse ScrollWheel");
         if(wheel != 0f)
         {
+            wheel = -wheel;
             curDistanceOffset = Mathf.Clamp(curDistanceOffset + wheel, _maxDistanceOffset.x, _maxDistanceOffset.y);
         }
     }
