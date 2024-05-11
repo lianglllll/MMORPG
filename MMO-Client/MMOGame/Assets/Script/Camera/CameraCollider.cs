@@ -9,7 +9,7 @@ public class CameraCollider : MonoBehaviour
     [SerializeField, Header("最大最小偏移量")]          
     private Vector2 _maxDistanceOffset;                     //是和它的父物体为参照无做的偏移,最小起码是1
     [SerializeField, Header("当前偏移量")]
-    private float curDistanceOffset;
+    private float curDistanceOffset = 8f;
     [SerializeField, Header("检测层级"), Space(10)]
     private LayerMask _whatIsWall;
     [SerializeField, Header("射线长度"), Space(10)] 

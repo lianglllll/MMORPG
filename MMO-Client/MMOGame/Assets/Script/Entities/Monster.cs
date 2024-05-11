@@ -33,7 +33,7 @@ namespace Assets.Script.Entities
             if (renderObj == null) return;
             
             //隐藏怪物实体
-            GameTimerManager.Instance.TryUseOneTimer(115f, () => {
+            GameTimerManager.Instance.TryUseOneTimer(3f, () => {
                 //如果单位死亡，将其隐藏
                 //这里判断是防止在死亡的3秒内本actor复活了
                 if (IsDeath)

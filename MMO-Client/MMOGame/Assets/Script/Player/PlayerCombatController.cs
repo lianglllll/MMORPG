@@ -6,8 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// 连招信息
@@ -296,7 +295,7 @@ public class PlayerCombatController : MonoBehaviour
     public void SelectTargetObject()
     {
         //选择目标
-        if (Input.GetMouseButtonDown(0))  // 当鼠标左键被按下
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())  // 当鼠标左键被按下
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // 从鼠标点击位置发出一条射线
             RaycastHit hitInfo;  // 存储射线投射结果的数据
@@ -320,6 +319,10 @@ public class PlayerCombatController : MonoBehaviour
 
                     playerMovementController.MoveToPostion(hitInfo.point);
                 }
+                else
+                {
+
+                }
             }
         }
         else if (Input.GetKeyDown(KeyCode.Space))
@@ -341,14 +344,24 @@ public class PlayerCombatController : MonoBehaviour
         if (enemys == null) return -1;
         if (enemys.Length <= 1) return -1;
 
-        for(int i = 0; i < enemys.Length; ++i)
+        Actor targetActor = null;
+        float minDistance = float.MaxValue;
+        for (int i = 0; i < enemys.Length; ++i)
         {
-            Actor tmpA = enemys[i].GetComponent<GameEntity>().owner;
-            if (!tmpA.IsDeath && tmpA != owner)
+            var tmpA = enemys[i].GetComponent<GameEntity>().owner;
+            if (owner == tmpA || tmpA.IsDeath) continue;
+            var dis = Vector3.Distance(transform.position,tmpA.renderObj.transform.position);
+            if(dis < minDistance)
             {
-                LockTarget(tmpA);
-                return 0;
+                targetActor = tmpA;
+                minDistance = dis;
             }
+        }
+
+        if (targetActor != null)
+        {
+            LockTarget(targetActor);
+            return 0;
         }
 
         return -1;

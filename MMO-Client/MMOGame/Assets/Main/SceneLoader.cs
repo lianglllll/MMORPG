@@ -4,28 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YooAsset;
 
+/// <summary>
+/// 通过热更的方式加载场景
+/// </summary>
 public class SceneLoader : MonoBehaviour
 {
 
     public static float Progress;
-    public static SceneHandle handle;
+    public delegate void OnSceneLoaded(Scene scene);
     private static SceneLoader instance;
 
-    public delegate void OnSceneLoaded(Scene scene);
-    
+
     void Start()
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    void FixedUpdate()
-    {
-        if(handle != null)
-        {
-            Progress = handle.Progress;
-        }
-    }
 
 
     /// <summary>
@@ -33,7 +28,7 @@ public class SceneLoader : MonoBehaviour
     /// </summary>
     /// <param name="sceneName"></param>
     /// <param name="action"></param>
-    public static void LoadSceneAsync(string sceneName, OnSceneLoaded action=null)
+    public static void LoadSceneAsync(string sceneName, OnSceneLoaded action = null)
     {
         instance.StartCoroutine(RunLoad(sceneName, action));
     }
@@ -45,21 +40,25 @@ public class SceneLoader : MonoBehaviour
         var sceneMode = LoadSceneMode.Single;
         bool suspendLoad = false;
         Progress = 0;
-        handle = package.LoadSceneAsync(location, sceneMode, suspendLoad);
+        var handle = package.LoadSceneAsync(location, sceneMode, suspendLoad);
         yield return handle;
-        yield return WaitForSceneLoaded();
+        yield return WaitForSceneLoaded(handle);
         Debug.Log($"Scene name is {handle.SceneObject.name}");
         action?.Invoke(handle.SceneObject);
         Kaiyun.Event.FireOut("SceneCompleted", handle.SceneObject);
     }
 
-    static IEnumerator WaitForSceneLoaded()
+    static IEnumerator WaitForSceneLoaded(SceneHandle han)
     {
-        while(!(handle != null && handle.IsDone && Mathf.Approximately(handle.Progress, 1)))
+        if (han == null) yield break;
+        while (!Mathf.Approximately(han.Progress, 1))
         {
+            Debug.Log("进度：" + han.Progress);
+            Progress = han.Progress;
             yield return null;
         }
-        Debug.Log($"Scene Loaded: {handle.SceneObject.name}");
+        Progress = 1;
+        Debug.Log($"Scene Loaded: {han.SceneObject.name}");
     }
 
 }

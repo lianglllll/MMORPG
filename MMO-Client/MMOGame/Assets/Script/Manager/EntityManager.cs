@@ -42,6 +42,7 @@ namespace GameClient.Entities
             }
         }
 
+
         /// <summary>
         /// 添加一个Entity
         /// </summary>
@@ -65,7 +66,7 @@ namespace GameClient.Entities
         }
 
         /// <summary>
-        /// 清除全部东西
+        /// 清除全部entity
         /// </summary>
         public void Clear()
         {
@@ -79,18 +80,7 @@ namespace GameClient.Entities
             entityDict.Clear();
         }
 
-        /// <summary>
-        /// 获取符合条件的entity
-        /// </summary>
-        /// <param name="match"></param>
-        /// <returns></returns>
-        public List<T> GetEntityList<T>(Predicate<T> match) where T : Entity
-        {
-            return entityDict.Values?
-                .OfType<T>()                            //根据类型赛选
-                .Where(entity => match.Invoke(entity))  //根据条件赛选
-                .ToList();
-        }
+
 
         /// <summary>
         /// 有一个actor进入当前场景
@@ -98,6 +88,17 @@ namespace GameClient.Entities
         /// <param name="nCharacter"></param>
         public void OnActorEnterScene(NetActor nActor)
         {
+            //判断是否已经存在？
+            if(entityDict.TryGetValue(nActor.Entity.Id,out var entity))
+            {
+                if(entity is Actor actor)
+                {
+                    actor.info = nActor;
+                    return;
+                }
+            }
+
+
             //根据不同类型生成不同的actor：玩家角色、怪物、npc
             if(nActor.EntityType == EntityType.Character)
             {
@@ -121,9 +122,21 @@ namespace GameClient.Entities
         /// <param name="netItemEntity"></param>
         public void OnItemEnterScene(NetItemEntity netItemEntity)
         {
+            //判断是否已经存在？
+            if (entityDict.TryGetValue(netItemEntity.Entity.Id, out var itemEntity))
+            {
+                if (itemEntity is ItemEntity item )
+                {
+                    item.UpdateInfo(netItemEntity);
+                    return;
+                }
+            }
+
             AddEntity(new ItemEntity(netItemEntity));
             Kaiyun.Event.FireOut("CreateItemObject", netItemEntity);//GameObjectManager中实现
         }
+
+
 
         /// <summary>
         /// entity位置信息同步
@@ -155,7 +168,36 @@ namespace GameClient.Entities
             Kaiyun.Event.FireOut("CtlEntitySync", nEntitySync);    //GameObjectManager中实现
         }
 
+        /// <summary>
+        /// itementity信息同步,目前只同步了amount
+        /// </summary>
+        /// <param name="netItemEntity"></param>
+        public void OnItemEntitySync(NetItemEntity netItemEntity)
+        {
+            Entity entity = entityDict.GetValueOrDefault(netItemEntity.Entity.Id);
+            if (entity == null) return;
 
+            ItemEntity ientity = entity as ItemEntity;
+            ientity.Amount = netItemEntity.ItemInfo.Amount;
+
+            //暂时不需要同步其他的
+
+        }
+
+
+
+        /// <summary>
+        /// 获取符合条件的entity
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
+        public List<T> GetEntityList<T>(Predicate<T> match) where T : Entity
+        {
+            return entityDict.Values?
+                .OfType<T>()                            //根据类型赛选
+                .Where(entity => match.Invoke(entity))  //根据条件赛选
+                .ToList();
+        }
 
         /// <summary>
         /// 根据entityid获取一个entity，可以选择entity的子类类型
@@ -180,22 +222,6 @@ namespace GameClient.Entities
                 .OfType<T>()
                 .Where(e => match.Invoke(e))
                 .ToList();
-        }
-
-        /// <summary>
-        /// itementity信息同步,目前只同步了amount
-        /// </summary>
-        /// <param name="netItemEntity"></param>
-        public void OnItemEntitySync(NetItemEntity netItemEntity)
-        {
-            Entity entity = entityDict.GetValueOrDefault(netItemEntity.Entity.Id);
-            if (entity == null) return;
-
-            ItemEntity ientity = entity as ItemEntity;
-            ientity.Amount = netItemEntity.ItemInfo.Amount;
-
-            //暂时不需要同步其他的
-
         }
 
     }

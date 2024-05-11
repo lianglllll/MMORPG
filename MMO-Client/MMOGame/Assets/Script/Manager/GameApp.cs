@@ -18,6 +18,9 @@ public class GameApp
     //SessionId
     public static string SessionId;
 
+    //当前所在场景id
+    public static int SpaceId;
+
     //角色的entityid
     public static int entityId;
 
@@ -37,6 +40,7 @@ public class GameApp
     //清空当前存储的数据
     public static void ClearGameAppData()
     {
+        SpaceId = -1;
         SessionId = null;
         entityId = -1;
         character = null;
