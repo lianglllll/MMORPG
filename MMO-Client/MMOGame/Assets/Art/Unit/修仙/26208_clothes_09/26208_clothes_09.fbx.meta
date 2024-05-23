@@ -1,0 +1,374 @@
+fileFormatVersion: 2
+guid: 9ac6d6014e62682488b582890e88b9c7
+timeCreated: 1566202260
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: 26208_clothes_09
+    100004: 27205_character_02_body
+    100006: 27205_character_02_body_0
+    100008: 27205_character_02_face_01
+    100010: 27205_character_02_face_01_0
+    100012: 27205_clothes_06
+    100014: 27205_clothes_06_0
+    100016: 27205_clothes_06_gauze
+    100018: 27205_clothes_06_gauze_0
+    100020: 27205_clothes_06_hair
+    100022: 27205_clothes_06_hair_0
+    100024: 27205_fashion_point_bip001
+    100026: Bip001
+    100028: Bip001 Head
+    100030: Bip001 HeadNub
+    100032: Bip001 L Calf
+    100034: Bip001 L Clavicle
+    100036: Bip001 L Finger0
+    100038: Bip001 L Finger01
+    100040: Bip001 L Finger0Nub
+    100042: Bip001 L Finger1
+    100044: Bip001 L Finger11
+    100046: Bip001 L Finger1Nub
+    100048: Bip001 L Finger2
+    100050: Bip001 L Finger21
+    100052: Bip001 L Finger2Nub
+    100054: Bip001 L Foot
+    100056: Bip001 L Forearm
+    100058: Bip001 L Hand
+    100060: Bip001 L Thigh
+    100062: Bip001 L Toe0
+    100064: Bip001 L Toe0Nub
+    100066: Bip001 L UpperArm
+    100068: Bip001 Neck
+    100070: Bip001 Pelvis
+    100072: Bip001 Prop1
+    100074: Bip001 R Calf
+    100076: Bip001 R Clavicle
+    100078: Bip001 R Finger0
+    100080: Bip001 R Finger01
+    100082: Bip001 R Finger0Nub
+    100084: Bip001 R Finger1
+    100086: Bip001 R Finger11
+    100088: Bip001 R Finger1Nub
+    100090: Bip001 R Finger2
+    100092: Bip001 R Finger21
+    100094: Bip001 R Finger2Nub
+    100096: Bip001 R Foot
+    100098: Bip001 R Forearm
+    100100: Bip001 R Hand
+    100102: Bip001 R Thigh
+    100104: Bip001 R Toe0
+    100106: Bip001 R Toe0Nub
+    100108: Bip001 R UpperArm
+    100110: Bip001 Spine
+    100112: Bip001 Spine1
+    100114: Bone010
+    100116: Bone011
+    100118: Bone012
+    100120: Bone019
+    100122: Bone020
+    100124: Bone021
+    100126: Bone022
+    100128: Bone023
+    100130: Bone024
+    100132: Bone025
+    100134: Bone026
+    100136: Bone027
+    100138: Bone028
+    100140: Bone030
+    100142: Bone034
+    100144: Bone034(mirrored)
+    100146: Bone035
+    100148: Bone035(mirrored)
+    100150: Bone036
+    100152: Bone036(mirrored)
+    100154: Bone037
+    100156: Bone037(mirrored)
+    100158: Bone038
+    100160: Bone038(mirrored)
+    100162: Bone051
+    100164: Bone051(mirrored)
+    100166: Bone052
+    100168: Bone052(mirrored)
+    100170: Bone136
+    100172: Bone137
+    100174: Bone138
+    100176: Bone139
+    100178: Bone140
+    100180: Bone141
+    100182: Bone142
+    100184: Bone142(mirrored)
+    100186: Bone143
+    100188: Bone143(mirrored)
+    100190: Bone144
+    100192: Bone144(mirrored)
+    100194: Bone145
+    100196: Bone145(mirrored)
+    100198: Bone146
+    100200: Bone146(mirrored)
+    100202: Bone147
+    100204: Bone147(mirrored)
+    100206: Bone148
+    100208: Bone148(mirrored)
+    100210: Bone149
+    100212: Bone149(mirrored)
+    100214: Bone150
+    100216: Bone150(mirrored)
+    100218: Bottom
+    100220: Center
+    100222: collectpoint
+    100224: foot_l
+    100226: foot_r
+    100228: high_model
+    100230: Lflypoint
+    100232: mask_point
+    100234: Rflypoint
+    100236: Top
+    100238: weaponpoint
+    100240: wing_point
+    400000: 26208_clothes_09
+    400002: //RootNode
+    400004: 27205_character_02_body
+    400006: 27205_character_02_body_0
+    400008: 27205_character_02_face_01
+    400010: 27205_character_02_face_01_0
+    400012: 27205_clothes_06
+    400014: 27205_clothes_06_0
+    400016: 27205_clothes_06_gauze
+    400018: 27205_clothes_06_gauze_0
+    400020: 27205_clothes_06_hair
+    400022: 27205_clothes_06_hair_0
+    400024: 27205_fashion_point_bip001
+    400026: Bip001
+    400028: Bip001 Head
+    400030: Bip001 HeadNub
+    400032: Bip001 L Calf
+    400034: Bip001 L Clavicle
+    400036: Bip001 L Finger0
+    400038: Bip001 L Finger01
+    400040: Bip001 L Finger0Nub
+    400042: Bip001 L Finger1
+    400044: Bip001 L Finger11
+    400046: Bip001 L Finger1Nub
+    400048: Bip001 L Finger2
+    400050: Bip001 L Finger21
+    400052: Bip001 L Finger2Nub
+    400054: Bip001 L Foot
+    400056: Bip001 L Forearm
+    400058: Bip001 L Hand
+    400060: Bip001 L Thigh
+    400062: Bip001 L Toe0
+    400064: Bip001 L Toe0Nub
+    400066: Bip001 L UpperArm
+    400068: Bip001 Neck
+    400070: Bip001 Pelvis
+    400072: Bip001 Prop1
+    400074: Bip001 R Calf
+    400076: Bip001 R Clavicle
+    400078: Bip001 R Finger0
+    400080: Bip001 R Finger01
+    400082: Bip001 R Finger0Nub
+    400084: Bip001 R Finger1
+    400086: Bip001 R Finger11
+    400088: Bip001 R Finger1Nub
+    400090: Bip001 R Finger2
+    400092: Bip001 R Finger21
+    400094: Bip001 R Finger2Nub
+    400096: Bip001 R Foot
+    400098: Bip001 R Forearm
+    400100: Bip001 R Hand
+    400102: Bip001 R Thigh
+    400104: Bip001 R Toe0
+    400106: Bip001 R Toe0Nub
+    400108: Bip001 R UpperArm
+    400110: Bip001 Spine
+    400112: Bip001 Spine1
+    400114: Bone010
+    400116: Bone011
+    400118: Bone012
+    400120: Bone019
+    400122: Bone020
+    400124: Bone021
+    400126: Bone022
+    400128: Bone023
+    400130: Bone024
+    400132: Bone025
+    400134: Bone026
+    400136: Bone027
+    400138: Bone028
+    400140: Bone030
+    400142: Bone034
+    400144: Bone034(mirrored)
+    400146: Bone035
+    400148: Bone035(mirrored)
+    400150: Bone036
+    400152: Bone036(mirrored)
+    400154: Bone037
+    400156: Bone037(mirrored)
+    400158: Bone038
+    400160: Bone038(mirrored)
+    400162: Bone051
+    400164: Bone051(mirrored)
+    400166: Bone052
+    400168: Bone052(mirrored)
+    400170: Bone136
+    400172: Bone137
+    400174: Bone138
+    400176: Bone139
+    400178: Bone140
+    400180: Bone141
+    400182: Bone142
+    400184: Bone142(mirrored)
+    400186: Bone143
+    400188: Bone143(mirrored)
+    400190: Bone144
+    400192: Bone144(mirrored)
+    400194: Bone145
+    400196: Bone145(mirrored)
+    400198: Bone146
+    400200: Bone146(mirrored)
+    400202: Bone147
+    400204: Bone147(mirrored)
+    400206: Bone148
+    400208: Bone148(mirrored)
+    400210: Bone149
+    400212: Bone149(mirrored)
+    400214: Bone150
+    400216: Bone150(mirrored)
+    400218: Bottom
+    400220: Center
+    400222: collectpoint
+    400224: foot_l
+    400226: foot_r
+    400228: high_model
+    400230: Lflypoint
+    400232: mask_point
+    400234: Rflypoint
+    400236: Top
+    400238: weaponpoint
+    400240: wing_point
+    4300000: 27205_character_02_body_0
+    4300002: 27205_character_02_face_01_0
+    4300004: 27205_clothes_06_0
+    4300006: 27205_clothes_06_gauze_0
+    4300008: 27205_clothes_06_hair_0
+    7400000: battle_to_idle
+    7400002: combatidle
+    7400004: dead
+    7400006: deaded
+    7400008: diaoyu1
+    7400010: diaoyu2
+    7400012: diaoyu3
+    7400014: fall
+    7400016: fly_1
+    7400018: fly_2
+    7400020: fly_3
+    7400022: fly_4
+    7400024: hurt
+    7400026: idle
+    7400028: idle00
+    7400030: idle2
+    7400032: idle_to_battle
+    7400034: jump_on_ground
+    7400036: login_idle
+    7400038: login_pose
+    7400040: return_11
+    7400042: return_12
+    7400044: return_13
+    7400046: return_14
+    7400048: run
+    7400050: run00
+    7400052: run_battle
+    7400054: run_sprint
+    7400056: spell_6_go
+    7400058: spell_7_go
+    7400060: spell_11_go
+    7400062: spell_12_go
+    7400064: spell_13_go
+    7400066: spell_14_go
+    7400068: spell_21_go
+    7400070: spell_22_go
+    7400072: spell_23_go
+    7400074: spell_5001_go
+    7400076: spell_6001_go
+    7400078: spell_7001_go
+    7400080: spell_8001_go
+    7400082: spell_120001_go
+    7400084: stun
+    7400086: swim_idle
+    7400088: swim_jump2water
+    7400090: swim_run
+    9500000: //RootNode
+    13700000: 27205_character_02_body_0
+    13700002: 27205_character_02_face_01_0
+    13700004: 27205_clothes_06_0
+    13700006: 27205_clothes_06_gauze_0
+    13700008: 27205_clothes_06_hair_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
