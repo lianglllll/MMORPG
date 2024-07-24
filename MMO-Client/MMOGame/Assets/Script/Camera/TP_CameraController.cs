@@ -90,7 +90,16 @@ public class TP_CameraController : MonoBehaviour
     private void CameraPosition()
     {
         //以_currentLookTarget位置为基准，向正后移动_positionOffset
-        var newPosition = (((_isFinish)? _currentLookTarget.transform.position + _currentLookTarget.up*0.9f : _currentLookTarget.position) + (-_currentLookTarget.transform.forward * _positionOffset));
+        //tpcamera一直跟着注视对象
+        Vector3 newPosition;
+        if (_isFinish)
+        {
+            newPosition = _currentLookTarget.transform.position + _currentLookTarget.up * 0.9f + (-_currentLookTarget.transform.forward * _positionOffset);
+        }
+        else
+        {
+            newPosition =  _currentLookTarget.position + (-_currentLookTarget.transform.forward * _positionOffset);
+        }
         //插值更新摄像机位置
         transform.position = Vector3.Lerp(transform.position, newPosition, DevelopmentToos.UnTetheredLerp(_positionSmoothTime));
     }
@@ -124,6 +133,10 @@ public class TP_CameraController : MonoBehaviour
     {
         _lookTarget = lookTarget;
         _currentLookTarget = _lookTarget;
+
+        //摄像机的旋转offset
+        _input = new Vector2(30f, 0);
+
         isStart = true;
         _isFinish = false;
     }

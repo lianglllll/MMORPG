@@ -65,5 +65,10 @@ namespace GameServer.Model
             item = new Item(netItemEntity.ItemInfo);
         }
 
+        public void UpdateInfo(NetItemEntity netItemEntity)
+        {
+            item = new Item(netItemEntity.ItemInfo);
+        }
+
     }
 }

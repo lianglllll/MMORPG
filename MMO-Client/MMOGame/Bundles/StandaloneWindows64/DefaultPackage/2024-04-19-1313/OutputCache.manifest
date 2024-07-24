@@ -1,0 +1,384 @@
+ManifestFileVersion: 0
+CRC: 2726673691
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: assets_assetpackage_combat_prefabs_entity.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+    Info_1:
+      Name: assets_assetpackage_combat_prefabs_item.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_itemmodel_rpg pack_animations.bundle
+        Dependency_1: share_assets_art_itemmodel_rpg pack_materials.bundle
+        Dependency_2: share_assets_art_itemmodel_rpg pack_models_bottles.bundle
+        Dependency_3: share_assets_art_itemmodel_rpg pack_models.bundle
+    Info_2:
+      Name: assets_assetpackage_combat_prefabs_unit.bundle
+      Dependencies:
+        Dependency_0: share_assets_animation_tid-0.bundle
+        Dependency_1: share_assets_art_ui_ui ability indicators.bundle
+        Dependency_2: share_assets_art_unit_dogknight_material.bundle
+        Dependency_3: share_assets_art_unit_dogknight_mesh.bundle
+        Dependency_4: share_assets_animation_tid-1.bundle
+        Dependency_5: share_assets_art_unit_wizardpolyart_materials.bundle
+        Dependency_6: share_assets_art_unit_wizardpolyart_mesh.bundle
+        Dependency_7: share_assets_art_unit_e3d-cordelia.bundle
+        Dependency_8: share_assets_animation_tid-4.bundle
+        Dependency_9: share_assets_art_unit_mini simple characters skeleton demo_materials.bundle
+        Dependency_10: share_assets_art_unit_mini simple characters skeleton demo_materials_material
+          variations.bundle
+        Dependency_11: share_assets_art_unit_mini simple characters skeleton demo_prefabs_props.bundle
+        Dependency_12: share_assets_art_unit_mini simple characters skeleton demo_models.bundle
+        Dependency_13: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_prefab.bundle"
+        Dependency_14: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_mesh.bundle"
+        Dependency_15: share_assets_animation_tid-1003.bundle
+        Dependency_16: "share_assets_animation_\u7EDB\u96E8.bundle"
+        Dependency_17: "share_assets_art_unit_\u7EDB\u96E8.bundle"
+    Info_3:
+      Name: assets_assetpackage_combat_effects_aoe.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+    Info_4:
+      Name: assets_assetpackage_combat_effects_charavterauras.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+    Info_5:
+      Name: assets_assetpackage_combat_effects_fly.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_52specialeffectpack_texture.bundle
+    Info_6:
+      Name: assets_assetpackage_combat_effects_hits.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+    Info_7:
+      Name: assets_assetpackage_combat_effects_magiccircles.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+        Dependency_1: share_assets_art_effects_hovl studio_magic effects pack_models.bundle
+        Dependency_2: share_assets_resources_combat_effects_magiccircles.bundle
+    Info_8:
+      Name: assets_assetpackage_combat_effects_portals.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+        Dependency_1: share_assets_resources_combat_effects_portals.bundle
+    Info_9:
+      Name: assets_assetpackage_combat_effects_slash.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+    Info_10:
+      Name: assets_assetpackage_scenes.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_ui_combat_dynamic floating text_resources_prefabs.bundle
+        Dependency_1: share_assets_art_ui_combat_dynamic floating text_demo_data.bundle
+        Dependency_2: share_assets_resources_ui_prefabs.bundle
+        Dependency_3: share_packages_com_unity_inputsystem_inputsystem_plugins_playerinput.bundle
+        Dependency_4: share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers.bundle
+        Dependency_5: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+        Dependency_6: share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_terrain.bundle
+        Dependency_7: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_mushrooms.bundle
+        Dependency_8: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle
+        Dependency_9: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_rocks.bundle
+        Dependency_10: share_assets_resources_combat_prefabs_entity.bundle
+        Dependency_11: share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_fence.bundle
+        Dependency_12: share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle
+        Dependency_13: share_assets.bundle
+    Info_11:
+      Name: share_assets_art_effects_hovl studio_magic effects pack_textures.bundle
+      Dependencies: {}
+    Info_12:
+      Name: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_textures.bundle
+    Info_13:
+      Name: share_assets_art_itemmodel_rpg pack_textures.bundle
+      Dependencies: {}
+    Info_14:
+      Name: share_assets_art_itemmodel_rpg pack_animations.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_itemmodel_rpg pack_models_bottles.bundle
+        Dependency_1: share_assets_art_itemmodel_rpg pack_models.bundle
+    Info_15:
+      Name: share_assets_art_itemmodel_rpg pack_materials.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_itemmodel_rpg pack_textures.bundle
+    Info_16:
+      Name: share_assets_art_itemmodel_rpg pack_models_bottles.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_itemmodel_rpg pack_materials.bundle
+    Info_17:
+      Name: share_assets_art_itemmodel_rpg pack_models.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_itemmodel_rpg pack_materials.bundle
+    Info_18:
+      Name: share_assets_animation_tid-0.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_dogknight_animations.bundle
+    Info_19:
+      Name: share_assets_art_ui_ui ability indicators.bundle
+      Dependencies: {}
+    Info_20:
+      Name: share_assets_art_unit_dogknight_animations.bundle
+      Dependencies: {}
+    Info_21:
+      Name: share_assets_art_unit_dogknight_material.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_dogknight_texture.bundle
+    Info_22:
+      Name: share_assets_art_unit_dogknight_texture.bundle
+      Dependencies: {}
+    Info_23:
+      Name: share_assets_art_unit_dogknight_mesh.bundle
+      Dependencies: {}
+    Info_24:
+      Name: share_assets_art_unit_wizardpolyart_textures_forstandardshader.bundle
+      Dependencies: {}
+    Info_25:
+      Name: share_assets_animation_tid-1.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_wizardpolyart_animations.bundle
+    Info_26:
+      Name: share_assets_art_unit_wizardpolyart_animations.bundle
+      Dependencies: {}
+    Info_27:
+      Name: share_assets_art_unit_wizardpolyart_materials.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_wizardpolyart_textures_forstandardshader.bundle
+    Info_28:
+      Name: share_assets_art_unit_wizardpolyart_mesh.bundle
+      Dependencies: {}
+    Info_29:
+      Name: share_assets_art_unit_e3d-cordelia_animation_fbx.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_e3d-cordelia.bundle
+    Info_30:
+      Name: share_assets_art_unit_e3d-cordelia.bundle
+      Dependencies: {}
+    Info_31:
+      Name: share_assets_animation_tid-4.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_e3d-cordelia_animation_fbx.bundle
+    Info_32:
+      Name: share_assets_art_unit_mini simple characters skeleton demo_materials.bundle
+      Dependencies: {}
+    Info_33:
+      Name: share_assets_art_unit_mini simple characters skeleton demo_materials_material
+        variations.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_mini simple characters skeleton demo_materials.bundle
+    Info_34:
+      Name: share_assets_art_unit_mini simple characters skeleton demo_prefabs_props.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_unit_mini simple characters skeleton demo_materials.bundle
+        Dependency_1: share_assets_art_unit_mini simple characters skeleton demo_models.bundle
+    Info_35:
+      Name: share_assets_art_unit_mini simple characters skeleton demo_models.bundle
+      Dependencies: {}
+    Info_36:
+      Name: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_animation.bundle"
+      Dependencies:
+        Dependency_0: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_mesh.bundle"
+    Info_37:
+      Name: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_prefab.bundle"
+      Dependencies:
+        Dependency_0: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_mesh.bundle"
+        Dependency_1: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_materials.bundle"
+        Dependency_2: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull.bundle"
+    Info_38:
+      Name: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_mesh.bundle"
+      Dependencies:
+        Dependency_0: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_mesh_materials.bundle"
+    Info_39:
+      Name: share_assets_animation_tid-1003.bundle
+      Dependencies:
+        Dependency_0: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_animation.bundle"
+    Info_40:
+      Name: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_mesh_materials.bundle"
+      Dependencies: {}
+    Info_41:
+      Name: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_materials.bundle"
+      Dependencies: {}
+    Info_42:
+      Name: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull.bundle"
+      Dependencies:
+        Dependency_0: "share_assets_art_unit_\u725B\u5934\u4EBA_boss_bull_animation.bundle"
+    Info_43:
+      Name: "share_assets_art_unit_\u7EDB\u96E8_materials.bundle"
+      Dependencies:
+        Dependency_0: "share_assets_art_unit_\u7EDB\u96E8_toon.bundle"
+        Dependency_1: "share_assets_art_unit_\u7EDB\u96E8_spa.bundle"
+        Dependency_2: "share_assets_art_unit_\u7EDB\u96E8_tex.bundle"
+    Info_44:
+      Name: "share_assets_art_unit_\u7EDB\u96E8_toon.bundle"
+      Dependencies: {}
+    Info_45:
+      Name: "share_assets_art_unit_\u7EDB\u96E8_spa.bundle"
+      Dependencies: {}
+    Info_46:
+      Name: "share_assets_art_unit_\u7EDB\u96E8_tex.bundle"
+      Dependencies: {}
+    Info_47:
+      Name: "share_assets_animation_\u7EDB\u96E8.bundle"
+      Dependencies: {}
+    Info_48:
+      Name: "share_assets_art_unit_\u7EDB\u96E8.bundle"
+      Dependencies:
+        Dependency_0: "share_assets_art_unit_\u7EDB\u96E8_materials.bundle"
+    Info_49:
+      Name: share_assets_art_effects_52specialeffectpack_texture.bundle
+      Dependencies: {}
+    Info_50:
+      Name: share_assets_art_effects_hovl studio_magic effects pack_models.bundle
+      Dependencies: {}
+    Info_51:
+      Name: share_assets_resources_combat_effects_magiccircles.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+        Dependency_1: share_assets_art_effects_hovl studio_magic effects pack_models.bundle
+    Info_52:
+      Name: share_assets_resources_combat_effects_portals.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+    Info_53:
+      Name: unityshaders.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle
+    Info_54:
+      Name: share_assets_art_fonts.bundle
+      Dependencies:
+        Dependency_0: unityshaders.bundle
+    Info_55:
+      Name: share_assets_art_ui_combat_dynamic floating text_resources_prefabs.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_fonts.bundle
+    Info_56:
+      Name: share_packages_com_unity_inputsystem_inputsystem_editor_icons.bundle
+      Dependencies: {}
+    Info_57:
+      Name: share_assets_art_ui_combat_dynamic floating text_demo_data.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_fonts.bundle
+    Info_58:
+      Name: share_packages_com_unity_textmeshpro_editor resources_gizmos.bundle
+      Dependencies: {}
+    Info_59:
+      Name: share_assets_resources_ui_prefabs.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_fonts.bundle
+        Dependency_1: share_assets_resources_ui_prefabs_inventory_itemmenu.bundle
+    Info_60:
+      Name: share_assets_art_ui_combat_dynamic floating text_resources_icons.bundle
+      Dependencies: {}
+    Info_61:
+      Name: share_assets_resources_ui_prefabs_inventory_itemmenu.bundle
+      Dependencies:
+        Dependency_0: share_assets_resources_ui_texture_inventory_tipstool.bundle
+    Info_62:
+      Name: share_packages_com_unity_inputsystem_inputsystem_plugins_playerinput.bundle
+      Dependencies: {}
+    Info_63:
+      Name: share_assets_resources_ui_texture_inventory_tipstool.bundle
+      Dependencies: {}
+    Info_64:
+      Name: share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers.bundle
+      Dependencies:
+        Dependency_0: unityshaders.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+        Dependency_2: share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle
+        Dependency_3: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle
+        Dependency_4: share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_fence.bundle
+        Dependency_5: share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_bridge.bundle
+        Dependency_6: share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_materials.bundle
+        Dependency_7: share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle
+    Info_65:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_flowers.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+    Info_66:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_trees.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle
+    Info_67:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+      Dependencies:
+        Dependency_0: unityshaders.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle
+    Info_68:
+      Name: share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_terrain.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_trees.bundle
+        Dependency_2: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle
+        Dependency_3: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_rocks.bundle
+        Dependency_4: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_rocks.bundle
+        Dependency_5: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_flowers.bundle
+        Dependency_6: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_shrubs.bundle
+        Dependency_7: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_plants.bundle
+        Dependency_8: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_shrubs.bundle
+    Info_69:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_textures.bundle
+      Dependencies: {}
+    Info_70:
+      Name: share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle
+      Dependencies: {}
+    Info_71:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_mushrooms.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+    Info_72:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_trees.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+    Info_73:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_rocks.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+    Info_74:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_rocks.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_rocks.bundle
+    Info_75:
+      Name: share_assets_resources_combat_prefabs_entity.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_effects_hovl studio_magic effects pack_materials.bundle
+    Info_76:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_flowers.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_flowers.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+    Info_77:
+      Name: share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_fence.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle
+    Info_78:
+      Name: share_assets_art_environment_polytope studio_lowpoly_village_sources_meshes_modular_bridge.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle
+    Info_79:
+      Name: share_assets_art_environment_polytope studio_lowpoly_demos_environment_free_helpers_materials.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle
+    Info_80:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_shrubs.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+    Info_81:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_plants.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+    Info_82:
+      Name: share_assets_art_environment_polytope studio_lowpoly_village_sources_materials.bundle
+      Dependencies:
+        Dependency_0: unityshaders.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_village_sources_textures.bundle
+    Info_83:
+      Name: share_assets_art_environment_polytope studio_lowpoly_environments_prefabs_shrubs.bundle
+      Dependencies:
+        Dependency_0: share_assets_art_environment_polytope studio_lowpoly_environments_sources_materials.bundle
+        Dependency_1: share_assets_art_environment_polytope studio_lowpoly_environments_sources_meshes_shrubs.bundle
+    Info_84:
+      Name: share_assets.bundle
+      Dependencies: {}

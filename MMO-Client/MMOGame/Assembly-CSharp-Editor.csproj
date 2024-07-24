@@ -56,7 +56,7 @@
     <Analyzer Include="D:\vs2019\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Art\Unit\Mini Simple Characters Skeleton Demo\Readme\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Art\Unit\骷髅\Readme\Scripts\Editor\ReadmeEditor.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Editor\DynamicTextDataEditor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -315,11 +315,14 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>D:\MygameTools\2021.3.5f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog">
-      <HintPath>Assets\Plugins\Serilog.dll</HintPath>
+    <Reference Include="LZ4">
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@95922aec1e\Plugins\LZ4.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>Assets\Plugins\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
       <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
@@ -344,6 +347,9 @@
     </Reference>
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="dnlib">
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@95922aec1e\Plugins\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
@@ -753,6 +759,9 @@
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="HybridCLR.Runtime">
+      <HintPath>Library\ScriptAssemblies\HybridCLR.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -821,6 +830,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="HybridCLR.Editor">
+      <HintPath>Library\ScriptAssemblies\HybridCLR.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
