@@ -1,6 +1,8 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,7 +98,7 @@ public class UIManager
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public BasePanel OpenPanel(string name)
+    public void OpenPanel(string name)
     {
         Debug.Log("正在尝试打开panel:" + name);
 
@@ -105,42 +107,49 @@ public class UIManager
         if(!pathDict.TryGetValue(name,out define))
         {
             Debug.LogError("界面名称有误：" + name);
-            return null;
+            return ;
         }
-
 
         //2.检查目标界面是否已经打开了
         BasePanel panel = null;
         if(panelScriptDict.TryGetValue(name,out panel)){
             Debug.Log(name + "界面已经打开");
-            return null;
+            return ;
         }
 
         //3.查看是否有prefab缓冲能用
         GameObject panelPrefab = null;
         if(!prefabsDict.TryGetValue(name,out panelPrefab)){
-            panelPrefab = Resources.Load<GameObject>(define.Resource) as GameObject;
-            prefabsDict.Add(name, panelPrefab);                             //添加到缓冲
+            GameObjectManager.Instance.CreatePrefab(define.Resource, (prefab) => {
+                if (prefab == null) return;
+                prefabsDict.Add(name, prefab);//添加到缓冲
+                _OpenPanel(prefab, name);
+            });
+            return;
         }
+        _OpenPanel(panelPrefab, name);
+    }
 
-        //4.实例化panel，并且挂载到挂载点
+    private void _OpenPanel(GameObject panelPrefab,string name)
+    {
+        //实例化panel，并且挂载到挂载点
         GameObject panelObject = GameObject.Instantiate(panelPrefab, UIRoot, false);
-        if(panelObject == null)
+        if (panelObject == null)
         {
             Debug.Log("panel：" + name + "生成失败");
-            return null;
+            return;
         }
-        panel = panelObject.GetComponent<BasePanel>();
-        if(panel == null)
+        BasePanel panel = panelObject.GetComponent<BasePanel>();
+        if (panel == null)
         {
             Debug.Log("panel：" + name + "获取脚本失败");
             GameObject.Destroy(panelObject);
-            return null;
+            return;
         }
         panelScriptDict.Add(name, panel);
         panel.OpenPanel(name);
-        return panel;
     }
+
 
     /// <summary>
     /// 关闭panel
@@ -184,7 +193,7 @@ public class UIManager
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public GameObject GetPanelPrefab(string name)
+    public async Task<GameObject> GetPanelPrefab(string name)
     {
         //1.检查name是否有误
         PanelDefine define = null;
@@ -196,13 +205,28 @@ public class UIManager
 
         //2.查看是否有prefab缓冲能用
         GameObject panelPrefab = null;
-        if (!prefabsDict.TryGetValue(name, out panelPrefab))
+        if(!prefabsDict.TryGetValue(name, out panelPrefab))
         {
-            panelPrefab = Resources.Load<GameObject>(define.Resource) as GameObject;
-            prefabsDict.Add(name, panelPrefab);                             //添加到缓冲
+            //需要加载prefab
+            panelPrefab = await GetPanelPrefabSync(name);
         }
-
         return panelPrefab;
+    }
+    private Task<GameObject> GetPanelPrefabSync(string path)
+    {
+        var tcs = new TaskCompletionSource<GameObject>();
+        GameObjectManager.Instance.CreatePrefab(path, (prefab) => {
+            if (prefab != null)
+            {
+                prefabsDict.Add(path, prefab);//添加到缓冲
+                tcs.SetResult(prefab);
+            }
+            else
+            {
+                tcs.SetException(new Exception("Failed to load prefab."));
+            }
+        });
+        return tcs.Task;
     }
 
     /// <summary>

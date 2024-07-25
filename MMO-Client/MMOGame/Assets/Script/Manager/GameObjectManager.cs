@@ -343,4 +343,25 @@ public class GameObjectManager:MonoBehaviour
         }
     }
 
+
+    public delegate void OnPrefabLoaded(GameObject prefab);
+
+    //生成对应的prefabs
+    public void CreatePrefab(string path, Action<GameObject> action)
+    {
+        UnityMainThreadDispatcher.Instance().Enqueue(LoadPrefab(path, (prefab)=> {
+            action?.Invoke(prefab);
+        }));
+    }
+
+    private IEnumerator LoadPrefab(string path,OnPrefabLoaded action)
+    {
+        //获取热更资源包
+        var package = YooAssets.GetPackage("DefaultPackage");
+        AssetHandle handle = package.LoadAssetAsync<GameObject>(path);
+        yield return handle;
+        var prefab = handle.AssetObject as GameObject;
+        action?.Invoke(prefab);
+    }
+
 }

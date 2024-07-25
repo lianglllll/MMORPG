@@ -20,7 +20,7 @@ MonoBehaviour:
     PackageDesc: "\u9ED8\u8BA4\u5305"
     EnableAddressable: 1
     LocationToLower: 0
-    IncludeAssetGUID: 0
+    IncludeAssetGUID: 1
     IgnoreDefaultType: 1
     AutoCollectShaders: 1
     Groups:
@@ -52,6 +52,19 @@ MonoBehaviour:
       Collectors:
       - CollectPath: Assets/AssetPackage/Scenes
         CollectorGUID: 1cfde826d94eee9478e45047a4bf500b
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: UI
+      GroupDesc: "ui\u7D20\u6750"
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/AssetPackage/UI/Prefabs
+        CollectorGUID: 2157ce51df756664eb3a158e08e30af7
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory

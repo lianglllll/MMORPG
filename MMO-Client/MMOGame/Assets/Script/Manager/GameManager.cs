@@ -22,11 +22,8 @@ public class GameManager : MonoBehaviour
     {
         Init();
 
-        //延迟到update执行
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            UIManager.Instance.OpenPanel("LoginPanel");
-        });
+        UIManager.Instance.OpenPanel("LoginPanel");
+
     }
 
     void Update()

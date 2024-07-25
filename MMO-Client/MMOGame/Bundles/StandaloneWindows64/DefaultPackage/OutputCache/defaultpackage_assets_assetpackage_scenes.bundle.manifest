@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2543416669
+CRC: 891129456
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d8f62e282030a03e8ab6225e847e348b
+    Hash: e466733537d391d03b355fbaca6b352a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b5d9418b2b57b8a225e4b1225264606f
+    Hash: b6f9c36260dd5cfe1fa3082f1300f856
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -52,10 +52,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 049982f63fd78c042851caecd952f3f4, type: 3}
@@ -65,6 +61,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: f2dd1805a0e7dd745861cf6723fe5d89, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fcff3a5a705644c4e9a3068b0236a108, type: 3}
 - Class: 114
@@ -145,6 +143,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: d37d8d4d05e73cf4c91a369455b28e2a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -183,6 +183,7 @@ Assets:
 - Assets/AssetPackage/Scenes/Scene0.unity
 - Assets/AssetPackage/Scenes/Game.unity
 Dependencies:
+- E:/MyProject/MMORPG/MMO-Client/MMOGame/Bundles/StandaloneWindows64/DefaultPackage/OutputCache/defaultpackage_assets_assetpackage_ui_prefabs.bundle
 - E:/MyProject/MMORPG/MMO-Client/MMOGame/Bundles/StandaloneWindows64/DefaultPackage/OutputCache/defaultpackage_share_assets.bundle
 - E:/MyProject/MMORPG/MMO-Client/MMOGame/Bundles/StandaloneWindows64/DefaultPackage/OutputCache/defaultpackage_share_assets_art_environment_polytope
   studio_lowpoly_demos_environment_free_helpers.bundle
@@ -206,5 +207,4 @@ Dependencies:
   floating text_resources_prefabs.bundle
 - E:/MyProject/MMORPG/MMO-Client/MMOGame/Bundles/StandaloneWindows64/DefaultPackage/OutputCache/defaultpackage_share_assets_plugins_ingamedebugconsole.bundle
 - E:/MyProject/MMORPG/MMO-Client/MMOGame/Bundles/StandaloneWindows64/DefaultPackage/OutputCache/defaultpackage_share_assets_resources_combat_prefabs_entity.bundle
-- E:/MyProject/MMORPG/MMO-Client/MMOGame/Bundles/StandaloneWindows64/DefaultPackage/OutputCache/defaultpackage_share_assets_resources_ui_prefabs.bundle
 - E:/MyProject/MMORPG/MMO-Client/MMOGame/Bundles/StandaloneWindows64/DefaultPackage/OutputCache/defaultpackage_share_packages_com_unity_inputsystem_inputsystem_plugins_playerinput.bundle

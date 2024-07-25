@@ -1,0 +1,218 @@
+{
+    "FileVersion": "2.0.0",
+    "EnableAddressable": true,
+    "LocationToLower": false,
+    "IncludeAssetGUID": true,
+    "OutputNameStyle": 0,
+    "BuildPipeline": "RawFileBuildPipeline",
+    "PackageName": "RawPackage",
+    "PackageVersion": "2024-07-25-660",
+    "AssetList": [
+        {
+            "Address": "Assembly-CSharp-firstpass.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/Assembly-CSharp-firstpass.dll.bytes",
+            "AssetGUID": "bfa475fdc8a72ad44b8af82319582fc8",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "Assembly-CSharp.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/Assembly-CSharp.dll.bytes",
+            "AssetGUID": "2a52be3ca46e9ff46807baff55544d20",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "Google.Protobuf.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/Google.Protobuf.dll.bytes",
+            "AssetGUID": "1f4c7a5497fd98d41b8d91d2e43daf88",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "HotUpdate.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/HotUpdate.dll.bytes",
+            "AssetGUID": "3cd664248028f1a459a228c3be8e72b1",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "mscorlib.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/mscorlib.dll.bytes",
+            "AssetGUID": "969a5d19b8d75b44bba9fceed5f74aee",
+            "AssetTags": [],
+            "BundleID": 4
+        },
+        {
+            "Address": "Newtonsoft.Json.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/Newtonsoft.Json.dll.bytes",
+            "AssetGUID": "395642072eb94bb418999bbf4e4aaabe",
+            "AssetTags": [],
+            "BundleID": 5
+        },
+        {
+            "Address": "Serilog.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/Serilog.dll.bytes",
+            "AssetGUID": "ca8fdd7881ca31c43bd4114f390bcb86",
+            "AssetTags": [],
+            "BundleID": 6
+        },
+        {
+            "Address": "System.Core.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/System.Core.dll.bytes",
+            "AssetGUID": "4052f1e0df1ce004abe7f8562e6dae98",
+            "AssetTags": [],
+            "BundleID": 7
+        },
+        {
+            "Address": "System.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/System.dll.bytes",
+            "AssetGUID": "288f00428c7b26640a00dffdb0d368e9",
+            "AssetTags": [],
+            "BundleID": 8
+        },
+        {
+            "Address": "Unity.InputSystem.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/Unity.InputSystem.dll.bytes",
+            "AssetGUID": "2a250dabba51e5d49ad6e136f59ad896",
+            "AssetTags": [],
+            "BundleID": 9
+        },
+        {
+            "Address": "UnityEngine.CoreModule.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/UnityEngine.CoreModule.dll.bytes",
+            "AssetGUID": "b0895f1f3d4bd6c47a4e8ee4ecf12058",
+            "AssetTags": [],
+            "BundleID": 10
+        },
+        {
+            "Address": "YooAsset.dll",
+            "AssetPath": "Assets/AssetPackage/dlls/YooAsset.dll.bytes",
+            "AssetGUID": "af04bf3447839cc4482e1d7f5fdd8b75",
+            "AssetTags": [],
+            "BundleID": 11
+        }
+    ],
+    "BundleList": [
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_assembly-csharp-firstpass_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "0e4cd3b425cf8f7b0f0c68333ebf0105",
+            "FileCRC": "b1608152",
+            "FileSize": 231936,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_assembly-csharp_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "aab9e39895e6f3fc2aa1fc6eb644204d",
+            "FileCRC": "3b0d8655",
+            "FileSize": 206336,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_google_protobuf_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "85b9f54afbb5a92d6d3de05c3f71ec3d",
+            "FileCRC": "84895efd",
+            "FileSize": 468992,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_hotupdate_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "3f3016aa00a26c412d0d7281bd1a9121",
+            "FileCRC": "d5ddebf3",
+            "FileSize": 4608,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_mscorlib_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "d8639b1f2a791c82a224695d6c152ee2",
+            "FileCRC": "9ee2c32e",
+            "FileSize": 2414592,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_newtonsoft_json_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "46291e2652a0ecf8ee94ce343aae6b38",
+            "FileCRC": "ddaaa05a",
+            "FileSize": 688128,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_serilog_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "624fdb94bb289f46203da89455fb87ac",
+            "FileCRC": "dbded630",
+            "FileSize": 136704,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_system_core_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "455ad662836a99eee74ed6074d8c107a",
+            "FileCRC": "d3b6c466",
+            "FileSize": 448000,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_system_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "6285f9e92fb0b25e3eefc225b115c8c6",
+            "FileCRC": "4c11d08f",
+            "FileSize": 877056,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_unity_inputsystem_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "b776bdac16cf37e047bae7612618967a",
+            "FileCRC": "4378d53b",
+            "FileSize": 976384,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_unityengine_coremodule_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "663ebb31081c43269173da3748e6aa7d",
+            "FileCRC": "6d1ad710",
+            "FileSize": 609280,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "rawpackage_assets_assetpackage_dlls_yooasset_dll_bytes.rawfile",
+            "UnityCRC": 0,
+            "FileHash": "54288f01d42ca6d9ea17c2ca4bd809af",
+            "FileCRC": "f3852951",
+            "FileSize": 153088,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        }
+    ]
+}

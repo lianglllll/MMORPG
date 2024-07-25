@@ -179,6 +179,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Func<object,byte>
 	// System.Func<object,int>
 	// System.Func<object,object,object>
+	// System.Func<object,object>
+	// System.Func<object>
 	// System.Linq.Enumerable.<OfTypeIterator>d__97<object>
 	// System.Linq.Enumerable.Iterator<object>
 	// System.Linq.Enumerable.WhereArrayIterator<object>
@@ -190,14 +192,23 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<byte>
 	// System.Predicate<int>
 	// System.Predicate<object>
+	// System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>
 	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter<byte>
+	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter<object>
 	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable<byte>
+	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable<object>
 	// System.Runtime.CompilerServices.TaskAwaiter<byte>
+	// System.Runtime.CompilerServices.TaskAwaiter<object>
 	// System.Threading.Tasks.ContinuationTaskFromResultTask<byte>
+	// System.Threading.Tasks.ContinuationTaskFromResultTask<object>
 	// System.Threading.Tasks.Task<byte>
+	// System.Threading.Tasks.Task<object>
 	// System.Threading.Tasks.TaskCompletionSource<byte>
+	// System.Threading.Tasks.TaskCompletionSource<object>
 	// System.Threading.Tasks.TaskFactory.<>c__DisplayClass35_0<byte>
+	// System.Threading.Tasks.TaskFactory.<>c__DisplayClass35_0<object>
 	// System.Threading.Tasks.TaskFactory<byte>
+	// System.Threading.Tasks.TaskFactory<object>
 	// UnityEngine.InputSystem.InputBindingComposite<UnityEngine.Vector2>
 	// UnityEngine.InputSystem.InputControl<UnityEngine.Vector2>
 	// UnityEngine.InputSystem.InputProcessor<UnityEngine.Vector2>
@@ -227,6 +238,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.OfTypeIterator<object>(System.Collections.IEnumerable)
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
+		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,UIManager.<GetPanelPrefab>d__19>(System.Runtime.CompilerServices.TaskAwaiter<object>&,UIManager.<GetPanelPrefab>d__19&)
+		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.Start<UIManager.<GetPanelPrefab>d__19>(UIManager.<GetPanelPrefab>d__19&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,SelectRolePanelScript.<LoadRoleList>d__14>(System.Runtime.CompilerServices.TaskAwaiter<object>&,SelectRolePanelScript.<LoadRoleList>d__14&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<SelectRolePanelScript.<LoadRoleList>d__14>(SelectRolePanelScript.<LoadRoleList>d__14&)
 		// System.Void* Unity.Collections.LowLevel.Unsafe.UnsafeUtility.AddressOf<UnityEngine.Vector2>(UnityEngine.Vector2&)
 		// int Unity.Collections.LowLevel.Unsafe.UnsafeUtility.SizeOf<UnityEngine.Vector2>()
 		// object UnityEngine.Component.GetComponent<object>()
