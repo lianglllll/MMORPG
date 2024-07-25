@@ -78,9 +78,7 @@
   <ItemGroup>
     <None Include="Assets\Plugins\protobuf\Google.Protobuf.xml" />
     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.XML" />
-    <None Include="Assets\Plugins\Newtonsoft\Newtonsoft.Json.dll" />
     <None Include="Assets\Plugins\protobuf\Google.Protobuf.dll" />
-    <None Include="Assets\Plugins\Newtonsoft\Newtonsoft.Json.xml" />
     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.dll" />
     <None Include="Assets\Plugins\protobuf\System.Memory.dll" />
     <None Include="Assets\Plugins\protobuf\System.Buffers.dll" />
@@ -333,7 +331,7 @@
       <HintPath>D:\MygameTools\2021.3.5f1c1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="LZ4">
-      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@95922aec1e\Plugins\LZ4.dll</HintPath>
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@2d5f71f6b7\Plugins\LZ4.dll</HintPath>
     </Reference>
     <Reference Include="Serilog">
       <HintPath>Assets\Plugins\Serilog.dll</HintPath>
@@ -344,9 +342,6 @@
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets\Plugins\Newtonsoft\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
@@ -354,16 +349,13 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="dnlib">
-      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@95922aec1e\Plugins\dnlib.dll</HintPath>
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@2d5f71f6b7\Plugins\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="Animancer.Lite">
-      <HintPath>Assets\Plugins\Animancer\Internal\Core\Animancer.Lite.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
@@ -376,6 +368,9 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Assets\Plugins\protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\MygameTools\2021.3.5f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>
@@ -833,9 +828,6 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
@@ -853,6 +845,9 @@
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
@@ -890,26 +885,33 @@
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="BetterStreamingAssets">
+      <HintPath>Library\ScriptAssemblies\BetterStreamingAssets.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Animancer.Examples.csproj">
-      <Project>{F9B8EC8F-6D7C-0535-DA95-22BA8D197B65}</Project>
-      <Name>Animancer.Examples</Name>
+    <ProjectReference Include="HotUpdate.csproj">
+      <Project>{E759DA4C-59DC-1809-C862-E6716DE69777}</Project>
+      <Name>HotUpdate</Name>
     </ProjectReference>
-    <ProjectReference Include="Animancer.FSM.csproj">
-      <Project>{883E9B2F-E1F2-E457-29B4-C7B1EBE5DDFA}</Project>
-      <Name>Animancer.FSM</Name>
+    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
+      <Project>{47921D90-3ADE-6686-F0CD-45318BF36735}</Project>
+      <Name>IngameDebugConsole.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="IngameDebugConsole.Editor.csproj">
+      <Project>{88556816-2CA4-F522-6553-345DFCC07ED5}</Project>
+      <Name>IngameDebugConsole.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Main.csproj">
+      <Project>{86C6AA80-C9DC-063F-133E-52C802CA1BF0}</Project>
+      <Name>Main</Name>
     </ProjectReference>
     <ProjectReference Include="Serilog.Sinks.Unity3D.csproj">
       <Project>{0A987264-62ED-5DCB-7BC0-BDE50C35B58B}</Project>
       <Name>Serilog.Sinks.Unity3D</Name>
-    </ProjectReference>
-    <ProjectReference Include="Animancer.csproj">
-      <Project>{7AB3840D-2E43-489E-7F68-5CEBD1B0F238}</Project>
-      <Name>Animancer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

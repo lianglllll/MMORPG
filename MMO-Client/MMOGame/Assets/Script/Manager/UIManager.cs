@@ -19,7 +19,6 @@ public class UIManager
 
     private UIManager()
     {
-        InitDicts();
     }
 
     public static UIManager Instance
@@ -34,6 +33,9 @@ public class UIManager
         }
     }
 
+    /// <summary>
+    /// 挂载点
+    /// </summary>
     public Transform UIRoot
     {
         get
@@ -53,6 +55,14 @@ public class UIManager
 
             return _uiRoot;
         }
+    }
+
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    public void Init()
+    {
+        InitDicts();
     }
 
     /// <summary>
@@ -88,6 +98,8 @@ public class UIManager
     /// <returns></returns>
     public BasePanel OpenPanel(string name)
     {
+        Debug.Log("正在尝试打开panel:" + name);
+
         //1.检查name是否有误
         PanelDefine define = null;
         if(!pathDict.TryGetValue(name,out define))
@@ -95,6 +107,7 @@ public class UIManager
             Debug.LogError("界面名称有误：" + name);
             return null;
         }
+
 
         //2.检查目标界面是否已经打开了
         BasePanel panel = null;
@@ -112,7 +125,18 @@ public class UIManager
 
         //4.实例化panel，并且挂载到挂载点
         GameObject panelObject = GameObject.Instantiate(panelPrefab, UIRoot, false);
+        if(panelObject == null)
+        {
+            Debug.Log("panel：" + name + "生成失败");
+            return null;
+        }
         panel = panelObject.GetComponent<BasePanel>();
+        if(panel == null)
+        {
+            Debug.Log("panel：" + name + "获取脚本失败");
+            GameObject.Destroy(panelObject);
+            return null;
+        }
         panelScriptDict.Add(name, panel);
         panel.OpenPanel(name);
         return panel;

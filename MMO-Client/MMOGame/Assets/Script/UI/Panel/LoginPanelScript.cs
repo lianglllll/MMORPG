@@ -30,9 +30,7 @@ public class LoginPanelScript : BasePanel
         loginButton.onClick.AddListener(OnLogin);
         registerButton.onClick.AddListener(OnRegister);
         isOnClickLoginBtn = false;
-
     }
-
 
     /// <summary>
     /// 登录按钮回调
@@ -65,7 +63,10 @@ public class LoginPanelScript : BasePanel
         UserService.Instance._UserLoginRequest(username, password);
     }
 
-    //登录事件触发的响应
+    /// <summary>
+    /// 登录事件触发的响应
+    /// </summary>
+    /// <param name="msg"></param>
     public void OnLoginResponse(UserLoginResponse msg)
     {
 
@@ -92,13 +93,13 @@ public class LoginPanelScript : BasePanel
 
     }
 
-
-    //注册按钮触发
+    /// <summary>
+    /// 注册按钮触发
+    /// </summary>
     private void OnRegister()
     {
         //切换到registerpanel
         UIManager.Instance.OpenPanel("RegisterPanel");
     }
-
 
 }

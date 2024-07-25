@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Init();
+
+        //延迟到update执行
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            UIManager.Instance.OpenPanel("LoginPanel");
+        });
     }
 
     void Update()
@@ -65,9 +71,9 @@ public class GameManager : MonoBehaviour
         ChatService.Instance.Init();
         ItemService.Instance.Init();
         BuffService.Instance.Init();
+        UIManager.Instance.Init();
 
-        //推入第一个面板
-        UIManager.Instance.OpenPanel("LoginPanel");
+
     }
 
 }

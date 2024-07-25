@@ -34,7 +34,6 @@ public class GameObjectManager:MonoBehaviour
         Kaiyun.Event.RegisterOut("EntitySync", this, "EntitySync");
         Kaiyun.Event.RegisterOut("CtlEntitySync", this, "CtlEntitySync");
     }
-
     private void Update()
     {
         if (Mathf.Approximately(SceneLoader.Progress, 1))
@@ -52,7 +51,6 @@ public class GameObjectManager:MonoBehaviour
             }
         }
     }
-
     private void OnDestroy()
     {
         Kaiyun.Event.UnregisterOut("CreateActorObject", this, "CreateActorObject");
@@ -96,7 +94,6 @@ public class GameObjectManager:MonoBehaviour
 
         StartCoroutine(LoadActor(nActor));
     }
-
     /// <summary>
     /// 协程加载方式角色Obj
     /// </summary>
@@ -218,7 +215,6 @@ public class GameObjectManager:MonoBehaviour
 
         StartCoroutine(LoadItem(netItemEntity));
     }
-
     /// <summary>
     /// 异步加载物品
     /// </summary>

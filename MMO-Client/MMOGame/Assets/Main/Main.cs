@@ -2,34 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YooAsset;
 
+
 public class Main : MonoBehaviour
 {
-    //ui
+
     public TextMeshProUGUI textPro;
     public Slider slider;
 
     // 包的版本
-    private string packageVersion;
+    string packageVersion;
 
+    // Start is called before the first frame update
     void Start()
     {
         // 初始化资源系统
         YooAssets.Initialize();
+        BetterStreamingAssets.Initialize();
 
         // 创建默认的资源包
-        var package = YooAssets.CreatePackage("DefaultPackage");
+        string packageName = "DefaultPackage";
+        var package = YooAssets.CreatePackage(packageName);
+        var rawPackage = YooAssets.CreatePackage("RawPackage");
 
         // 设置该资源包为默认的资源包，可以使用YooAssets相关加载接口加载该资源包内容。
         YooAssets.SetDefaultPackage(package);
 
+
         // 资源初始化
-        StartCoroutine(InitializeYooAsset());
+        StartCoroutine(InitYooAsset2());
 
     }
 
@@ -38,20 +46,32 @@ public class Main : MonoBehaviour
     {
         
     }
-
-
-    private IEnumerator InitializeYooAsset()
+    // 准备就绪的包数量（DefaultPackage，RawPackage）
+    int readyCount = 0;
+    private IEnumerator InitYooAsset2()
     {
-        
+        var package = YooAssets.GetPackage("DefaultPackage");
+        var rawPackage = YooAssets.GetPackage("RawPackage");
+        yield return InitializeYooAsset2(package);
+        yield return InitializeYooAsset2(rawPackage);
+        Debug.Log("======= isReady = "+readyCount);
+        if(readyCount == 2)
+        {
+            //两个补丁包已经全部就绪，下一步可以加载dll文件
+            yield return LoadDlls.InitDlls();
+            //启动游戏
+            GameStart();
+        }
+    }
+    private IEnumerator InitializeYooAsset2(ResourcePackage package)
+    {
         string defaultHostServer = "http://175.178.99.14:12345/mmo";
         string fallbackHostServer = "http://175.178.99.14:12345/mmo";
         var initParameters = new HostPlayModeParameters();
         initParameters.BuildinQueryServices = new GameQueryServices();
-        initParameters.DecryptionServices = new FileOffsetDecryption();
         initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
-
-        var package = YooAssets.GetPackage("DefaultPackage");
-        textPro.text = "初始化资源包";
+        // 1.初始化资源包
+        textPro.text = $"初始化资源包";
         var initOperation = package.InitializeAsync(initParameters);
         yield return initOperation;
 
@@ -60,80 +80,53 @@ public class Main : MonoBehaviour
         if (initOperation.Status == EOperationStatus.Succeed)
         {
             Debug.Log("资源包初始化成功！");
-            textPro.text = "资源包初始化成功";
-            StartCoroutine(UpdatePackageVersion());
+            textPro.text = $"资源包初始化成功";
         }
         else
         {
             Debug.LogError($"资源包初始化失败：{initOperation.Error}");
-            textPro.text = "资源包初始化失败";
+            textPro.text = $"资源包初始化失败";
+            yield break;
         }
-    }
 
-
-    // 1.获取资源版本
-    private IEnumerator UpdatePackageVersion()
-    {
-        textPro.text = "检查资源版本";
-
-        var package = YooAssets.GetPackage("DefaultPackage");
+        //2.获取资源版本
         var operation = package.UpdatePackageVersionAsync();
         yield return operation;
 
-        if (operation.Status == EOperationStatus.Succeed)
-        {
-            //更新成功
-            packageVersion = operation.PackageVersion;
-            Debug.Log($"Updated package Version : {packageVersion}");
-
-            StartCoroutine(UpdatePackageManifest());
-        }
-        else
+        if (operation.Status != EOperationStatus.Succeed)
         {
             //更新失败
             Debug.LogError(operation.Error);
+            yield break;
         }
-    }
+        string PackageVersion = operation.PackageVersion;
 
-    // 2.更新资源
-    private IEnumerator UpdatePackageManifest()
-    {
-        textPro.text = "更新资源清单";
+        //3.更新补丁清单
+        var operation3 = package.UpdatePackageManifestAsync(PackageVersion);
+        yield return operation3;
 
-        // 更新成功后自动保存版本号，作为下次初始化的版本。
-        // 也可以通过operation.SavePackageVersion()方法保存。
-        bool savePackageVersion = true;
-        var package = YooAssets.GetPackage("DefaultPackage");
-        var operation = package.UpdatePackageManifestAsync(packageVersion, savePackageVersion);
-        yield return operation;
-
-        if (operation.Status == EOperationStatus.Succeed)
-        {
-            //更新成功
-            Debug.Log("更新资源:成功");
-            StartCoroutine (Download());
-        }
-        else
+        if (operation3.Status != EOperationStatus.Succeed)
         {
             //更新失败
-            Debug.LogError(operation.Error);
+            Debug.LogError(operation3.Error);
+            yield break;
         }
-    }
 
-    // 3.下载资源
-    IEnumerator Download()
+        //4.下载补丁包
+        yield return Download2(package);
+        //TODO:判断是否下载成功...
+        
+    }
+    IEnumerator Download2(ResourcePackage package)
     {
         int downloadingMaxNum = 10;
         int failedTryAgain = 3;
-        var package = YooAssets.GetPackage("DefaultPackage");
         var downloader = package.CreateResourceDownloader(downloadingMaxNum, failedTryAgain);
 
-        //没有需要下载的资源
         if (downloader.TotalDownloadCount == 0)
         {
             Debug.Log("没有需要下载的资源");
-            //进入游戏场景
-            GameStart();
+            readyCount ++;
             yield break;
         }
 
@@ -156,13 +149,13 @@ public class Main : MonoBehaviour
         {
             //下载成功
             Debug.Log("下载资源:成功");
-            //进入游戏场景
-            GameStart();
+            readyCount++;
         }
         else
         {
             //下载失败
             Debug.Log("下载资源:失败");
+            yield break;
         }
     }
 
@@ -170,28 +163,25 @@ public class Main : MonoBehaviour
     private void OnStartDownloadFileFunction(string fileName, long sizeBytes)
     {
         Debug.LogError($"开始下载");
-        textPro.text = "开始下载";
-
     }
 
     private void OnDownloadOverFunction(bool isSucceed)
     {
         Debug.LogError($"下载结束");
-        textPro.text = "下载结束";
     }
 
     private void OnDownloadProgressUpdateFunction(int totalDownloadCount, int currentDownloadCount, long totalDownloadBytes, long currentDownloadBytes)
     {
-        Debug.LogError($"下载进度:{currentDownloadBytes}/{totalDownloadBytes}");
+        //Debug.LogError($"下载进度:{currentDownloadBytes}/{totalDownloadBytes}");
         slider.maxValue = totalDownloadBytes;
         slider.value = currentDownloadBytes;
-        textPro.text = $"下载进度:{FormatBytes(currentDownloadBytes)}/{FormatBytes(totalDownloadBytes)}";
+        textPro.text = $"下载更新 : {FormatBytes(currentDownloadBytes)} / {FormatBytes(totalDownloadBytes)}";
     }
 
     private void OnDownloadErrorFunction(string fileName, string error)
     {
         Debug.LogError($"下载失败");
-        textPro.text = "下载失败";
+        textPro.text = $"下载失败";
     }
 
     static string FormatBytes(long bytes)
@@ -201,7 +191,7 @@ public class Main : MonoBehaviour
         int suffixIndex = 0;
         double byteCount = bytes;
 
-        while(byteCount >= 1024 && suffixIndex < suffixes.Length - 1)
+        while (byteCount >= 1024 && suffixIndex < suffixes.Length - 1)
         {
             byteCount /= 1024;
             suffixIndex++;
@@ -211,15 +201,35 @@ public class Main : MonoBehaviour
     }
 
 
-
     /// <summary>
     /// 进入游戏场景
     /// </summary>
     private void GameStart()
     {
-        textPro.text = "进入游戏";
-        SceneLoader.LoadSceneAsync("Game");
+        textPro.text = $"进入游戏";
+        /*LoadSceneAsync("World", (s) =>
+        {
+            LoadSceneAsync("LoginScene");
+        });*/
+
+        LoadSceneAsync("Game");
     }
+
+    private void LoadSceneAsync(string  sceneName)
+    {
+        StartCoroutine(RunLoad(sceneName));
+    }
+    IEnumerator RunLoad(string sceneName)
+    {
+        var package = YooAssets.GetPackage("DefaultPackage");
+        string location = sceneName;
+        var sceneMode = LoadSceneMode.Single;
+        bool suspendLoad = false;
+        var handle = package.LoadSceneAsync(location, sceneMode, suspendLoad);
+        yield return handle;
+        Debug.Log($"场景已加载：{handle.SceneObject.name}");
+    }
+    
 
     /// <summary>
     /// 资源文件偏移加载解密类
@@ -276,17 +286,17 @@ public class Main : MonoBehaviour
             return $"{_fallbackHostServer}/{fileName}";
         }
     }
-
-
-
-
 }
 
 public class GameQueryServices : IBuildinQueryServices
 {
     public bool Query(string packageName, string fileName, string fileCRC)
     {
-        Debug.Log($"GameQueryServices.Query：{packageName},{fileName},{fileCRC}");
-        return false;
+        bool exists = BetterStreamingAssets.FileExists($"yoo/{packageName}/{fileName}");
+        Debug.Log($"GameQueryServices.Query：{packageName},{fileName},{fileCRC}，结果={exists}");
+        return exists;
     }
 }
+
+
+

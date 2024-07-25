@@ -35,7 +35,7 @@ public class GameApp
     public static Skill CurrSkill;
 
     //战斗面板
-    public static CombatPanelScript combatPanelScript;
+    public static CombatPanelScript _CombatPanelScript => (CombatPanelScript)UIManager.Instance.GetPanelByName("CombatPanel");
 
     //清空当前存储的数据
     public static void ClearGameAppData()
@@ -46,7 +46,6 @@ public class GameApp
         character = null;
         target = null;
         CurrSkill = null;
-        combatPanelScript = null;
     }
 
 
@@ -55,7 +54,7 @@ public class GameApp
     /// </summary>
     public static bool IsInputtingChatBox
     {
-        get => combatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
+        get => _CombatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
     }
 
 

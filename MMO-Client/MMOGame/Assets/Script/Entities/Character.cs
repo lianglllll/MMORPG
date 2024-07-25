@@ -31,7 +31,7 @@ namespace Assets.Script.Entities
             if (renderObj == null) return;
             if (GameApp.character == this)
             {
-                GameApp.combatPanelScript.ShowDeathBox();
+                GameApp._CombatPanelScript.ShowDeathBox();
                 //主角死亡事件发生
                 Kaiyun.Event.FireOut("CtlChrDeath");
             }

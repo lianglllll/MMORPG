@@ -834,12 +834,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3577067835004180650}
-  - component: {fileID: 6690548567873992422}
   - component: {fileID: -7838610827506862632}
   - component: {fileID: 5042855744219432576}
   - component: {fileID: -5763275758667950717}
   - component: {fileID: -1176852259381456558}
-  m_Layer: 5
+  - component: {fileID: 1967103218073507659}
+  m_Layer: 0
   m_Name: LoginPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,18 +868,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &6690548567873992422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3577067835004180651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0139ff3aa0ca22942bc04749c299d5f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!223 &-7838610827506862632
 Canvas:
   m_ObjectHideFlags: 0
@@ -953,6 +941,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1967103218073507659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3577067835004180651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0139ff3aa0ca22942bc04749c299d5f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3577067835098770420
 GameObject:
   m_ObjectHideFlags: 0
