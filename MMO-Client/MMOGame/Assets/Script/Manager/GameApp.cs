@@ -76,10 +76,31 @@ public class GameApp
     public static void LoadSpace(int spaceId, Action<Scene> action)
     {
         var spaceDefine = DataManager.Instance.spaceDict[spaceId];
-        SceneLoader.LoadSceneAsync(spaceDefine.Resource, (s) =>
+/*        SceneLoader.LoadSceneAsync(spaceDefine.Resource, (s) =>
         {
             action?.Invoke(s);
-        });
+        });*/
+
+        var handle = Res.LoadSceneAsync(spaceDefine.Resource);
+        handle.OnLoaded = (s) =>
+        {
+            //MakeEventSystem();
+            UnityMainThreadDispatcher.Instance()
+                .StartCoroutine(Delay(0.01f, () => action?.Invoke(s)));
+        };
+
+    }
+
+    /// <summary>
+    /// 延时
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <param name="action"></param>
+    /// <returns></returns>
+    static IEnumerator Delay(float delay, Action action)
+    {
+        yield return new WaitForSeconds(delay);
+        action?.Invoke();
     }
 
 }

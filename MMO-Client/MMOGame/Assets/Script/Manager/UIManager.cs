@@ -98,7 +98,7 @@ public class UIManager
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public void OpenPanel(string name)
+    public  void  OpenPanel(string name)
     {
         Debug.Log("正在尝试打开panel:" + name);
 
@@ -120,14 +120,19 @@ public class UIManager
         //3.查看是否有prefab缓冲能用
         GameObject panelPrefab = null;
         if(!prefabsDict.TryGetValue(name,out panelPrefab)){
-            GameObjectManager.Instance.CreatePrefab(define.Resource, (prefab) => {
-                if (prefab == null) return;
-                prefabsDict.Add(name, prefab);//添加到缓冲
-                _OpenPanel(prefab, name);
+            //需要加载prefab
+            GameObjectManager.Instance.GetPrefab(define.Resource, (prefab) =>
+            {
+                panelPrefab = prefab;
+                prefabsDict.Add(name, panelPrefab);//添加到缓冲
+                _OpenPanel(panelPrefab, name);
+          
             });
-            return;
         }
-        _OpenPanel(panelPrefab, name);
+        else
+        {
+            _OpenPanel(panelPrefab, name);
+        }
     }
 
     private void _OpenPanel(GameObject panelPrefab,string name)
@@ -208,17 +213,17 @@ public class UIManager
         if(!prefabsDict.TryGetValue(name, out panelPrefab))
         {
             //需要加载prefab
-            panelPrefab = await GetPanelPrefabSync(name);
+            panelPrefab = await GetPanelPrefabSync(define.Resource);
+            prefabsDict.Add(name, panelPrefab);//添加到缓冲
         }
         return panelPrefab;
     }
     private Task<GameObject> GetPanelPrefabSync(string path)
     {
         var tcs = new TaskCompletionSource<GameObject>();
-        GameObjectManager.Instance.CreatePrefab(path, (prefab) => {
+        GameObjectManager.Instance.GetPrefab(path, (prefab) => {
             if (prefab != null)
             {
-                prefabsDict.Add(path, prefab);//添加到缓冲
                 tcs.SetResult(prefab);
             }
             else
@@ -228,6 +233,7 @@ public class UIManager
         });
         return tcs.Task;
     }
+
 
     /// <summary>
     /// 通过消息面板显示消息

@@ -11,6 +11,7 @@ using Serilog;
 using YooAsset;
 using System.Collections.Concurrent;
 using System;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject
@@ -36,7 +37,7 @@ public class GameObjectManager:MonoBehaviour
     }
     private void Update()
     {
-        if (Mathf.Approximately(SceneLoader.Progress, 1))
+        if (SceneManager.GetActiveScene().isLoaded)
         {
             while(preparCrateActorObjQueue.TryDequeue(out var item))
             {
@@ -108,10 +109,19 @@ public class GameObjectManager:MonoBehaviour
 
         //2.获取热更资源包
         UnitDefine unitDefine = actor.define;
-        var package = YooAssets.GetPackage("DefaultPackage");
-        AssetHandle handle = package.LoadAssetAsync<GameObject>(unitDefine.Resource);
-        yield return handle;
-        var prefab = handle.AssetObject as GameObject;
+        /*        var package = YooAssets.GetPackage("DefaultPackage");
+                AssetHandle handle = package.LoadAssetAsync<GameObject>(unitDefine.Resource);
+                yield return handle;
+                var prefab = handle.AssetObject as GameObject;
+        */
+        GameObject prefab = null;
+        //Debug.Log("开始加载资源：" + def.Resource);
+        yield return LoadAsset<GameObject>(unitDefine.Resource, (obj) => {
+            prefab = obj;
+        });
+        yield return prefab;
+        Debug.Log("资源加载完成：" + unitDefine.Resource);
+
 
         //3.获取坐标和方向
         Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000;
@@ -227,10 +237,17 @@ public class GameObjectManager:MonoBehaviour
         var define = DataManager.Instance.itemDefineDict[netItemEntity.ItemInfo.ItemId];
 
         // 2.获取热更资源包
-        var package = YooAssets.GetPackage("DefaultPackage");
-        AssetHandle handle = package.LoadAssetAsync<GameObject>(define.Model);
-        yield return handle;
-        GameObject prefab = handle.AssetObject as GameObject;
+        /*        var package = YooAssets.GetPackage("DefaultPackage");
+                AssetHandle handle = package.LoadAssetAsync<GameObject>(define.Model);
+                yield return handle;
+                GameObject prefab = handle.AssetObject as GameObject;*/
+
+        GameObject prefab = null;
+        yield return LoadAsset<GameObject>(define.Model, (obj) => {
+            prefab = obj;
+        });
+        yield return prefab;
+        Debug.Log("资源加载完成：" + define.Model);
 
 
         //3.获取坐标和方向
@@ -344,24 +361,46 @@ public class GameObjectManager:MonoBehaviour
     }
 
 
-    public delegate void OnPrefabLoaded(GameObject prefab);
-
-    //生成对应的prefabs
-    public void CreatePrefab(string path, Action<GameObject> action)
+    /// <summary>
+    /// 加载asset资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="location"></param>
+    /// <param name="action"></param>
+    /// <param name="timeout"></param>
+    /// <returns></returns>
+    public IEnumerator LoadAsset<T>(string location, Action<T> action, float timeout = 5f) where T : UnityEngine.Object
     {
-        UnityMainThreadDispatcher.Instance().Enqueue(LoadPrefab(path, (prefab)=> {
+        T prefab = null;
+        var handle = Res.LoadAssetAsync<T>(location);
+        handle.OnLoaded = (obj) => {
+            prefab = obj;
+        };
+
+        // 等待资源加载完成或超时
+        var startTime = Time.time;
+        while (prefab == null)
+        {
+            if (Time.time - startTime >= timeout)
+            {
+                Debug.LogError($"Loading {location} timed out.");
+                yield break;
+            }
+            yield return null;
+        }
+        yield return prefab;
+        action?.Invoke(prefab);
+        yield break;
+    }
+
+    //获取prefab
+    public void GetPrefab(string path,Action<GameObject> action)
+    {
+        StartCoroutine(LoadAsset<GameObject>(path, (prefab) =>
+        {
             action?.Invoke(prefab);
         }));
     }
 
-    private IEnumerator LoadPrefab(string path,OnPrefabLoaded action)
-    {
-        //获取热更资源包
-        var package = YooAssets.GetPackage("DefaultPackage");
-        AssetHandle handle = package.LoadAssetAsync<GameObject>(path);
-        yield return handle;
-        var prefab = handle.AssetObject as GameObject;
-        action?.Invoke(prefab);
-    }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,37 +21,13 @@ public class SceneLoader
     /// </summary>
     /// <param name="sceneName"></param>
     /// <param name="action"></param>
-    public static void LoadSceneAsync(string sceneName, OnSceneLoaded action=null)
+    public static void LoadSceneAsync(string sceneName, Action<Scene> action=null)
     {
-        UnityMainThreadDispatcher.Instance().Enqueue(RunLoad(sceneName, action));
+        var handle = Res.LoadSceneAsync(sceneName);
+        handle.OnProgress = (p)=> Progress = p;
+        handle.OnLoaded = action;
+        
     }
 
-    static IEnumerator RunLoad(string sceneName, OnSceneLoaded action)
-    {
-        var package = YooAssets.GetPackage("DefaultPackage");
-        string location = sceneName;
-        var sceneMode = LoadSceneMode.Single;
-        bool suspendLoad = false;
-        Progress = 0;
-        var handle = package.LoadSceneAsync(location, sceneMode, suspendLoad);
-        yield return handle;
-        yield return WaitForSceneLoaded(handle);
-        Debug.Log($"Scene name is {handle.SceneObject.name}");
-        action?.Invoke(handle.SceneObject);
-        Kaiyun.Event.FireOut("SceneCompleted", handle.SceneObject);
-    }
-
-    static IEnumerator WaitForSceneLoaded(SceneHandle han)
-    {
-        if(han == null)yield break;
-        while(!Mathf.Approximately(han.Progress, 1))
-        {
-            Debug.Log("进度："+ han.Progress);
-            Progress = han.Progress;
-            yield return null;
-        }
-        Progress = 1;
-        Debug.Log($"Scene Loaded: {han.SceneObject.name}");
-    }
 
 }

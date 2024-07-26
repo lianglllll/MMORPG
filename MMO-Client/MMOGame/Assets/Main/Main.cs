@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,16 +21,19 @@ public class Main : MonoBehaviour
     // 包的版本
     string packageVersion;
 
+
     // Start is called before the first frame update
     void Start()
     {
+        new GameObject("MainThreadDispatcher")
+            .gameObject.AddComponent<UnityMainThreadDispatcher>();
+
         // 初始化资源系统
         YooAssets.Initialize();
         BetterStreamingAssets.Initialize();
 
         // 创建默认的资源包
-        string packageName = "DefaultPackage";
-        var package = YooAssets.CreatePackage(packageName);
+        var package = YooAssets.CreatePackage("DefaultPackage");
         var rawPackage = YooAssets.CreatePackage("RawPackage");
 
         // 设置该资源包为默认的资源包，可以使用YooAssets相关加载接口加载该资源包内容。
@@ -50,23 +54,41 @@ public class Main : MonoBehaviour
     int readyCount = 0;
     private IEnumerator InitYooAsset2()
     {
-        var package = YooAssets.GetPackage("DefaultPackage");
-        var rawPackage = YooAssets.GetPackage("RawPackage");
+        var package = YooAssets.GetPackage("DefaultPackage"); //默认包
+        var rawPackage = YooAssets.GetPackage("RawPackage"); //原生资源包（代码dlls、json）
         yield return InitializeYooAsset2(package);
         yield return InitializeYooAsset2(rawPackage);
         Debug.Log("======= isReady = "+readyCount);
         if(readyCount == 2)
         {
+#if !UNITY_EDITOR
             //两个补丁包已经全部就绪，下一步可以加载dll文件
             yield return LoadDlls.InitDlls();
+#endif
             //启动游戏
             GameStart();
         }
     }
+
+    private string GetHostServerURL()
+    {
+        string hostServer = "http://175.178.99.14:12345/mmo";
+        if (Application.platform == RuntimePlatform.Android)
+            return $"{hostServer}/Android";
+        else if (Application.platform == RuntimePlatform.IPhonePlayer)
+            return $"{hostServer}/IPhone";
+        else if (Application.platform == RuntimePlatform.WebGLPlayer)
+            return $"{hostServer}/WebGL";
+        else //Windows、MacOS、Linux
+            return $"{hostServer}/PC";
+    }
+
     private IEnumerator InitializeYooAsset2(ResourcePackage package)
     {
-        string defaultHostServer = "http://175.178.99.14:12345/mmo";
-        string fallbackHostServer = "http://175.178.99.14:12345/mmo";
+        string defaultHostServer = GetHostServerURL();
+        string fallbackHostServer = GetHostServerURL();
+
+
         var initParameters = new HostPlayModeParameters();
         initParameters.BuildinQueryServices = new GameQueryServices();
         initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
@@ -207,29 +229,15 @@ public class Main : MonoBehaviour
     private void GameStart()
     {
         textPro.text = $"进入游戏";
-        /*LoadSceneAsync("World", (s) =>
-        {
-            LoadSceneAsync("LoginScene");
-        });*/
 
-        LoadSceneAsync("Game");
+        //选择服务器（Host，Port），服务器列表可以使用json表示
+
+        
+        Debug.Log("开始加载场景");
+        Res.LoadSceneAsync("Game");
+
     }
 
-    private void LoadSceneAsync(string  sceneName)
-    {
-        StartCoroutine(RunLoad(sceneName));
-    }
-    IEnumerator RunLoad(string sceneName)
-    {
-        var package = YooAssets.GetPackage("DefaultPackage");
-        string location = sceneName;
-        var sceneMode = LoadSceneMode.Single;
-        bool suspendLoad = false;
-        var handle = package.LoadSceneAsync(location, sceneMode, suspendLoad);
-        yield return handle;
-        Debug.Log($"场景已加载：{handle.SceneObject.name}");
-    }
-    
 
     /// <summary>
     /// 资源文件偏移加载解密类

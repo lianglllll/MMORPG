@@ -21,6 +21,7 @@ public class LoadDlls
         return s_assetDatas[dllName];
     }
 
+    //AOT程序集
     private static List<string> AOTMetaAssemblyFiles { get; } = new List<string>()
     {
         "Assembly-CSharp-firstpass.dll",
@@ -77,11 +78,13 @@ public class LoadDlls
     public static IEnumerator InitDlls()
     {
         var package = YooAssets.GetPackage("RawPackage");
+
         var assets = new List<string>
         {
-            //"HotUpdate.dll"
+            "HotUpdate.dll",
             "Assembly-CSharp.dll"
         }.Concat(AOTMetaAssemblyFiles);
+
         foreach (var asset in assets)
         {
             //加载原生文件

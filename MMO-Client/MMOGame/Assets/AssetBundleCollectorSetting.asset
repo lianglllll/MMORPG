@@ -29,18 +29,26 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/AssetPackage/Combat/Prefabs
-        CollectorGUID: 203aaf4c797c5bc428ad643481fd43fb
+      - CollectPath: Assets/Res/Effects
+        CollectorGUID: 1cb11d4789ca3cb4b860923618bbdc03
         CollectorType: 0
-        AddressRuleName: AddressByFolderAndFileName
+        AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/AssetPackage/Combat/Effects
-        CollectorGUID: 1cb11d4789ca3cb4b860923618bbdc03
+      - CollectPath: Assets/Res/Units
+        CollectorGUID: 7e164e5c5d219cf4db497f25e584510f
         CollectorType: 0
-        AddressRuleName: AddressByFolderAndFileName
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Res/Items
+        CollectorGUID: 8ff84da9b8a9ebd4eb98487be1077488
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 
@@ -50,7 +58,7 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/AssetPackage/Scenes
+      - CollectPath: Assets/Res/Scenes
         CollectorGUID: 1cfde826d94eee9478e45047a4bf500b
         CollectorType: 0
         AddressRuleName: AddressByFileName
@@ -63,7 +71,7 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/AssetPackage/UI/Prefabs
+      - CollectPath: Assets/Res/UI/Prefabs
         CollectorGUID: 2157ce51df756664eb3a158e08e30af7
         CollectorType: 0
         AddressRuleName: AddressByFileName
@@ -84,7 +92,7 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/AssetPackage/dlls
+      - CollectPath: Assets/Res/dlls
         CollectorGUID: fcd139f8b4005934195ffa86825da426
         CollectorType: 0
         AddressRuleName: AddressByFileName
