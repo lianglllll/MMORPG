@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     {
         Init();
 
-        UIManager.Instance.OpenPanel("LoginPanel");
 
     }
 
@@ -70,6 +69,8 @@ public class GameManager : MonoBehaviour
         BuffService.Instance.Init();
         UIManager.Instance.Init();
 
+        //打开登录面板ui
+        UIManager.Instance.OpenPanel("LoginPanel");
 
     }
 

@@ -8,6 +8,7 @@ using Proto;
 using System;
 using GameClient.Entities;
 using Serilog;
+using GameClient;
 
 public class KnapsackPanel:BasePanel
 {

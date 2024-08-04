@@ -41,7 +41,7 @@ public class NetClient
         clientSocket.ConnectAsync(connectArgs);
 
         // 等待连接完成的信号
-        connectDone.WaitOne();
+        //connectDone.WaitOne();
 
     }
 
@@ -65,7 +65,7 @@ public class NetClient
         }
 
         // 释放连接完成的信号
-        connectDone.Set();
+        //connectDone.Set();
     }
 
     /// <summary>

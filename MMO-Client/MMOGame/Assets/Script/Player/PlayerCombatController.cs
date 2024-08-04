@@ -1,3 +1,4 @@
+using GameClient;
 using GameClient.Combat;
 using GameClient.Entities;
 using GameClient.Manager;

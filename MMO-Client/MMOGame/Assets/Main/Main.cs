@@ -11,10 +11,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YooAsset;
 
-
+/// <summary>
+/// 用于拉取远程资源服务器的资源。
+/// </summary>
 public class Main : MonoBehaviour
 {
-
+    //用于显示资源更新进度的UI
     public TextMeshProUGUI textPro;
     public Slider slider;
 
@@ -22,9 +24,9 @@ public class Main : MonoBehaviour
     string packageVersion;
 
 
-    // Start is called before the first frame update
     void Start()
     {
+        //
         new GameObject("MainThreadDispatcher")
             .gameObject.AddComponent<UnityMainThreadDispatcher>();
 
@@ -39,17 +41,10 @@ public class Main : MonoBehaviour
         // 设置该资源包为默认的资源包，可以使用YooAssets相关加载接口加载该资源包内容。
         YooAssets.SetDefaultPackage(package);
 
-
-        // 资源初始化
+        // 异步资源初始化
         StartCoroutine(InitYooAsset2());
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     // 准备就绪的包数量（DefaultPackage，RawPackage）
     int readyCount = 0;
     private IEnumerator InitYooAsset2()
@@ -234,7 +229,7 @@ public class Main : MonoBehaviour
 
         
         Debug.Log("开始加载场景");
-        Res.LoadSceneAsync("Game");
+        Res.LoadSceneAsync("Servers");
 
     }
 

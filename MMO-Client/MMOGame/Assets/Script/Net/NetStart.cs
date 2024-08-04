@@ -16,9 +16,9 @@ public class NetStart : MonoBehaviour
 {
     public static NetStart Instance;
 
-    [Header("服务器信息")]
-    public string host = "127.0.0.1";
-    public int port = 6666;
+    //[Header("服务器信息")]
+    //public string host = "127.0.0.1";
+    //public int port = 6666;
     public bool isConnectServer;
 
     //心跳机制
@@ -26,7 +26,7 @@ public class NetStart : MonoBehaviour
     private WaitForSeconds waitForSeconds = new WaitForSeconds(2f);      //心跳包时间控制
     private DateTime lastBeatTime = DateTime.MinValue;                          //上一次发送心跳包的时间
 
-    //重连
+    //是否处于重连状态
     private bool isReconnecting;
 
     private void Awake()
@@ -78,7 +78,7 @@ public class NetStart : MonoBehaviour
     {
         if (isConnectServer) return;
         //连接服务器
-        NetClient.ConnectToServer(host, port);
+        NetClient.ConnectToServer(GameApp.ServerInfo.host, GameApp.ServerInfo.port);
     }
 
     /// <summary>
@@ -93,10 +93,9 @@ public class NetStart : MonoBehaviour
         isEnableHeartBeat = true;
         StartCoroutine(SendHeartMessage());
 
-        //需要判断是否是重连的
+        //判断是否是重连的。
         if (GameApp.SessionId != null)
         {
-
             //发送重新连接的清请求
             ReconnectRequest req = new ReconnectRequest
             {
@@ -137,6 +136,8 @@ public class NetStart : MonoBehaviour
     /// </summary>
     private void ReConnect()
     {
+
+        //我们可用弹窗给它
         if (!isReconnecting)
         {
             isReconnecting = true;
@@ -188,6 +189,8 @@ public class NetStart : MonoBehaviour
         });
     }
 
+
+
     /// <summary>
     /// 发送心跳包协程
     /// </summary>
@@ -221,6 +224,8 @@ public class NetStart : MonoBehaviour
             UIManager.Instance.MessagePanel.ShowNetworkDelay(ms);
         });
     }
+
+
 
     /// <summary>
     /// 主动关闭与服务器的连接

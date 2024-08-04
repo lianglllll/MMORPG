@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Proto;
 using UnityEngine.EventSystems;
 using TMPro;
+using GameClient;
 
 
 /// <summary>

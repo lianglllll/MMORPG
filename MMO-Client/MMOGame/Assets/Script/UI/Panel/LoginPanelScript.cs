@@ -1,3 +1,4 @@
+using GameClient;
 using Proto;
 using Summer.Network;
 using System;

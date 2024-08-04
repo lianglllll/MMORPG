@@ -1,3 +1,4 @@
+using GameClient;
 using GameClient.Entities;
 using Proto;
 using System;

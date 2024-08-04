@@ -12,6 +12,7 @@ using YooAsset;
 using System.Collections.Concurrent;
 using System;
 using UnityEngine.SceneManagement;
+using GameClient;
 
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject

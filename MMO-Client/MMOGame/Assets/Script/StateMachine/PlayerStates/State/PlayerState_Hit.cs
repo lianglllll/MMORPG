@@ -1,3 +1,4 @@
+using GameClient;
 using Proto;
 using System.Collections;
 using System.Collections.Generic;

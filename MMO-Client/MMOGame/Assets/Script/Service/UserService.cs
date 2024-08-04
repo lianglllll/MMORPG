@@ -1,4 +1,5 @@
 using Assets.Script.Entities;
+using GameClient;
 using GameClient.Entities;
 using Proto;
 using Summer;

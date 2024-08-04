@@ -9,98 +9,124 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace GameClient {
 
-//主要记录一下全局唯一的数据
-//动态的，不同于datamanager
-//方便调用罢了
-public class GameApp 
-{
-    //SessionId
-    public static string SessionId;
 
-    //当前所在场景id
-    public static int SpaceId;
-
-    //角色的entityid
-    public static int entityId;
-
-    //全局角色
-    public static Character character;
-    public static Actor target;
-
-    //当前角色对象引用
-    public static GameObject myCharacter = null;
-
-    //当前技能
-    public static Skill CurrSkill;
-
-    //战斗面板
-    public static CombatPanelScript _CombatPanelScript => (CombatPanelScript)UIManager.Instance.GetPanelByName("CombatPanel");
-
-    //清空当前存储的数据
-    public static void ClearGameAppData()
+    /// <summary>
+    /// 服务器信息类
+    /// </summary>
+    [Serializable]
+    public class ServerInfo
     {
-        SpaceId = -1;
-        SessionId = null;
-        entityId = -1;
-        character = null;
-        target = null;
-        CurrSkill = null;
+        public string name;
+        public string host;
+        public int port;
+        public int state;
     }
 
 
     /// <summary>
-    /// 是否正在输入,//todo 改成用事件来触发：聊天事件====》角色控制失效、聊天框跳出、
+    /// 主要记录一下全局唯一的数据
     /// </summary>
-    public static bool IsInputtingChatBox
+    public class GameApp
     {
-        get => _CombatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
-    }
+        //当前的服务器信息
+        public static ServerInfo ServerInfo;
 
+        //SessionId
+        public static string SessionId;
 
-    /// <summary>
-    /// 传送请求发包
-    /// </summary>
-    /// <param name="spaceId"></param>
-    public static void SpaceDeliver(int spaceId)
-    {
-        SpaceDeliverRequest req = new SpaceDeliverRequest();
-        req.SpaceId = spaceId;
-        NetClient.Send(req);
-    }
+        //当前所在场景id
+        public static int SpaceId;
 
-    /// <summary>
-    /// 进入对应的场景
-    /// </summary>
-    /// <param name="spaceId"></param>
-    public static void LoadSpace(int spaceId, Action<Scene> action)
-    {
-        var spaceDefine = DataManager.Instance.spaceDict[spaceId];
-/*        SceneLoader.LoadSceneAsync(spaceDefine.Resource, (s) =>
+        //角色的entityid
+        public static int entityId;
+
+        //全局角色
+        public static Character character;
+        public static Actor target;
+
+        //当前角色对象引用
+        public static GameObject myCharacter = null;
+
+        //当前技能
+        public static Skill CurrSkill;
+
+        //战斗面板
+        public static CombatPanelScript _CombatPanelScript => (CombatPanelScript)UIManager.Instance.GetPanelByName("CombatPanel");
+
+        //清空当前存储的数据
+        public static void ClearGameAppData()
         {
-            action?.Invoke(s);
-        });*/
+            SpaceId = -1;
+            SessionId = null;
+            entityId = -1;
+            character = null;
+            target = null;
+            CurrSkill = null;
+        }
 
-        var handle = Res.LoadSceneAsync(spaceDefine.Resource);
-        handle.OnLoaded = (s) =>
+
+        /// <summary>
+        /// 是否正在输入,//todo 改成用事件来触发：聊天事件====》角色控制失效、聊天框跳出、
+        /// </summary>
+        public static bool IsInputtingChatBox
         {
-            //MakeEventSystem();
-            UnityMainThreadDispatcher.Instance()
-                .StartCoroutine(Delay(0.01f, () => action?.Invoke(s)));
-        };
+            get => _CombatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
+        }
+
+
+        /// <summary>
+        /// 传送请求发包
+        /// </summary>
+        /// <param name="spaceId"></param>
+        public static void SpaceDeliver(int spaceId)
+        {
+            SpaceDeliverRequest req = new SpaceDeliverRequest();
+            req.SpaceId = spaceId;
+            NetClient.Send(req);
+        }
+
+
+        /// <summary>
+        /// 进入对应的场景
+        /// </summary>
+        /// <param name="spaceId">场景id</param>
+        /// <param name="action">场景加载完成后的回调</param>
+        public static void LoadSpace(int spaceId, Action<Scene> action)
+        {
+            var spaceDefine = DataManager.Instance.spaceDict[spaceId];
+            /*
+            SceneLoader.LoadSceneAsync(spaceDefine.Resource, (s) =>
+            {
+                action?.Invoke(s);
+            });
+            */
+
+            var handle = Res.LoadSceneAsync(spaceDefine.Resource);
+            handle.OnLoaded = (s) =>
+            {
+                //MakeEventSystem();
+                UnityMainThreadDispatcher.Instance()
+                    .StartCoroutine(Delay(0.01f, () => action?.Invoke(s)));
+            };
+
+        }
+
+        /// <summary>
+        /// 延时
+        /// </summary>
+        /// <param name="delay"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        static IEnumerator Delay(float delay, Action action)
+        {
+            yield return new WaitForSeconds(delay);
+            action?.Invoke();
+        }
 
     }
 
-    /// <summary>
-    /// 延时
-    /// </summary>
-    /// <param name="delay"></param>
-    /// <param name="action"></param>
-    /// <returns></returns>
-    static IEnumerator Delay(float delay, Action action)
-    {
-        yield return new WaitForSeconds(delay);
-        action?.Invoke();
-    }
 
 }
+

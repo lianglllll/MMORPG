@@ -1,3 +1,4 @@
+using GameClient;
 using GameClient.Entities;
 using GameClient.InventorySystem;
 using GameServer.Model;

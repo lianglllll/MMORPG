@@ -39,7 +39,7 @@ public class Res
     }
 
     /// <summary>
-    /// 异步加载场景
+    /// 异步加载场景，场景文件必须放在Assets/Res/Scenes目录
     /// </summary>
     /// <param name="path"></param>
     /// <param name="sceneMode"></param>
@@ -47,16 +47,9 @@ public class Res
     public static ResHandle<Scene> LoadSceneAsync(string path, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
         var handle = new ResHandle<Scene>();
-        UnityMainThreadDispatcher.Instance()
-            .StartCoroutine(_loadSceneAsync(path, handle));
+        UnityMainThreadDispatcher.Instance().StartCoroutine(_loadSceneAsync(path, handle));
         return handle;
     }
-    /// <summary>
-    /// 异步加载场景，场景文件必须放在Assets/Res/Scenes目录
-    /// </summary>
-    /// <param name="sceneName">场景名称</param>
-    /// <param name="handle"></param>
-    /// <returns></returns>
     static IEnumerator _loadSceneAsync(string sceneName, ResHandle<Scene> handle)
     {
         string location = $"{Prefix}/Scenes/{sceneName}.unity";
