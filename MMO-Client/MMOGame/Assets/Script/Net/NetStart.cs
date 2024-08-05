@@ -128,6 +128,7 @@ public class NetStart : MonoBehaviour
 
         //重连
         ReConnect();
+        UIManager.Instance.MessagePanel.ShowNetworkDisconnect();
         UIManager.Instance.MessagePanel.ShowLoadingBox("断线重连中...");
     }
 

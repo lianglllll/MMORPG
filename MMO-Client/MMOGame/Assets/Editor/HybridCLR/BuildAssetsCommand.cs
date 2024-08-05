@@ -69,7 +69,7 @@ namespace HybridCLR.Editor
             BuildAssetBundles(GetAssetBundleTempDirByTarget(target), GetAssetBundleOutputDirByTarget(target), target);
         }
 
-        [MenuItem("HybridCLR/Builds/BuildAssetsAndCopyToStreamingAssets")]
+        //[MenuItem("HybridCLR/Builds/BuildAssetsAndCopyToStreamingAssets")]
         public static void BuildAndCopyABAOTHotUpdateDlls()
         {
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
@@ -78,6 +78,18 @@ namespace HybridCLR.Editor
             CopyABAOTHotUpdateDlls(target);
             AssetDatabase.Refresh();
         }
+        [MenuItem("HybridCLR/Builds/BuildAndCopyDlls")]
+        public static void CopyABAOTHotUpdateDlls()
+        {
+            BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
+            BuildAssetBundleByTarget(target);
+            CompileDllCommand.CompileDll(target);
+            CopyAssetBundlesToYoo(target);
+            CopyAOTAssembliesToYoo();
+            CopyHotUpdateAssembliesToYoo();
+            AssetDatabase.Refresh();
+        }
+
 
         public static void CopyABAOTHotUpdateDlls(BuildTarget target)
         {
@@ -140,6 +152,58 @@ namespace HybridCLR.Editor
                 string dstAb = ToRelativeAssetPath($"{streamingAssetPathDst}/{ab}");
                 Debug.Log($"[CopyAssetBundlesToStreamingAssets] copy assetbundle {srcAb} -> {dstAb}");
                 AssetDatabase.CopyAsset( srcAb, dstAb);
+            }
+        }
+
+        public static void CopyAssetBundlesToYoo(BuildTarget target)
+        {
+            // 获取项目的 Assets 目录
+            string assetsDirectory = Application.dataPath;
+            string streamingAssetPathDst = $"{assetsDirectory}/Res/Files/dlls";
+            Directory.CreateDirectory(streamingAssetPathDst);
+            string outputDir = GetAssetBundleOutputDirByTarget(target);
+            var abs = new string[] { "prefabs" };
+            foreach (var ab in abs)
+            {
+                string srcAb = ToRelativeAssetPath($"{outputDir}/{ab}");
+                string dstAb = ToRelativeAssetPath($"{streamingAssetPathDst}/{ab}");
+                Debug.Log($"[CopyAssetBundles] copy assetbundle {srcAb} -> {dstAb}");
+                AssetDatabase.CopyAsset(srcAb, dstAb);
+            }
+        }
+
+        public static void CopyAOTAssembliesToYoo()
+        {
+            var target = EditorUserBuildSettings.activeBuildTarget;
+            string aotAssembliesSrcDir = SettingsUtil.GetAssembliesPostIl2CppStripDir(target);
+            string aotAssembliesDstDir = $"{Application.dataPath}/Res/Files/dlls";
+
+            foreach (var dll in SettingsUtil.AOTAssemblyNames)
+            {
+                string srcDllPath = $"{aotAssembliesSrcDir}/{dll}.dll";
+                if (!File.Exists(srcDllPath))
+                {
+                    Debug.LogError($"ab中添加AOT补充元数据dll:{srcDllPath} 时发生错误,文件不存在。裁剪后的AOT dll在BuildPlayer时才能生成，因此需要你先构建一次游戏App后再打包。");
+                    continue;
+                }
+                string dllBytesPath = $"{aotAssembliesDstDir}/{dll}.dll.bytes";
+                File.Copy(srcDllPath, dllBytesPath, true);
+                Debug.Log($"[CopyAOTAssembliesToYoo] copy AOT dll {srcDllPath} -> {dllBytesPath}");
+            }
+        }
+
+        public static void CopyHotUpdateAssembliesToYoo()
+        {
+            var target = EditorUserBuildSettings.activeBuildTarget;
+
+            string hotfixDllSrcDir = SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target);
+            string hotfixAssembliesDstDir = $"{Application.dataPath}/Res/Files/dlls";
+            foreach (var dll in SettingsUtil.HotUpdateAssemblyFilesExcludePreserved)
+            {
+                string dllPath = $"{hotfixDllSrcDir}/{dll}";
+                string dllBytesPath = $"{hotfixAssembliesDstDir}/{dll}.bytes";
+                File.Copy(dllPath, dllBytesPath, true);
+                Debug.Log($"[CopyHotUpdateAssembliesToStreamingAssets] copy hotfix dll {dllPath} -> {dllBytesPath}");
             }
         }
     }

@@ -123,6 +123,10 @@ namespace GameClient.Entities
             }
         }
 
+        /// <summary>
+        /// 看向一个位置，只选择Y轴
+        /// </summary>
+        /// <param name="pos"></param>
         public void LookTarget(Vector3 pos)
         {
 

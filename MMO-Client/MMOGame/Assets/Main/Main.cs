@@ -11,71 +11,255 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YooAsset;
 
-/// <summary>
-/// 用于拉取远程资源服务器的资源。
-/// </summary>
+
 public class Main : MonoBehaviour
 {
-    //用于显示资源更新进度的UI
+    public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
     public TextMeshProUGUI textPro;
     public Slider slider;
+    public string assetServer = "http://175.178.99.14:12345/mmo";
 
     // 包的版本
     string packageVersion;
 
-
     void Start()
     {
-        //
         new GameObject("MainThreadDispatcher")
             .gameObject.AddComponent<UnityMainThreadDispatcher>();
 
-        // 初始化资源系统
-        YooAssets.Initialize();
         BetterStreamingAssets.Initialize();
 
-        // 创建默认的资源包
+        StartCoroutine(DownLoadAssetsByYooAssets());
+
+    }
+
+    IEnumerator DownLoadAssetsByYooAssets()
+    {
+        // 1.初始化资源系统
+        YooAssets.Initialize();
         var package = YooAssets.CreatePackage("DefaultPackage");
         var rawPackage = YooAssets.CreatePackage("RawPackage");
-
-        // 设置该资源包为默认的资源包，可以使用YooAssets相关加载接口加载该资源包内容。
         YooAssets.SetDefaultPackage(package);
+        if (PlayMode == EPlayMode.EditorSimulateMode)
+        {
+            //编辑器模拟模式
+            yield return package.InitializeAsync(new EditorSimulateModeParameters()
+            {
+                SimulateManifestFilePath = EditorSimulateModeHelper.SimulateBuild(
+                    EDefaultBuildPipeline.BuiltinBuildPipeline, "DefaultPackage")
+            });
+            yield return rawPackage.InitializeAsync(new EditorSimulateModeParameters()
+            {
+                SimulateManifestFilePath = EditorSimulateModeHelper.SimulateBuild(
+                    EDefaultBuildPipeline.RawFileBuildPipeline, "RawPackage")
+            });
+        }
+        else if (PlayMode == EPlayMode.HostPlayMode)
+        {
+            //联机运行模式
+            string defaultHostServer = GetHostServerURL();
+            string fallbackHostServer = GetHostServerURL();
+            var initParameters = new HostPlayModeParameters();
+            initParameters.BuildinQueryServices = new GameQueryServices(); //太空战机DEMO的脚本类，详细见StreamingAssetsHelper
+            //initParameters.DecryptionServices = new GameDecryptionServices();//这里的代码和官网上的代码有差别，官网的代码可能是旧版本的代码会报错已这里的代码为主
+            //initParameters.DeliveryQueryServices = new DefaultDeliveryQueryServices();
+            initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+            var initOperation = package.InitializeAsync(initParameters);
+            yield return initOperation;
+            if (initOperation.Status == EOperationStatus.Succeed)
+            {
+                Debug.Log("资源包初始化成功！");
+            }
+            else
+            {
+                Debug.LogError($"资源包初始化失败：{initOperation.Error}");
+            }
+            initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+            var initOperation2 = rawPackage.InitializeAsync(initParameters);
+            yield return initOperation2;
+            if (initOperation2.Status == EOperationStatus.Succeed)
+            {
+                Debug.Log("资源包2初始化成功！");
+            }
+            else
+            {
+                Debug.LogError($"资源包2初始化失败：{initOperation.Error}");
+            }
 
-        // 异步资源初始化
-        StartCoroutine(InitYooAsset2());
+        }
+        else if (PlayMode == EPlayMode.OfflinePlayMode)
+        {
+            //单机模式
+            var initParameters = new OfflinePlayModeParameters();
+            yield return package.InitializeAsync(initParameters);
+            //var createParameters = new OfflinePlayModeParameters();
+            //createParameters.DecryptionServices = new GameDecryptionServices();
+            //initializationOperation = package.InitializeAsync(createParameters);
+        }
+        else
+        {
+            //WebGL运行模式
+            string defaultHostServer = $"{assetServer}/WebGL";
+            string fallbackHostServer = $"{assetServer}/WebGL";
+            var initParameters = new WebPlayModeParameters();
+            initParameters.BuildinQueryServices = new GameQueryServices(); //太空战机DEMO的脚本类，详细见StreamingAssetsHelper
+            initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+            //默认资源包
+            var initOperation = package.InitializeAsync(initParameters);
+            yield return initOperation;
+            if (initOperation.Status == EOperationStatus.Succeed)
+            {
+                Debug.Log("资源包初始化成功！");
+            }
+            else
+            {
+                Debug.LogError($"资源包初始化失败：{initOperation.Error}");
+            }
+            //原生资源包
+            var initOperation2 = rawPackage.InitializeAsync(initParameters);
+            yield return initOperation2;
+            if (initOperation2.Status == EOperationStatus.Succeed)
+            {
+                Debug.Log("资源包2初始化成功！");
+            }
+            else
+            {
+                Debug.LogError($"资源包2初始化失败：{initOperation.Error}");
+            }
+        }
+
+        yield return HandlePackage(package);
+        yield return HandlePackage(rawPackage);
+
+        if (readyCount < 2)
+        {
+            textPro.text = $"资源加载失败，请重新启动";
+        }
+        else
+        {
+            //联机模式加载dll文件
+            if (PlayMode == EPlayMode.HostPlayMode)
+            {
+                yield return LoadDlls.InitDlls();
+            }
+            GameStart();
+        }
+
     }
+
+    private IEnumerator HandlePackage(ResourcePackage package)
+    {
+        //2.获取资源版本
+        var operation = package.UpdatePackageVersionAsync();
+        yield return operation;
+
+        if (operation.Status != EOperationStatus.Succeed)
+        {
+            //更新失败
+            Debug.LogError(operation.Error);
+            yield break;
+        }
+        string PackageVersion = operation.PackageVersion;
+
+        //3.更新补丁清单
+        var operation3 = package.UpdatePackageManifestAsync(PackageVersion);
+        yield return operation3;
+
+        if (operation3.Status != EOperationStatus.Succeed)
+        {
+            //更新失败
+            Debug.LogError(operation3.Error);
+            yield break;
+        }
+
+        //4.下载补丁包
+        yield return Download2(package);
+    }
+
 
     // 准备就绪的包数量（DefaultPackage，RawPackage）
     int readyCount = 0;
-    private IEnumerator InitYooAsset2()
+    private IEnumerator InitYooAsset()
     {
         var package = YooAssets.GetPackage("DefaultPackage"); //默认包
         var rawPackage = YooAssets.GetPackage("RawPackage"); //原生资源包（代码dlls、json）
-        yield return InitializeYooAsset2(package);
-        yield return InitializeYooAsset2(rawPackage);
-        Debug.Log("======= isReady = "+readyCount);
-        if(readyCount == 2)
+
+        if (PlayMode == EPlayMode.EditorSimulateMode)
         {
+            //编辑器模拟模式
+            var initParameters = new EditorSimulateModeParameters();
+            var simulateManifestFilePath = EditorSimulateModeHelper.SimulateBuild(EDefaultBuildPipeline.BuiltinBuildPipeline, "DefaultPackage");
+            initParameters.SimulateManifestFilePath = simulateManifestFilePath;
+            yield return package.InitializeAsync(initParameters);
+        }
+        else if (PlayMode == EPlayMode.HostPlayMode)
+        {
+            //联机运行模式
+            yield return InitializeYooAsset2(package);
+            yield return InitializeYooAsset2(rawPackage);
+            if (readyCount == 2)
+            {
 #if !UNITY_EDITOR
-            //两个补丁包已经全部就绪，下一步可以加载dll文件
+            //加载dll文件
             yield return LoadDlls.InitDlls();
 #endif
-            //启动游戏
-            GameStart();
+                //启动游戏
+                GameStart();
+            }
+
         }
+        else if (PlayMode == EPlayMode.OfflinePlayMode)
+        {
+            //单机模式
+            var initParameters = new OfflinePlayModeParameters();
+            yield return package.InitializeAsync(initParameters);
+            //var createParameters = new OfflinePlayModeParameters();
+            //createParameters.DecryptionServices = new GameDecryptionServices();
+            //initializationOperation = package.InitializeAsync(createParameters);
+        }
+        else
+        {
+            //WebGL运行模式
+            string defaultHostServer = "http://127.0.0.1/CDN/WebGL/v1.0";
+            string fallbackHostServer = "http://127.0.0.1/CDN/WebGL/v1.0";
+            var initParameters = new WebPlayModeParameters();
+            initParameters.BuildinQueryServices = new GameQueryServices(); //太空战机DEMO的脚本类，详细见StreamingAssetsHelper
+            initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+            var initOperation = package.InitializeAsync(initParameters);
+            yield return initOperation;
+
+            if (initOperation.Status == EOperationStatus.Succeed)
+            {
+                Debug.Log("资源包初始化成功！");
+            }
+            else
+            {
+                Debug.LogError($"资源包初始化失败：{initOperation.Error}");
+            }
+
+        }
+
+        while (true)
+        {
+            yield return null;
+        }
+        GameStart();
+
     }
 
     private string GetHostServerURL()
     {
-        string hostServer = "http://175.178.99.14:12345/mmo";
-        if (Application.platform == RuntimePlatform.Android)
-            return $"{hostServer}/Android";
-        else if (Application.platform == RuntimePlatform.IPhonePlayer)
-            return $"{hostServer}/IPhone";
-        else if (Application.platform == RuntimePlatform.WebGLPlayer)
-            return $"{hostServer}/WebGL";
-        else //Windows、MacOS、Linux
-            return $"{hostServer}/PC";
+        var path = Application.platform switch
+        {
+            RuntimePlatform.Android => $"{assetServer}/Android",
+            RuntimePlatform.IPhonePlayer => $"{assetServer}/IPhone",
+            RuntimePlatform.WebGLPlayer => $"{assetServer}/WebGL",
+            RuntimePlatform.OSXPlayer => $"{assetServer}/MacOS",
+            RuntimePlatform.OSXEditor => $"{assetServer}/MacOS",
+            _ => $"{assetServer}/PC"
+        };
+        Debug.LogWarning("GetHostServerURL：" + path);
+        return path;
     }
 
     private IEnumerator InitializeYooAsset2(ResourcePackage package)
@@ -132,7 +316,7 @@ public class Main : MonoBehaviour
         //4.下载补丁包
         yield return Download2(package);
         //TODO:判断是否下载成功...
-        
+
     }
     IEnumerator Download2(ResourcePackage package)
     {
@@ -143,7 +327,7 @@ public class Main : MonoBehaviour
         if (downloader.TotalDownloadCount == 0)
         {
             Debug.Log("没有需要下载的资源");
-            readyCount ++;
+            readyCount++;
             yield break;
         }
 
@@ -227,7 +411,7 @@ public class Main : MonoBehaviour
 
         //选择服务器（Host，Port），服务器列表可以使用json表示
 
-        
+
         Debug.Log("开始加载场景");
         Res.LoadSceneAsync("Servers");
 

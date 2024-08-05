@@ -25,7 +25,6 @@ public class GameEntity : MonoBehaviour
     public Vector3 position;
     public Vector3 direction;
 
-
     private PlayerStateMachine stateMachine;
     public Actor owner;
 
@@ -94,7 +93,7 @@ public class GameEntity : MonoBehaviour
     /// <summary>
     /// 用于显示角色名
     /// </summary>
-    private void OnGUI()
+ /*   private void OnGUI()
     {
         if (!isView(gameObject))
         {
@@ -130,7 +129,9 @@ public class GameEntity : MonoBehaviour
         Rect nameLabel = new Rect(guiPos.x-(nameSize.x/2),guiPos.y-nameSize.y,nameSize.x,nameSize.y);
         GUI.Label(nameLabel,entityName,labelStyle);
 
-    }
+    }*/
+
+
 
     /// <summary>
     /// 启动GameEntity

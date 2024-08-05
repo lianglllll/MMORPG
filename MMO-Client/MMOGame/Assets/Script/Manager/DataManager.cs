@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using YooAsset;
 
 public class DataManager : Singleton<DataManager>
 {
@@ -39,13 +40,14 @@ public class DataManager : Singleton<DataManager>
     public void init()
     {
         //获取SpaceDefine场景文件对象，
-        spaceDict = Load<SpaceDefine>("Data/SpaceDefine");
-        unitDict = Load<UnitDefine>("Data/UnitDefine");
-        panelDict = Load2<PanelDefine>("Data/PanelDefine");
-        skillDefineDict = Load<SkillDefine>("Data/SkillDefine");
-        itemDefineDict = Load<ItemDefine>("Data/ItemDefine");
-        levelDefindeDict = Load<LevelDefine>("Data/LevelDefine");
-        buffDefindeDict = Load<BuffDefine>("Data/BuffDefine");
+        spaceDict = Load<SpaceDefine>("SpaceDefine");
+        unitDict = Load<UnitDefine>("UnitDefine");
+        skillDefineDict = Load<SkillDefine>("SkillDefine");
+        itemDefineDict = Load<ItemDefine>("ItemDefine");
+        levelDefindeDict = Load<LevelDefine>("LevelDefine");
+        buffDefindeDict = Load<BuffDefine>("BuffDefine");
+        panelDict = Load2<PanelDefine>("PanelDefine");
+
     }
 
     /// <summary>
@@ -56,21 +58,27 @@ public class DataManager : Singleton<DataManager>
     /// <returns></returns>
     private Dictionary<int,T> Load<T>(string path)
     {
-        string sceneJson = Resources.Load<TextAsset>(path).text;
-        var settings = new JsonSerializerSettings
-        {
-            Converters = new JsonConverter[] {
-                new FloatArrayConverter(),
-                new IntArrayConverter(),
-            }
-        };
-        return JsonConvert.DeserializeObject<Dictionary<int, T>>(sceneJson, settings);
+        var package = YooAssets.GetPackage("RawPackage");
+        var hanle = package.LoadRawFileSync(path);
+        string fileText = hanle.GetRawFileText();
+
+        return JsonConvert.DeserializeObject<Dictionary<int, T>>(fileText, settings);
     }
     private Dictionary<string,T> Load2<T>(string path)
     {
-        string sceneJson = Resources.Load<TextAsset>(path).text;
-        return JsonConvert.DeserializeObject<Dictionary<string, T>>(sceneJson);
+        var package = YooAssets.GetPackage("RawPackage");
+        var hanle = package.LoadRawFileSync(path);
+        string fileText = hanle.GetRawFileText();
+        return JsonConvert.DeserializeObject<Dictionary<string, T>>(fileText);
     }
+
+    JsonSerializerSettings settings = new JsonSerializerSettings
+    {
+        Converters = new JsonConverter[] {
+            new FloatArrayConverter(),
+            new IntArrayConverter(),
+        }
+    };
 
 
     /// <summary>

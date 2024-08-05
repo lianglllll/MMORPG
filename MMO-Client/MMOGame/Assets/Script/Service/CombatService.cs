@@ -10,6 +10,7 @@ using GameClient.Entities;
 using Assets.Script.Entities;
 using GameClient;
 using GameClient.Combat;
+using System.Threading.Tasks;
 
 public class CombatService : Singleton<CombatService>, IDisposable
 {
@@ -57,11 +58,20 @@ public class CombatService : Singleton<CombatService>, IDisposable
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            if(GameApp.character==null)
+
+            //展示转场UI
+            var def = DataManager.Instance.GetSpaceDefineById(msg.Character.SpaceId);
+            ScenePoster.Instance.nameText.text = def.Name ?? "---";
+            ScenePoster.Instance.SetProgress(0.9f, 4.0f);
+
+            if (GameApp.character==null)
             {
                 //1.切换场景
                 GameApp.SpaceId = msg.Character.SpaceId;
-                GameApp.LoadSpace(msg.Character.SpaceId, (scene) => {
+
+                GameApp.LoadSpace(msg.Character.SpaceId, async (scene) => {
+
+                     await Task.Delay(800);
 
                     //2.加载其他角色和ai
                     foreach (var item in msg.CharacterList)
@@ -85,6 +95,9 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     DataManager.Instance.spaceDict.TryGetValue(GameApp.SpaceId, out var def);
                     UIManager.Instance.ShowTopMessage("" + def.Name);
 
+                    //完成转场ui
+                    ScenePoster.Instance.SetProgress(1f, 0.3f);
+
                 });
             }
             else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)
@@ -96,7 +109,10 @@ public class CombatService : Singleton<CombatService>, IDisposable
 
                 //切换场景
                 GameApp.SpaceId = msg.Character.SpaceId;
-                GameApp.LoadSpace(msg.Character.SpaceId, (scene) => {
+                GameApp.LoadSpace(msg.Character.SpaceId, async (scene) => {
+
+                    await Task.Delay(800);
+
                     //加载其他角色和ai
                     foreach (var item in msg.CharacterList)
                     {
@@ -118,6 +134,9 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     UIManager.Instance.OpenPanel("CombatPanel");
                     DataManager.Instance.spaceDict.TryGetValue(GameApp.SpaceId, out var def);
                     UIManager.Instance.ShowTopMessage("" + def.Name);
+
+                    //完成转场ui
+                    ScenePoster.Instance.SetProgress(1f, 0.3f);
                 });
             }
             else

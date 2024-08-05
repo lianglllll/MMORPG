@@ -67,14 +67,14 @@
     <Compile Include="Assets\Script\UI\Panel\Inventory\UISlot.cs" />
     <Compile Include="Assets\Script\StateMachine\Ctl\State\CtlState_Idle.cs" />
     <Compile Include="Assets\Script\Net\GameEntity.cs" />
-    <Compile Include="Assets\aMyTest\Mechanism\BackInTime\Boomer.cs" />
-    <Compile Include="Assets\aMyTest\Action\LightInteraction.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\Mechanism\BackInTime\Boomer.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\Action\LightInteraction.cs" />
     <Compile Include="Assets\Script\Camera\old\CameraManager.cs" />
     <Compile Include="Assets\Script\Manager\GameApp.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\BuffGroupScript.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextData.cs" />
-    <Compile Include="Assets\aMyTest\InteractionManager.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\InteractionManager.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\DeliverPanel.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\AbilityBarScript.cs" />
     <Compile Include="Assets\Script\UI\Panel\CreateRolePanelScript.cs" />
@@ -92,9 +92,9 @@
     <Compile Include="Assets\Script\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Script\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Script\Entities\Actor.cs" />
-    <Compile Include="Assets\aMyTest\MovementController.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\MovementController.cs" />
     <Compile Include="Assets\Script\Combat\Skill.cs" />
-    <Compile Include="Assets\aMyTest\SyncMovementController.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\SyncMovementController.cs" />
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Script\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\Script\Tools\Event.cs" />
@@ -127,7 +127,7 @@
     <Compile Include="Assets\Script\UI\Panel\CombatPanelScript.cs" />
     <Compile Include="Assets\Script\Combat\Missile.cs" />
     <Compile Include="Assets\Script\Tools\GameTools.cs" />
-    <Compile Include="Assets\aMyTest\ReplayMgr.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\ReplayMgr.cs" />
     <Compile Include="Assets\Script\Player\UnitUIController.cs" />
     <Compile Include="Assets\Script\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Art\Unit\牛头人\DemoScene\Action_Manage.cs" />
@@ -144,8 +144,8 @@
     <Compile Include="Assets\Script\Inventory\Inventory.cs" />
     <Compile Include="Assets\Script\Tools\SerilogConfig.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
-    <Compile Include="Assets\aMyTest\Action\LigthContrl.cs" />
-    <Compile Include="Assets\aMyTest\TimeMachineMgr2.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\Action\LigthContrl.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\TimeMachineMgr2.cs" />
     <Compile Include="Assets\Script\Tools\DevelopmentTool\DevelopmentToos.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
@@ -170,15 +170,15 @@
     <Compile Include="Assets\Script\StateMachine\Base\PlayerState.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
     <Compile Include="Assets\Script\Effect\GameEffect.cs" />
-    <Compile Include="Assets\aMyTest2\TimeLeap.cs" />
+    <Compile Include="Assets\aaTest\aMyTest2\TimeLeap.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Script\Service\ItemService.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Hit.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\RevivalPointDefine.cs" />
     <Compile Include="Assets\Script\Net\NetClient.cs" />
     <Compile Include="Assets\Script\StateMachine\Base\IState.cs" />
-    <Compile Include="Assets\aMyTest\TimeMachineMgr.cs" />
-    <Compile Include="Assets\aMyTest\GameTest.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\TimeMachineMgr.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\GameTest.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Script\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText.cs" />
@@ -191,6 +191,7 @@
     <Compile Include="Assets\Script\Manager\EntityManager.cs" />
     <Compile Include="Assets\Script\Entities\Character.cs" />
     <Compile Include="Assets\Script\Service\CombatService.cs" />
+    <Compile Include="Assets\Script\UI\Servers\ServerInfoButton.cs" />
     <Compile Include="Assets\Script\UI\Tool\ItemMenu\ItemMenuOption.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Script\Entities\Monster.cs" />
@@ -200,10 +201,11 @@
     <Compile Include="Assets\Script\Manager\DataDefine\SkillDefine.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Script\Buffs\Buff.cs" />
-    <Compile Include="Assets\aMyTest\Mechanism\BackInTime\TimeMachineManager.cs" />
+    <Compile Include="Assets\aaTest\aMyTest\Mechanism\BackInTime\TimeMachineManager.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Motion.cs" />
     <Compile Include="Assets\Script\Entities\Entity.cs" />
     <Compile Include="Assets\Script\UI\Panel\BasePanel.cs" />
+    <Compile Include="Assets\Script\UI\Servers\SelectServer.cs" />
     <Compile Include="Assets\Script\Net\V3.cs" />
     <Compile Include="Assets\Script\StateMachine\Ctl\State\CtlState_Motion.cs" />
     <Compile Include="Assets\Script\Interaction\Base\InteractionBehaviour.cs" />
@@ -212,8 +214,8 @@
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_StrikeAndFly.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Jump.cs" />
     <Compile Include="Assets\Script\Player\PlayerCombatController.cs" />
-    <Compile Include="Assets\Script\UI\Servers\SelectServer.cs" />
-    <Compile Include="Assets\Script\UI\Servers\ServerInfoButton.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Combat\UnitBillboard.cs" />
+    <Compile Include="Assets\Script\UI\Panel\ScenePoster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />

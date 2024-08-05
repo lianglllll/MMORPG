@@ -7,25 +7,28 @@ using UnityEngine.UI;
 
 public class UnitUIController : MonoBehaviour
 {
+
     private Actor owner;
 
-    private Canvas SelectMarkCanvas;        //锁定目标的ui
+    //actor的角色名和血条ui模块
+    private UnitBillboard unitBillboard;
 
+
+    //技能指示器模块
+    //最后技能指示器拿到的就是一个dir or 坐标，用于技能的释放请求的参数。
+    private Canvas SelectMarkCanvas;        //被锁定锁定目标的ui
     private Canvas SpellRangeCanvas;        //攻击距离的ui
     private Image SpellRangeImage;
-
     private Canvas SectorAreaCanvas;        //扇形区域
     private Image SectorAreaImage;
-
-    private RaycastHit hit;
+    private RaycastHit hit;                 //中间使用到的东西
     private Ray ray;
     private Vector3 curPos;
     private LayerMask groundLayer;
+    private bool isUse;                     //是否被使用
 
 
-    private bool isUse;
 
-    //最后技能指示器拿到的就是一个dir 或者是一个 坐标
 
 
     private void Awake()
@@ -35,6 +38,9 @@ public class UnitUIController : MonoBehaviour
         SpellRangeImage = SpellRangeCanvas.GetComponentInChildren<Image>();
         SectorAreaCanvas = transform.Find("MyCanvas/SectorAreaCanvas").GetComponent<Canvas>();
         SectorAreaImage = SectorAreaCanvas.GetComponentInChildren<Image>();
+
+        unitBillboard = transform.Find("MyCanvas/UnitBillboard").GetComponent<UnitBillboard>();
+
     }
 
     private void Start()
@@ -47,7 +53,7 @@ public class UnitUIController : MonoBehaviour
 
     private void Update()
     {
-
+        //扇形ui被激活
         if (SectorAreaImage.enabled)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -63,10 +69,14 @@ public class UnitUIController : MonoBehaviour
             SectorAreaCanvas.transform.rotation = Quaternion.Lerp(ab1canvas, SectorAreaCanvas.transform.rotation, 0);
         }
 
-
+        if(owner != null)
+        {
+            ShowEntityInfoBar();
+        }
 
     }
 
+    //被外部调用的初始化
     public void Init(Actor actor)
     {
         this.owner = actor;
@@ -214,6 +224,16 @@ public class UnitUIController : MonoBehaviour
     #endregion
 
 
-
+    /// <summary>
+    /// 显示3维的角色名和血条，
+    /// </summary>
+    private void ShowEntityInfoBar()
+    {
+        // 面板看向摄像机的代码再Billboard中
+        unitBillboard.slider.value = owner.info.Hp;
+        unitBillboard.slider.maxValue = owner.info.HpMax;
+        unitBillboard.nameText.text = owner.info.Name;
+        unitBillboard.gameObject.SetActive(owner.info.Hp > 0);
+    }
 
 }

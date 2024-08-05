@@ -7,13 +7,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	{
 		"Assembly-CSharp-firstpass.dll",
 		"Google.Protobuf.dll",
+		"Main.dll",
 		"Newtonsoft.Json.dll",
 		"Serilog.dll",
 		"System.Core.dll",
 		"System.dll",
 		"Unity.InputSystem.dll",
 		"UnityEngine.CoreModule.dll",
-		"YooAsset.dll",
+		"UnityEngine.JSONSerializeModule.dll",
 		"mscorlib.dll",
 	};
 	// }}
@@ -34,6 +35,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Google.Protobuf.ValueReader<object>
 	// Google.Protobuf.ValueWriter<object>
 	// Newtonsoft.Json.JsonConverter<object>
+	// Res.<_loadAssetAsync>d__5<object>
+	// Res.ResHandle<UnityEngine.SceneManagement.Scene>
+	// Res.ResHandle<object>
 	// Summer.Network.MessageRouter.MessageHandler<object>
 	// Summer.Singleton<object>
 	// System.Action<CameraHolder.SVA>
@@ -41,6 +45,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Action<UnityEngine.InputSystem.InputAction.CallbackContext>
 	// System.Action<UnityEngine.SceneManagement.Scene>
 	// System.Action<byte>
+	// System.Action<float>
 	// System.Action<int>
 	// System.Action<object,object>
 	// System.Action<object>
@@ -173,7 +178,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Comparison<int>
 	// System.Comparison<object>
 	// System.EventHandler<object>
-	// System.Func<byte>
 	// System.Func<int,object,object>
 	// System.Func<int,object>
 	// System.Func<object,byte>
@@ -193,21 +197,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<int>
 	// System.Predicate<object>
 	// System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>
-	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter<byte>
 	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter<object>
-	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable<byte>
 	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable<object>
-	// System.Runtime.CompilerServices.TaskAwaiter<byte>
 	// System.Runtime.CompilerServices.TaskAwaiter<object>
-	// System.Threading.Tasks.ContinuationTaskFromResultTask<byte>
 	// System.Threading.Tasks.ContinuationTaskFromResultTask<object>
-	// System.Threading.Tasks.Task<byte>
 	// System.Threading.Tasks.Task<object>
-	// System.Threading.Tasks.TaskCompletionSource<byte>
 	// System.Threading.Tasks.TaskCompletionSource<object>
-	// System.Threading.Tasks.TaskFactory.<>c__DisplayClass35_0<byte>
 	// System.Threading.Tasks.TaskFactory.<>c__DisplayClass35_0<object>
-	// System.Threading.Tasks.TaskFactory<byte>
 	// System.Threading.Tasks.TaskFactory<object>
 	// UnityEngine.InputSystem.InputBindingComposite<UnityEngine.Vector2>
 	// UnityEngine.InputSystem.InputControl<UnityEngine.Vector2>
@@ -219,6 +215,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	{
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string)
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string,Newtonsoft.Json.JsonSerializerSettings)
+		// Res.ResHandle<object> Res.LoadAssetAsync<object>(string,uint)
+		// System.Collections.IEnumerator Res._loadAssetAsync<object>(string,Res.ResHandle<object>,uint,float)
 		// System.Void Serilog.ILogger.Write<UnityEngine.Vector3>(Serilog.Events.LogEventLevel,string,UnityEngine.Vector3)
 		// System.Void Serilog.ILogger.Write<object>(Serilog.Events.LogEventLevel,string,object)
 		// System.Void Serilog.Log.Error<object>(string,object)
@@ -240,7 +238,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,UIManager.<GetPanelPrefab>d__19>(System.Runtime.CompilerServices.TaskAwaiter<object>&,UIManager.<GetPanelPrefab>d__19&)
 		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.Start<UIManager.<GetPanelPrefab>d__19>(UIManager.<GetPanelPrefab>d__19&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d>(System.Runtime.CompilerServices.TaskAwaiter&,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d>(System.Runtime.CompilerServices.TaskAwaiter&,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,SelectRolePanelScript.<LoadRoleList>d__14>(System.Runtime.CompilerServices.TaskAwaiter<object>&,SelectRolePanelScript.<LoadRoleList>d__14&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d>(CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d>(CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<SelectRolePanelScript.<LoadRoleList>d__14>(SelectRolePanelScript.<LoadRoleList>d__14&)
 		// System.Void* Unity.Collections.LowLevel.Unsafe.UnsafeUtility.AddressOf<UnityEngine.Vector2>(UnityEngine.Vector2&)
 		// int Unity.Collections.LowLevel.Unsafe.UnsafeUtility.SizeOf<UnityEngine.Vector2>()
@@ -256,6 +258,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object[] UnityEngine.GameObject.GetComponentsInChildren<object>(bool)
 		// UnityEngine.Vector2 UnityEngine.InputSystem.InputAction.ReadValue<UnityEngine.Vector2>()
 		// UnityEngine.Vector2 UnityEngine.InputSystem.InputActionState.ReadValue<UnityEngine.Vector2>(int,int,bool)
+		// object UnityEngine.JsonUtility.FromJson<object>(string)
 		// object UnityEngine.Object.FindObjectOfType<object>()
 		// object UnityEngine.Object.Instantiate<object>(object)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform)
@@ -263,6 +266,5 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Vector3,UnityEngine.Quaternion)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)
 		// object UnityEngine.Resources.Load<object>(string)
-		// YooAsset.AssetHandle YooAsset.ResourcePackage.LoadAssetAsync<object>(string,uint)
 	}
 }
