@@ -97,6 +97,7 @@
     <Compile Include="Assets\aaTest\aMyTest\SyncMovementController.cs" />
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Script\Combat\AttrubuteData.cs" />
+    <Compile Include="Assets\Script\Proto\Message.cs" />
     <Compile Include="Assets\Script\Tools\Event.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\MessagePanelScript.cs" />
     <Compile Include="Assets\Script\Camera\TP_CameraController.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Assets\aaTest\aMyTest\TimeMachineMgr.cs" />
     <Compile Include="Assets\aaTest\aMyTest\GameTest.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\ItemIOInfoItem.cs" />
+    <Compile Include="Assets\Script\UI\Panel\Combat\UnitBillboard.cs" />
     <Compile Include="Assets\Script\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText.cs" />
     <Compile Include="Assets\Script\UI\Panel\Combat\BuffUIScript.cs" />
@@ -214,7 +216,6 @@
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_StrikeAndFly.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Jump.cs" />
     <Compile Include="Assets\Script\Player\PlayerCombatController.cs" />
-    <Compile Include="Assets\Script\UI\Panel\Combat\UnitBillboard.cs" />
     <Compile Include="Assets\Script\UI\Panel\ScenePoster.cs" />
   </ItemGroup>
   <ItemGroup>

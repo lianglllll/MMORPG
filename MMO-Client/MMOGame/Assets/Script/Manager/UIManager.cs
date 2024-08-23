@@ -121,7 +121,7 @@ public class UIManager
         GameObject panelPrefab = null;
         if(!prefabsDict.TryGetValue(name,out panelPrefab)){
             //需要加载prefab
-            GameObjectManager.Instance.GetPrefab(define.Resource, (prefab) =>
+            GameObjectManager.Instance.GetPrefabAsync(define.Resource, (prefab) =>
             {
                 panelPrefab = prefab;
                 prefabsDict.Add(name, panelPrefab);//添加到缓冲
@@ -221,7 +221,7 @@ public class UIManager
     private Task<GameObject> GetPanelPrefabSync(string path)
     {
         var tcs = new TaskCompletionSource<GameObject>();
-        GameObjectManager.Instance.GetPrefab(path, (prefab) => {
+        GameObjectManager.Instance.GetPrefabAsync(path, (prefab) => {
             if (prefab != null)
             {
                 tcs.SetResult(prefab);

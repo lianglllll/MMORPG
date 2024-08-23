@@ -29,7 +29,16 @@ message NetEntity {
 	Vec3 direction = 3;
 }
 
-//entity状态
+//活动单位的广义状态
+enum UnitState{
+	FREE = 0;		//自由进行任何操作
+	DEAD = 1;		//死亡，无法操作。
+	REST = 2;		//休息，挂机 回血回蓝
+	FIGHT = 3;		//战斗状态，持续一段时间，期间可能无法骑马吧。
+	MAX = 4;
+}
+
+//活动单位的狭义状态
 enum EntityState{
 	NoneState = 0;			//无状态
 	Idle = 1;				//等待状态
@@ -44,6 +53,8 @@ enum EntityState{
 	Dizzy = 10;				//眩晕
 	SkillIntonate = 11;  	//技能蓄气
     SkillActive = 12;    	//技能激活
+	//骑马跑，骑马跳。
+	//游泳，游泳上浮，下潜。
 }
 
 //同步entity:位置+状态
@@ -326,13 +337,7 @@ message PropertyUpdateRsponse{
 	repeated PropertyUpdate list = 1;
 }
 
-enum UnitState{
-	FREE = 0;		//自由进行任何操作
-	DEAD = 1;
-	REST = 2;		//休息，挂机 回血回蓝
-	FIGHT = 3;		//持续一段时间
-	MAX = 4;
-}
+
 
 //复活请求
 message ReviveRequest{

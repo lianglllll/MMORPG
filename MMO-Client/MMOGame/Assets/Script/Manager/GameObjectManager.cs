@@ -108,21 +108,13 @@ public class GameObjectManager:MonoBehaviour
         if (actor == null) yield break;
         bool isMine = (nActor.Entity.Id == GameApp.entityId);
 
-        //2.获取热更资源包
+        //2.异步加载资源
         UnitDefine unitDefine = actor.define;
-        /*        var package = YooAssets.GetPackage("DefaultPackage");
-                AssetHandle handle = package.LoadAssetAsync<GameObject>(unitDefine.Resource);
-                yield return handle;
-                var prefab = handle.AssetObject as GameObject;
-        */
         GameObject prefab = null;
-        //Debug.Log("开始加载资源：" + def.Resource);
         yield return LoadAsset<GameObject>(unitDefine.Resource, (obj) => {
             prefab = obj;
         });
         yield return prefab;
-        Debug.Log("资源加载完成：" + unitDefine.Resource);
-
 
         //3.获取坐标和方向
         Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000;
@@ -190,6 +182,8 @@ public class GameObjectManager:MonoBehaviour
 
 
     }
+    //使用同步加载会不会更好一点。
+
 
     /// <summary>
     /// 事件驱动：向当前场景中创建物品
@@ -237,19 +231,13 @@ public class GameObjectManager:MonoBehaviour
         ItemEntity itemEntity = EntityManager.Instance.GetEntity<ItemEntity>(entityId);
         var define = DataManager.Instance.itemDefineDict[netItemEntity.ItemInfo.ItemId];
 
-        // 2.获取热更资源包
-        /*        var package = YooAssets.GetPackage("DefaultPackage");
-                AssetHandle handle = package.LoadAssetAsync<GameObject>(define.Model);
-                yield return handle;
-                GameObject prefab = handle.AssetObject as GameObject;*/
-
         GameObject prefab = null;
         yield return LoadAsset<GameObject>(define.Model, (obj) => {
             prefab = obj;
         });
         yield return prefab;
-        Debug.Log("资源加载完成：" + define.Model);
 
+        //下面的操作可能有问题，应该移动到LoadAsset的回调中吧。
 
         //3.获取坐标和方向
         Vector3 initPosition = V3.Of(netItemEntity.Entity.Position) / 1000;
@@ -276,6 +264,53 @@ public class GameObjectManager:MonoBehaviour
         }
 
     }
+
+
+    /// <summary>
+    /// 加载asset资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="location"></param>
+    /// <param name="action"></param>
+    /// <param name="timeout"></param>
+    /// <returns></returns>
+    private IEnumerator LoadAsset<T>(string location, Action<T> action, float timeout = 5f) where T : UnityEngine.Object
+    {
+        T prefab = null;
+        var handle = Res.LoadAssetAsync<T>(location);
+        handle.OnLoaded = (obj) => {
+            prefab = obj;
+        };
+
+        //同步等待资源加载完成或超时
+        var startTime = Time.time;
+        while (prefab == null)
+        {
+            if (Time.time - startTime >= timeout)
+            {
+                Debug.LogError($"Loading {location} timed out.");
+                yield break;
+            }
+            yield return null;
+        }
+
+        yield return prefab;
+        action?.Invoke(prefab);
+        yield break;
+    }
+    /// <summary>
+    /// 异步获取prefab，自己加回调方法。
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="action"></param>
+    public void GetPrefabAsync(string path, Action<GameObject> action)
+    {
+        StartCoroutine(LoadAsset<GameObject>(path, (prefab) =>
+        {
+            action?.Invoke(prefab);
+        }));
+    }
+
 
     /// <summary>
     /// 事件驱动：entity离开场景
@@ -360,48 +395,5 @@ public class GameObjectManager:MonoBehaviour
             });
         }
     }
-
-
-    /// <summary>
-    /// 加载asset资源
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="location"></param>
-    /// <param name="action"></param>
-    /// <param name="timeout"></param>
-    /// <returns></returns>
-    public IEnumerator LoadAsset<T>(string location, Action<T> action, float timeout = 5f) where T : UnityEngine.Object
-    {
-        T prefab = null;
-        var handle = Res.LoadAssetAsync<T>(location);
-        handle.OnLoaded = (obj) => {
-            prefab = obj;
-        };
-
-        // 等待资源加载完成或超时
-        var startTime = Time.time;
-        while (prefab == null)
-        {
-            if (Time.time - startTime >= timeout)
-            {
-                Debug.LogError($"Loading {location} timed out.");
-                yield break;
-            }
-            yield return null;
-        }
-        yield return prefab;
-        action?.Invoke(prefab);
-        yield break;
-    }
-
-    //获取prefab
-    public void GetPrefab(string path,Action<GameObject> action)
-    {
-        StartCoroutine(LoadAsset<GameObject>(path, (prefab) =>
-        {
-            action?.Invoke(prefab);
-        }));
-    }
-
 
 }

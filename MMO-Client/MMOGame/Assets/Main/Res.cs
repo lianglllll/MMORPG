@@ -135,6 +135,7 @@ public class Res
             // 获取热更资源包
             var package = YooAssets.GetPackage("DefaultPackage");
             AssetHandle han = package.LoadAssetAsync<T>(path, priority);
+
             // 等待资源加载完成或超时
             var startTime = Time.time;
             while (han.IsValid && !han.IsDone)
@@ -146,6 +147,7 @@ public class Res
                 }
                 yield return null;
             }
+
             yield return han;
             prefab = han.AssetObject as T;
         }
