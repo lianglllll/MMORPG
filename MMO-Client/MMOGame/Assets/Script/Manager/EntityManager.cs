@@ -89,7 +89,7 @@ namespace GameClient.Entities
         public void OnActorEnterScene(NetActor nActor)
         {
             //判断是否已经存在？
-            if(entityDict.TryGetValue(nActor.Entity.Id,out var entity))
+                if(entityDict.TryGetValue(nActor.Entity.Id,out var entity))
             {
                 if(entity is Actor actor)
                 {

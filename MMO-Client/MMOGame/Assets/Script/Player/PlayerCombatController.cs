@@ -157,7 +157,7 @@ public class PlayerCombatController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))            
         {
             //施法范围圈
-            owner.unitUIController.SetSpellRangeCanvas(true, currentComboData.next.skill.Define.EffectAreaRadius * 0.001f);
+            owner.unitUIController.SetSpellRangeCanvas(true, currentComboData.next.skill.Define.SpellRangeRadius * 0.001f);
         }
 
         if (Input.GetKeyUp(KeyCode.Alpha1))
@@ -222,7 +222,7 @@ public class PlayerCombatController : MonoBehaviour
             else
             {
                 //已经锁定了一个最近的目标，计算当前的攻击距离
-                if(Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.EffectAreaRadius * 0.001f)
+                if(Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.SpellRangeRadius * 0.001f)
                 {
                     //打不到敌人，自己原地平啊
                     //获取移动到可以攻击到敌人的位置
@@ -239,7 +239,7 @@ public class PlayerCombatController : MonoBehaviour
         else
         {
             //已经锁定了一个最近的目标，计算当前的攻击距离
-            if (Vector3.Distance(transform.position, _currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.EffectAreaRadius *0.001f)
+            if (Vector3.Distance(transform.position, _currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.SpellRangeRadius * 0.001f)
             {
                 //打不到敌人，自己原地平啊
                 //获取移动到可以攻击到敌人的位置
@@ -479,7 +479,7 @@ public class PlayerCombatController : MonoBehaviour
     public void ShowSpellRangeUI(Skill skill)
     {
         //技能圈圈
-        owner.unitUIController.SetSpellRangeCanvas(true, skill.Define.EffectAreaRadius * 0.001f);
+        owner.unitUIController.SetSpellRangeCanvas(true, skill.Define.SpellRangeRadius * 0.001f);
 
         if (skill.IsUnitTarget)
         {
@@ -496,7 +496,7 @@ public class PlayerCombatController : MonoBehaviour
             switch (skill.Define.EffectAreaType)
             {
                 case "扇形":
-                    owner.unitUIController.SetSectorArea(true, skill.Define.EffectAreaRadius * 0.001f, 0f);
+                    owner.unitUIController.SetSectorArea(true, skill.Define.SpellRangeRadius * 0.001f, 0f);
                     break;
                 case "圆形":
 
