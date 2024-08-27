@@ -118,15 +118,15 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     {
                         EntityManager.Instance.OnActorEnterScene(item);
                     }
-                    //3.加载物品
+                    //加载物品
                     foreach (var item in msg.ItemEntityList)
                     {
                         EntityManager.Instance.OnItemEnterScene(item);
                     }
 
                     //最后生成自己的角色,记录本机的数据
-                    EntityManager.Instance.OnActorEnterScene(msg.Character);
                     GameApp.entityId = msg.Character.Entity.Id;
+                    EntityManager.Instance.OnActorEnterScene(msg.Character);
                     GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
 
                     //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了

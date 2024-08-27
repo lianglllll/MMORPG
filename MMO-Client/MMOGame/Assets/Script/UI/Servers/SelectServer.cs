@@ -80,7 +80,7 @@ public class SelectServer : MonoBehaviour
             {
                 // 成功获取数据
                 string json = webRequest.downloadHandler.text;
-                Debug.Log($"Received JSON: {json}");
+                //Debug.Log($"Received JSON: {json}");
 
                 // 可以在这里将json字符串解析为对象，或者进行其他处理
                 // 例如，解析为自定义的数据结构

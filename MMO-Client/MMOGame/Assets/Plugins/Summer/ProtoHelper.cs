@@ -30,7 +30,6 @@ namespace Summer
             }
         }
 
-
         /// <summary>
         /// 解析
         /// </summary>
@@ -51,10 +50,12 @@ namespace Summer
         static ProtoHelper()
         {
             List<string> list = new List<string>();
-            //var q = from t in Assembly.GetExecutingAssembly().GetTypes() select t;
-            var q = Assembly.GetExecutingAssembly().GetTypes();
+            // 查找并获取指定名称的程序集
+            var tpyes = AppDomain.CurrentDomain.GetAssemblies()
+                .FirstOrDefault(a => a.GetName().Name == "Assembly-CSharp")
+                .GetTypes();
 
-            q.ToList().ForEach(t =>
+            tpyes.ToList().ForEach(t =>
             {
                 if (typeof(IMessage).IsAssignableFrom(t))
                 {
@@ -88,7 +89,6 @@ namespace Summer
 
         public static int SeqCode(Type type)
         {
-            
             return mDict2[type];
         }
         public static Type SeqType(int code)
