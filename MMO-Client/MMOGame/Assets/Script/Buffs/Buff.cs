@@ -210,7 +210,7 @@ public  class Buff
 
         }
 
-        Owner.AddBuff(this);
+        Owner?.AddBuff(this);
 
     }
 
