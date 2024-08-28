@@ -275,7 +275,9 @@ public class GameEntity : MonoBehaviour
     {
         if (startFlag)
         {
-            this.position = ToVector3(nEntity.Position);
+            var pos = ToVector3(nEntity.Position);
+            this.position.x = pos.x;
+            this.position.z = pos.z;
             this.direction = ToVector3(nEntity.Direction);
 
             if (instantMove)
