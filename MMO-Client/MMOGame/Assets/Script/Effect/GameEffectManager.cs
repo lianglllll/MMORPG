@@ -50,7 +50,7 @@ public class GameEffectManager
     /// <returns></returns>
     private static GameEffect CreateEffect(string path)
     {
-        GameObject temp = Resources.Load<GameObject>(path);
+        GameObject temp = Res.LoadAssetSync<GameObject>(path);
         if (temp == null)
         {
             Debug.LogError("cant find file ! : " + path);

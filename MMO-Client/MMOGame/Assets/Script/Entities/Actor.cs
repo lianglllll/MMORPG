@@ -115,7 +115,7 @@ namespace GameClient.Entities
                 //动作
                 if(entityState != EntityState.Motion && StateMachine.currentEntityState != EntityState.Motion)
                 {
-                    StateMachine.parameter.attacker = GameTools.GetUnit(damage.AttackerId);
+                    StateMachine.parameter.attacker = GameTools.GetActorById(damage.AttackerId);
                     StateMachine.SwitchState(EntityState.Hit,false,true);
                 }
 

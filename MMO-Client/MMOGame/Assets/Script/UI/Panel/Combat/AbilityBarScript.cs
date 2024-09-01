@@ -74,7 +74,7 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if(skillInfo != null)
         {
             _skill = skillInfo;
-            icon = Resources.Load<Sprite>(skillInfo.Define.Icon);
+            icon = Res.LoadAssetSync<Sprite>(skillInfo.Define.Icon,FileType.Png);
             aName = skillInfo.Define.Name;
             maxColdDown = skillInfo.Define.CD;
             coldDown = skillInfo.ColddownTime;

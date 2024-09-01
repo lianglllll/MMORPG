@@ -41,7 +41,7 @@ namespace Assets.Script.Service
         {
             foreach (var info in msg.List)
             {
-                var actor = GameTools.GetUnit(info.OwnerId);
+                var actor = GameTools.GetActorById(info.OwnerId);
                 if (actor == null) continue;
                 actor.RemoveBuff(info.Id);
             }

@@ -1,84 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <linker>
   <assembly fullname="Assembly-CSharp-firstpass">
-    <type fullname="Proto.BuffConflict" preserve="all" />
-    <type fullname="Proto.BuffInfo" preserve="all" />
-    <type fullname="Proto.BuffType" preserve="all" />
-    <type fullname="Proto.BuffsAddResponse" preserve="all" />
-    <type fullname="Proto.BuffsRemoveResponse" preserve="all" />
-    <type fullname="Proto.BuffsUpdateResponse" preserve="all" />
-    <type fullname="Proto.CastInfo" preserve="all" />
-    <type fullname="Proto.CastResult" preserve="all" />
-    <type fullname="Proto.CharacterCreateRequest" preserve="all" />
-    <type fullname="Proto.CharacterCreateResponse" preserve="all" />
-    <type fullname="Proto.CharacterDeleteRequest" preserve="all" />
-    <type fullname="Proto.CharacterDeleteResponse" preserve="all" />
-    <type fullname="Proto.CharacterListRequest" preserve="all" />
-    <type fullname="Proto.CharacterListResponse" preserve="all" />
-    <type fullname="Proto.ChatChannel" preserve="all" />
-    <type fullname="Proto.ChatMessage" preserve="all" />
-    <type fullname="Proto.ChatRequest" preserve="all" />
-    <type fullname="Proto.ChatResponse" preserve="all" />
-    <type fullname="Proto.ChatResponseOne" preserve="all" />
-    <type fullname="Proto.CtlClientSpaceEntitySyncResponse" preserve="all" />
-    <type fullname="Proto.Damage" preserve="all" />
-    <type fullname="Proto.DamageResponse" preserve="all" />
-    <type fullname="Proto.DameageType" preserve="all" />
-    <type fullname="Proto.EntityState" preserve="all" />
-    <type fullname="Proto.EntityType" preserve="all" />
-    <type fullname="Proto.EquipsType" preserve="all" />
-    <type fullname="Proto.EquipsUpdateResponse" preserve="all" />
-    <type fullname="Proto.GameEnterRequest" preserve="all" />
-    <type fullname="Proto.GameEnterResponse" preserve="all" />
-    <type fullname="Proto.HeartBeatRequest" preserve="all" />
-    <type fullname="Proto.HeartBeatResponse" preserve="all" />
-    <type fullname="Proto.InventoryInfo" preserve="all" />
-    <type fullname="Proto.InventoryInfoRequest" preserve="all" />
-    <type fullname="Proto.InventoryInfoResponse" preserve="all" />
-    <type fullname="Proto.InventoryType" preserve="all" />
-    <type fullname="Proto.ItemDiscardRequest" preserve="all" />
-    <type fullname="Proto.ItemDiscardResponse" preserve="all" />
-    <type fullname="Proto.ItemInfo" preserve="all" />
-    <type fullname="Proto.ItemPickUpRequest" preserve="all" />
-    <type fullname="Proto.ItemPickupResponse" preserve="all" />
-    <type fullname="Proto.ItemPlacementRequest" preserve="all" />
-    <type fullname="Proto.ItemType" preserve="all" />
-    <type fullname="Proto.ItemUseRequest" preserve="all" />
-    <type fullname="Proto.ItemUseResponse" preserve="all" />
-    <type fullname="Proto.NEntitySync" preserve="all" />
-    <type fullname="Proto.NetActor" preserve="all" />
-    <type fullname="Proto.NetEntity" preserve="all" />
-    <type fullname="Proto.NetItemEntity" preserve="all" />
-    <type fullname="Proto.NetItemEntitySync" preserve="all" />
-    <type fullname="Proto.PropertyUpdate" preserve="all" />
-    <type fullname="Proto.PropertyUpdate/Types" preserve="all" />
-    <type fullname="Proto.PropertyUpdate/Types/Prop" preserve="all" />
-    <type fullname="Proto.PropertyUpdate/Types/PropertyValue" preserve="all" />
-    <type fullname="Proto.PropertyUpdateRsponse" preserve="all" />
-    <type fullname="Proto.Quality" preserve="all" />
-    <type fullname="Proto.ReconnectRequest" preserve="all" />
-    <type fullname="Proto.ReconnectResponse" preserve="all" />
-    <type fullname="Proto.Result" preserve="all" />
-    <type fullname="Proto.ReviveRequest" preserve="all" />
-    <type fullname="Proto.SkillInfo" preserve="all" />
-    <type fullname="Proto.SpaceCharactersEnterResponse" preserve="all" />
-    <type fullname="Proto.SpaceDeliverRequest" preserve="all" />
-    <type fullname="Proto.SpaceEnterResponse" preserve="all" />
-    <type fullname="Proto.SpaceEntityLeaveResponse" preserve="all" />
-    <type fullname="Proto.SpaceEntitySyncRequest" preserve="all" />
-    <type fullname="Proto.SpaceEntitySyncResponse" preserve="all" />
-    <type fullname="Proto.SpaceItemEnterResponse" preserve="all" />
-    <type fullname="Proto.SpellCastRequest" preserve="all" />
-    <type fullname="Proto.SpellCastResponse" preserve="all" />
-    <type fullname="Proto.SpellFailResponse" preserve="all" />
-    <type fullname="Proto.UnitState" preserve="all" />
-    <type fullname="Proto.UnloadEquipmentRequest" preserve="all" />
-    <type fullname="Proto.UserLoginRequest" preserve="all" />
-    <type fullname="Proto.UserLoginResponse" preserve="all" />
-    <type fullname="Proto.UserRegisterRequest" preserve="all" />
-    <type fullname="Proto.UserRegisterResponse" preserve="all" />
-    <type fullname="Proto.Vec3" preserve="all" />
-    <type fullname="Proto.WearEquipmentRequest" preserve="all" />
     <type fullname="Summer.Network.Connection" preserve="all" />
     <type fullname="Summer.Network.Connection/DisconnectedCallback" preserve="all" />
     <type fullname="Summer.Network.MessageRouter" preserve="all" />
@@ -91,10 +13,31 @@
     <type fullname="DG.Tweening.Tweener" preserve="all" />
   </assembly>
   <assembly fullname="Google.Protobuf">
+    <type fullname="Google.Protobuf.CodedInputStream" preserve="all" />
+    <type fullname="Google.Protobuf.CodedOutputStream" preserve="all" />
+    <type fullname="Google.Protobuf.Collections.ProtobufEqualityComparers" preserve="all" />
     <type fullname="Google.Protobuf.Collections.RepeatedField`1" preserve="all" />
+    <type fullname="Google.Protobuf.Extension" preserve="all" />
+    <type fullname="Google.Protobuf.FieldCodec" preserve="all" />
+    <type fullname="Google.Protobuf.FieldCodec`1" preserve="all" />
+    <type fullname="Google.Protobuf.IBufferMessage" preserve="all" />
+    <type fullname="Google.Protobuf.IDeepCloneable`1" preserve="all" />
     <type fullname="Google.Protobuf.IMessage" preserve="all" />
+    <type fullname="Google.Protobuf.IMessage`1" preserve="all" />
+    <type fullname="Google.Protobuf.JsonFormatter" preserve="all" />
+    <type fullname="Google.Protobuf.MessageParser" preserve="all" />
+    <type fullname="Google.Protobuf.MessageParser`1" preserve="all" />
+    <type fullname="Google.Protobuf.ParseContext" preserve="all" />
+    <type fullname="Google.Protobuf.ProtoPreconditions" preserve="all" />
+    <type fullname="Google.Protobuf.Reflection.FileDescriptor" preserve="all" />
+    <type fullname="Google.Protobuf.Reflection.GeneratedClrTypeInfo" preserve="all" />
+    <type fullname="Google.Protobuf.Reflection.MessageDescriptor" preserve="all" />
+    <type fullname="Google.Protobuf.Reflection.OriginalNameAttribute" preserve="all" />
+    <type fullname="Google.Protobuf.UnknownFieldSet" preserve="all" />
+    <type fullname="Google.Protobuf.WriteContext" preserve="all" />
   </assembly>
   <assembly fullname="Main">
+    <type fullname="FileType" preserve="all" />
     <type fullname="Res" preserve="all" />
     <type fullname="Res/ResHandle`1" preserve="all" />
     <type fullname="UnityMainThreadDispatcher" preserve="all" />
@@ -124,6 +67,7 @@
     <type fullname="Serilog.Sinks.Unity3D.UnitySinkExtensions" preserve="all" />
   </assembly>
   <assembly fullname="System">
+    <type fullname="System.CodeDom.Compiler.GeneratedCodeAttribute" preserve="all" />
     <type fullname="System.Collections.Generic.LinkedListNode`1" preserve="all" />
     <type fullname="System.Collections.Generic.LinkedList`1" preserve="all" />
     <type fullname="System.Collections.Generic.Queue`1" preserve="all" />
@@ -197,7 +141,6 @@
     <type fullname="UnityEngine.Ray" preserve="all" />
     <type fullname="UnityEngine.Rect" preserve="all" />
     <type fullname="UnityEngine.RectTransform" preserve="all" />
-    <type fullname="UnityEngine.Resources" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.LoadSceneMode" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.Scene" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.SceneManager" preserve="all" />
@@ -283,6 +226,7 @@
     <type fullname="System.Activator" preserve="all" />
     <type fullname="System.Array" preserve="all" />
     <type fullname="System.AsyncCallback" preserve="all" />
+    <type fullname="System.Boolean" preserve="all" />
     <type fullname="System.Char" preserve="all" />
     <type fullname="System.Collections.Concurrent.ConcurrentDictionary`2" preserve="all" />
     <type fullname="System.Collections.Concurrent.ConcurrentQueue`1" preserve="all" />
@@ -293,6 +237,7 @@
     <type fullname="System.Collections.Generic.Dictionary`2/KeyCollection/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator" preserve="all" />
+    <type fullname="System.Collections.Generic.EqualityComparer`1" preserve="all" />
     <type fullname="System.Collections.Generic.ICollection`1" preserve="all" />
     <type fullname="System.Collections.Generic.IDictionary`2" preserve="all" />
     <type fullname="System.Collections.Generic.IEnumerable`1" preserve="all" />
@@ -305,18 +250,22 @@
     <type fullname="System.Collections.Generic.List`1/Enumerator" preserve="all" />
     <type fullname="System.Collections.IEnumerable" preserve="all" />
     <type fullname="System.Collections.IEnumerator" preserve="all" />
+    <type fullname="System.Convert" preserve="all" />
     <type fullname="System.DateTime" preserve="all" />
     <type fullname="System.Delegate" preserve="all" />
     <type fullname="System.Diagnostics.DebuggableAttribute" preserve="all" />
     <type fullname="System.Diagnostics.DebuggableAttribute/DebuggingModes" preserve="all" />
     <type fullname="System.Diagnostics.DebuggerHiddenAttribute" preserve="all" />
+    <type fullname="System.Diagnostics.DebuggerNonUserCodeAttribute" preserve="all" />
     <type fullname="System.Double" preserve="all" />
     <type fullname="System.Enum" preserve="all" />
     <type fullname="System.EventHandler`1" preserve="all" />
     <type fullname="System.Exception" preserve="all" />
+    <type fullname="System.Func`1" preserve="all" />
     <type fullname="System.Func`2" preserve="all" />
     <type fullname="System.IAsyncResult" preserve="all" />
     <type fullname="System.IDisposable" preserve="all" />
+    <type fullname="System.IEquatable`1" preserve="all" />
     <type fullname="System.IFormatProvider" preserve="all" />
     <type fullname="System.Int32" preserve="all" />
     <type fullname="System.Int64" preserve="all" />
@@ -332,7 +281,6 @@
     <type fullname="System.Reflection.MethodBase" preserve="all" />
     <type fullname="System.Reflection.MethodInfo" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.AsyncStateMachineAttribute" preserve="all" />
-    <type fullname="System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.AsyncVoidMethodBuilder" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.CompilationRelaxationsAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.CompilerGeneratedAttribute" preserve="all" />
@@ -340,7 +288,6 @@
     <type fullname="System.Runtime.CompilerServices.IteratorStateMachineAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.TaskAwaiter" preserve="all" />
-    <type fullname="System.Runtime.CompilerServices.TaskAwaiter`1" preserve="all" />
     <type fullname="System.RuntimeTypeHandle" preserve="all" />
     <type fullname="System.Security.Permissions.SecurityAction" preserve="all" />
     <type fullname="System.Security.Permissions.SecurityPermissionAttribute" preserve="all" />
@@ -351,8 +298,6 @@
     <type fullname="System.Threading.ManualResetEvent" preserve="all" />
     <type fullname="System.Threading.Monitor" preserve="all" />
     <type fullname="System.Threading.Tasks.Task" preserve="all" />
-    <type fullname="System.Threading.Tasks.TaskCompletionSource`1" preserve="all" />
-    <type fullname="System.Threading.Tasks.Task`1" preserve="all" />
     <type fullname="System.Threading.Thread" preserve="all" />
     <type fullname="System.TimeSpan" preserve="all" />
     <type fullname="System.Type" preserve="all" />

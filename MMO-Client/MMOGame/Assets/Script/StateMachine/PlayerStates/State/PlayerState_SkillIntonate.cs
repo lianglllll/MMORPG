@@ -21,7 +21,7 @@ public class PlayerState_SkillIntonate : PlayerState
         //自身特效
         if(skill.Define.IntonateArt != "")
         {
-            var prefab = Resources.Load<GameObject>(skill.Define.IntonateArt);
+            var prefab = Res.LoadAssetSync<GameObject>(skill.Define.IntonateArt);
             var ins = GameObject.Instantiate(prefab, stateMachine.parameter.owner.renderObj.transform);
             GameObject.Destroy(ins, stateMachine.parameter.skill.Define.IntonateTime);
         }

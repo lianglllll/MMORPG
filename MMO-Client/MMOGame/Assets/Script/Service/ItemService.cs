@@ -82,7 +82,7 @@ public class ItemService : Singleton<ItemService>, IDisposable
     /// <param name="msg"></param>
     private void _EquipsUpdateResponse(Connection sender, EquipsUpdateResponse msg)
     {
-        var actor = GameTools.GetUnit(msg.EntityId);
+        var actor = GameTools.GetActorById(msg.EntityId);
         if (actor == null) return;
         ItemDataManager.Instance.ReloadEquipData(actor, msg.EquipsList);
     }

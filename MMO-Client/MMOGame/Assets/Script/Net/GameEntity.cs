@@ -49,11 +49,11 @@ public class GameEntity : MonoBehaviour
     {
         if (!startFlag) return;
 
+        
         //模拟重力
         if (!characterController.isGrounded)
         {
             //本次的重力加速度向量，也就是重力增量
-            //Physics.gravity   其实就是-9.8f
             fallSpeed += 9.8f * Time.deltaTime;
             if (fallSpeed >= FALLSPEEDMAX)
             {
@@ -64,10 +64,10 @@ public class GameEntity : MonoBehaviour
         }
         else
         {
-            characterController.Move(new Vector3(0, -0.01f, 0));
+            characterController.Move(new Vector3(0, -0.001f, 0));
             fallSpeed = 0f;
         }
-
+        
 
         if (!isMine)
         {
@@ -238,8 +238,8 @@ public class GameEntity : MonoBehaviour
             //只有当主角移动的时候才会发生同步信息
             if (transform.hasChanged)
             {
-                SetValueTo(this.position * 1000, req.EntitySync.Entity.Position);
-                SetValueTo(this.direction * 1000, req.EntitySync.Entity.Direction);
+                SetValueTo(transform.position * 1000, req.EntitySync.Entity.Position);
+                SetValueTo(transform.rotation.eulerAngles * 1000, req.EntitySync.Entity.Direction);
                 req.EntitySync.Entity.Id = entityId;
                 //如果角色现在的动画处于不是常规的motion动作时，同一传none
                 req.EntitySync.State = stateMachine.currentEntityState;

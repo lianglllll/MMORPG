@@ -43,7 +43,7 @@ public class PickUpItemCell : MonoBehaviour
     public void SetUI()
     {
         if (itemEntity == null) return;
-        icon.sprite = Resources.Load<Sprite>(itemEntity.Icon);
+        icon.sprite = Res.LoadAssetSync<Sprite>(itemEntity.Icon, FileType.Png);
         itemName.text = itemEntity.itemName;
         itemAmount.text ="" + itemEntity.Amount;
     }

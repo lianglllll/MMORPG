@@ -174,9 +174,9 @@ public  class Buff
         }
         else
         {
-            Owner = GameTools.GetUnit(info.OwnerId);
+            Owner = GameTools.GetActorById(info.OwnerId);
         }
-        Provider = GameTools.GetUnit(info.ProviderId);
+        Provider = GameTools.GetActorById(info.ProviderId);
         CurrentLevel = info.CurrentLevel;
         ResidualDuration = info.ResidualDuration;
         Def = DataManager.Instance.buffDefindeDict.GetValueOrDefault(info.Bid,null);

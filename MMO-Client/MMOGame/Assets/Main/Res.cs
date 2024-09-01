@@ -15,7 +15,6 @@ using YooAsset;
 /// </summary>
 public class Res
 {
-
     public const string Prefix = "Assets/Res";
 
     public class ResHandle<T>
@@ -50,13 +49,12 @@ public class Res
         UnityMainThreadDispatcher.Instance().StartCoroutine(_loadSceneAsync(path, handle));
         return handle;
     }
-    static IEnumerator _loadSceneAsync(string sceneName, ResHandle<Scene> handle)
+    private static IEnumerator _loadSceneAsync(string sceneName, ResHandle<Scene> handle)
     {
         string location = $"{Prefix}/Scenes/{sceneName}.unity";
 #if (UNITY_EDITOR)
         {
             var assetPath = location;
-            //Debug.Log($"--Editor查找场景-开始：assetPath={assetPath}");
             handle.Progress = 0;
             LoadSceneParameters parameters = new LoadSceneParameters() { loadSceneMode = LoadSceneMode.Single, localPhysicsMode = LocalPhysicsMode.None };
             AsyncOperation asyncOperation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(assetPath, parameters);
@@ -64,13 +62,10 @@ public class Res
             while (!asyncOperation.isDone)
             {
                 handle.Progress = asyncOperation.progress;
-                //Debug.Log($"==== 进度：{handle.Progress}");
                 yield return null;
             }
             Scene loadedScene = SceneManager.GetSceneByPath(assetPath);
             handle.Progress = 1;
-            //Debug.Log($"====> 进度：{handle.Progress}");
-            //Debug.Log($"--Editor查找场景-结束：scene={loadedScene}");
             yield return null;
             handle.OnLoaded?.Invoke(loadedScene);
         }
@@ -94,8 +89,6 @@ public class Res
                 yield return null;
             }
             yield return han;
-
-            //Debug.Log($"====> 进度：{han.Progress}");
             handle.Progress = 1;
             yield return null;
             handle.OnLoaded?.Invoke(han.SceneObject);
@@ -111,6 +104,31 @@ public class Res
     /// <param name="location"></param>
     /// <param name="priority"></param>
     /// <returns></returns>
+    public static IEnumerator LoadAssetAsyncWithTimeout<T>(string location, Action<T> loadedAction, float timeout = 5f) where T : UnityEngine.Object
+    {
+        T prefab = null;
+        var handle = Res.LoadAssetAsync<T>(location);
+        handle.OnLoaded = (obj) => {
+            prefab = obj;
+        };
+
+        //同步等待资源加载完成或超时
+        var startTime = Time.time;
+        while (prefab == null)
+        {
+            if (Time.time - startTime >= timeout)
+            {
+                Debug.LogError($"Loading {location} timed out.");
+                yield break;
+            }
+            yield return null;
+        }
+
+        //下一帧在执行load完成的回调方法
+        yield return prefab;
+        loadedAction?.Invoke(prefab);
+        yield break;
+    }
     public static ResHandle<T> LoadAssetAsync<T>(string location, uint priority = 0) where T : UnityEngine.Object
     {
         var handle = new ResHandle<T>();
@@ -118,7 +136,7 @@ public class Res
             .StartCoroutine(_loadAssetAsync<T>(location, handle, priority));
         return handle;
     }
-    static IEnumerator _loadAssetAsync<T>(string location, ResHandle<T> handle, uint priority = 0, float timeout=5f) where T : UnityEngine.Object
+    private static IEnumerator _loadAssetAsync<T>(string location, ResHandle<T> handle, uint priority = 0, float timeout=5f) where T : UnityEngine.Object
     {
         var path = $"{Prefix}/{location}.prefab";
         T prefab;
@@ -158,5 +176,49 @@ public class Res
         yield break;
     }
 
+    /// <summary>
+    /// 同步加载游戏对象
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="location"></param>
+    /// <param name="priority"></param>
+    /// <returns></returns>
+    public static T LoadAssetSync<T>(string location, FileType fileType = FileType.Prefab,uint priority = 0)where T : UnityEngine.Object
+    {
+        if (string.IsNullOrEmpty(location)) return null;
+
+        string suffix = "";
+        if(fileType == FileType.Prefab)
+        {
+            suffix = ".prefab";
+        }
+        else if(fileType == FileType.Png)
+        {
+            suffix = ".png";
+        }
+
+        var path = $"{Prefix}/{location}{suffix}";
+        Debug.Log("当前path=" + path);
+#if (UNITY_EDITOR)
+        {
+            T prefab = AssetDatabase.LoadAssetAtPath<T>(path);
+            return prefab;
+        }
+#else
+        {
+            var package = YooAssets.GetPackage("DefaultPackage");
+            var handle = package.LoadAssetSync<T>(path);
+            return handle.AssetObject as T;
+        }
+#endif
+
+    }
+
 
 }
+
+public enum FileType
+{
+    Prefab,Png
+}
+

@@ -15,6 +15,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"Unity.InputSystem.dll",
 		"UnityEngine.CoreModule.dll",
 		"UnityEngine.JSONSerializeModule.dll",
+		"YooAsset.dll",
 		"mscorlib.dll",
 	};
 	// }}
@@ -32,12 +33,15 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Google.Protobuf.FieldCodec.ValuesMerger<object>
 	// Google.Protobuf.FieldCodec<object>
 	// Google.Protobuf.IDeepCloneable<object>
+	// Google.Protobuf.IMessage<object>
+	// Google.Protobuf.MessageParser.<>c__DisplayClass2_0<object>
+	// Google.Protobuf.MessageParser<object>
 	// Google.Protobuf.ValueReader<object>
 	// Google.Protobuf.ValueWriter<object>
 	// Newtonsoft.Json.JsonConverter<object>
-	// Res.<_loadAssetAsync>d__5<object>
+	// Res.<>c__DisplayClass4_0<object>
+	// Res.<LoadAssetAsyncWithTimeout>d__4<object>
 	// Res.ResHandle<UnityEngine.SceneManagement.Scene>
-	// Res.ResHandle<object>
 	// Summer.Network.MessageRouter.MessageHandler<object>
 	// Summer.Singleton<object>
 	// System.Action<CameraHolder.SVA>
@@ -47,13 +51,17 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Action<byte>
 	// System.Action<float>
 	// System.Action<int>
-	// System.Action<object,object>
 	// System.Action<object>
 	// System.Collections.Concurrent.ConcurrentDictionary.<GetEnumerator>d__35<int,object>
+	// System.Collections.Concurrent.ConcurrentDictionary.<GetEnumerator>d__35<object,object>
 	// System.Collections.Concurrent.ConcurrentDictionary.DictionaryEnumerator<int,object>
+	// System.Collections.Concurrent.ConcurrentDictionary.DictionaryEnumerator<object,object>
 	// System.Collections.Concurrent.ConcurrentDictionary.Node<int,object>
+	// System.Collections.Concurrent.ConcurrentDictionary.Node<object,object>
 	// System.Collections.Concurrent.ConcurrentDictionary.Tables<int,object>
+	// System.Collections.Concurrent.ConcurrentDictionary.Tables<object,object>
 	// System.Collections.Concurrent.ConcurrentDictionary<int,object>
+	// System.Collections.Concurrent.ConcurrentDictionary<object,object>
 	// System.Collections.Concurrent.ConcurrentQueue.<Enumerate>d__28<object>
 	// System.Collections.Concurrent.ConcurrentQueue.Segment<object>
 	// System.Collections.Concurrent.ConcurrentQueue<object>
@@ -87,6 +95,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary<object,object>
 	// System.Collections.Generic.EqualityComparer<TimeMachineMgr.TimerInfo>
 	// System.Collections.Generic.EqualityComparer<TimeMachineMgr2.TimerInfo2>
+	// System.Collections.Generic.EqualityComparer<double>
+	// System.Collections.Generic.EqualityComparer<float>
 	// System.Collections.Generic.EqualityComparer<int>
 	// System.Collections.Generic.EqualityComparer<object>
 	// System.Collections.Generic.ICollection<CameraHolder.SVA>
@@ -103,6 +113,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IComparer<int>
 	// System.Collections.Generic.IComparer<object>
 	// System.Collections.Generic.IDictionary<int,object>
+	// System.Collections.Generic.IDictionary<object,object>
 	// System.Collections.Generic.IEnumerable<CameraHolder.SVA>
 	// System.Collections.Generic.IEnumerable<Entry.MyVec3>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,int>>
@@ -161,6 +172,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ObjectComparer<object>
 	// System.Collections.Generic.ObjectEqualityComparer<TimeMachineMgr.TimerInfo>
 	// System.Collections.Generic.ObjectEqualityComparer<TimeMachineMgr2.TimerInfo2>
+	// System.Collections.Generic.ObjectEqualityComparer<double>
+	// System.Collections.Generic.ObjectEqualityComparer<float>
 	// System.Collections.Generic.ObjectEqualityComparer<int>
 	// System.Collections.Generic.ObjectEqualityComparer<object>
 	// System.Collections.Generic.Queue.Enumerator<ItemIOInfoSt>
@@ -185,6 +198,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Func<object,object,object>
 	// System.Func<object,object>
 	// System.Func<object>
+	// System.IEquatable<object>
 	// System.Linq.Enumerable.<OfTypeIterator>d__97<object>
 	// System.Linq.Enumerable.Iterator<object>
 	// System.Linq.Enumerable.WhereArrayIterator<object>
@@ -196,15 +210,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<byte>
 	// System.Predicate<int>
 	// System.Predicate<object>
-	// System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>
-	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter<object>
-	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable<object>
-	// System.Runtime.CompilerServices.TaskAwaiter<object>
-	// System.Threading.Tasks.ContinuationTaskFromResultTask<object>
-	// System.Threading.Tasks.Task<object>
-	// System.Threading.Tasks.TaskCompletionSource<object>
-	// System.Threading.Tasks.TaskFactory.<>c__DisplayClass35_0<object>
-	// System.Threading.Tasks.TaskFactory<object>
 	// UnityEngine.InputSystem.InputBindingComposite<UnityEngine.Vector2>
 	// UnityEngine.InputSystem.InputControl<UnityEngine.Vector2>
 	// UnityEngine.InputSystem.InputProcessor<UnityEngine.Vector2>
@@ -215,8 +220,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	{
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string)
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string,Newtonsoft.Json.JsonSerializerSettings)
-		// Res.ResHandle<object> Res.LoadAssetAsync<object>(string,uint)
-		// System.Collections.IEnumerator Res._loadAssetAsync<object>(string,Res.ResHandle<object>,uint,float)
+		// System.Collections.IEnumerator Res.LoadAssetAsyncWithTimeout<object>(string,System.Action<object>,float)
+		// object Res.LoadAssetSync<object>(string,FileType,uint)
 		// System.Void Serilog.ILogger.Write<UnityEngine.Vector3>(Serilog.Events.LogEventLevel,string,UnityEngine.Vector3)
 		// System.Void Serilog.ILogger.Write<object>(Serilog.Events.LogEventLevel,string,object)
 		// System.Void Serilog.Log.Error<object>(string,object)
@@ -236,11 +241,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.OfTypeIterator<object>(System.Collections.IEnumerable)
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
-		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,UIManager.<GetPanelPrefab>d__19>(System.Runtime.CompilerServices.TaskAwaiter<object>&,UIManager.<GetPanelPrefab>d__19&)
-		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.Start<UIManager.<GetPanelPrefab>d__19>(UIManager.<GetPanelPrefab>d__19&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d>(System.Runtime.CompilerServices.TaskAwaiter&,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d>(System.Runtime.CompilerServices.TaskAwaiter&,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,SelectRolePanelScript.<LoadRoleList>d__14>(System.Runtime.CompilerServices.TaskAwaiter<object>&,SelectRolePanelScript.<LoadRoleList>d__14&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d>(CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d>(CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d&)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<SelectRolePanelScript.<LoadRoleList>d__14>(SelectRolePanelScript.<LoadRoleList>d__14&)
@@ -265,6 +267,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform,bool)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Vector3,UnityEngine.Quaternion)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)
-		// object UnityEngine.Resources.Load<object>(string)
+		// YooAsset.AssetHandle YooAsset.ResourcePackage.LoadAssetSync<object>(string)
 	}
 }

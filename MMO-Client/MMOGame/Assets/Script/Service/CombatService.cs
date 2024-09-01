@@ -284,7 +284,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
         {
             foreach (Damage item in msg.List)
             {
-                var target = GameTools.GetUnit(item.TargetId);
+                var target = GameTools.GetActorById(item.TargetId);
                 if (target == null) continue;
                 target.recvDamage(item);
             }
@@ -304,7 +304,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
             foreach (PropertyUpdate item in msg.List)
             {
 
-                var actor = GameTools.GetUnit(item.EntityId);
+                var actor = GameTools.GetActorById(item.EntityId);
                 if (actor == null) continue;                    //防止在aoi体系下，actor突然从我们的视野中消失
 
                 Character chr;

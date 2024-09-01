@@ -19,10 +19,7 @@ public class UIManager
     //用于展示消息的面板（如果有需要可以将panel的实例保存起来使用）
     private MessagePanelScript messagePanel;                            
 
-    private UIManager()
-    {
-    }
-
+    private UIManager() { }
     public static UIManager Instance
     {
         get
@@ -60,14 +57,6 @@ public class UIManager
     }
 
     /// <summary>
-    /// 初始化
-    /// </summary>
-    public void Init()
-    {
-        InitDicts();
-    }
-
-    /// <summary>
     /// 消息面板
     /// </summary>
     public MessagePanelScript MessagePanel
@@ -83,16 +72,15 @@ public class UIManager
     }
 
     /// <summary>
-    /// 管理器初始化
+    /// 初始化
     /// </summary>
-    private void InitDicts()
+    public void Init()
     {
         //获取各个面板的数据
         pathDict = DataManager.Instance.panelDict;
         prefabsDict = new Dictionary<string, GameObject>();
         panelScriptDict = new Dictionary<string, BasePanel>();
     }
-
     /// <summary>
     /// 打开panel
     /// </summary>
@@ -100,7 +88,7 @@ public class UIManager
     /// <returns></returns>
     public  void  OpenPanel(string name)
     {
-        Debug.Log("正在尝试打开panel:" + name);
+        //Debug.Log("正在尝试打开panel:" + name);
 
         //1.检查name是否有误
         PanelDefine define = null;
@@ -119,22 +107,13 @@ public class UIManager
 
         //3.查看是否有prefab缓冲能用
         GameObject panelPrefab = null;
-        if(!prefabsDict.TryGetValue(name,out panelPrefab)){
-            //需要加载prefab
-            GameObjectManager.Instance.GetPrefabAsync(define.Resource, (prefab) =>
-            {
-                panelPrefab = prefab;
-                prefabsDict.Add(name, panelPrefab);//添加到缓冲
-                _OpenPanel(panelPrefab, name);
-          
-            });
-        }
-        else
+        if (!prefabsDict.TryGetValue(name, out panelPrefab))
         {
-            _OpenPanel(panelPrefab, name);
+            panelPrefab = GetPanelPrefab(name);
         }
-    }
+        _OpenPanel(panelPrefab, name);
 
+    }
     private void _OpenPanel(GameObject panelPrefab,string name)
     {
         //实例化panel，并且挂载到挂载点
@@ -154,8 +133,6 @@ public class UIManager
         panelScriptDict.Add(name, panel);
         panel.OpenPanel(name);
     }
-
-
     /// <summary>
     /// 关闭panel
     /// </summary>
@@ -178,7 +155,6 @@ public class UIManager
         return true;
 
     }
-
     /// <summary>
     /// 获取某个打开的penel
     /// </summary>
@@ -192,13 +168,12 @@ public class UIManager
         }
         return null;
     }
-
     /// <summary>
     /// 获取某个uiprefab
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<GameObject> GetPanelPrefab(string name)
+    public GameObject GetPanelPrefab(string name)
     {
         //1.检查name是否有误
         PanelDefine define = null;
@@ -213,26 +188,13 @@ public class UIManager
         if(!prefabsDict.TryGetValue(name, out panelPrefab))
         {
             //需要加载prefab
-            panelPrefab = await GetPanelPrefabSync(define.Resource);
+            panelPrefab = Res.LoadAssetSync<GameObject>(define.Resource);
             prefabsDict.Add(name, panelPrefab);//添加到缓冲
         }
         return panelPrefab;
     }
-    private Task<GameObject> GetPanelPrefabSync(string path)
-    {
-        var tcs = new TaskCompletionSource<GameObject>();
-        GameObjectManager.Instance.GetPrefabAsync(path, (prefab) => {
-            if (prefab != null)
-            {
-                tcs.SetResult(prefab);
-            }
-            else
-            {
-                tcs.SetException(new Exception("Failed to load prefab."));
-            }
-        });
-        return tcs.Task;
-    }
+
+
 
 
     /// <summary>

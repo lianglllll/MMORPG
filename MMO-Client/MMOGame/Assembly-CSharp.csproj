@@ -98,7 +98,7 @@
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Script\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\Script\Proto\Message.cs" />
-    <Compile Include="Assets\Script\Tools\Event.cs" />
+    <Compile Include="Assets\Script\Tools\EventSystem\Event.cs" />
     <Compile Include="Assets\Script\UI\Panel\Info\MessagePanelScript.cs" />
     <Compile Include="Assets\Script\Camera\TP_CameraController.cs" />
     <Compile Include="Assets\Script\StateMachine\PlayerStates\PlayerStateMachine.cs" />
@@ -127,6 +127,7 @@
     <Compile Include="Assets\Script\Manager\DataManager.cs" />
     <Compile Include="Assets\Script\UI\Panel\CombatPanelScript.cs" />
     <Compile Include="Assets\Script\Combat\Missile.cs" />
+    <Compile Include="Assets\Script\Player\GroundChecker.cs" />
     <Compile Include="Assets\Script\Tools\GameTools.cs" />
     <Compile Include="Assets\aaTest\aMyTest\ReplayMgr.cs" />
     <Compile Include="Assets\Script\Player\UnitUIController.cs" />
@@ -143,11 +144,11 @@
     <Compile Include="Assets\Script\Manager\DataDefine\ItemDefine.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\ChibiDialogDemo\Scripts\ChibiDialogMain.cs" />
     <Compile Include="Assets\Script\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Script\Tools\SerilogConfig.cs" />
+    <Compile Include="Assets\Script\Tools\Log\SerilogConfig.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\aaTest\aMyTest\Action\LigthContrl.cs" />
     <Compile Include="Assets\aaTest\aMyTest\TimeMachineMgr2.cs" />
-    <Compile Include="Assets\Script\Tools\DevelopmentTool\DevelopmentToos.cs" />
+    <Compile Include="Assets\Script\Tools\DevelopmentToos.cs" />
     <Compile Include="Assets\Script\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
     <Compile Include="Assets\Script\Entities\ItemEntity.cs" />
@@ -187,7 +188,7 @@
     <Compile Include="Assets\Script\UI\Panel\Combat\BuffUIScript.cs" />
     <Compile Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\MouseLook.cs" />
     <Compile Include="Assets\Art\Unit\骷髅\Readme\Scripts\Readme.cs" />
-    <Compile Include="Assets\Script\SceneLoader.cs" />
+    <Compile Include="Assets\Script\Tools\SceneLoader.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Demo\Scripts\Enemy.cs" />
     <Compile Include="Assets\Script\StateMachine\Base\StateMachine.cs" />
     <Compile Include="Assets\Script\Manager\EntityManager.cs" />
@@ -217,7 +218,8 @@
     <Compile Include="Assets\Script\StateMachine\PlayerStates\State\PlayerState_Jump.cs" />
     <Compile Include="Assets\Script\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Script\UI\Panel\ScenePoster.cs" />
-    <Compile Include="Assets\Script\Player\GroundChecker.cs" />
+    <Compile Include="Assets\Script\Net\CtrlEntity.cs" />
+    <Compile Include="Assets\Script\Net\SyncEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />

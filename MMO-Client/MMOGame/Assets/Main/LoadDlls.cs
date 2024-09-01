@@ -15,7 +15,6 @@ public class LoadDlls
 {
     //原生文件
     private static Dictionary<string, byte[]> s_assetDatas = new Dictionary<string, byte[]>();
-
     private static Assembly _hotUpdateAss;
     public static Assembly HotAssembly;
 
@@ -34,11 +33,6 @@ public class LoadDlls
         "mscorlib.dll",
     };
 
-    private static void Handle_Completed(AssetHandle obj)
-    {
-        GameObject go = obj.InstantiateSync();
-        Debug.Log($"Prefab name is {go.name}");
-    }
 
     /// <summary>
     /// 加载热更代码，Main中初始化时调用。
@@ -66,7 +60,6 @@ public class LoadDlls
         }
         RunCode();
     }
-
     private static void RunCode()
     {
         LoadMetadataForAOTAssemblies();
@@ -82,12 +75,10 @@ public class LoadDlls
 
         Run_InstantiateComponentByAsset();
     }
-
     private static void LoadMetadataForAOTAssemblies()
     {
         /// 注意，补充元数据是给AOT dll补充元数据，而不是给热更新dll补充元数据。
         /// 热更新dll不缺元数据，不需要补充，如果调用LoadMetadataForAOTAssembly会返回错误
-        /// 
         HomologousImageMode mode = HomologousImageMode.SuperSet;
         foreach (var aotDllName in AOTMetaAssemblyFiles)
         {
@@ -98,12 +89,10 @@ public class LoadDlls
             Debug.Log($"LoadMetadataForAOTAssembly:{aotDllName}. mode:{mode} ret:{err}");
         }
     }
-
     private static byte[] ReadBytesFromStreamingAssets(string dllName)
     {
         return s_assetDatas[dllName];
     }
-
     private static void Run_InstantiateComponentByAsset()
     {
         // 通过实例化assetbundle中的资源，还原资源上的热更新脚本
@@ -114,6 +103,12 @@ public class LoadDlls
         var handle = package.LoadAssetAsync<GameObject>("Cube");
         handle.Completed += Handle_Completed;*/
 
+    }
+
+    private static void Handle_Completed(AssetHandle obj)
+    {
+        GameObject go = obj.InstantiateSync();
+        Debug.Log($"Prefab name is {go.name}");
     }
 
 }

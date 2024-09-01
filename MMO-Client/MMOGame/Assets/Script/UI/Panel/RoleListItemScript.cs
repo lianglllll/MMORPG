@@ -71,7 +71,7 @@ public class RoleListItemScript : MonoBehaviour
         }
 
         //加载当前ui的背景图
-        Sprite sprite = Resources.Load<Sprite>(define.BgResource);
+        Sprite sprite = Res.LoadAssetSync<Sprite>(define.BgResource,FileType.Png);
         image.sprite = sprite;
 
         //设置item的info显示

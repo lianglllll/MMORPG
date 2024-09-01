@@ -58,7 +58,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     {
         AmountText.text = ""+item.Amount;
         icon.gameObject.SetActive(true);
-        icon.sprite = Resources.Load<Sprite>(item.Define.Icon);
+        icon.sprite = Res.LoadAssetSync<Sprite>(item.Define.Icon, FileType.Png);
     }
 
     /// <summary>

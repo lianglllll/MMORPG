@@ -12,7 +12,7 @@ public class PickUpItemListBox : MonoBehaviour
 
     private void Awake()
     {
-        pickUpItemCellPrefab = Resources.Load<GameObject>("UI/Prefabs/Inventory/PickUpItemCell");
+        pickUpItemCellPrefab = Res.LoadAssetSync<GameObject>("UI/Prefabs/Inventory/PickUpItemCell");
         Content = transform.Find("Scroll View/Viewport/Content").transform;
     }
 

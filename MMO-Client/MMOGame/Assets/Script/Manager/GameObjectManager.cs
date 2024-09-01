@@ -64,7 +64,7 @@ public class GameObjectManager:MonoBehaviour
     }
 
     /// <summary>
-    /// 事件驱动：向当前场景中创建ActorObj
+    /// 事件驱动：异步向当前场景中创建ActorObj
     /// </summary>
     /// <param name="chr"></param>
     public void CreateActorObject(NetActor nActor)
@@ -96,11 +96,6 @@ public class GameObjectManager:MonoBehaviour
 
         StartCoroutine(LoadActor(nActor));
     }
-    /// <summary>
-    /// 协程加载方式角色Obj
-    /// </summary>
-    /// <param name="nActor"></param>
-    /// <returns></returns>
     private IEnumerator LoadActor(NetActor nActor)
     {
         //1.判断合法性
@@ -111,9 +106,11 @@ public class GameObjectManager:MonoBehaviour
         //2.异步加载资源
         UnitDefine unitDefine = actor.define;
         GameObject prefab = null;
-        yield return LoadAsset<GameObject>(unitDefine.Resource, (obj) => {
+        yield return Res.LoadAssetAsyncWithTimeout<GameObject>(unitDefine.Resource, (obj) => {
             prefab = obj;
         });
+
+        //下一帧再执行接下去的
         yield return prefab;
 
         //3.获取坐标和方向
@@ -182,11 +179,8 @@ public class GameObjectManager:MonoBehaviour
 
 
     }
-    //使用同步加载会不会更好一点。
-
-
     /// <summary>
-    /// 事件驱动：向当前场景中创建物品
+    /// 事件驱动：异步向当前场景中创建物品
     /// </summary>
     /// <param name="netItemEntity"></param>
     public void CreateItemObject(NetItemEntity netItemEntity)
@@ -220,11 +214,6 @@ public class GameObjectManager:MonoBehaviour
 
         StartCoroutine(LoadItem(netItemEntity));
     }
-    /// <summary>
-    /// 异步加载物品
-    /// </summary>
-    /// <param name="netItemEntity"></param>
-    /// <returns></returns>
     private IEnumerator LoadItem(NetItemEntity netItemEntity)
     {
         int entityId = netItemEntity.Entity.Id;
@@ -232,7 +221,7 @@ public class GameObjectManager:MonoBehaviour
         var define = DataManager.Instance.itemDefineDict[netItemEntity.ItemInfo.ItemId];
 
         GameObject prefab = null;
-        yield return LoadAsset<GameObject>(define.Model, (obj) => {
+        yield return Res.LoadAssetAsyncWithTimeout<GameObject>(define.Model, (obj) => {
             prefab = obj;
         });
         yield return prefab;
@@ -264,54 +253,6 @@ public class GameObjectManager:MonoBehaviour
         }
 
     }
-
-
-    /// <summary>
-    /// 加载asset资源
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="location"></param>
-    /// <param name="action"></param>
-    /// <param name="timeout"></param>
-    /// <returns></returns>
-    private IEnumerator LoadAsset<T>(string location, Action<T> action, float timeout = 5f) where T : UnityEngine.Object
-    {
-        T prefab = null;
-        var handle = Res.LoadAssetAsync<T>(location);
-        handle.OnLoaded = (obj) => {
-            prefab = obj;
-        };
-
-        //同步等待资源加载完成或超时
-        var startTime = Time.time;
-        while (prefab == null)
-        {
-            if (Time.time - startTime >= timeout)
-            {
-                Debug.LogError($"Loading {location} timed out.");
-                yield break;
-            }
-            yield return null;
-        }
-
-        yield return prefab;
-        action?.Invoke(prefab);
-        yield break;
-    }
-    /// <summary>
-    /// 异步获取prefab，自己加回调方法。
-    /// </summary>
-    /// <param name="path"></param>
-    /// <param name="action"></param>
-    public void GetPrefabAsync(string path, Action<GameObject> action)
-    {
-        StartCoroutine(LoadAsset<GameObject>(path, (prefab) =>
-        {
-            action?.Invoke(prefab);
-        }));
-    }
-
-
     /// <summary>
     /// 事件驱动：entity离开场景
     /// 不同的场景可以创建不同的对象池来使用这个东西
@@ -327,7 +268,6 @@ public class GameObjectManager:MonoBehaviour
         }
         currentGameObjectDict.TryRemove(entityId,out _);
     }
-
     /// <summary>
     /// 事件驱动：其他entity位置+动画状态信息同步
     /// </summary>
@@ -363,7 +303,6 @@ public class GameObjectManager:MonoBehaviour
             });
         }
     }
-
     /// <summary>
     /// 事件驱动：本机角色位置+动画状态信息同步
     /// </summary>

@@ -45,7 +45,7 @@ public class GameTools
     /// </summary>
     /// <param name="entityId"></param>
     /// <returns></returns>
-    public static Actor GetUnit(int entityId)
+    public static Actor GetActorById(int entityId)
     {
         return EntityManager.Instance.GetEntity<Actor>(entityId);
     }
@@ -67,3 +67,6 @@ public class GameTools
     }
 
 }
+
+
+

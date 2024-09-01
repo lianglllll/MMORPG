@@ -32,8 +32,8 @@ public class KnapsackPanel:BasePanel
     {
         base.Awake();
         gridTransform = transform.Find("Right/ItemColumn/Grid").transform;
-        inventoryCellPrefab = Resources.Load<GameObject>("UI/Prefabs/Inventory/InventoryCell");
-        itemUIPrefab = Resources.Load<GameObject>("UI/Prefabs/Inventory/ItemUI");
+        inventoryCellPrefab = Res.LoadAssetSync<GameObject>("UI/Prefabs/Inventory/InventoryCell");
+        itemUIPrefab = Res.LoadAssetSync<GameObject>("UI/Prefabs/Inventory/ItemUI");
         closeBtn = transform.Find("Right/ItemColumn/CloseBtn").GetComponent<Button>();
         ItemUITmpParent = transform.Find("ItemUITmpParent").transform;
         numberInputBox = transform.Find("NumberInputBox").GetComponent<NumberInputBox>();

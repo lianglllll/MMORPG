@@ -67,7 +67,7 @@ public class Missile : MonoBehaviour
         transform.position = initPos;
         Log.Information("Missile InitPos:{0}", initPos);
 
-        var prefab = Resources.Load<GameObject>(skill.Define.Missile);
+        var prefab = Res.LoadAssetSync<GameObject>(skill.Define.Missile);
         if(prefab != null)
         {
             child = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);

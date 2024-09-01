@@ -14,13 +14,18 @@ using YooAsset;
 
 public class Main : MonoBehaviour
 {
-    public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
+    [Header("UI组件")]
     public TextMeshProUGUI textPro;
     public Slider slider;
+
+    [Header("配置")]
+    public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
     public string assetServer = "http://175.178.99.14:12345/mmo";
 
-    // 包的版本
-    string packageVersion;
+    [Header("临时变量")]
+    private string packageVersion;                          //包的版本
+    private int readyCount = 0;                             // 准备就绪的包数量（DefaultPackage，RawPackage）
+
 
     void Start()
     {
@@ -30,7 +35,6 @@ public class Main : MonoBehaviour
         BetterStreamingAssets.Initialize();
 
         StartCoroutine(DownLoadAssetsByYooAssets());
-
     }
 
     IEnumerator DownLoadAssetsByYooAssets()
@@ -43,6 +47,7 @@ public class Main : MonoBehaviour
         if (PlayMode == EPlayMode.EditorSimulateMode)
         {
             //编辑器模拟模式
+            //等待异步方法完成。
             yield return package.InitializeAsync(new EditorSimulateModeParameters()
             {
                 SimulateManifestFilePath = EditorSimulateModeHelper.SimulateBuild(
@@ -60,12 +65,12 @@ public class Main : MonoBehaviour
             string defaultHostServer = GetHostServerURL();
             string fallbackHostServer = GetHostServerURL();
             var initParameters = new HostPlayModeParameters();
-            initParameters.BuildinQueryServices = new GameQueryServices(); //太空战机DEMO的脚本类，详细见StreamingAssetsHelper
-            //initParameters.DecryptionServices = new GameDecryptionServices();//这里的代码和官网上的代码有差别，官网的代码可能是旧版本的代码会报错已这里的代码为主
+            initParameters.BuildinQueryServices = new GameQueryServices();      //太空战机DEMO的脚本类，详细见StreamingAssetsHelper
+            //initParameters.DecryptionServices = new GameDecryptionServices(); //这里的代码和官网上的代码有差别，官网的代码可能是旧版本的代码会报错已这里的代码为主
             //initParameters.DeliveryQueryServices = new DefaultDeliveryQueryServices();
             initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
             var initOperation = package.InitializeAsync(initParameters);
-            yield return initOperation;
+            yield return initOperation;                             //等待异步方法完成
             if (initOperation.Status == EOperationStatus.Succeed)
             {
                 Debug.Log("资源包初始化成功！");
@@ -146,7 +151,6 @@ public class Main : MonoBehaviour
         }
 
     }
-
     private IEnumerator HandlePackage(ResourcePackage package)
     {
         //2.获取资源版本
@@ -173,12 +177,134 @@ public class Main : MonoBehaviour
         }
 
         //4.下载补丁包
-        yield return Download2(package);
+        yield return Download(package);
+    }
+    IEnumerator Download(ResourcePackage package)
+    {
+        int downloadingMaxNum = 10;
+        int failedTryAgain = 3;
+        var downloader = package.CreateResourceDownloader(downloadingMaxNum, failedTryAgain);
+
+        if (downloader.TotalDownloadCount == 0)
+        {
+            Debug.Log("没有需要下载的资源");
+            readyCount++;
+            yield break;
+        }
+
+        //弹框询问是否更新
+
+
+
+        //需要下载的文件总数和总大小
+        int totalDownloadCount = downloader.TotalDownloadCount;
+        long totalDownloadBytes = downloader.TotalDownloadBytes;
+
+        //注册回调方法
+        downloader.OnDownloadErrorCallback = OnDownloadErrorFunction;
+        downloader.OnDownloadProgressCallback = OnDownloadProgressUpdateFunction;
+        downloader.OnDownloadOverCallback = OnDownloadOverFunction;
+        downloader.OnStartDownloadFileCallback = OnStartDownloadFileFunction;
+
+        //开启下载
+        downloader.BeginDownload();
+        yield return downloader;
+
+        //检测下载结果
+        if (downloader.Status == EOperationStatus.Succeed)
+        {
+            //下载成功
+            Debug.Log("下载资源:成功");
+            readyCount++;
+        }
+        else
+        {
+            //下载失败
+            Debug.Log("下载资源:失败");
+            yield break;
+        }
+    }
+    private void OnStartDownloadFileFunction(string fileName, long sizeBytes)
+    {
+        Debug.LogError($"开始下载");
+    }
+    private void OnDownloadOverFunction(bool isSucceed)
+    {
+        Debug.LogError($"下载结束");
+    }
+    private void OnDownloadProgressUpdateFunction(int totalDownloadCount, int currentDownloadCount, long totalDownloadBytes, long currentDownloadBytes)
+    {
+        //Debug.LogError($"下载进度:{currentDownloadBytes}/{totalDownloadBytes}");
+        slider.maxValue = totalDownloadBytes;
+        slider.value = currentDownloadBytes;
+        textPro.text = $"下载更新 : {FormatBytes(currentDownloadBytes)} / {FormatBytes(totalDownloadBytes)}";
+    }
+    private void OnDownloadErrorFunction(string fileName, string error)
+    {
+        Debug.LogError($"下载失败");
+        textPro.text = $"下载失败";
+    }
+    private void GameStart()
+    {
+        textPro.text = $"进入游戏";
+        //选择服务器（Host，Port），服务器列表可以使用json表示
+
+        Res.LoadSceneAsync("Servers");
     }
 
 
-    // 准备就绪的包数量（DefaultPackage，RawPackage）
-    int readyCount = 0;
+    private string GetHostServerURL()
+    {
+        var path = Application.platform switch
+        {
+            RuntimePlatform.Android => $"{assetServer}/Android",
+            RuntimePlatform.IPhonePlayer => $"{assetServer}/IPhone",
+            RuntimePlatform.WebGLPlayer => $"{assetServer}/WebGL",
+            RuntimePlatform.OSXPlayer => $"{assetServer}/MacOS",
+            RuntimePlatform.OSXEditor => $"{assetServer}/MacOS",
+            _ => $"{assetServer}/PC"
+        };
+        Debug.LogWarning("GetHostServerURL：" + path);
+        return path;
+    }
+    static string FormatBytes(long bytes)
+    {
+        string[] suffixes = { "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+
+        int suffixIndex = 0;
+        double byteCount = bytes;
+
+        while (byteCount >= 1024 && suffixIndex < suffixes.Length - 1)
+        {
+            byteCount /= 1024;
+            suffixIndex++;
+        }
+
+        return $"{byteCount:0.00} {suffixes[suffixIndex]}";
+    }
+    private class RemoteServices : IRemoteServices
+    {
+        // 远端资源地址查询服务类
+
+        private readonly string _defaultHostServer;
+        private readonly string _fallbackHostServer;
+
+        public RemoteServices(string defaultHostServer, string fallbackHostServer)
+        {
+            _defaultHostServer = defaultHostServer;
+            _fallbackHostServer = fallbackHostServer;
+        }
+        string IRemoteServices.GetRemoteMainURL(string fileName)
+        {
+            return $"{_defaultHostServer}/{fileName}";
+        }
+        string IRemoteServices.GetRemoteFallbackURL(string fileName)
+        {
+            return $"{_fallbackHostServer}/{fileName}";
+        }
+    }
+
+    #region 弃用
     private IEnumerator InitYooAsset()
     {
         var package = YooAssets.GetPackage("DefaultPackage"); //默认包
@@ -243,25 +369,9 @@ public class Main : MonoBehaviour
         {
             yield return null;
         }
-        GameStart();
+        //GameStart();
 
     }
-
-    private string GetHostServerURL()
-    {
-        var path = Application.platform switch
-        {
-            RuntimePlatform.Android => $"{assetServer}/Android",
-            RuntimePlatform.IPhonePlayer => $"{assetServer}/IPhone",
-            RuntimePlatform.WebGLPlayer => $"{assetServer}/WebGL",
-            RuntimePlatform.OSXPlayer => $"{assetServer}/MacOS",
-            RuntimePlatform.OSXEditor => $"{assetServer}/MacOS",
-            _ => $"{assetServer}/PC"
-        };
-        Debug.LogWarning("GetHostServerURL：" + path);
-        return path;
-    }
-
     private IEnumerator InitializeYooAsset2(ResourcePackage package)
     {
         string defaultHostServer = GetHostServerURL();
@@ -314,110 +424,10 @@ public class Main : MonoBehaviour
         }
 
         //4.下载补丁包
-        yield return Download2(package);
+        yield return Download(package);
         //TODO:判断是否下载成功...
 
     }
-    IEnumerator Download2(ResourcePackage package)
-    {
-        int downloadingMaxNum = 10;
-        int failedTryAgain = 3;
-        var downloader = package.CreateResourceDownloader(downloadingMaxNum, failedTryAgain);
-
-        if (downloader.TotalDownloadCount == 0)
-        {
-            Debug.Log("没有需要下载的资源");
-            readyCount++;
-            yield break;
-        }
-
-        //需要下载的文件总数和总大小
-        int totalDownloadCount = downloader.TotalDownloadCount;
-        long totalDownloadBytes = downloader.TotalDownloadBytes;
-
-        //注册回调方法
-        downloader.OnDownloadErrorCallback = OnDownloadErrorFunction;
-        downloader.OnDownloadProgressCallback = OnDownloadProgressUpdateFunction;
-        downloader.OnDownloadOverCallback = OnDownloadOverFunction;
-        downloader.OnStartDownloadFileCallback = OnStartDownloadFileFunction;
-
-        //开启下载
-        downloader.BeginDownload();
-        yield return downloader;
-
-        //检测下载结果
-        if (downloader.Status == EOperationStatus.Succeed)
-        {
-            //下载成功
-            Debug.Log("下载资源:成功");
-            readyCount++;
-        }
-        else
-        {
-            //下载失败
-            Debug.Log("下载资源:失败");
-            yield break;
-        }
-    }
-
-
-    private void OnStartDownloadFileFunction(string fileName, long sizeBytes)
-    {
-        Debug.LogError($"开始下载");
-    }
-
-    private void OnDownloadOverFunction(bool isSucceed)
-    {
-        Debug.LogError($"下载结束");
-    }
-
-    private void OnDownloadProgressUpdateFunction(int totalDownloadCount, int currentDownloadCount, long totalDownloadBytes, long currentDownloadBytes)
-    {
-        //Debug.LogError($"下载进度:{currentDownloadBytes}/{totalDownloadBytes}");
-        slider.maxValue = totalDownloadBytes;
-        slider.value = currentDownloadBytes;
-        textPro.text = $"下载更新 : {FormatBytes(currentDownloadBytes)} / {FormatBytes(totalDownloadBytes)}";
-    }
-
-    private void OnDownloadErrorFunction(string fileName, string error)
-    {
-        Debug.LogError($"下载失败");
-        textPro.text = $"下载失败";
-    }
-
-    static string FormatBytes(long bytes)
-    {
-        string[] suffixes = { "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-
-        int suffixIndex = 0;
-        double byteCount = bytes;
-
-        while (byteCount >= 1024 && suffixIndex < suffixes.Length - 1)
-        {
-            byteCount /= 1024;
-            suffixIndex++;
-        }
-
-        return $"{byteCount:0.00} {suffixes[suffixIndex]}";
-    }
-
-
-    /// <summary>
-    /// 进入游戏场景
-    /// </summary>
-    private void GameStart()
-    {
-        textPro.text = $"进入游戏";
-
-        //选择服务器（Host，Port），服务器列表可以使用json表示
-
-
-        Debug.Log("开始加载场景");
-        Res.LoadSceneAsync("Servers");
-
-    }
-
-
     /// <summary>
     /// 资源文件偏移加载解密类
     /// </summary>
@@ -450,29 +460,7 @@ public class Main : MonoBehaviour
 
     }
 
-
-    /// <summary>
-    /// 远端资源地址查询服务类
-    /// </summary>
-    private class RemoteServices : IRemoteServices
-    {
-        private readonly string _defaultHostServer;
-        private readonly string _fallbackHostServer;
-
-        public RemoteServices(string defaultHostServer, string fallbackHostServer)
-        {
-            _defaultHostServer = defaultHostServer;
-            _fallbackHostServer = fallbackHostServer;
-        }
-        string IRemoteServices.GetRemoteMainURL(string fileName)
-        {
-            return $"{_defaultHostServer}/{fileName}";
-        }
-        string IRemoteServices.GetRemoteFallbackURL(string fileName)
-        {
-            return $"{_fallbackHostServer}/{fileName}";
-        }
-    }
+    #endregion
 }
 
 public class GameQueryServices : IBuildinQueryServices

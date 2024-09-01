@@ -15,18 +15,24 @@ public class SelectServer : MonoBehaviour
     public string webUrl;
     public GameObject groupObj;
     public TextMeshProUGUI currentServerName;
+    private GameObject serverNode;      
 
-    private GameObject tempNode;
+    [Serializable]
+    public class RootObject
+    {
+        public ServerInfo[] ServerList;
+    }
 
     void Start()
     {
+        //拉取serversJson文件
         StartCoroutine(GetRequest(webUrl));
 
         if (groupObj != null && groupObj.transform.childCount > 0)
         {
             // 获取第一个子对象
-            tempNode = groupObj.transform.GetChild(0).gameObject;
-            tempNode.SetActive(false);
+            serverNode = groupObj.transform.GetChild(0).gameObject;
+            serverNode.SetActive(false);
         }
 
         //加载上次的服务器信息
@@ -35,8 +41,6 @@ public class SelectServer : MonoBehaviour
         {
             GameApp.ServerInfo = JsonUtility.FromJson<ServerInfo>(myServerInfo);
         }
-        
-
 
     }
 
@@ -59,9 +63,7 @@ public class SelectServer : MonoBehaviour
         }
 
         //还需要判断这个服务器是否可用才能开始游戏。
-
-
-        SceneLoader.LoadSceneAsync("Game");
+        Res.LoadSceneAsync("Game");
     }
 
 
@@ -80,7 +82,6 @@ public class SelectServer : MonoBehaviour
             {
                 // 成功获取数据
                 string json = webRequest.downloadHandler.text;
-                //Debug.Log($"Received JSON: {json}");
 
                 // 可以在这里将json字符串解析为对象，或者进行其他处理
                 // 例如，解析为自定义的数据结构
@@ -94,7 +95,7 @@ public class SelectServer : MonoBehaviour
                     foreach (ServerInfo server in rootObject.ServerList)
                     {
                         // 创建tempNode实例
-                        GameObject inst = Instantiate(tempNode, groupObj.transform);
+                        GameObject inst = Instantiate(serverNode, groupObj.transform);
 
                         // 设置tempNode实例的属性
                         inst.name = server.name;
@@ -112,10 +113,5 @@ public class SelectServer : MonoBehaviour
     }
 
 
-    [Serializable]
-    public class RootObject
-    {
-        public ServerInfo[] ServerList;
-    }
 
 }

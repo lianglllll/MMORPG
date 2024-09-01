@@ -30,7 +30,7 @@ public class BuffUIScript : MonoBehaviour
         if (_buff == null) return;
         if (icon.sprite == null)
         {
-            icon.sprite = Resources.Load<Sprite>(_buff.IconPath);
+            icon.sprite = Res.LoadAssetSync<Sprite>(_buff.IconPath,FileType.Png);
         }
         coldDownLayer.fillAmount = 1 - (_buff.ResidualDuration / _buff.MaxDuration);
         levelText.text = _buff.CurrentLevel.ToString();

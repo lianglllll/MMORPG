@@ -125,7 +125,7 @@ public class SelectRolePanelScript : BasePanel
         for (int i = 0; i < characterInfoList.Count;i++)
         {
             //实例化item
-            panelPrefab = await UIManager.Instance.GetPanelPrefab("RoleListItem");
+            panelPrefab =  UIManager.Instance.GetPanelPrefab("RoleListItem");
             panelObject = GameObject.Instantiate(panelPrefab, roleListItemMountPoint, false);
             if(panelObject == null)
             {
