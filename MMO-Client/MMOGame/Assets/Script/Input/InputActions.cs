@@ -152,6 +152,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AnyKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""6fe22e67-e748-476a-941f-49bd389ada9e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -352,6 +361,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5153b7dc-fd5c-4c9a-b7ad-4d642e575c2b"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -374,6 +394,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_Quit = m_GameInput.FindAction("Quit", throwIfNotFound: true);
         m_GameInput_Enter = m_GameInput.FindAction("Enter", throwIfNotFound: true);
         m_GameInput_Newaction = m_GameInput.FindAction("New action", throwIfNotFound: true);
+        m_GameInput_AnyKey = m_GameInput.FindAction("AnyKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,6 +468,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_Quit;
     private readonly InputAction m_GameInput_Enter;
     private readonly InputAction m_GameInput_Newaction;
+    private readonly InputAction m_GameInput_AnyKey;
     public struct GameInputActions
     {
         private @InputActions m_Wrapper;
@@ -465,6 +487,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Quit => m_Wrapper.m_GameInput_Quit;
         public InputAction @Enter => m_Wrapper.m_GameInput_Enter;
         public InputAction @Newaction => m_Wrapper.m_GameInput_Newaction;
+        public InputAction @AnyKey => m_Wrapper.m_GameInput_AnyKey;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -516,6 +539,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Newaction.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnNewaction;
                 @Newaction.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnNewaction;
                 @Newaction.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnNewaction;
+                @AnyKey.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
+                @AnyKey.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
+                @AnyKey.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
             }
             m_Wrapper.m_GameInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -562,6 +588,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Newaction.started += instance.OnNewaction;
                 @Newaction.performed += instance.OnNewaction;
                 @Newaction.canceled += instance.OnNewaction;
+                @AnyKey.started += instance.OnAnyKey;
+                @AnyKey.performed += instance.OnAnyKey;
+                @AnyKey.canceled += instance.OnAnyKey;
             }
         }
     }
@@ -582,5 +611,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnQuit(InputAction.CallbackContext context);
         void OnEnter(InputAction.CallbackContext context);
         void OnNewaction(InputAction.CallbackContext context);
+        void OnAnyKey(InputAction.CallbackContext context);
     }
 }

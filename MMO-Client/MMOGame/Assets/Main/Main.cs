@@ -15,8 +15,15 @@ using YooAsset;
 public class Main : MonoBehaviour
 {
     [Header("UI组件")]
-    public TextMeshProUGUI textPro;
+    public Text msgText ;
     public Slider slider;
+    public UpdatePanel updatePanel;
+    private bool isStart;
+    private float minAlpha = 0.1f;
+    private float maxAlpha = 1.0f;
+    private float alphaStep = 0.001f; // 控制呼吸效果的速度
+    private float curAlpha;
+
 
     [Header("配置")]
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
@@ -34,7 +41,38 @@ public class Main : MonoBehaviour
 
         BetterStreamingAssets.Initialize();
 
+        updatePanel.gameObject.SetActive(false);
+
+        isStart = false;
+        msgText.text = "正在加载";
+        curAlpha = minAlpha; // 初始化为最小值
+
         StartCoroutine(DownLoadAssetsByYooAssets());
+    }
+
+    private void Update()
+    {
+        if(isStart)
+        {
+            // 文本的呼吸效果
+            if (curAlpha >= maxAlpha || curAlpha <= minAlpha)
+            {
+                alphaStep = -alphaStep; // 反转 AlphaStep 的方向
+            }
+
+            curAlpha += alphaStep;
+            curAlpha = Mathf.Clamp(curAlpha, minAlpha, maxAlpha); // 限制在 0 到 1 之间
+
+            // 更新文本颜色
+            var color = msgText.color;
+            color.a = curAlpha;
+            msgText.color = color;
+
+            if (Input.anyKeyDown)
+            {
+                Res.LoadSceneAsync("Servers");
+            }
+        }
     }
 
     IEnumerator DownLoadAssetsByYooAssets()
@@ -138,7 +176,7 @@ public class Main : MonoBehaviour
 
         if (readyCount < 2)
         {
-            textPro.text = $"资源加载失败，请重新启动";
+            msgText.text = $"资源加载失败，请重新启动";
         }
         else
         {
@@ -192,10 +230,6 @@ public class Main : MonoBehaviour
             yield break;
         }
 
-        //弹框询问是否更新
-
-
-
         //需要下载的文件总数和总大小
         int totalDownloadCount = downloader.TotalDownloadCount;
         long totalDownloadBytes = downloader.TotalDownloadBytes;
@@ -206,8 +240,16 @@ public class Main : MonoBehaviour
         downloader.OnDownloadOverCallback = OnDownloadOverFunction;
         downloader.OnStartDownloadFileCallback = OnStartDownloadFileFunction;
 
-        //开启下载
-        downloader.BeginDownload();
+        //弹框询问是否更新
+        updatePanel.gameObject.SetActive(true);
+        updatePanel.OpenPanel("游戏更新", $"需要下载{FormatBytes(totalDownloadBytes)}是否继续?", () => {
+            //开启下载
+            downloader.BeginDownload();
+        },()=> {
+            Application.Quit();
+        });
+
+        //等待下载结束
         yield return downloader;
 
         //检测下载结果
@@ -237,19 +279,17 @@ public class Main : MonoBehaviour
         //Debug.LogError($"下载进度:{currentDownloadBytes}/{totalDownloadBytes}");
         slider.maxValue = totalDownloadBytes;
         slider.value = currentDownloadBytes;
-        textPro.text = $"下载更新 : {FormatBytes(currentDownloadBytes)} / {FormatBytes(totalDownloadBytes)}";
+        msgText.text = $"下载更新 : {FormatBytes(currentDownloadBytes)} / {FormatBytes(totalDownloadBytes)}";
     }
     private void OnDownloadErrorFunction(string fileName, string error)
     {
         Debug.LogError($"下载失败");
-        textPro.text = $"下载失败";
+        msgText.text = $"下载失败";
     }
     private void GameStart()
     {
-        textPro.text = $"进入游戏";
-        //选择服务器（Host，Port），服务器列表可以使用json表示
-
-        Res.LoadSceneAsync("Servers");
+        msgText.text = $"点击任意键进入游戏";
+        isStart = true;
     }
 
 
@@ -382,7 +422,7 @@ public class Main : MonoBehaviour
         initParameters.BuildinQueryServices = new GameQueryServices();
         initParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
         // 1.初始化资源包
-        textPro.text = $"初始化资源包";
+        msgText.text = $"初始化资源包";
         var initOperation = package.InitializeAsync(initParameters);
         yield return initOperation;
 
@@ -391,12 +431,12 @@ public class Main : MonoBehaviour
         if (initOperation.Status == EOperationStatus.Succeed)
         {
             Debug.Log("资源包初始化成功！");
-            textPro.text = $"资源包初始化成功";
+            msgText.text = $"资源包初始化成功";
         }
         else
         {
             Debug.LogError($"资源包初始化失败：{initOperation.Error}");
-            textPro.text = $"资源包初始化失败";
+            msgText.text = $"资源包初始化失败";
             yield break;
         }
 

@@ -8,7 +8,6 @@ using TMPro;
 public class MessagePanelScript : MonoBehaviour
 {
 
-
     //网络延迟text面板
     private Text NDelayText;
 
@@ -34,7 +33,6 @@ public class MessagePanelScript : MonoBehaviour
 
     //传送面板
     private DeliverPanel deliverPanel;
-
 
     private void Awake()
     {
@@ -239,6 +237,5 @@ public class MessagePanelScript : MonoBehaviour
         }
 
     }
-
 
 }

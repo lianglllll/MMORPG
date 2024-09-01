@@ -22,6 +22,8 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool Quit => _inputActions.GameInput.Quit.triggered;
     public bool Enter => _inputActions.GameInput.Enter.triggered;
 
+    public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;
+
 
 
     protected override void Awake()
