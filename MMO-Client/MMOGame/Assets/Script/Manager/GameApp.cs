@@ -75,7 +75,6 @@ namespace GameClient {
             get => _CombatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
         }
 
-
         /// <summary>
         /// 传送请求发包
         /// </summary>
@@ -89,40 +88,52 @@ namespace GameClient {
 
 
         /// <summary>
-        /// 进入对应的场景
+        /// 加载场景
         /// </summary>
         /// <param name="spaceId">场景id</param>
         /// <param name="action">场景加载完成后的回调</param>
-        public static void LoadSpace(int spaceId, Action<Scene> action)
+        public static void LoadSpaceWithPoster(int spaceId, Action<Scene> action)
         {
             var spaceDefine = DataManager.Instance.spaceDict[spaceId];
-            /*
-            SceneLoader.LoadSceneAsync(spaceDefine.Resource, (s) =>
-            {
-                action?.Invoke(s);
-            });
-            */
+            UnityMainThreadDispatcher.Instance().StartCoroutine(_LoadSpaceWithPoster(spaceDefine.Name,spaceDefine.Resource, action));
+        }
+        public static void LoadSpaceWithPoster(string sceneName, Action<Scene> action)
+        {
+            UnityMainThreadDispatcher.Instance().StartCoroutine(_LoadSpaceWithPoster(sceneName, sceneName, action));
+        }
+        private static IEnumerator _LoadSpaceWithPoster(string spaceName,string path, Action<Scene> action)
+        {
 
-            var handle = Res.LoadSceneAsync(spaceDefine.Resource);
+            //淡入1秒
+            yield return ScenePoster.Instance.FadeIn();
+
+            //展示转场UI,这里需要在4秒内模拟到进度的百分之90，这个是模拟出来假的进度。
+            ScenePoster.Instance.nameText.text = spaceName ?? "---";
+            ScenePoster.Instance.SetProgress(0.9f, 4.0f);
+
+            //淡出
+            yield return ScenePoster.Instance.FadeOut();
+
+            var handle = Res.LoadSceneAsync(path);
             handle.OnLoaded = (s) =>
             {
-                //MakeEventSystem();
-                UnityMainThreadDispatcher.Instance()
-                    .StartCoroutine(Delay(0.01f, () => action?.Invoke(s)));
+                UnityMainThreadDispatcher.Instance().StartCoroutine(__LoadSpaceWithPoster( s,action));
             };
-
         }
-
-        /// <summary>
-        /// 延时
-        /// </summary>
-        /// <param name="delay"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        static IEnumerator Delay(float delay, Action action)
+        private static IEnumerator __LoadSpaceWithPoster(Scene s, Action<Scene> action)
         {
-            yield return new WaitForSeconds(delay);
-            action?.Invoke();
+            yield return new WaitForSeconds(0.01f);
+
+            //逻辑
+            action?.Invoke(s);
+
+            //完成转场ui
+            ScenePoster.Instance.SetProgress(1f, 0.3f);
+
+            //淡入
+            yield return ScenePoster.Instance.FadeIn();
+            //淡出
+            yield return ScenePoster.Instance.FadeOut();
         }
 
     }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,41 +13,41 @@ public class ScenePoster : MonoBehaviour
 {
     public static ScenePoster Instance;
 
+    //场景切换海报+进度
+    public GameObject SecneChangePoster;
     public Slider progressBar;
     public Image bgImage;   //背景图
     public TextMeshProUGUI nameText; //场景名称
-
     private bool isUpdatingProgress = false;
     private float targetProgress = 0f;
     private float initialProgress = 0f;
     private float elapsedTime = 0f;
     private float interval = 0.2f;
 
-    // 调用该函数来平滑地更新进度条
-    public void SetProgress(float targetProgress, float interval = 0.2f)
-    {
-        gameObject.SetActive(true);
-        this.targetProgress = targetProgress;
-        this.interval = interval;
-        initialProgress = progressBar.value;
-        elapsedTime = 0f;
-        isUpdatingProgress = true;
-    }
+    //淡入淡出效果
+    private Image fadeImage;
+    private float fadeDuration = 0.6f;
 
     private void Awake()
     {
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        gameObject.SetActive(false);
+        fadeImage = transform.Find("Canvas/FadeAffect").GetComponent<Image>();
     }
 
     void Start()
     {
-
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        gameObject.SetActive(true);
+        SecneChangePoster.SetActive(false);
+        // 初始时，图像完全黑
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
+        //淡出，透明
+        StartCoroutine(FadeOut());
     }
 
     void Update()
     {
+        //过场海报
         if (isUpdatingProgress)
         {
             elapsedTime += Time.deltaTime;
@@ -66,10 +67,39 @@ public class ScenePoster : MonoBehaviour
         }
     }
 
+    // 调用该函数来平滑地更新进度条
+    public void SetProgress(float targetProgress, float interval = 0.2f)
+    {
+        SecneChangePoster.SetActive(true) ;
+        this.targetProgress = targetProgress;
+        this.interval = interval;
+        initialProgress = progressBar.value;
+        elapsedTime = 0f;
+        isUpdatingProgress = true;
+    }
     private IEnumerator HideProgressBarAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        gameObject.SetActive(false);
+        SecneChangePoster.SetActive(false);
         progressBar.value = 0f;
     }
+
+    public IEnumerator  FadeIn()
+    {
+        fadeImage.gameObject.SetActive(true); // 确保 Image 组件被激活
+        fadeImage.DOFade(1, fadeDuration);
+        yield return new WaitForSeconds(fadeDuration);
+    }
+
+    public IEnumerator FadeOut()
+    {
+        // 淡入效果
+        fadeImage.DOFade(0, fadeDuration).OnComplete(() =>
+        {
+            fadeImage.gameObject.SetActive(false); // 隐藏 Image 组件
+        });
+        yield return new WaitForSeconds(fadeDuration);
+    }
+
+
 }

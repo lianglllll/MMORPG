@@ -58,9 +58,19 @@ public class SelectRolePanelScript : BasePanel
     /// </summary>
     public void OnCreateBtn()
     {
+        StartCoroutine(_OnCreateBtn());
+    }
+
+    private IEnumerator _OnCreateBtn()
+    {
+        yield return ScenePoster.Instance.FadeIn();
+
         //切换创建角色面板
         UIManager.Instance.OpenPanel("CreateRolePanel");
+
+        yield return ScenePoster.Instance.FadeOut();
     }
+
 
     /// <summary>
     /// 点击开始按钮回调

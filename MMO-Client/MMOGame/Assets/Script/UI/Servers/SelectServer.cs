@@ -15,7 +15,9 @@ public class SelectServer : MonoBehaviour
     public string webUrl;
     public GameObject groupObj;
     public TextMeshProUGUI currentServerName;
-    private GameObject serverNode;      
+    private GameObject serverNode;
+    private bool isStart;
+
 
     [Serializable]
     public class RootObject
@@ -42,6 +44,8 @@ public class SelectServer : MonoBehaviour
             GameApp.ServerInfo = JsonUtility.FromJson<ServerInfo>(myServerInfo);
         }
 
+        isStart = false;
+
     }
 
     private void FixedUpdate()
@@ -56,6 +60,8 @@ public class SelectServer : MonoBehaviour
 
     public void StartGame()
     {
+        if (isStart) return;
+
         if (GameApp.ServerInfo == null)
         {
             UIManager.Instance.ShowTopMessage("未选择服务器");
@@ -63,9 +69,12 @@ public class SelectServer : MonoBehaviour
         }
 
         //还需要判断这个服务器是否可用才能开始游戏。
-        Res.LoadSceneAsync("Game");
-    }
 
+
+        //开始切换场景了
+        isStart = true;
+        GameApp.LoadSpaceWithPoster("Game", null);
+    }
 
     IEnumerator GetRequest(string uri)
     {
@@ -111,7 +120,5 @@ public class SelectServer : MonoBehaviour
             }
         }
     }
-
-
 
 }

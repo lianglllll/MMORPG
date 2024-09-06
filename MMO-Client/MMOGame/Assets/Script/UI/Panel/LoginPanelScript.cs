@@ -14,7 +14,7 @@ public class LoginPanelScript : BasePanel
     private InputField passwordInputField;
     private Button loginButton;
     private Button registerButton;
-
+    private Toggle recordUsernameAndPassword;
     private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来
 
     protected override void Awake()
@@ -23,6 +23,7 @@ public class LoginPanelScript : BasePanel
         passwordInputField = transform.Find("Login-box/PasswordInputField").GetComponent<InputField>();
         loginButton = transform.Find("Login-box/LoginButton").GetComponent<Button>();
         registerButton = transform.Find("Login-box/RegisterButton").GetComponent<Button>();
+        recordUsernameAndPassword = transform.Find("Login-box/RecordToggle").GetComponent<Toggle>();
     }
 
     protected override void Start()
@@ -31,6 +32,19 @@ public class LoginPanelScript : BasePanel
         loginButton.onClick.AddListener(OnLogin);
         registerButton.onClick.AddListener(OnRegister);
         isOnClickLoginBtn = false;
+
+        //加载用户名和密码
+        string myUsername = PlayerPrefs.GetString("myUsername");
+        string myPassword = PlayerPrefs.GetString("myPassword");
+        if (!string.IsNullOrEmpty(myUsername))
+        {
+            usernameInputField.text = myUsername;
+        }
+        if (!string.IsNullOrEmpty(myPassword))
+        {
+            passwordInputField.text = myPassword;
+        }
+
     }
 
     /// <summary>
@@ -74,14 +88,22 @@ public class LoginPanelScript : BasePanel
         //登录成功，切换到角色选择scene
         if (msg.Success)
         {
+
+
             //保存SessionId
             GameApp.SessionId = msg.SessionId;
             //切换面板
-            UnityMainThreadDispatcher.Instance().Enqueue(() =>
-            {
-                UIManager.Instance.ShowTopMessage("登录成功");
-                UIManager.Instance.OpenPanel("SelectRolePanel");
-                UIManager.Instance.ClosePanel("LoginPanel");
+            UnityMainThreadDispatcher.Instance().Enqueue(()=> {
+
+                if (recordUsernameAndPassword.isOn)
+                {
+                    //记录用户名和密码
+                    PlayerPrefs.SetString("myUsername", usernameInputField.text);
+                    PlayerPrefs.SetString("myPassword", passwordInputField.text);
+                    PlayerPrefs.Save();
+                }
+
+                UnityMainThreadDispatcher.Instance().StartCoroutine(_OnLoginResponse());
             });
         } 
         else
@@ -94,13 +116,36 @@ public class LoginPanelScript : BasePanel
 
     }
 
+    private IEnumerator _OnLoginResponse()
+    {
+        UIManager.Instance.ShowTopMessage("登录成功");
+
+        yield return new WaitForSeconds(0.5f);
+
+        yield return  ScenePoster.Instance.FadeIn();
+        UIManager.Instance.OpenPanel("SelectRolePanel");
+        UIManager.Instance.ClosePanel("LoginPanel");
+        yield return ScenePoster.Instance.FadeOut();
+    }
+
+
     /// <summary>
     /// 注册按钮触发
     /// </summary>
     private void OnRegister()
     {
+        StartCoroutine(_OnRegister());
+    }
+
+    private IEnumerator _OnRegister()
+    {
+        yield return ScenePoster.Instance.FadeIn();
+
         //切换到registerpanel
         UIManager.Instance.OpenPanel("RegisterPanel");
+
+        yield return ScenePoster.Instance.FadeOut();
+
     }
 
 }

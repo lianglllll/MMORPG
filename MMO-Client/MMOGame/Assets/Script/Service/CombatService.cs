@@ -58,18 +58,12 @@ public class CombatService : Singleton<CombatService>, IDisposable
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-
-            //展示转场UI
-            var def = DataManager.Instance.GetSpaceDefineById(msg.Character.SpaceId);
-            ScenePoster.Instance.nameText.text = def.Name ?? "---";
-            ScenePoster.Instance.SetProgress(0.9f, 4.0f);
-
             if (GameApp.character==null)
             {
                 //1.切换场景
                 GameApp.SpaceId = msg.Character.SpaceId;
 
-                GameApp.LoadSpace(msg.Character.SpaceId, async (scene) => {
+                GameApp.LoadSpaceWithPoster(msg.Character.SpaceId, async (scene) => {
 
                      await Task.Delay(800);
 
@@ -95,9 +89,6 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     DataManager.Instance.spaceDict.TryGetValue(GameApp.SpaceId, out var def);
                     UIManager.Instance.ShowTopMessage("" + def.Name);
 
-                    //完成转场ui
-                    ScenePoster.Instance.SetProgress(1f, 0.3f);
-
                 });
             }
             else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)
@@ -109,7 +100,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
 
                 //切换场景
                 GameApp.SpaceId = msg.Character.SpaceId;
-                GameApp.LoadSpace(msg.Character.SpaceId, async (scene) => {
+                GameApp.LoadSpaceWithPoster(msg.Character.SpaceId, async (scene) => {
 
                     await Task.Delay(800);
 
@@ -135,8 +126,6 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     DataManager.Instance.spaceDict.TryGetValue(GameApp.SpaceId, out var def);
                     UIManager.Instance.ShowTopMessage("" + def.Name);
 
-                    //完成转场ui
-                    ScenePoster.Instance.SetProgress(1f, 0.3f);
                 });
             }
             else

@@ -51,13 +51,18 @@ public class CreateRolePanelScript : BasePanel
 
     }
 
-
     /// <summary>
     /// 返回按钮回调
     /// </summary>
     public void OnReturnBtn()
     {
+        StartCoroutine(_OnReturnBtn());
+    }
+    private IEnumerator _OnReturnBtn()
+    {
+        yield return ScenePoster.Instance.FadeIn();
         UIManager.Instance.ClosePanel("CreateRolePanel");
+        ScenePoster.Instance.StartCoroutine( ScenePoster.Instance.FadeOut());
     }
 
     /// <summary>
@@ -71,7 +76,6 @@ public class CreateRolePanelScript : BasePanel
             UIManager.Instance.ShowTopMessage("请选择你的角色");
             return;
         }
-
 
         //发送网络请求
         UserService.Instance._CharacterCreateRequest(usernameFileid.text, jobid);

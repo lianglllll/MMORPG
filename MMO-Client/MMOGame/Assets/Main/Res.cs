@@ -198,7 +198,7 @@ public class Res
         }
 
         var path = $"{Prefix}/{location}{suffix}";
-        Debug.Log("当前path=" + path);
+        //Debug.Log("当前path=" + path);
 #if (UNITY_EDITOR)
         {
             T prefab = AssetDatabase.LoadAssetAtPath<T>(path);

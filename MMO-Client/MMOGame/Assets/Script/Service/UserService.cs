@@ -99,10 +99,13 @@ public class UserService : Singleton<UserService>, IDisposable
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
             UIManager.Instance.AsyncShowTopMessage(msg.Message);
+
             switch (msg.Code)
             {
                 case 0://成功,跳转到选择角色页面
-                    UIManager.Instance.ClosePanel("RegisterPanel");
+
+                    RegisterPanelScript panel = (RegisterPanelScript)UIManager.Instance.GetPanelByName("RegisterPanel");
+                    panel.OnReturn();
                     break;
                 case 1:
 
@@ -172,7 +175,8 @@ public class UserService : Singleton<UserService>, IDisposable
             //发起角色列表的请求，刷新角色列表
             UserService.Instance._CharacterListRequest();
             UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                UIManager.Instance.ClosePanel("CreateRolePanel");
+                CreateRolePanelScript panel = (CreateRolePanelScript)UIManager.Instance.GetPanelByName("CreateRolePanel");
+                panel.OnReturnBtn();
             });
         }
     }

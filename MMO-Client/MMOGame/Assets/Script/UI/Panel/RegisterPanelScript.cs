@@ -58,9 +58,16 @@ public class RegisterPanelScript : BasePanel
     /// <summary>
     /// 返回按钮回调
     /// </summary>
-    private void OnReturn()
+    public void OnReturn()
     {
+        StartCoroutine(_OnReturn());
+    }
+    private IEnumerator _OnReturn()
+    {
+        yield return ScenePoster.Instance.FadeIn();
         UIManager.Instance.ClosePanel("RegisterPanel");
+        ScenePoster.Instance.StartCoroutine(ScenePoster.Instance.FadeOut());
+
     }
 
 }

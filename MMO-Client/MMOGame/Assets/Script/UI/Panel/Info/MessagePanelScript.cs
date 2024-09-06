@@ -4,19 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using DG.Tweening;
 
 public class MessagePanelScript : MonoBehaviour
 {
 
     //网络延迟text面板
     private Text NDelayText;
+    private Image NSignalImage;
 
     //消息提示面板
     private GameObject topMsgBox;
     private GameObject bottonMsgBox;
     private Text topMsgBoxText;
     private TextMeshProUGUI bottonMsgBoxText;
-    //提示信息的停留时间
     private float showTime = 2f;
     private float topMsgBoxCountdown;
     private float bottonMsgBoxCountdown;
@@ -41,12 +42,12 @@ public class MessagePanelScript : MonoBehaviour
         bottonMsgBoxText = transform.Find("BottonMessageBox/MessageText").GetComponent<TextMeshProUGUI>();
         topMsgBox = transform.Find("TopMessageBox").gameObject;
         bottonMsgBox = transform.Find("BottonMessageBox").gameObject;
-        NDelayText = transform.Find("NetworkDelay").GetComponent<Text>();
+        NDelayText = transform.Find("NetworkInfoBox/NetworkDelay").GetComponent<Text>();
+        NSignalImage = transform.Find("NetworkInfoBox/SignalImage").GetComponent<Image>();
         confirmBox = transform.Find("ConfirmBox").GetComponent<ConfirmBox>();
         loadingBox = transform.Find("LoadingBox").GetComponent<LoadingBox>();
         itemIOInfoBox = transform.Find("ItemIOInfoBox").GetComponent<ItemIOInfoBox>();
         deliverPanel = transform.Find("DeliverPanel").GetComponent<DeliverPanel>();
-
     }
 
     private void Start()
@@ -70,6 +71,9 @@ public class MessagePanelScript : MonoBehaviour
 
         //初始化传送面板
         deliverPanel.gameObject.SetActive(false);
+
+        //初始化网络信息
+        ShowNetworkDisconnect();
     }
 
     private void Update()
@@ -104,6 +108,7 @@ public class MessagePanelScript : MonoBehaviour
         //设置提示信息并且启动text
         topMsgBoxText.text = msg;
         topMsgBox.SetActive(true);
+
         //停留showTime秒后调用隐藏
         topMsgBoxCountdown = showTime;
     }
@@ -128,11 +133,13 @@ public class MessagePanelScript : MonoBehaviour
     /// <param name="ms"></param>
     public void ShowNetworkDelay(int ms)
     {
+        NSignalImage.color = Color.green;
         NDelayText.color = Color.green;
         NDelayText.text = "网络延迟：" + ms + "ms";
     }
     public void ShowNetworkDisconnect()
     {
+        NSignalImage.color = Color.red;
         NDelayText.color = Color.red;
         NDelayText.text = "网络断开";
     }

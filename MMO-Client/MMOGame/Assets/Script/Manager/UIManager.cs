@@ -88,7 +88,6 @@ public class UIManager
     /// <returns></returns>
     public  void  OpenPanel(string name)
     {
-        //Debug.Log("正在尝试打开panel:" + name);
 
         //1.检查name是否有误
         PanelDefine define = null;
@@ -131,6 +130,7 @@ public class UIManager
             return;
         }
         panelScriptDict.Add(name, panel);
+
         panel.OpenPanel(name);
     }
     /// <summary>
@@ -193,8 +193,6 @@ public class UIManager
         }
         return panelPrefab;
     }
-
-
 
 
     /// <summary>
