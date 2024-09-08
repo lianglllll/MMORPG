@@ -71,7 +71,6 @@ public class MainScenePanel : MonoBehaviour
 
     public void FadeIn(Action action)
     {
-        Debug.Log("11");
         fadeImage.gameObject.SetActive(true); // 隐藏 Image 组件
         fadeImage.DOFade(1, fadeDuration*1.2f).OnComplete(() =>
         {

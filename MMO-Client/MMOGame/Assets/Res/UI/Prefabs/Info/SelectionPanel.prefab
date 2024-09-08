@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 3646463916333402724}
   - component: {fileID: 3646463916333402727}
   - component: {fileID: 3646463916333402725}
+  - component: {fileID: 5632157312026047026}
   m_Layer: 5
   m_Name: SelectionPanel
   m_TagString: Untagged
@@ -415,6 +416,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249f921c99400ff4e888c3495b4748aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &5632157312026047026
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646463916333402721}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3646463916339522809
 GameObject:
   m_ObjectHideFlags: 0

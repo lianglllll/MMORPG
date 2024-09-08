@@ -10,6 +10,7 @@ public class MessagePanelScript : MonoBehaviour
 {
 
     //网络延迟text面板
+    private Transform NetworkInfoBox;
     private Text NDelayText;
     private Image NSignalImage;
 
@@ -23,8 +24,10 @@ public class MessagePanelScript : MonoBehaviour
     private float bottonMsgBoxCountdown;
 
     //确认面板
-    private ConfirmBox confirmBox;
-    private bool confirmBoxActive;
+    private SelectionPanel selectionPanel;
+    private bool selectionPanelActive;
+    private CanvasGroup selectionPanelCanvasGroup;
+
 
     //loading面板
     private LoadingBox loadingBox;
@@ -42,9 +45,11 @@ public class MessagePanelScript : MonoBehaviour
         bottonMsgBoxText = transform.Find("BottonMessageBox/MessageText").GetComponent<TextMeshProUGUI>();
         topMsgBox = transform.Find("TopMessageBox").gameObject;
         bottonMsgBox = transform.Find("BottonMessageBox").gameObject;
+        NetworkInfoBox = transform.Find("NetworkInfoBox");
         NDelayText = transform.Find("NetworkInfoBox/NetworkDelay").GetComponent<Text>();
         NSignalImage = transform.Find("NetworkInfoBox/SignalImage").GetComponent<Image>();
-        confirmBox = transform.Find("ConfirmBox").GetComponent<ConfirmBox>();
+        selectionPanel = transform.Find("SelectionPanel").GetComponent<SelectionPanel>();
+        selectionPanelCanvasGroup = transform.Find("SelectionPanel").GetComponent<CanvasGroup>();
         loadingBox = transform.Find("LoadingBox").GetComponent<LoadingBox>();
         itemIOInfoBox = transform.Find("ItemIOInfoBox").GetComponent<ItemIOInfoBox>();
         deliverPanel = transform.Find("DeliverPanel").GetComponent<DeliverPanel>();
@@ -53,15 +58,25 @@ public class MessagePanelScript : MonoBehaviour
     private void Start()
     {
         //因为消息提示默认是不显示的
-        topMsgBox.SetActive(false);
-        bottonMsgBox.SetActive(false);
+
         topMsgBoxCountdown = 0f;
         bottonMsgBoxCountdown = 0f;
 
+        // 确保初始颜色为透明状态
+        Color originalColor1 = topMsgBoxText.color;
+        originalColor1.a = 0;
+        topMsgBoxText.color = originalColor1;
+
+        topMsgBox.SetActive(false);
+        bottonMsgBox.SetActive(false);
+
         //初始化确认面板
-        confirmBox.Init(CloseConfirmBox);
-        confirmBox.gameObject.SetActive(false);
-        confirmBoxActive = false;
+        selectionPanel.gameObject.SetActive(false);
+        selectionPanelActive = false;
+        selectionPanel.Init(() =>
+        {
+            selectionPanelActive = false;
+        });
 
         //初始化loading面板
         loadingBox.gameObject.SetActive(false);
@@ -73,20 +88,13 @@ public class MessagePanelScript : MonoBehaviour
         deliverPanel.gameObject.SetActive(false);
 
         //初始化网络信息
+        NetworkInfoBox.gameObject.SetActive(true);
         ShowNetworkDisconnect();
     }
 
     private void Update()
     {
-        if(topMsgBoxCountdown > 0)
-        {
-            topMsgBoxCountdown -= Time.deltaTime;
-            if(topMsgBoxCountdown <= 0f)
-            {
-                topMsgBox.SetActive(false);
-                topMsgBoxCountdown = 0f;
-            }
-        }
+
         if (bottonMsgBoxCountdown > 0)
         {
             bottonMsgBoxCountdown -= Time.deltaTime;
@@ -96,7 +104,6 @@ public class MessagePanelScript : MonoBehaviour
                 bottonMsgBoxCountdown = 0f;
             }
         }
-
     }
 
     /// <summary>
@@ -108,6 +115,13 @@ public class MessagePanelScript : MonoBehaviour
         //设置提示信息并且启动text
         topMsgBoxText.text = msg;
         topMsgBox.SetActive(true);
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(topMsgBoxText.DOFade(1, 1f));
+        sequence.AppendInterval(showTime);
+        sequence.Append(topMsgBoxText.DOFade(0, 1f).OnComplete(()=> {
+            topMsgBox.SetActive(false);
+        }));
 
         //停留showTime秒后调用隐藏
         topMsgBoxCountdown = showTime;
@@ -126,7 +140,6 @@ public class MessagePanelScript : MonoBehaviour
         bottonMsgBoxCountdown = showTime;
     }
 
-
     /// <summary>
     /// 显示网络延迟
     /// </summary>
@@ -144,38 +157,30 @@ public class MessagePanelScript : MonoBehaviour
         NDelayText.text = "网络断开";
     }
 
-
     /// <summary>
     /// 显示确认面板
     /// </summary>
     /// <param name="spaceid"></param>
     /// <param name="desc"></param>
-    public void ShowConfirmBox(string tipsContent, string btnContent,bool btnActive, Action onClickBtnCallback)
+    public void ShowSelectionPanel(string simpleTipsText, string detailTipsText, Action comfirmAction)
     {
-        if (confirmBoxActive == true) return;
+        if (selectionPanelActive == true) return;
         //显示面板、设置ui
-        SetConfirmBoxActive(true);
-        confirmBox.ShowBox(tipsContent, btnContent, btnActive, onClickBtnCallback);
+        selectionPanelActive = true;
+        selectionPanel.gameObject.SetActive(true);
+        selectionPanelCanvasGroup.alpha = 0;
+        selectionPanelCanvasGroup.DOFade(1, 1f);
+        selectionPanel.OpenPanel(simpleTipsText, detailTipsText, comfirmAction);
     }
     /// <summary>
-    /// 关闭确认面板
+    /// 主动关闭确认面板
     /// </summary>
-    public void CloseConfirmBox()
+    public void CloseSelectionPanel()
     {
-        if (confirmBoxActive == false) return;
-        SetConfirmBoxActive(false);
-        confirmBox.CloseBox();
+        if (selectionPanelActive == false) return;
+        selectionPanelActive = false;
+        selectionPanel.gameObject.SetActive(false);
     }
-    /// <summary>
-    /// 设置确认面板是否激活
-    /// </summary>
-    /// <param name="active"></param>
-    private void SetConfirmBoxActive(bool active)
-    {
-        confirmBox.gameObject.SetActive(active);
-        confirmBoxActive = active;
-    }
-
 
     /// <summary>
     /// 展示loadingbox
@@ -194,7 +199,6 @@ public class MessagePanelScript : MonoBehaviour
         loadingBox.gameObject.SetActive(false);
     }
 
-
     /// <summary>
     /// 展示一些个item的信息
     /// </summary>
@@ -203,6 +207,9 @@ public class MessagePanelScript : MonoBehaviour
     {
         itemIOInfoBox.ShowMsg(msg);
     }
+
+
+
 
 
     /// <summary>
@@ -220,7 +227,6 @@ public class MessagePanelScript : MonoBehaviour
             deliverPanel.gameObject.SetActive(false);
         });
     }
-
 
     /// <summary>
     /// 设置鼠标的显示

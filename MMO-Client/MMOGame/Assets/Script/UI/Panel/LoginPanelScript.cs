@@ -7,15 +7,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
+
+
 public class LoginPanelScript : BasePanel
 {
-
+    private Transform loginBox;
+    private Transform ServerInfoBox;
     private InputField usernameInputField;
     private InputField passwordInputField;
     private Button loginButton;
     private Button registerButton;
+    private Button ExitButton;
     private Toggle recordUsernameAndPassword;
     private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来
+
 
     protected override void Awake()
     {
@@ -24,6 +30,9 @@ public class LoginPanelScript : BasePanel
         loginButton = transform.Find("Login-box/LoginButton").GetComponent<Button>();
         registerButton = transform.Find("Login-box/RegisterButton").GetComponent<Button>();
         recordUsernameAndPassword = transform.Find("Login-box/RecordToggle").GetComponent<Toggle>();
+        loginBox = transform.Find("Login-box");
+        ServerInfoBox = transform.Find("ServerInfoBox");
+        ExitButton = transform.Find("ExitBtn").GetComponent<Button>();
     }
 
     protected override void Start()
@@ -31,8 +40,13 @@ public class LoginPanelScript : BasePanel
         passwordInputField.contentType = InputField.ContentType.Password;
         loginButton.onClick.AddListener(OnLogin);
         registerButton.onClick.AddListener(OnRegister);
+        ExitButton.onClick.AddListener(OnExitBtn);
         isOnClickLoginBtn = false;
+        Init();
+    }
 
+    private void Init()
+    {
         //加载用户名和密码
         string myUsername = PlayerPrefs.GetString("myUsername");
         string myPassword = PlayerPrefs.GetString("myPassword");
@@ -45,7 +59,11 @@ public class LoginPanelScript : BasePanel
             passwordInputField.text = myPassword;
         }
 
+        //给登录框弄点移动效果
+        loginBox.DOLocalMoveX(transform.localPosition.x + 2000f, 2f).From();
+        ServerInfoBox.DOLocalMoveX(transform.localPosition.x  -4000f, 2f).From();
     }
+
 
     /// <summary>
     /// 登录按钮回调
@@ -89,7 +107,6 @@ public class LoginPanelScript : BasePanel
         if (msg.Success)
         {
 
-
             //保存SessionId
             GameApp.SessionId = msg.SessionId;
             //切换面板
@@ -115,7 +132,6 @@ public class LoginPanelScript : BasePanel
         }
 
     }
-
     private IEnumerator _OnLoginResponse()
     {
         UIManager.Instance.ShowTopMessage("登录成功");
@@ -128,7 +144,6 @@ public class LoginPanelScript : BasePanel
         yield return ScenePoster.Instance.FadeOut();
     }
 
-
     /// <summary>
     /// 注册按钮触发
     /// </summary>
@@ -136,7 +151,6 @@ public class LoginPanelScript : BasePanel
     {
         StartCoroutine(_OnRegister());
     }
-
     private IEnumerator _OnRegister()
     {
         yield return ScenePoster.Instance.FadeIn();
@@ -146,6 +160,24 @@ public class LoginPanelScript : BasePanel
 
         yield return ScenePoster.Instance.FadeOut();
 
+    }
+
+
+    private void OnExitBtn()
+    {
+        //弹框提示
+        UIManager.Instance.MessagePanel.ShowSelectionPanel("退出游戏", "是否退出游戏？", () =>
+        {
+#if (UNITY_EDITOR)
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+#else
+            {
+                Application.Quit();
+            }
+#endif
+        });
     }
 
 }

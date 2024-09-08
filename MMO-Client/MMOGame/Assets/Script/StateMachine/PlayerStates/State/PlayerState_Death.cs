@@ -17,8 +17,6 @@ public class PlayerState_Death : PlayerState
     {
         animator.CrossFade("Death", transitionDuration);
         stateMachine.parameter.owner.OnDeath();
-
-
     }
 
     public override void LogicUpdate()

@@ -73,7 +73,7 @@ public class SelectServer : MonoBehaviour
 
         //开始切换场景了
         isStart = true;
-        GameApp.LoadSpaceWithPoster("Game", null);
+        GameApp.LoadSpaceWithPoster("正在连接目标服务器","Game", null);
     }
 
     IEnumerator GetRequest(string uri)

@@ -318,7 +318,7 @@ public class Main : MonoBehaviour
             RuntimePlatform.OSXEditor => $"{assetServer}/MacOS",
             _ => $"{assetServer}/PC"
         };
-        Debug.LogWarning("GetHostServerURL：" + path);
+        //Debug.LogWarning("GetHostServerURL：" + path);
         return path;
     }
     private class RemoteServices : IRemoteServices

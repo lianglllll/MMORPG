@@ -7,16 +7,18 @@ using UnityEngine.UI;
 
 public class SelectionPanel : MonoBehaviour
 {
-    private TextMeshPro SimpleTipsText;
-    private TextMeshPro DetailTipsText;
+    private TextMeshProUGUI SimpleTipsText;
+    private TextMeshProUGUI DetailTipsText;
     private Button ComfirmBtn;
     private Button CancelBtn;
     private Action comfirmAction;
 
+    private Action cancelAction;
+
     private void Awake()
     {
-        SimpleTipsText = transform.Find("TipsBox/SimpleTipsText").GetComponent<TextMeshPro>();
-        DetailTipsText = transform.Find("TipsBox/DetailTipsText").GetComponent<TextMeshPro>();
+        SimpleTipsText = transform.Find("TipsBox/SimpleTipsText").GetComponent<TextMeshProUGUI>();
+        DetailTipsText = transform.Find("TipsBox/DetailTipsText").GetComponent<TextMeshProUGUI>();
         ComfirmBtn = transform.Find("TipsBox/ComfirmBtn").GetComponent<Button>();
         CancelBtn = transform.Find("TipsBox/CancelBtn").GetComponent<Button>();
     }
@@ -25,6 +27,11 @@ public class SelectionPanel : MonoBehaviour
     {
         ComfirmBtn.onClick.AddListener(OnComfirm);
         CancelBtn.onClick.AddListener(OnCancel);
+    }
+
+    public void Init(Action action)
+    {
+        cancelAction = action;
     }
 
     public void OpenPanel(string simpleTipsText,string detailTipsText, Action comfirmAction)
@@ -37,13 +44,14 @@ public class SelectionPanel : MonoBehaviour
     public void OnComfirm()
     {
         comfirmAction?.Invoke();
+        OnCancel();
     }
-
 
     public void OnCancel()
     {
         comfirmAction = null;
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
+        cancelAction?.Invoke();
     }
 
 }

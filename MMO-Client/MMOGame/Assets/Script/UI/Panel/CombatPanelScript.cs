@@ -106,14 +106,13 @@ public class CombatPanelScript : BasePanel
     public void ShowDeathBox()
     {
         //设置数据
-        string deathText = "你已死亡，将会在最近的出生点复活";     //提示语句
+        string deathText = "你已死亡，是否选择最近复活点复活？";     //提示语句
         Action onBtnAction = () =>
         {
             GameApp.character._Revive();
         };
 
-        UIManager.Instance.MessagePanel.ShowConfirmBox(deathText, "复活", true, onBtnAction);
-
+        UIManager.Instance.MessagePanel.ShowSelectionPanel("复活", deathText, onBtnAction);
     }
 
     /// <summary>

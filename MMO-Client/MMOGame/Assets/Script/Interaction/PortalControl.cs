@@ -22,39 +22,39 @@ public class PortalControl : InteractionBehaviour
         //设置数据
         var spaceDefine = DataManager.Instance.GetSpaceDefineById(tagetSpaceId);
         string DeliverText;     //提示语句
-        bool btnActive = false; //是否启用按钮触发回调
+        Action onBtnAction = null ;
 
         if (spaceDefine != null)
         {
-            DeliverText = "目标：" + spaceDefine.Name;
-            btnActive = true;
+            DeliverText = "传送到目标：" + spaceDefine.Name+"是否传送？";
+            //事件回调
+            onBtnAction = () =>
+            {
+                int spaceId = tagetSpaceId;//闭包
+                if (spaceId < 0)
+                {
+                    UIManager.Instance.ShowTopMessage("传送失败,无法搜寻坐标点");
+                    return;
+                }
+                //给服务器发送请求
+                CombatService.Instance.SpaceDeliver(spaceId, pointId);
+            };
+
+
         }
         else
         {
             DeliverText = "由于空间乱流，目标点暂时无法传送";
-            btnActive = false;
         }
 
-        //事件回调
-        Action onBtnAction = () =>
-        {
-            int spaceId = tagetSpaceId;//闭包
-            if (spaceId < 0)
-            {
-                UIManager.Instance.ShowTopMessage("传送失败,无法搜寻坐标点");
-                return;
-            }
-            //给服务器发送请求
-            CombatService.Instance.SpaceDeliver(spaceId, pointId);
-        };
 
         //调用uimananger，显示传送面板
-        UIManager.Instance.MessagePanel.ShowConfirmBox(DeliverText,"传送",btnActive, onBtnAction);
+        UIManager.Instance.MessagePanel.ShowSelectionPanel("传送", DeliverText, onBtnAction);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        UIManager.Instance.MessagePanel.CloseConfirmBox();
+        UIManager.Instance.MessagePanel.CloseSelectionPanel();
     }
 
 

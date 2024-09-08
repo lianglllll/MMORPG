@@ -4,7 +4,7 @@
 @SET EXE=.\excel2json.exe
 
 #复制到目录
-@SET DEST_FOLDER_1=..\MMOGame\Assets\Resources\Data
+@SET DEST_FOLDER_1=..\MMOGame\Assets\Res\Files\Data
 # ----------------------------------------------------------------------------
 
 @ECHO Converting excel files in folder %EXCEL_FOLDER% ...

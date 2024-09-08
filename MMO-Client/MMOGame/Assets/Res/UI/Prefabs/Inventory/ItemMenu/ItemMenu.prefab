@@ -34,6 +34,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -52,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a35e09c38ecc09449a7e396c6cb1357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuOptionPrefab: {fileID: 2421593074830184291, guid: 81676cd5b8191d34c9ba9b42cd05b7b0, type: 3}
+  menuOptionPrefab: {fileID: 2421593074830184291, guid: 71e7a401439a75144846db59388c2b7a, type: 3}
 --- !u!222 &6248347381484906017
 CanvasRenderer:
   m_ObjectHideFlags: 0
