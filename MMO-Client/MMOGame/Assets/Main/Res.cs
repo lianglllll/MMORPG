@@ -138,7 +138,7 @@ public class Res
     }
     private static IEnumerator _loadAssetAsync<T>(string location, ResHandle<T> handle, uint priority = 0, float timeout=5f) where T : UnityEngine.Object
     {
-        var path = $"{Prefix}/{location}.prefab";
+        var path = $"{Prefix}/{location}";
         T prefab;
         handle.Progress = 0;
 #if (UNITY_EDITOR)
@@ -183,22 +183,11 @@ public class Res
     /// <param name="location"></param>
     /// <param name="priority"></param>
     /// <returns></returns>
-    public static T LoadAssetSync<T>(string location, FileType fileType = FileType.Prefab,uint priority = 0)where T : UnityEngine.Object
+    public static T LoadAssetSync<T>(string location, uint priority = 0)where T : UnityEngine.Object
     {
         if (string.IsNullOrEmpty(location)) return null;
 
-        string suffix = "";
-        if(fileType == FileType.Prefab)
-        {
-            suffix = ".prefab";
-        }
-        else if(fileType == FileType.Png)
-        {
-            suffix = ".png";
-        }
-
-        var path = $"{Prefix}/{location}{suffix}";
-        //Debug.Log("当前path=" + path);
+        var path = $"{Prefix}/{location}";
 #if (UNITY_EDITOR)
         {
             T prefab = AssetDatabase.LoadAssetAtPath<T>(path);
