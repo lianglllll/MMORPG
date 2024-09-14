@@ -12,6 +12,8 @@ using DG.Tweening;
 
 public class LoginPanelScript : BasePanel
 {
+    private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来
+
     private Transform loginBox;
     private Transform ServerInfoBox;
     private InputField usernameInputField;
@@ -20,7 +22,13 @@ public class LoginPanelScript : BasePanel
     private Button registerButton;
     private Button ExitButton;
     private Toggle recordUsernameAndPassword;
-    private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来
+    //serverinfo
+    private Button RefreshServerInfoBtn;
+    private Text OnlinePlayerCountText;
+    private Text UserCountText;
+    private Transform Content;
+    private GameObject contentNode;
+
 
 
     protected override void Awake()
@@ -33,6 +41,15 @@ public class LoginPanelScript : BasePanel
         loginBox = transform.Find("Login-box");
         ServerInfoBox = transform.Find("ServerInfoBox");
         ExitButton = transform.Find("ExitBtn").GetComponent<Button>();
+
+        RefreshServerInfoBtn = transform.Find("ServerInfoBox/UpdateServerInfo").GetComponent<Button>();
+        OnlinePlayerCountText = transform.Find("ServerInfoBox/OnlinePlayerCountText").GetComponent<Text>();
+        UserCountText = transform.Find("ServerInfoBox/UserCountText").GetComponent<Text>();
+        Content = transform.Find("ServerInfoBox/KillRank/Content");
+        contentNode = transform.Find("ServerInfoBox/KillRank/ContentNode").gameObject;
+        contentNode.SetActive(false);
+
+
     }
 
     protected override void Start()
@@ -41,9 +58,13 @@ public class LoginPanelScript : BasePanel
         loginButton.onClick.AddListener(OnLogin);
         registerButton.onClick.AddListener(OnRegister);
         ExitButton.onClick.AddListener(OnExitBtn);
+        RefreshServerInfoBtn.onClick.AddListener(OnRefreshServerInfoBtn);
         isOnClickLoginBtn = false;
+        OnRefreshServerInfoBtn();
         Init();
     }
+
+
 
     private void Init()
     {
@@ -62,6 +83,8 @@ public class LoginPanelScript : BasePanel
         //给登录框弄点移动效果
         loginBox.DOLocalMoveX(transform.localPosition.x + 2000f, 2f).From();
         ServerInfoBox.DOLocalMoveX(transform.localPosition.x  -4000f, 2f).From();
+
+
     }
 
 
@@ -102,7 +125,6 @@ public class LoginPanelScript : BasePanel
     /// <param name="msg"></param>
     public void OnLoginResponse(UserLoginResponse msg)
     {
-
         //登录成功，切换到角色选择scene
         if (msg.Success)
         {
@@ -162,7 +184,40 @@ public class LoginPanelScript : BasePanel
 
     }
 
+    public void OnServerInfoResponse(ServerInfoResponse message)
+    {
+        OnlinePlayerCountText.text = "当前服务器在线人数：" + message.OnlinePlayerCount;
+        UserCountText.text = "当前服务器注册人数：" + message.UserCount;
 
+        //清理
+        foreach(Transform child in Content)
+        {
+            Destroy(child.gameObject);
+        }
+
+        //添加
+        int index = 0;
+        foreach(var item in message.KillRankingList)
+        {
+            index++;
+            var obj = Instantiate(contentNode, Content);
+            obj.GetComponent<Text>().text = $"{index}.{item.ChrName}-击杀数量：{item.KillCount}";
+            obj.SetActive(true);
+        }
+
+
+    }
+
+    private void OnRefreshServerInfoBtn()
+    {
+        UserService.Instance._ServerInfoRequest();
+    }
+
+
+
+    /// <summary>
+    /// 退出
+    /// </summary>
     private void OnExitBtn()
     {
         //弹框提示

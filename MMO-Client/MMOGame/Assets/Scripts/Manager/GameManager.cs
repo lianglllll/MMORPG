@@ -1,5 +1,6 @@
 using Assets.Script.Service;
 using BaseSystem.PoolModule;
+using BaseSystem.Singleton;
 using GameClient.Entities;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,28 +13,18 @@ using UnityEngine.UI;
 /// <summary>
 /// 全局游戏管理器
 /// </summary>
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-
     public List<GameObject> keepAlive;          //切换场景时不销毁的对象
+    private NetManager netManager;
 
-    public Texture2D mouseIcon;
-
+    protected override void Awake()
+    {
+        base.Awake();
+        netManager = GetComponent<NetManager>();
+    }
     void Start()
     {
-        Init();
-    }
-    /// <summary>
-    /// 初始化游戏内的一些设置
-    /// </summary>
-    private void Init()
-    {
-        //设置鼠标光标icon
-        if(mouseIcon != null)
-        {
-            Cursor.SetCursor(mouseIcon, Vector2.zero, CursorMode.Auto);
-        }
-
         //设置初始优先窗口大小
         Screen.SetResolution(1920, 1080, false);
 
@@ -59,19 +50,21 @@ public class GameManager : MonoBehaviour
         UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;
 
         //打开登录面板ui
-        UIManager.Instance.OpenPanel("LoginPanel");
+        UIManager.Instance.OpenPanel("ServerPanel");
     }
-
-
     void Update()
     {
         //执行事件系统
         Kaiyun.Event.Tick();
     }
-
     private void FixedUpdate()
     {
         EntityManager.Instance.OnUpdate(Time.fixedDeltaTime);
+    }
+
+    public void ConnectToServer()
+    {
+        netManager.ConnectToServer();
     }
 
 }

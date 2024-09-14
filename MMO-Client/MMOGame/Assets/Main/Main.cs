@@ -302,7 +302,7 @@ public class Main : MonoBehaviour
     {
         mainScenePanel.FadeIn(() =>
         {
-            Res.LoadSceneAsync("Servers");
+            Res.LoadSceneAsync("Game");
         });
     }
 

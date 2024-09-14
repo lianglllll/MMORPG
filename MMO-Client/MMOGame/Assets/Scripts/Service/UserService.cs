@@ -28,10 +28,9 @@ public class UserService : Singleton<UserService>, IDisposable
         MessageRouter.Instance.Subscribe<CharacterDeleteResponse>(_CharacterDeleteResponse);
         MessageRouter.Instance.Subscribe<UserRegisterResponse>(OnRegisterResponse);
         MessageRouter.Instance.Subscribe<CharacterCreateResponse>(_CharacterCreateResponse);
+        MessageRouter.Instance.Subscribe<ServerInfoResponse>(_ServerInfoResponse);
 
     }
-
-
 
 
     /// <summary>
@@ -241,5 +240,26 @@ public class UserService : Singleton<UserService>, IDisposable
         //这里处理一些其他事情，比如说ui关闭的清理工作
     }
 
+    /// <summary>
+    ///服务器的信息
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="message"></param>
+    public void _ServerInfoRequest()
+    {
+        NetClient.Send(new ServerInfoRequest());
+    }
+
+    private void _ServerInfoResponse(Connection sender, ServerInfoResponse message)
+    {
+        var panel = UIManager.Instance.GetPanelByName("LoginPanel");
+        if (panel == null) return;
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            ((LoginPanelScript)panel).OnServerInfoResponse(message);
+        });
+
+
+    }
 
 }

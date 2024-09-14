@@ -44,7 +44,7 @@ public class NetManager : Singleton<NetManager>
         isConnected = false;
         isReconnecting = false;
         isEnableHeartBeat = false;
-        ConnectToServer();
+
     }
 
     private void OnDestroy()

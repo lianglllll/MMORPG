@@ -26,7 +26,7 @@ public class ScenePoster : MonoBehaviour
 
     //淡入淡出效果
     private Image fadeImage;
-    private float fadeDuration = 0.6f;
+    private float fadeDuration = 1f;
 
     private void Awake()
     {

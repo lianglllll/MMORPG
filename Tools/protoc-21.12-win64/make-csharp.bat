@@ -16,7 +16,7 @@ for %%i in (proto/*.proto) do (
 
 ::复制文件
 copy /y out\csharp\Message.cs ..\..\MMO-SERVER\Common\Summer\Proto\Message.cs
-copy /y out\csharp\Message.cs ..\..\MMO-Client\MMOGame\Assets\Script\Proto\Message.cs
+copy /y out\csharp\Message.cs ..\..\MMO-Client\MMOGame\Assets\Scripts\Proto\Message.cs
 
 
 echo "OK"

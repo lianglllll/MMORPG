@@ -10,13 +10,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class SelectServer : MonoBehaviour
+public class ServerPanel : BasePanel
 {
     public string webUrl;
     public GameObject groupObj;
     public TextMeshProUGUI currentServerName;
     private GameObject serverNode;
     private bool isStart;
+    private Button startBtn;
 
 
     [Serializable]
@@ -25,8 +26,17 @@ public class SelectServer : MonoBehaviour
         public ServerInfo[] ServerList;
     }
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        startBtn = transform.Find("Info/StartBtn").GetComponent<Button>();
+        
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
         //拉取serversJson文件
         StartCoroutine(GetRequest(webUrl));
 
@@ -44,6 +54,8 @@ public class SelectServer : MonoBehaviour
             GameApp.ServerInfo = JsonUtility.FromJson<ServerInfo>(myServerInfo);
         }
 
+        startBtn.onClick.AddListener(StartGame);
+
         isStart = false;
 
     }
@@ -56,7 +68,6 @@ public class SelectServer : MonoBehaviour
         }
         
     }
-
 
     public void StartGame()
     {
@@ -73,7 +84,16 @@ public class SelectServer : MonoBehaviour
 
         //开始切换场景了
         isStart = true;
-        GameApp.LoadSpaceWithPoster("正在连接目标服务器","Game", null);
+        GameManager.Instance.ConnectToServer();
+        StartCoroutine(_StartGame());
+
+    }
+    private IEnumerator _StartGame()
+    {
+        yield return ScenePoster.Instance.FadeIn();
+        UIManager.Instance.OpenPanel("LoginPanel");
+        yield return ScenePoster.Instance.FadeOut();
+        UIManager.Instance.ClosePanel("ServerPanel");
     }
 
     IEnumerator GetRequest(string uri)

@@ -75,16 +75,6 @@ namespace GameClient {
             get => _CombatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
         }
 
-        /// <summary>
-        /// 传送请求发包
-        /// </summary>
-        /// <param name="spaceId"></param>
-        public static void SpaceDeliver(int spaceId)
-        {
-            SpaceDeliverRequest req = new SpaceDeliverRequest();
-            req.SpaceId = spaceId;
-            NetClient.Send(req);
-        }
 
 
         /// <summary>
@@ -97,10 +87,7 @@ namespace GameClient {
             var spaceDefine = DataManager.Instance.spaceDict[spaceId];
             UnityMainThreadDispatcher.Instance().StartCoroutine(_LoadSpaceWithPoster(spaceDefine.Name,spaceDefine.Resource, action));
         }
-        public static void LoadSpaceWithPoster(string str,string sceneName, Action<Scene> action)
-        {
-            UnityMainThreadDispatcher.Instance().StartCoroutine(_LoadSpaceWithPoster(str, sceneName, action));
-        }
+
         private static IEnumerator _LoadSpaceWithPoster(string spaceName,string path, Action<Scene> action)
         {
 
