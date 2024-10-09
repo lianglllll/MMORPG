@@ -8,19 +8,7 @@ namespace BaseSystem.PoolModule
     [Serializable]
     public class UnityObjectPool : IObjectPool<Object>, IDisposable
     {
-        private static Transform _poolRoot;
-        public static Transform PoolRoot
-        {
-            get
-            {
-                if (_poolRoot == null)
-                {
-                    _poolRoot = new GameObject("PoolRoot").transform;
-                }
-
-                return _poolRoot;
-            }
-        }
+        private string poolName = "hello";
         public Object ItemPrefab;
         public int InitialPoolSize = 0;
         private int _curCount = 0;
@@ -30,10 +18,31 @@ namespace BaseSystem.PoolModule
         private Action<Object> _enterQueueHandle;
         private Action<Object> _dequeueHandle;
 
+        private Transform _poolRoot;
+        public Transform PoolRoot
+        {
+            get
+            {
+                if (_poolRoot == null)
+                {
+                    GameObject obj = GameObject.Find("PoolRoot");
+                    if (obj == null)
+                    {
+                        obj = new GameObject("PoolRoot");
+                    }
+                    _poolRoot = new GameObject(poolName).transform;
+                    _poolRoot.SetParent(obj.transform);
+                }
+
+                return _poolRoot;
+            }
+        }
+
         private bool _disposed;
 
-        public UnityObjectPool(Object itemPrefab, Func<Object> objectFactory,int initialPoolSize = 0, int maxPoolSize = 500, Action<Object> enterQueueHandle = null,Action<Object> dequeueHandle = null)
+        public UnityObjectPool(string poolName, Object itemPrefab, Func<Object> objectFactory, int initialPoolSize = 0, int maxPoolSize = 500, Action<Object> enterQueueHandle = null, Action<Object> dequeueHandle = null)
         {
+            this.poolName = poolName;
             _disposed = false;
             ItemPrefab = itemPrefab;
             _objectFactory = objectFactory;

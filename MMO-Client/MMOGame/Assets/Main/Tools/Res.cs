@@ -107,10 +107,11 @@ public class Res
     public static IEnumerator LoadAssetAsyncWithTimeout<T>(string location, Action<T> loadedAction, float timeout = 5f) where T : UnityEngine.Object
     {
         T prefab = null;
-        var handle = Res.LoadAssetAsync<T>(location);
+        var handle = new ResHandle<T>();
         handle.OnLoaded = (obj) => {
             prefab = obj;
         };
+        UnityMainThreadDispatcher.Instance().StartCoroutine(_loadAssetAsync<T>(location, handle));
 
         //同步等待资源加载完成或超时
         var startTime = Time.time;
@@ -128,13 +129,6 @@ public class Res
         yield return prefab;
         loadedAction?.Invoke(prefab);
         yield break;
-    }
-    public static ResHandle<T> LoadAssetAsync<T>(string location, uint priority = 0) where T : UnityEngine.Object
-    {
-        var handle = new ResHandle<T>();
-        UnityMainThreadDispatcher.Instance()
-            .StartCoroutine(_loadAssetAsync<T>(location, handle, priority));
-        return handle;
     }
     private static IEnumerator _loadAssetAsync<T>(string location, ResHandle<T> handle, uint priority = 0, float timeout=5f) where T : UnityEngine.Object
     {
@@ -203,11 +197,6 @@ public class Res
 
     }
 
-
 }
 
-public enum FileType
-{
-    Prefab,Png
-}
 

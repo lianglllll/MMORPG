@@ -10,14 +10,21 @@ public class GameInputManager : Singleton<GameInputManager>
 
     public Vector2 Movement => _inputActions.GameInput.Movement.ReadValue<Vector2>();           //获取二维输入
     public Vector2 CameraLook => _inputActions.GameInput.CameraLook.ReadValue<Vector2>();
-    public bool Climb => _inputActions.GameInput.Climb.triggered;
+    public bool Run => _inputActions.GameInput.Run.phase == InputActionPhase.Performed;
+    public bool Jump => _inputActions.GameInput.Jump.triggered;
+    public bool Shift => _inputActions.GameInput.Run.triggered;
     public bool LAttack => _inputActions.GameInput.LAttack.triggered;
+    public bool LAttackPerFormed => _inputActions.GameInput.LAttack.phase == InputActionPhase.Performed;
     public bool RAttack => _inputActions.GameInput.RAttack.triggered;
+    public bool RAttackPerFormed => _inputActions.GameInput.RAttack.phase == InputActionPhase.Performed;
+    public bool Defense => _inputActions.GameInput.Grab.triggered;
+
+
+
+    public bool Climb => _inputActions.GameInput.Climb.triggered;
     public bool Grab => _inputActions.GameInput.Grab.triggered;
     public bool TakeOut => _inputActions.GameInput.TakeOut.triggered;
-    public bool Run => _inputActions.GameInput.Run.triggered;
     public bool Dash => _inputActions.GameInput.Dash.triggered;
-    public bool Parry => _inputActions.GameInput.Parry.phase == InputActionPhase.Performed;     //按住
     public bool Equip => _inputActions.GameInput.EquipWP.triggered;
     public bool Quit => _inputActions.GameInput.Quit.triggered;
     public bool Enter => _inputActions.GameInput.Enter.triggered;

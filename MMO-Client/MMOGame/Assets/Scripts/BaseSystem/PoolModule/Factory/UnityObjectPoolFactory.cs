@@ -25,7 +25,7 @@ namespace BaseSystem.PoolModule
             int initialPoolSize = 0, int maxPoolSize = 200,
             Action<UnityEngine.Object> enqueueHandle = null, Action<UnityEngine.Object> dequeueHandle = null)
         {
-            var pool = new UnityObjectPool(t, objectFactory, initialPoolSize, maxPoolSize, enqueueHandle, dequeueHandle);
+            var pool = new UnityObjectPool(poolName, t, objectFactory, initialPoolSize, maxPoolSize, enqueueHandle, dequeueHandle);
             _pools[poolName] = pool;
             return pool;
         }

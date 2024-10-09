@@ -1,1 +1,0 @@
-public enum ExitType { Simple, Fade, Pop, Blink }

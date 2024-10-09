@@ -8,6 +8,7 @@ TagManager:
   - CtlPlayer
   - InventorySlot
   - EquipSlot
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,10 +19,10 @@ TagManager:
   - Actor
   - Ground
   - Item
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Env
+  - HurtCollider
+  - Boss
   - 
   - 
   - 

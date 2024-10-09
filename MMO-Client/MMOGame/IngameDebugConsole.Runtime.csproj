@@ -58,19 +58,19 @@
   <ItemGroup>
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\InputFieldWarningsFixer.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\PlayerPrefsCommands.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugsOnScrollListener.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogItem.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogPopup.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogResizeListener.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogConsole.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogRecycledListView.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\CircularBuffer.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogItemCopyWebGL.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\TimeCommands.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Android\DebugLogLogcatListener.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugsOnScrollListener.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogPopup.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogConsole.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogEntry.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\EventSystemHandler.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\ConsoleMethodAttribute.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogItemCopyWebGL.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\TimeCommands.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Android\DebugLogLogcatListener.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\SceneCommands.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogManager.cs" />
   </ItemGroup>
@@ -346,14 +346,8 @@
     <Reference Include="DOTweenEditor">
       <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Burst.Unsafe">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.Unsafe.dll</HintPath>
-    </Reference>
     <Reference Include="DemiEditor">
       <HintPath>Assets\Plugins\Demigiant\DemiLib\Core\Editor\DemiEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
@@ -361,17 +355,8 @@
     <Reference Include="Unity.VisualScripting.IonicZip">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Burst.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
-    </Reference>
     <Reference Include="dnlib">
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@2d5f71f6b7\Plugins\dnlib.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil.Rocks">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
