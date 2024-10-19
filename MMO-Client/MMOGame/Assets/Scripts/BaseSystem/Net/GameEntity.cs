@@ -59,15 +59,14 @@ public class GameEntity : MonoBehaviour
             {
                 fallSpeed = FALLSPEEDMAX;
             }
-            //向下移动
-            characterController.Move(new Vector3(0, -fallSpeed * Time.deltaTime, 0));
         }
         else
         {
-            characterController.Move(new Vector3(0, -0.001f, 0));
-            fallSpeed = 0f;
+            fallSpeed = 1f;
         }
-        
+        //向下移动
+        characterController.Move(new Vector3(0, -fallSpeed * Time.deltaTime, 0));
+
 
         if (!isMine)
         {
@@ -89,48 +88,6 @@ public class GameEntity : MonoBehaviour
         }
 
     }
-
-    /// <summary>
-    /// 用于显示角色名
-    /// </summary>
- /*   private void OnGUI()
-    {
-        if (!isView(gameObject))
-        {
-            return;
-        }
-
-        float height = 1.8f;
-
-        Camera playerCamera = Camera.main;
-        //计算角色头顶往上一点的世界坐标
-        Vector3 targetPos = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
-        //转换为screen坐标
-        Vector2 screenPos =  playerCamera.WorldToScreenPoint(targetPos);
-        //screen坐标转换为gui坐标
-        Vector2 guiPos = new Vector2(screenPos.x, Screen.height - screenPos.y);
-
-
-        //label样式
-        GUIStyle labelStyle = new GUIStyle(GUI.skin.label);
-        labelStyle.fontSize = 24; // 设置适当的字体大小，这里的值为20
-
-
-        //根据姓名的长度做一些位置调整
-        //获取通过gui生成名字的标签的宽高
-        //Vector2 nameSize = GUI.skin.label.CalcSize(new GUIContent(entityName));
-        Vector2 nameSize = labelStyle.CalcSize(new GUIContent(entityName));
-
-
-        //设置gui的颜色
-        GUI.color = Color.green;
-        //绘制gui
-        //nameLabel你需要将其x轴向做移动标准长度的一半，否则标签会从guipos这个点直接开始
-        Rect nameLabel = new Rect(guiPos.x-(nameSize.x/2),guiPos.y-nameSize.y,nameSize.x,nameSize.y);
-        GUI.Label(nameLabel,entityName,labelStyle);
-
-    }*/
-
 
 
     /// <summary>
@@ -183,6 +140,7 @@ public class GameEntity : MonoBehaviour
     public void Move(Vector3 target)
     {
         if (characterController == null || !characterController.enabled) return;
+        target.y = transform.position.y;
         characterController.Move(target - transform.position);
     }
 

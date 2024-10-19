@@ -212,7 +212,7 @@ namespace Summer.Network
             {
                 try
                 {
-                    handler.DynamicInvoke(sender, message);
+                    handler?.DynamicInvoke(sender, message);
                 }
                 catch (Exception e)
                 {

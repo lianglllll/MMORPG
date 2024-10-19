@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.15</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.16</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2021.3.5f1c1</UnityVersion>
@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\BaseSystem\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenu.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\DemoManager.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\DemoManager.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_IdleState.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\RegisterPanelScript.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\ChibiDialogDemo\Scripts\ChibiDialogMain.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Assets\Scripts\BaseSystem\Singleton\Singleton.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Ctl\State\CtlState_Idle.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingLayer.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingLayer.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\Test\TestDelayTask.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\Net\GameEntity.cs" />
     <Compile Include="Assets\aExample\aMyTest\Action\LigthContrl.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="Assets\Scripts\Entities\ItemEntity.cs" />
     <Compile Include="Assets\aExample\aMyTest\Mechanism\BackInTime\Boomer.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Billboard.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\CustomImpulse.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\CustomImpulse.cs" />
     <Compile Include="Assets\aExample\aMyTest\Action\LightInteraction.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_DefenceState.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Info\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\Net\SyncEntity.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityBarScript.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\DestroyAfterTime.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\DestroyAfterTime.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\DelayedTaskList.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
@@ -230,10 +230,10 @@
     <Compile Include="Assets\Scripts\Service\CombatService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_StateBase.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerInfoButton.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingInstance.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingInstance.cs" />
     <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\SwooshTest.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenuOption.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessing.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessing.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\AlternationMode.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_Death.cs" />
@@ -243,7 +243,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\Dialog.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingInstanceController_RadialBlur.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingInstanceController_RadialBlur.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_SkillIntonate.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpaceDefine.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SkillDefine.cs" />
@@ -267,7 +267,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerPanel.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Factory\ObjectPoolFactory.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\DelayedTaskScheduler.cs" />
-    <Compile Include="Assets\Mirza Beig\Lightning VFX\Scripts\FPSDisplay.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\FPSDisplay.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_AttackState.cs" />
     <Compile Include="Assets\Scripts\BaseSystem\Net\CtrlEntity.cs" />
     <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
@@ -307,7 +307,7 @@
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuNNDV1.MMD4Mecanim.xml" />
     <None Include="Assets\Art\Effects\刀光剑影\Demo scene\HDRP and URP.txt" />
-    <None Include="Assets\Mirza Beig\Lightning VFX\Shaders\Post-Processing\CGIncludes\RadialBlur.cginc" />
+    <None Include="Assets\Art\Effects\闪电\Lightning VFX\Shaders\Post-Processing\CGIncludes\RadialBlur.cginc" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuNNDV1.xml" />
     <None Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Environments\Sources\Shaders\PT_Vegetation_Plants_Shader.shader" />
@@ -317,19 +317,18 @@
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\DissolveNoise.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBark.shader" />
-    <None Include="Assets\Art\Effects\VFX_Klaus\Prefabs\Hyper Casual FX\ReadMe_Hyper Casual FX.txt" />
     <None Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Village\Sources\Shaders\PT_Buildings_Shader_PBR.shader" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\Add_Fresnel.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.xml" />
     <None Include="Assets\HybridCLRGenerate\link.xml" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\Ice.shader" />
-    <None Include="Assets\Mirza Beig\Lightning VFX\README.txt" />
+    <None Include="Assets\Art\Effects\闪电\Lightning VFX\README.txt" />
     <None Include="Assets\Art\joker-Combat\MeleeWeaponTrail\README.txt" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\Distortion.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeavesOptimized.shader" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\Blend_TwoSides.shader" />
-    <None Include="Assets\Mirza Beig\Lightning VFX\Shaders\Post-Processing\Grayscale.shader" />
+    <None Include="Assets\Art\Effects\闪电\Lightning VFX\Shaders\Post-Processing\Grayscale.shader" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Environments\Sources\Shaders\PT_Vegetation_Opaque_Shader.shader" />
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.xml" />
@@ -353,13 +352,13 @@
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\BlendDistort.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\Scroll.shader" />
-    <None Include="Assets\Mirza Beig\Lightning VFX\Shaders\Lightning.shader" />
+    <None Include="Assets\Art\Effects\闪电\Lightning VFX\Shaders\Lightning.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\WavingGrass.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBarkOptimized.shader" />
     <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_MeshMask.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuV1武器.MMD4Mecanim.xml" />
-    <None Include="Assets\Mirza Beig\Lightning VFX\Shaders\Post-Processing\Radial Blur.shader" />
+    <None Include="Assets\Art\Effects\闪电\Lightning VFX\Shaders\Post-Processing\Radial Blur.shader" />
     <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_NoiseDissolve.shader" />
     <None Include="Assets\Art\Fonts\zh-cn.txt" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeaves.shader" />
@@ -372,7 +371,8 @@
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_Triplanar_BumpSpec.shader" />
     <None Include="Assets\Art\Unit\WizardPolyArt\SRP\HowToTestSRPs.txt" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\Mirza Beig\Lightning VFX\Shaders\Ground Crack.shader" />
+    <None Include="Assets\Art\Effects\Hovl Studio\Magic effects pack\Demo scene\Readme.txt" />
+    <None Include="Assets\Art\Effects\闪电\Lightning VFX\Shaders\Ground Crack.shader" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\Explosion.shader" />
     <None Include="Assets\Art\UI\Combat\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Art\Effects\刀光剑影\Shaders\SwordSlash.shader" />
@@ -655,6 +655,21 @@
     </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>Assets\Plugins\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\MygameTools\2021.3.5f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>
@@ -1135,6 +1150,51 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
