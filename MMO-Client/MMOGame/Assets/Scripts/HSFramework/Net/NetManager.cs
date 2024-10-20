@@ -65,10 +65,12 @@ public class NetManager : Singleton<NetManager>
     /// <summary>
     /// 尝试连接到服务器
     /// </summary>
-    public void ConnectToServer()
+    private Action connectSuccessAction;
+    public void ConnectToServer(Action action = null)
     {
         if (isConnected) return;
         //连接服务器
+        connectSuccessAction = action;
         NetClient.ConnectToServer(GameApp.ServerInfo.host, GameApp.ServerInfo.port);
     }
 
@@ -80,6 +82,8 @@ public class NetManager : Singleton<NetManager>
         isConnected = true;
         //显示ui
         UIManager.Instance.MessagePanel.ShowTopMsg("成功连接到服务器.....");
+        connectSuccessAction?.Invoke();
+
         //发送心跳包
         isEnableHeartBeat = true;
         StartCoroutine(SendHeartMessage());

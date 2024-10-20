@@ -2,6 +2,7 @@ using Assets.Script.Service;
 using BaseSystem.PoolModule;
 using BaseSystem.Singleton;
 using GameClient.Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,9 +63,9 @@ public class GameManager : Singleton<GameManager>
         EntityManager.Instance.OnUpdate(Time.fixedDeltaTime);
     }
 
-    public void ConnectToServer()
+    public void ConnectToServer(Action action = null)
     {
-        netManager.ConnectToServer();
+        netManager.ConnectToServer(action);
     }
 
 }

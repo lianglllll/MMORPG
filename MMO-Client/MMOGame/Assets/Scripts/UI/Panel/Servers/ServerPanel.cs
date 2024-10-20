@@ -1,3 +1,4 @@
+using BaseSystem.MyDelayedTaskScheduler;
 using GameClient;
 using Newtonsoft.Json;
 using System;
@@ -29,7 +30,7 @@ public class ServerPanel : BasePanel
     protected override void Awake()
     {
         base.Awake();
-        startBtn = transform.Find("Info/StartBtn").GetComponent<Button>();
+        startBtn = transform.Find("Info/ConnectBtn").GetComponent<Button>();
         
     }
 
@@ -82,18 +83,23 @@ public class ServerPanel : BasePanel
         //还需要判断这个服务器是否可用才能开始游戏。
 
 
-        //开始切换场景了
-        isStart = true;
-        GameManager.Instance.ConnectToServer();
-        StartCoroutine(_StartGame());
+        //连接服务器
+        GameManager.Instance.ConnectToServer(()=> {
+            isStart = true;
+            //开始切换场景了
+            DelayedTaskScheduler.Instance.AddDelayedTask(1f, () => {
+                UIManager.Instance.ExchangePanelWithFade("ServerPanel", "LoginPanel");
+            });
+        });
 
     }
     private IEnumerator _StartGame()
     {
-        yield return ScenePoster.Instance.FadeIn();
-        UIManager.Instance.OpenPanel("LoginPanel");
-        yield return ScenePoster.Instance.FadeOut();
-        UIManager.Instance.ClosePanel("ServerPanel");
+        /*        yield return ScenePoster.Instance.FadeIn();
+                UIManager.Instance.OpenPanel("LoginPanel");
+                yield return ScenePoster.Instance.FadeOut();
+                UIManager.Instance.ClosePanel("ServerPanel");*/
+        yield return null;
     }
 
     IEnumerator GetRequest(string uri)

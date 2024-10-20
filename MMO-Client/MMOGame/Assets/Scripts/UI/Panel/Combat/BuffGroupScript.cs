@@ -6,7 +6,6 @@ using UnityEngine;
 public class BuffGroupScript : MonoBehaviour
 {
     private Actor owner;
-
     private GameObject buffPrefab;
     private Dictionary<int, BuffUIScript> buffUIdict = new();
 

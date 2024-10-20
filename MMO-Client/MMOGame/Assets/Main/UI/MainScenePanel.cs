@@ -18,7 +18,7 @@ public class MainScenePanel : MonoBehaviour
 
 
     private float fadeDuration = 1f;    // 淡入淡出的时间
-    private float minAlpha = 0.1f;      // 最小透明度
+    private float minAlpha = 0f;        // 最小透明度
     private float maxAlpha = 1f;        // 最大透明度
     private Tween breathingTween;
 
@@ -72,7 +72,7 @@ public class MainScenePanel : MonoBehaviour
     public void FadeIn(Action action)
     {
         fadeImage.gameObject.SetActive(true); // 隐藏 Image 组件
-        fadeImage.DOFade(1, fadeDuration*1.2f).OnComplete(() =>
+        fadeImage.DOFade(1, fadeDuration).OnComplete(() =>
         {
             action?.Invoke();
             //场景已经要销毁了。

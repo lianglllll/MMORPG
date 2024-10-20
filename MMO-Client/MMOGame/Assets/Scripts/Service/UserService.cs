@@ -97,7 +97,7 @@ public class UserService : Singleton<UserService>, IDisposable
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            UIManager.Instance.AsyncShowTopMessage(msg.Message);
+            UIManager.Instance.ShowTopMessage(msg.Message);
 
             switch (msg.Code)
             {

@@ -56,250 +56,250 @@
     <Analyzer Include="D:\vs2019\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenu.cs" />
-    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\DemoManager.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_IdleState.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\RegisterPanelScript.cs" />
-    <Compile Include="Assets\Art\UI\ChibiDialog\ChibiDialogDemo\Scripts\ChibiDialogMain.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\ExitType.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\StateMachine\StateMachine.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Skill\IHurter.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Old\Timer\GameTimerManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Log\SerilogConfig.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DataStruct\Heap\MinHeap.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Input\InputActions.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\SelectionPanel.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Singleton\Singleton.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Skill\IHurter.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Old\Timer\GameTimerManager.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Input\InputActions.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Singleton\Singleton.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Ctl\State\CtlState_Idle.cs" />
-    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingLayer.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\Test\TestDelayTask.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Net\GameEntity.cs" />
-    <Compile Include="Assets\aExample\aMyTest\Action\LigthContrl.cs" />
-    <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr2.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Skill\Weapon_Controller.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DevelopmentToos.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Ctl\State\CtlState_Idle.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\Test\TestDelayTask.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\GameEntity.cs" />
     <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Scripts\Interpolate.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
-    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
-    <Compile Include="Assets\Scripts\Entities\ItemEntity.cs" />
     <Compile Include="Assets\aExample\aMyTest\Mechanism\BackInTime\Boomer.cs" />
-    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Billboard.cs" />
     <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\CustomImpulse.cs" />
     <Compile Include="Assets\aExample\aMyTest\Action\LightInteraction.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_DefenceState.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_SkillActive.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DataStruct\Heap\MaxHeap.cs" />
-    <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\LookAtTarget.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\MaxHeap.cs" />
     <Compile Include="Assets\Scripts\Manager\GameApp.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Ctl\CtlState.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_HurtState.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Frame\ModelBase.cs" />
     <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextData.cs" />
     <Compile Include="Assets\aExample\aMyTest\InteractionManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Old\Timer\GameTimer.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\DeliverPanel.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Net\SyncEntity.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityBarScript.cs" />
     <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\DestroyAfterTime.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\DelayedTaskList.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\AutoRecycle\AutoRecycleConf.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Pool\IObjectPool.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AudioManager\AudioDefine.cs" />
-    <Compile Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\PlayerMovement.cs" />
-    <Compile Include="Assets\Art\Effects\刀光剑影\Demo scene\CameraHolder.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\DragHolder\DragHolder.cs" />
-    <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskList.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleConf.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPool.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\CreateRolePanelScript.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Factory\UnityObjectPoolFactory.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_Dizzy.cs" />
-    <Compile Include="Assets\Scripts\Service\BuffService.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_Controller.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_Idle.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_Idle.cs" />
     <Compile Include="Assets\Scripts\Interaction\PortalControl.cs" />
     <Compile Include="Assets\Scripts\Service\ChatService.cs" />
     <Compile Include="Assets\Art\Unit\牛头人\DemoScene\demo.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AudioManager\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\Tips\ToolTip.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AudioManager\AudioManager.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillInfo.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\AutoRecycle\AutoRecycleItem.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleItem.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Player\Player_Controller.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Effect\GameEffectManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Test\TestFire.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Effect\GameEffectManager.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestFire.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRolePanelScript.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\PlayerState.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillConfig.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AudioManager\AudioDataSO.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_StrikeAndBack.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Pool\IObjectPoolItem.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Effect\GameEffect.cs" />
-    <Compile Include="Assets\aExample\aMyTest2\TimeLeap.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AudioManager\AudioDataSO.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_StrikeAndBack.cs" />
     <Compile Include="Assets\Scripts\Inventory\MaterialItem.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Manager\GameObjectManager.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_WalkState.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Scripts\Entities\Actor.cs" />
     <Compile Include="Assets\aExample\aMyTest\MovementController.cs" />
     <Compile Include="Assets\Scripts\Combat\Skill.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\PoolAssetLoad.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_SkillAttackState.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\ITimerUtil.cs" />
-    <Compile Include="Assets\Scripts\Service\ItemService.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_Hit.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\MouseMove.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Player\Player_State.cs" />
     <Compile Include="Assets\aExample\aMyTest\SyncMovementController.cs" />
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Config\Skill\Skill2.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Net\NetClient.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Skill\SkillHitEFConfig.cs" />
     <Compile Include="Assets\Scripts\Proto\Message.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Base\IState.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\EventSystem\Event.cs" />
-    <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr.cs" />
-    <Compile Include="Assets\aExample\aMyTest\GameTest.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Skill\SkillHitEFConfig.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\EventSystem\Event.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\MessagePanelScript.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DataStruct\Heap\Heap.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Player\Player_Model.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Scripts\Camera\TP_CameraController.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\PlayerStateMachine.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\RoleListItemScript.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\VocationItem.cs" />
-    <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Demo\Scripts\Movement.cs" />
-    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_JumpUpState.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Scripts\MeleeWeaponTrail.cs" />
     <Compile Include="Assets\Scripts\Inventory\Consumable.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_IdelState.cs" />
-    <Compile Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\MouseLook.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Singleton\SingletonNonMono.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Singleton\SingletonNonMono.cs" />
     <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\EnterType.cs" />
     <Compile Include="Assets\Scripts\Service\UserService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_HurtState.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Pool\UnityObjectPool.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\UnityObjectPool.cs" />
     <Compile Include="Assets\aExample\CombatSystem\PostProcessMananger.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AudioManager\AudioSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ChatBoxScript.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\StateMachine\StateBase.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Ctl\CtlStateMachine.cs" />
-    <Compile Include="Assets\Art\Unit\骷髅\Readme\Scripts\Readme.cs" />
-    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Demo\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Ctl\CtlStateMachine.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Input\GameInputManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Base\StateMachine.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Pool\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Input\GameInputManager.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingSelectOption.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_State.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\NumberInputBox.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_Model.cs" />
-    <Compile Include="Assets\Scripts\Entities\Character.cs" />
     <Compile Include="Assets\Art\joker-Combat\Flooded_Grounds\Scripts\WaterFloat.cs" />
     <Compile Include="Assets\Art\joker-Combat\RzFX_BloodSpray\KillTime.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Test\TestBullet.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestBullet.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_AirDownState.cs" />
+    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\SwooshTest.cs" />
+    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\AlternationMode.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_Death.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskData.cs" />
+    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingInstanceController_RadialBlur.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_SkillIntonate.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\LoginPanelScript.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_RunState.cs" />
+    <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\DialogButton.cs" />
+    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataManager.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_StrandAttackState.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\CombatPanelScript.cs" />
+    <Compile Include="Assets\Scripts\Combat\Missile.cs" />
+    <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\GameTools.cs" />
+    <Compile Include="Assets\aExample\aMyTest\ReplayMgr.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_StateBase.cs" />
+    <Compile Include="Assets\Scripts\Player\UnitUIController.cs" />
+    <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
+    <Compile Include="Assets\Art\Unit\牛头人\DemoScene\Action_Manage.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Config\Skill\SkillObjBase.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
+    <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\LoadingBox.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Skill\ISkillOwner.cs" />
+    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
+    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\NetManager.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\DemoManager.cs" />
+    <Compile Include="Assets\Art\UI\ChibiDialog\ChibiDialogDemo\Scripts\ChibiDialogMain.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\StateMachine\StateMachine.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Log\SerilogConfig.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\MinHeap.cs" />
+    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\SelectionPanel.cs" />
+    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingLayer.cs" />
+    <Compile Include="Assets\aExample\aMyTest\Action\LigthContrl.cs" />
+    <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr2.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Skill\Weapon_Controller.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DevelopmentToos.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
+    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
+    <Compile Include="Assets\Scripts\Entities\ItemEntity.cs" />
+    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\Billboard.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_DefenceState.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_SkillActive.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
+    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\LookAtTarget.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Ctl\CtlState.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_HurtState.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Frame\ModelBase.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Old\Timer\GameTimer.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AudioManager\AudioDefine.cs" />
+    <Compile Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\PlayerMovement.cs" />
+    <Compile Include="Assets\Art\Effects\刀光剑影\Demo scene\CameraHolder.cs" />
+    <Compile Include="Assets\Scripts\UI\Tool\DragHolder\DragHolder.cs" />
+    <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\UnityObjectPoolFactory.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_Dizzy.cs" />
+    <Compile Include="Assets\Scripts\Service\BuffService.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_Controller.cs" />
+    <Compile Include="Assets\Scripts\UI\Tool\Tips\ToolTip.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Player\Player_Controller.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\PlayerState.cs" />
+    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPoolItem.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Effect\GameEffect.cs" />
+    <Compile Include="Assets\aExample\aMyTest2\TimeLeap.cs" />
+    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_WalkState.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\PoolAssetLoad.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\ITimerUtil.cs" />
+    <Compile Include="Assets\Scripts\Service\ItemService.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_Hit.cs" />
+    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\MouseMove.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Player\Player_State.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\NetClient.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Base\IState.cs" />
+    <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr.cs" />
+    <Compile Include="Assets\aExample\aMyTest\GameTest.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\Heap.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Player\Player_Model.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\VocationItem.cs" />
+    <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
+    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicText.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_JumpUpState.cs" />
+    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Scripts\MeleeWeaponTrail.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_IdelState.cs" />
+    <Compile Include="Assets\Art\Environment\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AudioManager\AudioSettingPanel.cs" />
+    <Compile Include="Assets\aExample\CombatSystem\StateMachine\StateBase.cs" />
+    <Compile Include="Assets\Art\Unit\骷髅\Readme\Scripts\Readme.cs" />
+    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Demo\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Base\StateMachine.cs" />
+    <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
+    <Compile Include="Assets\Scripts\Entities\Character.cs" />
     <Compile Include="Assets\Scripts\Service\CombatService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_StateBase.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerInfoButton.cs" />
     <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingInstance.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\SwooshTest.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenuOption.cs" />
     <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessing.cs" />
-    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\AlternationMode.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_Death.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\DelayedTaskData.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\Dialog.cs" />
-    <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\Custom Post-Processing\CustomPostProcessingInstanceController_RadialBlur.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_SkillIntonate.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpaceDefine.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SkillDefine.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\LoginPanelScript.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_RunState.cs" />
-    <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\DialogButton.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_RollState.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Scripts\Buffs\Buff.cs" />
     <Compile Include="Assets\Art\joker-Combat\RzFX_BloodSpray\PlayFX.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataManager.cs" />
-    <Compile Include="Assets\Art\UI\Combat\Dynamic Floating Text\Scripts\DynamicTextManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Factory\ThreadObjectPool.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_StrandAttackState.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\CombatPanelScript.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ThreadObjectPool.cs" />
     <Compile Include="Assets\aExample\aMyTest\Mechanism\BackInTime\TimeMachineManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_Motion.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_Motion.cs" />
     <Compile Include="Assets\Scripts\Entities\Entity.cs" />
-    <Compile Include="Assets\Scripts\Combat\Missile.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\BasePanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerPanel.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Factory\ObjectPoolFactory.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\DelayedTaskModule\DelayedTaskScheduler.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ObjectPoolFactory.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskScheduler.cs" />
     <Compile Include="Assets\Art\Effects\闪电\Lightning VFX\Scripts\FPSDisplay.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_AttackState.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Net\CtrlEntity.cs" />
-    <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\GameTools.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AudioManager\PlayClickAudio.cs" />
-    <Compile Include="Assets\aExample\aMyTest\ReplayMgr.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_StateBase.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\CtrlEntity.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AudioManager\PlayClickAudio.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingPanel.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_MoveState.cs" />
-    <Compile Include="Assets\Scripts\Player\UnitUIController.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\Net\V3.cs" />
-    <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
-    <Compile Include="Assets\Art\Unit\牛头人\DemoScene\Action_Manage.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Ctl\State\CtlState_Motion.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\V3.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Ctl\State\CtlState_Motion.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\PoolModule\Test\TestPool.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestPool.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Config\Skill\SkillObjBase.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
-    <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\LoadingBox.cs" />
     <Compile Include="Assets\aExample\CombatSystem\MonoManager.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_StrikeAndFly.cs" />
-    <Compile Include="Assets\Scripts\BaseSystem\AI\StateMachine\Player\State\PlayerState_Jump.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_StrikeAndFly.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\Player\State\PlayerState_Jump.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\ScenePoster.cs" />
-    <Compile Include="Assets\aExample\CombatSystem\Skill\ISkillOwner.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Frame\CharacterBase.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />
@@ -632,8 +632,23 @@
     <Reference Include="Serilog">
       <HintPath>Assets\Plugins\Serilog.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="dnlib">
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@2d5f71f6b7\Plugins\dnlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
@@ -655,21 +670,6 @@
     </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>Assets\Plugins\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Unsafe">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil.Rocks">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\MygameTools\2021.3.5f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>
@@ -1046,9 +1046,6 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>D:\MygameTools\2021.3.5f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="HybridCLR.Runtime">
       <HintPath>Library\ScriptAssemblies\HybridCLR.Runtime.dll</HintPath>
     </Reference>
@@ -1058,11 +1055,11 @@
     <Reference Include="YooAsset.Editor">
       <HintPath>Library\ScriptAssemblies\YooAsset.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
@@ -1070,29 +1067,17 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -1103,20 +1088,17 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="HybridCLR.Editor">
-      <HintPath>Library\ScriptAssemblies\HybridCLR.Editor.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
       <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
@@ -1124,8 +1106,71 @@
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="YooAsset">
+      <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
+    </Reference>
+    <Reference Include="BetterStreamingAssets">
+      <HintPath>Library\ScriptAssemblies\BetterStreamingAssets.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="HybridCLR.Editor">
+      <HintPath>Library\ScriptAssemblies\HybridCLR.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
@@ -1133,11 +1178,11 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ScriptableBuildPipeline">
       <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
-    </Reference>
-    <Reference Include="YooAsset">
-      <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ScriptableBuildPipeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
@@ -1145,56 +1190,11 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="BetterStreamingAssets">
-      <HintPath>Library\ScriptAssemblies\BetterStreamingAssets.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="PPv2URPConverters">
-      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+    <Reference Include="Unity.VisualScripting.State">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1202,21 +1202,13 @@
       <Project>{E361F34E-9485-3D1E-F65B-5430B3BA17A1}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="HotUpdate.csproj">
-      <Project>{E759DA4C-59DC-1809-C862-E6716DE69777}</Project>
-      <Name>HotUpdate</Name>
-    </ProjectReference>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{682213BC-AB5A-6785-DF80-1FFA307A26DD}</Project>
-      <Name>DOTween.Modules</Name>
+    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
+      <Project>{47921D90-3ADE-6686-F0CD-45318BF36735}</Project>
+      <Name>IngameDebugConsole.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="IngameDebugConsole.Editor.csproj">
       <Project>{88556816-2CA4-F522-6553-345DFCC07ED5}</Project>
       <Name>IngameDebugConsole.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
-      <Project>{47921D90-3ADE-6686-F0CD-45318BF36735}</Project>
-      <Name>IngameDebugConsole.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Main.csproj">
       <Project>{86C6AA80-C9DC-063F-133E-52C802CA1BF0}</Project>
@@ -1229,6 +1221,14 @@
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="HotUpdate.csproj">
+      <Project>{E759DA4C-59DC-1809-C862-E6716DE69777}</Project>
+      <Name>HotUpdate</Name>
+    </ProjectReference>
+    <ProjectReference Include="DOTween.Modules.csproj">
+      <Project>{682213BC-AB5A-6785-DF80-1FFA307A26DD}</Project>
+      <Name>DOTween.Modules</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

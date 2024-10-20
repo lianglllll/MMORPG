@@ -33,8 +33,11 @@ public class EliteScript : MonoBehaviour
     /// </summary>
     /// <param name="actor"></param>
     public void SetOwner(Actor actor)
-    {   
-        if (actor == null) return;
+    {
+        if (actor == null) {
+            this.actor = null;
+            return;
+        }
         if (this.actor == actor) return;
         this.actor = actor;
         buffGroup.SetOwner(actor);

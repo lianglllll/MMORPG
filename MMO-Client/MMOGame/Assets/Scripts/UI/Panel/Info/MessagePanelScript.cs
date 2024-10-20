@@ -16,8 +16,9 @@ public class MessagePanelScript : MonoBehaviour
 
     //消息提示面板
     private GameObject topMsgBox;
-    private GameObject bottonMsgBox;
     private Text topMsgBoxText;
+    private CanvasGroup topMsgCanvasGroup;
+    private GameObject bottonMsgBox;
     private TextMeshProUGUI bottonMsgBoxText;
     private float showTime = 2f;
     private float topMsgBoxCountdown;
@@ -42,6 +43,7 @@ public class MessagePanelScript : MonoBehaviour
     {
         //获取自身身上的Text组件
         topMsgBoxText = transform.Find("TopMessageBox/MessageText").GetComponent<Text>();
+        topMsgCanvasGroup = transform.Find("TopMessageBox").GetComponent<CanvasGroup>();
         bottonMsgBoxText = transform.Find("BottonMessageBox/MessageText").GetComponent<TextMeshProUGUI>();
         topMsgBox = transform.Find("TopMessageBox").gameObject;
         bottonMsgBox = transform.Find("BottonMessageBox").gameObject;
@@ -63,9 +65,7 @@ public class MessagePanelScript : MonoBehaviour
         bottonMsgBoxCountdown = 0f;
 
         // 确保初始颜色为透明状态
-        Color originalColor1 = topMsgBoxText.color;
-        originalColor1.a = 0;
-        topMsgBoxText.color = originalColor1;
+        topMsgCanvasGroup.alpha = 0;
 
         topMsgBox.SetActive(false);
         bottonMsgBox.SetActive(false);
@@ -117,9 +117,9 @@ public class MessagePanelScript : MonoBehaviour
         topMsgBox.SetActive(true);
 
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(topMsgBoxText.DOFade(1, 1f));
+        sequence.Append(topMsgCanvasGroup.DOFade(1, 1f));
         sequence.AppendInterval(showTime);
-        sequence.Append(topMsgBoxText.DOFade(0, 1f).OnComplete(()=> {
+        sequence.Append(topMsgCanvasGroup.DOFade(0, 1f).OnComplete(()=> {
             topMsgBox.SetActive(false);
         }));
 

@@ -93,7 +93,6 @@ public class ScenePoster : MonoBehaviour
 
     public IEnumerator  FadeIn()
     {
-        //if(fadeImage.gameObject.activeInHierarchy == true)yield break;
         fadeImage.gameObject.SetActive(true); // 确保 Image 组件被激活
         fadeImage.DOFade(1, fadeDuration);
         yield return new WaitForSeconds(fadeDuration);
@@ -101,7 +100,7 @@ public class ScenePoster : MonoBehaviour
 
     public IEnumerator FadeOut()
     {
-        if (fadeImage.gameObject.activeInHierarchy == false) yield break;
+        //if (fadeImage.gameObject.activeInHierarchy == false) yield break;
 
         // 淡入效果
         fadeImage.DOFade(0, fadeDuration).OnComplete(() =>

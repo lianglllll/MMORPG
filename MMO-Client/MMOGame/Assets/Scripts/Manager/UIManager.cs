@@ -194,7 +194,6 @@ public class UIManager
         return panelPrefab;
     }
 
-
     /// <summary>
     /// 通过消息面板显示消息
     /// </summary>
@@ -202,18 +201,6 @@ public class UIManager
     public void ShowTopMessage(string str)
     {
         MessagePanel.ShowTopMsg(str);
-    }
-
-    /// <summary>
-    /// 异步通过消息面板显示消息
-    /// </summary>
-    /// <param name="str"></param>
-    public void AsyncShowTopMessage(string str)
-    {
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            MessagePanel.ShowTopMsg(str);
-        });
     }
 
     /// <summary>
@@ -227,6 +214,20 @@ public class UIManager
         }
         panelScriptDict.Clear();
     }
+
+    public void ExchangePanelWithFade(string curPanel,string targetPanel)
+    {
+        UnityMainThreadDispatcher.Instance().StartCoroutine(_ExchangePanelWithFade(curPanel, targetPanel));
+    }
+    private IEnumerator _ExchangePanelWithFade(string curPanel, string targetPanel)
+    {
+        yield return ScenePoster.Instance.FadeIn();
+        UIManager.Instance.ClosePanel(curPanel);
+        yield return null;
+        UIManager.Instance.OpenPanel(targetPanel);
+        yield return ScenePoster.Instance.FadeOut();
+    }
+
 
 }
 
