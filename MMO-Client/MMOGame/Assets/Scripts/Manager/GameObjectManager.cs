@@ -130,11 +130,11 @@ public class GameObjectManager:MonoBehaviour
             yield break;
         }
 
-        if (nActor.EntityType == EntityType.Character)
+        if (nActor.ActorType == ActorType.Character)
         {
             chrObj.name = "Character_" + nActor.Entity.Id;
         }
-        else if (nActor.EntityType == EntityType.Monster)
+        else if (nActor.ActorType == ActorType.Monster)
         {
             chrObj.name = "Monster_" + nActor.Entity.Id;
             //如果怪物死亡，就不要显示了

@@ -91,21 +91,18 @@ namespace GameClient {
         private static IEnumerator _LoadSpaceWithPoster(string spaceName,string path, Action<Scene> action)
         {
 
-            //淡入1秒
-            yield return ScenePoster.Instance.FadeIn();
-
             //展示转场UI,这里需要在4秒内模拟到进度的百分之90，这个是模拟出来假的进度。
             ScenePoster.Instance.nameText.text = spaceName ?? "---";
             ScenePoster.Instance.SetProgress(0.9f, 4.0f);
 
-            //淡出
-            yield return ScenePoster.Instance.FadeOut();
+            yield return new WaitForSeconds(ScenePoster.Instance.fadeDuration * 1.1f);
 
             var handle = Res.LoadSceneAsync(path);
             handle.OnLoaded = (s) =>
             {
                 UnityMainThreadDispatcher.Instance().StartCoroutine(__LoadSpaceWithPoster( s,action));
             };
+
         }
         private static IEnumerator __LoadSpaceWithPoster(Scene s, Action<Scene> action)
         {
@@ -116,11 +113,6 @@ namespace GameClient {
 
             //完成转场ui
             ScenePoster.Instance.SetProgress(1f, 0.3f);
-
-            //淡入
-            yield return ScenePoster.Instance.FadeIn();
-            //淡出
-            yield return ScenePoster.Instance.FadeOut();
         }
 
     }

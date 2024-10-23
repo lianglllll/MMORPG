@@ -83,7 +83,7 @@ message NEntitySync{
 //=======================================actor==============================================
 
 //actor类型todo改名
-enum EntityType
+enum ActorType
 {
     Character=0;
     Monster=1;
@@ -102,7 +102,7 @@ message NetActor{
 	int64 gold = 8;
 	float hp=9;
 	float mp=10;
-	EntityType entityType = 11; 
+	ActorType actorType = 11; 
 	repeated SkillInfo skills = 12;			//技能列表
 	repeated ItemInfo equipList = 13;	 	//穿戴装备
 	float hpMax = 14;

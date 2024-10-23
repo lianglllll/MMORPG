@@ -80,8 +80,6 @@ namespace GameClient.Entities
             entityDict.Clear();
         }
 
-
-
         /// <summary>
         /// 有一个actor进入当前场景
         /// </summary>
@@ -100,10 +98,10 @@ namespace GameClient.Entities
 
 
             //根据不同类型生成不同的actor：玩家角色、怪物、npc
-            if(nActor.EntityType == EntityType.Character)
+            if(nActor.ActorType == ActorType.Character)
             {
                 AddEntity(new Character(nActor));
-            }else if(nActor.EntityType == EntityType.Monster)
+            }else if(nActor.ActorType == ActorType.Monster)
             {
                 AddEntity(new Monster(nActor));
             }
