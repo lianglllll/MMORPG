@@ -17,7 +17,7 @@ public class ItemService : Singleton<ItemService>, IDisposable
     public void Init()
     {
         MessageRouter.Instance.Subscribe<InventoryInfoResponse>(_InventoryInfoResponse);
-        MessageRouter.Instance.Subscribe<NetItemEntitySync>(_NetItemEntitySync); 
+        MessageRouter.Instance.Subscribe<NetEItemSync>(_NetEItemSync); 
         MessageRouter.Instance.Subscribe<ItemUseResponse>(_ItemUseResponse);
         MessageRouter.Instance.Subscribe<EquipsUpdateResponse>(_EquipsUpdateResponse);
         MessageRouter.Instance.Subscribe<ItemDiscardResponse>(_ItemDiscardResponse);
@@ -28,7 +28,7 @@ public class ItemService : Singleton<ItemService>, IDisposable
     public void Dispose()
     {
         MessageRouter.Instance.Off<InventoryInfoResponse>(_InventoryInfoResponse);
-        MessageRouter.Instance.Off<NetItemEntitySync>(_NetItemEntitySync);
+        MessageRouter.Instance.Off<NetEItemSync>(_NetEItemSync);
         MessageRouter.Instance.Off<ItemUseResponse>(_ItemUseResponse);
         MessageRouter.Instance.Off<EquipsUpdateResponse>(_EquipsUpdateResponse);
         MessageRouter.Instance.Off<ItemDiscardResponse>(_ItemDiscardResponse);
@@ -92,9 +92,9 @@ public class ItemService : Singleton<ItemService>, IDisposable
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="msg"></param>
-    private void _NetItemEntitySync(Connection sender, NetItemEntitySync msg)
+    private void _NetEItemSync(Connection sender, NetEItemSync msg)
     {
-        EntityManager.Instance.OnItemEntitySync(msg.NetItemEntity);
+        EntityManager.Instance.OnItemEntitySync(msg.NetEItem);
     }
 
     /// <summary>

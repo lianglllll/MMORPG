@@ -60,12 +60,12 @@ namespace GameServer.Model
         /// <param name="item"></param>
         /// <param name="pos"></param>
         /// <param name="dir"></param>
-        public ItemEntity(NetItemEntity netItemEntity) :base(netItemEntity.Entity)
+        public ItemEntity(NetEItem netEItem) :base(netEItem.Entity)
         {
-            item = new Item(netItemEntity.ItemInfo);
+            item = new Item(netEItem.ItemInfo);
         }
 
-        public void UpdateInfo(NetItemEntity netItemEntity)
+        public void UpdateInfo(NetEItem netItemEntity)
         {
             item = new Item(netItemEntity.ItemInfo);
         }

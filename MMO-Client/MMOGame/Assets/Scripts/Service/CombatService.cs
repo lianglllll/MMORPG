@@ -74,7 +74,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     }
 
                     //3.加载物品
-                    foreach (var item in msg.ItemEntityList)
+                    foreach (var item in msg.EItemList)
                     {
                         EntityManager.Instance.OnItemEnterScene(item);
                     }
@@ -110,7 +110,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
                         EntityManager.Instance.OnActorEnterScene(item);
                     }
                     //加载物品
-                    foreach (var item in msg.ItemEntityList)
+                    foreach (var item in msg.EItemList)
                     {
                         EntityManager.Instance.OnItemEnterScene(item);
                     }
@@ -343,7 +343,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
     /// <param name="msg"></param>
     private void _SpaceItemEnterResponse(Connection sender, SpaceItemEnterResponse msg)
     {
-        EntityManager.Instance.OnItemEnterScene(msg.NetItemEntity);
+        EntityManager.Instance.OnItemEnterScene(msg.NetEItem);
     }
 
     /// <summary>

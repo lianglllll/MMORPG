@@ -132,7 +132,7 @@ message SpaceCharactersEnterResponse{
 message SpaceEnterResponse{
 	NetActor character = 1;
 	repeated NetActor characterList = 2;
-	repeated NetItemEntity itemEntityList = 3;
+	repeated NetEItem eItemList = 3;
 }
 
 
@@ -470,7 +470,7 @@ message EquipData{
 }
 
 //Net itemEntity信息(用于场景中物品的同步)
-message NetItemEntity{
+message NetEItem{
 	ItemInfo ItemInfo = 1;
 	int32 spaceId = 2;
 	NetEntity entity = 3;
@@ -483,8 +483,8 @@ message InventoryInfo{
 }
 
 //itemEntity 信息同步响应包
-message NetItemEntitySync{
-	NetItemEntity  netItemEntity =  1;
+message NetEItemSync{
+	NetEItem  netEItem =  1;
 }
 
 //场景中物品更新响应包
@@ -500,7 +500,7 @@ message ItemUpdate{
 
 //item进入场景响应
 message SpaceItemEnterResponse{
-	NetItemEntity  netItemEntity =  1;
+	NetEItem  netEItem =  1;
 }
 
 //获取角色的Inventory信息请求

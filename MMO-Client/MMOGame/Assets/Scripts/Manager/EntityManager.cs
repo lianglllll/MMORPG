@@ -117,21 +117,21 @@ namespace GameClient.Entities
         /// <summary>
         /// 有一个itemEntity进入当前场景
         /// </summary>
-        /// <param name="netItemEntity"></param>
-        public void OnItemEnterScene(NetItemEntity netItemEntity)
+        /// <param name="netEItem"></param>
+        public void OnItemEnterScene(NetEItem netEItem)
         {
             //判断是否已经存在？
-            if (entityDict.TryGetValue(netItemEntity.Entity.Id, out var itemEntity))
+            if (entityDict.TryGetValue(netEItem.Entity.Id, out var itemEntity))
             {
                 if (itemEntity is ItemEntity item )
                 {
-                    item.UpdateInfo(netItemEntity);
+                    item.UpdateInfo(netEItem);
                     return;
                 }
             }
 
-            AddEntity(new ItemEntity(netItemEntity));
-            Kaiyun.Event.FireOut("CreateItemObject", netItemEntity);//GameObjectManager中实现
+            AddEntity(new ItemEntity(netEItem));
+            Kaiyun.Event.FireOut("CreateItemObject", netEItem);//GameObjectManager中实现
         }
 
 
@@ -169,14 +169,14 @@ namespace GameClient.Entities
         /// <summary>
         /// itementity信息同步,目前只同步了amount
         /// </summary>
-        /// <param name="netItemEntity"></param>
-        public void OnItemEntitySync(NetItemEntity netItemEntity)
+        /// <param name="netEItem"></param>
+        public void OnItemEntitySync(NetEItem netEItem)
         {
-            Entity entity = entityDict.GetValueOrDefault(netItemEntity.Entity.Id);
+            Entity entity = entityDict.GetValueOrDefault(netEItem.Entity.Id);
             if (entity == null) return;
 
             ItemEntity ientity = entity as ItemEntity;
-            ientity.Amount = netItemEntity.ItemInfo.Amount;
+            ientity.Amount = netEItem.ItemInfo.Amount;
 
             //暂时不需要同步其他的
 

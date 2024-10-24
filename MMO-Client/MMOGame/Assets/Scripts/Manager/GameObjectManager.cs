@@ -22,7 +22,7 @@ public class GameObjectManager:MonoBehaviour
     public static GameObjectManager Instance;
     private static ConcurrentDictionary<int, GameObject> currentGameObjectDict = new();                         //<entityid,gameobject>  entity和gameobject的映射
     private static ConcurrentQueue<NetActor> preparCrateActorObjQueue = new();                                  //创建actorObj的缓冲队列
-    private static ConcurrentQueue<NetItemEntity> preparCrateItemObjQueue = new();                              //创建itemObj的缓冲队列
+    private static ConcurrentQueue<NetEItem> preparCrateItemObjQueue = new();                                   //创建itemObj的缓冲队列
 
     private void Awake()
     {
@@ -182,18 +182,18 @@ public class GameObjectManager:MonoBehaviour
     /// <summary>
     /// 事件驱动：异步向当前场景中创建物品
     /// </summary>
-    /// <param name="netItemEntity"></param>
-    public void CreateItemObject(NetItemEntity netItemEntity)
+    /// <param name="netEItem"></param>
+    public void CreateItemObject(NetEItem netEItem)
     {
         //
-        if (GameApp.SpaceId != netItemEntity.SpaceId) return;
+        if (GameApp.SpaceId != netEItem.SpaceId) return;
 
-        preparCrateItemObjQueue.Enqueue(netItemEntity);
+        preparCrateItemObjQueue.Enqueue(netEItem);
 
     }
-    public void _CreateItemObject(NetItemEntity netItemEntity)
+    public void _CreateItemObject(NetEItem netEItem)
     {
-        int entityId = netItemEntity.Entity.Id;
+        int entityId = netEItem.Entity.Id;
         ItemEntity itemEntity = EntityManager.Instance.GetEntity<ItemEntity>(entityId);
         if (itemEntity == null) return;
 
@@ -212,9 +212,9 @@ public class GameObjectManager:MonoBehaviour
             }
         }
 
-        StartCoroutine(LoadItem(netItemEntity));
+        StartCoroutine(LoadItem(netEItem));
     }
-    private IEnumerator LoadItem(NetItemEntity netItemEntity)
+    private IEnumerator LoadItem(NetEItem netItemEntity)
     {
         int entityId = netItemEntity.Entity.Id;
         ItemEntity itemEntity = EntityManager.Instance.GetEntity<ItemEntity>(entityId);
