@@ -16,22 +16,22 @@ using UnityEngine;
 //反正比之前那个好看一点(本质其实没啥变化)，再不济也可以当成一个动画切换器来使用
 
 /// <summary>
-/// 状态间共享的参数
-/// </summary>
-public class Parameter
-{
-    public Actor owner;
-    public Animator animator;
-    public Skill skill;
-    //hit的时候有用
-    public Actor attacker;
-}
-
-/// <summary>
 /// 玩家状态机,只做动画的同步，不做其他的逻辑处理
 /// </summary>
 public class PlayerStateMachine : StateMachine
 {
+    /// <summary>
+    /// 状态间共享的参数
+    /// </summary>
+    public class Parameter
+    {
+        public Actor owner;
+        public Animator animator;
+        public Skill skill;
+        //hit的时候有用
+        public Actor attacker;
+    }
+
     public Parameter parameter;
     public EntityState currentEntityState;
     private Dictionary<EntityState, IState> stateTable = new();

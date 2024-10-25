@@ -15,18 +15,12 @@ public class PlayerMovementController : MonoBehaviour
     private float rotationSpeed = 8f;
     private Transform mainCamera;
 
-    public EntityState entityState => stateMachine.parameter.owner.entityState;
-
     public float CurrentSpeed => owner.Speed *0.001f;
-    //private float acceleration = 5f;//加速度
-    private float maxSpeed => owner.Speed;
-
 
     //自动移动需要的
     private Vector3 targetPos;
     private bool isMoveTo;
     private Action moveToOverAction;
-
 
     private void Awake()
     {
@@ -35,13 +29,11 @@ public class PlayerMovementController : MonoBehaviour
         gameEntity = GetComponent<GameEntity>();
         mainCamera = Camera.main.transform;
 
-
     }
 
     private void Start()
     {
         isMoveTo = false;
-
     }
 
     private void OnDestroy()
@@ -62,7 +54,6 @@ public class PlayerMovementController : MonoBehaviour
     public void Init(Actor owner)
     {
         this.owner = owner;
-        owner.playerMovementController = this;
     }
 
     /// <summary>
@@ -134,8 +125,6 @@ public class PlayerMovementController : MonoBehaviour
         moveToOverAction = action;
         isMoveTo = true;
     }
-
-
     private void MoveTo()
     {
         if(Vector3.Distance(targetPos,transform.position) < 0.1f)

@@ -1,4 +1,5 @@
 using GameClient.Entities;
+using Player;
 using Proto;
 using Serilog;
 using Summer;
@@ -12,9 +13,6 @@ using UnityEngine;
 namespace GameClient.Combat
 {
     //todo   蓄气技能在蓄气阶段被其他人打死，如果有投射物还是会发出。
-    // 
-
-
 
     //技能施法的阶段
     //开始 - 蓄气 - 激活 - 结束
@@ -82,8 +80,6 @@ namespace GameClient.Combat
         /// 是不是主动技能
         /// </summary>
         public bool IsActiveSkill =>  !(IsPassive || IsNormal);
-
-
 
         /// <summary>
         /// 构造函数
@@ -155,23 +151,32 @@ namespace GameClient.Combat
                 GameApp.CurrSkill = this;
             }
 
-
             _sco = target;
             RunTime = 0;
 
-            if (Owner.StateMachine.parameter.skill == null)
+            if (Owner.baseController.StateMachineParameter.curSkill == null)
             {
-                Owner.StateMachine.parameter.skill = this;
+                Owner.baseController.StateMachineParameter.curSkill = this;
             }
             else
             {
                 //有东西要中断当前技能active
+                Log.Error("当前状态机黑白skill参数不为空！！");
                 return;
             }
 
-            //技能阶段从none切换到蓄气阶段
-            Stage = SkillStage.Intonate;
-            OnIntonate();
+            if (Define.IntonateTime > 0)
+            {
+                //技能阶段从none切换到蓄气阶段
+                Stage = SkillStage.Intonate;
+                OnIntonate();
+            }
+            else
+            {
+                Stage = SkillStage.Active;
+                OnActive();
+            }
+            Owner.baseController.ChangeState(CommonSmallState.Skill);
         }
 
         /// <summary>
@@ -179,29 +184,19 @@ namespace GameClient.Combat
         /// </summary>
         public void OnIntonate()
         {
-            if(Define.IntonateTime > 0)
+
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
-                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                //蓄气转向,
+                if (_sco is SCEntity)
                 {
-                    //蓄气转向,
-                    if (_sco is SCEntity)
+                    var target = _sco.RealObj as Actor;
+                    if (target != Owner)
                     {
-                        var target = _sco.RealObj as Actor;
-                        if(target != Owner)
-                        {
-                            Owner.LookTarget(target.renderObj.transform.position);
-                        }
+                        Owner.LookTarget(target.renderObj.transform.position);
                     }
-
-
-                    //蓄气动画
-                    if (Define.IntonateTime > 0)
-                    {
-                        Owner.StateMachine.SwitchState(EntityState.SkillIntonate);
-                    }
-
-                });
-            }
+                }
+            });
 
         }
 
@@ -220,9 +215,6 @@ namespace GameClient.Combat
                 var missile = myObjcet.AddComponent<Missile>();
                 missile.Init(this, Owner.renderObj.transform.position, target.renderObj);
             }
-
-            //切换动画 skill激活阶段的动画
-            Owner.StateMachine.SwitchState(EntityState.SkillActive);
 
         }
 
@@ -248,7 +240,6 @@ namespace GameClient.Combat
             //Log.Information("技能结束：Owner[{0}],skill[{1}]", Owner.EntityId, Define.Name);
         }
 
-
         /// <summary>
         /// 获取描述文本
         /// </summary>
@@ -260,6 +251,5 @@ namespace GameClient.Combat
                           $"<color=bulue>技能冷却时间：{this.Define.CD}</color>";
             return content;
         }
-
     }
 }

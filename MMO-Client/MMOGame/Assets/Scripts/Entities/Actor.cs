@@ -1,6 +1,7 @@
 using GameClient.InventorySystem;
 using GameClient.Manager;
 using Google.Protobuf.Collections;
+using Player;
 using Proto;
 using Serilog;
 using System;
@@ -16,21 +17,16 @@ namespace GameClient.Entities
 {
     public class Actor:Entity
     {
-
-        public NetActor info;
-        public UnitDefine define;
-        public SkillManager skillManager;
-        public GameObject renderObj;        //actor中对应的游戏对象
         public UnitState unitState;
-        public PlayerStateMachine StateMachine;
+        public EntityState entityState;
+        public NetActor info;                                                   //网络信息
+        public UnitDefine define;                                               //actor默认def
+        public SkillManager skillManager;                                       //技能管理
         public ConcurrentDictionary<EquipsType, Equipment> equipsDict = new();  //actor持有的装备
         public ConcurrentDictionary<int, Buff> buffsDict = new();               //actor持有的buff<实例id,buff>
+        public GameObject renderObj;                                            //actor中对应的游戏对象
 
-        public EntityState entityState;
-
-        public UnitUIController unitUIController;
-        public PlayerMovementController playerMovementController;
-
+        public BaseController baseController;
 
         public bool IsDeath => unitState == UnitState.Dead;
         public int Level => info.Level;
@@ -56,12 +52,16 @@ namespace GameClient.Entities
             BuffUpdate(deltatime);
         }
 
+        public void Inject(BaseController baseController)
+        {
+            this.baseController = baseController;
+        }
 
         /// <summary>
         /// 受伤，被别人打了，播放一下特效或者ui。不做数值更新
         /// </summary>
         /// <param name="damage"></param>
-        public void recvDamage(Damage damage)
+        public virtual void recvDamage(Damage damage)
         {
             if (renderObj == null) return;
             //ui
@@ -112,16 +112,18 @@ namespace GameClient.Entities
 
                 //被击中的音效
 
-                //动作
-                if(entityState != EntityState.Motion && StateMachine.currentEntityState != EntityState.Motion)
-                {
-                    StateMachine.parameter.attacker = GameTools.GetActorById(damage.AttackerId);
-                    StateMachine.SwitchState(EntityState.Hit,false,true);
-                }
 
+                //切换到挨打的动作
+                if(baseController.CurState != CommonSmallState.Move)
+                {
+                    baseController.StateMachineParameter.attacker = GameTools.GetActorById(damage.AttackerId);
+                    baseController.ChangeState(CommonSmallState.Hurt);
+                }
 
             }
         }
+
+
 
         /// <summary>
         /// 看向一个位置，只选择Y轴
@@ -258,7 +260,6 @@ namespace GameClient.Entities
                 equipsDict[item.EquipsType] = item;
             }
         }
-
 
         /// <summary>
         /// 加载buff

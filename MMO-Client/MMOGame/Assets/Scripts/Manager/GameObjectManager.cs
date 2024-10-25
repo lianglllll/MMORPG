@@ -13,6 +13,9 @@ using System.Collections.Concurrent;
 using System;
 using UnityEngine.SceneManagement;
 using GameClient;
+using Player;
+using Player.Controller;
+using HSFramework.Net;
 
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject
@@ -113,72 +116,61 @@ public class GameObjectManager:MonoBehaviour
         //下一帧再执行接下去的
         yield return prefab;
 
-        //3.获取坐标和方向
+        //3.获取坐标和方向,实例化obj并初始化,将实例化的角色放到gamemanager下面
         Vector3 initPosition = V3.Of(nActor.Entity.Position) / 1000;
-        if (initPosition.y == 0)
+        initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;//计算地面坐标
+        GameObject actorObj = Instantiate(prefab, initPosition, Quaternion.identity, this.transform);
+        if (actorObj == null) yield break;
+        if (!currentGameObjectDict.TryAdd(nActor.Entity.Id, actorObj))
         {
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;//计算地面坐标
-        }
-
-        //4.实例化obj并初始化
-        GameObject chrObj = Instantiate(prefab, initPosition, Quaternion.identity, this.transform);//将实例化的角色放到gamemanager下面
-        if (chrObj == null) yield break;
-
-        if (!currentGameObjectDict.TryAdd(nActor.Entity.Id, chrObj))
-        {
-            Destroy(chrObj);
+            Destroy(actorObj);
             yield break;
         }
 
-        if (nActor.ActorType == ActorType.Character)
+        //加入actor图层
+        actorObj.layer = 6;
+        actor.renderObj = actorObj; //actor 和 gameobj关联
+        if (actor is Character chr)
         {
-            chrObj.name = "Character_" + nActor.Entity.Id;
-        }
-        else if (nActor.ActorType == ActorType.Monster)
+            actorObj.name = "Character_" + nActor.Entity.Id;
+
+        }else if(actor is Monster mon)
         {
-            chrObj.name = "Monster_" + nActor.Entity.Id;
+            actorObj.name = "Monster_" + nActor.Entity.Id;
             //如果怪物死亡，就不要显示了
             if (Mathf.Approximately(nActor.Hp, 0))
             {
-                chrObj.SetActive(false);
+                actorObj.SetActive(false);
                 actor.unitState = UnitState.Dead;
             }
         }
-        chrObj.layer = 6;//加入actor图层
-
-
-        //5.actor 和 gameobj关联
-        actor.renderObj = chrObj;
-        actor.StateMachine = chrObj.GetComponent<PlayerStateMachine>();
-        actor.StateMachine.parameter.owner = actor;
-
-        //obj身上的ui
-        var unitui = chrObj.AddComponent<UnitUIController>();
-        unitui.Init(actor);
-        actor.unitUIController = unitui;
-
-
-
-        //6.设置一下同步脚本gameentity
-        GameEntity gameEntity = chrObj.GetComponent<GameEntity>();
-        gameEntity._Start(actor, isMine, initPosition, Vector3.zero);
-
 
         //7.给我们控制的角色添加一些控制脚本
         if (isMine)
         {
-            chrObj.tag = "CtlPlayer";                                                          //打标签
-            PlayerMovementController ctl = chrObj.AddComponent<PlayerMovementController>();    //给当前用户控制的角色添加控制脚本
+            actorObj.tag = "CtlPlayer";                                                             //打标签
+            CtrlController ctl = actorObj.AddComponent<CtrlController>();                           //给当前用户控制的角色添加控制脚本
             ctl.Init(actor);
-            PlayerCombatController combat = chrObj.AddComponent<PlayerCombatController>();     //给当前用户控制的角色添加战斗脚本
-            combat.Init(actor);
+            PlayerCombatController combat = actorObj.AddComponent<PlayerCombatController>();        //给当前用户控制的角色添加战斗脚本
+            combat.Init(ctl);
+            SyncEntitySend syncEntitySend = actorObj.AddComponent<SyncEntitySend>();
+            syncEntitySend.Init(ctl, initPosition, Vector3.zero);
 
             //启用第三人称摄像机
-            TP_CameraController.instance.OnStart(chrObj.transform.Find("CameraLookTarget").transform);
+            TP_CameraController.instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
+        }
+        else
+        {
+            actorObj.tag = "SyncPlayer";                                                             //打标签
+            SyncController ctl = actorObj.AddComponent<SyncController>();                           //给当前用户控制的角色添加控制脚本
+            ctl.Init(actor);
+            SyncEntityRecive syncEntityRecive = actorObj.AddComponent<SyncEntityRecive>();
+            syncEntityRecive.Init(ctl, initPosition, Vector3.zero);
         }
 
 
     }
+
     /// <summary>
     /// 事件驱动：异步向当前场景中创建物品
     /// </summary>
@@ -253,6 +245,7 @@ public class GameObjectManager:MonoBehaviour
         }
 
     }
+
     /// <summary>
     /// 事件驱动：entity离开场景
     /// 不同的场景可以创建不同的对象池来使用这个东西
@@ -274,13 +267,13 @@ public class GameObjectManager:MonoBehaviour
     /// <param name="nEntitySync"></param>
     public void EntitySync(NEntitySync nEntitySync)
     {
-        //1.设置位置+方向+speed
+        //1.设置位置+方向
         int entityId = nEntitySync.Entity.Id;
         GameObject obj = currentGameObjectDict.GetValueOrDefault(entityId, null);
         if (obj == null) return;
-        GameEntity gameEntity = obj.GetComponent<GameEntity>();
         //设置数据到entity中
-        gameEntity.SetData(nEntitySync.Entity,nEntitySync.Force);
+        SyncEntityRecive syncEntityRecive = obj.GetComponent<SyncEntityRecive>();
+        syncEntityRecive.SyncPosAndRotaion(nEntitySync.Entity,nEntitySync.Force);
 
         //2.设置动画状态
         //如果是None,一律不作处理，将维持原来的动画状态
@@ -291,17 +284,6 @@ public class GameObjectManager:MonoBehaviour
             stateMachine.SwitchState(nEntitySync.State);
         }
 
-        //3.安全校验
-        //强制回到目标位置
-        if (nEntitySync.Force)
-        {
-            Vector3 target = V3.Of(nEntitySync.Entity.Position) * 0.001f;
-            //获取位移向量
-            //不能直接使用trasforme的原因是，存在charactercontroller会默认覆盖transform
-            UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                gameEntity.Move(target);
-            });
-        }
     }
     /// <summary>
     /// 事件驱动：本机角色位置+动画状态信息同步
@@ -312,27 +294,17 @@ public class GameObjectManager:MonoBehaviour
         GameObject obj = GameApp.character?.renderObj;
         if (obj == null) return;
 
-        //设置动画状态
+        //这里通常由服务器来通知一些我们的特殊变化
+        //比如：眩晕、击退、击飞、强制位移
         //如果是None,一律不作处理，将维持原来的动画状态
         if (nEntitySync.State != EntityState.NoneState)
         {
-            PlayerStateMachine stateMachine = obj.GetComponent<PlayerStateMachine>();
-            stateMachine.parameter.owner.entityState = nEntitySync.State;//这里也缓存一份，用于状态机退出一些特殊的状态
-            stateMachine.SwitchState(nEntitySync.State);
+            var ctrl = GameApp.character.baseController;
+            ctrl.ChangeState(ctrl.GetCommonSmallState(nEntitySync.State));
         }
-
-        //3.安全校验
-        //强制回到目标位置
-        if (nEntitySync.Force)
-        {
-            GameEntity gameEntity = obj.GetComponent<GameEntity>();
-            Vector3 target = V3.Of(nEntitySync.Entity.Position) * 0.001f;
-            //获取位移向量
-            //不能直接使用trasforme的原因是，存在charactercontroller会默认覆盖transform
-            UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                gameEntity.Move(target);
-            });
-        }
+        //设置数据到entity中,这里强制设置
+        SyncEntitySend syncEntitySend = obj.GetComponent<SyncEntitySend>();
+        syncEntitySend.SyncPosAndRotaion(nEntitySync.Entity);
     }
 
 }

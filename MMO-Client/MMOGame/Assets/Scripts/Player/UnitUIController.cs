@@ -27,10 +27,6 @@ public class UnitUIController : MonoBehaviour
     private LayerMask groundLayer;
     private bool isUse;                     //是否被使用
 
-
-
-
-
     private void Awake()
     {
         SelectMarkCanvas = transform.Find("MyCanvas/SelectMarkCanvas").GetComponent<Canvas>();

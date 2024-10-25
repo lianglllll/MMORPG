@@ -6,7 +6,6 @@ using GameClient.Entities;
 
 /// <summary>
 /// entity网络同步对象
-/// todo 这个脚本职责不单一，抽离重力功能，抽离摄像机的功能，只留下pos+dir+state的同步设置
 /// </summary>
 public class GameEntity : MonoBehaviour
 {
@@ -19,8 +18,6 @@ public class GameEntity : MonoBehaviour
 
     //entity信息
     public int entityId => owner.EntityId;
-    public float speed => owner.info.Speed;
-    public string entityName => owner.info.Name;
 
     public Vector3 position;
     public Vector3 direction;
@@ -144,33 +141,6 @@ public class GameEntity : MonoBehaviour
         characterController.Move(target - transform.position);
     }
 
-    /// <summary>
-    /// 判断一个对象是否在摄像机的显示范围内
-    /// </summary>
-    /// <param name="targetObj"></param>
-    /// <returns></returns>
-    public bool isView(GameObject targetObj)
-    {
-        Vector3 worldPos = targetObj.transform.position;
-        Transform camTransform = Camera.main.transform;
-        //距离50米
-        if (Vector3.Distance(camTransform.position, worldPos) > 50f)
-        {
-            return false;
-        }
-        Vector2 viewPos = Camera.main.WorldToViewportPoint(worldPos);
-        Vector3 dir = (worldPos - camTransform.position).normalized;
-        //判断物体是否在相机前
-        float dot = Vector3.Dot(camTransform.forward, dir);
-        if(dot>0 && viewPos.x>=0 && viewPos.x<=1 && viewPos.y >= 0 && viewPos.y <= 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 
     /// <summary>
     /// 发送同步信息协程
@@ -235,6 +205,7 @@ public class GameEntity : MonoBehaviour
         {
             var pos = ToVector3(nEntity.Position);
             this.position.x = pos.x;
+            //y值不变
             this.position.z = pos.z;
             this.direction = ToVector3(nEntity.Direction);
 

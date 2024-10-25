@@ -2,6 +2,8 @@ using GameClient;
 using GameClient.Combat;
 using GameClient.Entities;
 using GameClient.Manager;
+using Player;
+using Player.Controller;
 using Proto;
 using System;
 using System.Collections;
@@ -28,7 +30,6 @@ public class ComboData
         this.skill = skill;
         next = null;
     }
-
 }
 
 
@@ -38,10 +39,9 @@ public class ComboData
 /// </summary>
 public class PlayerCombatController : MonoBehaviour
 {
-    private PlayerStateMachine stateMachine;
+
+    private CtrlController ctrlController;
     private SkillManager skillManager;
-    private Actor owner;
-    private PlayerMovementController playerMovementController;
 
     protected bool _applyAttackInput => GameApp.CurrSkill == null;               //当前是否可以进行攻击输入
 
@@ -54,6 +54,7 @@ public class PlayerCombatController : MonoBehaviour
     private float comboBufferTime = 2f;
 
     //敌人的范围检测
+    private Actor owner => ctrlController.Actor;
     private Actor _currentEnemy;
     protected float _detectionRange = 15f;
     private LayerMask _enemyLayer;
@@ -62,12 +63,10 @@ public class PlayerCombatController : MonoBehaviour
     private Dictionary<KeyCode,Skill> ActiveTypeSkills  = new();
     protected Skill selectedSkill;                                              //当前输入的主动技能
 
-
     private void Start()
     {
         _enemyLayer = LayerMask.GetMask("Actor");
     }
-
     private void Update()
     {
         SelectTargetObject();
@@ -75,7 +74,6 @@ public class PlayerCombatController : MonoBehaviour
         ComboEnd();
         ClearEnemyWhenMotion();
     }
-
     private void OnEnable()
     {
         //目标死亡
@@ -84,7 +82,6 @@ public class PlayerCombatController : MonoBehaviour
         Kaiyun.Event.RegisterIn("SkillActiveEnd", this, "SkillActiveEnd");
 
     }
-
     private void OnDisable()
     {
         Kaiyun.Event.UnregisterIn("TargetDeath", this, "ClearEnemy");
@@ -97,15 +94,13 @@ public class PlayerCombatController : MonoBehaviour
     /// 组件初始化
     /// </summary>
     /// <param name="owner"></param>
-    public void Init(Actor owner)
+    public void Init(CtrlController ctrlController)
     {
-        this.owner = owner;
-        this.stateMachine = owner.StateMachine;
-        this.skillManager = owner.skillManager;
-        this.playerMovementController = owner.playerMovementController;
+        this.ctrlController = ctrlController;
+        this.skillManager = ctrlController.Actor.skillManager;
 
         //初始化普通攻击连招表
-        var baseSkillIds = owner.define.DefaultSkills;
+        var baseSkillIds = ctrlController.Actor.define.DefaultSkills;
         int count = baseSkillIds.Length;
         if (count <= 0) return;     //没有基础攻击就返回
 
@@ -140,9 +135,6 @@ public class PlayerCombatController : MonoBehaviour
 
     }
 
-
-
-
     /// <summary>
     /// 玩家攻击输入
     /// </summary>
@@ -157,7 +149,7 @@ public class PlayerCombatController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))            
         {
             //施法范围圈
-            owner.unitUIController.SetSpellRangeCanvas(true, currentComboData.next.skill.Define.SpellRangeRadius * 0.001f);
+            ctrlController.unitUIController.SetSpellRangeCanvas(true, currentComboData.next.skill.Define.SpellRangeRadius * 0.001f);
         }
 
         if (Input.GetKeyUp(KeyCode.Alpha1))
@@ -165,7 +157,7 @@ public class PlayerCombatController : MonoBehaviour
             SetComboData(currentComboData.next);
             BaseComboActionExecute();
             //关闭攻击范围
-            owner.unitUIController.SetSpellRangeCanvas(false);
+            ctrlController.unitUIController.SetSpellRangeCanvas(false);
         }
 
         //qefzxc等技能攻击
@@ -180,15 +172,12 @@ public class PlayerCombatController : MonoBehaviour
     private bool CanAttackInput()
     {
         if (_applyAttackInput == false) return false;
-        if (stateMachine.currentEntityState == EntityState.Hit) return false;
-        if (stateMachine.currentEntityState == EntityState.SkillActive) return false;
-        if (stateMachine.currentEntityState == EntityState.SkillIntonate) return false;
-        if (stateMachine.currentEntityState == EntityState.Dizzy) return false;
-        if (stateMachine.currentEntityState == EntityState.Death) return false;
-        //3. 角色正在格挡，不允许攻击
-        //4.角色正在处决，不允许攻击
+        if (ctrlController.CurState == CommonSmallState.Hurt) return false;
+        if (ctrlController.CurState == CommonSmallState.Skill) return false;
+        if (ctrlController.CurState == CommonSmallState.Dizzy) return false;
+        if (ctrlController.CurState == CommonSmallState.Death) return false;
+        if (ctrlController.CurState == CommonSmallState.Defense) return false;
         return true;
-
     }
 
     /// <summary>
@@ -287,9 +276,6 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
-
-
-
     /// <summary>
     /// 手动选择一个目标
     /// </summary>
@@ -317,8 +303,7 @@ public class PlayerCombatController : MonoBehaviour
                 }
                 else if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
-
-                    playerMovementController.MoveToPostion(hitInfo.point);
+                    ctrlController.MoveToPostion(hitInfo.point);
                 }
                 else
                 {
@@ -378,7 +363,7 @@ public class PlayerCombatController : MonoBehaviour
         ClearEnemy();
         _currentEnemy = target;
         GameApp.target = _currentEnemy;
-        _currentEnemy.unitUIController.SetSelectMark(true);
+        ctrlController.unitUIController.SetSelectMark(true);
         Kaiyun.Event.FireOut("SelectTarget");//ui
     }
 
@@ -391,7 +376,7 @@ public class PlayerCombatController : MonoBehaviour
 
         //触发一下取消敌人锁定的事件
         Kaiyun.Event.FireOut("CancelSelectTarget");//ui
-        _currentEnemy?.unitUIController.SetSelectMark(false);
+        ctrlController?.unitUIController.SetSelectMark(false);
 
         GameApp.target = null;
         _currentEnemy = null;
@@ -402,15 +387,12 @@ public class PlayerCombatController : MonoBehaviour
     /// </summary>
     private void ClearEnemyWhenMotion()
     {
-        if(_currentEnemy !=null && stateMachine.currentEntityState == EntityState.Motion && 
+        if(_currentEnemy !=null && ctrlController.CurState == CommonSmallState.Move && 
             Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > _detectionRange)
         {
             ClearEnemy();
         }
     }
-
-
-
 
     /// <summary>
     /// 技能输入
@@ -479,7 +461,7 @@ public class PlayerCombatController : MonoBehaviour
     public void ShowSpellRangeUI(Skill skill)
     {
         //技能圈圈
-        owner.unitUIController.SetSpellRangeCanvas(true, skill.Define.SpellRangeRadius * 0.001f);
+        ctrlController.unitUIController.SetSpellRangeCanvas(true, skill.Define.SpellRangeRadius * 0.001f);
 
         if (skill.IsUnitTarget)
         {
@@ -496,7 +478,7 @@ public class PlayerCombatController : MonoBehaviour
             switch (skill.Define.EffectAreaType)
             {
                 case "扇形":
-                    owner.unitUIController.SetSectorArea(true, skill.Define.SpellRangeRadius * 0.001f, 0f);
+                    ctrlController.unitUIController.SetSectorArea(true, skill.Define.SpellRangeRadius * 0.001f, 0f);
                     break;
                 case "圆形":
 
@@ -515,8 +497,8 @@ public class PlayerCombatController : MonoBehaviour
     public void CloseSpellRangeUI()
     {
         selectedSkill = null;
-        owner.unitUIController.SetSpellRangeCanvas(false);
-        owner.unitUIController.SetSectorArea(false);
+        ctrlController.unitUIController.SetSpellRangeCanvas(false);
+        ctrlController.unitUIController.SetSectorArea(false);
 
     }
 
@@ -528,7 +510,7 @@ public class PlayerCombatController : MonoBehaviour
     {
 
         //关掉技能指示器
-        owner.unitUIController.SetSpellRangeCanvas(false);
+        ctrlController.unitUIController.SetSpellRangeCanvas(false);
 
         if (skill.IsUnitTarget)
         {
@@ -551,7 +533,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 case "扇形":
                     //拿最后指向的方向
-                    var dir = owner.unitUIController.GetSectorAreaDir();
+                    var dir = ctrlController.unitUIController.GetSectorAreaDir();
 
                     //设置到角色身上
                     if (dir != Quaternion.identity)
@@ -560,7 +542,7 @@ public class PlayerCombatController : MonoBehaviour
                     }
 
                     //指示器关闭
-                    owner.unitUIController.SetSectorArea(false);
+                    ctrlController.unitUIController.SetSectorArea(false);
 
                     break;
                 case "圆形":
@@ -583,7 +565,6 @@ public class PlayerCombatController : MonoBehaviour
         //向服务器发请求
         CombatService.Instance.SpellSkill(skill, _currentEnemy);
     }
-
     private void ShowExecuteMsg(string context)
     {
         UIManager.Instance.MessagePanel.ShowBottonMsg(context);
@@ -626,6 +607,5 @@ public class PlayerCombatController : MonoBehaviour
 
 
     }
-
 
 }
