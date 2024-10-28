@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_JumpUp: CtrlState
+    public class SyncState_JumpUp: SyncState
     {
         public override void Enter()
         {
-            player.PlayAnimation("JumpUp");
+            syncer.PlayAnimation("JumpUp");
         }
 
         public override void Update()

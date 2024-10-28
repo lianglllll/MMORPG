@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Defense : CtrlState
+    public class SyncState_Defense : SyncState
     {
         public override void Enter()
         {

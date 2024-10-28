@@ -298,7 +298,7 @@ public class PlayerCombatController : MonoBehaviour
                 if (collider.gameObject.layer == LayerMask.NameToLayer("Actor"))
                 {
                     GameObject clickedObject = hitInfo.collider.gameObject;  // 获取被点击的物体，在这里可以对获取到的物体进行处理
-                    LockTarget(clickedObject.GetComponent<GameEntity>().owner);
+                    LockTarget(clickedObject.GetComponent<BaseController>().Actor);
                     Kaiyun.Event.FireOut("SelectTarget");
                 }
                 else if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -334,7 +334,7 @@ public class PlayerCombatController : MonoBehaviour
         float minDistance = float.MaxValue;
         for (int i = 0; i < enemys.Length; ++i)
         {
-            var tmpA = enemys[i].GetComponent<GameEntity>().owner;
+            var tmpA = enemys[i].GetComponent<BaseController>().Actor;
             if (owner == tmpA || tmpA.IsDeath) continue;
             var dis = Vector3.Distance(transform.position,tmpA.renderObj.transform.position);
             if(dis < minDistance)

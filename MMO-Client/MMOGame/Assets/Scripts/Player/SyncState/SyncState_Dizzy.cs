@@ -8,19 +8,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Dizzy : CtrlState
+    public class SyncState_Dizzy : SyncState
     {
         public override void Enter()
         {
-            player.PlayAnimation("Dizzy");
-        }
-
-        public override void Update()
-        {
-        }
-
-        public override void Exit()
-        {
+            syncer.PlayAnimation("Dizzy");
         }
 
     }

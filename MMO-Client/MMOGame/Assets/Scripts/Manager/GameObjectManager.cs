@@ -145,27 +145,42 @@ public class GameObjectManager:MonoBehaviour
             }
         }
 
+
         //7.给我们控制的角色添加一些控制脚本
         if (isMine)
         {
+
+
             actorObj.tag = "CtlPlayer";                                                             //打标签
+            var modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<PlayerModel>();
             CtrlController ctl = actorObj.AddComponent<CtrlController>();                           //给当前用户控制的角色添加控制脚本
-            ctl.Init(actor);
             PlayerCombatController combat = actorObj.AddComponent<PlayerCombatController>();        //给当前用户控制的角色添加战斗脚本
-            combat.Init(ctl);
             SyncEntitySend syncEntitySend = actorObj.AddComponent<SyncEntitySend>();
+            modelBase.Init();
+            ctl.Init(actor, syncEntitySend);
+            actor.Init(ctl);
+            combat.Init(ctl);
             syncEntitySend.Init(ctl, initPosition, Vector3.zero);
 
             //启用第三人称摄像机
             TP_CameraController.instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
+
+            ctl.SStart();
+
         }
         else
         {
+
+
             actorObj.tag = "SyncPlayer";                                                             //打标签
+            var modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<SyncModel>();
             SyncController ctl = actorObj.AddComponent<SyncController>();                           //给当前用户控制的角色添加控制脚本
-            ctl.Init(actor);
             SyncEntityRecive syncEntityRecive = actorObj.AddComponent<SyncEntityRecive>();
+            modelBase.Init();
+            ctl.Init(actor, syncEntityRecive);
+            actor.Init(ctl);
             syncEntityRecive.Init(ctl, initPosition, Vector3.zero);
+            ctl.SStart();
         }
 
 
@@ -279,9 +294,8 @@ public class GameObjectManager:MonoBehaviour
         //如果是None,一律不作处理，将维持原来的动画状态
         if (nEntitySync.State != EntityState.NoneState)
         {
-            PlayerStateMachine stateMachine = obj.GetComponent<PlayerStateMachine>();
-            stateMachine.parameter.owner.entityState = nEntitySync.State;//这里也缓存一份，用于状态机退出一些特殊的状态
-            stateMachine.SwitchState(nEntitySync.State);
+            var ctrl = GameApp.character.baseController;
+            ctrl.ChangeState(ctrl.GetCommonSmallState(nEntitySync.State));
         }
 
     }

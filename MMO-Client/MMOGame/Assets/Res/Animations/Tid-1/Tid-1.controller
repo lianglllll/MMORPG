@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Motion
+  m_Name: Move
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -154,10 +154,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 3231341555931711907}
-    m_Position: {x: 160, y: -80, z: 0}
+    m_Position: {x: 160, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1355290703735560442}
-    m_Position: {x: 150, y: 70, z: 0}
+    m_Position: {x: 160, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6292350280328093712}
     m_Position: {x: 420, y: 40, z: 0}
@@ -166,22 +166,22 @@ AnimatorStateMachine:
     m_Position: {x: 410, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8055870902132441974}
-    m_Position: {x: 200, y: 160, z: 0}
+    m_Position: {x: 330, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2869333176281001859}
     m_Position: {x: -170, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5720094050145549824}
-    m_Position: {x: 190, y: -10, z: 0}
+    m_Position: {x: 160, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6075516439963918265}
     m_Position: {x: -80, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4078742352832434045}
-    m_Position: {x: -62.997406, y: 337.7958, z: 0}
+    m_Position: {x: 70, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4327213467225504837}
-    m_Position: {x: 250, y: 340, z: 0}
+    m_Position: {x: 80, y: 230, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -357,7 +357,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit
+  m_Name: Hurt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

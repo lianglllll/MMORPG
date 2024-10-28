@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace HSFramework.Net
 {
-    public class SyncEntitySend : MonoBehaviour
+    public class SyncEntitySend : SyncEntity
     {
         //标志
         private bool isStart;

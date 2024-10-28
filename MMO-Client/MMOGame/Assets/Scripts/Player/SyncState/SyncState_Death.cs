@@ -8,17 +8,13 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Death : CtrlState
+    public class SyncState_Death : SyncState
     {
         public override void Enter()
         {
-            player.PlayAnimation("Death");
+            syncer.PlayAnimation("Death");
+            syncer.Actor.OnDeath();
         }
-
-        public override void Update()
-        {
-        }
-
         public override void Exit()
         {
         }

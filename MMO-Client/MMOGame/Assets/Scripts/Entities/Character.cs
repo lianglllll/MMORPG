@@ -11,7 +11,6 @@ namespace Assets.Script.Entities
 {
     public class Character:Actor
     {
-        
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -21,31 +20,20 @@ namespace Assets.Script.Entities
 
         }
 
-
         /// <summary>
         /// 处理死亡逻辑
         /// </summary>
         public override void OnDeath()
         {
+            if (renderObj == null) return;
             base.OnDeath();
 
-            if (renderObj == null) return;
             if (GameApp.character == this)
             {
                 GameApp._CombatPanelScript.ShowDeathBox();
                 //主角死亡事件发生
                 Kaiyun.Event.FireOut("CtlChrDeath");
             }
-        }
-
-        /// <summary>
-        /// 发送玩家复活请求
-        /// </summary>
-        public void _Revive()
-        {
-            ReviveRequest req = new ReviveRequest();
-            req.EntityId = EntityId;
-            NetClient.Send(req);
         }
 
         /// <summary>
@@ -71,7 +59,6 @@ namespace Assets.Script.Entities
             this.info.Gold = new_value;
             Kaiyun.Event.FireOut("GoldChange");
         }
-
 
     }
 

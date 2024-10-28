@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Player.SyncState
+namespace Player
 {
     public class SyncState_Move:SyncState
     {

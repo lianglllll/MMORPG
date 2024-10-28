@@ -1,6 +1,7 @@
 using GameClient.Combat;
 using GameClient.Entities;
 using HSFramework.AI.StateMachine;
+using HSFramework.Net;
 using Proto;
 using System;
 using System.Collections.Generic;
@@ -33,14 +34,6 @@ namespace Player
         //声音源
         protected AudioSource audioSource;
 
-        //状态机
-        public StateMachine stateMachine { get; protected set; }
-        protected CommonSmallState curState;
-        public CommonSmallState CurState => curState;
-        private StateMachineParameter stateMachineParameter;
-        public StateMachineParameter StateMachineParameter => stateMachineParameter;
-
-
         //角色控制器
         private CharacterController characterController;
         public CharacterController CharacterController { get => characterController; }
@@ -52,6 +45,7 @@ namespace Player
         private Actor actor;
         public Actor Actor => actor;
 
+        //初始化
         protected virtual void Awake()
         {
             model = transform.Find("Model").GetComponent<ModelBase>();
@@ -59,7 +53,7 @@ namespace Player
             audioSource = GetComponent<AudioSource>();
             unitUIController = GetComponent<UnitUIController>();
         }
-        public virtual void Init(Actor actor)
+        public virtual void Init(Actor actor, SyncEntity syncEntity)
         {
             this.actor = actor;
             Model.Init();
@@ -68,7 +62,21 @@ namespace Player
             stateMachine.Init(this, stateMachineParameter);
         }
 
-        //状态改变
+        public virtual void SStart()
+        {
+
+        }
+
+
+        #region 状态机
+
+        public StateMachine stateMachine { get; protected set; }
+        protected CommonSmallState curState;
+        public CommonSmallState CurState => curState;
+        private StateMachineParameter stateMachineParameter;
+        public StateMachineParameter StateMachineParameter => stateMachineParameter;
+
+
         public EntityState GetEntityState(CommonSmallState state)
         {
             switch (state)
@@ -81,6 +89,8 @@ namespace Player
                     return EntityState.NoneState;
             }
         }
+
+
         public CommonSmallState GetCommonSmallState(EntityState state)
         {
             switch (state)
@@ -94,11 +104,16 @@ namespace Player
             }
         }
 
-
         public virtual void ChangeState(CommonSmallState state, bool reCurrstate = false)
         {
 
         }
+
+
+        #endregion
+
+        #region 动画相关
+
         private string currentAnimationName;
         public void PlayAnimation(string animationName, bool reState = false, float fixedTransitionDuration = 0.25f)
         {
@@ -120,6 +135,31 @@ namespace Player
 
         }
 
+        #endregion
+
+        #region 工具
+
+        public void DirectLookTarget(Vector3 pos)
+        {
+
+            // 计算角色应该朝向目标点的方向
+            Vector3 targetDirection = pos - transform.position;
+
+            // 限制在Y轴上的旋转
+            targetDirection.y = 0;
+
+            // 计算旋转方向
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+            // 将角色逐渐旋转到目标方向
+            //float rotationSpeed = 5f;
+            //renderObj.transform.rotation = Quaternion.Slerp(renderObj.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            // 立即将角色转向目标方向
+            transform.rotation = targetRotation;
+        }
+
+        #endregion
 
     }
 }

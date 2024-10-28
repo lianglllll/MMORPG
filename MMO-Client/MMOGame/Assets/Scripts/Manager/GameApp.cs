@@ -75,8 +75,6 @@ namespace GameClient {
             get => _CombatPanelScript.chatBoxScript.chatMsgInputField.isFocused;
         }
 
-
-
         /// <summary>
         /// 加载场景
         /// </summary>
@@ -87,7 +85,6 @@ namespace GameClient {
             var spaceDefine = DataManager.Instance.spaceDict[spaceId];
             UnityMainThreadDispatcher.Instance().StartCoroutine(_LoadSpaceWithPoster(spaceDefine.Name,spaceDefine.Resource, action));
         }
-
         private static IEnumerator _LoadSpaceWithPoster(string spaceName,string path, Action<Scene> action)
         {
 
@@ -115,6 +112,16 @@ namespace GameClient {
             ScenePoster.Instance.SetProgress(1f, 0.3f);
         }
 
+
+        /// <summary>
+        /// 发送玩家复活请求
+        /// </summary>
+        public static void _Revive()
+        {
+            ReviveRequest req = new ReviveRequest();
+            req.EntityId = entityId;
+            NetClient.Send(req);
+        }
     }
 
 

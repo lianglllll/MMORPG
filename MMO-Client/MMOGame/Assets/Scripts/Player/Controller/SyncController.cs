@@ -1,7 +1,6 @@
  using GameClient.Entities;
 using HSFramework.Net;
 using Player;
-using Player.SyncState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +14,17 @@ namespace Player.Controller
     {
         private SyncEntityRecive syncEntityRecive;
 
-        public override void Init(Actor actor)
+        public override void Init(Actor actor,SyncEntity syncEntity)
         {
-            base.Init(actor);
+            base.Init(actor, syncEntity);
+            syncEntityRecive = syncEntity as SyncEntityRecive;
+        }
+
+        public override void SStart()
+        {
             ChangeState(CommonSmallState.Idle);
         }
+
 
         public override void ChangeState(CommonSmallState state, bool reCurrstate = false)
         {

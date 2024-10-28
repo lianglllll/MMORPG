@@ -13,10 +13,7 @@ namespace Player
         public override void Enter()
         {
             player.PlayAnimation("Death");
-        }
-
-        public override void Update()
-        {
+            player.Actor.OnDeath();
         }
 
         public override void Exit()

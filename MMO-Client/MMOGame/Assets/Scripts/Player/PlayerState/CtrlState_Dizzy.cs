@@ -14,14 +14,5 @@ namespace Player
         {
             player.PlayAnimation("Dizzy");
         }
-
-        public override void Update()
-        {
-        }
-
-        public override void Exit()
-        {
-        }
-
     }
 }

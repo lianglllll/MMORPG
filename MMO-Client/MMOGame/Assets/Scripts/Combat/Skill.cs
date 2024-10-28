@@ -193,7 +193,7 @@ namespace GameClient.Combat
                     var target = _sco.RealObj as Actor;
                     if (target != Owner)
                     {
-                        Owner.LookTarget(target.renderObj.transform.position);
+                        Owner.baseController.DirectLookTarget(target.renderObj.transform.position);
                     }
                 }
             });

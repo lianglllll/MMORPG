@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HSFramework.Net
 {
-    public class SyncEntityRecive : MonoBehaviour
+    public class SyncEntityRecive : SyncEntity
     {
         private bool isStart;
         private SyncController syncController;

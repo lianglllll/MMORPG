@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
-namespace Player
+namespace HSFramework.Net
 {
-    public class PlayerModel:ModelBase
+    public class SyncEntity: MonoBehaviour
     {
-
     }
 }

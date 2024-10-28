@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Evade : CtrlState
+    public class SyncState_Evade : SyncState
     {
         public override void Enter()
         {
-            player.PlayAnimation("Evade");
+            syncer.PlayAnimation("Evade");
         }
 
         public override void Update()

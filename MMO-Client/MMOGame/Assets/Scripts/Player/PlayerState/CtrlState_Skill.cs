@@ -60,7 +60,16 @@ namespace Player
             switch (ChildState)
             {
                 case SkillChildState.Intonate:
-                    if(curSkill.Stage == SkillStage.Active)
+
+                    //自身特效
+                    if (curSkill.Define.IntonateArt != "")
+                    {
+                        var prefab = Res.LoadAssetSync<GameObject>(curSkill.Define.IntonateArt);
+                        var ins = GameObject.Instantiate(prefab, player.transform);
+                        GameObject.Destroy(ins, curSkill.Define.IntonateTime);
+                    }
+
+                    if (curSkill.Stage == SkillStage.Active)
                     {
                         ChildState = SkillChildState.Active;
                     }

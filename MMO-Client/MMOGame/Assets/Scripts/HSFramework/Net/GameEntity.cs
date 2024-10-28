@@ -7,7 +7,7 @@ using GameClient.Entities;
 /// <summary>
 /// entity网络同步对象
 /// </summary>
-public class GameEntity : MonoBehaviour
+/*public class GameEntity : MonoBehaviour
 {
     //标志
     private bool startFlag;
@@ -230,3 +230,4 @@ public class GameEntity : MonoBehaviour
     }
 
 }
+*/

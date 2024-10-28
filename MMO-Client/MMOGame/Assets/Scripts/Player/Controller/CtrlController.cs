@@ -13,11 +13,17 @@ namespace Player.Controller
     {
         private SyncEntitySend syncEntitySend;
 
-        public override void Init(Actor actor)
+        public override void Init(Actor actor,SyncEntity syncEntity)
         {
-            base.Init(actor);
+            base.Init(actor,syncEntity);
+            this.syncEntitySend = syncEntity as SyncEntitySend;
+        }
+
+        public override void SStart()
+        {
             ChangeState(CommonSmallState.Idle);
         }
+
 
         public override void ChangeState(CommonSmallState state, bool reCurrstate = false)
         {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Player.SyncState
+namespace Player
 {
     public class SyncState: StateBase
     {

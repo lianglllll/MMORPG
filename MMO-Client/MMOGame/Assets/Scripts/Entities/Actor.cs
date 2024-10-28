@@ -25,7 +25,6 @@ namespace GameClient.Entities
         public ConcurrentDictionary<EquipsType, Equipment> equipsDict = new();  //actor持有的装备
         public ConcurrentDictionary<int, Buff> buffsDict = new();               //actor持有的buff<实例id,buff>
         public GameObject renderObj;                                            //actor中对应的游戏对象
-
         public BaseController baseController;
 
         public bool IsDeath => unitState == UnitState.Dead;
@@ -33,11 +32,7 @@ namespace GameClient.Entities
         public long Exp => info.Exp;
         public int Speed { get => info.Speed; set => info.Speed = value; }
 
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="info"></param>
+        //初始化相关
         public Actor(NetActor info) :base(info.Entity)
         {
             this.info = info;
@@ -51,19 +46,37 @@ namespace GameClient.Entities
             skillManager.OnUpdate(deltatime);
             BuffUpdate(deltatime);
         }
-
-        public void Inject(BaseController baseController)
+        public void Init(BaseController baseController)
         {
             this.baseController = baseController;
         }
+        public void LoadEquips(RepeatedField<ItemInfo> itemInfos)
+        {
+            equipsDict.Clear();
+            foreach (var itemInfo in itemInfos)
+            {
+                var item = new Equipment(itemInfo);
+                equipsDict[item.EquipsType] = item;
+            }
+        }
+        private void LoadBuffs(RepeatedField<BuffInfo> buffsList)
+        {
+            foreach (var buffInfo in buffsList)
+            {
+                new Buff().Init(buffInfo, this);
+            }
+        }
 
-        /// <summary>
-        /// 受伤，被别人打了，播放一下特效或者ui。不做数值更新
-        /// </summary>
-        /// <param name="damage"></param>
+        public virtual void OnStateChanged(UnitState old_value, UnitState new_value)
+        {
+            this.unitState = new_value;
+        }
         public virtual void recvDamage(Damage damage)
         {
+            //受伤，被别人打了，播放一下特效或者ui。不做数值更新
+
             if (renderObj == null) return;
+            if (IsDeath) return;
             //ui
             var ownerPos = renderObj.transform.position;
             if (damage.IsImmune)
@@ -122,84 +135,26 @@ namespace GameClient.Entities
 
             }
         }
-
-
-
-        /// <summary>
-        /// 看向一个位置，只选择Y轴
-        /// </summary>
-        /// <param name="pos"></param>
-        public void LookTarget(Vector3 pos)
-        {
-
-            // 计算角色应该朝向目标点的方向
-            Vector3 targetDirection = pos - renderObj.transform.position;
-
-            // 限制在Y轴上的旋转
-            targetDirection.y = 0;
-
-            // 计算旋转方向
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-
-            // 将角色逐渐旋转到目标方向
-            //float rotationSpeed = 5f;
-            //renderObj.transform.rotation = Quaternion.Slerp(renderObj.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-            // 立即将角色转向目标方向
-            renderObj.transform.rotation = targetRotation;
-        }
-
-        /// <summary>
-        /// HP更新
-        /// </summary>
-        /// <param name="oldHp"></param>
-        /// <param name="newHp"></param>
         public void OnHpChanged(float oldHp,float newHp)
         {
             //Debug.Log($"current hp = {newHp}");
             this.info.Hp = newHp;
             LocalOrTargetAcotrPropertyChange();
         }
-
-        /// <summary>
-        /// MP更新
-        /// </summary>
-        /// <param name="old_value"></param>
-        /// <param name="new_value"></param>
         public void OnMpChanged(float old_value, float new_value)
         {
             this.info.Mp = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
-
-        /// <summary>
-        /// 状态更新
-        /// </summary>
-        /// <param name="old_value"></param>
-        /// <param name="new_value"></param>
-        public virtual void OnStateChanged(UnitState old_value, UnitState new_value)
-        {
-            this.unitState = new_value;
-        }
-
-        /// <summary>
-        /// 死亡
-        /// </summary>
         public virtual void OnDeath()
         {
-            //ui
+            //如果当前actor被关注，则需要通知
             if (GameApp.target == this)
             {
                 Kaiyun.Event.FireIn("TargetDeath");
             }
 
         }
-
-        /// <summary>
-        /// 等级更新
-        /// </summary>
-        /// <param name="intValue1"></param>
-        /// <param name="intValue2"></param>
         public void OnLevelChanged(int old_value, int new_value)
         {
             //更新当前actor的数据
@@ -207,76 +162,22 @@ namespace GameClient.Entities
             //事件通知，level数据发送变化（可能某些ui组件需要这个信息）
             LocalOrTargetAcotrPropertyChange();
         }
-
-        /// <summary>
-        /// 本地玩家或者目标玩家的属性发送变化
-        /// </summary>
-        public void LocalOrTargetAcotrPropertyChange()
-        {
-            if(this == GameApp.character || this == GameApp.target)
-            {
-                //CombatPanelScript、这个事件给需要更新本地chr和targetChr的UI用的
-                Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate",this);
-            }
-        }
-
-        /// <summary>
-        /// 生命值上限更新
-        /// </summary>
         public void OnHpmaxChanged(float old_value, float new_value)
         {
             this.info.HpMax = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
-
-        /// <summary>
-        /// 法力值上限更新
-        /// </summary>
         public void OnMpmaxChanged(float old_value, float new_value)
         {
             this.info.MpMax = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
-
-        /// <summary>
-        /// 速度更新
-        /// </summary>
-        /// <param name="intValue1"></param>
-        /// <param name="intValue2"></param>
         public void OnSpeedChanged(int old_value, int new_value)
         {
             this.Speed = new_value;
         }
 
-        /// <summary>
-        /// 加载装备
-        /// </summary>
-        public void LoadEquips(RepeatedField<ItemInfo> itemInfos)
-        {
-            equipsDict.Clear();
-            foreach(var itemInfo in itemInfos)
-            {
-                var item = new Equipment(itemInfo);
-                equipsDict[item.EquipsType] = item;
-            }
-        }
-
-        /// <summary>
-        /// 加载buff
-        /// </summary>
-        /// <param name="buffsList"></param>
-        private void LoadBuffs(RepeatedField<BuffInfo> buffsList)
-        {
-            foreach(var buffInfo in buffsList)
-            {
-                new Buff().Init(buffInfo,this);
-            }
-        }
-
-        /// <summary>
-        /// 添加buf
-        /// </summary>
-        /// <param name="buff"></param>
+        //buff相关，//todo应该用一个buffmananger来管理
         public void AddBuff(Buff buff)
         {
             buffsDict[buff.ID] = buff;
@@ -285,11 +186,6 @@ namespace GameClient.Entities
                 Kaiyun.Event.FireOut("SpecialActorAddBuff", buff);
             }
         }
-
-        /// <summary>
-        /// 去除buf
-        /// </summary>
-        /// <param name="id"></param>
         public void RemoveBuff(int id)
         {
             if(buffsDict.TryRemove(id, out _))
@@ -301,7 +197,6 @@ namespace GameClient.Entities
             }
 
         }
-
         private List<int> removeKey = new();
         private void BuffUpdate(float deltatime)
         {
@@ -333,6 +228,18 @@ namespace GameClient.Entities
                 RemoveBuff(key);
             }
 
+        }
+
+        /// <summary>
+        /// 本地玩家或者目标玩家的属性发送变化
+        /// </summary>
+        public void LocalOrTargetAcotrPropertyChange()
+        {
+            if (this == GameApp.character || this == GameApp.target)
+            {
+                //CombatPanelScript、这个事件给需要更新本地chr和targetChr的UI用的
+                Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate", this);
+            }
         }
 
     }
