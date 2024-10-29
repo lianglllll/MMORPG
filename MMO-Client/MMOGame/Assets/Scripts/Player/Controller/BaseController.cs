@@ -71,40 +71,12 @@ namespace Player
         #region 状态机
 
         public StateMachine stateMachine { get; protected set; }
-        protected CommonSmallState curState;
-        public CommonSmallState CurState => curState;
+        protected ActorState curState;
+        public ActorState CurState => curState;
         private StateMachineParameter stateMachineParameter;
         public StateMachineParameter StateMachineParameter => stateMachineParameter;
 
-
-        public EntityState GetEntityState(CommonSmallState state)
-        {
-            switch (state)
-            {
-                case CommonSmallState.Idle:
-                    return EntityState.Idle;
-                case CommonSmallState.Move:
-                    return EntityState.Motion;
-                default:
-                    return EntityState.NoneState;
-            }
-        }
-
-
-        public CommonSmallState GetCommonSmallState(EntityState state)
-        {
-            switch (state)
-            {
-                case EntityState.Idle:
-                    return CommonSmallState.Idle;
-                case EntityState.Motion:
-                    return CommonSmallState.Move;
-                default:
-                    return CommonSmallState.None;
-            }
-        }
-
-        public virtual void ChangeState(CommonSmallState state, bool reCurrstate = false)
+        public virtual void ChangeState(ActorState state, bool reCurrstate = false)
         {
 
         }

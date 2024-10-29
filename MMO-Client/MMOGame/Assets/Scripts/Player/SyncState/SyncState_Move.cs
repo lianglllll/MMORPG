@@ -1,3 +1,4 @@
+using Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace Player
                 syncer.transform.position = targetPos;
                 syncer.transform.rotation = targetRotation;
                 moveToOverAction?.Invoke();
-                syncer.ChangeState(CommonSmallState.Idle);
+                syncer.ChangeState(ActorState.Idle);
             }
             else
             {

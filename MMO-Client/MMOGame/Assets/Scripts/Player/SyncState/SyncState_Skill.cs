@@ -1,5 +1,6 @@
 using GameClient.Combat;
 using Player;
+using Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace Player
                     }
                     break;
                 case SkillChildState.Exit:
-                    syncer.ChangeState(CommonSmallState.Idle);
+                    syncer.ChangeState(ActorState.Idle);
                     return;
             }
         }

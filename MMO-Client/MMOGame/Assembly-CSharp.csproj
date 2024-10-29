@@ -123,6 +123,7 @@
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_SkillAttackState.cs" />
     <Compile Include="Assets\aExample\aMyTest\SyncMovementController.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Dizzy.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntitySend.cs" />
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Config\Skill\Skill2.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Assets\aExample\CombatSystem\Frame\ModelBase.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Death.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\Old\Timer\GameTimer.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntity.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Move.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="Assets\aExample\aMyTest\GameTest.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\Heap.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_Model.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntityRecive.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\VocationItem.cs" />
@@ -309,9 +312,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\ScenePoster.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Frame\CharacterBase.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntity.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntitySend.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntityRecive.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />

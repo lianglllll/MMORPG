@@ -98,12 +98,12 @@ namespace HSFramework.Net
             SetValueTo(transform.position, req.EntitySync.Entity.Position);
             SetValueTo(transform.rotation.eulerAngles, req.EntitySync.Entity.Direction);
             req.EntitySync.Entity.Id = entityId;
-            req.EntitySync.State = ctrlController.GetEntityState(ctrlController.CurState);
+            req.EntitySync.State = ctrlController.CurState;
             NetClient.Send(req);
 
             //重置
             transform.hasChanged = false;
-            req.EntitySync.State = EntityState.NoneState;
+            req.EntitySync.State = ActorState.Constant;
         }
         private void SetValueTo(Vector3 a, Vec3 b)
         {

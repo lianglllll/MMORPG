@@ -1,4 +1,5 @@
 using Player;
+using Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Player
             float v = GameInputManager.Instance.Movement.y;
             if (h != 0 || v != 0)
             {
-                player.ChangeState(CommonSmallState.Move);
+                player.ChangeState(ActorState.Move);
                 return;
             }
 

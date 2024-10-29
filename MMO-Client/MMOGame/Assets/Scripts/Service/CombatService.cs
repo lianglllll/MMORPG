@@ -311,8 +311,11 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     case PropertyUpdate.Types.Prop.Mpmax:
                         actor.OnMpmaxChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
                         break;
-                    case PropertyUpdate.Types.Prop.State:
-                        actor.OnStateChanged(item.OldValue.StateValue, item.NewValue.StateValue);
+                    case PropertyUpdate.Types.Prop.Mode:
+                        actor.OnModeChanged(item.OldValue.ModeValue, item.NewValue.ModeValue);
+                        break;
+                    case PropertyUpdate.Types.Prop.CombatMode:
+                        actor.OnCombatModeChanged(item.OldValue.CombatModeValue, item.NewValue.CombatModeValue);
                         break;
                     case PropertyUpdate.Types.Prop.Level:
                         actor.OnLevelChanged(item.OldValue.IntValue, item.NewValue.IntValue);

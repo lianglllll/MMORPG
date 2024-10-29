@@ -8,16 +8,6 @@ using System.Threading.Tasks;
 
 namespace Player
 {
-    public enum CommonLargeState
-    {
-        Stand,Equip,SwordFlight
-    }
-
-    public enum CommonSmallState
-    {
-        AirDown, Death, Defense, Dizzy,Evade,Hurt,Idle, JumpUp, Move,Skill,None
-    }
-
     public class CtrlState : StateBase
     {
         protected CtrlController player;

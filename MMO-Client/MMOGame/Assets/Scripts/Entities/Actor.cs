@@ -17,8 +17,9 @@ namespace GameClient.Entities
 {
     public class Actor:Entity
     {
-        public UnitState unitState;
-        public EntityState entityState;
+        public ActorMode actorMode;
+        public ActorCombatMode actorCombatMode;
+        public ActorState actorState;
         public NetActor info;                                                   //网络信息
         public UnitDefine define;                                               //actor默认def
         public SkillManager skillManager;                                       //技能管理
@@ -27,7 +28,7 @@ namespace GameClient.Entities
         public GameObject renderObj;                                            //actor中对应的游戏对象
         public BaseController baseController;
 
-        public bool IsDeath => unitState == UnitState.Dead;
+        public bool IsDeath => actorMode == ActorMode.Dead;
         public int Level => info.Level;
         public long Exp => info.Exp;
         public int Speed { get => info.Speed; set => info.Speed = value; }
@@ -67,9 +68,13 @@ namespace GameClient.Entities
             }
         }
 
-        public virtual void OnStateChanged(UnitState old_value, UnitState new_value)
+        public virtual void OnModeChanged(ActorMode old_value, ActorMode new_value)
         {
-            this.unitState = new_value;
+            this.actorMode = new_value;
+        }
+        public virtual void OnCombatModeChanged(ActorCombatMode old_value, ActorCombatMode new_value)
+        {
+            this.actorCombatMode = new_value;
         }
         public virtual void recvDamage(Damage damage)
         {
@@ -127,10 +132,10 @@ namespace GameClient.Entities
 
 
                 //切换到挨打的动作
-                if(baseController.CurState != CommonSmallState.Move)
+                if(baseController.CurState != ActorState.Move)
                 {
                     baseController.StateMachineParameter.attacker = GameTools.GetActorById(damage.AttackerId);
-                    baseController.ChangeState(CommonSmallState.Hurt);
+                    baseController.ChangeState(ActorState.Hurt);
                 }
 
             }

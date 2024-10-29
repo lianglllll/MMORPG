@@ -1,5 +1,6 @@
 using GameClient.Entities;
 using HSFramework.Net;
+using Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,11 @@ namespace Player.Controller
 
         public override void SStart()
         {
-            ChangeState(CommonSmallState.Idle);
+            ChangeState(ActorState.Idle);
         }
 
 
-        public override void ChangeState(CommonSmallState state, bool reCurrstate = false)
+        public override void ChangeState(ActorState state, bool reCurrstate = false)
         {
             if (curState == state && !reCurrstate) return;
 
@@ -35,34 +36,34 @@ namespace Player.Controller
             
             switch (state)
             {
-                case CommonSmallState.AirDown:
+                case ActorState.AirDown:
                     stateMachine.ChangeState<CtrlState_Idle>(reCurrstate);
                     break;
-                case CommonSmallState.Death:
+                case ActorState.Death:
                     stateMachine.ChangeState<CtrlState_Death>(reCurrstate);
                     break;
-                case CommonSmallState.Defense:
+                case ActorState.Defense:
                     stateMachine.ChangeState<CtrlState_Defense>(reCurrstate);
                     break;
-                case CommonSmallState.Dizzy:
+                case ActorState.Dizzy:
                     stateMachine.ChangeState<CtrlState_Dizzy>(reCurrstate);
                     break;
-                case CommonSmallState.Evade:
+                case ActorState.Evade:
                     stateMachine.ChangeState<CtrlState_Evade>(reCurrstate);
                     break;
-                case CommonSmallState.Hurt:
+                case ActorState.Hurt:
                     stateMachine.ChangeState<CtrlState_Hurt>(reCurrstate);
                     break;
-                case CommonSmallState.Idle:
+                case ActorState.Idle:
                     stateMachine.ChangeState<CtrlState_Idle>(reCurrstate);
                     break;
-                case CommonSmallState.JumpUp:
+                case ActorState.JumpUp:
                     stateMachine.ChangeState<CtrlState_JumpUp>(reCurrstate);
                     break;
-                case CommonSmallState.Move:
+                case ActorState.Move:
                     stateMachine.ChangeState<CtrlState_Move>(reCurrstate);
                     break;
-                case CommonSmallState.Skill:
+                case ActorState.Skill:
                     stateMachine.ChangeState<CtrlState_Skill>(reCurrstate);
                     break;
             }
@@ -70,7 +71,7 @@ namespace Player.Controller
 
         public void MoveToPostion(Vector3 pos)
         {
-            ChangeState(CommonSmallState.Move);
+            ChangeState(ActorState.Move);
             var state = stateMachine.CurState as CtrlState_Move;
             state.MoveToPostion(pos);
         }

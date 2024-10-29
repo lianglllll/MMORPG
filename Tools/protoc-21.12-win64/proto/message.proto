@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package proto;
 
-
-
 //============================================心跳检测==========================================
 message HeartBeatRequest{
 
@@ -29,7 +27,6 @@ message ServerInfoResponse{
 	repeated KillRankingListItem killRankingList = 3;
 }
 
-
 //====================================entity=================================================
 //网络三维向量
 message Vec3 {
@@ -45,39 +42,39 @@ message NetEntity {
 	Vec3 direction = 3;
 }
 
-//活动单位的广义状态
-enum UnitState{
+//活动单位的模式
+enum ActorMode{
 	FREE = 0;		//自由进行任何操作
 	DEAD = 1;		//死亡，无法操作。
-	REST = 2;		//休息，挂机 回血回蓝
+	REST = 2;		//休息，挂机 回血回蓝(可以坐下的时候触发)
 	FIGHT = 3;		//战斗状态，持续一段时间，期间可能无法骑马吧。
-	MAX = 4;
 }
-
-//活动单位的狭义状态
-enum EntityState{
-	NoneState = 0;			//无状态
-	Idle = 1;				//等待状态
-	Motion = 2;				//walk||run||其他速度比较快的行为，这个motion状态我们使用speed来驱动变换
-	Hit = 3;				//受击状态
-	Jump = 4;				//跳跃状态，需要用到pos.y
-	Death = 5;				//死亡状态、这个状态可能用不上,因为我们在其他地方也定义了死亡
-	Shift = 6;				//闪步
-	SWORDFLIGHT = 7;		//御剑飞行
-	StrikeAndFly = 8;		//击飞
-	StrikeAndBack = 9;		//击退
-	Dizzy = 10;				//眩晕
-	SkillIntonate = 11;  	//技能蓄气
-    SkillActive = 12;    	//技能激活
-	//骑马跑，骑马跳。
-	//游泳，游泳上浮，下潜。
+//活动单位的行为
+enum ActorCombatMode{
+    Stand = 0;
+	Equip = 1;
+	SwordFlight = 2;
+}
+enum ActorState{
+    AirDown = 0;
+	Death = 1;
+	Defense = 2;
+	Dizzy = 3;
+	Evade = 4;
+	Hurt = 5;
+	Idle = 6;
+	JumpUp = 7;
+	Move = 8;
+	Skill = 9;
+	Constant = 10;
 }
 
 //同步entity:位置+状态
 message NEntitySync{
 	NetEntity entity = 1;
-	EntityState state = 2;
-	bool force = 3;
+	bool force = 2;
+	ActorState state = 3;
+	int32 flag1 = 4;
 }
 
 //=======================================actor==============================================
@@ -321,13 +318,15 @@ message PropertyUpdate{
 		MP = 1;
 		HPMax = 2;
 		MPMax = 3;
-		State = 4;
+		Mode = 4;
 		Level = 5;
 		Name = 6;
 		Golds = 7;
 		Exp = 8;		//经验
 		Energy = 9;		//活力
 		Speed = 10;
+		CombatMode = 11;
+		
 		//幸运、罪恶、技能点
 	}
 
@@ -337,8 +336,9 @@ message PropertyUpdate{
 			int32 int_value = 1;
 			float float_value = 2;
 			string string_value = 3;
-			UnitState state_value = 4;
+			ActorMode mode_value = 4;
 			int64 long_value = 5;
+			ActorCombatMode combatMode_value = 6;
 		}
 	}
 
@@ -346,6 +346,7 @@ message PropertyUpdate{
 	Prop property = 2;
 	PropertyValue oldValue = 3;
 	PropertyValue newValue = 4;
+
 }
 
 //actor属性更新响应
@@ -606,9 +607,8 @@ message UnloadEquipmentRequest{
 
 //buff类型
 enum BuffType{
-	None = 0;
-	Buff = 1;
-	Debuff = 2;
+	Buff = 0;
+	Debuff = 1;
 }
 
 //buff叠加方式

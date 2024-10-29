@@ -141,7 +141,7 @@ public class GameObjectManager:MonoBehaviour
             if (Mathf.Approximately(nActor.Hp, 0))
             {
                 actorObj.SetActive(false);
-                actor.unitState = UnitState.Dead;
+                actor.actorMode = ActorMode.Dead;
             }
         }
 
@@ -292,10 +292,10 @@ public class GameObjectManager:MonoBehaviour
 
         //2.设置动画状态
         //如果是None,一律不作处理，将维持原来的动画状态
-        if (nEntitySync.State != EntityState.NoneState)
+        if (nEntitySync.State != ActorState.Constant)
         {
             var ctrl = GameApp.character.baseController;
-            ctrl.ChangeState(ctrl.GetCommonSmallState(nEntitySync.State));
+            ctrl.ChangeState(nEntitySync.State);
         }
 
     }
@@ -311,10 +311,10 @@ public class GameObjectManager:MonoBehaviour
         //这里通常由服务器来通知一些我们的特殊变化
         //比如：眩晕、击退、击飞、强制位移
         //如果是None,一律不作处理，将维持原来的动画状态
-        if (nEntitySync.State != EntityState.NoneState)
+        if (nEntitySync.State != ActorState.Constant)
         {
             var ctrl = GameApp.character.baseController;
-            ctrl.ChangeState(ctrl.GetCommonSmallState(nEntitySync.State));
+            ctrl.ChangeState(nEntitySync.State);
         }
         //设置数据到entity中,这里强制设置
         SyncEntitySend syncEntitySend = obj.GetComponent<SyncEntitySend>();

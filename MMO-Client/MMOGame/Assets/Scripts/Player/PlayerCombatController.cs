@@ -172,11 +172,11 @@ public class PlayerCombatController : MonoBehaviour
     private bool CanAttackInput()
     {
         if (_applyAttackInput == false) return false;
-        if (ctrlController.CurState == CommonSmallState.Hurt) return false;
-        if (ctrlController.CurState == CommonSmallState.Skill) return false;
-        if (ctrlController.CurState == CommonSmallState.Dizzy) return false;
-        if (ctrlController.CurState == CommonSmallState.Death) return false;
-        if (ctrlController.CurState == CommonSmallState.Defense) return false;
+        if (ctrlController.CurState == ActorState.Hurt) return false;
+        if (ctrlController.CurState == ActorState.Skill) return false;
+        if (ctrlController.CurState == ActorState.Dizzy) return false;
+        if (ctrlController.CurState == ActorState.Death) return false;
+        if (ctrlController.CurState == ActorState.Defense) return false;
         return true;
     }
 
@@ -387,7 +387,7 @@ public class PlayerCombatController : MonoBehaviour
     /// </summary>
     private void ClearEnemyWhenMotion()
     {
-        if(_currentEnemy !=null && ctrlController.CurState == CommonSmallState.Move && 
+        if(_currentEnemy !=null && ctrlController.CurState == ActorState.Move && 
             Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > _detectionRange)
         {
             ClearEnemy();

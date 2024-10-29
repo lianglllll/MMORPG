@@ -176,7 +176,7 @@ namespace GameClient.Combat
                 Stage = SkillStage.Active;
                 OnActive();
             }
-            Owner.baseController.ChangeState(CommonSmallState.Skill);
+            Owner.baseController.ChangeState(ActorState.Skill);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 using Player;
+using Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Player
             //todo,僵直时间应该像眩晕那样由服务器控制
             if(CheckAnimatorStateName("Hurt",out var time) && time > 0.9f)
             {
-                player.ChangeState(CommonSmallState.Idle);
+                player.ChangeState(ActorState.Idle);
             }
         }
 
