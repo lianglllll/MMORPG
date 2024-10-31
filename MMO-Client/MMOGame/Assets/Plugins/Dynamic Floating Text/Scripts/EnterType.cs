@@ -1,0 +1,1 @@
+public enum EnterType { Simple, Fade, Pop, Bounce, Shift }
