@@ -9,7 +9,6 @@ namespace Player
     {
         protected Animator animator;
         public Animator Animator { get => animator; }
-        protected ISkillOwner skillOwner;
         protected void Awake()
         {
             animator = GetComponent<Animator>();
@@ -47,29 +46,24 @@ namespace Player
 
         protected void FootStep()
         {
-            skillOwner.OnFootStep();
         }
 
         protected void StartSkillHit(int weaponIndex)
         {
-            skillOwner.StartSkillHit(weaponIndex);
         }
 
         protected void StopSkillHit(int weaponIndex)
         {
-            skillOwner.StopSkillHit(weaponIndex);
         }
 
         //允许变招
         protected void CanSwitchSkill()
         {
-            skillOwner.CanSwitchSkill();
         }
 
         //允许打断
         protected void CanCancelSkill()
         {
-            skillOwner.CanCancelSkill();
         }
 
         //技能结束
