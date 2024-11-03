@@ -13,7 +13,7 @@ public class Main : MonoBehaviour
 
     [Header("配置")]
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
-    public string assetServer = "http://175.178.99.14:12345/mmo";
+    public string assetServer;
 
     [Header("临时变量")]
     private string packageVersion;                          //包的版本

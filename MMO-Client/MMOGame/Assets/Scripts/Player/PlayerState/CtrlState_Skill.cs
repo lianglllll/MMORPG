@@ -24,7 +24,8 @@ namespace Player
             get => skillChildState;
             set
             {
-                switch (value)
+                skillChildState = value;
+                switch (skillChildState)
                 {
                     case SkillChildState.Intonate:
                         player.PlayAnimation(curSkill.Define.IntonateAnimName);
@@ -53,8 +54,6 @@ namespace Player
             {
                 ChildState = SkillChildState.Exit;
             }
-
-
         }
         public override void Update()
         {
@@ -69,14 +68,16 @@ namespace Player
                         var ins = GameObject.Instantiate(prefab, player.transform);
                         GameObject.Destroy(ins, curSkill.Define.IntonateTime);
                     }
-
                     if (curSkill.Stage == SkillStage.Active)
                     {
                         ChildState = SkillChildState.Active;
+                    }else if(curSkill.Stage == SkillStage.None || curSkill.Stage == SkillStage.Colding)
+                    {
+                        ChildState = SkillChildState.Exit;
                     }
                     break;
                 case SkillChildState.Active:
-                    if(curSkill.Stage == SkillStage.Colding)
+                    if(curSkill.Stage == SkillStage.Colding || curSkill.Stage == SkillStage.None)
                     {
                         ChildState = SkillChildState.Exit;
                     }

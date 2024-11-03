@@ -19,8 +19,8 @@ namespace Player
     public class StateMachineParameter
     {
         public float gravity = -9.8f;
+        public float moveSpeed = 1f;
         public float rotationSpeed = 8f;
-        public float curSpeed = 1f;
         public Actor attacker;
         public Skill curSkill;
     }

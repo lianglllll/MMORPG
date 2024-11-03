@@ -151,9 +151,6 @@ namespace GameClient.Combat
                 GameApp.CurrSkill = this;
             }
 
-            _sco = target;
-            RunTime = 0;
-
             if (Owner.baseController.StateMachineParameter.curSkill == null)
             {
                 Owner.baseController.StateMachineParameter.curSkill = this;
@@ -161,9 +158,14 @@ namespace GameClient.Combat
             else
             {
                 //有东西要中断当前技能active
-                Log.Error("当前状态机黑白skill参数不为空！！");
+
+
+                Log.Error("当前状态机skill参数不为空！！");
                 return;
             }
+
+            _sco = target;
+            RunTime = 0;
 
             if (Define.IntonateTime > 0)
             {

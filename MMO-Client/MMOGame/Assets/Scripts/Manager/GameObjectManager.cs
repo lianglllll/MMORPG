@@ -149,10 +149,9 @@ public class GameObjectManager:MonoBehaviour
         //7.给我们控制的角色添加一些控制脚本
         if (isMine)
         {
-
-
             actorObj.tag = "CtlPlayer";                                                             //打标签
-            var modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<PlayerModel>();
+            PlayerModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<PlayerModel>();
+            UnitUIController uuc = actorObj.AddComponent<UnitUIController>();
             CtrlController ctl = actorObj.AddComponent<CtrlController>();                           //给当前用户控制的角色添加控制脚本
             PlayerCombatController combat = actorObj.AddComponent<PlayerCombatController>();        //给当前用户控制的角色添加战斗脚本
             SyncEntitySend syncEntitySend = actorObj.AddComponent<SyncEntitySend>();
@@ -166,14 +165,12 @@ public class GameObjectManager:MonoBehaviour
             TP_CameraController.instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
 
             ctl.SStart();
-
         }
         else
         {
-
-
             actorObj.tag = "SyncPlayer";                                                             //打标签
             var modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<SyncModel>();
+            UnitUIController uuc = actorObj.AddComponent<UnitUIController>();
             SyncController ctl = actorObj.AddComponent<SyncController>();                           //给当前用户控制的角色添加控制脚本
             SyncEntityRecive syncEntityRecive = actorObj.AddComponent<SyncEntityRecive>();
             modelBase.Init();

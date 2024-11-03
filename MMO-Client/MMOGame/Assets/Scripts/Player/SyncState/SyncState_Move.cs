@@ -71,7 +71,7 @@ namespace Player
                 dir.y = 0;
                 dir.Normalize();
                 Quaternion targetRotation = Quaternion.LookRotation(dir);
-                syncer.CharacterController.Move(dir * ShareParameter.curSpeed * Time.deltaTime);
+                syncer.CharacterController.Move(dir * ShareParameter.moveSpeed * Time.deltaTime);
 
                 // 平滑地调整角色旋转
                 syncer.transform.rotation = Quaternion.Lerp(syncer.transform.rotation, targetRotation, Time.deltaTime * ShareParameter.rotationSpeed);

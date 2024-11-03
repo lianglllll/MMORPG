@@ -231,35 +231,36 @@ public class CombatService : Singleton<CombatService>, IDisposable
     private void _SpellCastResponse(Connection conn, SpellCastResponse msg)
     {
 
-        foreach (CastInfo item in msg.List)
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            var caster = EntityManager.Instance.GetEntity<Actor>(item.CasterId);
-            if (caster == null) continue;
+            foreach (CastInfo item in msg.List)
+            {
+                var caster = EntityManager.Instance.GetEntity<Actor>(item.CasterId);
+                if (caster == null) continue;
 
-            var skill = caster.skillManager.GetSkill(item.SkillId);
-            if (skill.IsUnitTarget)
-            {
-                var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);
-                skill.Use(new SCEntity(target));
-            }
-            else if (skill.IsPointTarget)
-            {
-
-            }else if (skill.IsNoneTarget)
-            {
-                skill.Use(new SCEntity(caster));
-            }
-
-            //skill ui
-            if (GameApp.character.EntityId == skill.Owner.EntityId)
-            {
-                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                var skill = caster.skillManager.GetSkill(item.SkillId);
+                if (skill.IsUnitTarget)
                 {
-                    UIManager.Instance.MessagePanel.ShowBottonMsg(skill.Define.Name,Color.green);
-                });
-            }
+                    var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);
+                    skill.Use(new SCEntity(target));
+                }
+                else if (skill.IsPointTarget)
+                {
 
-        }
+                }
+                else if (skill.IsNoneTarget)
+                {
+                    skill.Use(new SCEntity(caster));
+                }
+
+                //skill ui
+                if (GameApp.character.EntityId == skill.Owner.EntityId)
+                {
+                    UIManager.Instance.MessagePanel.ShowBottonMsg(skill.Define.Name, Color.green);
+                }
+            }
+        });
+
     }
 
     /// <summary>

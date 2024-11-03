@@ -134,7 +134,6 @@ namespace Summer.Network
         /// <param name="msg"></param>
         private void Fire<T>(Connection sender, T msg)
         {
-
             string type = typeof(T).FullName;
             //Console.WriteLine(type);
             //没人订阅自然就不需要处理这个消息了
@@ -206,7 +205,6 @@ namespace Summer.Network
         }
         private void executeMessage(Connection sender, Google.Protobuf.IMessage message)
         {
-
             var fullName = message.GetType().FullName;
             if (delegateMap.TryGetValue(fullName, out var handler))
             {

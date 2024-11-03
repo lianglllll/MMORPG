@@ -125,14 +125,12 @@ public class PlayerCombatController : MonoBehaviour
         Keys.Add(KeyCode.X);
         Keys.Add(KeyCode.C);
 
-
         int index = 0;
         foreach(var skill in skillManager.GetActiveSkills())
         {
             ActiveTypeSkills.Add(Keys[index], skill);
             index++;
         }
-
     }
 
     /// <summary>
@@ -558,9 +556,6 @@ public class PlayerCombatController : MonoBehaviour
                     break;
             }
         }
-
-
-
 
         //向服务器发请求
         CombatService.Instance.SpellSkill(skill, _currentEnemy);

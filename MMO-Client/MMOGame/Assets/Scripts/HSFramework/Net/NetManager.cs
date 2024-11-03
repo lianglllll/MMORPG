@@ -19,7 +19,7 @@ public class NetManager : Singleton<NetManager>
 
     //心跳机制
     private bool isEnableHeartBeat;
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(2f);      //心跳包时间控制
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(100f);           //心跳包时间控制
     private DateTime lastBeatTime = DateTime.MinValue;                          //上一次发送心跳包的时间
 
     //是否处于重连状态

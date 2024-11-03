@@ -68,7 +68,6 @@ enum ActorState{
 	Skill = 9;
 	Constant = 10;
 }
-
 //同步entity:位置+状态
 message NEntitySync{
 	NetEntity entity = 1;

@@ -44,6 +44,8 @@ namespace Player
                 Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
                 player.Model.transform.rotation = Quaternion.Slerp(player.Model.transform.rotation, Quaternion.LookRotation(targetDir),
                     Time.deltaTime * player.StateMachineParameter.rotationSpeed);
+                //位置
+                player.CharacterController.Move(targetDir * ShareParameter.moveSpeed * Time.deltaTime);
             }
 
 
@@ -80,14 +82,14 @@ namespace Player
             }
             else
             {
-                Vector3 dir = targetPos - player.transform.position;
-                dir.y = 0;
-                dir.Normalize();
+                Vector3 targetDir = targetPos - player.transform.position;
+                targetDir.y = 0;
+                targetDir.Normalize();
                 // 插值计算目标旋转方向
-                Quaternion targetRotation = Quaternion.LookRotation(dir);
+                Quaternion targetRotation = Quaternion.LookRotation(targetDir);
                 // 平滑地调整角色旋转
                 player.transform.rotation = Quaternion.Lerp(player.transform.rotation, targetRotation, Time.deltaTime * ShareParameter.rotationSpeed);
-                player.CharacterController.Move(dir * ShareParameter.curSpeed * Time.deltaTime);
+                player.CharacterController.Move(targetDir * ShareParameter.moveSpeed * Time.deltaTime);
             }
         }
 

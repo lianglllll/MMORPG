@@ -34,9 +34,7 @@ public class UnitUIController : MonoBehaviour
         SpellRangeImage = SpellRangeCanvas.GetComponentInChildren<Image>();
         SectorAreaCanvas = transform.Find("MyCanvas/SectorAreaCanvas").GetComponent<Canvas>();
         SectorAreaImage = SectorAreaCanvas.GetComponentInChildren<Image>();
-
         unitBillboard = transform.Find("MyCanvas/UnitBillboard").GetComponent<UnitBillboard>();
-
     }
 
     private void Start()
