@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPool.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Audio\AudioDefine.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Dialog\IDialogEvent.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\SyncController.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\DragHolder\DragHolder.cs" />
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleItem.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Effect\GameEffectManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Dialog\DialogNodeConfig.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestFire.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Inventory\MaterialItem.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Dialog\DialogConfig.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Defense.cs" />
     <Compile Include="Assets\Scripts\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
