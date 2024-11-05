@@ -26,7 +26,6 @@ namespace Player.Controller
             ChangeState(ActorState.Idle);
         }
 
-
         public override void ChangeState(ActorState state, bool reCurrstate = false)
         {
             if (curState == state && !reCurrstate) return;
@@ -66,13 +65,5 @@ namespace Player.Controller
                     break;
             }
         }
-
-        public void SyncPosAndRotaion(Vector3 pos,Vector3 rotation)
-        {
-            ChangeState(ActorState.Move);
-            var state = stateMachine.CurState as SyncState_Move;
-            state.MoveToPostion(pos,rotation);
-        }
-
     }
 }

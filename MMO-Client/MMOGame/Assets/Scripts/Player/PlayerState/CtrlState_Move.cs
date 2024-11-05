@@ -57,7 +57,6 @@ namespace Player
 
             //重力
             player.CharacterController.Move(new Vector3(0, ShareParameter.gravity * Time.deltaTime, 0));
-
         }
 
 
@@ -92,7 +91,5 @@ namespace Player
                 player.CharacterController.Move(targetDir * ShareParameter.moveSpeed * Time.deltaTime);
             }
         }
-
-
     }
 }

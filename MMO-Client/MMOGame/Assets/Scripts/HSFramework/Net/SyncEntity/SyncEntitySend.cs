@@ -116,16 +116,16 @@ namespace HSFramework.Net
         //同步远端的强制数据
         public void SyncPosAndRotaion(NetEntity nEntity)
         {
-            SetValueTo(nEntity.Position, m_position);
+            SetValueTo(nEntity.Position, ref m_position);
             //y值不变
             m_position.y = 0f;
-            SetValueTo(nEntity.Direction, m_direction);
+            SetValueTo(nEntity.Direction, ref m_direction);
 
             transform.rotation = Quaternion.Euler(m_direction);
             transform.position = m_position;
 
         }
-        private void SetValueTo(Vec3 a, Vector3 b)
+        private void SetValueTo(Vec3 a, ref Vector3 b)
         {
             b.x = a.X * 0.001f;
             b.y = a.Y * 0.001f;

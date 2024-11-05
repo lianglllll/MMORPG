@@ -279,22 +279,12 @@ public class GameObjectManager:MonoBehaviour
     /// <param name="nEntitySync"></param>
     public void EntitySync(NEntitySync nEntitySync)
     {
-        //1.设置位置+方向
         int entityId = nEntitySync.Entity.Id;
         GameObject obj = currentGameObjectDict.GetValueOrDefault(entityId, null);
         if (obj == null) return;
         //设置数据到entity中
         SyncEntityRecive syncEntityRecive = obj.GetComponent<SyncEntityRecive>();
-        syncEntityRecive.SyncPosAndRotaion(nEntitySync.Entity,nEntitySync.Force);
-
-        //2.设置动画状态
-        //如果是None,一律不作处理，将维持原来的动画状态
-        if (nEntitySync.State != ActorState.Constant)
-        {
-            var ctrl = GameApp.character.baseController;
-            ctrl.ChangeState(nEntitySync.State);
-        }
-
+        syncEntityRecive.SyncEntity(nEntitySync);
     }
     /// <summary>
     /// 事件驱动：本机角色位置+动画状态信息同步

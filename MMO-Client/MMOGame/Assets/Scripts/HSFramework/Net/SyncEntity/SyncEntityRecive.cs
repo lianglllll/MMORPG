@@ -11,9 +11,9 @@ namespace HSFramework.Net
     {
         private bool isStart;
         private SyncController syncController;
-        public Vector3 position;
-        public Vector3 direction;
-
+        [SerializeField]
+        private Vector3 position;
+        private Vector3 direction;
 
         private void Start()
         {
@@ -30,33 +30,45 @@ namespace HSFramework.Net
         }
 
 
-        public void SyncPosAndRotaion(NetEntity nEntity, bool instantMove = false)
+        private void Update()
         {
-            SetValueTo(nEntity.Position,position);
-            //y值不变
-            position.y = 0f;
-            SetValueTo(nEntity.Direction, direction);
+            //进行插值处理，而不是之间瞬移，看上去更加平滑
+            //因为我们是0.2秒同步一次信息所以是5帧
+            Move(Vector3.Lerp(transform.position, position, Time.deltaTime * 5f));
 
-            //是否强制同步
-            if (instantMove)
+            //四元数，插值处理
+            Quaternion targetQuaternion = Quaternion.Euler(direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetQuaternion, Time.deltaTime * 10f);
+        }
+
+        public void SyncEntity(NEntitySync nEntitySync)
+        {
+            SetValueTo(nEntitySync.Entity.Position,ref position);
+            SetValueTo(nEntitySync.Entity.Direction, ref direction);
+
+            if (nEntitySync.Force)
             {
                 transform.rotation = Quaternion.Euler(direction);
                 transform.position = position;
             }
-            else
-            {
-                syncController.SyncPosAndRotaion(position, direction);
-            }
 
+            if(nEntitySync.State != ActorState.Constant)
+            {
+                syncController.ChangeState(nEntitySync.State);
+            }
         }
-        private void SetValueTo(Vec3 a, Vector3 b)
+        private void SetValueTo(Vec3 a, ref Vector3 b)
         {
             b.x = a.X * 0.001f;
             b.y = a.Y * 0.001f;
             b.z = a.Z * 0.001f;
         }
+        public void Move(Vector3 target)
+        {
+            target.y = transform.position.y;
+            syncController.CharacterController.Move(target - transform.position);
+        }
 
     }
-
 }
 

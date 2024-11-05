@@ -1,15 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Proto;
 using Summer.Network;
 using System;
-using UnityEngine.SceneManagement;
 using GameClient.Entities;
-using Assets.Script.Entities;
 using GameClient;
-using Serilog;
 using System.Threading.Tasks;
 using BaseSystem.Singleton;
 
@@ -19,7 +14,7 @@ public class NetManager : Singleton<NetManager>
 
     //心跳机制
     private bool isEnableHeartBeat;
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(100f);           //心跳包时间控制
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(2f);           //心跳包时间控制
     private DateTime lastBeatTime = DateTime.MinValue;                          //上一次发送心跳包的时间
 
     //是否处于重连状态
