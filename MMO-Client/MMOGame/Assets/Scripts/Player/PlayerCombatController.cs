@@ -37,7 +37,7 @@ public class ComboData
 /// </summary>
 public class PlayerCombatController : MonoBehaviour
 {
-
+    private bool m_IsStart;
     private CtrlController ctrlController;
     private SkillManager skillManager;
 
@@ -67,6 +67,7 @@ public class PlayerCombatController : MonoBehaviour
     }
     private void Update()
     {
+        if (!m_IsStart) return;
         SelectTargetObject();
         PlayerAttackInput();
         ComboEnd();
@@ -86,7 +87,6 @@ public class PlayerCombatController : MonoBehaviour
         Kaiyun.Event.UnregisterOut("CtlChrDeath", this, "ClearEnemy");
         Kaiyun.Event.UnregisterIn("SkillActiveEnd", this, "SkillActiveEnd");
     }
-
 
     /// <summary>
     /// 组件初始化
@@ -129,6 +129,8 @@ public class PlayerCombatController : MonoBehaviour
             ActiveTypeSkills.Add(Keys[index], skill);
             index++;
         }
+
+        m_IsStart = true;
     }
 
     /// <summary>
@@ -147,7 +149,6 @@ public class PlayerCombatController : MonoBehaviour
             //施法范围圈
             ctrlController.unitUIController.SetSpellRangeCanvas(true, currentComboData.next.skill.Define.SpellRangeRadius * 0.001f);
         }
-
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             SetComboData(currentComboData.next);

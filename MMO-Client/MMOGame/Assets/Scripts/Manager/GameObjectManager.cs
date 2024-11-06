@@ -164,7 +164,6 @@ public class GameObjectManager:MonoBehaviour
             //启用第三人称摄像机
             TP_CameraController.instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
 
-            ctl.SStart();
         }
         else
         {
@@ -177,7 +176,6 @@ public class GameObjectManager:MonoBehaviour
             ctl.Init(actor, syncEntityRecive);
             actor.Init(ctl);
             syncEntityRecive.Init(ctl, initPosition, Vector3.zero);
-            ctl.SStart();
         }
 
 

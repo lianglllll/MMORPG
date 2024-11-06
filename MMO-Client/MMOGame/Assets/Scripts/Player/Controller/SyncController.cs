@@ -19,10 +19,6 @@ namespace Player.Controller
         {
             base.Init(actor, syncEntity);
             syncEntityRecive = syncEntity as SyncEntityRecive;
-        }
-
-        public override void SStart()
-        {
             ChangeState(ActorState.Idle);
         }
 

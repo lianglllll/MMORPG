@@ -108,6 +108,10 @@ namespace HSFramework.Net
         }
         public void SendSyncRequest()
         {
+            if (!m_isStart)
+            {
+                return;
+            }
             _StopAutoSendSyncRequestCorountine();
             _SendSyncRequest();
             _ResumeAutoSendSyncRequestCorountine();

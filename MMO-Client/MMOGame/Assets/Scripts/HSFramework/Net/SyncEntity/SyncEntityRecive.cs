@@ -13,6 +13,7 @@ namespace HSFramework.Net
         private SyncController syncController;
         [SerializeField]
         private Vector3 position;
+        [SerializeField]
         private Vector3 direction;
 
         private void Start()

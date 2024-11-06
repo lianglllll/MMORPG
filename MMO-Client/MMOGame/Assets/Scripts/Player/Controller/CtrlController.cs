@@ -18,12 +18,9 @@ namespace Player.Controller
         {
             base.Init(actor,syncEntity);
             this.syncEntitySend = syncEntity as SyncEntitySend;
-        }
-
-        public override void SStart()
-        {
             ChangeState(ActorState.Idle);
         }
+
 
         public override void ChangeState(ActorState state, bool reCurrstate = false)
         {

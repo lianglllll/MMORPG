@@ -42,7 +42,7 @@ namespace Player
                 float y = Camera.main.transform.rotation.eulerAngles.y;
                 //让四元数和向量相乘：让这个向量按照这个四元数所表达的角度进行旋转后得到的新向量。
                 Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
-                player.Model.transform.rotation = Quaternion.Slerp(player.Model.transform.rotation, Quaternion.LookRotation(targetDir),
+                player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(targetDir),
                     Time.deltaTime * player.StateMachineParameter.rotationSpeed);
                 //位置
                 player.CharacterController.Move(targetDir * ShareParameter.moveSpeed * Time.deltaTime);

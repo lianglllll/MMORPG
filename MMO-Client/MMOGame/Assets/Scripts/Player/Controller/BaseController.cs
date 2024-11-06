@@ -63,11 +63,6 @@ namespace Player
             stateMachine.Init(this, stateMachineParameter);
         }
 
-        public virtual void SStart()
-        {
-
-        }
-
 
         #region 状态机
 
