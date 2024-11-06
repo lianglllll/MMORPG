@@ -124,6 +124,7 @@
     <type fullname="Unity.VisualScripting.UnityObjectUtility" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.AnimationModule">
+    <type fullname="UnityEngine.Animation" preserve="all" />
     <type fullname="UnityEngine.Animator" preserve="all" />
     <type fullname="UnityEngine.AnimatorStateInfo" preserve="all" />
   </assembly>
@@ -200,6 +201,7 @@
     <type fullname="UnityEngine.Physics" preserve="all" />
     <type fullname="UnityEngine.QueryTriggerInteraction" preserve="all" />
     <type fullname="UnityEngine.RaycastHit" preserve="all" />
+    <type fullname="UnityEngine.Rigidbody" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.UI">
     <type fullname="UnityEngine.EventSystems.EventSystem" preserve="all" />

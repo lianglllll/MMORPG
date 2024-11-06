@@ -5,8 +5,6 @@ using GameClient.Manager;
 using Player;
 using Player.Controller;
 using Proto;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -361,7 +359,7 @@ public class PlayerCombatController : MonoBehaviour
         ClearEnemy();
         _currentEnemy = target;
         GameApp.target = _currentEnemy;
-        ctrlController.unitUIController.SetSelectMark(true);
+        _currentEnemy.baseController.unitUIController.SetSelectedMark(true);
         Kaiyun.Event.FireOut("SelectTarget");//ui
     }
 
@@ -374,7 +372,7 @@ public class PlayerCombatController : MonoBehaviour
 
         //触发一下取消敌人锁定的事件
         Kaiyun.Event.FireOut("CancelSelectTarget");//ui
-        ctrlController?.unitUIController.SetSelectMark(false);
+        _currentEnemy.baseController.unitUIController.SetSelectedMark(false);
 
         GameApp.target = null;
         _currentEnemy = null;

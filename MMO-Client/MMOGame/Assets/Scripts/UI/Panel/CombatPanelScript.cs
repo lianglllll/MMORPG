@@ -171,11 +171,4 @@ public class CombatPanelScript : BasePanel
     {
         expBoxScript.RefrashUI();
     }
-
-
-
-
-
-
-
 }

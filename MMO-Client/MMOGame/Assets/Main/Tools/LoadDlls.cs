@@ -1,3 +1,5 @@
+
+
 using HybridCLR;
 using System;
 using System.Collections;
@@ -99,8 +101,9 @@ public class LoadDlls
         //AssetBundle ab = AssetBundle.LoadFromMemory(LoadDll.ReadBytesFromStreamingAssets("prefabs"));
         //GameObject cube = ab.LoadAsset<GameObject>("Cube");
         //GameObject.Instantiate(cube);
-        /*var package = YooAssets.GetPackage("DefaultPackage");
-        var handle = package.LoadAssetAsync<GameObject>("Cube");
+        //*var package = YooAssets.GetPackage("DefaultPackage");
+
+        /*var handle = package.LoadAssetAsync<GameObject>("Cube");
         handle.Completed += Handle_Completed;*/
 
     }

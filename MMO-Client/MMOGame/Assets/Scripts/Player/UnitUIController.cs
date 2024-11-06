@@ -40,7 +40,7 @@ public class UnitUIController : MonoBehaviour
     private void Start()
     {
         groundLayer = LayerMask.GetMask("Ground");
-        SetSelectMark(false);
+        SetSelectedMark(false);
         SetSpellRangeCanvas(false);
         SetSectorArea(false,0,0);
     }
@@ -79,7 +79,7 @@ public class UnitUIController : MonoBehaviour
     /// <summary>
     /// 设置选中标志是否显示
     /// </summary>
-    public void SetSelectMark(bool enable)
+    public void SetSelectedMark(bool enable)
     {
         SelectMarkCanvas.enabled = enable;
     }

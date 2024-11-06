@@ -57,6 +57,7 @@ namespace Player
         {
             this.actor = actor;
             Model.Init();
+            unitUIController.Init(actor);
             stateMachine = new StateMachine();
             stateMachineParameter = new StateMachineParameter();
             stateMachine.Init(this, stateMachineParameter);
