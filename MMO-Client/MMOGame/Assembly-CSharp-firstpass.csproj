@@ -901,6 +901,26 @@
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{2F3FA87D-7750-1DC8-AD86-313FBE0C2E3B}</Project>
+      <Name>UniTask.Addressables</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.DOTween.csproj">
+      <Project>{4BBC919A-5F67-451D-32D5-BA3C7E00BD5A}</Project>
+      <Name>UniTask.DOTween</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.csproj">
+      <Project>{D9F16AAE-7D0A-25AB-7D15-0319FAB08A3D}</Project>
+      <Name>UniTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{2819E52A-4B91-74BE-EC76-FBD7597CD34E}</Project>
+      <Name>UniTask.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Linq.csproj">
+      <Project>{ECB3AE6C-7D06-2930-681C-FE5CC1E0B9E5}</Project>
+      <Name>UniTask.Linq</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
