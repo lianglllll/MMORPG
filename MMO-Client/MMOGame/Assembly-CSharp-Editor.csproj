@@ -827,17 +827,17 @@
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Services.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
@@ -894,6 +894,10 @@
       <Project>{682213BC-AB5A-6785-DF80-1FFA307A26DD}</Project>
       <Name>DOTween.Modules</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.DOTween.csproj">
+      <Project>{4BBC919A-5F67-451D-32D5-BA3C7E00BD5A}</Project>
+      <Name>UniTask.DOTween</Name>
+    </ProjectReference>
     <ProjectReference Include="IngameDebugConsole.Editor.csproj">
       <Project>{88556816-2CA4-F522-6553-345DFCC07ED5}</Project>
       <Name>IngameDebugConsole.Editor</Name>
@@ -906,9 +910,25 @@
       <Project>{86C6AA80-C9DC-063F-133E-52C802CA1BF0}</Project>
       <Name>Main</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.Linq.csproj">
+      <Project>{ECB3AE6C-7D06-2930-681C-FE5CC1E0B9E5}</Project>
+      <Name>UniTask.Linq</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{2819E52A-4B91-74BE-EC76-FBD7597CD34E}</Project>
+      <Name>UniTask.TextMeshPro</Name>
+    </ProjectReference>
     <ProjectReference Include="Serilog.Sinks.Unity3D.csproj">
       <Project>{0A987264-62ED-5DCB-7BC0-BDE50C35B58B}</Project>
       <Name>Serilog.Sinks.Unity3D</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.csproj">
+      <Project>{D9F16AAE-7D0A-25AB-7D15-0319FAB08A3D}</Project>
+      <Name>UniTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{2F3FA87D-7750-1DC8-AD86-313FBE0C2E3B}</Project>
+      <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
