@@ -82,15 +82,14 @@
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ItemEntity.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\RecyclingListView.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\MaxHeap.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Scripts\Manager\GameApp.cs" />
     <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
+    <Compile Include="Assets\Art\Hand_to_Hand_Set\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Player\Model\SyncModel.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\RecyclingListViewItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Death.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\CreateRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\UnityObjectPoolFactory.cs" />
-    <Compile Include="Assets\aExample\RecyclingListDemo\TestChildItem.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Skill.cs" />
     <Compile Include="Assets\Scripts\Service\BuffService.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_AirDown.cs" />
@@ -155,9 +153,11 @@
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
+    <Compile Include="Assets\aExample\RecyclingListDemo\TestItem.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Net\NetClient.cs" />
     <Compile Include="Assets\Scripts\Proto\Message.cs" />
     <Compile Include="Assets\Scripts\HSFramework\EventSystem\Event.cs" />
+    <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\IRecyclingListViewItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\MessagePanelScript.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\Heap.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntityRecive.cs" />
@@ -188,6 +188,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState.cs" />
     <Compile Include="Assets\Scripts\Entities\Character.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestBullet.cs" />
+    <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\RecyclingListView.cs" />
     <Compile Include="Assets\Scripts\Service\CombatService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerInfoButton.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenuOption.cs" />
@@ -240,7 +241,6 @@
     <Compile Include="Assets\Scripts\UI\Panel\ScenePoster.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Art\Hand_to_Hand_Set\Scripts\SimpleCameraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Res\Model\Unit\WizardPolyArt\Shader\PolyArtMaskTint.shader" />

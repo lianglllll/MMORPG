@@ -18,8 +18,6 @@ namespace BaseSystem.PoolModule
         //Dispose时将等待回收的对象都回收掉
         private Dictionary<UnityEngine.Object, AutoRecycleItem> _autoRecycleItems = new Dictionary<UnityEngine.Object, AutoRecycleItem>();
         private AutoRecycleConf _autoRecycleConf = new AutoRecycleConf();
-
-
         private UnityObjectPool CreatePool(UnityEngine.Object t, string poolName,
             Func<UnityEngine.Object> objectFactory,
             int initialPoolSize = 0, int maxPoolSize = 200,
@@ -74,8 +72,6 @@ namespace BaseSystem.PoolModule
             //_pools在不同场景中，使用到的gameobjcet频率可能是不一致的，所有重新获取比较合理一点把。
 
         }
-
-
 
         private bool _disposed;
         protected override void Dispose(bool disposing)
