@@ -197,6 +197,27 @@ public class Res
 
     }
 
+    public static String LoadRawJsonFileSync(string location)
+    {
+        if (string.IsNullOrEmpty(location)) return null;
+        var path = $"{Prefix}/{location}";
+        string fileText = null;
+
+#if (UNITY_EDITOR)
+        {
+            TextAsset jsonAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+            fileText = jsonAsset.text;
+        }
+#else
+        {
+            var package = YooAssets.GetPackage("RawPackage");
+            var hanle = package.LoadRawFileSync(path);
+            fileText = hanle.GetRawFileText();
+        }
+#endif
+        return fileText;
+    }
+
 }
 
 

@@ -1,78 +1,13 @@
 using Summer;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using YooAsset;
+
 
 public class DataManager : Singleton<DataManager>
 {
-
-    //地图场景数据
-    public Dictionary<int, SpaceDefine> spaceDict = null;
-    //职业|野怪的数据
-    public Dictionary<int, UnitDefine> unitDict = null;
-    //panel路径映射
-    public Dictionary<string, PanelDefine> panelDict = null;
-    //技能信息
-    public Dictionary<int, SkillDefine> skillDefineDict = null;
-    //物品信息
-    public Dictionary<int, ItemDefine> itemDefineDict = null;
-    //等级经验信息
-    public Dictionary<int, LevelDefine> levelDefindeDict = null;
-    //buff信息
-    public Dictionary<int, BuffDefine> buffDefindeDict = null;
-
-
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    public DataManager()
-    {
-    }
-
-    /// <summary>
-    /// 初始化，就是将文件中的数据读入
-    /// </summary>
-    public void init()
-    {
-        //获取SpaceDefine场景文件对象，
-        spaceDict = Load<SpaceDefine>("SpaceDefine");
-        unitDict = Load<UnitDefine>("UnitDefine");
-        skillDefineDict = Load<SkillDefine>("SkillDefine");
-        itemDefineDict = Load<ItemDefine>("ItemDefine");
-        levelDefindeDict = Load<LevelDefine>("LevelDefine");
-        buffDefindeDict = Load<BuffDefine>("BuffDefine");
-        panelDict = Load2<PanelDefine>("PanelDefine");
-
-    }
-
-    /// <summary>
-    /// json -> dictionary
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="path"></param>
-    /// <returns></returns>
-    private Dictionary<int,T> Load<T>(string path)
-    {
-        var package = YooAssets.GetPackage("RawPackage");
-        var hanle = package.LoadRawFileSync(path);
-        string fileText = hanle.GetRawFileText();
-
-
-
-        return JsonConvert.DeserializeObject<Dictionary<int, T>>(fileText, settings);
-    }
-    private Dictionary<string,T> Load2<T>(string path)
-    {
-        var package = YooAssets.GetPackage("RawPackage");
-        var hanle = package.LoadRawFileSync(path);
-        string fileText = hanle.GetRawFileText();
-        return JsonConvert.DeserializeObject<Dictionary<string, T>>(fileText);
-    }
+    private const string _prefix = "Files/Data";
 
     JsonSerializerSettings settings = new JsonSerializerSettings
     {
@@ -82,20 +17,62 @@ public class DataManager : Singleton<DataManager>
         }
     };
 
+    //地图场景数据
+    public Dictionary<int, SpaceDefine> spaceDefineDict = null;
+    //职业|野怪的数据
+    public Dictionary<int, UnitDefine> unitDefineDict = null;
+    //panel路径映射
+    public Dictionary<string, PanelDefine> panelDefineDict = null;
+    //技能信息
+    public Dictionary<int, SkillDefine> skillDefineDict = null;
+    //物品信息
+    public Dictionary<int, ItemDefine> itemDefineDict = null;
+    //等级经验信息
+    public Dictionary<int, LevelDefine> levelDefineDict = null;
+    //buff信息
+    public Dictionary<int, BuffDefine> buffDefineDict = null;
+    //对话映射
+    private Dictionary<int,DialogDefine> _dialogDefineDict = null;
 
-    /// <summary>
-    /// 通过spaceid拿spaceDefine信息
-    /// </summary>
-    /// <param name="spaceId"></param>
-    /// <returns></returns>
-    public SpaceDefine GetSpaceDefineById(int spaceId)
+    public DataManager()
     {
-        return spaceDict.GetValueOrDefault(spaceId,null);
     }
 
+    public void init()
+    {
+        //todo 就是将文件中的数据读入,真的有必要全部读入吗？懒加载可以吗
+        spaceDefineDict = _LoadJsonAnd2Dict<int,SpaceDefine>("SpaceDefine");
+        unitDefineDict = _LoadJsonAnd2Dict<int, UnitDefine>("UnitDefine");
+        skillDefineDict = _LoadJsonAnd2Dict<int, SkillDefine>("SkillDefine");
+        itemDefineDict = _LoadJsonAnd2Dict<int, ItemDefine>("ItemDefine");
+        levelDefineDict = _LoadJsonAnd2Dict<int, LevelDefine>("LevelDefine");
+        buffDefineDict = _LoadJsonAnd2Dict<int, BuffDefine>("BuffDefine");
+        panelDefineDict = _LoadJsonAnd2Dict<string, PanelDefine>("PanelDefine");
+        _dialogDefineDict = _LoadJsonAnd2Dict<int, DialogDefine>("DialogDefine");
+    }
+
+    private Dictionary<K,T> _LoadJsonAnd2Dict<K,T>(string location)
+    {
+        string path = _prefix + "/" + location + ".json";
+        string fileText =Res.LoadRawJsonFileSync(path);
+        return JsonConvert.DeserializeObject<Dictionary<K, T>>(fileText, settings);
+    }
+
+    public SpaceDefine GetSpaceDefineById(int spaceId)
+    {
+        return spaceDefineDict.GetValueOrDefault(spaceId,null);
+    }
+    public string GetDialogConfigPathByDid(int dId)
+    {
+        DialogDefine def = _dialogDefineDict.GetValueOrDefault(dId, null);
+        if(def == null)
+        {
+            return null;
+        }
+        return def.DialogFilePath;
+    }
 
 }
-
 
 //自定义的JsonConverter,用于解决普通的JsonConverter无法转换float[]的问题
 public class FloatArrayConverter : JsonConverter<float[]>
@@ -151,7 +128,3 @@ public class IntArrayConverter : JsonConverter<int[]>
         throw new NotImplementedException();
     }
 }
-
-
-
-

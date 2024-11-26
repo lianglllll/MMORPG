@@ -26,7 +26,7 @@ public class ExpBoxScript : MonoBehaviour
     public void RefrashUI()
     {
         if (_actor == null) return;
-        var def = DataManager.Instance.levelDefindeDict[_actor.Level];
+        var def = DataManager.Instance.levelDefineDict[_actor.Level];
         if (def == null) return;
         expText.text = "" + _actor.Exp + "/" + def.ExpLimit;
         var proportion = (_actor.Exp*1.0f / def.ExpLimit);

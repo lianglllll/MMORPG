@@ -37,7 +37,7 @@ namespace GameClient.Entities
         public Actor(NetActor info) :base(info.Entity)
         {
             this.info = info;
-            this.define = DataManager.Instance.unitDict[info.Tid];
+            this.define = DataManager.Instance.unitDefineDict[info.Tid];
             this.skillManager = new SkillManager(this);
             this.LoadEquips(info.EquipList);
             this.LoadBuffs(info.BuffsList);

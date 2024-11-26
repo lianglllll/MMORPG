@@ -179,7 +179,7 @@ public  class Buff
         Provider = GameTools.GetActorById(info.ProviderId);
         CurrentLevel = info.CurrentLevel;
         ResidualDuration = info.ResidualDuration;
-        Def = DataManager.Instance.buffDefindeDict.GetValueOrDefault(info.Bid,null);
+        Def = DataManager.Instance.buffDefineDict.GetValueOrDefault(info.Bid,null);
         //m_Initialized = true;
 
         var def = Def;

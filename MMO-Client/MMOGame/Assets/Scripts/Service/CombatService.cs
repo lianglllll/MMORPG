@@ -86,7 +86,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
 
                     //推入combatUI
                     UIManager.Instance.OpenPanel("CombatPanel");
-                    DataManager.Instance.spaceDict.TryGetValue(GameApp.SpaceId, out var def);
+                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
                     UIManager.Instance.ShowTopMessage("" + def.Name);
 
                 });
@@ -123,7 +123,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
                     //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
                     UIManager.Instance.ClosePanel("CombatPanel");
                     UIManager.Instance.OpenPanel("CombatPanel");
-                    DataManager.Instance.spaceDict.TryGetValue(GameApp.SpaceId, out var def);
+                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
                     UIManager.Instance.ShowTopMessage("" + def.Name);
 
                 });

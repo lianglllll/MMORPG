@@ -82,7 +82,7 @@ namespace GameClient {
         /// <param name="action">场景加载完成后的回调</param>
         public static void LoadSpaceWithPoster(int spaceId, Action<Scene> action)
         {
-            var spaceDefine = DataManager.Instance.spaceDict[spaceId];
+            var spaceDefine = DataManager.Instance.spaceDefineDict[spaceId];
             UnityMainThreadDispatcher.Instance().StartCoroutine(_LoadSpaceWithPoster(spaceDefine.Name,spaceDefine.Resource, action));
         }
         private static IEnumerator _LoadSpaceWithPoster(string spaceName,string path, Action<Scene> action)
