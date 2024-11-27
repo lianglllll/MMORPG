@@ -1,5 +1,4 @@
 using BaseSystem.Singleton;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,6 +6,9 @@ using UnityEngine.InputSystem;
 public class GameInputManager : Singleton<GameInputManager>
 {
     private InputActions _inputActions;
+    private Dictionary<string, List<string>>  m_originalActionBindings = new Dictionary<string, List<string>>();
+
+    #region 输入
 
     public Vector2 Movement => _inputActions.GameInput.Movement.ReadValue<Vector2>();           //获取二维输入
     public Vector2 CameraLook => _inputActions.GameInput.CameraLook.ReadValue<Vector2>();
@@ -20,7 +22,6 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool Defense => _inputActions.GameInput.Grab.triggered;
 
 
-
     public bool Climb => _inputActions.GameInput.Climb.triggered;
     public bool Grab => _inputActions.GameInput.Grab.triggered;
     public bool TakeOut => _inputActions.GameInput.TakeOut.triggered;
@@ -31,7 +32,7 @@ public class GameInputManager : Singleton<GameInputManager>
 
     public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;
 
-
+    #endregion
 
     protected override void Awake()
     {
@@ -52,5 +53,57 @@ public class GameInputManager : Singleton<GameInputManager>
     {
         _inputActions.Disable();
     }
+
+
+    private void Start()
+    {
+        GetAllActionBindings();
+    }
+
+    private void Update()
+    {
+
+    }
+
+    public void Change()
+    {
+        InputAction jumpAction = _inputActions.GameInput.Jump;
+        if (jumpAction != null)
+        {
+            // Disable the action before modifying it
+            jumpAction.Disable();
+            var newKey = "a";
+            // Clear existing bindings
+            jumpAction.ApplyBindingOverride(0, $"<Keyboard>/{newKey}");
+
+            // Re-enable the action
+            jumpAction.Enable();
+        }
+    }
+
+    public void  GetAllActionBindings()
+    {
+        //todo获取 的时候顺便吧action也保存起来。
+        // 遍历每个动作映射
+        foreach (var map in _inputActions.asset.actionMaps)
+        {
+            // 遍历每个动作
+            foreach (var action in map.actions)
+            {
+                var bindingPaths = new List<string>();
+
+                // 获取每个绑定的有效路径
+                foreach (var binding in action.bindings)
+                {
+                    bindingPaths.Add(binding.effectivePath);
+                }
+
+                // 将动作名称和绑定路径添加到字典中
+                m_originalActionBindings[action.name] = bindingPaths;
+            }
+        }
+
+    }
+
 
 }

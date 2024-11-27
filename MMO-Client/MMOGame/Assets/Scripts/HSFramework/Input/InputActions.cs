@@ -145,15 +145,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""587da5ce-91b4-4e91-b7f0-32ed618ecae5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""AnyKey"",
                     ""type"": ""Button"",
                     ""id"": ""6fe22e67-e748-476a-941f-49bd389ada9e"",
@@ -371,17 +362,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1036a511-87ec-453d-9e02-3b42d0670df1"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5153b7dc-fd5c-4c9a-b7ad-4d642e575c2b"",
                     ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
@@ -433,7 +413,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_EquipWP = m_GameInput.FindAction("EquipWP", throwIfNotFound: true);
         m_GameInput_Quit = m_GameInput.FindAction("Quit", throwIfNotFound: true);
         m_GameInput_Enter = m_GameInput.FindAction("Enter", throwIfNotFound: true);
-        m_GameInput_Newaction = m_GameInput.FindAction("New action", throwIfNotFound: true);
         m_GameInput_AnyKey = m_GameInput.FindAction("AnyKey", throwIfNotFound: true);
         m_GameInput_Jump = m_GameInput.FindAction("Jump", throwIfNotFound: true);
         m_GameInput_BigJump = m_GameInput.FindAction("BigJump", throwIfNotFound: true);
@@ -509,7 +488,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_EquipWP;
     private readonly InputAction m_GameInput_Quit;
     private readonly InputAction m_GameInput_Enter;
-    private readonly InputAction m_GameInput_Newaction;
     private readonly InputAction m_GameInput_AnyKey;
     private readonly InputAction m_GameInput_Jump;
     private readonly InputAction m_GameInput_BigJump;
@@ -530,7 +508,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @EquipWP => m_Wrapper.m_GameInput_EquipWP;
         public InputAction @Quit => m_Wrapper.m_GameInput_Quit;
         public InputAction @Enter => m_Wrapper.m_GameInput_Enter;
-        public InputAction @Newaction => m_Wrapper.m_GameInput_Newaction;
         public InputAction @AnyKey => m_Wrapper.m_GameInput_AnyKey;
         public InputAction @Jump => m_Wrapper.m_GameInput_Jump;
         public InputAction @BigJump => m_Wrapper.m_GameInput_BigJump;
@@ -582,9 +559,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Enter.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
                 @Enter.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
                 @Enter.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
-                @Newaction.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnNewaction;
                 @AnyKey.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
                 @AnyKey.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
                 @AnyKey.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
@@ -637,9 +611,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Enter.started += instance.OnEnter;
                 @Enter.performed += instance.OnEnter;
                 @Enter.canceled += instance.OnEnter;
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
                 @AnyKey.started += instance.OnAnyKey;
                 @AnyKey.performed += instance.OnAnyKey;
                 @AnyKey.canceled += instance.OnAnyKey;
@@ -668,7 +639,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnEquipWP(InputAction.CallbackContext context);
         void OnQuit(InputAction.CallbackContext context);
         void OnEnter(InputAction.CallbackContext context);
-        void OnNewaction(InputAction.CallbackContext context);
         void OnAnyKey(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnBigJump(InputAction.CallbackContext context);
