@@ -69,6 +69,22 @@ namespace GameClient.UI.Dialog
             return events;
         }
 
+        public bool ExcuteStartEvents()
+        {
+            foreach(var t in OnStartEventList)
+            {
+                t.Execute();
+            }
+            return true;
+        }
+        public bool ExcuteEndEvents()
+        {
+            foreach (var t in OnEndEventList)
+            {
+                t.Execute();
+            }
+            return true;
+        }
     }
 }
 

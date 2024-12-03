@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ItemEntity.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Audio\GlobalAudioManager.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\MaxHeap.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
@@ -108,9 +109,9 @@
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleConf.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Move.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
-    <Compile Include="Assets\aExample\Unitask\DialogTestEvent.cs" />
+    <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPool.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\AudioDefine.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioDefine.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\SyncController.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\DragHolder\DragHolder.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="Assets\Scripts\Service\ChatService.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogPanel.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioManager.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\Tips\ToolTip.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleItem.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
@@ -134,7 +135,7 @@
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\AudioDataSO.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioDataSO.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPoolItem.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Effect\GameEffect.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Move.cs" />
@@ -177,7 +178,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\UnityObjectPool.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\PostProcessMananger.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\AudioSettingPanel.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ChatBoxScript.cs" />
     <Compile Include="Assets\Res\Model\Unit\骷髅\Readme\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Assets\Scripts\Service\CombatService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerInfoButton.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenuOption.cs" />
+    <Compile Include="Assets\aExample\Dialog\DialogStopBackgroundAudioEvent.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_AirDown.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
@@ -224,13 +226,14 @@
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Idle.cs" />
     <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\GameTools.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\PlayClickAudio.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\PlayClickAudio.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingPanel.cs" />
     <Compile Include="Assets\Scripts\Player\Model\PlayerModel.cs" />
     <Compile Include="Assets\Scripts\Player\UnitUIController.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Net\V3.cs" />
     <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\Action_Manage.cs" />
+    <Compile Include="Assets\aExample\Dialog\DialogPlayBackgroundAudioEvent.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Skill.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
@@ -245,7 +248,6 @@
     <Compile Include="Assets\Scripts\UI\Panel\ScenePoster.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\ttest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Res\Model\Unit\WizardPolyArt\Shader\PolyArtMaskTint.shader" />

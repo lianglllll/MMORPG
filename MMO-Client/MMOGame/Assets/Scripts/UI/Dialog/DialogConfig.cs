@@ -5,7 +5,7 @@ namespace GameClient.UI.Dialog
     //某个角色的对话配置
     public class DialogConfig
     {
-        public List<DialogStepConfig> m_stepList = new List<DialogStepConfig>();
+        private List<DialogStepConfig> m_stepList = new List<DialogStepConfig>();
 
         public void Init(List<RawDialogStepConfig> configList)
         {
@@ -22,6 +22,23 @@ namespace GameClient.UI.Dialog
         public void UnInit()
         {
             m_stepList.Clear();
+        }
+
+        public int DialogStepCount()
+        {
+            if(m_stepList.Count <= 0)
+            {
+                return 0;
+            }
+            return m_stepList.Count;
+        }
+
+        public DialogStepConfig GetDialogStepConfigByIndex(int index) {
+            if(m_stepList == null ||  m_stepList.Count == 0 || index >= m_stepList.Count)
+            {
+                return null;
+            }
+            return m_stepList[index];
         }
     }
 }
