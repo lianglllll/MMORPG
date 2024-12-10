@@ -7,9 +7,9 @@ if not exist "%outPath%" (
 )
 
 :: 遍历文件
-set sourceFileDirectoryPath=..\..\MMO-SERVER\GameServer\Net\Proto
-for %%i in (proto\*.proto) do (
-    %cd%\bin\protoc -I=proto --csharp_out=%outPath% %%i
+set protoPath=..\..\MMO-SERVER\GameServer\Net\Proto
+for %%i in (%protoPath%\*.proto) do (
+    %cd%\bin\protoc -I=%protoPath% --csharp_out=%outPath% %%i
     echo %%i Done
 )
 
