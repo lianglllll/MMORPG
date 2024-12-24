@@ -52,7 +52,7 @@ public class RegisterPanelScript : BasePanel
             return;
         }
 
-        UserService.Instance._UserRegisterRequest(username, password);
+        UserService.Instance.UserRegisterRequest(username, password);
     }
 
     /// <summary>

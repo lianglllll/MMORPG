@@ -9,7 +9,7 @@ using Proto;
 
 namespace Assets.Script.Service
 {
-    public class BuffService : Singleton<BuffService>, IDisposable
+    public class BuffService : Singleton<BuffService>
     {
         public void Init()
         {
@@ -17,7 +17,7 @@ namespace Assets.Script.Service
             MessageRouter.Instance.Subscribe<BuffsRemoveResponse>(_BuffsRemoveResponse);
             MessageRouter.Instance.Subscribe<BuffsUpdateResponse>(_BuffsUpdateResponse);
         }
-        public void Dispose()
+        public void UnInit()
         {
             MessageRouter.Instance.Off<BuffsAddResponse>(_BuffsAddResponse);
             MessageRouter.Instance.Off<BuffsRemoveResponse>(_BuffsRemoveResponse);

@@ -37,7 +37,7 @@ public class SelectRolePanelScript : BasePanel
         deleteBtn.onClick.AddListener(OnDeleteRoleBtn);
 
         //拉取角色列表
-        UserService.Instance._CharacterListRequest();
+        UserService.Instance.GetCharacterListRequest();
     }
     public void RefreshRoleListUI(CharacterListResponse msg)
     {
@@ -126,7 +126,7 @@ public class SelectRolePanelScript : BasePanel
 
         //获取当前roleItemId对应的role信息，将角色id发送到服务端进行处理
         //发送网络请求
-        UserService.Instance._GameEnterRequest(curSelectedItem.ChrId);
+        UserService.Instance.EnterGameRequest(curSelectedItem.ChrId);
 
         StartCoroutine(_OnstartBtn());
 
@@ -152,7 +152,7 @@ public class SelectRolePanelScript : BasePanel
         //todo 需要进行弹窗，确认删除
 
         //发送请求
-        UserService.Instance._CharacterDeleteRequest(curSelectedItem.ChrId);
+        UserService.Instance.CharacterDeleteRequest(curSelectedItem.ChrId);
 
     }
 

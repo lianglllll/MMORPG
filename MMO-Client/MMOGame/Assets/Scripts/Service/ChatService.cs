@@ -9,7 +9,7 @@ using UnityEngine;
 /// <summary>
 /// 主要负责聊天消息的发送与接收
 /// </summary>
-public class ChatService : Singleton<ChatService>,IDisposable
+public class ChatService : Singleton<ChatService>
 {
     public ChatService()
     {
@@ -17,21 +17,18 @@ public class ChatService : Singleton<ChatService>,IDisposable
     }
 
     /// <summary>
-    /// 初始化
+    /// 初始化，gamemanager中启用
     /// </summary>
     public void Init()
     {
         MessageRouter.Instance.Subscribe<ChatResponse>(_ChatResponse);
         MessageRouter.Instance.Subscribe<ChatResponseOne>(_ChatResponseOne);
     }
-
-    public void Dispose()
+    public void UnInit()
     {
         MessageRouter.Instance.Off<ChatResponse>(_ChatResponse);
         MessageRouter.Instance.Off<ChatResponseOne>(_ChatResponseOne);
     }
-
-
 
     private void _ChatResponseOne(Connection sender, ChatResponseOne msg)
     {
@@ -69,7 +66,6 @@ public class ChatService : Singleton<ChatService>,IDisposable
         }
     }
 
-
     /// <summary>
     /// 发送消息
     /// </summary>
@@ -97,7 +93,5 @@ public class ChatService : Singleton<ChatService>,IDisposable
             NetManager.Instance.SimulateAbnormalDisconnection();
         }
     }
-
-
 
 }

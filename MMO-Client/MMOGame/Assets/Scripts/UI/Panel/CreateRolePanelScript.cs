@@ -94,7 +94,7 @@ public class CreateRolePanelScript : BasePanel
         }
 
         //发送网络请求
-        UserService.Instance._CharacterCreateRequest(usernameFileid.text, curItem.JobId);
+        UserService.Instance.CharacterCreateRequest(usernameFileid.text, curItem.JobId);
 
     }
 

@@ -12,7 +12,7 @@ using GameClient;
 using GameClient.Combat;
 using System.Threading.Tasks;
 
-public class CombatService : Singleton<CombatService>, IDisposable
+public class CombatService : Singleton<CombatService>
 {
 
     /// <summary>
@@ -32,10 +32,7 @@ public class CombatService : Singleton<CombatService>, IDisposable
         MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
 
-    /// <summary>
-    /// 脚本销毁时操作
-    /// </summary>
-    public void Dispose()
+    public void UnInit()
     {
         MessageRouter.Instance.Off<SpaceEnterResponse>(_SpaceEnterResponse);
         MessageRouter.Instance.Off<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);

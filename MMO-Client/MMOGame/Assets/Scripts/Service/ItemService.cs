@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemService : Singleton<ItemService>, IDisposable
+public class ItemService : Singleton<ItemService>
 {
     /// <summary>
     /// 初始化，gamemanager中启用
@@ -25,7 +25,7 @@ public class ItemService : Singleton<ItemService>, IDisposable
     }
 
 
-    public void Dispose()
+    public void UnInit()
     {
         MessageRouter.Instance.Off<InventoryInfoResponse>(_InventoryInfoResponse);
         MessageRouter.Instance.Off<NetEItemSync>(_NetEItemSync);

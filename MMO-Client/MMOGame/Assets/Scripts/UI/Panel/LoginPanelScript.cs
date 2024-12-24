@@ -1,11 +1,7 @@
 using GameClient;
 using Proto;
-using Summer.Network;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 
@@ -22,15 +18,13 @@ public class LoginPanelScript : BasePanel
     private Button registerButton;
     private Button ExitButton;
     private Toggle recordUsernameAndPassword;
-    //serverinfo
+
+    //curServerinfo
     private Button RefreshServerInfoBtn;
     private Text OnlinePlayerCountText;
     private Text UserCountText;
     private Transform Content;
     private GameObject contentNode;
-
-
-
     protected override void Awake()
     {
         usernameInputField = transform.Find("Login-box/UsernameInputField").GetComponent<InputField>();
@@ -55,8 +49,8 @@ public class LoginPanelScript : BasePanel
     protected override void Start()
     {
         passwordInputField.contentType = InputField.ContentType.Password;
-        loginButton.onClick.AddListener(OnLogin);
-        registerButton.onClick.AddListener(OnRegister);
+        loginButton.onClick.AddListener(OnLoginBtn);
+        registerButton.onClick.AddListener(OnRegisterBtn);
         ExitButton.onClick.AddListener(OnExitBtn);
         RefreshServerInfoBtn.onClick.AddListener(OnRefreshServerInfoBtn);
         isOnClickLoginBtn = false;
@@ -64,11 +58,9 @@ public class LoginPanelScript : BasePanel
         Init();
     }
 
-
-
     private void Init()
     {
-        //加载用户名和密码
+        //加载上次缓存的用户名和密码
         string myUsername = PlayerPrefs.GetString("myUsername");
         string myPassword = PlayerPrefs.GetString("myPassword");
         if (!string.IsNullOrEmpty(myUsername))
@@ -83,17 +75,10 @@ public class LoginPanelScript : BasePanel
         //给登录框弄点移动效果
         loginBox.DOLocalMoveX(transform.localPosition.x + 2000f, 2f).From();
         ServerInfoBox.DOLocalMoveX(transform.localPosition.x  -4000f, 2f).From();
-
-
     }
 
-
-    /// <summary>
-    /// 登录按钮回调
-    /// </summary>
-    private void OnLogin()
+    private void OnLoginBtn()
     {
-
         //防止多次连续点击
         if (isOnClickLoginBtn) return;
 
@@ -116,13 +101,8 @@ public class LoginPanelScript : BasePanel
         isOnClickLoginBtn = true;
 
         //向server发送登录请求
-        UserService.Instance._UserLoginRequest(username, password);
+        UserService.Instance.UserLoginRequest(username, password);
     }
-
-    /// <summary>
-    /// 登录事件触发的响应
-    /// </summary>
-    /// <param name="msg"></param>
     public void OnLoginResponse(UserLoginResponse msg)
     {
         //登录成功，切换到角色选择scene
@@ -166,10 +146,8 @@ public class LoginPanelScript : BasePanel
         yield return ScenePoster.Instance.FadeOut();
     }
 
-    /// <summary>
-    /// 注册按钮触发
-    /// </summary>
-    private void OnRegister()
+
+    private void OnRegisterBtn()
     {
         StartCoroutine(_OnRegister());
     }
@@ -181,9 +159,13 @@ public class LoginPanelScript : BasePanel
         UIManager.Instance.OpenPanel("RegisterPanel");
 
         yield return ScenePoster.Instance.FadeOut();
-
     }
 
+
+    private void OnRefreshServerInfoBtn()
+    {
+        UserService.Instance.GetServerInfoRequest();
+    }
     public void OnServerInfoResponse(ServerInfoResponse message)
     {
         OnlinePlayerCountText.text = "当前服务器在线人数：" + message.OnlinePlayerCount;
@@ -207,17 +189,8 @@ public class LoginPanelScript : BasePanel
 
 
     }
+ 
 
-    private void OnRefreshServerInfoBtn()
-    {
-        UserService.Instance._ServerInfoRequest();
-    }
-
-
-
-    /// <summary>
-    /// 退出
-    /// </summary>
     private void OnExitBtn()
     {
         //弹框提示
@@ -234,5 +207,4 @@ public class LoginPanelScript : BasePanel
 #endif
         });
     }
-
 }

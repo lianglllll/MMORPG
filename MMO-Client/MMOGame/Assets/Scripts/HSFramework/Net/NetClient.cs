@@ -18,7 +18,7 @@ public class NetClient
 {
     private static Socket clientSocket = null;
     private static Connection conn = null;
-    private static ManualResetEvent connectDone = new ManualResetEvent(false);
+    //private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
     /// <summary>
     /// 连接到服务器
