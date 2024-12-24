@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
-using Proto;
-using Summer.Network;
 using System;
 using GameClient.Entities;
 using GameClient;
 using System.Threading.Tasks;
 using BaseSystem.Singleton;
+using HS.Protobuf.Common;
+using Common.Summer.Core;
+using Common.Summer.Net;
+using HS.Protobuf.Login;
 
 public class NetManager : Singleton<NetManager>
 {
@@ -14,7 +16,7 @@ public class NetManager : Singleton<NetManager>
 
     //心跳机制
     private bool isEnableHeartBeat;
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(2f);           //心跳包时间控制
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(2f);             //心跳包时间控制
     private DateTime lastBeatTime = DateTime.MinValue;                          //上一次发送心跳包的时间
 
     //是否处于重连状态
@@ -44,8 +46,8 @@ public class NetManager : Singleton<NetManager>
 
     private void OnDestroy()
     {
-        MessageRouter.Instance.Off<HeartBeatResponse>(_HeartBeatResponse);
-        MessageRouter.Instance.Off<ReconnectResponse>(_ReconnectResponse);
+        MessageRouter.Instance.UnSubscribe<HeartBeatResponse>(_HeartBeatResponse);
+        MessageRouter.Instance.UnSubscribe<ReconnectResponse>(_ReconnectResponse);
         Kaiyun.Event.UnregisterOut("SuccessConnectServer", this, "ConnectToServerCallback");
         Kaiyun.Event.UnregisterOut("FailedConnectServer", this, "ConnectToServerFailedCallback");
         Kaiyun.Event.UnregisterOut("Disconnected", this, "OnDisconnected");

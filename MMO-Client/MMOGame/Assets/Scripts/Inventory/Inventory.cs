@@ -1,16 +1,10 @@
-using Assets.Script.Entities;
 using GameClient.Entities;
 using GameClient.InventorySystem;
-using Proto;
-using Serilog;
+using HS.Protobuf.Backpack;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
 
 /// <summary>
 /// 库存对象，可以用作仓库，可以用做背包

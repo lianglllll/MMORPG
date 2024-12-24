@@ -1,9 +1,5 @@
 using GameClient.Entities;
-using Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using HS.Protobuf.SceneEntity;
 using UnityEngine;
 
 namespace GameServer.Model

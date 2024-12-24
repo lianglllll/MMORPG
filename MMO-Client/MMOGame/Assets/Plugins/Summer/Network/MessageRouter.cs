@@ -1,32 +1,22 @@
+using Common.Summer.Core;
+using Google.Protobuf;
+using Serilog;
 using Summer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Threading;
-using Common;
-using Serilog;
 using System.Collections.Concurrent;
+using System.Threading;
 
-namespace Summer.Network
+namespace Common.Summer.Net
 {
-
-    /// <summary>
-    /// 消息单元
-    /// </summary>
+    //消息单元
     class Msg
     {
-        public Connection sender;//谁发的
-        public Google.Protobuf.IMessage message;//消息
-
+        public Connection conn;//谁发的
+        public IMessage message;//消息
     }
 
-    /// <summary>
-    /// 消息分发器
-    /// </summary>
-    public class MessageRouter : Singleton<MessageRouter>
+    // 消息路由
+    public class MessageRouter:Singleton<MessageRouter>
     {
         private int ThreadCount = 1; //线程个数
         private int WorkerCount = 0; //线程工作个数
@@ -34,12 +24,12 @@ namespace Summer.Network
         public bool Running { get { return running; } }
 
         //通过set每次可以唤醒一个线程
-        AutoResetEvent threadEvent = new AutoResetEvent(false);
+        AutoResetEvent threadEvent = new AutoResetEvent(false);  
 
         //消息队列，所有客户端发送过来的消息都暂存到这里
         private ConcurrentQueue<Msg> messageQueue = new ConcurrentQueue<Msg>();
 
-        //消息处理器(这里是一个委托)
+        //消息处理委托
         public delegate void MessageHandler<T>(Connection sender, T message);
 
         //消息频道（技能频道，战斗频道，物品频道）（订阅记录）
@@ -49,9 +39,9 @@ namespace Summer.Network
         {
             if (running) return;
             running = true;
-            this.ThreadCount = Math.Min(Math.Max(1, ThreadCount), 10);
+            this.ThreadCount = Math.Min(Math.Max(1, ThreadCount),10);
 
-            for (int i = 0; i < this.ThreadCount; i++)
+            for(int i = 0; i < this.ThreadCount; i++)
             {
                 //将委托任务交付给线程池
                 ThreadPool.QueueUserWorkItem(new WaitCallback(MessageWork));
@@ -63,7 +53,6 @@ namespace Summer.Network
                 Thread.Sleep(100);
             }
         }
-
         public void Stop()
         {
             running = false;
@@ -76,46 +65,20 @@ namespace Summer.Network
             Thread.Sleep(50);
         }
 
-        /// <summary>
-        /// 添加消息到消息队列
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="message"></param>
-        public void AddMessage(Connection sender, Google.Protobuf.IMessage message)
-        {
-            //加锁
-            lock (messageQueue)
-            {
-                messageQueue.Enqueue(new Msg() { sender = sender, message = message });
-            }
-            //唤醒一个进程来处理消息队列
-            threadEvent.Set();
-        }
 
-        /// <summary>
-        ///  订阅频道
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="handler"></param>
         public void Subscribe<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage
         {
             string type = typeof(T).FullName;
-
+            
             if (!delegateMap.ContainsKey(type))//没有就创建一个空的
             {
                 delegateMap[type] = null;
             }
 
             //添加订阅者,因为这里它不知道是什么类型的委托，所以要转型（这里是委托链注意，可能会多次绑定）
-            delegateMap[type] = (MessageHandler<T>)delegateMap[type] + handler;
+            delegateMap[type] = (MessageHandler < T >)delegateMap[type]  + handler;
         }
-
-        /// <summary>
-        /// 退订频道
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="handler"></param>
-        public void Off<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage
+        public void UnSubscribe<T>(MessageHandler<T> handler) where T : Google.Protobuf.IMessage
         {
             string key = typeof(T).FullName;
             if (!delegateMap.ContainsKey(key))
@@ -126,40 +89,21 @@ namespace Summer.Network
             delegateMap[key] = (MessageHandler<T>)delegateMap[key] - handler;
         }
 
-        /// <summary>
-        /// 触发相对应订阅的事件
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sender"></param>
-        /// <param name="msg"></param>
-        private void Fire<T>(Connection sender, T msg)
+
+        // 添加消息到消息队列
+        public void AddMessage(Connection sender, Google.Protobuf.IMessage message)
         {
-            string type = typeof(T).FullName;
-            //Console.WriteLine(type);
-            //没人订阅自然就不需要处理这个消息了
-            if (delegateMap.ContainsKey(type))
+            //加锁
+            lock (messageQueue)
             {
-                //Console.WriteLine(type);
-                MessageHandler<T> handler = (MessageHandler<T>)delegateMap[type];
-                try
-                {
-                    handler?.Invoke(sender, msg);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("MessageRouter.Fire error:" + e.StackTrace);
-                }
+                messageQueue.Enqueue(new Msg() { conn = sender, message = message });
             }
-
+            //唤醒一个进程来处理消息队列
+            threadEvent.Set();
         }
-
-        /// <summary>
-        /// 多线程消息处理
-        /// </summary>
-        /// <param name="state"></param>
+        // 多线程消息处理
         private void MessageWork(object state)
         {
-            // Console.WriteLine("MessageWork thread start");
             try
             {
                 //考虑到线程安全
@@ -182,17 +126,17 @@ namespace Summer.Network
                         if (messageQueue.Count == 0) continue;
                         messageQueue.TryDequeue(out msg);
                     }
-                    Google.Protobuf.IMessage package = msg.message;
+                    IMessage package = msg.message;
 
                     //判断这个包是什么类型
                     if (package != null)
                     {
                         //处理这个数据包
-                        executeMessage(msg.sender, package);//将package向下传递
+                        executeMessage(msg.conn, package);//将package向下传递
                     }
-                }
+                }              
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Console.WriteLine(e.StackTrace);
             }
@@ -201,24 +145,54 @@ namespace Summer.Network
                 Interlocked.Decrement(ref WorkerCount);//WorkerCount-1
             }
             Console.WriteLine("MessageWork thread end");
-
+            
         }
-        private void executeMessage(Connection sender, Google.Protobuf.IMessage message)
+        private void executeMessage(Connection sender, IMessage message)
         {
             var fullName = message.GetType().FullName;
-            if (delegateMap.TryGetValue(fullName, out var handler))
+            if(delegateMap.TryGetValue(fullName,out var handler))
             {
                 try
                 {
-                    handler?.DynamicInvoke(sender, message);
-                }
-                catch (Exception e)
+                    handler.DynamicInvoke(sender, message);
+                }catch(Exception e)
                 {
                     Log.Error("[MessageRouter.executeMessage]" + e.StackTrace);
                 }
             }
+        }
+
+        #region 弃用
+        /*
+        /// <summary>
+        /// 触发相对应订阅的事件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sender"></param>
+        /// <param name="msg"></param>
+        private void Fire<T>(Connection sender, T msg)
+        {
+
+            string type = typeof(T).FullName;
+            //Console.WriteLine(type);
+            //没人订阅自然就不需要处理这个消息了
+            if (delegateMap.ContainsKey(type))
+            {
+                //Console.WriteLine(type);
+                MessageHandler<T> handler = (MessageHandler<T>)delegateMap[type];
+                try
+                {
+                    handler?.Invoke(sender, msg);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("MessageRouter.Fire error:" + e.StackTrace);
+                }
+            }
 
         }
-    }
 
+        */
+        #endregion
+    }
 }

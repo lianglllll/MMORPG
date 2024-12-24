@@ -1,13 +1,10 @@
+using Common.Summer.Core;
+using Common.Summer.Net;
 using GameClient;
 using GameClient.Entities;
-using Proto;
-using Serilog;
+using HS.Protobuf.Backpack;
+using HS.Protobuf.Scene;
 using Summer;
-using Summer.Network;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class ItemService : Singleton<ItemService>
 {
@@ -27,12 +24,12 @@ public class ItemService : Singleton<ItemService>
 
     public void UnInit()
     {
-        MessageRouter.Instance.Off<InventoryInfoResponse>(_InventoryInfoResponse);
-        MessageRouter.Instance.Off<NetEItemSync>(_NetEItemSync);
-        MessageRouter.Instance.Off<ItemUseResponse>(_ItemUseResponse);
-        MessageRouter.Instance.Off<EquipsUpdateResponse>(_EquipsUpdateResponse);
-        MessageRouter.Instance.Off<ItemDiscardResponse>(_ItemDiscardResponse);
-        MessageRouter.Instance.Off<ItemPickupResponse>(_ItemPickupResponse);
+        MessageRouter.Instance.UnSubscribe<InventoryInfoResponse>(_InventoryInfoResponse);
+        MessageRouter.Instance.UnSubscribe<NetEItemSync>(_NetEItemSync);
+        MessageRouter.Instance.UnSubscribe<ItemUseResponse>(_ItemUseResponse);
+        MessageRouter.Instance.UnSubscribe<EquipsUpdateResponse>(_EquipsUpdateResponse);
+        MessageRouter.Instance.UnSubscribe<ItemDiscardResponse>(_ItemDiscardResponse);
+        MessageRouter.Instance.UnSubscribe<ItemPickupResponse>(_ItemPickupResponse);
     }
 
     /// <summary>
@@ -177,7 +174,7 @@ public class ItemService : Singleton<ItemService>
     {
 
         //刷一下ui
-        if (msg.Result == Result.Success)
+        if (msg.ResultCode == 0)
         {
             Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
 
@@ -185,7 +182,7 @@ public class ItemService : Singleton<ItemService>
             var item = DataManager.Instance.itemDefineDict[msg.ItemId];
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
-                UIManager.Instance.MessagePanel.ShowItemIOInfo($"拾取物品:{item.Name}X{msg.Amout}");
+                UIManager.Instance.MessagePanel.ShowItemIOInfo($"拾取物品:{item.Name}X{msg.Amount}");
             });
         }
 
@@ -212,13 +209,13 @@ public class ItemService : Singleton<ItemService>
     public void _ItemDiscardResponse(Connection sender, ItemDiscardResponse msg)
     {
         //刷一下ui
-        if(msg.Result == Result.Success)
+        if(msg.ResultCode == 0)
         {
             Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
             var item = DataManager.Instance.itemDefineDict[msg.ItemId];
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
-                UIManager.Instance.MessagePanel.ShowItemIOInfo($"丢弃物品:{item.Name}X{msg.Amout}");
+                UIManager.Instance.MessagePanel.ShowItemIOInfo($"丢弃物品:{item.Name}X{msg.Amount}");
             });
         }
 

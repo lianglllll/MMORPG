@@ -1,8 +1,9 @@
+using Common.Summer.Core;
+using Common.Summer.Net;
 using GameClient;
-using Proto;
+using HS.Protobuf.Login;
+using HS.Protobuf.Scene;
 using Summer;
-using Summer.Network;
-using System;
 
 public class UserService : Singleton<UserService>
 {
@@ -19,12 +20,12 @@ public class UserService : Singleton<UserService>
     }
     public void UnInit()
     {
-        MessageRouter.Instance.Off<UserLoginResponse>(_UserLoginResponse);
-        MessageRouter.Instance.Off<GameEnterResponse>(_EnterGameResponse);
-        MessageRouter.Instance.Off<CharacterListResponse>(_GetCharacterListResponse);
-        MessageRouter.Instance.Off<CharacterDeleteResponse>(_CharacterDeleteResponse);
-        MessageRouter.Instance.Off<UserRegisterResponse>(_UserRegisterResponse);
-        MessageRouter.Instance.Off<CharacterCreateResponse>(_CharacterCreateResponse);
+        MessageRouter.Instance.UnSubscribe<UserLoginResponse>(_UserLoginResponse);
+        MessageRouter.Instance.UnSubscribe<GameEnterResponse>(_EnterGameResponse);
+        MessageRouter.Instance.UnSubscribe<CharacterListResponse>(_GetCharacterListResponse);
+        MessageRouter.Instance.UnSubscribe<CharacterDeleteResponse>(_CharacterDeleteResponse);
+        MessageRouter.Instance.UnSubscribe<UserRegisterResponse>(_UserRegisterResponse);
+        MessageRouter.Instance.UnSubscribe<CharacterCreateResponse>(_CharacterCreateResponse);
     }
 
     public void UserLoginRequest(string username,string password)

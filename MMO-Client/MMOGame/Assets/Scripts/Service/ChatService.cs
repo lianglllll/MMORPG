@@ -1,10 +1,7 @@
-using Proto;
+using Common.Summer.Core;
+using Common.Summer.Net;
+using HS.Protobuf.Chat;
 using Summer;
-using Summer.Network;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// 主要负责聊天消息的发送与接收
@@ -26,20 +23,20 @@ public class ChatService : Singleton<ChatService>
     }
     public void UnInit()
     {
-        MessageRouter.Instance.Off<ChatResponse>(_ChatResponse);
-        MessageRouter.Instance.Off<ChatResponseOne>(_ChatResponseOne);
+        MessageRouter.Instance.UnSubscribe<ChatResponse>(_ChatResponse);
+        MessageRouter.Instance.UnSubscribe<ChatResponseOne>(_ChatResponseOne);
     }
 
     private void _ChatResponseOne(Connection sender, ChatResponseOne msg)
     {
-        if (msg.Result == Result.Success)
+        if (msg.ResultCode == 0)
         {
             ChatManager.Instance.AddMessage(ChatChannel.Local, msg.Message);
 
         }
-        else if (msg.Result == Result.Fault)
+        else if (msg.ResultCode == 1)
         {
-            ChatManager.Instance.AddSystemMessage(msg.Errormsg);
+            ChatManager.Instance.AddSystemMessage(msg.ResultMsg);
         }
     }
 
@@ -51,7 +48,7 @@ public class ChatService : Singleton<ChatService>
     private void _ChatResponse(Connection conn, ChatResponse msg)
     {
 
-        if(msg.Result == Result.Success)
+        if(msg.ResultCode == 0)
         {
             ChatManager.Instance.AddMessage(ChatChannel.Local, msg.LocalMessages);
             //ChatManager.Instance.AddMessage(ChatChannel.World, msg.WorldMessages);
@@ -60,9 +57,9 @@ public class ChatService : Singleton<ChatService>
             //ChatManager.Instance.AddMessage(ChatChannel.Team, msg.TeamMessages);
             //ChatManager.Instance.AddMessage(ChatChannel.Guild, msg.GuildMessages);
         }
-        else if(msg.Result == Result.Fault)
+        else if(msg.ResultCode == 1)
         {
-            ChatManager.Instance.AddSystemMessage(msg.Errormsg);
+            ChatManager.Instance.AddSystemMessage(msg.ResultMsg);
         }
     }
 

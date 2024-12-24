@@ -1,11 +1,6 @@
-using Assets.Script.Entities;
 using GameClient;
 using GameClient.Combat;
 using GameClient.Entities;
-using Proto;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,11 +1,6 @@
 using GameClient;
 using GameClient.Entities;
-using Proto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HS.Protobuf.SceneEntity;
 
 namespace Assets.Script.Entities
 {

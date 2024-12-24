@@ -1,14 +1,9 @@
-using GameServer.Model;
-using BaseSystem.Tool.Singleton;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using Proto;
 using System;
-using GameClient.Entities;
-using Serilog;
 using GameClient;
+using HS.Protobuf.Backpack;
 
 public class KnapsackPanel:BasePanel
 {

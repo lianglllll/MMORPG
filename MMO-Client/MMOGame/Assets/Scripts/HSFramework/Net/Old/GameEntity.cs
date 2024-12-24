@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Proto;
-using GameClient.Entities;
 
 /// <summary>
 /// entity网络同步对象

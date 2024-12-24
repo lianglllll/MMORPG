@@ -1,11 +1,6 @@
 using GameClient.Combat;
-using Serilog;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Proto;
 using UnityEngine.EventSystems;
 using TMPro;
 using GameClient;

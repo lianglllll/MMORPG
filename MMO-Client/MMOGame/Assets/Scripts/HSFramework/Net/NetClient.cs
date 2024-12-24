@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Summer;
 using System.Net;
 using System.Net.Sockets;
-using Summer.Network;
 using System;
-using System.Threading;
 using Google.Protobuf;
+using Common.Summer.Core;
 
 /// <summary>
 /// 网络客户端操作对象
@@ -18,7 +14,6 @@ public class NetClient
 {
     private static Socket clientSocket = null;
     private static Connection conn = null;
-    //private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
     /// <summary>
     /// 连接到服务器
@@ -54,8 +49,8 @@ public class NetClient
     {
         if (e.SocketError == SocketError.Success)
         {
-            conn = new Connection(clientSocket);
-            conn.OnDisconnected += OnDisconnected;
+            conn = new Connection();
+            conn.Init(clientSocket, OnDisconnected);
             Kaiyun.Event.FireOut("SuccessConnectServer");
         }
         else
@@ -84,7 +79,7 @@ public class NetClient
     /// </summary>
     public static void Close()
     {
-        conn?._Close();
+        conn?.CloseConnection();
         conn = null;
     }
 

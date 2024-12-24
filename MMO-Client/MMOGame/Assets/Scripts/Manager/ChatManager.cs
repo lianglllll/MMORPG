@@ -1,10 +1,8 @@
 using Google.Protobuf.Collections;
-using Proto;
+using HS.Protobuf.Chat;
 using Summer;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class ChatManager : Singleton<ChatManager>
 {

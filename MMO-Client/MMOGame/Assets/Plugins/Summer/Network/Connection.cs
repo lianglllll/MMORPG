@@ -1,157 +1,149 @@
-using Google.Protobuf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+using Common.Summer.Net;
+using Common.Summer.Proto;
+using Common.Summer.Security;
+using Google.Protobuf;
 using Serilog;
-using Google.Protobuf.Reflection;
 using Summer.Core;
 
-namespace Summer.Network
+namespace Common.Summer.Core
 {
     /// <summary>
-    /// 通用网络连接，可以继承此类实现功能拓展
-    /// 职责：发送消息，关闭连接，断开回调，接收消息回调，
+    /// 通用的网络连接，可以继承本类进行功能扩展
+    /// 职责： 
+    ///        1.接收、发送网络消息
+    ///        2.处理网络断开的时候需要有一个事件通知(回调)
+    ///        3.关闭连接(回调)
     /// </summary>
-    public class Connection
+    public class Connection:TypeAttributeStore
     {
-
-        private Socket _socket;
-        private SocketReceiver lfd;
-
-        public delegate void DataReceivedCallback(Connection sender, IMessage data);   
-        public delegate void DisconnectedCallback(Connection sender);
-        public DataReceivedCallback OnDataReceived;         //接收到数据的委托，现在没啥用
-        public DisconnectedCallback OnDisconnected;         //连接断开的委托
-
-        /// <summary>
-        /// 构造函数
-        /// 创建消息解码器
-        /// </summary>
-        /// <param name="socket"></param>
-        public Connection(Socket socket)
+        public delegate void DisconnectedHandler(Connection sender);
+        private Socket m_socket;                            // 连接客户端的socket
+        private LengthFieldDecoder m_lfd;                   //消息接受器
+        private DisconnectedHandler m_onDisconnected;       //关闭连接的委托
+        public EncryptionManager m_encryptionManager;       // 安全相关
+        public Socket Socket
         {
-            this._socket = socket;
-            //创建解码器
-            lfd = new SocketReceiver(socket);
-            lfd.DataReceived += _received;
-            lfd.Disconnected += _OnDisconnected;
-            //启动解码器
-            lfd.Start();
-        }
-
-        /// <summary>
-        /// 消息接收回调
-        /// </summary>
-        /// <param name="data"></param>
-        private void _received(byte[] data)
-        {
-            //获取消息序列号
-            ushort code = GetUShort(data, 0);
-            var msg = ProtoHelper.ParseFrom(code, data, 2, data.Length - 2);
-            //交付消息路由处理
-            if (MessageRouter.Instance.Running)
+            get
             {
-                MessageRouter.Instance.AddMessage(this,msg);
+                return m_socket;
             }
-            //通知上层
-            OnDataReceived?.Invoke(this, msg);
         }
 
-        /// <summary>
-        /// 连接端口回调
-        /// </summary>
+        public bool Init(Socket socket, DisconnectedHandler disconnected)
+        {
+            m_socket = socket;
+
+            //给这个客户端连接创建一个解码器
+            m_lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4, _OnDataRecived, _OnDisconnected);
+            m_lfd.Init();//启动解码器，开始接收消息
+
+            m_encryptionManager = new EncryptionManager();
+            m_encryptionManager.Init();
+
+            return true;
+        }
+
         private void _OnDisconnected()
         {
-            OnDisconnected?.Invoke(this);
+            m_socket = null;
+            //向上转发，让其删除本connection对象
+            m_onDisconnected?.Invoke(this);
         }
-
-        /// <summary>
-        /// 主动关闭连接
-        /// </summary>
-        public void _Close()
+        private void _OnDataRecived(byte[] data)
         {
-            _socket = null;
-            lfd._Close();
+            ushort code = _GetUShort(data, 0);
+            var msg = ProtoHelper.ParseFrom((int)code, data, 2, data.Length - 2);
+
+            //交给消息路由，让其帮忙转发
+            if (MessageRouter.Instance.Running)
+            {
+                MessageRouter.Instance.AddMessage(this, msg);
+            }
+        }
+        public void CloseConnection()
+        {
+            m_socket = null;
+            //转交给下一层的解码器关闭连接
+            m_lfd.ActiveDisconnection();
         }
 
         #region 发送网络数据包
 
         /// <summary>
-        /// 发送proto包
+        /// 发送消息包，编码过程(通用)
         /// </summary>
         /// <param name="message"></param>
-        public void Send(IMessage message)
+        public void Send(Google.Protobuf.IMessage message)
         {
-            using(var ds = DataStream.Allocate())
+            try
             {
-                int code = ProtoHelper.SeqCode(message.GetType());
-                ds.WriteInt(message.CalculateSize()+2);
-                ds.WriteUShort((ushort)code);
-                message.WriteTo(ds);
-                this.SocketSend(ds.ToArray());
-            }
-            
-        }
-
-        /// <summary>
-        /// 通过socket发送原生数据
-        /// </summary>
-        /// <param name="data"></param>
-        private void SocketSend(byte[] data)
-        {
-            this.SocketSend(data,0, data.Length);
-        }
-
-        /// <summary>
-        /// 通过socket异步发送原生数据
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="offset"></param>
-        /// <param name="len"></param>
-        private void SocketSend(byte[] data, int offset, int len)
-        {
-            lock (this)
-            {
-                if (_socket.Connected)
+                //获取imessage类型所对应的编号，网络传输我们只传输编号
+                using (var ds = DataStream.Allocate())
                 {
-                    _socket.BeginSend(data, offset, len, SocketFlags.None, new AsyncCallback(SendCallback), _socket);
+                    int code = ProtoHelper.Type2Seq(message.GetType());
+                    ds.WriteInt(message.CalculateSize() + 2);             //长度字段
+                    ds.WriteUShort((ushort)code);                       //协议编号字段
+                    message.WriteTo(ds);                                //数据
+                    _SocketSend(ds.ToArray());
+                }
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.ToString());
+            }
+
+        }
+
+        /// <summary>
+        /// 通过socket发送，原生数据
+        /// </summary>
+        /// <param name="data"></param>
+        private void _SocketSend(byte[] data)
+        {
+            _SocketSend(data, 0, data.Length);
+        }
+
+        /// <summary>
+        /// 开始异步发送消息,原生数据
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="start"></param>
+        /// <param name="len"></param>
+        private void _SocketSend(byte[] data, int start, int len)
+        {
+            lock (this)//多线程问题，防止争夺send
+            {
+                if (m_socket!=null && m_socket.Connected)
+                {
+                    m_socket.BeginSend(data, start, len, SocketFlags.None, new AsyncCallback(_SendCallback), m_socket);
                 }
             }
         }
 
         /// <summary>
-        /// 通过socket异步发送原生数据回调
+        /// 异步发送消息回调
         /// </summary>
         /// <param name="ar"></param>
-        private void SendCallback(IAsyncResult ar)
+        private void _SendCallback(IAsyncResult ar)
         {
-            // 发送的字节数
-            int len = _socket.EndSend(ar);
+            if (m_socket != null && m_socket.Connected)
+            {
+                // 发送的字节数
+                int len = m_socket.EndSend(ar);
+            }
+
         }
 
         #endregion
 
-        /// <summary>
-        /// 通过小端方式获取data的前两个字节, 前提是data必须是大端字节序
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="offset"></param>
-        /// <returns></returns>
-        private ushort GetUShort(byte[] data, int offset)
+        // 获取两个字节
+        private ushort _GetUShort(byte[] data, int offset)
         {
             if (BitConverter.IsLittleEndian)
-            {
                 return (ushort)((data[offset] << 8) | data[offset + 1]);
-            }
-            else
-            {
-                return (ushort)((data[offset + 1] << 8) | data[offset]);
-            }
+            return (ushort)((data[offset + 1] << 8) | data[offset]);
         }
-
     }
 }

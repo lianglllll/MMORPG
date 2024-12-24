@@ -1,21 +1,18 @@
-using Summer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Proto;
 using GameClient.Entities;
 using Unity.VisualScripting;
 using GameServer.Model;
 using Assets.Script.Entities;
-using Serilog;
-using YooAsset;
 using System.Collections.Concurrent;
-using System;
 using UnityEngine.SceneManagement;
 using GameClient;
 using Player;
 using Player.Controller;
 using HSFramework.Net;
+using HS.Protobuf.SceneEntity;
+using HS.Protobuf.Scene;
 
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject
@@ -305,5 +302,4 @@ public class GameObjectManager:MonoBehaviour
         SyncEntitySend syncEntitySend = obj.GetComponent<SyncEntitySend>();
         syncEntitySend.SyncPosAndRotaion(nEntitySync.Entity);
     }
-
 }

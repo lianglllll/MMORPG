@@ -56,20 +56,24 @@
     <Analyzer Include="D:\Tools\CodeTools\VS\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Summer\DataSerializer.cs" />
-    <Compile Include="Assets\Plugins\Summer\ProtoHelper.cs" />
+    <Compile Include="Assets\Plugins\Summer\Tools\DataSerializer.cs" />
+    <Compile Include="Assets\Plugins\Summer\Network\ProtoHelper.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\ExitType.cs" />
+    <Compile Include="Assets\Plugins\Summer\Network\TypeAttributeStore.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\Billboard.cs" />
-    <Compile Include="Assets\Plugins\Summer\Hash.cs" />
+    <Compile Include="Assets\Plugins\Summer\Tools\Hash.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicTextData.cs" />
+    <Compile Include="Assets\Plugins\Summer\Security\AesEncryption.cs" />
     <Compile Include="Assets\Plugins\Summer\Network\MessageRouter.cs" />
-    <Compile Include="Assets\Plugins\Summer\Singleton.cs" />
+    <Compile Include="Assets\Plugins\Summer\Security\EncryptionManager.cs" />
+    <Compile Include="Assets\Plugins\Summer\Security\RsaEncryption.cs" />
+    <Compile Include="Assets\Plugins\Summer\Tools\Singleton.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Demo\Scripts\Movement.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicText.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\EnterType.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Demo\Scripts\Enemy.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\Core\TcpServer.cs" />
+    <Compile Include="Assets\Plugins\Summer\Network\LengthFieldDecoder.cs" />
     <Compile Include="Assets\Plugins\Summer\Network\Connection.cs" />
     <Compile Include="Assets\Plugins\Summer\Network\SocketReceiver.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\AlternationMode.cs" />

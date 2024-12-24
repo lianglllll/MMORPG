@@ -1,13 +1,8 @@
 using GameClient.InventorySystem;
-using Proto;
-using System.Collections;
-using System.Collections.Generic;
+using HS.Protobuf.Backpack;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-
-
 
 /// <summary>
 /// 物品的ui内容，需要放到插槽里面

@@ -1,11 +1,7 @@
 using Summer;
-using Summer.Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Proto;
+using Common.Summer.Net;
+using Common.Summer.Core;
+using HS.Protobuf.Combat.Buff;
 
 namespace Assets.Script.Service
 {
@@ -19,11 +15,10 @@ namespace Assets.Script.Service
         }
         public void UnInit()
         {
-            MessageRouter.Instance.Off<BuffsAddResponse>(_BuffsAddResponse);
-            MessageRouter.Instance.Off<BuffsRemoveResponse>(_BuffsRemoveResponse);
-            MessageRouter.Instance.Off<BuffsUpdateResponse>(_BuffsUpdateResponse);
+            MessageRouter.Instance.UnSubscribe<BuffsAddResponse>(_BuffsAddResponse);
+            MessageRouter.Instance.UnSubscribe<BuffsRemoveResponse>(_BuffsRemoveResponse);
+            MessageRouter.Instance.UnSubscribe<BuffsUpdateResponse>(_BuffsUpdateResponse);
         }
-
 
         private void _BuffsAddResponse(Connection sender, BuffsAddResponse msg)
         {

@@ -1,7 +1,7 @@
+using HS.Protobuf.Common;
+using HS.Protobuf.Scene;
+using HS.Protobuf.SceneEntity;
 using Player.Controller;
-using Proto;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 

@@ -1,16 +1,13 @@
 using Assets.Script.Entities;
 using GameClient.Combat;
 using GameClient.Entities;
-using Proto;
-using Serilog;
+using HS.Protobuf.Scene;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GameClient {
-
 
     /// <summary>
     /// 服务器信息类

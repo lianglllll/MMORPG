@@ -1,10 +1,4 @@
-using Proto;
-using Summer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HS.Protobuf.SceneEntity;
 using UnityEngine;
 
 namespace GameClient.Entities
@@ -40,7 +34,7 @@ namespace GameClient.Entities
             }
         }
 
-        public Proto.NetEntity EntityData
+        public NetEntity EntityData
         {
             get {
                 return netObj;

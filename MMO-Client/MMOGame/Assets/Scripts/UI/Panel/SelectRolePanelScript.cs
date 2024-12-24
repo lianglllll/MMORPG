@@ -1,5 +1,5 @@
-using Proto;
-using Summer.Network;
+using HS.Protobuf.Login;
+using HS.Protobuf.SceneEntity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

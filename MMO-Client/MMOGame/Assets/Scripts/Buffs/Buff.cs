@@ -1,7 +1,6 @@
 using GameClient.Entities;
-using Proto;
+using HS.Protobuf.Combat.Buff;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

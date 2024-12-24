@@ -1,16 +1,15 @@
 using Summer;
-using Summer.Network;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Proto;
-using System;
-using Serilog;
 using GameClient.Entities;
 using Assets.Script.Entities;
 using GameClient;
 using GameClient.Combat;
 using System.Threading.Tasks;
+using Common.Summer.Core;
+using Common.Summer.Net;
+using HS.Protobuf.Scene;
+using HS.Protobuf.Combat.Skill;
+using HS.Protobuf.SceneEntity;
 
 public class CombatService : Singleton<CombatService>
 {
@@ -34,16 +33,16 @@ public class CombatService : Singleton<CombatService>
 
     public void UnInit()
     {
-        MessageRouter.Instance.Off<SpaceEnterResponse>(_SpaceEnterResponse);
-        MessageRouter.Instance.Off<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
-        MessageRouter.Instance.Off<SpaceItemEnterResponse>(_SpaceItemEnterResponse);
-        MessageRouter.Instance.Off<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
-        MessageRouter.Instance.Off<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
-        MessageRouter.Instance.Off<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
-        MessageRouter.Instance.Off<SpellCastResponse>(_SpellCastResponse);
-        MessageRouter.Instance.Off<SpellFailResponse>(_SpellFailResponse);
-        MessageRouter.Instance.Off<DamageResponse>(_DamageResponse);
-        MessageRouter.Instance.Off<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
+        MessageRouter.Instance.UnSubscribe<SpaceEnterResponse>(_SpaceEnterResponse);
+        MessageRouter.Instance.UnSubscribe<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
+        MessageRouter.Instance.UnSubscribe<SpaceItemEnterResponse>(_SpaceItemEnterResponse);
+        MessageRouter.Instance.UnSubscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
+        MessageRouter.Instance.UnSubscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
+        MessageRouter.Instance.UnSubscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
+        MessageRouter.Instance.UnSubscribe<SpellCastResponse>(_SpellCastResponse);
+        MessageRouter.Instance.UnSubscribe<SpellFailResponse>(_SpellFailResponse);
+        MessageRouter.Instance.UnSubscribe<DamageResponse>(_DamageResponse);
+        MessageRouter.Instance.UnSubscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
 
     /// <summary>
@@ -332,7 +331,6 @@ public class CombatService : Singleton<CombatService>
                         actor.OnSpeedChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
                 }
-
             }
         });
     }

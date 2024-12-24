@@ -1,19 +1,13 @@
 using Assets.Script.Entities;
 using GameServer.Model;
-using Proto;
-using Serilog;
+using HS.Protobuf.Scene;
+using HS.Protobuf.SceneEntity;
 using Summer;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-
-
-
-
 
 namespace GameClient.Entities
 {

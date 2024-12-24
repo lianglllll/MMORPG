@@ -1,9 +1,5 @@
-using Proto;
-using System.Collections;
-using System.Collections.Generic;
+using HS.Protobuf.Backpack;
 using UnityEngine;
-using UnityEngine.UI;
-
 public class EquipSlot : UISlot
 {
     public EquipsType equipsType;        //装备格子类型、inspector界面设置

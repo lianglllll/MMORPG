@@ -1,9 +1,4 @@
-using Proto;
-using Summer.Network;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class RegisterPanelScript : BasePanel

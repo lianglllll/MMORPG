@@ -1,9 +1,9 @@
 using GameClient;
-using Proto;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using HS.Protobuf.Login;
 
 
 public class LoginPanelScript : BasePanel

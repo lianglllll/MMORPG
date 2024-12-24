@@ -1,5 +1,5 @@
 using GameClient.Entities;
-using Proto;
+using HS.Protobuf.SceneEntity;
 using Serilog;
 using UnityEngine;
 
