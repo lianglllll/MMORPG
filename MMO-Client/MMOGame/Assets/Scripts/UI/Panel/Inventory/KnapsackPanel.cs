@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using GameClient;
-using HS.Protobuf.Backpack;
+using HS.Protobuf.Game.Backpack;
 
 public class KnapsackPanel:BasePanel
 {

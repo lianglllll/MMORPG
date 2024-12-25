@@ -2,7 +2,7 @@ using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
 using GameClient.Entities;
-using HS.Protobuf.Backpack;
+using HS.Protobuf.Game.Backpack;
 using HS.Protobuf.Scene;
 using Summer;
 

@@ -1,6 +1,6 @@
 using GameClient.Entities;
 using GameClient.InventorySystem;
-using HS.Protobuf.Backpack;
+using HS.Protobuf.Game.Backpack;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

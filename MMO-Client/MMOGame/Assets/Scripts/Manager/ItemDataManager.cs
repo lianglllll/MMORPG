@@ -2,7 +2,7 @@ using GameClient;
 using GameClient.Entities;
 using GameClient.InventorySystem;
 using Google.Protobuf.Collections;
-using HS.Protobuf.Backpack;
+using HS.Protobuf.Game.Backpack;
 using Summer;
 using System.Collections.Concurrent;
 

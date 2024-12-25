@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\RegisterPanelScript.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Proto\Login\Login.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\Old\Timer\GameTimerManager.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Log\SerilogConfig.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPool.cs" />
+    <Compile Include="Assets\Scripts\Proto\Scene\SceneEntity.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioDefine.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\SyncController.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Move.cs" />
     <Compile Include="Assets\Scripts\Player\Model\ModelBase.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Hurt.cs" />
+    <Compile Include="Assets\Scripts\Proto\Scene\Scene.cs" />
     <Compile Include="Assets\Scripts\Inventory\MaterialItem.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Defense.cs" />
@@ -152,6 +155,8 @@
     <Compile Include="Assets\Scripts\Proto\Chat\Chat.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\ITimerUtil.cs" />
     <Compile Include="Assets\Scripts\Service\ItemService.cs" />
+    <Compile Include="Assets\Scripts\Proto\Game\Backpack.cs" />
+    <Compile Include="Assets\Scripts\Proto\Combat\Buff.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntitySend.cs" />
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
@@ -212,6 +217,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\LoginPanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Scripts\Buffs\Buff.cs" />
+    <Compile Include="Assets\Scripts\Proto\Combat\Skill.cs" />
     <Compile Include="Assets\Scripts\Manager\DataManager.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ThreadObjectPool.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\DialogDefine.cs" />
@@ -249,12 +255,6 @@
     <Compile Include="Assets\Scripts\UI\Panel\ScenePoster.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Scripts\Proto\Combat\Buff.cs" />
-    <Compile Include="Assets\Scripts\Proto\Backpack\Backpack.cs" />
-    <Compile Include="Assets\Scripts\Proto\Login\Login.cs" />
-    <Compile Include="Assets\Scripts\Proto\Combat\Skill.cs" />
-    <Compile Include="Assets\Scripts\Proto\Scene\SceneEntity.cs" />
-    <Compile Include="Assets\Scripts\Proto\Scene\Scene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />

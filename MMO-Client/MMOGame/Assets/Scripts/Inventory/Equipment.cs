@@ -1,5 +1,5 @@
 using GameClient.Combat;
-using HS.Protobuf.Backpack;
+using HS.Protobuf.Game.Backpack;
 
 namespace GameClient.InventorySystem
 {

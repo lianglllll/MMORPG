@@ -25,7 +25,7 @@ public class NetManager : Singleton<NetManager>
     void Start()
     {
         //消息分发注册
-        MessageRouter.Instance.Subscribe<HeartBeatResponse>(_HeartBeatResponse);
+        MessageRouter.Instance.Subscribe<CSHeartBeatResponse>(_HeartBeatResponse);
         MessageRouter.Instance.Subscribe<ReconnectResponse>(_ReconnectResponse);
 
 
@@ -46,7 +46,7 @@ public class NetManager : Singleton<NetManager>
 
     private void OnDestroy()
     {
-        MessageRouter.Instance.UnSubscribe<HeartBeatResponse>(_HeartBeatResponse);
+        MessageRouter.Instance.UnSubscribe<CSHeartBeatResponse>(_HeartBeatResponse);
         MessageRouter.Instance.UnSubscribe<ReconnectResponse>(_ReconnectResponse);
         Kaiyun.Event.UnregisterOut("SuccessConnectServer", this, "ConnectToServerCallback");
         Kaiyun.Event.UnregisterOut("FailedConnectServer", this, "ConnectToServerFailedCallback");
@@ -191,7 +191,7 @@ public class NetManager : Singleton<NetManager>
     IEnumerator SendHeartMessage()
     {
         //优化,防止不断在堆中创建新对象
-        HeartBeatRequest beatReq = new HeartBeatRequest();
+        CSHeartBeatRequest beatReq = new();
 
         while (true)
         {
@@ -206,7 +206,7 @@ public class NetManager : Singleton<NetManager>
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="msg"></param>
-    public void _HeartBeatResponse(Connection sender, HeartBeatResponse msg)
+    public void _HeartBeatResponse(Connection sender, CSHeartBeatResponse msg)
     {
         //说明服务器和客户端之间连接是通畅的
         TimeSpan gap = DateTime.Now - lastBeatTime;

@@ -1,9 +1,9 @@
 using GameClient.InventorySystem;
 using GameClient.Manager;
 using Google.Protobuf.Collections;
-using HS.Protobuf.Backpack;
 using HS.Protobuf.Combat.Buff;
 using HS.Protobuf.Combat.Skill;
+using HS.Protobuf.Game.Backpack;
 using HS.Protobuf.SceneEntity;
 using Player;
 using System.Collections.Concurrent;

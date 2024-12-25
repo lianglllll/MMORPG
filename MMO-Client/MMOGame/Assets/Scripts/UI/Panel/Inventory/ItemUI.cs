@@ -1,5 +1,5 @@
 using GameClient.InventorySystem;
-using HS.Protobuf.Backpack;
+using HS.Protobuf.Game.Backpack;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
