@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Scripts\Manager\GameApp.cs" />
+    <Compile Include="Assets\Scripts\Proto\Login\LoginGateMgr.cs" />
     <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Art\Hand_to_Hand_Set\Scripts\SimpleCameraController.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ObjectPoolFactory.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskScheduler.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Idle.cs" />
+    <Compile Include="Assets\Scripts\Proto\Login\LoginGate.cs" />
     <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\GameTools.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Audio\Old\PlayClickAudio.cs" />
