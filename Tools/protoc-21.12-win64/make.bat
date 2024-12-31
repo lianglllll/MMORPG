@@ -11,9 +11,9 @@ set SOURCE_SUFFIX=/ProtoSource
 set OUTPUT_SUFFIX=/ProtoClass
 
 rem 定义相对的源、目标和复制目录（不含共同后缀）
-set "REL_DIRS=Chat Combat Common ControlCenter Game Login Scene"
+set "REL_DIRS=Chat Combat Common ControlCenter Game Login Scene DBProxy"
 rem 定义复制目录，使用“-”表示不复制
-set "REL_COPY_DIRS=Chat Combat Common _ Game Login Scene"
+set "REL_COPY_DIRS=Chat Combat Common _ Game Login Scene _"
 
 rem 转换字符串为数组以便于索引
 set i=0
