@@ -58,14 +58,14 @@ for /l %%i in (0, 1, !num_dirs!) do (
 
     rem 编译当前目录下的所有 .proto 文件，加入额外的 proto path
     for %%f in ("!SOURCE_DIR!/*.proto") do (
-        echo Compiling %%f
+        :: echo Compiling %%f
         "%PROTOC_PATH%" --proto_path="!SOURCE_DIR!" --proto_path="%BASE_PATH%" --csharp_out="!OUTPUT_DIR!" "%%f"
     )
     
     rem 复制生成的文件到目标复制目录，如果需要的话
     if "!SKIP_COPY!"=="false" (
         for %%f in ("!OUTPUT_DIR!\*.*") do (
-            echo Copying %%~nxf to !FULL_COPY_DIR!
+            :: echo Copying %%~nxf to !FULL_COPY_DIR!
             copy "%%f" "!FULL_COPY_DIR!" > nul
         )
     )
