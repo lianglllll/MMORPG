@@ -58,8 +58,9 @@ public class CombatService : Singleton<CombatService>
             {
                 //1.切换场景
                 GameApp.SpaceId = msg.Character.SpaceId;
+                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
 
-                GameApp.LoadSpaceWithPoster(msg.Character.SpaceId, async (scene) => {
+                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
 
                      await Task.Delay(800);
 
@@ -96,7 +97,8 @@ public class CombatService : Singleton<CombatService>
 
                 //切换场景
                 GameApp.SpaceId = msg.Character.SpaceId;
-                GameApp.LoadSpaceWithPoster(msg.Character.SpaceId, async (scene) => {
+                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
+                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
 
                     await Task.Delay(800);
 
@@ -369,7 +371,7 @@ public class CombatService : Singleton<CombatService>
         {
             //无目标就啥也不用填了，这种技能类似旋风斩的，跟随主角的范围伤害。在这一点上和点目标技能进行了区分。
         }
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>
@@ -381,7 +383,7 @@ public class CombatService : Singleton<CombatService>
         SpaceDeliverRequest req = new SpaceDeliverRequest();
         req.SpaceId = spaceId;
         req.PointId = point;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
 

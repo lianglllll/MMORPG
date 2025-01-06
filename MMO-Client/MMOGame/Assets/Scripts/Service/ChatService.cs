@@ -82,7 +82,7 @@ public class ChatService : Singleton<ChatService>
         }
         msg.Content = content;
         req.Message = msg;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
 
         //测试用
         if(content == "close")

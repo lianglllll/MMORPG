@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Res\Model\Unit\骷髅\Readme\Scripts\Editor\ReadmeEditor.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\Editor\AudioDefineGenTool.cs" />
     <Compile Include="Assets\Editor\HybridCLR\BuildAssetsCommand.cs" />
     <Compile Include="Assets\Editor\HybridCLR\BuildPlayerCommand.cs" />
   </ItemGroup>
@@ -933,6 +932,22 @@
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="HSFramework.csproj">
+      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
+      <Name>HSFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="Summer.csproj">
+      <Project>{14018557-8B53-2BB4-E9D8-6F103401F551}</Project>
+      <Name>Summer</Name>
+    </ProjectReference>
+    <ProjectReference Include="Proto.csproj">
+      <Project>{F6A6C19C-C6DF-7B80-0A83-68D03B75FCA5}</Project>
+      <Name>Proto</Name>
+    </ProjectReference>
+    <ProjectReference Include="UITools.csproj">
+      <Project>{A46ADEF6-78DE-8C60-2F9A-1E23A3AE7D23}</Project>
+      <Name>UITools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

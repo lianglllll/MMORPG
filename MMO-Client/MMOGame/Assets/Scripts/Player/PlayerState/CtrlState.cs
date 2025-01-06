@@ -1,17 +1,13 @@
 using HSFramework.AI.StateMachine;
 using Player.Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Player
 {
     public class CtrlState : StateBase
     {
         protected CtrlController player;
-        protected StateMachineParameter ShareParameter => player.stateMachine.ShareParameter;
+        protected StateMachineParameter ShareParameter => player.StateMachineParameter;
 
         public override void Init(IStateMachineOwner owner)
         {

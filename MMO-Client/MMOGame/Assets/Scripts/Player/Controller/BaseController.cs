@@ -55,7 +55,7 @@ namespace Player
             unitUIController.Init(actor);
             stateMachine = new StateMachine();
             stateMachineParameter = new StateMachineParameter();
-            stateMachine.Init(this, stateMachineParameter);
+            stateMachine.Init(this);
         }
 
 

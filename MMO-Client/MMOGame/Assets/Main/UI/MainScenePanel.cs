@@ -11,7 +11,6 @@ public class MainScenePanel : MonoBehaviour
     private Slider loadingSlider;
     private SelectUpdatePanel selectUpdatePanel;
     private CanvasGroup selectUpdatePanelCanvasGroup;
-    private Image fadeImage;
 
     public Text TipsText => tipsText;
     public Slider LoadingSlider => loadingSlider;
@@ -28,7 +27,6 @@ public class MainScenePanel : MonoBehaviour
         loadingSlider = transform.Find("LoadingSlider").GetComponent<Slider>();
         selectUpdatePanel = transform.Find("SelectUpdatePanel").GetComponent<SelectUpdatePanel>();
         selectUpdatePanelCanvasGroup = transform.Find("SelectUpdatePanel").GetComponent<CanvasGroup>();
-        fadeImage = transform.Find("FadeImage").GetComponent<Image>();
     }
 
     private void Start()
@@ -38,14 +36,11 @@ public class MainScenePanel : MonoBehaviour
         originalColor1.a = maxAlpha;
         tipsText.color = originalColor1;
 
-        Color originalColor2 = fadeImage.color;
-        originalColor2.a = maxAlpha;
-        fadeImage.color = originalColor2;
-
         tipsText.text = "正在加载";
         selectUpdatePanel.gameObject.SetActive(false);
-
         LoadingSlider.gameObject.SetActive(false);
+
+        //ScenePoster.Instance.Init();
     }
 
     // 在对象销毁时停止动画
@@ -57,28 +52,6 @@ public class MainScenePanel : MonoBehaviour
             breathingTween.Kill();  // 停止并销毁 Tween 动画
         }
     }
-
-
-    public void Init(Action action)
-    {
-        // 淡入效果
-        fadeImage.DOFade(0, fadeDuration).OnComplete(() =>
-        {
-            action?.Invoke();
-            fadeImage.gameObject.SetActive(false); // 隐藏 Image 组件
-        });
-    }
-
-    public void FadeIn(Action action)
-    {
-        fadeImage.gameObject.SetActive(true); // 隐藏 Image 组件
-        fadeImage.DOFade(1, fadeDuration).OnComplete(() =>
-        {
-            action?.Invoke();
-            //场景已经要销毁了。
-        });
-    }
-
 
     public void OpenSelectUpdatePanel(string simpleTipsText, string detailTipsText, Action comfirm,Action cancel)
     {

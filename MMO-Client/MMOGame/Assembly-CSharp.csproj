@@ -58,39 +58,27 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\NetManager.cs" />
+    <Compile Include="Assets\Scripts\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenu.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\CtrlController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\RegisterPanelScript.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Proto\Login\Login.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Tools\Old\Timer\GameTimerManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Log\SerilogConfig.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\MinHeap.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Input\InputActions.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\SelectionPanel.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Singleton\Singleton.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Idle.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfigImporter.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Hurt.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\Test\TestDelayTask.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\Old\GameEntity.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Tools\DevelopmentToos.cs" />
+    <Compile Include="Assets\Scripts\Net\Old\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ItemEntity.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\GlobalAudioManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\MaxHeap.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Scripts\Manager\GameApp.cs" />
-    <Compile Include="Assets\Scripts\Proto\Login\LoginGateMgr.cs" />
     <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Art\Hand_to_Hand_Set\Scripts\SimpleCameraController.cs" />
@@ -98,29 +86,19 @@
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Death.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Tools\Old\Timer\GameTimer.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Evade.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\StateBase.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityBarScript.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntity.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskList.cs" />
+    <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\StateMachine.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleConf.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Move.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Proto\Scene\SceneEntity.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioDefine.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\SyncController.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\DragHolder\DragHolder.cs" />
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\CreateRolePanelScript.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\UnityObjectPoolFactory.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Skill.cs" />
     <Compile Include="Assets\Scripts\Service\BuffService.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_AirDown.cs" />
@@ -128,23 +106,14 @@
     <Compile Include="Assets\Scripts\Service\ChatService.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogPanel.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\Tips\ToolTip.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleItem.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Effect\GameEffectManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestFire.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioDataSO.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\IObjectPoolItem.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Effect\GameEffect.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Move.cs" />
     <Compile Include="Assets\Scripts\Player\Model\ModelBase.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Hurt.cs" />
-    <Compile Include="Assets\Scripts\Proto\Scene\Scene.cs" />
     <Compile Include="Assets\Scripts\Inventory\MaterialItem.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Defense.cs" />
@@ -152,24 +121,15 @@
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Scripts\Entities\Actor.cs" />
     <Compile Include="Assets\Scripts\Combat\Skill.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\PoolAssetLoad.cs" />
-    <Compile Include="Assets\Scripts\Proto\Chat\Chat.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\ITimerUtil.cs" />
     <Compile Include="Assets\Scripts\Service\ItemService.cs" />
-    <Compile Include="Assets\Scripts\Proto\Game\Backpack.cs" />
-    <Compile Include="Assets\Scripts\Proto\Combat\Buff.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Dizzy.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntitySend.cs" />
+    <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntitySend.cs" />
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestItem.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\NetClient.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\EventSystem\Event.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\IRecyclingListViewItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\MessagePanelScript.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\Heap.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\SyncEntity\SyncEntityRecive.cs" />
+    <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntityRecive.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Scripts\Camera\TP_CameraController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
@@ -179,18 +139,11 @@
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Death.cs" />
     <Compile Include="Assets\Scripts\Inventory\Consumable.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Singleton\SingletonNonMono.cs" />
     <Compile Include="Assets\Scripts\Service\UserService.cs" />
-    <Compile Include="Assets\Scripts\Proto\Common\Common.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\UnityObjectPool.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Tools\PostProcessMananger.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ChatBoxScript.cs" />
     <Compile Include="Assets\Res\Model\Unit\骷髅\Readme\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Input\GameInputManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogStepConfig.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingSelectOption.cs" />
@@ -198,17 +151,13 @@
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState.cs" />
     <Compile Include="Assets\Scripts\Entities\Character.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestBullet.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\RecyclingListView.cs" />
     <Compile Include="Assets\Scripts\Service\CombatService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerInfoButton.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenuOption.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogStopBackgroundAudioEvent.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_AirDown.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskData.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestPanel.cs" />
@@ -218,9 +167,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\LoginPanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Scripts\Buffs\Buff.cs" />
-    <Compile Include="Assets\Scripts\Proto\Combat\Skill.cs" />
     <Compile Include="Assets\Scripts\Manager\DataManager.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ThreadObjectPool.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\DialogDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\CombatPanelScript.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Defense.cs" />
@@ -229,34 +176,27 @@
     <Compile Include="Assets\Scripts\Entities\Entity.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\BasePanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Servers\ServerPanel.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ObjectPoolFactory.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskScheduler.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Idle.cs" />
-    <Compile Include="Assets\Scripts\Proto\Login\LoginGate.cs" />
     <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Tools\GameTools.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Audio\Old\PlayClickAudio.cs" />
+    <Compile Include="Assets\Scripts\Manager\GameTools.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingPanel.cs" />
     <Compile Include="Assets\Scripts\Player\Model\PlayerModel.cs" />
     <Compile Include="Assets\Scripts\Player\UnitUIController.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Net\V3.cs" />
     <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\Action_Manage.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogPlayBackgroundAudioEvent.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Skill.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestPool.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\LoadingBox.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\Tools\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\ScenePoster.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
+    <Compile Include="Assets\Scripts\Net\NetClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />
@@ -1083,6 +1023,22 @@
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="HSFramework.csproj">
+      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
+      <Name>HSFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="Summer.csproj">
+      <Project>{14018557-8B53-2BB4-E9D8-6F103401F551}</Project>
+      <Name>Summer</Name>
+    </ProjectReference>
+    <ProjectReference Include="Proto.csproj">
+      <Project>{F6A6C19C-C6DF-7B80-0A83-68D03B75FCA5}</Project>
+      <Name>Proto</Name>
+    </ProjectReference>
+    <ProjectReference Include="UITools.csproj">
+      <Project>{A46ADEF6-78DE-8C60-2F9A-1E23A3AE7D23}</Project>
+      <Name>UITools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -56,10 +56,7 @@
     <Analyzer Include="D:\Tools\CodeTools\VS\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Main\Tools\UnityMainThreadDispatcher.cs" />
     <Compile Include="Assets\Main\UI\SelectUpdatePanel.cs" />
-    <Compile Include="Assets\Main\Tools\Res.cs" />
-    <Compile Include="Assets\Main\Tools\LoadDlls.cs" />
     <Compile Include="Assets\Main\Main.cs" />
     <Compile Include="Assets\Main\UI\MainScenePanel.cs" />
   </ItemGroup>
@@ -781,6 +778,14 @@
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="HSFramework.csproj">
+      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
+      <Name>HSFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="UITools.csproj">
+      <Project>{A46ADEF6-78DE-8C60-2F9A-1E23A3AE7D23}</Project>
+      <Name>UITools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

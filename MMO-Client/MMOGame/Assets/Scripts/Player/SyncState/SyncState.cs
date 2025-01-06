@@ -11,7 +11,7 @@ namespace Player
     public class SyncState: StateBase
     {
         protected SyncController syncer;
-        protected StateMachineParameter ShareParameter => syncer.stateMachine.ShareParameter;
+        protected StateMachineParameter ShareParameter => syncer.StateMachineParameter;
 
         public override void Init(IStateMachineOwner owner)
         {

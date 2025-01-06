@@ -83,10 +83,10 @@ public class LoginPanelScript : BasePanel
         if (isOnClickLoginBtn) return;
 
         //与服务器没有建立连接时
-        if (!NetManager.Instance.isConnected)
+        if (!NetManager.Instance.loginGateisConnected)
         {
             UIManager.Instance.MessagePanel.ShowTopMsg("正在帮您连接服务器.....");
-            NetManager.Instance.ConnectToServer();
+            NetManager.Instance.ConnectToLoginGate();
             return;
         }
 
@@ -106,9 +106,8 @@ public class LoginPanelScript : BasePanel
     public void OnLoginResponse(UserLoginResponse msg)
     {
         //登录成功，切换到角色选择scene
-        if (msg.Success)
+        if (msg.ResultCode == 0)
         {
-
             //保存SessionId
             GameApp.SessionId = msg.SessionId;
             //切换面板

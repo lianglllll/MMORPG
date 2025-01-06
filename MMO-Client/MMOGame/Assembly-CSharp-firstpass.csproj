@@ -56,28 +56,15 @@
     <Analyzer Include="D:\Tools\CodeTools\VS\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Summer\Tools\DataSerializer.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\ProtoHelper.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\ExitType.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\TypeAttributeStore.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\Billboard.cs" />
-    <Compile Include="Assets\Plugins\Summer\Tools\Hash.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicTextData.cs" />
-    <Compile Include="Assets\Plugins\Summer\Security\AesEncryption.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\MessageRouter.cs" />
-    <Compile Include="Assets\Plugins\Summer\Security\EncryptionManager.cs" />
-    <Compile Include="Assets\Plugins\Summer\Security\RsaEncryption.cs" />
-    <Compile Include="Assets\Plugins\Summer\Tools\Singleton.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Demo\Scripts\Movement.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicText.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\EnterType.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Demo\Scripts\Enemy.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\LengthFieldDecoder.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\Connection.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\SocketReceiver.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\AlternationMode.cs" />
-    <Compile Include="Assets\Plugins\Summer\Core\DataStream.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicTextManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -924,6 +911,22 @@
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="HSFramework.csproj">
+      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
+      <Name>HSFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="Summer.csproj">
+      <Project>{14018557-8B53-2BB4-E9D8-6F103401F551}</Project>
+      <Name>Summer</Name>
+    </ProjectReference>
+    <ProjectReference Include="Proto.csproj">
+      <Project>{F6A6C19C-C6DF-7B80-0A83-68D03B75FCA5}</Project>
+      <Name>Proto</Name>
+    </ProjectReference>
+    <ProjectReference Include="UITools.csproj">
+      <Project>{A46ADEF6-78DE-8C60-2F9A-1E23A3AE7D23}</Project>
+      <Name>UITools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

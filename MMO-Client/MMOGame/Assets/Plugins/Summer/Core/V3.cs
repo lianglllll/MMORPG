@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 //工具类  Nvector3--->Vector3
-class V3
+public class V3
 {
     public static Vector3 Of(Vec3 nv)
     {

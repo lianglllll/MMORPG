@@ -16,7 +16,6 @@ namespace Player.Controller
             ChangeState(ActorState.Idle);
         }
 
-
         public override void ChangeState(ActorState state, bool reCurrstate = false)
         {
             if (curState == state && !reCurrstate) return;

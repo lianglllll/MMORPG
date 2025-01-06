@@ -43,7 +43,7 @@ public class ItemService : Singleton<ItemService>
         req.EntityId = GameApp.character.EntityId;
 
         req.QueryKnapsack = true;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public class ItemService : Singleton<ItemService>
         req.EntityId = GameApp.character.EntityId;
         req.SlotIndex = slotIndex;
         req.Count = count;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class ItemService : Singleton<ItemService>
     {
         var req = new WearEquipmentRequest();
         req.SlotIndex = slotIndex;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>
@@ -141,7 +141,7 @@ public class ItemService : Singleton<ItemService>
     {
         var req = new UnloadEquipmentRequest();
         req.Type = type;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>
@@ -153,7 +153,7 @@ public class ItemService : Singleton<ItemService>
     /// <param name="targetSlot"></param>
     public void ItemPlacementRequeset(ItemPlacementRequest req)
     {
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ public class ItemService : Singleton<ItemService>
     {
         var req = new ItemPickUpRequest();
         req.EntityId = entityId;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>
@@ -200,7 +200,7 @@ public class ItemService : Singleton<ItemService>
         req.SlotIndex = slotIndex;
         req.Number = number;
         req.Type = type;
-        NetClient.Send(req);
+        NetManager.Instance.curNetClient.Send(req);
     }
 
     /// <summary>

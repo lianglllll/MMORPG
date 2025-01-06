@@ -1,12 +1,19 @@
 {
+  "-1": {
+    "SID": -1,
+    "Name": "入口",
+    "Resource": "Game",
+    "Kind": "场景",
+    "AllowPK": 0,
+    "RevivalPointS": "[0]"
+  },
   "0": {
     "SID": 0,
     "Name": "新手村",
     "Resource": "Scene0",
     "Kind": "场景",
     "AllowPK": 0,
-    "RevivalPointS": "[0,1]",
-    "Area": "[-99,-73,200,226]"
+    "RevivalPointS": "[0,1]"
   },
   "1": {
     "SID": 1,
@@ -14,7 +21,6 @@
     "Resource": "Scene1",
     "Kind": "场景",
     "AllowPK": 0,
-    "RevivalPointS": "[1000]",
-    "Area": "[0,0,1000,1000]"
+    "RevivalPointS": "[1000]"
   }
 }

@@ -46,9 +46,7 @@ public class Main : MonoBehaviour
     private IEnumerator Init()
     {
         yield return new WaitForSeconds(0.1f);
-        mainScenePanel.Init(() => {
-            StartCoroutine(DownLoadAssetsByYooAssets());
-        });
+        StartCoroutine(DownLoadAssetsByYooAssets());
     }
 
     private IEnumerator DownLoadAssetsByYooAssets()
@@ -300,12 +298,8 @@ public class Main : MonoBehaviour
 
     private void StartGame()
     {
-        mainScenePanel.FadeIn(() =>
-        {
-            Res.LoadSceneAsync("Game");
-        });
+        ScenePoster.Instance.LoadSpaceWithPoster("--", "Game", null);
     }
-
 
     private string GetHostServerURL()
     {
@@ -342,7 +336,6 @@ public class Main : MonoBehaviour
             return $"{_fallbackHostServer}/{fileName}";
         }
     }
-
 }
 
 public class GameQueryServices : IBuildinQueryServices

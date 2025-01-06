@@ -1,7 +1,5 @@
 using Serilog;
 using Serilog.Sinks.Unity3D;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SerilogConfig : MonoBehaviour

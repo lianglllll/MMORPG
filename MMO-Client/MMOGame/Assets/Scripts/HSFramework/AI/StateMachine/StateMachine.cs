@@ -1,31 +1,23 @@
-using Player;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HSFramework.AI.StateMachine
 {
-
-
     public interface IStateMachineOwner { }
+
     public class StateMachine
     {
         private IStateMachineOwner owner;
         private StateBase curState;
         private Dictionary<Type, StateBase> stateDict = new();
-        private StateMachineParameter shareParameter;
 
         public StateBase CurState { get => curState; }
         public bool HasState { get => curState != null; }
         public Type CurrentStateType { get => curState.GetType(); }
-        public StateMachineParameter ShareParameter => shareParameter;
 
-        public void Init(IStateMachineOwner owner, StateMachineParameter shareParameter)
+        public void Init(IStateMachineOwner owner)
         {
             this.owner = owner;
-            this.shareParameter = shareParameter;
         }
         private StateBase GetState<T>() where T : StateBase, new()
         {

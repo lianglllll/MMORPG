@@ -19,7 +19,6 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        netManager = GetComponent<NetManager>();
     }
     void Start()
     {
@@ -48,7 +47,7 @@ public class GameManager : Singleton<GameManager>
         UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;
 
         //打开登录面板ui
-        UIManager.Instance.OpenPanel("ServerPanel");
+        UIManager.Instance.OpenPanel("LoginPanel");
     }
     void Update()
     {
@@ -59,10 +58,4 @@ public class GameManager : Singleton<GameManager>
     {
         EntityManager.Instance.OnUpdate(Time.fixedDeltaTime);
     }
-
-    public void ConnectToServer(Action action = null)
-    {
-        netManager.ConnectToServer(action);
-    }
-
 }

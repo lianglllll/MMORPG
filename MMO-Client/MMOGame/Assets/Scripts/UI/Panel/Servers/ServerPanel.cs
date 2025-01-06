@@ -84,7 +84,7 @@ public class ServerPanel : BasePanel
 
 
         //连接服务器
-        GameManager.Instance.ConnectToServer(()=> {
+        NetManager.Instance.ConnectToLoginGate(()=> {
             isStart = true;
             //开始切换场景了
             DelayedTaskScheduler.Instance.AddDelayedTask(1f, () => {
