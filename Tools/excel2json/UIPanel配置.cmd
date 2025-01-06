@@ -18,7 +18,6 @@ for %%i in ("%EXCEL_FOLDER%\*.xlsx") do (
 :: 复制json文件
 @ECHO Copying JSON files to destination folder %DEST_FOLDER% ...
 for %%i in (%JSON_FOLDER%\*.json) do (
-for /r %JSON_FOLDER% %%i in (*.json) do (
     @echo   copying %%~nxi 
     @COPY "%%i" "%DEST_FOLDER_1%\%%~nxi"
 )
