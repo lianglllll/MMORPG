@@ -1,27 +1,27 @@
 {
   "LoginPanel": {
     "PanelName": "LoginPanel",
-    "Resource": "UI/Prefabs/LoginPanel.prefab"
+    "Resource": "UI/Prefabs/Login/LoginPanel.prefab"
   },
   "RegisterPanel": {
     "PanelName": "RegisterPanel",
-    "Resource": "UI/Prefabs/RegisterPanel.prefab"
+    "Resource": "UI/Prefabs/Login/RegisterPanel.prefab"
   },
   "SelectRolePanel": {
     "PanelName": "SelectRolePanel",
-    "Resource": "UI/Prefabs/SelectRolePanel.prefab"
+    "Resource": "UI/Prefabs/SelectRole/SelectRolePanel.prefab"
   },
   "CreateRolePanel": {
     "PanelName": "CreateRolePanel",
-    "Resource": "UI/Prefabs/CreateRolePanel.prefab"
+    "Resource": "UI/Prefabs/SelectRole/CreateRolePanel.prefab"
   },
   "RoleListItem": {
     "PanelName": "RoleListItem",
-    "Resource": "UI/Prefabs/RoleListItem.prefab"
+    "Resource": "UI/Prefabs/SelectRole/RoleListItem.prefab"
   },
   "CombatPanel": {
     "PanelName": "CombatPanel",
-    "Resource": "UI/Prefabs/CombatPanel.prefab"
+    "Resource": "UI/Prefabs/Combat/CombatPanel.prefab"
   },
   "KnapsackPanel": {
     "PanelName": "KnapsackPanel",
@@ -29,10 +29,10 @@
   },
   "VocationItem": {
     "PanelName": "VocationItem",
-    "Resource": "UI/Prefabs/VocationItem.prefab"
+    "Resource": "UI/Prefabs/SelectRole/VocationItem.prefab"
   },
   "ServerPanel": {
     "PanelName": "ServerPanel",
-    "Resource": "UI/Prefabs/Server/ServerPanel.prefab"
+    "Resource": "UI/Prefabs/SelectWorld/ServerPanel.prefab"
   }
 }

@@ -57,13 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\Summer\Tools\DataSerializer.cs" />
-    <Compile Include="Assets\Plugins\Summer\Network\ProtoHelper.cs" />
     <Compile Include="Assets\Plugins\Summer\Network\TypeAttributeStore.cs" />
     <Compile Include="Assets\Plugins\Summer\Tools\Hash.cs" />
     <Compile Include="Assets\Plugins\Summer\Security\AesEncryption.cs" />
     <Compile Include="Assets\Plugins\Summer\Network\MessageRouter.cs" />
     <Compile Include="Assets\Plugins\Summer\Security\EncryptionManager.cs" />
     <Compile Include="Assets\Plugins\Summer\Security\RsaEncryption.cs" />
+    <Compile Include="Assets\Plugins\Summer\Network\ProtoHelper.cs" />
     <Compile Include="Assets\Plugins\Summer\Tools\Singleton.cs" />
     <Compile Include="Assets\Plugins\Summer\Network\LengthFieldDecoder.cs" />
     <Compile Include="Assets\Plugins\Summer\Network\Connection.cs" />

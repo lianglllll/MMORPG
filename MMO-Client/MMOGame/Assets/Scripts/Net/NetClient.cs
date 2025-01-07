@@ -56,6 +56,7 @@ public class NetClient
     {
         var conn = m_connection;
         m_connection = null;
+        conn.CloseConnection();
         return conn;
     }
     private void _ConnectToServer()

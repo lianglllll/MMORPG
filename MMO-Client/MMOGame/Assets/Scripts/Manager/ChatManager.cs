@@ -1,10 +1,10 @@
+using BaseSystem.Tool.Singleton;
 using Google.Protobuf.Collections;
 using HS.Protobuf.Chat;
-using Summer;
 using System;
 using System.Collections.Generic;
 
-public class ChatManager : Singleton<ChatManager>
+public class ChatManager : SingletonNonMono<ChatManager>
 {
     //当前聊天框选中的频道
     private LocalChannel sendChannel;

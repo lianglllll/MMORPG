@@ -14,8 +14,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public List<GameObject> keepAlive;          //切换场景时不销毁的对象
-    private NetManager netManager;
-
     protected override void Awake()
     {
         base.Awake();
@@ -43,11 +41,13 @@ public class GameManager : Singleton<GameManager>
         BuffService.Instance.Init();
         UIManager.Instance.Init();
 
-        //gameObj对象池初始化
+        // gameObj对象池初始化
         UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;
 
-        //打开登录面板ui
+        // 打开登录面板ui
         UIManager.Instance.OpenPanel("LoginPanel");
+        // 连接流程
+        NetManager.Instance.Init();
     }
     void Update()
     {

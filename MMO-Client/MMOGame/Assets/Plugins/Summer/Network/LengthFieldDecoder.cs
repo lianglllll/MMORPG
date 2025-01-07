@@ -1,4 +1,4 @@
-﻿using Serilog;
+using Serilog;
 using System;
 using System.Net.Sockets;
 
@@ -57,6 +57,11 @@ namespace Common.Summer.Net
                 m_Socket.BeginReceive(m_buffer, m_offect, m_size - m_offect, SocketFlags.None, new AsyncCallback(OnReceive), null);
             }
         }
+        public void ActiveDisconnection()
+        {
+            m_isStart = false;
+            _PassiveDisconnection();
+        }
         private void _PassiveDisconnection()
         {
             try
@@ -77,11 +82,7 @@ namespace Common.Summer.Net
                 m_onDisconnected?.Invoke();
             }
         }
-        public void ActiveDisconnection()
-        {
-            m_isStart = false;
-            _PassiveDisconnection();
-        }
+
         public void OnReceive(IAsyncResult result)
         {
             try

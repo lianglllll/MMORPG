@@ -62,7 +62,7 @@
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\CtrlController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Dizzy.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\RegisterPanelScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Login\RegisterPanelScript.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="Assets\Scripts\Player\Controller\SyncController.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\CreateRolePanelScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\CreateRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Skill.cs" />
     <Compile Include="Assets\Scripts\Service\BuffService.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_AirDown.cs" />
@@ -109,7 +109,7 @@
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\SelectRolePanelScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\SelectRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Move.cs" />
     <Compile Include="Assets\Scripts\Player\Model\ModelBase.cs" />
@@ -133,8 +133,8 @@
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Scripts\Camera\TP_CameraController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\RoleListItemScript.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\VocationItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\RoleListItemScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\VocationItem.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Death.cs" />
@@ -158,18 +158,19 @@
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
+    <Compile Include="Assets\Scripts\Net\NetClient.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpaceDefine.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SkillDefine.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\LoginPanelScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Login\LoginPanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Scripts\Buffs\Buff.cs" />
     <Compile Include="Assets\Scripts\Manager\DataManager.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\DialogDefine.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\CombatPanelScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\CombatPanelScript.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Defense.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Evade.cs" />
     <Compile Include="Assets\Scripts\Combat\Missile.cs" />
@@ -196,7 +197,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Scripts\Net\NetClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />
@@ -862,9 +862,6 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.5f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="HybridCLR.Runtime">
       <HintPath>Library\ScriptAssemblies\HybridCLR.Runtime.dll</HintPath>
     </Reference>
@@ -883,6 +880,39 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.State.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="YooAsset">
+      <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
+    </Reference>
+    <Reference Include="BetterStreamingAssets">
+      <HintPath>Library\ScriptAssemblies\BetterStreamingAssets.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
@@ -895,47 +925,23 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="HybridCLR.Editor">
-      <HintPath>Library\ScriptAssemblies\HybridCLR.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    <Reference Include="HybridCLR.Editor">
+      <HintPath>Library\ScriptAssemblies\HybridCLR.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
@@ -955,17 +961,11 @@
     <Reference Include="Unity.ScriptableBuildPipeline">
       <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
     </Reference>
-    <Reference Include="YooAsset">
-      <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.ScriptableBuildPipeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="BetterStreamingAssets">
-      <HintPath>Library\ScriptAssemblies\BetterStreamingAssets.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
@@ -976,17 +976,9 @@
       <Project>{E361F34E-9485-3D1E-F65B-5430B3BA17A1}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="HotUpdate.csproj">
-      <Project>{E759DA4C-59DC-1809-C862-E6716DE69777}</Project>
-      <Name>HotUpdate</Name>
-    </ProjectReference>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{682213BC-AB5A-6785-DF80-1FFA307A26DD}</Project>
-      <Name>DOTween.Modules</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{4BBC919A-5F67-451D-32D5-BA3C7E00BD5A}</Project>
-      <Name>UniTask.DOTween</Name>
+    <ProjectReference Include="UITools.csproj">
+      <Project>{A46ADEF6-78DE-8C60-2F9A-1E23A3AE7D23}</Project>
+      <Name>UITools</Name>
     </ProjectReference>
     <ProjectReference Include="IngameDebugConsole.Editor.csproj">
       <Project>{88556816-2CA4-F522-6553-345DFCC07ED5}</Project>
@@ -1000,10 +992,6 @@
       <Project>{86C6AA80-C9DC-063F-133E-52C802CA1BF0}</Project>
       <Name>Main</Name>
     </ProjectReference>
-    <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{ECB3AE6C-7D06-2930-681C-FE5CC1E0B9E5}</Project>
-      <Name>UniTask.Linq</Name>
-    </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
       <Project>{2819E52A-4B91-74BE-EC76-FBD7597CD34E}</Project>
       <Name>UniTask.TextMeshPro</Name>
@@ -1012,9 +1000,9 @@
       <Project>{0A987264-62ED-5DCB-7BC0-BDE50C35B58B}</Project>
       <Name>Serilog.Sinks.Unity3D</Name>
     </ProjectReference>
-    <ProjectReference Include="UniTask.csproj">
-      <Project>{D9F16AAE-7D0A-25AB-7D15-0319FAB08A3D}</Project>
-      <Name>UniTask</Name>
+    <ProjectReference Include="Proto.csproj">
+      <Project>{F6A6C19C-C6DF-7B80-0A83-68D03B75FCA5}</Project>
+      <Name>Proto</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
       <Project>{2F3FA87D-7750-1DC8-AD86-313FBE0C2E3B}</Project>
@@ -1024,21 +1012,33 @@
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
     </ProjectReference>
-    <ProjectReference Include="HSFramework.csproj">
-      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
-      <Name>HSFramework</Name>
+    <ProjectReference Include="HotUpdate.csproj">
+      <Project>{E759DA4C-59DC-1809-C862-E6716DE69777}</Project>
+      <Name>HotUpdate</Name>
+    </ProjectReference>
+    <ProjectReference Include="DOTween.Modules.csproj">
+      <Project>{682213BC-AB5A-6785-DF80-1FFA307A26DD}</Project>
+      <Name>DOTween.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.DOTween.csproj">
+      <Project>{4BBC919A-5F67-451D-32D5-BA3C7E00BD5A}</Project>
+      <Name>UniTask.DOTween</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Linq.csproj">
+      <Project>{ECB3AE6C-7D06-2930-681C-FE5CC1E0B9E5}</Project>
+      <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="Summer.csproj">
       <Project>{14018557-8B53-2BB4-E9D8-6F103401F551}</Project>
       <Name>Summer</Name>
     </ProjectReference>
-    <ProjectReference Include="Proto.csproj">
-      <Project>{F6A6C19C-C6DF-7B80-0A83-68D03B75FCA5}</Project>
-      <Name>Proto</Name>
+    <ProjectReference Include="HSFramework.csproj">
+      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
+      <Name>HSFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="UITools.csproj">
-      <Project>{A46ADEF6-78DE-8C60-2F9A-1E23A3AE7D23}</Project>
-      <Name>UITools</Name>
+    <ProjectReference Include="UniTask.csproj">
+      <Project>{D9F16AAE-7D0A-25AB-7D15-0319FAB08A3D}</Project>
+      <Name>UniTask</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

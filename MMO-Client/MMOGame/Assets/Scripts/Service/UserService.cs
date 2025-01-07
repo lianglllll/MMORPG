@@ -1,3 +1,4 @@
+using BaseSystem.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
@@ -33,7 +34,7 @@ public class UserService : Singleton<UserService>
         UserLoginRequest loginRequest = new UserLoginRequest();
         loginRequest.Username = username;
         loginRequest.Password = password;
-        NetManager.Instance.curNetClient.Send(loginRequest);
+        NetManager.Instance.m_curNetClient.Send(loginRequest);
     }
     private void _UserLoginResponse(Connection sender, UserLoginResponse msg)
     {
@@ -47,7 +48,7 @@ public class UserService : Singleton<UserService>
         UserRegisterRequest req = new UserRegisterRequest();
         req.Username = username;
         req.Password = password;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
     private void _UserRegisterResponse(Connection sender, UserRegisterResponse msg)
     {
@@ -73,7 +74,7 @@ public class UserService : Singleton<UserService>
     {
         //发起角色列表的请求
         CharacterListRequest req = new CharacterListRequest();
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
     private void _GetCharacterListResponse(Connection sender, CharacterListResponse msg)
     {
@@ -90,7 +91,7 @@ public class UserService : Singleton<UserService>
         CharacterCreateRequest req = new CharacterCreateRequest();
         req.Name = roleName;
         req.JobType = jobId;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
     private void _CharacterCreateResponse(Connection sender, CharacterCreateResponse msg)
     {
@@ -116,7 +117,7 @@ public class UserService : Singleton<UserService>
     {
         CharacterDeleteRequest req = new CharacterDeleteRequest();
         req.CharacterId = chrId;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
     private void _CharacterDeleteResponse(Connection sender, CharacterDeleteResponse msg)
     {
@@ -130,7 +131,7 @@ public class UserService : Singleton<UserService>
         {
             //发起角色列表的请求
             CharacterListRequest req = new CharacterListRequest();
-            NetManager.Instance.curNetClient.Send(req);
+            NetManager.Instance.m_curNetClient.Send(req);
         }
 
     }
@@ -143,7 +144,7 @@ public class UserService : Singleton<UserService>
         //发送请求 
         GameEnterRequest request = new GameEnterRequest();
         request.CharacterId = roleId;
-        NetManager.Instance.curNetClient.Send(request);
+        NetManager.Instance.m_curNetClient.Send(request);
     }
     private void _EnterGameResponse(Connection sender, GameEnterResponse msg)
     {
@@ -152,7 +153,7 @@ public class UserService : Singleton<UserService>
 
     public void GetServerInfoRequest()
     {
-        NetManager.Instance.curNetClient.Send(new ServerInfoRequest());
+        NetManager.Instance.m_curNetClient.Send(new ServerInfoRequest());
     }
     private void _GetServerInfoResponse(Connection sender, ServerInfoResponse message)
     {

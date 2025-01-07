@@ -3,10 +3,7 @@ using GameClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Policy;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -83,14 +80,14 @@ public class ServerPanel : BasePanel
         //还需要判断这个服务器是否可用才能开始游戏。
 
 
-        //连接服务器
-        NetManager.Instance.ConnectToLoginGate(()=> {
-            isStart = true;
-            //开始切换场景了
-            DelayedTaskScheduler.Instance.AddDelayedTask(1f, () => {
-                UIManager.Instance.ExchangePanelWithFade("ServerPanel", "LoginPanel");
-            });
-        });
+        ////连接服务器
+        //NetManager.Instance.ConnectToLoginGate(()=> {
+        //    isStart = true;
+        //    //开始切换场景了
+        //    DelayedTaskScheduler.Instance.AddDelayedTask(1f, () => {
+        //        UIManager.Instance.ExchangePanelWithFade("ServerPanel", "LoginPanel");
+        //    });
+        //});
 
     }
     private IEnumerator _StartGame()

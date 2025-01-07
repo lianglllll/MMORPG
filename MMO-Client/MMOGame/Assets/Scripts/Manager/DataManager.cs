@@ -1,11 +1,11 @@
-using Summer;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using BaseSystem.Tool.Singleton;
 
 
-public class DataManager : Singleton<DataManager>
+public class DataManager : SingletonNonMono<DataManager>
 {
     private const string _prefix = "Files/Data";
 

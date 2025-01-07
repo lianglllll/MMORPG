@@ -3,7 +3,7 @@ using System;
 
 namespace BaseSystem.Tool.Singleton
 {
-    public abstract class SingletonNonMono<T> : IDisposable where T : class,new()
+    public abstract class SingletonNonMono<T> : IDisposable where T : class, new()
     {
         private static T _instance;
         private static object _lock = new object();

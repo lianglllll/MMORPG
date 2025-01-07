@@ -10,8 +10,9 @@ using Common.Summer.Net;
 using HS.Protobuf.Scene;
 using HS.Protobuf.Combat.Skill;
 using HS.Protobuf.SceneEntity;
+using BaseSystem.Tool.Singleton;
 
-public class CombatService : Singleton<CombatService>
+public class CombatService : SingletonNonMono<CombatService>
 {
 
     /// <summary>
@@ -371,7 +372,7 @@ public class CombatService : Singleton<CombatService>
         {
             //无目标就啥也不用填了，这种技能类似旋风斩的，跟随主角的范围伤害。在这一点上和点目标技能进行了区分。
         }
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>
@@ -383,7 +384,7 @@ public class CombatService : Singleton<CombatService>
         SpaceDeliverRequest req = new SpaceDeliverRequest();
         req.SpaceId = spaceId;
         req.PointId = point;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
 

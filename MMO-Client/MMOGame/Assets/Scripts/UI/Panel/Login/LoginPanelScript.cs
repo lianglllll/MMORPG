@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using HS.Protobuf.Login;
-
-
 public class LoginPanelScript : BasePanel
 {
     private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来
@@ -43,9 +41,7 @@ public class LoginPanelScript : BasePanel
         contentNode = transform.Find("ServerInfoBox/KillRank/ContentNode").gameObject;
         contentNode.SetActive(false);
 
-
     }
-
     protected override void Start()
     {
         passwordInputField.contentType = InputField.ContentType.Password;
@@ -55,7 +51,13 @@ public class LoginPanelScript : BasePanel
         RefreshServerInfoBtn.onClick.AddListener(OnRefreshServerInfoBtn);
         isOnClickLoginBtn = false;
         OnRefreshServerInfoBtn();
+
         Init();
+
+    }
+    private void OnDestroy()
+    {
+        UnInit();
     }
 
     private void Init()
@@ -74,8 +76,13 @@ public class LoginPanelScript : BasePanel
 
         //给登录框弄点移动效果
         loginBox.DOLocalMoveX(transform.localPosition.x + 2000f, 2f).From();
-        ServerInfoBox.DOLocalMoveX(transform.localPosition.x  -4000f, 2f).From();
+        ServerInfoBox.DOLocalMoveX(transform.localPosition.x - 4000f, 2f).From();
     }
+    private void UnInit()
+    {
+
+    }
+
 
     private void OnLoginBtn()
     {
@@ -83,10 +90,11 @@ public class LoginPanelScript : BasePanel
         if (isOnClickLoginBtn) return;
 
         //与服务器没有建立连接时
-        if (!NetManager.Instance.loginGateisConnected)
+        if (!NetManager.Instance.m_loginGateisConnected)
         {
             UIManager.Instance.MessagePanel.ShowTopMsg("正在帮您连接服务器.....");
-            NetManager.Instance.ConnectToLoginGate();
+            
+
             return;
         }
 
@@ -145,7 +153,6 @@ public class LoginPanelScript : BasePanel
         yield return ScenePoster.Instance.FadeOut();
     }
 
-
     private void OnRegisterBtn()
     {
         StartCoroutine(_OnRegister());
@@ -159,7 +166,6 @@ public class LoginPanelScript : BasePanel
 
         yield return ScenePoster.Instance.FadeOut();
     }
-
 
     private void OnRefreshServerInfoBtn()
     {
@@ -188,7 +194,6 @@ public class LoginPanelScript : BasePanel
 
 
     }
- 
 
     private void OnExitBtn()
     {

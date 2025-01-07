@@ -1,12 +1,12 @@
+using BaseSystem.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using HS.Protobuf.Chat;
-using Summer;
 
 /// <summary>
 /// 主要负责聊天消息的发送与接收
 /// </summary>
-public class ChatService : Singleton<ChatService>
+public class ChatService : SingletonNonMono<ChatService>
 {
     public ChatService()
     {
@@ -82,7 +82,7 @@ public class ChatService : Singleton<ChatService>
         }
         msg.Content = content;
         req.Message = msg;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
 
         //测试用
         if(content == "close")

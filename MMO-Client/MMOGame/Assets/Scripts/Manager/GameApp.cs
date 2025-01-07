@@ -71,7 +71,7 @@ namespace GameClient {
         {
             ReviveRequest req = new ReviveRequest();
             req.EntityId = entityId;
-            NetManager.Instance.curNetClient.Send(req);
+            NetManager.Instance.m_curNetClient.Send(req);
         }
     }
 }

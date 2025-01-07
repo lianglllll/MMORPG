@@ -1,9 +1,9 @@
+using BaseSystem.Tool.Singleton;
 using GameClient;
 using GameClient.Entities;
 using GameClient.InventorySystem;
 using Google.Protobuf.Collections;
 using HS.Protobuf.Game.Backpack;
-using Summer;
 using System.Collections.Concurrent;
 
 //缓存itemUI的操作
@@ -18,7 +18,7 @@ public class ItemUIAction
 /// <summary>
 /// 缓存一些数据，并且给ui提供获取数据的接口
 /// </summary>
-public class ItemDataManager : Singleton<ItemDataManager>
+public class ItemDataManager : SingletonNonMono<ItemDataManager>
 {
     //缓存的背包数据
     public Inventory localCharacterKnapsack;

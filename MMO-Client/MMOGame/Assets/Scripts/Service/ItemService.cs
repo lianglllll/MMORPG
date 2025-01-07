@@ -1,12 +1,12 @@
+using BaseSystem.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
 using GameClient.Entities;
 using HS.Protobuf.Game.Backpack;
 using HS.Protobuf.Scene;
-using Summer;
 
-public class ItemService : Singleton<ItemService>
+public class ItemService : SingletonNonMono<ItemService>
 {
     /// <summary>
     /// 初始化，gamemanager中启用
@@ -43,7 +43,7 @@ public class ItemService : Singleton<ItemService>
         req.EntityId = GameApp.character.EntityId;
 
         req.QueryKnapsack = true;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public class ItemService : Singleton<ItemService>
         req.EntityId = GameApp.character.EntityId;
         req.SlotIndex = slotIndex;
         req.Count = count;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class ItemService : Singleton<ItemService>
     {
         var req = new WearEquipmentRequest();
         req.SlotIndex = slotIndex;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>
@@ -141,7 +141,7 @@ public class ItemService : Singleton<ItemService>
     {
         var req = new UnloadEquipmentRequest();
         req.Type = type;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>
@@ -153,7 +153,7 @@ public class ItemService : Singleton<ItemService>
     /// <param name="targetSlot"></param>
     public void ItemPlacementRequeset(ItemPlacementRequest req)
     {
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ public class ItemService : Singleton<ItemService>
     {
         var req = new ItemPickUpRequest();
         req.EntityId = entityId;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>
@@ -200,7 +200,7 @@ public class ItemService : Singleton<ItemService>
         req.SlotIndex = slotIndex;
         req.Number = number;
         req.Type = type;
-        NetManager.Instance.curNetClient.Send(req);
+        NetManager.Instance.m_curNetClient.Send(req);
     }
 
     /// <summary>

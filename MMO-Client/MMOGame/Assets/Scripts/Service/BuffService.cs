@@ -1,11 +1,11 @@
-using Summer;
 using Common.Summer.Net;
 using Common.Summer.Core;
 using HS.Protobuf.Combat.Buff;
+using BaseSystem.Tool.Singleton;
 
 namespace Assets.Script.Service
 {
-    public class BuffService : Singleton<BuffService>
+    public class BuffService : SingletonNonMono<BuffService>
     {
         public void Init()
         {

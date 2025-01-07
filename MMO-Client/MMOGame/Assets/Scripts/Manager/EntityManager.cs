@@ -1,4 +1,5 @@
 using Assets.Script.Entities;
+using BaseSystem.Singleton;
 using GameServer.Model;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
