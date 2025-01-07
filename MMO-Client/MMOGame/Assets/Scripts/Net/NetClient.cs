@@ -5,6 +5,8 @@ using Google.Protobuf;
 using Common.Summer.Core;
 using Serilog;
 using BaseSystem.MyDelayedTaskScheduler;
+using Common.Summer.Security;
+using UnityEditor.Build.Pipeline;
 
 
 //主要功能是从当一个client去连接其他服务
@@ -13,6 +15,8 @@ public class NetClient
     private Socket m_clientSocket;
     private SocketAsyncEventArgs m_connectArgs;
     private Connection m_connection;
+    public EncryptionManager EncryptionManager => m_connection.m_encryptionManager;
+
 
     public delegate void TcpClientConnectedCallback(NetClient tcpClient);
     public delegate void TcpClientConnectedFailedCallback(NetClient tcpClient, bool isEnd);

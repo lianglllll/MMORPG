@@ -34,6 +34,7 @@ public class GameManager : Singleton<GameManager>
 
         //初始化服务
         DataManager.Instance.init();
+        SecurityService.Instance.Init();
         UserService.Instance.Init();
         CombatService.Instance.Init();
         ChatService.Instance.Init();

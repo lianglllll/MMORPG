@@ -32,13 +32,11 @@ namespace Common.Summer.Core
         public bool Init(Socket socket, DisconnectedHandler disconnected)
         {
             m_socket = socket;
-
+            m_encryptionManager = new EncryptionManager();
+            m_encryptionManager.Init();
             //给这个客户端连接创建一个解码器
             m_lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4, _OnDataRecived, _OnDisconnected);
             m_lfd.Init();//启动解码器，开始接收消息
-
-            m_encryptionManager = new EncryptionManager();
-            m_encryptionManager.Init();
 
             return true;
         }

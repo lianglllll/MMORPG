@@ -1,17 +1,19 @@
-using BaseSystem.Singleton;
+using BaseSystem.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
 using HS.Protobuf.Login;
 using HS.Protobuf.Scene;
-using Summer;
 
-public class UserService : Singleton<UserService>
+public class UserService : SingletonNonMono<UserService>
 {
     // 初始化，gamemanager中启用
     public void Init()
     {
-        MessageRouter.Instance.Subscribe<UserLoginResponse>(_UserLoginResponse);
+        ProtoHelper.Instance.Register<UserLoginRequest>((int)LoginProtocl.UserLoginRequest);
+        ProtoHelper.Instance.Register<UserLoginResponse>((int)LoginProtocl.UserLoginResponse);
+
+        MessageRouter.Instance.Subscribe<UserLoginResponse>(_HandleUserLoginResponse);
         MessageRouter.Instance.Subscribe<GameEnterResponse>(_EnterGameResponse);
         MessageRouter.Instance.Subscribe<CharacterListResponse>(_GetCharacterListResponse);
         MessageRouter.Instance.Subscribe<CharacterDeleteResponse>(_CharacterDeleteResponse);
@@ -21,7 +23,7 @@ public class UserService : Singleton<UserService>
     }
     public void UnInit()
     {
-        MessageRouter.Instance.UnSubscribe<UserLoginResponse>(_UserLoginResponse);
+        MessageRouter.Instance.UnSubscribe<UserLoginResponse>(_HandleUserLoginResponse);
         MessageRouter.Instance.UnSubscribe<GameEnterResponse>(_EnterGameResponse);
         MessageRouter.Instance.UnSubscribe<CharacterListResponse>(_GetCharacterListResponse);
         MessageRouter.Instance.UnSubscribe<CharacterDeleteResponse>(_CharacterDeleteResponse);
@@ -29,18 +31,21 @@ public class UserService : Singleton<UserService>
         MessageRouter.Instance.UnSubscribe<CharacterCreateResponse>(_CharacterCreateResponse);
     }
 
-    public void UserLoginRequest(string username,string password)
+    public void SendUserLoginRequest(string username,string password)
     {
         UserLoginRequest loginRequest = new UserLoginRequest();
-        loginRequest.Username = username;
-        loginRequest.Password = password;
+        loginRequest.Username = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(username);
+        loginRequest.Password = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(password);
+        loginRequest.LoginGateToken = NetManager.Instance.m_loginGateToken;
         NetManager.Instance.m_curNetClient.Send(loginRequest);
     }
-    private void _UserLoginResponse(Connection sender, UserLoginResponse msg)
+    private void _HandleUserLoginResponse(Connection sender, UserLoginResponse msg)
     {
         var panel = UIManager.Instance.GetPanelByName("LoginPanel");
         if (panel == null) return;
-        (panel as LoginPanelScript).OnLoginResponse(msg);
+        UnityMainThreadDispatcher.Instance().Enqueue(() => {
+            (panel as LoginPanelScript).HandleUserLoginResponse(msg);
+        });
     }
 
     public void UserRegisterRequest(string username,string password)

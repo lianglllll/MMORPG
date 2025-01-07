@@ -75,82 +75,68 @@ public class LoginPanelScript : BasePanel
         }
 
         //给登录框弄点移动效果
-        loginBox.DOLocalMoveX(transform.localPosition.x + 2000f, 2f).From();
-        ServerInfoBox.DOLocalMoveX(transform.localPosition.x - 4000f, 2f).From();
+        loginBox.DOLocalMoveX(transform.localPosition.x + 2000f, 3f).From();
+        ServerInfoBox.DOLocalMoveX(transform.localPosition.x - 4000f, 3f).From();
     }
     private void UnInit()
     {
 
     }
 
-
     private void OnLoginBtn()
     {
-        //防止多次连续点击
-        if (isOnClickLoginBtn) return;
-
         //与服务器没有建立连接时
         if (!NetManager.Instance.m_loginGateisConnected)
         {
-            UIManager.Instance.MessagePanel.ShowTopMsg("正在帮您连接服务器.....");
-            
-
-            return;
+            UIManager.Instance.MessagePanel.ShowTopMsg("正在帮您连接服务器...");
+            goto End;
         }
+
+        //防止多次连续点击
+        if (isOnClickLoginBtn)
+        {
+            UIManager.Instance.MessagePanel.ShowTopMsg("您点击太快了...");
+            goto End;
+        }
+        isOnClickLoginBtn = true;
 
         string username = usernameInputField.text;
         string password = passwordInputField.text;
         if (username.Equals("") ||password.Equals(""))
         {
             UIManager.Instance.MessagePanel.ShowTopMsg("登录名或密码不能为空！");
-            return;
+            goto End;
         }
 
-        isOnClickLoginBtn = true;
-
         //向server发送登录请求
-        UserService.Instance.UserLoginRequest(username, password);
+        UserService.Instance.SendUserLoginRequest(username, password);
+    End:
+        return;
     }
-    public void OnLoginResponse(UserLoginResponse msg)
+    public void HandleUserLoginResponse(UserLoginResponse msg)
     {
         //登录成功，切换到角色选择scene
         if (msg.ResultCode == 0)
         {
             //保存SessionId
             GameApp.SessionId = msg.SessionId;
+            if (recordUsernameAndPassword.isOn)
+            {
+                //记录用户名和密码
+                PlayerPrefs.SetString("myUsername", usernameInputField.text);
+                PlayerPrefs.SetString("myPassword", passwordInputField.text);
+                PlayerPrefs.Save();
+            }
+            UIManager.Instance.ShowTopMessage(msg.ResultMsg);
             //切换面板
-            UnityMainThreadDispatcher.Instance().Enqueue(()=> {
-
-                if (recordUsernameAndPassword.isOn)
-                {
-                    //记录用户名和密码
-                    PlayerPrefs.SetString("myUsername", usernameInputField.text);
-                    PlayerPrefs.SetString("myPassword", passwordInputField.text);
-                    PlayerPrefs.Save();
-                }
-
-                UnityMainThreadDispatcher.Instance().StartCoroutine(_OnLoginResponse());
-            });
-        } 
+            UIManager.Instance.ExchangePanelWithFade("SelectRolePanel", "LoginPanel");
+        }
         else
         {
             isOnClickLoginBtn = false;
-            UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                UIManager.Instance.ShowTopMessage("登录失败！！");
-            });
+            UIManager.Instance.ShowTopMessage(msg.ResultMsg);
         }
 
-    }
-    private IEnumerator _OnLoginResponse()
-    {
-        UIManager.Instance.ShowTopMessage("登录成功");
-
-        yield return new WaitForSeconds(0.5f);
-
-        yield return  ScenePoster.Instance.FadeIn();
-        UIManager.Instance.OpenPanel("SelectRolePanel");
-        UIManager.Instance.ClosePanel("LoginPanel");
-        yield return ScenePoster.Instance.FadeOut();
     }
 
     private void OnRegisterBtn()

@@ -29,8 +29,6 @@ namespace GameClient {
     {
         //当前的服务器信息
         public static ServerInfo ServerInfo;
-
-        //SessionId
         public static string SessionId;
 
         //当前所在场景id

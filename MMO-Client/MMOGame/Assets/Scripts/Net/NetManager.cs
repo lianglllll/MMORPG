@@ -26,8 +26,7 @@ public class NetManager : Singleton<NetManager>
     private DateTime m_lastBeatTime = DateTime.MinValue;                          //上一次发送心跳包的时间
 
     private List<ServerInfo> m_loginGateInfo = new();
-    private string m_loginGateToken;
-
+    public  string m_loginGateToken;
 
     public void Init()
     {
@@ -42,7 +41,6 @@ public class NetManager : Singleton<NetManager>
         //消息分发注册
         MessageRouter.Instance.Subscribe<CSHeartBeatResponse>(_HandleCSHeartBeatResponse);
         MessageRouter.Instance.Subscribe<GetLoginGateTokenResponse>(_HandleGetLoginGateTokenResponse);
-
 
         m_loginGateisConnected = false;
         m_isEnableHeartBeat = false;
@@ -124,6 +122,9 @@ public class NetManager : Singleton<NetManager>
                 };
                 m_curNetClient.Send(req);
             }
+
+            // 获取通信密钥流程
+            SecurityService.Instance.SendExchangePublicKeyRequest();
         });
     }
     private void _LoginGateConnectedFailedCallback(NetClient tcpClient, bool isEnd)
