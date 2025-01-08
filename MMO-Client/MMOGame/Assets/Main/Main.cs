@@ -253,6 +253,8 @@ public class Main : MonoBehaviour
     {
         Debug.LogError($"开始下载");
         mainScenePanel.TipsText.text = "开始下载";
+        mainScenePanel.UpdatePercentageText.enabled = true;
+        mainScenePanel.UpdatePercentageText.text = "";
         mainScenePanel.LoadingSlider.gameObject.SetActive(true);
 
     }
@@ -260,6 +262,7 @@ public class Main : MonoBehaviour
     {
         Debug.LogError($"下载结束");
         mainScenePanel.TipsText.text = "下载结束";
+        mainScenePanel.UpdatePercentageText.enabled = false;
 
     }
     public void OnDownloadProgressUpdateFunction(int totalDownloadCount, int currentDownloadCount, long totalDownloadBytes, long currentDownloadBytes)
@@ -268,6 +271,7 @@ public class Main : MonoBehaviour
         mainScenePanel.LoadingSlider.maxValue = totalDownloadBytes;
         mainScenePanel.LoadingSlider.value = currentDownloadBytes;
         mainScenePanel.TipsText.text = $"下载更新 : {FormatBytes(currentDownloadBytes)} / {FormatBytes(totalDownloadBytes)}";
+        mainScenePanel.UpdatePercentageText.text = $"{(int)((currentDownloadBytes * 1.0f / totalDownloadBytes ) * 100)}%";
     }
     public void OnDownloadErrorFunction(string fileName, string error)
     {

@@ -1,9 +1,8 @@
 using Assets.Script.Entities;
-using BaseSystem.Singleton;
+using BaseSystem.Tool.Singleton;
 using GameServer.Model;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
-using Summer;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace GameClient.Entities
     /// <summary>
     /// entity对象管理器，只用于管理当前场景的entity
     /// </summary>
-    public class EntityManager : Singleton<EntityManager>
+    public class EntityManager : SingletonNonMono<EntityManager>
     {
         //线程安全字典
         private ConcurrentDictionary <int, Entity> entityDict = new ConcurrentDictionary<int, Entity>();

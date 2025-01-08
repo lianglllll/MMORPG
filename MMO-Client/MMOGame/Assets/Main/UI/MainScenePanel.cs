@@ -8,11 +8,13 @@ using DG.Tweening;
 public class MainScenePanel : MonoBehaviour
 {
     private Text tipsText;
+    private Text updatePercentageText;
     private Slider loadingSlider;
     private SelectUpdatePanel selectUpdatePanel;
     private CanvasGroup selectUpdatePanelCanvasGroup;
 
     public Text TipsText => tipsText;
+    public Text UpdatePercentageText => updatePercentageText;
     public Slider LoadingSlider => loadingSlider;
 
 
@@ -24,6 +26,7 @@ public class MainScenePanel : MonoBehaviour
     private void Awake()
     {
         tipsText = transform.Find("TipsText").GetComponent<Text>();
+        updatePercentageText = transform.Find("UpdatePercentageText").GetComponent<Text>();
         loadingSlider = transform.Find("LoadingSlider").GetComponent<Slider>();
         selectUpdatePanel = transform.Find("SelectUpdatePanel").GetComponent<SelectUpdatePanel>();
         selectUpdatePanelCanvasGroup = transform.Find("SelectUpdatePanel").GetComponent<CanvasGroup>();
@@ -40,7 +43,7 @@ public class MainScenePanel : MonoBehaviour
         selectUpdatePanel.gameObject.SetActive(false);
         LoadingSlider.gameObject.SetActive(false);
 
-        //ScenePoster.Instance.Init();
+        updatePercentageText.enabled = false;
     }
 
     // 在对象销毁时停止动画
