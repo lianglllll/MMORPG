@@ -12,12 +12,16 @@ public class UserService : SingletonNonMono<UserService>
     {
         ProtoHelper.Instance.Register<UserLoginRequest>((int)LoginProtocl.UserLoginRequest);
         ProtoHelper.Instance.Register<UserLoginResponse>((int)LoginProtocl.UserLoginResponse);
+        ProtoHelper.Instance.Register<UserRegisterRequest>((int)LoginProtocl.UserRegisterRequest);
+        ProtoHelper.Instance.Register<UserRegisterResponse>((int)LoginProtocl.UserRegisterResponse);
 
         MessageRouter.Instance.Subscribe<UserLoginResponse>(_HandleUserLoginResponse);
+        MessageRouter.Instance.Subscribe<UserRegisterResponse>(_HandleUserRegisterResponse);
+
+
         MessageRouter.Instance.Subscribe<GameEnterResponse>(_EnterGameResponse);
         MessageRouter.Instance.Subscribe<CharacterListResponse>(_GetCharacterListResponse);
         MessageRouter.Instance.Subscribe<CharacterDeleteResponse>(_CharacterDeleteResponse);
-        MessageRouter.Instance.Subscribe<UserRegisterResponse>(_UserRegisterResponse);
         MessageRouter.Instance.Subscribe<CharacterCreateResponse>(_CharacterCreateResponse);
         MessageRouter.Instance.Subscribe<ServerInfoResponse>(_GetServerInfoResponse);
     }
@@ -27,17 +31,17 @@ public class UserService : SingletonNonMono<UserService>
         MessageRouter.Instance.UnSubscribe<GameEnterResponse>(_EnterGameResponse);
         MessageRouter.Instance.UnSubscribe<CharacterListResponse>(_GetCharacterListResponse);
         MessageRouter.Instance.UnSubscribe<CharacterDeleteResponse>(_CharacterDeleteResponse);
-        MessageRouter.Instance.UnSubscribe<UserRegisterResponse>(_UserRegisterResponse);
+        MessageRouter.Instance.UnSubscribe<UserRegisterResponse>(_HandleUserRegisterResponse);
         MessageRouter.Instance.UnSubscribe<CharacterCreateResponse>(_CharacterCreateResponse);
     }
 
     public void SendUserLoginRequest(string username,string password)
     {
-        UserLoginRequest loginRequest = new UserLoginRequest();
-        loginRequest.Username = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(username);
-        loginRequest.Password = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(password);
-        loginRequest.LoginGateToken = NetManager.Instance.m_loginGateToken;
-        NetManager.Instance.m_curNetClient.Send(loginRequest);
+        UserLoginRequest req = new UserLoginRequest();
+        req.Username = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(username);
+        req.Password = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(password);
+        req.LoginGateToken = NetManager.Instance.m_loginGateToken;
+        NetManager.Instance.m_curNetClient.Send(req);
     }
     private void _HandleUserLoginResponse(Connection sender, UserLoginResponse msg)
     {
@@ -47,15 +51,15 @@ public class UserService : SingletonNonMono<UserService>
             (panel as LoginPanelScript).HandleUserLoginResponse(msg);
         });
     }
-
-    public void UserRegisterRequest(string username,string password)
+    public void SendUserRegisterRequest(string username,string password)
     {
         UserRegisterRequest req = new UserRegisterRequest();
-        req.Username = username;
-        req.Password = password;
+        req.Username = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(username);
+        req.Password = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(password);
+        req.LoginGateToken = NetManager.Instance.m_loginGateToken;
         NetManager.Instance.m_curNetClient.Send(req);
     }
-    private void _UserRegisterResponse(Connection sender, UserRegisterResponse msg)
+    private void _HandleUserRegisterResponse(Connection sender, UserRegisterResponse msg)
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {

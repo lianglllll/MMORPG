@@ -10,7 +10,7 @@ using Common.Summer.Net;
 using HS.Protobuf.Login;
 using Serilog;
 using Newtonsoft.Json;
-using static ServerPanel;
+using static SelectWorldPanel;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using HS.Protobuf.LoginGate;

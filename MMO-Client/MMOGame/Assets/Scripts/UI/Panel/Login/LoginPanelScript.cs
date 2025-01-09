@@ -129,7 +129,7 @@ public class LoginPanelScript : BasePanel
             }
             UIManager.Instance.ShowTopMessage(msg.ResultMsg);
             //切换面板
-            UIManager.Instance.ExchangePanelWithFade("SelectRolePanel", "LoginPanel");
+            //UIManager.Instance.ExchangePanelWithFade("LoginPanel", "SelectWorldPanel");
         }
         else
         {

@@ -16,7 +16,6 @@ public class RegisterPanelScript : BasePanel
         confirmPasswordInputField = transform.Find("Register-box/ConfirmPasswordInputField").GetComponent<InputField>();
         returnButton = transform.Find("ReturnBtn").GetComponent<Button>();
         registerButton = transform.Find("Register-box/RegisterButton").GetComponent<Button>();
-
     }
 
     protected override void  Start()
@@ -38,16 +37,28 @@ public class RegisterPanelScript : BasePanel
         if (username.Equals("") || password.Equals("") || confirmPassword.Equals(""))
         {
             UIManager.Instance.ShowTopMessage("用户名或密码不能为空！");
-            return;
+            goto End;
         }
-
         if(password.Equals(confirmPassword) == false)
         {
             UIManager.Instance.ShowTopMessage("二次密码不一致");
-            return;
+            goto End;
+        }
+        if (username.Length < 2 || username.Length > 24)
+        {
+            UIManager.Instance.ShowTopMessage("请限制用户名长度在2-16个字符");
+            goto End;
+        }
+        if (password.Length < 6 || username.Length > 36)
+        {
+            UIManager.Instance.ShowTopMessage("请限制密码长度在6-36个字符");
+            goto End;
         }
 
-        UserService.Instance.UserRegisterRequest(username, password);
+        UserService.Instance.SendUserRegisterRequest(username, password);
+
+    End:
+        return;
     }
 
     /// <summary>
