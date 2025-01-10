@@ -8,15 +8,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class ServerPanel : BasePanel
+public class SelectWorldPanel : BasePanel
 {
-    public string webUrl;
+    private bool isStart;
     public GameObject groupObj;
     public TextMeshProUGUI currentServerName;
     private GameObject serverNode;
-    private bool isStart;
     private Button startBtn;
-
+    private Button selectBtn;
 
     [Serializable]
     public class RootObject
@@ -27,16 +26,13 @@ public class ServerPanel : BasePanel
     protected override void Awake()
     {
         base.Awake();
-        startBtn = transform.Find("Info/ConnectBtn").GetComponent<Button>();
-        
+        startBtn = transform.Find("InfoBox/StartBtn").GetComponent<Button>();
+        selectBtn = transform.Find("InfoBox/SelectBtn").GetComponent<Button>();
     }
 
     protected override void Start()
     {
         base.Start();
-
-        //拉取serversJson文件
-        StartCoroutine(GetRequest(webUrl));
 
         if (groupObj != null && groupObj.transform.childCount > 0)
         {
@@ -52,11 +48,11 @@ public class ServerPanel : BasePanel
             GameApp.ServerInfo = JsonUtility.FromJson<ServerInfo>(myServerInfo);
         }
 
-        startBtn.onClick.AddListener(StartGame);
+        startBtn.onClick.AddListener(OnStartBtn);
 
         isStart = false;
 
-    }
+    } 
 
     private void FixedUpdate()
     {
@@ -67,7 +63,7 @@ public class ServerPanel : BasePanel
         
     }
 
-    public void StartGame()
+    public void OnStartBtn()
     {
         if (isStart) return;
 
@@ -90,14 +86,7 @@ public class ServerPanel : BasePanel
         //});
 
     }
-    private IEnumerator _StartGame()
-    {
-        /*        yield return ScenePoster.Instance.FadeIn();
-                UIManager.Instance.OpenPanel("LoginPanel");
-                yield return ScenePoster.Instance.FadeOut();
-                UIManager.Instance.ClosePanel("ServerPanel");*/
-        yield return null;
-    }
+
 
     IEnumerator GetRequest(string uri)
     {
