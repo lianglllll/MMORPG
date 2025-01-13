@@ -10,11 +10,10 @@ public class UserService : SingletonNonMono<UserService>
     // 初始化，gamemanager中启用
     public void Init()
     {
-        ProtoHelper.Instance.Register<UserLoginRequest>((int)LoginProtocl.UserLoginRequest);
-        ProtoHelper.Instance.Register<UserLoginResponse>((int)LoginProtocl.UserLoginResponse);
-        ProtoHelper.Instance.Register<UserRegisterRequest>((int)LoginProtocl.UserRegisterRequest);
-        ProtoHelper.Instance.Register<UserRegisterResponse>((int)LoginProtocl.UserRegisterResponse);
-
+        ProtoHelper.Instance.Register<UserLoginRequest>((int)LoginProtocl.UserLoginReq);
+        ProtoHelper.Instance.Register<UserLoginResponse>((int)LoginProtocl.UserLoginResp);
+        ProtoHelper.Instance.Register<UserRegisterRequest>((int)LoginProtocl.UserRegisterReq);
+        ProtoHelper.Instance.Register<UserRegisterResponse>((int)LoginProtocl.UserRegisterResp);
         MessageRouter.Instance.Subscribe<UserLoginResponse>(_HandleUserLoginResponse);
         MessageRouter.Instance.Subscribe<UserRegisterResponse>(_HandleUserRegisterResponse);
 
@@ -38,10 +37,10 @@ public class UserService : SingletonNonMono<UserService>
     public void SendUserLoginRequest(string username,string password)
     {
         UserLoginRequest req = new UserLoginRequest();
-        req.Username = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(username);
-        req.Password = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(password);
+        req.Username = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(username);
+        req.Password = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(password);
         req.LoginGateToken = NetManager.Instance.m_loginGateToken;
-        NetManager.Instance.m_curNetClient.Send(req);
+        NetManager.Instance.m_loginGateClient.Send(req);
     }
     private void _HandleUserLoginResponse(Connection sender, UserLoginResponse msg)
     {
@@ -54,10 +53,10 @@ public class UserService : SingletonNonMono<UserService>
     public void SendUserRegisterRequest(string username,string password)
     {
         UserRegisterRequest req = new UserRegisterRequest();
-        req.Username = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(username);
-        req.Password = NetManager.Instance.m_curNetClient.EncryptionManager.AesEncrypt(password);
+        req.Username = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(username);
+        req.Password = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(password);
         req.LoginGateToken = NetManager.Instance.m_loginGateToken;
-        NetManager.Instance.m_curNetClient.Send(req);
+        NetManager.Instance.m_loginGateClient.Send(req);
     }
     private void _HandleUserRegisterResponse(Connection sender, UserRegisterResponse msg)
     {
@@ -83,7 +82,7 @@ public class UserService : SingletonNonMono<UserService>
     {
         //发起角色列表的请求
         CharacterListRequest req = new CharacterListRequest();
-        NetManager.Instance.m_curNetClient.Send(req);
+        NetManager.Instance.m_loginGateClient.Send(req);
     }
     private void _GetCharacterListResponse(Connection sender, CharacterListResponse msg)
     {
@@ -100,7 +99,7 @@ public class UserService : SingletonNonMono<UserService>
         CharacterCreateRequest req = new CharacterCreateRequest();
         req.Name = roleName;
         req.JobType = jobId;
-        NetManager.Instance.m_curNetClient.Send(req);
+        NetManager.Instance.m_loginGateClient.Send(req);
     }
     private void _CharacterCreateResponse(Connection sender, CharacterCreateResponse msg)
     {
@@ -126,7 +125,7 @@ public class UserService : SingletonNonMono<UserService>
     {
         CharacterDeleteRequest req = new CharacterDeleteRequest();
         req.CharacterId = chrId;
-        NetManager.Instance.m_curNetClient.Send(req);
+        NetManager.Instance.m_loginGateClient.Send(req);
     }
     private void _CharacterDeleteResponse(Connection sender, CharacterDeleteResponse msg)
     {
@@ -140,7 +139,7 @@ public class UserService : SingletonNonMono<UserService>
         {
             //发起角色列表的请求
             CharacterListRequest req = new CharacterListRequest();
-            NetManager.Instance.m_curNetClient.Send(req);
+            NetManager.Instance.m_loginGateClient.Send(req);
         }
 
     }
@@ -153,7 +152,7 @@ public class UserService : SingletonNonMono<UserService>
         //发送请求 
         GameEnterRequest request = new GameEnterRequest();
         request.CharacterId = roleId;
-        NetManager.Instance.m_curNetClient.Send(request);
+        NetManager.Instance.m_loginGateClient.Send(request);
     }
     private void _EnterGameResponse(Connection sender, GameEnterResponse msg)
     {
@@ -162,7 +161,7 @@ public class UserService : SingletonNonMono<UserService>
 
     public void GetServerInfoRequest()
     {
-        NetManager.Instance.m_curNetClient.Send(new ServerInfoRequest());
+        NetManager.Instance.m_loginGateClient.Send(new ServerInfoRequest());
     }
     private void _GetServerInfoResponse(Connection sender, ServerInfoResponse message)
     {

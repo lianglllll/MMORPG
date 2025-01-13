@@ -93,7 +93,7 @@ namespace HSFramework.Net
             SetValueTo(transform.rotation.eulerAngles, req.EntitySync.Entity.Direction);
             req.EntitySync.Entity.Id = EntityId;
             req.EntitySync.State = m_ctrlController.CurState;
-            NetManager.Instance.m_curNetClient.Send(req);
+            NetManager.Instance.m_loginGateClient.Send(req);
 
             //重置
             transform.hasChanged = false;

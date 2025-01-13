@@ -153,12 +153,13 @@
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState.cs" />
     <Compile Include="Assets\Scripts\Entities\Character.cs" />
     <Compile Include="Assets\Scripts\Service\CombatService.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\ServerInfoButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\WorldInfoNodeUI.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogStopBackgroundAudioEvent.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_AirDown.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
+    <Compile Include="Assets\Scripts\Service\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\Net\NetClient.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />

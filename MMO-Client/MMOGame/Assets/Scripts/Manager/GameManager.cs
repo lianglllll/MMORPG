@@ -2,11 +2,8 @@ using Assets.Script.Service;
 using BaseSystem.PoolModule;
 using BaseSystem.Singleton;
 using GameClient.Entities;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 
 /// <summary>
 /// 全局游戏管理器
@@ -36,6 +33,7 @@ public class GameManager : Singleton<GameManager>
         DataManager.Instance.init();
         SecurityService.Instance.Init();
         UserService.Instance.Init();
+        EntryGameWorldService.Instance.Init();
         CombatService.Instance.Init();
         ChatService.Instance.Init();
         ItemService.Instance.Init();

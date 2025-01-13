@@ -139,7 +139,7 @@ public class ScenePoster : Singleton<ScenePoster>
             sprite = Res.LoadAssetSync<Sprite>(bgImgResPath[randomNumber]);
         }
         m_bgImage.sprite = sprite;
-
+        m_progressBar.value = 0f;
         randomNumber = random.Next(0, contents.Count);
         m_randomContentText.text = contents[randomNumber];
 

@@ -20,7 +20,7 @@ public class MessagePanelScript : MonoBehaviour
     private CanvasGroup topMsgCanvasGroup;
     private GameObject bottonMsgBox;
     private TextMeshProUGUI bottonMsgBoxText;
-    private float showTime = 2f;
+    private float showTime = 1f;
     private float topMsgBoxCountdown;
     private float bottonMsgBoxCountdown;
 
@@ -146,14 +146,17 @@ public class MessagePanelScript : MonoBehaviour
     /// <param name="ms"></param>
     public void ShowNetworkDelay(int ms)
     {
-        NSignalImage.color = Color.green;
+        Color newColor = Color.green;
+        newColor.a = 64 / 256f;
+        NSignalImage.color = newColor;
         NDelayText.color = Color.green;
         NDelayText.text = "网络延迟：" + ms + "ms";
     }
     public void ShowNetworkDisconnect()
     {
-        NSignalImage.color = Color.red;
-        NDelayText.color = Color.red;
+        Color newColor = Color.red;
+        newColor.a = 64 / 256f;
+        NSignalImage.color = newColor; NDelayText.color = Color.red;
         NDelayText.text = "网络断开";
     }
 

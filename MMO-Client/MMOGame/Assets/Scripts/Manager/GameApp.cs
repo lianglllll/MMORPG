@@ -1,11 +1,10 @@
 using Assets.Script.Entities;
 using GameClient.Combat;
 using GameClient.Entities;
+using HS.Protobuf.Login;
 using HS.Protobuf.Scene;
 using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace GameClient {
 
@@ -20,7 +19,10 @@ namespace GameClient {
         public int port;
         public int state;
     }
-
+    public class RootObject
+    {
+        public ServerInfo[] ServerList;
+    }
 
     /// <summary>
     /// 主要记录一下全局唯一的数据
@@ -28,8 +30,8 @@ namespace GameClient {
     public class GameApp
     {
         //当前的服务器信息
-        public static ServerInfo ServerInfo;
         public static string SessionId;
+        public static HS.Protobuf.Login.WorldInfoNode WorldInfoNode;
 
         //当前所在场景id
         public static int SpaceId;
@@ -69,7 +71,7 @@ namespace GameClient {
         {
             ReviveRequest req = new ReviveRequest();
             req.EntityId = entityId;
-            NetManager.Instance.m_curNetClient.Send(req);
+            NetManager.Instance.m_loginGateClient.Send(req);
         }
     }
 }
