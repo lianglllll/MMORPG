@@ -13,7 +13,7 @@ public class WorldInfoNodeUI : MonoBehaviour
     private TextMeshProUGUI m_worldNameText;
     private Button selectBtn;
 
-    private Action<int, string> m_onSelectBtn;
+    private Action<WorldInfoNode> m_onSelectBtn;
 
     private void Awake()
     {
@@ -24,9 +24,9 @@ public class WorldInfoNodeUI : MonoBehaviour
     }
     private void Start()
     {
-        selectBtn.onClick.AddListener(OnSelectBtn)
+        selectBtn.onClick.AddListener(OnSelectBtn);
     }
-    public bool Init(WorldInfoNode worldInfoNode, Action<int, string> OnSelectBtn)
+    public bool Init(WorldInfoNode worldInfoNode, Action<WorldInfoNode> OnSelectBtn)
     {
         m_worldInfoNode = worldInfoNode;
         m_lockOulineImg.enabled = false;
@@ -59,7 +59,7 @@ public class WorldInfoNodeUI : MonoBehaviour
 
     private void OnSelectBtn()
     {
-        m_onSelectBtn?.Invoke(m_worldInfoNode.WorldId, m_worldInfoNode.WorldName);
+        m_onSelectBtn?.Invoke(m_worldInfoNode);
     }
 
 }

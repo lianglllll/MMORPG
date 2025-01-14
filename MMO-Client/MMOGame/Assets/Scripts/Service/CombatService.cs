@@ -372,7 +372,7 @@ public class CombatService : SingletonNonMono<CombatService>
         {
             //无目标就啥也不用填了，这种技能类似旋风斩的，跟随主角的范围伤害。在这一点上和点目标技能进行了区分。
         }
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>
@@ -384,7 +384,7 @@ public class CombatService : SingletonNonMono<CombatService>
         SpaceDeliverRequest req = new SpaceDeliverRequest();
         req.SpaceId = spaceId;
         req.PointId = point;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
 

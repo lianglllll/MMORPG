@@ -43,7 +43,7 @@ public class ItemService : SingletonNonMono<ItemService>
         req.EntityId = GameApp.character.EntityId;
 
         req.QueryKnapsack = true;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public class ItemService : SingletonNonMono<ItemService>
         req.EntityId = GameApp.character.EntityId;
         req.SlotIndex = slotIndex;
         req.Count = count;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class ItemService : SingletonNonMono<ItemService>
     {
         var req = new WearEquipmentRequest();
         req.SlotIndex = slotIndex;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>
@@ -141,7 +141,7 @@ public class ItemService : SingletonNonMono<ItemService>
     {
         var req = new UnloadEquipmentRequest();
         req.Type = type;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>
@@ -153,7 +153,7 @@ public class ItemService : SingletonNonMono<ItemService>
     /// <param name="targetSlot"></param>
     public void ItemPlacementRequeset(ItemPlacementRequest req)
     {
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ public class ItemService : SingletonNonMono<ItemService>
     {
         var req = new ItemPickUpRequest();
         req.EntityId = entityId;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>
@@ -200,7 +200,7 @@ public class ItemService : SingletonNonMono<ItemService>
         req.SlotIndex = slotIndex;
         req.Number = number;
         req.Type = type;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
 
     /// <summary>

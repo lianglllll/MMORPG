@@ -24,7 +24,7 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
     {
         GetAllWorldInfosRequest req = new();
         req.LoginGateToken = NetManager.Instance.m_loginGateToken;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
     private void _HandleGetAllWorldInfosResponse(Connection sender, GetAllWorldInfosResponse message)
     {
@@ -34,4 +34,8 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
             (panel as SelectWorldPanel).HandleGetAllWorldInfosResponse(message);
         });
     }
+
+
+
+
 }

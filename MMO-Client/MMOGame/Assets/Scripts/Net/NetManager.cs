@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using HS.Protobuf.LoginGate;
+using Google.Protobuf;
+using HS.Protobuf.GameGateMgr;
 
 public class NetManager : Singleton<NetManager>
 {
@@ -20,8 +22,6 @@ public class NetManager : Singleton<NetManager>
     public bool m_loginGateisConnected;
     public bool m_loginGateConnecting;
     private bool m_isEnableHeartBeat;
-
-
 
     private WaitForSeconds m_waitForSeconds = new WaitForSeconds(2f);             //心跳包时间控制
     private DateTime m_lastBeatTime = DateTime.MinValue;                          //上一次发送心跳包的时间
@@ -39,15 +39,21 @@ public class NetManager : Singleton<NetManager>
         ProtoHelper.Instance.Register<CSHeartBeatResponse>((int)CommonProtocl.CsHeartbeatResp);
         ProtoHelper.Instance.Register<GetLoginGateTokenRequest>((int)LoginGateProtocl.GetLogingateTokenReq);
         ProtoHelper.Instance.Register<GetLoginGateTokenResponse>((int)LoginGateProtocl.GetLogingateTokenResp);
+        ProtoHelper.Instance.Register<GetGameGateByWorldIdRequest>((int)LoginProtocl.GetGameGateByWorldidReq);
+        ProtoHelper.Instance.Register<GetGameGateByWorldIdResponse>((int)LoginProtocl.GetGameGateByWorldidResp);
+
         //消息分发注册
         MessageRouter.Instance.Subscribe<CSHeartBeatResponse>(_HandleCSHeartBeatResponse);
         MessageRouter.Instance.Subscribe<GetLoginGateTokenResponse>(_HandleGetLoginGateTokenResponse);
+        MessageRouter.Instance.Subscribe<GetGameGateByWorldIdResponse>(_HandleGetGameGateByWorldIdResponse);
 
         m_loginGateisConnected = false;
         m_isEnableHeartBeat = false;
 
         StartCoroutine(SendGetLoginGatesRequest("http://8.138.30.5:12345/mmo/game-config.json"));
     }
+
+
     public void UnInit()
     {
         MessageRouter.Instance.UnSubscribe<CSHeartBeatResponse>(_HandleCSHeartBeatResponse);
@@ -165,10 +171,43 @@ public class NetManager : Singleton<NetManager>
         m_loginGateToken = message.LoginGateToken;
         Log.Debug($"以获取到loginToken:{m_loginGateToken}");
     }
+    public bool SendToLoginGate(IMessage message)
+    {
+        if(m_loginGateClient != null)
+        {
+            return m_loginGateClient.Send(message);
+        }
+        return false;
+    }
 
     // GameGate
     public void SendGetGameGatesRequest(int worldId)
     {
+        GetGameGateByWorldIdRequest req = new();
+        req.WorldId = worldId;
+        req.LoginGateToken = m_loginGateToken;
+        req.SessionId = GameApp.SessionId;
+        SendToLoginGate(req);
+    }
+    private void _HandleGetGameGateByWorldIdResponse(Connection sender, GetGameGateByWorldIdResponse message)
+    {
+        if(message.ResultCode != 0)
+        {
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                var panel = UIManager.Instance.GetPanelByName("SelectWorldPanel");
+                if (panel != null)
+                {
+                    (panel as SelectWorldPanel).HandleStartResponse(message);
+                }
+            });
+        }
+        else
+        {
+            UnityMainThreadDispatcher.Instance().Enqueue(() => {
+                UIManager.Instance.MessagePanel.ShowTopMsg("导通了铁铁");
+            });
+        }
     }
     public void ConnectToGameGate()
     {

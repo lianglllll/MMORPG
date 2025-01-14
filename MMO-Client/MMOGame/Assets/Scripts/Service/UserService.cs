@@ -40,7 +40,7 @@ public class UserService : SingletonNonMono<UserService>
         req.Username = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(username);
         req.Password = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(password);
         req.LoginGateToken = NetManager.Instance.m_loginGateToken;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
     private void _HandleUserLoginResponse(Connection sender, UserLoginResponse msg)
     {
@@ -56,7 +56,7 @@ public class UserService : SingletonNonMono<UserService>
         req.Username = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(username);
         req.Password = NetManager.Instance.m_loginGateClient.EncryptionManager.AesEncrypt(password);
         req.LoginGateToken = NetManager.Instance.m_loginGateToken;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
     private void _HandleUserRegisterResponse(Connection sender, UserRegisterResponse msg)
     {
@@ -82,7 +82,7 @@ public class UserService : SingletonNonMono<UserService>
     {
         //发起角色列表的请求
         CharacterListRequest req = new CharacterListRequest();
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
     private void _GetCharacterListResponse(Connection sender, CharacterListResponse msg)
     {
@@ -99,7 +99,7 @@ public class UserService : SingletonNonMono<UserService>
         CharacterCreateRequest req = new CharacterCreateRequest();
         req.Name = roleName;
         req.JobType = jobId;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
     private void _CharacterCreateResponse(Connection sender, CharacterCreateResponse msg)
     {
@@ -125,7 +125,7 @@ public class UserService : SingletonNonMono<UserService>
     {
         CharacterDeleteRequest req = new CharacterDeleteRequest();
         req.CharacterId = chrId;
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
     }
     private void _CharacterDeleteResponse(Connection sender, CharacterDeleteResponse msg)
     {
@@ -139,7 +139,7 @@ public class UserService : SingletonNonMono<UserService>
         {
             //发起角色列表的请求
             CharacterListRequest req = new CharacterListRequest();
-            NetManager.Instance.m_loginGateClient.Send(req);
+            NetManager.Instance.SendToLoginGate(req);
         }
 
     }
@@ -152,7 +152,7 @@ public class UserService : SingletonNonMono<UserService>
         //发送请求 
         GameEnterRequest request = new GameEnterRequest();
         request.CharacterId = roleId;
-        NetManager.Instance.m_loginGateClient.Send(request);
+        NetManager.Instance.SendToLoginGate(request);
     }
     private void _EnterGameResponse(Connection sender, GameEnterResponse msg)
     {
@@ -161,7 +161,7 @@ public class UserService : SingletonNonMono<UserService>
 
     public void GetServerInfoRequest()
     {
-        NetManager.Instance.m_loginGateClient.Send(new ServerInfoRequest());
+        NetManager.Instance.SendToLoginGate(new ServerInfoRequest());
     }
     private void _GetServerInfoResponse(Connection sender, ServerInfoResponse message)
     {

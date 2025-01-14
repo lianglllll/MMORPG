@@ -31,7 +31,7 @@ namespace GameClient {
     {
         //当前的服务器信息
         public static string SessionId;
-        public static HS.Protobuf.Login.WorldInfoNode WorldInfoNode;
+        public static WorldInfoNode curWorldInfoNode;
 
         //当前所在场景id
         public static int SpaceId;
@@ -71,7 +71,7 @@ namespace GameClient {
         {
             ReviveRequest req = new ReviveRequest();
             req.EntityId = entityId;
-            NetManager.Instance.m_loginGateClient.Send(req);
+            NetManager.Instance.SendToLoginGate(req);
         }
     }
 }

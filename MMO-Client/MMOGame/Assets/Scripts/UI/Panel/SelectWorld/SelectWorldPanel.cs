@@ -6,12 +6,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-
 public class SelectWorldPanel : BasePanel
 {
     private bool isStart;
+    private bool isCanStart;
 
     private Button startBtn;
     private Button openSelectWorldsBoxBtn;
@@ -46,7 +44,9 @@ public class SelectWorldPanel : BasePanel
         base.Start();
 
         isStart = false;
+        isCanStart = false;
         isSelectWorldsBoxAnimating = false;
+        curSelectWorldId = -1;
 
         selectWorldBox.SetActive(false);
         SelectWorldsBoxCanvasGroup.alpha = 0;
@@ -64,8 +64,8 @@ public class SelectWorldPanel : BasePanel
         string myServerInfo = PlayerPrefs.GetString("myWorldInfoNode");
         if (!string.IsNullOrEmpty(myServerInfo))
         {
-            GameApp.WorldInfoNode = JsonUtility.FromJson<HS.Protobuf.Login.WorldInfoNode>(myServerInfo);
-            currentServerName.text = GameApp.WorldInfoNode.WorldName;
+            GameApp.curWorldInfoNode = JsonUtility.FromJson<HS.Protobuf.Login.WorldInfoNode>(myServerInfo);
+            currentServerName.text = GameApp.curWorldInfoNode.WorldName;
         }
         else
         {
@@ -94,11 +94,13 @@ public class SelectWorldPanel : BasePanel
     }
     public void OnStartBtn()
     {
+        if (!isCanStart) return;
         if (isStart) return;
-
-        if (GameApp.WorldInfoNode == null)
+        isStart = true;
+        if (curSelectWorldId == -1)
         {
             UIManager.Instance.ShowTopMessage("未选择世界，无法开始");
+            isStart = false;
             return;
         }
         // 获取GameGate信息
@@ -108,13 +110,29 @@ public class SelectWorldPanel : BasePanel
     {
         // todo
     }
-    private void OnSelectWorldBtn(int worldId, string worldName)
+    private void OnSelectWorldBtn(WorldInfoNode infoNode)
     {
-        curSelectWorldId = worldId;
-        currentServerName.text = worldName;
+        curSelectWorldId = infoNode.WorldId;
+        currentServerName.text = infoNode.WorldName;
+        GameApp.curWorldInfoNode = infoNode;
+        OnExitSelectWorldsBoxBtn();
     }
 
-
+    public void HandleStartResponse(GetGameGateByWorldIdResponse message)
+    {
+        if(message.ResultMsg != null)
+        {
+            UIManager.Instance.MessagePanel.ShowTopMsg(message.ResultMsg);
+        }
+        if (message.ResultCode == 0) {
+            // 切换面板
+            UIManager.Instance.ExchangePanelWithFade("SelectWorldPanel", "SelectRolePanel");
+        }
+        else
+        {
+            isStart = false;
+        }
+    }
     public void HandleGetAllWorldInfosResponse(GetAllWorldInfosResponse message)
     {
         var sortedNodes = message.WorldInfoNodes.OrderBy(node => node.WorldId);
@@ -128,7 +146,6 @@ public class SelectWorldPanel : BasePanel
             WorldInfoNodeUI worldInfoNode =  obj.GetComponent<WorldInfoNodeUI>();
             worldInfoNode.Init(node, OnSelectWorldBtn);
         }
-        isStart = true;
+        isCanStart = true;
     }
-
 }

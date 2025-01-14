@@ -30,7 +30,7 @@ public class SecurityService : SingletonNonMono<SecurityService>
     {
         ExchangePublicKeyRequest req = new();
         req.ClientPublicKey = NetManager.Instance.m_loginGateClient.EncryptionManager.GetLocalRsaPublicKey(); 
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
         return true;
     }
 
@@ -48,7 +48,7 @@ public class SecurityService : SingletonNonMono<SecurityService>
         // 用对方的rsa公钥加密两个key
         req.Key1 = NetManager.Instance.m_loginGateClient.EncryptionManager.RsaEncrypt(kv.key);
         req.Key2 = NetManager.Instance.m_loginGateClient.EncryptionManager.RsaEncrypt(kv.iv);
-        NetManager.Instance.m_loginGateClient.Send(req);
+        NetManager.Instance.SendToLoginGate(req);
         return true;
     }
 
