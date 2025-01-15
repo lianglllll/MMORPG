@@ -1,6 +1,7 @@
 using BaseSystem.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
+using HS.Protobuf.GameGate;
 using HS.Protobuf.Login;
 using System;
 
@@ -12,9 +13,12 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
         ProtoHelper.Instance.Register<GetAllWorldInfosRequest>((int)LoginProtocl.GetAllWorldInfoNodeReq);
         ProtoHelper.Instance.Register<GetAllWorldInfosResponse>((int)LoginProtocl.GetAllWorldInfoNodeResp);
 
+
         // 消息的订阅
         MessageRouter.Instance.Subscribe<GetAllWorldInfosResponse>(_HandleGetAllWorldInfosResponse);
     }
+
+
     public void UnInit()
     {
         MessageRouter.Instance.UnSubscribe<GetAllWorldInfosResponse>(_HandleGetAllWorldInfosResponse);
@@ -24,17 +28,16 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
     {
         GetAllWorldInfosRequest req = new();
         req.LoginGateToken = NetManager.Instance.m_loginGateToken;
-        NetManager.Instance.SendToLoginGate(req);
+        NetManager.Instance.Send(req);
     }
     private void _HandleGetAllWorldInfosResponse(Connection sender, GetAllWorldInfosResponse message)
     {
-        var panel = UIManager.Instance.GetPanelByName("SelectWorldPanel");
+        var panel = UIManager.Instance.GetOpeningPanelByName("SelectWorldPanel");
         if (panel == null) return;
         UnityMainThreadDispatcher.Instance().Enqueue(() => {
             (panel as SelectWorldPanel).HandleGetAllWorldInfosResponse(message);
         });
     }
-
 
 
 

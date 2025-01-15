@@ -12,17 +12,14 @@ namespace GameClient {
     /// 服务器信息类
     /// </summary>
     [Serializable]
-    public class ServerInfo
+    public class TempServerInfo
     {
         public string name;
         public string host;
         public int port;
         public int state;
     }
-    public class RootObject
-    {
-        public ServerInfo[] ServerList;
-    }
+
 
     /// <summary>
     /// 主要记录一下全局唯一的数据
@@ -30,7 +27,6 @@ namespace GameClient {
     public class GameApp
     {
         //当前的服务器信息
-        public static string SessionId;
         public static WorldInfoNode curWorldInfoNode;
 
         //当前所在场景id
@@ -50,13 +46,12 @@ namespace GameClient {
         public static Skill CurrSkill;
 
         //战斗面板
-        public static CombatPanelScript _CombatPanelScript => (CombatPanelScript)UIManager.Instance.GetPanelByName("CombatPanel");
+        public static CombatPanelScript _CombatPanelScript => (CombatPanelScript)UIManager.Instance.GetOpeningPanelByName("CombatPanel");
 
         //清空当前存储的数据
         public static void ClearGameAppData()
         {
             SpaceId = -1;
-            SessionId = null;
             entityId = -1;
             character = null;
             target = null;
@@ -71,7 +66,7 @@ namespace GameClient {
         {
             ReviveRequest req = new ReviveRequest();
             req.EntityId = entityId;
-            NetManager.Instance.SendToLoginGate(req);
+            NetManager.Instance.Send(req);
         }
     }
 }

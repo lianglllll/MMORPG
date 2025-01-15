@@ -82,7 +82,7 @@ public class ChatService : SingletonNonMono<ChatService>
         }
         msg.Content = content;
         req.Message = msg;
-        NetManager.Instance.SendToLoginGate(req);
+        NetManager.Instance.Send(req);
 
         //测试用
         if(content == "close")

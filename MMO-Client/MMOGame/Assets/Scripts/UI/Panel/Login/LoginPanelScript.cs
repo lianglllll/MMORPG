@@ -86,7 +86,7 @@ public class LoginPanelScript : BasePanel
     private void OnLoginBtn()
     {
         //与服务器没有建立连接时
-        if (!NetManager.Instance.m_loginGateisConnected)
+        if (NetManager.Instance.curNetClient == null)
         {
             UIManager.Instance.MessagePanel.ShowTopMsg("正在帮您连接服务器...");
             goto End;
@@ -119,7 +119,7 @@ public class LoginPanelScript : BasePanel
         if (msg.ResultCode == 0)
         {
             //保存SessionId
-            GameApp.SessionId = msg.SessionId;
+            NetManager.Instance.sessionId = msg.SessionId;
             if (recordUsernameAndPassword.isOn)
             {
                 //记录用户名和密码

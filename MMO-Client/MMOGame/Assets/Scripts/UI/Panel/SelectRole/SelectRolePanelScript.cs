@@ -1,4 +1,4 @@
-using HS.Protobuf.Login;
+using HS.Protobuf.Game;
 using HS.Protobuf.SceneEntity;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,7 +19,6 @@ public class SelectRolePanelScript : BasePanel
     private Text vocation;
     private Text level;
 
-
     protected override void Awake()
     {
         roleListItemMountPoint = transform.Find("RoleList");
@@ -39,7 +38,7 @@ public class SelectRolePanelScript : BasePanel
         //拉取角色列表
         UserService.Instance.GetCharacterListRequest();
     }
-    public void RefreshRoleListUI(CharacterListResponse msg)
+    public void RefreshRoleListUI(GetCharacterListResponse msg)
     {
         //1.存储全部角色信息
         characterInfoList.Clear();

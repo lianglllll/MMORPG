@@ -11,15 +11,14 @@ using Common.Summer.Security;
 //主要功能是从当一个client去连接其他服务
 public class NetClient
 {
+    public delegate void TcpClientConnectedCallback(NetClient tcpClient);
+    public delegate void TcpClientConnectedFailedCallback(NetClient tcpClient, bool isEnd);
+    public delegate void TcpClientDisconnectedCallback(NetClient tcpClient);
+
     private Socket m_clientSocket;
     private SocketAsyncEventArgs m_connectArgs;
     private Connection m_connection;
     public EncryptionManager EncryptionManager => m_connection.m_encryptionManager;
-
-
-    public delegate void TcpClientConnectedCallback(NetClient tcpClient);
-    public delegate void TcpClientConnectedFailedCallback(NetClient tcpClient, bool isEnd);
-    public delegate void TcpClientDisconnectedCallback(NetClient tcpClient);
 
     private event TcpClientConnectedCallback m_connected;
     private event TcpClientConnectedFailedCallback m_connectFailed;
@@ -28,6 +27,10 @@ public class NetClient
     private int m_curReConnectionCount;
     private int m_maxReConnectionCount = 10;
     private float m_reConnectionInterval = 2f;
+
+    public bool IsConnected => m_connected != null;
+    public bool IsConnecting { get; set; }
+    public bool IsHeartBeat { get; set; }
 
     public void Init(string ip, int port, int maxReconnectionCount,
         TcpClientConnectedCallback connected, TcpClientConnectedFailedCallback connectFailed,
@@ -45,6 +48,9 @@ public class NetClient
         m_connectFailed = connectFailed;
         m_disconnected = disconnected;
 
+        IsConnecting = true;
+        IsHeartBeat = false;
+
         _ConnectToServer();
     }
     public void UnInit()
@@ -54,13 +60,6 @@ public class NetClient
         m_connected = null;
         m_connectFailed = null;
         m_disconnected = null;
-    }
-    public Connection CloseConnection()
-    {
-        var conn = m_connection;
-        m_connection = null;
-        conn.CloseConnection();
-        return conn;
     }
     private void _ConnectToServer()
     {
@@ -85,6 +84,7 @@ public class NetClient
             Socket clientSocket = e.UserToken as Socket;
             m_connection = new Connection();
             m_connection.Init(clientSocket, _OnDisconnected);
+            IsConnecting = false;
             m_connected?.Invoke(this);
         }
         else
@@ -106,6 +106,13 @@ public class NetClient
     {
         m_connection = null;
         m_disconnected?.Invoke(this);
+    }
+    public Connection CloseConnection()
+    {
+        var conn = m_connection;
+        m_connection = null;
+        conn.CloseConnection();
+        return conn;
     }
     public bool Send(IMessage message)
     {

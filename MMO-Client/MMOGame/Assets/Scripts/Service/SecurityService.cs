@@ -29,29 +29,26 @@ public class SecurityService : SingletonNonMono<SecurityService>
     public bool SendExchangePublicKeyRequest()
     {
         ExchangePublicKeyRequest req = new();
-        req.ClientPublicKey = NetManager.Instance.m_loginGateClient.EncryptionManager.GetLocalRsaPublicKey(); 
-        NetManager.Instance.SendToLoginGate(req);
+        req.ClientPublicKey = NetManager.Instance.curNetClient.EncryptionManager.GetLocalRsaPublicKey(); 
+        NetManager.Instance.Send(req);
         return true;
     }
-
     private void _HandleExchangePublicKeyResponse(Connection sender, ExchangePublicKeyResponse message)
     {
-        NetManager.Instance.m_loginGateClient.EncryptionManager.SetRemoteRsaPublicKey(message.ServerPublilcKey);
+        NetManager.Instance.curNetClient.EncryptionManager.SetRemoteRsaPublicKey(message.ServerPublilcKey);
         SendExchangeCommunicationSecretKeyRequest();
     }
-
     public bool SendExchangeCommunicationSecretKeyRequest()
     {
-        var kv = NetManager.Instance.m_loginGateClient.EncryptionManager.GenerateAesKeyAndIv();
-        NetManager.Instance.m_loginGateClient.EncryptionManager.SetAesKeyAndIv(kv.key, kv.iv);
+        var kv = NetManager.Instance.curNetClient.EncryptionManager.GenerateAesKeyAndIv();
+        NetManager.Instance.curNetClient.EncryptionManager.SetAesKeyAndIv(kv.key, kv.iv);
         ExchangeCommunicationSecretKeyRequest req = new();
         // 用对方的rsa公钥加密两个key
-        req.Key1 = NetManager.Instance.m_loginGateClient.EncryptionManager.RsaEncrypt(kv.key);
-        req.Key2 = NetManager.Instance.m_loginGateClient.EncryptionManager.RsaEncrypt(kv.iv);
-        NetManager.Instance.SendToLoginGate(req);
+        req.Key1 = NetManager.Instance.curNetClient.EncryptionManager.RsaEncrypt(kv.key);
+        req.Key2 = NetManager.Instance.curNetClient.EncryptionManager.RsaEncrypt(kv.iv);
+        NetManager.Instance.Send(req);
         return true;
     }
-
     private void _HandleExchangeCommunicationSecretKeyResponse(Connection sender, ExchangeCommunicationSecretKeyResponse message)
     {
         if(message.ResultCode == 0)

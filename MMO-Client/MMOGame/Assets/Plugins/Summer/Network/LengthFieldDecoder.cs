@@ -118,22 +118,19 @@ namespace Common.Summer.Net
             catch (ObjectDisposedException e)
             {
                 // Socket 已经被释放
-                Log.Information("[LengthFieldDecoder:ObjectDisposedException]");
-                Log.Information(e.ToString());
+                Log.Information($"[LengthFieldDecoder:ObjectDisposedException]\n {e.ToString()}");
                 _PassiveDisconnection();
             }
             catch (SocketException e)
             {
                 //打印一下异常，并且断开与客户端的连接
-                Log.Information("[[LengthFieldDecoder:SocketException]");
-                Log.Information(e.ToString());
+                Log.Information($"[LengthFieldDecoder:SocketException]\n {e.ToString()}");
                 _PassiveDisconnection();
             }
             catch (Exception e)
             {
                 //打印一下异常，并且断开与客户端的连接
-                Log.Information("[LengthFieldDecoder:Exception]");
-                Log.Information(e.ToString());
+                Log.Information($"[LengthFieldDecoder:Exception]\n {e.ToString()}");
                 _PassiveDisconnection();
             }
         }

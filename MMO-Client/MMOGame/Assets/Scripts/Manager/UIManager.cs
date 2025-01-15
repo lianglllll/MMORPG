@@ -160,7 +160,7 @@ public class UIManager
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public BasePanel GetPanelByName(string name)
+    public BasePanel GetOpeningPanelByName(string name)
     {
         if (panelScriptDict.TryGetValue(name, out BasePanel panel))
         {

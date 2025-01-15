@@ -62,10 +62,14 @@ public class SelectWorldPanel : BasePanel
 
         //加载上次的服务器信息
         string myServerInfo = PlayerPrefs.GetString("myWorldInfoNode");
-        if (!string.IsNullOrEmpty(myServerInfo))
+
+        //加载上次缓存的用户名和密码
+        string myLastSelectWorldId = PlayerPrefs.GetString("myLastSelectWorldId");
+        string myLastSelectWorldName = PlayerPrefs.GetString("myLastSelectWorldName");
+        if (!string.IsNullOrEmpty(myLastSelectWorldId))
         {
-            GameApp.curWorldInfoNode = JsonUtility.FromJson<HS.Protobuf.Login.WorldInfoNode>(myServerInfo);
-            currentServerName.text = GameApp.curWorldInfoNode.WorldName;
+            curSelectWorldId = int.Parse(myLastSelectWorldId);
+            currentServerName.text = myLastSelectWorldName;
         }
         else
         {
@@ -95,7 +99,11 @@ public class SelectWorldPanel : BasePanel
     public void OnStartBtn()
     {
         if (!isCanStart) return;
-        if (isStart) return;
+        if (isStart)
+        {
+            UIManager.Instance.ShowTopMessage("已开始");
+            return;
+        }
         isStart = true;
         if (curSelectWorldId == -1)
         {
@@ -117,22 +125,6 @@ public class SelectWorldPanel : BasePanel
         GameApp.curWorldInfoNode = infoNode;
         OnExitSelectWorldsBoxBtn();
     }
-
-    public void HandleStartResponse(GetGameGateByWorldIdResponse message)
-    {
-        if(message.ResultMsg != null)
-        {
-            UIManager.Instance.MessagePanel.ShowTopMsg(message.ResultMsg);
-        }
-        if (message.ResultCode == 0) {
-            // 切换面板
-            UIManager.Instance.ExchangePanelWithFade("SelectWorldPanel", "SelectRolePanel");
-        }
-        else
-        {
-            isStart = false;
-        }
-    }
     public void HandleGetAllWorldInfosResponse(GetAllWorldInfosResponse message)
     {
         var sortedNodes = message.WorldInfoNodes.OrderBy(node => node.WorldId);
@@ -148,4 +140,27 @@ public class SelectWorldPanel : BasePanel
         }
         isCanStart = true;
     }
+    public void HandleStartResponse(int reslutCode, string msg)
+    {
+        if (reslutCode == 0)
+        {
+            UIManager.Instance.MessagePanel.ShowTopMsg("giaogiao");
+            // 记录进入世界成功时的id和name
+            PlayerPrefs.SetString("myLastSelectWorldId",curSelectWorldId.ToString());
+            PlayerPrefs.SetString("myLastSelectWorldName", currentServerName.text);
+            PlayerPrefs.Save();
+
+            // 切换面板
+            UIManager.Instance.ExchangePanelWithFade("SelectWorldPanel", "SelectRolePanel");
+        }
+        else
+        {
+            isStart = false;
+            if (msg != null)
+            {
+                UIManager.Instance.MessagePanel.ShowTopMsg(msg);
+            }
+        }
+    }
+
 }

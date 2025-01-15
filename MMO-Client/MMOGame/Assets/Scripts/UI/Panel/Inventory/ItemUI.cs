@@ -268,7 +268,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private void ItemDiscard(int slotIndex, int count)
     {
         //弹出提示框，询问扔多少个
-        (UIManager.Instance.GetPanelByName("KnapsackPanel") as KnapsackPanel).numberInputBox.Show(transform.position,item.Define.Name, item.Amount,
+        (UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") as KnapsackPanel).numberInputBox.Show(transform.position,item.Define.Name, item.Amount,
             (targetAmount) => {
                 ItemDataManager.Instance.ItemDiscard(item.Position, targetAmount, InventoryType.Knapsack);
             });

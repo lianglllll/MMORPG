@@ -71,7 +71,7 @@ public class CombatPanelScript : BasePanel
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if(UIManager.Instance.GetPanelByName("KnapsackPanel") == null)
+            if(UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") == null)
             {
                 OnKnaspackBtn();
             }
