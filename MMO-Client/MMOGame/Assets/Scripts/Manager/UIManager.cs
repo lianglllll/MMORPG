@@ -228,6 +228,21 @@ public class UIManager
         yield return ScenePoster.Instance.FadeOut();
     }
 
+    public void ClosePanelWithFade(string curPanel) {
+        UnityMainThreadDispatcher.Instance().StartCoroutine(_ClosePanelWithFade(curPanel));
+    }
+    private IEnumerator _ClosePanelWithFade(string curPanel)
+    {
+        yield return ScenePoster.Instance.FadeIn();
+        UIManager.Instance.ClosePanel(curPanel);
+        yield return null;
+        yield return ScenePoster.Instance.FadeOut();
+    }
+
+
+
+
+
 
 }
 

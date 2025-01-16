@@ -4,10 +4,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 using HS.Protobuf.SceneEntity;
+using HS.Protobuf.Game;
 
 public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
-    private NetActor characterInfo;                         //角色信息的网络对象
+    private SimpleCharacterInfoNode characterInfo;                         //角色信息的网络对象
     private SelectRolePanelScript selectRolePanelScript;
     private UnitDefine define;
 
@@ -27,14 +28,14 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
     private float minAlpha = 0.1f;      // 最小透明度
     private float maxAlpha = 1f;        // 最大透明度
 
-    public int ChrId
+    public string ChrId
     {
         get
         {
-            return characterInfo.Id;
+            return characterInfo.CId;
         }
     }
-    public string Name => characterInfo.Name;
+    public string Name => characterInfo.ChrName;
     public string Vocation => define.Name;
     public int Level => characterInfo.Level;
 
@@ -68,13 +69,13 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
         click.alpha = 0f;
         IsSelected = false;
     }
-    public void Init(SelectRolePanelScript selectRole,NetActor nCharacter)
+    public void Init(SelectRolePanelScript selectRole,SimpleCharacterInfoNode nCharacter)
     {
         this.selectRolePanelScript = selectRole;
         this.characterInfo = nCharacter;
 
         //通过jobid可以在unitdefine中找到响应的图片资源，然后进行加载
-        int tid = nCharacter.Tid;
+        int tid = nCharacter.ProfessionId;
         define = DataManager.Instance.unitDefineDict.GetValueOrDefault(tid, null);
         if(define == null)
         {
@@ -87,7 +88,7 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
         Bg.sprite = sprite;
 
         //设置item的info显示
-        nameText.text = characterInfo.Name;
+        nameText.text = characterInfo.ChrName;
         levelText.text = "Lv. " + characterInfo.Level;
         jobText.text = define.Name;
     }

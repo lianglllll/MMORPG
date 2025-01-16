@@ -13,7 +13,7 @@ public class SelectRolePanelScript : BasePanel
     private Transform roleListItemMountPoint;                                           //item挂载点
     private RoleListItemScript curSelectedItem;                                         //rolelist中选中的item
     private List<RoleListItemScript> roleListItemList = new List<RoleListItemScript>(); //rolelistItem的脚本
-    private List<NetActor> characterInfoList = new List<NetActor>();                    //从网络中接收到的Ncharacter列表(缓冲)
+    private List<SimpleCharacterInfoNode> characterInfoList = new();                    //从网络中接收到的chr列表(缓冲)
 
     private Text cname;
     private Text vocation;
@@ -36,13 +36,13 @@ public class SelectRolePanelScript : BasePanel
         deleteBtn.onClick.AddListener(OnDeleteRoleBtn);
 
         //拉取角色列表
-        UserService.Instance.GetCharacterListRequest();
+        EntryGameWorldService.Instance.SendGetCharacterListRequest();
     }
     public void RefreshRoleListUI(GetCharacterListResponse msg)
     {
         //1.存储全部角色信息
         characterInfoList.Clear();
-        foreach (NetActor chr in msg.CharacterList)
+        foreach (var chr in msg.CharacterNodes)
         {
             characterInfoList.Add(chr);
         }
@@ -125,7 +125,7 @@ public class SelectRolePanelScript : BasePanel
 
         //获取当前roleItemId对应的role信息，将角色id发送到服务端进行处理
         //发送网络请求
-        UserService.Instance.EnterGameRequest(curSelectedItem.ChrId);
+        EntryGameWorldService.Instance.SendEnterGameRequest(curSelectedItem.ChrId);
 
         StartCoroutine(_OnstartBtn());
 
@@ -151,7 +151,7 @@ public class SelectRolePanelScript : BasePanel
         //todo 需要进行弹窗，确认删除
 
         //发送请求
-        UserService.Instance.CharacterDeleteRequest(curSelectedItem.ChrId);
+        EntryGameWorldService.Instance.SendDeleteCharacterRequest(curSelectedItem.ChrId);
 
     }
 

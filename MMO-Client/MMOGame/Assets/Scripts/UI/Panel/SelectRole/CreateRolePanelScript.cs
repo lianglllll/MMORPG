@@ -11,9 +11,7 @@ public class CreateRolePanelScript : BasePanel
     private Button returnBtn;
 
     private Transform ItemMountPoint;
-
     private VocationItem curItem;
-
 
     protected override void Awake()
     {
@@ -23,14 +21,12 @@ public class CreateRolePanelScript : BasePanel
         returnBtn = transform.Find("Canvas/Below/ReturnBtn").GetComponent<Button>();
         ItemMountPoint = transform.Find("Canvas/Left/ItemMountPoint");
     }
-
     protected override void Start()
     {
         createBtn.onClick.AddListener(OnCreateBtn);
         returnBtn.onClick.AddListener(OnReturnBtn);
         Init();
     }
-
     public void Init()
     {
         GameObject panelPrefab = null;
@@ -63,24 +59,11 @@ public class CreateRolePanelScript : BasePanel
         first.OnBtn();
     }
 
-
-    /// <summary>
-    /// 返回按钮回调
-    /// </summary>
     public void OnReturnBtn()
     {
-        StartCoroutine(_OnReturnBtn());
-    }
-    private IEnumerator _OnReturnBtn()
-    {
-        yield return ScenePoster.Instance.FadeIn();
-        UIManager.Instance.ClosePanel("CreateRolePanel");
-        ScenePoster.Instance.StartCoroutine( ScenePoster.Instance.FadeOut());
+        UIManager.Instance.ClosePanelWithFade("CreateRolePanel");
     }
 
-    /// <summary>
-    /// 创建角色按钮回调
-    /// </summary>
     public void OnCreateBtn()
     {
         //安全校验，姓名输入是否合理，有无选择角色
@@ -91,10 +74,9 @@ public class CreateRolePanelScript : BasePanel
         }
 
         //发送网络请求
-        UserService.Instance.CharacterCreateRequest(usernameFileid.text, curItem.JobId);
+        EntryGameWorldService.Instance.SendCreateCharacterRequest(usernameFileid.text, curItem.JobId);
 
     }
-
     public void OnSelectBtn(VocationItem vocationItem)
     {
         if(curItem != null)
@@ -107,5 +89,4 @@ public class CreateRolePanelScript : BasePanel
 
         SelectedJobInfo.text = curItem.Tname;
     }
-
 }
