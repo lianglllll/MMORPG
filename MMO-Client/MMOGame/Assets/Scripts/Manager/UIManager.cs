@@ -239,10 +239,17 @@ public class UIManager
         yield return ScenePoster.Instance.FadeOut();
     }
 
-
-
-
-
+    public void OpenPanelWithFade(string targetPanel)
+    {
+        UnityMainThreadDispatcher.Instance().StartCoroutine(_OpenPanelWithFade(targetPanel));
+    }
+    private IEnumerator _OpenPanelWithFade(string targetPanel)
+    {
+        yield return ScenePoster.Instance.FadeIn();
+        UIManager.Instance.OpenPanel(targetPanel);
+        yield return null;
+        yield return ScenePoster.Instance.FadeOut();
+    }
 
 }
 

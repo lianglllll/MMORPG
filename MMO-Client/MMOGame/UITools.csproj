@@ -57,12 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Tool\Video\GlobalVideoPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\DragHolder\DragHolder.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\Tips\ToolTip.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\IRecyclingListViewItem.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\RecyclingList\RecyclingListView.cs" />
     <Compile Include="Assets\Scripts\UI\Tool\ItemMenu\ItemMenuOption.cs" />
-    <Compile Include="Assets\Scripts\UI\Tool\ScenePoster.cs" />
+    <Compile Include="Assets\Scripts\UI\Tool\ScenePoster\ScenePoster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\UI\Tool\UITools.asmdef" />

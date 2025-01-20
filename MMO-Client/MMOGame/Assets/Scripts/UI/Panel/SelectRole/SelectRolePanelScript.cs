@@ -15,6 +15,7 @@ public class SelectRolePanelScript : BasePanel
     private List<RoleListItemScript> roleListItemList = new List<RoleListItemScript>(); //rolelistItem的脚本
     private List<SimpleCharacterInfoNode> characterInfoList = new();                    //从网络中接收到的chr列表(缓冲)
 
+    // role info
     private Text cname;
     private Text vocation;
     private Text level;
@@ -32,7 +33,7 @@ public class SelectRolePanelScript : BasePanel
     protected override void Start()
     {
         createBtn.onClick.AddListener(OnCreateBtn);
-        startBtn.onClick.AddListener(OnstartBtn);
+        startBtn.onClick.AddListener(OnStartBtn);
         deleteBtn.onClick.AddListener(OnDeleteRoleBtn);
 
         //拉取角色列表
@@ -52,6 +53,7 @@ public class SelectRolePanelScript : BasePanel
         {
             foreach (RoleListItemScript item in roleListItemList)
             {
+                item.Stop();
                 Destroy(item.gameObject);
             }
         }
@@ -84,8 +86,10 @@ public class SelectRolePanelScript : BasePanel
         {
             StartCoroutine(SelectDefaultItem());
         }
-
-
+        else
+        {
+            ClenrRoleInfo();
+        }
     }
     private IEnumerator SelectDefaultItem()
     {
@@ -93,54 +97,11 @@ public class SelectRolePanelScript : BasePanel
         roleListItemList[0].onBtn();
     }
 
-
-    /// <summary>
-    /// 点击创建角色按钮回调
-    /// </summary>
     public void OnCreateBtn()
     {
-        StartCoroutine(_OnCreateBtn());
-    }
-    private IEnumerator _OnCreateBtn()
-    {
-        yield return ScenePoster.Instance.FadeIn();
-
         //切换创建角色面板
-        UIManager.Instance.OpenPanel("CreateRolePanel");
-
-        yield return ScenePoster.Instance.FadeOut();
+        UIManager.Instance.OpenPanelWithFade("CreateRolePanel");
     }
-
-    /// <summary>
-    /// 点击开始按钮回调
-    /// </summary>
-    public void OnstartBtn()
-    {
-        if(curSelectedItem == null)
-        {
-            return;
-        }
-
-        curSelectedItem.Stop();
-
-        //获取当前roleItemId对应的role信息，将角色id发送到服务端进行处理
-        //发送网络请求
-        EntryGameWorldService.Instance.SendEnterGameRequest(curSelectedItem.ChrId);
-
-        StartCoroutine(_OnstartBtn());
-
-    }
-    private IEnumerator _OnstartBtn()
-    {
-        //关闭当前ui
-        yield return ScenePoster.Instance.FadeIn();
-        UIManager.Instance.ClosePanel("SelectRolePanel");
-    }
-
-
-    /// <summary>
-    /// 点击删除按钮回调
-    /// </summary>
     public void OnDeleteRoleBtn()
     {
         if(curSelectedItem == null)
@@ -148,18 +109,14 @@ public class SelectRolePanelScript : BasePanel
             return;
         }
 
-        //todo 需要进行弹窗，确认删除
-
-        //发送请求
-        EntryGameWorldService.Instance.SendDeleteCharacterRequest(curSelectedItem.ChrId);
+        //弹框提示
+        UIManager.Instance.MessagePanel.ShowSelectionPanelWithInput("删除角色", "是否删除角色？若是，请输入登录密码。", (password) =>
+        {
+            //发送请求
+            EntryGameWorldService.Instance.SendDeleteCharacterRequest(curSelectedItem.ChrId, password);
+        });
 
     }
-
-
-    /// <summary>
-    /// 选中roleitem回调
-    /// </summary>
-    /// <param name="roleListItemScript"></param>
     public void OnSelectedRoleItem(RoleListItemScript roleListItemScript)
     {
         if(curSelectedItem != null)
@@ -175,10 +132,29 @@ public class SelectRolePanelScript : BasePanel
         //选中效果
         curSelectedItem = roleListItemScript;
         curSelectedItem.SelectedEffect();
-
+    }
+    private void ClenrRoleInfo()
+    {
+        cname.text = "";
+        vocation.text = "";
+        level.text = "";
     }
 
+    /// <summary>
+    /// 点击开始按钮回调
+    /// </summary>
+    public void OnStartBtn()
+    {
+        if (curSelectedItem == null)
+        {
+            return;
+        }
 
+        curSelectedItem.Stop();
 
+        //获取当前roleItemId对应的role信息，将角色id发送到服务端进行处理
+        //发送网络请求
+        EntryGameWorldService.Instance.SendEnterGameRequest(curSelectedItem.ChrId);
 
+    }
 }

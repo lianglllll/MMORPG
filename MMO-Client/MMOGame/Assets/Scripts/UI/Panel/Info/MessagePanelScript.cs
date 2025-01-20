@@ -25,10 +25,9 @@ public class MessagePanelScript : MonoBehaviour
     private float bottonMsgBoxCountdown;
 
     //确认面板
-    private SelectionPanel selectionPanel;
     private bool selectionPanelActive;
+    private SelectionPanel selectionPanel;
     private CanvasGroup selectionPanelCanvasGroup;
-
 
     //loading面板
     private LoadingBox loadingBox;
@@ -56,7 +55,6 @@ public class MessagePanelScript : MonoBehaviour
         itemIOInfoBox = transform.Find("ItemIOInfoBox").GetComponent<ItemIOInfoBox>();
         deliverPanel = transform.Find("DeliverPanel").GetComponent<DeliverPanel>();
     }
-
     private void Start()
     {
         //因为消息提示默认是不显示的
@@ -71,12 +69,13 @@ public class MessagePanelScript : MonoBehaviour
         bottonMsgBox.SetActive(false);
 
         //初始化确认面板
-        selectionPanel.gameObject.SetActive(false);
         selectionPanelActive = false;
         selectionPanel.Init(() =>
         {
             selectionPanelActive = false;
+            selectionPanel.gameObject.SetActive(false);
         });
+        selectionPanel.gameObject.SetActive(false);
 
         //初始化loading面板
         loadingBox.gameObject.SetActive(false);
@@ -90,20 +89,6 @@ public class MessagePanelScript : MonoBehaviour
         //初始化网络信息
         NetworkInfoBox.gameObject.SetActive(true);
         ShowNetworkDisconnect();
-    }
-
-    private void Update()
-    {
-
-        if (bottonMsgBoxCountdown > 0)
-        {
-            bottonMsgBoxCountdown -= Time.deltaTime;
-            if (bottonMsgBoxCountdown <= 0f)
-            {
-                bottonMsgBox.SetActive(false);
-                bottonMsgBoxCountdown = 0f;
-            }
-        }
     }
 
     /// <summary>
@@ -161,7 +146,7 @@ public class MessagePanelScript : MonoBehaviour
     }
 
     /// <summary>
-    /// 显示确认面板
+    /// 确认面板
     /// </summary>
     /// <param name="spaceid"></param>
     /// <param name="desc"></param>
@@ -175,9 +160,15 @@ public class MessagePanelScript : MonoBehaviour
         selectionPanelCanvasGroup.DOFade(1, 1f);
         selectionPanel.OpenPanel(simpleTipsText, detailTipsText, comfirmAction);
     }
-    /// <summary>
-    /// 主动关闭确认面板
-    /// </summary>
+    public void ShowSelectionPanelWithInput(string simpleTipsText, string detailTipsText, Action<string> comfirmAction)
+    {
+        if (selectionPanelActive == true) return;
+        selectionPanelActive = true;
+        selectionPanel.gameObject.SetActive(true);
+        selectionPanelCanvasGroup.alpha = 0;
+        selectionPanelCanvasGroup.DOFade(1, 1f);
+        selectionPanel.OpenPanelWithInput(simpleTipsText, detailTipsText, comfirmAction);
+    }
     public void CloseSelectionPanel()
     {
         if (selectionPanelActive == false) return;
@@ -210,10 +201,6 @@ public class MessagePanelScript : MonoBehaviour
     {
         itemIOInfoBox.ShowMsg(msg);
     }
-
-
-
-
 
     /// <summary>
     /// 展示传送面板

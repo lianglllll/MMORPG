@@ -1211,7 +1211,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 4
   m_TargetDisplay: 0
@@ -2796,10 +2796,6 @@ PrefabInstance:
     - target: {fileID: 3646463916333402721, guid: 814127032827b3d4ca197fcfc6f40b4f, type: 3}
       propertyPath: m_Name
       value: SelectionPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3646463916333402721, guid: 814127032827b3d4ca197fcfc6f40b4f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3646463916333402726, guid: 814127032827b3d4ca197fcfc6f40b4f, type: 3}
       propertyPath: m_Pivot.x

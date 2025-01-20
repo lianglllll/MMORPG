@@ -58,12 +58,10 @@ public class CreateRolePanelScript : BasePanel
         yield return null;
         first.OnBtn();
     }
-
     public void OnReturnBtn()
     {
         UIManager.Instance.ClosePanelWithFade("CreateRolePanel");
     }
-
     public void OnCreateBtn()
     {
         //安全校验，姓名输入是否合理，有无选择角色

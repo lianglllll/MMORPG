@@ -92,8 +92,17 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
         levelText.text = "Lv. " + characterInfo.Level;
         jobText.text = define.Name;
     }
-
-
+    public void Stop()
+    {
+        if (breathingTween != null && breathingTween.IsActive())
+        {
+            breathingTween.Kill(); // 中止动画
+            breathingTween = null;
+        }
+        DOTween.Kill(hover);
+        DOTween.Kill(select);
+        DOTween.Kill(click);
+    }
 
     public void onBtn()
     {
@@ -101,7 +110,6 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
         if (IsSelected) return;
         selectRolePanelScript.OnSelectedRoleItem(this);
     }
-
 
     //当前item选中的效果
     public void SelectedEffect()
@@ -149,24 +157,9 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
         });
     }
 
-    public void Stop()
-    {
-        if (breathingTween != null && breathingTween.IsActive())
-        {
-            breathingTween.Kill(); // 中止动画
-            breathingTween = null;
-        }
-        DOTween.Kill(hover);  
-        DOTween.Kill(select);  
-        DOTween.Kill(click);  
-
-    }
-
-
 
     private bool isFadingIn = false;
     private bool isFadingOut = false;
-
     //淡入：透明=>不透明
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -190,7 +183,6 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
         });
 
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         // 如果正在淡出或者当前已经完全透明，不触发淡出动画

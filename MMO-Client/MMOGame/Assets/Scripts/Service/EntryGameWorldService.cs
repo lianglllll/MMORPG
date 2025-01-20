@@ -78,8 +78,8 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
     public void SendCreateCharacterRequest(string roleName, int jobId)
     {
         CreateCharacterRequest req = new();
-        req.Name = roleName;
-        req.VocationId = jobId;
+        req.CName = roleName;
+        req.ProfessionId = jobId;
         NetManager.Instance.Send(req);
     }
     private void _HandleCreateCharacterResponse(Connection sender, CreateCharacterResponse msg)
@@ -104,11 +104,19 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
         });
     }
 
-    public void SendDeleteCharacterRequest(string chrId)
+    public void SendDeleteCharacterRequest(string chrId, string password)
     {
+        if (string.IsNullOrEmpty(password)) {
+            UIManager.Instance.ShowTopMessage("删除失败，密码不能为空");
+            goto End;
+        }
         DeleteCharacterRequest req = new();
-        //req.CharacterId = chrId;
-        //NetManager.Instance.Send(req);
+        req.CId = chrId;
+
+        req.Password = NetManager.Instance.curNetClient.EncryptionManager.AesEncrypt(password);
+        NetManager.Instance.Send(req);
+    End:
+        return;
     }
     private void _HandleDeleteCharacterResponse(Connection sender, DeleteCharacterResponse msg)
     {
