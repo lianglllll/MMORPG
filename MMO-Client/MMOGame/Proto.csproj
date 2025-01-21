@@ -69,6 +69,9 @@
     <Compile Include="Assets\Scripts\Proto\Game\GameGateMgr.cs" />
     <Compile Include="Assets\Scripts\Proto\Combat\Skill.cs" />
     <Compile Include="Assets\Scripts\Proto\Login\LoginGate.cs" />
+    <Compile Include="Assets\Scripts\Proto\DBProxy\DBWorld.cs" />
+    <Compile Include="Assets\Scripts\Proto\DBProxy\DBUser.cs" />
+    <Compile Include="Assets\Scripts\Proto\DBProxy\DBCharacter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Proto\Proto.asmdef" />

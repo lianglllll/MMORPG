@@ -5,12 +5,10 @@
 
 :: josn文件要复制到的目的地
 @SET DEST_FOLDER_1=..\..\MMO-Client\MMOGame\Assets\Res\Files\Data
-@SET DEST_FOLDER_2=..\..\MMO-SERVER\GameServer\bin\Release\net6.0\Data
-@SET DEST_FOLDER_3=..\..\MMO-SERVER\GameServer\bin\Debug\net6.0\Data
+@SET DEST_FOLDER_2=..\..\MMO-SERVER\Common\Summer\StaticData\Data
 :: define文件要复制到的目的地
 @SET DEST_FOLDER_4=..\..\MMO-Client\MMOGame\Assets\Scripts\Manager\DataDefine
-@SET DEST_FOLDER_4=..\..\MMO-Client\MMOGame\Assets\Script\Manager\DataDefine
-@SET DEST_FOLDER_5=..\..\MMO-SERVER\GameServer\DataDefine
+@SET DEST_FOLDER_5=..\..\MMO-SERVER\Common\Summer\StaticData\DataDefine
 
 :: execl转json和生成对应的define文件
 @ECHO Converting excel files in folder %EXCEL_FOLDER% ...
@@ -25,7 +23,6 @@ for %%i in (%JSON_FOLDER%\*.json) do (
     @echo   copying %%~nxi 
     @COPY "%%i" "%DEST_FOLDER_1%\%%~nxi"
     @COPY "%%i" "%DEST_FOLDER_2%\%%~nxi"
-    @COPY "%%i" "%DEST_FOLDER_3%\%%~nxi"
 )
 
 :: 复制define文件

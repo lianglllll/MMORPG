@@ -6,7 +6,9 @@ using HS.Protobuf.Game;
 using HS.Protobuf.GameGate;
 using HS.Protobuf.Login;
 using HS.Protobuf.Scene;
+using Serilog;
 using System;
+using System.Diagnostics;
 
 public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
 {
@@ -143,14 +145,14 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
     {
         //安全校验
         if (GameApp.character != null) return;
-
         //发送请求 
         EnterGameRequest request = new();
-        //request.CharacterId = roleId;
-        //NetManager.Instance.Send(request);
+        request.CharacterId = cId;
+        NetManager.Instance.Send(request);
     }
     private void _HandleEnterGameResponse(Connection sender, EnterGameResponse msg)
     {
         //这里处理一些其他事情，比如说ui关闭的清理工作
+        Log.Debug("hhhhh");
     }
 }
