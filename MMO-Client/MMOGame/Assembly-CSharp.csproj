@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
-    <Compile Include="Assets\Scripts\Service\SecurityService.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
     <Compile Include="Assets\Scripts\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Net\Old\GameEntity.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ItemEntity.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
@@ -108,10 +108,12 @@
     <Compile Include="Assets\Scripts\UI\Dialog\DialogPanel.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\SelectRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\controller.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Move.cs" />
     <Compile Include="Assets\Scripts\Player\Model\ModelBase.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Hurt.cs" />
@@ -141,7 +143,6 @@
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Death.cs" />
     <Compile Include="Assets\Scripts\Inventory\Consumable.cs" />
-    <Compile Include="Assets\Scripts\Service\UserService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ChatBoxScript.cs" />
     <Compile Include="Assets\Res\Model\Unit\骷髅\Readme\Scripts\Readme.cs" />
@@ -160,12 +161,12 @@
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
-    <Compile Include="Assets\Scripts\Service\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\Net\NetClient.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\Swapper.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpaceDefine.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SkillDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\LoginPanelScript.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Assets\aExample\Dialog\DialogPlayBackgroundAudioEvent.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Skill.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\MouseOrbitImproved.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
@@ -200,11 +202,11 @@
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\controller.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\MouseOrbitImproved.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\ThirdPersonCamera.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\Swapper.cs" />
+    <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
+    <Compile Include="Assets\Scripts\Handle\UserService.cs" />
+    <Compile Include="Assets\Scripts\Handle\SecurityService.cs" />
+    <Compile Include="Assets\Scripts\Combat\BuffManager.cs" />
+    <Compile Include="Assets\Scripts\Combat\EquipManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />

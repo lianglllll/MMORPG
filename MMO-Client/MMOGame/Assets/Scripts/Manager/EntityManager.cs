@@ -32,7 +32,7 @@ namespace GameClient.Entities
         {
             foreach (var entity in entityDict.Values)
             {
-                entity.OnUpdate(deltatime);
+                entity.Update(deltatime);
             }
         }
 
@@ -78,24 +78,23 @@ namespace GameClient.Entities
         /// 有一个actor进入当前场景
         /// </summary>
         /// <param name="nCharacter"></param>
-        public void OnActorEnterScene(NetActor nActor)
+        public void OnActorEnterScene(NetActorNode nActor)
         {
             //判断是否已经存在？
-                if(entityDict.TryGetValue(nActor.Entity.Id,out var entity))
+            if(entityDict.TryGetValue(nActor.EntityId,out var entity))
             {
                 if(entity is Actor actor)
                 {
-                    actor.info = nActor;
+                    actor.m_netActorNode = nActor;
                     return;
                 }
             }
 
-
             //根据不同类型生成不同的actor：玩家角色、怪物、npc
-            if(nActor.ActorType == ActorType.Character)
+            if(nActor.NetActorType == NetActorType.Character)
             {
                 AddEntity(new Character(nActor));
-            }else if(nActor.ActorType == ActorType.Monster)
+            }else if(nActor.NetActorType == NetActorType.Monster)
             {
                 AddEntity(new Monster(nActor));
             }

@@ -2,6 +2,7 @@ using BaseSystem.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
+using GameClient.Entities;
 using HS.Protobuf.Game;
 using HS.Protobuf.GameGate;
 using HS.Protobuf.Login;
@@ -9,6 +10,7 @@ using HS.Protobuf.Scene;
 using Serilog;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
 {
@@ -152,7 +154,88 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
     }
     private void _HandleEnterGameResponse(Connection sender, EnterGameResponse msg)
     {
-        //这里处理一些其他事情，比如说ui关闭的清理工作
-        Log.Debug("hhhhh");
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            if (GameApp.character == null)
+            {
+                //1.切换场景
+                GameApp.SpaceId = msg.SelfNetActorNode.SceneId;
+                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
+
+                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
+
+                    await Task.Delay(800);
+
+                    //2.加载其他角色和ai
+                    foreach (var item in msg.OtherNetActorNodeList)
+                    {
+                        EntityManager.Instance.OnActorEnterScene(item);
+                    }
+
+                    //3.加载物品
+                    foreach (var item in msg.EItemList)
+                    {
+                        EntityManager.Instance.OnItemEnterScene(item);
+                    }
+
+                    //最后生成自己的角色,记录本机的数据
+                    GameApp.entityId = msg.Character.Entity.Id;
+                    EntityManager.Instance.OnActorEnterScene(msg.Character);
+                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+
+                    //推入combatUI
+                    UIManager.Instance.OpenPanel("CombatPanel");
+                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
+                    UIManager.Instance.ShowTopMessage("" + def.Name);
+
+                });
+            }
+            else if (GameApp.character.m_netActorNode.SpaceId != msg.Character.SpaceId)
+            {
+                //清理旧场景的对象
+                EntityManager.Instance.Clear();
+                GameApp.ClearGameAppData();
+                TP_CameraController.instance.OnStop();
+
+                //切换场景
+                GameApp.SpaceId = msg.Character.SpaceId;
+                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
+                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
+
+                    await Task.Delay(800);
+
+                    //加载其他角色和ai
+                    foreach (var item in msg.CharacterList)
+                    {
+                        EntityManager.Instance.OnActorEnterScene(item);
+                    }
+                    //加载物品
+                    foreach (var item in msg.EItemList)
+                    {
+                        EntityManager.Instance.OnItemEnterScene(item);
+                    }
+
+                    //最后生成自己的角色,记录本机的数据
+                    GameApp.entityId = msg.Character.Entity.Id;
+                    EntityManager.Instance.OnActorEnterScene(msg.Character);
+                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+
+                    //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
+                    UIManager.Instance.ClosePanel("CombatPanel");
+                    UIManager.Instance.OpenPanel("CombatPanel");
+                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
+                    UIManager.Instance.ShowTopMessage("" + def.Name);
+
+                });
+            }
+            else
+            {
+                Debug.LogError("_SpaceEnterResponse:发生甚么事了，给我干哪里来了");
+            }
+
+        });
     }
+
+
+
 }

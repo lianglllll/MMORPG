@@ -28,8 +28,8 @@ namespace GameClient.Combat
         {
 
             owner = actor;
-            var define = actor.define;
-            int level = actor.info.Level;
+            var define = actor.m_define;
+            int level = actor.m_netActorNode.Level;
 
 
             basic = new AttrubuteData();
@@ -65,8 +65,8 @@ namespace GameClient.Combat
         /// </summary>
         public void Reload()
         {
-            var define = owner.define;
-            int level = owner.info.Level;
+            var define = owner.m_define;
+            int level = owner.m_netActorNode.Level;
 
             //等级成长属性
             growth.Reset();

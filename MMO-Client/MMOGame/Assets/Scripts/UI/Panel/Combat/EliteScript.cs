@@ -50,14 +50,14 @@ public class EliteScript : MonoBehaviour
     public void RefreshUI()
     {
         if (actor == null) return;
-        Level.text = actor.info.Level + "";
-        float hp = actor.info.Hp / actor.info.HpMax;
-        float mp = actor.info.Mp / actor.info.MpMax;
+        Level.text = actor.m_netActorNode.Level + "";
+        float hp = actor.m_netActorNode.Hp / actor.m_netActorNode.HpMax;
+        float mp = actor.m_netActorNode.Mp / actor.m_netActorNode.MpMax;
         Healthbar.fillAmount = hp;
         Manabar.fillAmount = mp;
-        Name.text = actor.info.Name;
-        HpText.text = (int)actor.info.Hp + "/" + actor.info.HpMax;
-        MpText.text = (int)actor.info.Mp + "/" + actor.info.MpMax;
+        Name.text = actor.m_netActorNode.Name;
+        HpText.text = (int)actor.m_netActorNode.Hp + "/" + actor.m_netActorNode.HpMax;
+        MpText.text = (int)actor.m_netActorNode.Mp + "/" + actor.m_netActorNode.MpMax;
         
     }
 

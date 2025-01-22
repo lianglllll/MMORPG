@@ -6,21 +6,13 @@ namespace Assets.Script.Entities
 {
     public class Character:Actor
     {
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="nCharacter"></param>
-        public Character(NetActor nCharacter) : base(nCharacter)
+        public Character(NetActorNode nCharacter) : base(nCharacter)
         {
-
         }
 
-        /// <summary>
-        /// 处理死亡逻辑
-        /// </summary>
         public override void OnDeath()
         {
-            if (renderObj == null) return;
+            if (m_renderObj == null) return;
             base.OnDeath();
 
             if (GameApp.character == this)
@@ -30,31 +22,18 @@ namespace Assets.Script.Entities
                 Kaiyun.Event.FireOut("CtlChrDeath");
             }
         }
-
-        /// <summary>
-        /// 经验值更新
-        /// </summary>
-        /// <param name="longValue1"></param>
-        /// <param name="longValue2"></param>
-        public void onExpChanged(long old_value, long new_value)
+        public void OnExpChanged(long old_value, long new_value)
         {
             //更新当前actor的数据
-            this.info.Exp = new_value;
+            this.m_netActorNode.Exp = new_value;
             //事件通知，exp数据发送变化（可能某些ui组件需要这个信息）
             Kaiyun.Event.FireOut("ExpChange");
         }
-
-        /// <summary>
-        /// 金币更新
-        /// </summary>
-        /// <param name="longValue1"></param>
-        /// <param name="longValue2"></param>
-        public void onGoldChanged(long old_value, long new_value)
+        public void OnGoldChanged(long old_value, long new_value)
         {
-            this.info.Gold = new_value;
+            this.m_netActorNode.Gold = new_value;
             Kaiyun.Event.FireOut("GoldChange");
         }
-
     }
 
 }

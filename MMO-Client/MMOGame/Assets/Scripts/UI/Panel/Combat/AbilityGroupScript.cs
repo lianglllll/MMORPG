@@ -28,7 +28,7 @@ public class AbilityGroupScript : MonoBehaviour
     {
         if (GameApp.character == null) return;
         string tipKeys = "QEFZXC";
-        var skillList = GameApp.character.skillManager.GetActiveSkills();
+        var skillList = GameApp.character.m_skillManager.GetActiveSkills();
         for (int i = 0; i < bars.Count; i++)
         {
             var bar = bars[i];

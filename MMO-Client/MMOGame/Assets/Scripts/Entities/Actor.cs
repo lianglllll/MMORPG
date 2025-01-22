@@ -1,3 +1,4 @@
+using GameClient.Combat;
 using GameClient.InventorySystem;
 using GameClient.Manager;
 using Google.Protobuf.Collections;
@@ -14,56 +15,40 @@ namespace GameClient.Entities
 {
     public class Actor:Entity
     {
-        public ActorMode actorMode;
-        public ActorCombatMode actorCombatMode;
-        public ActorState actorState;
-        public NetActor info;                                                   //网络信息
-        public UnitDefine define;                                               //actor默认def
-        public SkillManager skillManager;                                       //技能管理
-        public ConcurrentDictionary<EquipsType, Equipment> equipsDict = new();  //actor持有的装备
-        public ConcurrentDictionary<int, Buff> buffsDict = new();               //actor持有的buff<实例id,buff>
-        public GameObject renderObj;                                            //actor中对应的游戏对象
-        public BaseController baseController;
+        private GameObject      m_renderObj;
+        private UnitDefine      m_define;                                               
+        private NetActorNode    m_netActorNode;                                     
+        public BaseController   m_baseController;
+        public SkillManager     m_skillManager;
+        public BuffManager      m_buffManager;
+        public EquipManager     m_equipManager;
 
-        public bool IsDeath => actorMode == ActorMode.Dead;
-        public int Level => info.Level;
-        public long Exp => info.Exp;
-        public int Speed { get => info.Speed; set => info.Speed = value; }
+        public bool IsDeath => m_netActorNode.NetActorState == NetActorState.Death;
+        public int Level => m_netActorNode.Level;
+        public long Exp => m_netActorNode.Exp;
+        public int Speed { get => m_netActorNode.Speed; set => m_netActorNode.Speed = value; }
 
-        //初始化相关
-        public Actor(NetActor info) :base(info.Entity)
+        public Actor(NetActorNode netAcotrNode) :base(netAcotrNode.EntityId, netAcotrNode.Transform)
         {
-            this.info = info;
-            this.define = DataManager.Instance.unitDefineDict[info.Tid];
-            this.skillManager = new SkillManager(this);
-            this.LoadEquips(info.EquipList);
-            this.LoadBuffs(info.BuffsList);
-        }
-        public override void OnUpdate(float deltatime)
-        {
-            skillManager.OnUpdate(deltatime);
-            BuffUpdate(deltatime);
+            m_netActorNode = netAcotrNode;
+            m_define = DataManager.Instance.unitDefineDict[netAcotrNode.ProfessionId];
+            m_skillManager = new();
+            m_buffManager = new();
+            m_equipManager = new();
+            m_skillManager.Init(this, netAcotrNode.EquippedSkills);
+            m_buffManager.Init(this, netAcotrNode.Buffs);
+            m_equipManager.Init(this, netAcotrNode.WornEquipments);
         }
         public void Init(BaseController baseController)
         {
-            this.baseController = baseController;
+            this.m_baseController = baseController;
         }
-        public void LoadEquips(RepeatedField<ItemInfo> itemInfos)
+        public override void Update(float deltatime)
         {
-            equipsDict.Clear();
-            foreach (var itemInfo in itemInfos)
-            {
-                var item = new Equipment(itemInfo);
-                equipsDict[item.EquipsType] = item;
-            }
+            m_skillManager.Update(deltatime);
+            m_buffManager.Update(deltatime);
         }
-        private void LoadBuffs(RepeatedField<BuffInfo> buffsList)
-        {
-            foreach (var buffInfo in buffsList)
-            {
-                new Buff().Init(buffInfo, this);
-            }
-        }
+
 
         public virtual void OnModeChanged(ActorMode old_value, ActorMode new_value)
         {
@@ -77,10 +62,10 @@ namespace GameClient.Entities
         {
             //受伤，被别人打了，播放一下特效或者ui。不做数值更新
 
-            if (renderObj == null) return;
+            if (m_renderObj == null) return;
             if (IsDeath) return;
             //ui
-            var ownerPos = renderObj.transform.position;
+            var ownerPos = m_renderObj.transform.position;
             if (damage.IsImmune)
             {
                 DynamicTextManager.CreateText(ownerPos, "免疫", DynamicTextManager.missData);
@@ -120,7 +105,7 @@ namespace GameClient.Entities
                     var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
                     if (skillDef != null)
                     {
-                        GameEffectManager.AddEffectTarget(skillDef.HitArt, renderObj, new Vector3(0, 1, 0));
+                        GameEffectManager.AddEffectTarget(skillDef.HitArt, m_renderObj, new Vector3(0, 1, 0));
                     }
                 }
 
@@ -129,10 +114,10 @@ namespace GameClient.Entities
 
 
                 //切换到挨打的动作
-                if(baseController.CurState != ActorState.Move)
+                if(m_baseController.CurState != ActorState.Move)
                 {
-                    baseController.StateMachineParameter.attacker = GameTools.GetActorById(damage.AttackerId);
-                    baseController.ChangeState(ActorState.Hurt);
+                    m_baseController.StateMachineParameter.attacker = GameTools.GetActorById(damage.AttackerId);
+                    m_baseController.ChangeState(ActorState.Hurt);
                 }
 
             }
@@ -140,12 +125,12 @@ namespace GameClient.Entities
         public void OnHpChanged(float oldHp,float newHp)
         {
             //Debug.Log($"current hp = {newHp}");
-            this.info.Hp = newHp;
+            this.m_netActorNode.Hp = newHp;
             LocalOrTargetAcotrPropertyChange();
         }
         public void OnMpChanged(float old_value, float new_value)
         {
-            this.info.Mp = new_value;
+            this.m_netActorNode.Mp = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
         public virtual void OnDeath()
@@ -160,18 +145,18 @@ namespace GameClient.Entities
         public void OnLevelChanged(int old_value, int new_value)
         {
             //更新当前actor的数据
-            this.info.Level = new_value;
+            this.m_netActorNode.Level = new_value;
             //事件通知，level数据发送变化（可能某些ui组件需要这个信息）
             LocalOrTargetAcotrPropertyChange();
         }
         public void OnHpmaxChanged(float old_value, float new_value)
         {
-            this.info.HpMax = new_value;
+            this.m_netActorNode.HpMax = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
         public void OnMpmaxChanged(float old_value, float new_value)
         {
-            this.info.MpMax = new_value;
+            this.m_netActorNode.MpMax = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
         public void OnSpeedChanged(int old_value, int new_value)
@@ -179,58 +164,7 @@ namespace GameClient.Entities
             this.Speed = new_value;
         }
 
-        //buff相关，//todo应该用一个buffmananger来管理
-        public void AddBuff(Buff buff)
-        {
-            buffsDict[buff.ID] = buff;
-            if(GameApp.character == this || GameApp.target == this)
-            {
-                Kaiyun.Event.FireOut("SpecialActorAddBuff", buff);
-            }
-        }
-        public void RemoveBuff(int id)
-        {
-            if(buffsDict.TryRemove(id, out _))
-            {
-                if (GameApp.character == this || GameApp.target == this)
-                {
-                    Kaiyun.Event.FireOut("SpecialActorRemoveBuff", this, id);
-                }
-            }
 
-        }
-        private List<int> removeKey = new();
-        private void BuffUpdate(float deltatime)
-        {
-            if (buffsDict.Count <= 0) return;
-
-            Buff temBuf;
-            removeKey.Clear();
-            foreach (var item in buffsDict)
-            {
-                temBuf = item.Value;
-                temBuf.ResidualDuration -= deltatime;
-                //降级
-                if(temBuf.ResidualDuration <= 0)
-                {
-                    --(temBuf.CurrentLevel);
-                }
-                //删除
-                if (temBuf.CurrentLevel <= 0)
-                {
-                    removeKey.Add(item.Key);
-                    continue;
-                }
-
-            }
-
-            //删除无效的ui
-            foreach (var key in removeKey)
-            {
-                RemoveBuff(key);
-            }
-
-        }
 
         /// <summary>
         /// 本地玩家或者目标玩家的属性发送变化
@@ -243,6 +177,5 @@ namespace GameClient.Entities
                 Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate", this);
             }
         }
-
     }
 }

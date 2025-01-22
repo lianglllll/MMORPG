@@ -36,7 +36,7 @@ public class BuffGroupScript : MonoBehaviour
         }
         buffUIdict.Clear();
 
-        foreach(var buf in actor.buffsDict.Values)
+        foreach(var buf in actor.m_buffsDict.Values)
         {
             AddBuffUI(buf);
         }

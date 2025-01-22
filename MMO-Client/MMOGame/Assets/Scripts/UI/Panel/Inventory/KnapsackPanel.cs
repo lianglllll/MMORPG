@@ -195,7 +195,7 @@ public class KnapsackPanel:BasePanel
     public void UpdateCurrency()
     {
         if (GameApp.character == null) return;
-        goldText.text = GameApp.character.info.Gold + "";
+        goldText.text = GameApp.character.m_netActorNode.Gold + "";
     }
 
     /// <summary>

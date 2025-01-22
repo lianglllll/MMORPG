@@ -144,9 +144,9 @@ namespace GameClient.Combat
                 GameApp.CurrSkill = this;
             }
 
-            if (Owner.baseController.StateMachineParameter.curSkill == null)
+            if (Owner.m_baseController.StateMachineParameter.curSkill == null)
             {
-                Owner.baseController.StateMachineParameter.curSkill = this;
+                Owner.m_baseController.StateMachineParameter.curSkill = this;
             }
             else
             {
@@ -171,7 +171,7 @@ namespace GameClient.Combat
                 Stage = SkillStage.Active;
                 OnActive();
             }
-            Owner.baseController.ChangeState(ActorState.Skill);
+            Owner.m_baseController.ChangeState(ActorState.Skill);
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace GameClient.Combat
                     var target = _sco.RealObj as Actor;
                     if (target != Owner)
                     {
-                        Owner.baseController.DirectLookTarget(target.renderObj.transform.position);
+                        Owner.m_baseController.DirectLookTarget(target.renderObj.transform.position);
                     }
                 }
             });
@@ -208,7 +208,7 @@ namespace GameClient.Combat
                 var target = _sco.RealObj as Actor;
                 GameObject myObjcet = new GameObject("MyMissile");
                 var missile = myObjcet.AddComponent<Missile>();
-                missile.Init(this, Owner.renderObj.transform.position, target.renderObj);
+                missile.Init(this, Owner.renderObj.transform.position, target.m_renderObj);
             }
 
         }

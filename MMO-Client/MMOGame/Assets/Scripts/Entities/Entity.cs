@@ -3,69 +3,72 @@ using UnityEngine;
 
 namespace GameClient.Entities
 {
-    /// <summary>
-    ///客户端entity数据的备份处理
-    /// </summary>
     public class Entity
     {
+        private int m_entityId;
+        private Vector3 m_position;
+        private Vector3 m_rotation;
+        private Vector3 m_sacle;
 
-        private Vector3 position;
-        private Vector3 direction;
-        private NetEntity netObj;                 //网络对象NetEntity
-
-        public int EntityId {
-            get { return netObj.Id; }
-            set { netObj.Id = value; }
+        public int EntityId
+        {
+            get{
+                return m_entityId;
+            }
         }
         public Vector3 Position
         {
-            get { return position; }
-            set {
-                position = value;
-                netObj.Position = V3.ToVec3(value); 
-            }
-        }
-        public Vector3 Direction
-        {
-            get { return direction; }
-            set {
-                direction = value;
-                netObj.Direction = V3.ToVec3(value);
-            }
-        }
-
-        public NetEntity EntityData
-        {
-            get {
-                return netObj;
+            get
+            {
+                return m_position;
             }
             set
             {
-                Position = V3.ToVector3(value.Position);
-                Direction = V3.ToVector3(value.Direction);
+                m_position = value;
+            }
+        }
+        public Vector3 Rotation
+        {
+            get
+            {
+                return m_rotation;
+            }
+            set
+            {
+                m_rotation = value;
+            }
+        }
+        public Vector3 Scale
+        {
+            get
+            {
+                return m_sacle;
+            }
+            set
+            {
+                m_sacle = value;
             }
         }
 
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="nEntity"></param>
-        public Entity(NetEntity nEntity)
+        public Entity(int entityId, NetTransform transform)
         {
-            netObj = new NetEntity();
-            netObj.Id = nEntity.Id;//设置id，因为entitydata赋值不会设置id
-            this.EntityData = nEntity;
+            m_entityId = entityId;
+            NetVector3MoveToVector3(transform.Position, m_position);
+            NetVector3MoveToVector3(transform.Rotation, m_rotation);
+            NetVector3MoveToVector3(transform.Scale, m_sacle);
         }
-
-        /// <summary>
-        /// 推动entity的更新
-        /// </summary>
-        /// <param name="deltatime"></param>
-        public virtual void OnUpdate(float deltatime)
+        public virtual void Update(float deltatime)
         {
 
         }
 
+        // tools 
+        protected void NetVector3MoveToVector3(NetVector3 v1, Vector3 v2)
+        {
+            v2.x = v1.X * 0.001f;
+            v2.y = v1.Y * 0.001f;
+            v2.z = v1.Z * 0.001f;
+        }
     }
 }
 

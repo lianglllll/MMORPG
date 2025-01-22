@@ -95,7 +95,7 @@ public class PlayerCombatController : MonoBehaviour
     public void Init(CtrlController ctrlController)
     {
         this.ctrlController = ctrlController;
-        this.skillManager = ctrlController.Actor.skillManager;
+        this.skillManager = ctrlController.Actor.m_skillManager;
 
         //初始化普通攻击连招表
         var baseSkillIds = ctrlController.Actor.define.DefaultSkills;
@@ -360,7 +360,7 @@ public class PlayerCombatController : MonoBehaviour
         ClearEnemy();
         _currentEnemy = target;
         GameApp.target = _currentEnemy;
-        _currentEnemy.baseController.unitUIController.SetSelectedMark(true);
+        _currentEnemy.m_baseController.unitUIController.SetSelectedMark(true);
         Kaiyun.Event.FireOut("SelectTarget");//ui
     }
 
@@ -373,7 +373,7 @@ public class PlayerCombatController : MonoBehaviour
 
         //触发一下取消敌人锁定的事件
         Kaiyun.Event.FireOut("CancelSelectTarget");//ui
-        _currentEnemy.baseController.unitUIController.SetSelectedMark(false);
+        _currentEnemy.m_baseController.unitUIController.SetSelectedMark(false);
 
         GameApp.target = null;
         _currentEnemy = null;

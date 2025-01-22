@@ -1,10 +1,7 @@
 using BaseSystem.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
-using GameClient;
-using HS.Protobuf.Game;
 using HS.Protobuf.Login;
-using HS.Protobuf.Scene;
 
 public class UserService : SingletonNonMono<UserService>
 {

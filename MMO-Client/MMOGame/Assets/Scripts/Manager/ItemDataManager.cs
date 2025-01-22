@@ -45,7 +45,7 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
     /// <returns></returns>
     public ConcurrentDictionary<EquipsType, Equipment> GetEquipmentDict()
     {
-        return GameApp.character.equipsDict;
+        return GameApp.character.m_equipsDict;
     }
 
     /// <summary>

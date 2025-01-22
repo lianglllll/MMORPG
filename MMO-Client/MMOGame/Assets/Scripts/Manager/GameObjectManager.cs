@@ -85,11 +85,11 @@ public class GameObjectManager:MonoBehaviour
             if (item == null || item.IsDestroyed())
             {
                 currentGameObjectDict.TryRemove(actor.EntityId, out _);
-                actor.renderObj = null;
+                actor.m_renderObj = null;
             }
             else
             {
-                actor.renderObj = item;
+                actor.m_renderObj = item;
                 return;
             }
         }
@@ -104,7 +104,7 @@ public class GameObjectManager:MonoBehaviour
         bool isMine = (nActor.Entity.Id == GameApp.entityId);
 
         //2.异步加载资源
-        UnitDefine unitDefine = actor.define;
+        UnitDefine unitDefine = actor.m_define;
         GameObject prefab = null;
         yield return Res.LoadAssetAsyncWithTimeout<GameObject>(unitDefine.Resource, (obj) => {
             prefab = obj;
@@ -126,7 +126,7 @@ public class GameObjectManager:MonoBehaviour
 
         //加入actor图层
         actorObj.layer = 6;
-        actor.renderObj = actorObj; //actor 和 gameobj关联
+        actor.m_renderObj = actorObj; //actor 和 gameobj关联
         if (actor is Character chr)
         {
             actorObj.name = "Character_" + nActor.Entity.Id;
@@ -287,7 +287,7 @@ public class GameObjectManager:MonoBehaviour
     /// <param name="nEntitySync"></param>
     public void CtlEntitySync(NEntitySync nEntitySync)
     {
-        GameObject obj = GameApp.character?.renderObj;
+        GameObject obj = GameApp.character?.m_renderObj;
         if (obj == null) return;
 
         //这里通常由服务器来通知一些我们的特殊变化
@@ -295,7 +295,7 @@ public class GameObjectManager:MonoBehaviour
         //如果是None,一律不作处理，将维持原来的动画状态
         if (nEntitySync.State != ActorState.Constant)
         {
-            var ctrl = GameApp.character.baseController;
+            var ctrl = GameApp.character.m_baseController;
             ctrl.ChangeState(nEntitySync.State);
         }
         //设置数据到entity中,这里强制设置

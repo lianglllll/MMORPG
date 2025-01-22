@@ -89,7 +89,7 @@ public class CombatService : SingletonNonMono<CombatService>
 
                 });
             }
-            else if(GameApp.character.info.SpaceId != msg.Character.SpaceId)
+            else if(GameApp.character.m_netActorNode.SceneId != msg.Character.SpaceId)
             {
                 //清理旧场景的对象
                 EntityManager.Instance.Clear();
@@ -129,6 +129,7 @@ public class CombatService : SingletonNonMono<CombatService>
             }
             else
             {
+                Debug.LogError("_SpaceEnterResponse:发生甚么事了，给我干哪里来了");
             }
 
         });
@@ -237,7 +238,7 @@ public class CombatService : SingletonNonMono<CombatService>
                 var caster = EntityManager.Instance.GetEntity<Actor>(item.CasterId);
                 if (caster == null) continue;
 
-                var skill = caster.skillManager.GetSkill(item.SkillId);
+                var skill = caster.m_skillManager.GetSkillBySkillId(item.SkillId);
                 if (skill.IsUnitTarget)
                 {
                     var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);
@@ -324,11 +325,11 @@ public class CombatService : SingletonNonMono<CombatService>
                         break;
                     case PropertyUpdate.Types.Prop.Exp:
                         chr = actor as Character;
-                        chr.onExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                        chr.OnExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
                         break;
                     case PropertyUpdate.Types.Prop.Golds:
                         chr = actor as Character;
-                        chr.onGoldChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                        chr.OnGoldChanged(item.OldValue.LongValue, item.NewValue.LongValue);
                         break;
                     case PropertyUpdate.Types.Prop.Speed:
                         actor.OnSpeedChanged(item.OldValue.IntValue, item.NewValue.IntValue);

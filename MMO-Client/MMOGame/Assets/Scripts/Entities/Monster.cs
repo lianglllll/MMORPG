@@ -6,14 +6,14 @@ namespace Assets.Script.Entities
 {
     public class Monster : Actor
     {
-        public Monster(NetActor nCharacter) : base(nCharacter)
+        public Monster(NetActorNode nCharacter) : base(nCharacter)
         {
 
         }
 
         public override void OnDeath()
         {
-            if (renderObj == null) return;
+            if (m_renderObj == null) return;
             base.OnDeath();
             //隐藏怪物实体
             DelayedTaskScheduler.Instance.AddDelayedTask(3f, () =>
@@ -22,7 +22,7 @@ namespace Assets.Script.Entities
                 //这里判断是防止在死亡的3秒内本actor复活了
                 if (IsDeath)
                 {
-                    renderObj?.SetActive(false);
+                    m_renderObj?.SetActive(false);
                 }
             });
         }
@@ -32,7 +32,7 @@ namespace Assets.Script.Entities
         /// </summary>
         public void OnRevive()
         {
-            renderObj?.SetActive(true);
+            m_renderObj?.SetActive(true);
 
         }
     }

@@ -224,10 +224,10 @@ public class UnitUIController : MonoBehaviour
     private void ShowEntityInfoBar()
     {
         // 面板看向摄像机的代码再Billboard中
-        unitBillboard.slider.value = owner.info.Hp;
-        unitBillboard.slider.maxValue = owner.info.HpMax;
-        unitBillboard.nameText.text = owner.info.Name;
-        unitBillboard.gameObject.SetActive(owner.info.Hp > 0);
+        unitBillboard.slider.value = owner.m_netActorNode.Hp;
+        unitBillboard.slider.maxValue = owner.m_netActorNode.HpMax;
+        unitBillboard.nameText.text = owner.m_netActorNode.Name;
+        unitBillboard.gameObject.SetActive(owner.m_netActorNode.Hp > 0);
     }
 
 }
