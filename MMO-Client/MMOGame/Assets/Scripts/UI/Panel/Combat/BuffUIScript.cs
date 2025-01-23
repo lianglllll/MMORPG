@@ -1,3 +1,4 @@
+using GameClient.Combat.Buffs;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,9 +33,9 @@ public class BuffUIScript : MonoBehaviour
         {
             icon.sprite = Res.LoadAssetSync<Sprite>(_buff.IconPath);
         }
-        coldDownLayer.fillAmount = 1 - (_buff.ResidualDuration / _buff.MaxDuration);
-        levelText.text = _buff.CurrentLevel.ToString();
-        levelText.gameObject.SetActive(_buff.CurrentLevel > 1);
+        coldDownLayer.fillAmount = 1 - (_buff.RemainingTime / _buff.MaxDuration);
+        levelText.text = _buff.CurLevel.ToString();
+        levelText.gameObject.SetActive(_buff.CurLevel > 1);
 
     }
 

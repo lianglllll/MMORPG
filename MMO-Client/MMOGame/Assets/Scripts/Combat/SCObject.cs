@@ -37,7 +37,7 @@ namespace GameClient
         public override int GetId => Obj.EntityId;
 
 
-        public override Vector3 GetDirection() => Obj.Direction;
+        public override Vector3 GetDirection() => Obj.Rotation;
 
 
         public override Vector3 GetPosition() => Obj.Position;

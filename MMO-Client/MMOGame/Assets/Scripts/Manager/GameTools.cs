@@ -1,8 +1,5 @@
 using GameClient.Entities;
-using GameServer.Model;
-using Summer;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,9 +54,9 @@ public class GameTools
     /// <param name="pos"></param>
     /// <param name="range"></param>
     /// <returns></returns>
-    public static List<ItemEntity> RangeItem(Vector3 pos, int range)
+    public static List<ClientItem> RangeItem(Vector3 pos, int range)
     {
-        Predicate<ItemEntity> match = (e) =>
+        Predicate<ClientItem> match = (e) =>
         {
             return Vector3.Distance(pos, e.Position) <= range;
         };

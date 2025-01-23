@@ -1,11 +1,4 @@
 using GameClient.Entities;
-using GameServer.Model;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameClient.Combat
 {
@@ -28,9 +21,8 @@ namespace GameClient.Combat
         {
 
             owner = actor;
-            var define = actor.m_define;
-            int level = actor.m_netActorNode.Level;
-
+            var define = actor.UnitDefine;
+            int level = actor.Level;
 
             basic = new AttrubuteData();
             growth = new AttrubuteData();
@@ -65,8 +57,8 @@ namespace GameClient.Combat
         /// </summary>
         public void Reload()
         {
-            var define = owner.m_define;
-            int level = owner.m_netActorNode.Level;
+            var define = owner.UnitDefine;
+            int level = owner.Level;
 
             //等级成长属性
             growth.Reset();

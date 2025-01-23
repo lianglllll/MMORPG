@@ -4,11 +4,9 @@ using Common.Summer.Net;
 using GameClient;
 using GameClient.Entities;
 using HS.Protobuf.Game;
-using HS.Protobuf.GameGate;
 using HS.Protobuf.Login;
-using HS.Protobuf.Scene;
+using HS.Protobuf.SceneEntity;
 using Serilog;
-using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -154,88 +152,75 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
     }
     private void _HandleEnterGameResponse(Connection sender, EnterGameResponse msg)
     {
+        Log.Information("进入游戏回包");
+
+        if(msg.ResultCode != 0)
+        {
+            var panel = UIManager.Instance.GetOpeningPanelByName("SelectRolePanel");
+            if (panel != null)
+            {
+                UnityMainThreadDispatcher.Instance().Enqueue(() => {
+                    ((SelectRolePanelScript)panel).HandleStartResponse(msg.ResultCode, msg.ResultMsg);
+                });
+            }
+            goto End;
+        }
+
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            if (GameApp.character == null)
-            {
-                //1.切换场景
-                GameApp.SpaceId = msg.SelfNetActorNode.SceneId;
-                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
+            NetActorNode selfActorNode = msg.SelfNetActorNode;
+            int selfEntityId = selfActorNode.EntityId;
+            int curSceneId = selfActorNode.SceneId;
 
-                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
+            //清理旧场景的对象
+            EntityManager.Instance.Clear();
+            GameApp.ClearGameAppData();
+            TP_CameraController.instance.OnStop();
 
-                    await Task.Delay(800);
+            
+            GameApp.SceneId = curSceneId;
+            GameApp.entityId = selfEntityId;
 
-                    //2.加载其他角色和ai
-                    foreach (var item in msg.OtherNetActorNodeList)
-                    {
-                        EntityManager.Instance.OnActorEnterScene(item);
-                    }
+            //切换场景
+            DataManager.Instance.spaceDefineDict.TryGetValue(curSceneId, out var spaceDef);
+            ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
 
-                    //3.加载物品
-                    foreach (var item in msg.EItemList)
-                    {
-                        EntityManager.Instance.OnItemEnterScene(item);
-                    }
+                // 关闭选择角色的面板
+                var panel = UIManager.Instance.GetOpeningPanelByName("SelectRolePanel");
+                if (panel != null)
+                {
+                    ((SelectRolePanelScript)panel).HandleStartResponse(0 , null);
+                }
 
-                    //最后生成自己的角色,记录本机的数据
-                    GameApp.entityId = msg.Character.Entity.Id;
-                    EntityManager.Instance.OnActorEnterScene(msg.Character);
-                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
+                await Task.Delay(800);
 
-                    //推入combatUI
-                    UIManager.Instance.OpenPanel("CombatPanel");
-                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
-                    UIManager.Instance.ShowTopMessage("" + def.Name);
+                //加载其他Actor
+                foreach (var item in msg.OtherNetActorNodeList)
+                {
+                    EntityManager.Instance.OnActorEnterScene(item);
+                }
+                //加载物品
+                foreach (var item in msg.OtherNetItemNodeList)
+                {
+                    EntityManager.Instance.OnItemEnterScene(item);
+                }
 
-                });
-            }
-            else if (GameApp.character.m_netActorNode.SpaceId != msg.Character.SpaceId)
-            {
-                //清理旧场景的对象
-                EntityManager.Instance.Clear();
-                GameApp.ClearGameAppData();
-                TP_CameraController.instance.OnStop();
+                //最后生成自己的角色,记录本机的数据
+                EntityManager.Instance.OnActorEnterScene(msg.SelfNetActorNode);
+                GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.SelfNetActorNode.EntityId);
 
-                //切换场景
-                GameApp.SpaceId = msg.Character.SpaceId;
-                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
-                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
+                //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
+                // UIManager.Instance.ClosePanel("CombatPanel");
+                UIManager.Instance.OpenPanel("CombatPanel");
+                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SceneId, out var def);
+                UIManager.Instance.ShowTopMessage("" + def.Name);
 
-                    await Task.Delay(800);
-
-                    //加载其他角色和ai
-                    foreach (var item in msg.CharacterList)
-                    {
-                        EntityManager.Instance.OnActorEnterScene(item);
-                    }
-                    //加载物品
-                    foreach (var item in msg.EItemList)
-                    {
-                        EntityManager.Instance.OnItemEnterScene(item);
-                    }
-
-                    //最后生成自己的角色,记录本机的数据
-                    GameApp.entityId = msg.Character.Entity.Id;
-                    EntityManager.Instance.OnActorEnterScene(msg.Character);
-                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
-
-                    //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
-                    UIManager.Instance.ClosePanel("CombatPanel");
-                    UIManager.Instance.OpenPanel("CombatPanel");
-                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
-                    UIManager.Instance.ShowTopMessage("" + def.Name);
-
-                });
-            }
-            else
-            {
-                Debug.LogError("_SpaceEnterResponse:发生甚么事了，给我干哪里来了");
-            }
+            });
 
         });
+
+    End:
+        return;
     }
-
-
 
 }

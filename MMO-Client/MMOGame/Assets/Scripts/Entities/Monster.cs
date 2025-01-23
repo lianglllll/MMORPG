@@ -1,8 +1,9 @@
 using BaseSystem.MyDelayedTaskScheduler;
+using GameClient;
 using GameClient.Entities;
 using HS.Protobuf.SceneEntity;
 
-namespace Assets.Script.Entities
+namespace GameClient.Entities
 {
     public class Monster : Actor
     {
@@ -14,7 +15,13 @@ namespace Assets.Script.Entities
         public override void OnDeath()
         {
             if (m_renderObj == null) return;
-            base.OnDeath();
+
+            //如果当前actor被关注，则需要通知
+            if (GameApp.target == this)
+            {
+                Kaiyun.Event.FireIn("TargetDeath");
+            }
+
             //隐藏怪物实体
             DelayedTaskScheduler.Instance.AddDelayedTask(3f, () =>
             {
@@ -27,13 +34,9 @@ namespace Assets.Script.Entities
             });
         }
 
-        /// <summary>
-        /// 复活
-        /// </summary>
-        public void OnRevive()
-        {
-            m_renderObj?.SetActive(true);
-
-        }
+        //public void OnRevive()
+        //{
+        //    m_renderObj?.SetActive(true);
+        //}
     }
 }

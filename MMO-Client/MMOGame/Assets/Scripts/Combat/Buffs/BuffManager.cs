@@ -1,17 +1,17 @@
-
 using GameClient.Entities;
 using Google.Protobuf.Collections;
 using HS.Protobuf.Combat.Buff;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace GameClient.Combat
+namespace GameClient.Combat.Buffs
 {
     public class BuffManager
     {
         private Actor m_owner;
-        public ConcurrentDictionary<int, Buff> m_buffsDict = new();               //actor持有的buff<实例id,buff>
-        private List<int> removeKey = new();
+        public ConcurrentDictionary<int, Buff> m_buffsDict = new();               //<InstanceId, buff>
+        private List<int> m_removeKey = new();
 
         public bool Init(Actor owner, RepeatedField<BuffInfo> buffsList)
         {
@@ -19,38 +19,39 @@ namespace GameClient.Combat
 
             foreach (var buffInfo in buffsList)
             {
-                new Buff().Init(buffInfo, m_owner);
+                var buff = new Buff();
+                buff.Init(buffInfo, m_owner);
+                AddBuff(buff);
             }
-
-
             return true;
         }
         public void Update(float deltatime)
         {
             if (m_buffsDict.Count <= 0) return;
 
+            // 驱动buff,并且找出要消失的buff的key
             Buff temBuf;
-            removeKey.Clear();
+            m_removeKey.Clear();
             foreach (var item in m_buffsDict)
             {
                 temBuf = item.Value;
-                temBuf.ResidualDuration -= deltatime;
+                temBuf.RemainingTime -= deltatime;
                 //降级
-                if (temBuf.ResidualDuration <= 0)
+                if (temBuf.RemainingTime <= 0)
                 {
-                    --(temBuf.CurrentLevel);
+                    temBuf.CurLevel -= 1;
                 }
                 //删除
-                if (temBuf.CurrentLevel <= 0)
+                if (temBuf.CurLevel <= 0)
                 {
-                    removeKey.Add(item.Key);
+                    m_removeKey.Add(item.Key);
                     continue;
                 }
 
             }
 
-            //删除无效的ui
-            foreach (var key in removeKey)
+            // 删除过期的buff
+            foreach (var key in m_removeKey)
             {
                 RemoveBuff(key);
             }
@@ -59,7 +60,7 @@ namespace GameClient.Combat
 
         public void AddBuff(Buff buff)
         {
-            m_buffsDict[buff.ID] = buff;
+            m_buffsDict[buff.InstanceId] = buff;
             if (GameApp.character == m_owner || GameApp.target == m_owner)
             {
                 Kaiyun.Event.FireOut("SpecialActorAddBuff", buff);
@@ -75,5 +76,9 @@ namespace GameClient.Combat
                 }
             }
         }
+        public List<Buff> GetBuffs()
+        {
+            return m_buffsDict.Values.ToList();
+        } 
     }
 }

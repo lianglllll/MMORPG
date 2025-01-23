@@ -1,13 +1,10 @@
-using GameServer.Model;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using GameClient.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PickUpItemCell : MonoBehaviour
 {
-    private ItemEntity itemEntity;
+    private ClientItem itemEntity;
 
     private Button pickupBtn;
     private Image icon;
@@ -31,7 +28,7 @@ public class PickUpItemCell : MonoBehaviour
     /// 初始化
     /// </summary>
     /// <param name="itemEntity"></param>
-    public void Init(ItemEntity itemEntity)
+    public void Init(ClientItem itemEntity)
     {
         this.itemEntity = itemEntity;
         SetUI();
@@ -43,8 +40,8 @@ public class PickUpItemCell : MonoBehaviour
     public void SetUI()
     {
         if (itemEntity == null) return;
-        icon.sprite = Res.LoadAssetSync<Sprite>(itemEntity.Icon);
-        itemName.text = itemEntity.itemName;
+        icon.sprite = Res.LoadAssetSync<Sprite>(itemEntity.IconPath);
+        itemName.text = itemEntity.ItemName;
         itemAmount.text ="" + itemEntity.Amount;
     }
 

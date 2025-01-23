@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using System;
 using GameClient;
 using HS.Protobuf.Game.Backpack;
 
@@ -54,7 +53,7 @@ public class KnapsackPanel:BasePanel
 
     private void FixedUpdate()
     {
-        if (GameApp.character.renderObj.transform.hasChanged)
+        if (GameApp.character.RenderObj.transform.hasChanged)
         {
             RefreshPickUpBox();
         }
@@ -157,7 +156,7 @@ public class KnapsackPanel:BasePanel
     {
         //我们控制的角色的entity数据是垃圾数据，因为我们根本就不更新它
 
-        var list = GameTools.RangeItem(GameApp.character.renderObj.transform.position * 1000, 2 * 1000);
+        var list = GameTools.RangeItem(GameApp.character.RenderObj.transform.position * 1000, 2 * 1000);
         if (list != null)
         {
             pickUpItemListBox.Reset(list);
@@ -195,7 +194,7 @@ public class KnapsackPanel:BasePanel
     public void UpdateCurrency()
     {
         if (GameApp.character == null) return;
-        goldText.text = GameApp.character.m_netActorNode.Gold + "";
+        // goldText.text = GameApp.character.m_netActorNode.Gold + "";
     }
 
     /// <summary>

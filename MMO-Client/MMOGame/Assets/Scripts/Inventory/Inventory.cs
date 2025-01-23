@@ -190,7 +190,6 @@ public class Inventory
     public int AddItem(int itemId, int amount = 1)
     {
         //不做太多的判断，因为服务器已经做过判断了，在做一次就是多余
-
         var def = DataManager.Instance.itemDefineDict[itemId];
         var counter = amount;
 
@@ -254,7 +253,7 @@ public class Inventory
     /// <returns></returns>
     private Item FindFirstItemByItemIdAndNotFull(int itemId)
     {
-        return itemDict.Values.FirstOrDefault(item => item.Define.ID == itemId && item.Amount < item.StackingUpperLimit);
+        return itemDict.Values.FirstOrDefault(item => item.ItemDefine.ID == itemId && item.Amount < item.StackingUpperLimit);
     }
 
 }

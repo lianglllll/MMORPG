@@ -95,10 +95,10 @@ public class PlayerCombatController : MonoBehaviour
     public void Init(CtrlController ctrlController)
     {
         this.ctrlController = ctrlController;
-        this.skillManager = ctrlController.Actor.m_skillManager;
+        skillManager = ctrlController.Actor.m_skillManager;
 
         //初始化普通攻击连招表
-        var baseSkillIds = ctrlController.Actor.define.DefaultSkills;
+        var baseSkillIds = ctrlController.Actor.UnitDefine.DefaultSkills;
         int count = baseSkillIds.Length;
         if (count <= 0) return;     //没有基础攻击就返回
 
@@ -208,7 +208,7 @@ public class PlayerCombatController : MonoBehaviour
             else
             {
                 //已经锁定了一个最近的目标，计算当前的攻击距离
-                if(Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.SpellRangeRadius * 0.001f)
+                if(Vector3.Distance(transform.position,_currentEnemy.RenderObj.transform.position) > currentComboData.skill.Define.SpellRangeRadius * 0.001f)
                 {
                     //打不到敌人，自己原地平啊
                     //获取移动到可以攻击到敌人的位置
@@ -225,7 +225,7 @@ public class PlayerCombatController : MonoBehaviour
         else
         {
             //已经锁定了一个最近的目标，计算当前的攻击距离
-            if (Vector3.Distance(transform.position, _currentEnemy.renderObj.transform.position) > currentComboData.skill.Define.SpellRangeRadius * 0.001f)
+            if (Vector3.Distance(transform.position, _currentEnemy.RenderObj.transform.position) > currentComboData.skill.Define.SpellRangeRadius * 0.001f)
             {
                 //打不到敌人，自己原地平啊
                 //获取移动到可以攻击到敌人的位置
@@ -333,7 +333,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             var tmpA = enemys[i].GetComponent<BaseController>().Actor;
             if (owner == tmpA || tmpA.IsDeath) continue;
-            var dis = Vector3.Distance(transform.position,tmpA.renderObj.transform.position);
+            var dis = Vector3.Distance(transform.position,tmpA.RenderObj.transform.position);
             if(dis < minDistance)
             {
                 targetActor = tmpA;
@@ -385,7 +385,7 @@ public class PlayerCombatController : MonoBehaviour
     private void ClearEnemyWhenMotion()
     {
         if(_currentEnemy !=null && ctrlController.CurState == ActorState.Move && 
-            Vector3.Distance(transform.position,_currentEnemy.renderObj.transform.position) > _detectionRange)
+            Vector3.Distance(transform.position,_currentEnemy.RenderObj.transform.position) > _detectionRange)
         {
             ClearEnemy();
         }
@@ -574,7 +574,7 @@ public class PlayerCombatController : MonoBehaviour
         //transform.LookAt(target.renderObj.transform.position);
 
         // 计算角色应该朝向目标点的方向
-        Vector3 targetDirection = (target.renderObj.transform.position - transform.position).normalized;
+        Vector3 targetDirection = (target.RenderObj.transform.position - transform.position).normalized;
 
         // 限制在Y轴上的旋转
         targetDirection.y = 0;

@@ -20,6 +20,9 @@ public class SelectRolePanelScript : BasePanel
     private Text vocation;
     private Text level;
 
+    //
+    private bool isStart;
+
     protected override void Awake()
     {
         roleListItemMountPoint = transform.Find("RoleList");
@@ -32,6 +35,8 @@ public class SelectRolePanelScript : BasePanel
     }
     protected override void Start()
     {
+        isStart = false;
+
         createBtn.onClick.AddListener(OnCreateBtn);
         startBtn.onClick.AddListener(OnStartBtn);
         deleteBtn.onClick.AddListener(OnDeleteRoleBtn);
@@ -145,16 +150,31 @@ public class SelectRolePanelScript : BasePanel
     /// </summary>
     public void OnStartBtn()
     {
-        if (curSelectedItem == null)
+        if (curSelectedItem == null || isStart == true)
         {
-            return;
+            goto End;
         }
-
-        curSelectedItem.Stop();
-
+        isStart = true;
         //获取当前roleItemId对应的role信息，将角色id发送到服务端进行处理
         //发送网络请求
         EntryGameWorldService.Instance.SendEnterGameRequest(curSelectedItem.ChrId);
 
+    End:
+        return;
+    }
+    public void HandleStartResponse(int reslutCode, string msg)
+    {
+        if(reslutCode == 0)
+        {
+            // 关闭动画
+            curSelectedItem.Stop();
+            // 关闭当前ui
+            UIManager.Instance.ClosePanel("SelectRolePanel");
+        }
+        else
+        {
+            isStart = false;
+            UIManager.Instance.ShowTopMessage(msg);
+        }
     }
 }

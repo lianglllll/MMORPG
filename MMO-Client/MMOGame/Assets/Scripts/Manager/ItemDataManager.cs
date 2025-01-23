@@ -45,7 +45,7 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
     /// <returns></returns>
     public ConcurrentDictionary<EquipsType, Equipment> GetEquipmentDict()
     {
-        return GameApp.character.m_equipsDict;
+        return GameApp.character.EquipManager.EquipsDict;
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
     /// <param name="equipmentInfo"></param>
     public void ReloadEquipData(Actor actor, RepeatedField<ItemInfo> equipsList)
     {
-        actor.LoadEquips(equipsList);
+        // actor.LoadEquips(equipsList);
 
         //刷ui
         if (GameApp.character != null && GameApp.character.EntityId == actor.EntityId)

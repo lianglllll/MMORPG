@@ -1,3 +1,4 @@
+using Common.Summer.Net;
 using HS.Protobuf.Common;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
@@ -45,7 +46,7 @@ namespace HSFramework.Net
 
             //开启同步信息功能的协程
             //开启协程，每秒发送10次向服务器上传hero的属性
-            m_AutoSendSyncRequestCorountine = StartCoroutine(AutoSendSyncRequest());
+            // m_AutoSendSyncRequestCorountine = StartCoroutine(AutoSendSyncRequest());
         }
         private void _ResumeAutoSendSyncRequestCorountine()
         {

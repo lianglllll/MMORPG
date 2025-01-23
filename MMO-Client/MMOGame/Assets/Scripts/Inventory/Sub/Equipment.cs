@@ -8,77 +8,40 @@ namespace GameClient.InventorySystem
     /// </summary>
     public class Equipment : Item
     {
-        public EquipsType EquipsType => ParseEquipType(Define.EquipType);
-        public AttrubuteData attrubuteData;
+        private EquipsType m_equipsType;
+        private AttrubuteData m_attrubuteData;
+        public EquipsType EquipsType => m_equipsType;
 
-        //network
         public Equipment(ItemInfo itemInfo) : base(itemInfo)
         {
+            m_equipsType = ParseEquipType(ItemDefine.EquipType);
             LoadAttrubuteData(itemInfo);
         }
-
-        //define
         public Equipment(ItemDefine define,int position = 0) : base(define, 1, position)
         {
             LoadAttrubuteData(null);
         }
 
-        /// <summary>
-        /// str -> enum
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private EquipsType ParseEquipType(string value)
-        {
-            switch (value)
-            {
-                case "无":
-                    return EquipsType.Unset;
-                case "武器":
-                    return EquipsType.Weapon;
-                case "胸甲":
-                    return EquipsType.Chest;
-                case "腰带":
-                    return EquipsType.Belt;
-                case "裤子":
-                    return EquipsType.Legs;
-                case "鞋子":
-                    return EquipsType.Boots;
-                case "戒指":
-                    return EquipsType.Ring;
-                case "项链":
-                    return EquipsType.Neck;
-                case "翅膀":
-                    return EquipsType.Wings;
-                default:
-                    return EquipsType.Unset;
-            }
-        }
-
-        /// <summary>
-        /// 加载装备数据
-        /// </summary>
-        /// <param name="itemInfo"></param>
         private void LoadAttrubuteData(ItemInfo itemInfo)
         {
-            attrubuteData = new AttrubuteData
+            m_attrubuteData = new AttrubuteData
             {
-                Speed = Define.Speed,
-                HPMax = Define.HP,
-                MPMax = Define.MP,
-                AD = Define.AD,
-                AP = Define.AP,
-                DEF = Define.DEF,
-                MDEF = Define.MDEF,
-                CRI = Define.CRI,
-                CRD = Define.CRD,
-                STR = Define.STR,
-                INT = Define.INT,
-                AGI = Define.AGI,
-                HitRate = Define.HitRate,
-                DodgeRate = Define.DodgeRate,
-                HpRegen = Define.HpRegen,
-                HpSteal = Define.HpSteal,
+                Speed = ItemDefine.Speed,
+                HPMax = ItemDefine.HP,
+                MPMax = ItemDefine.MP,
+                AD = ItemDefine.AD,
+                AP = ItemDefine.AP,
+                DEF = ItemDefine.DEF,
+                MDEF = ItemDefine.MDEF,
+                CRI = ItemDefine.CRI,
+                CRD = ItemDefine.CRD,
+                STR = ItemDefine.STR,
+                INT = ItemDefine.INT,
+                AGI = ItemDefine.AGI,
+                HitRate = ItemDefine.HitRate,
+                DodgeRate = ItemDefine.DodgeRate,
+                HpRegen = ItemDefine.HpRegen,
+                HpSteal = ItemDefine.HpSteal,
             };
 
             //可能需要处理一些额外的数据
@@ -86,17 +49,12 @@ namespace GameClient.InventorySystem
             //itemInfo.Equipdata;
 
         }
-
-        /// <summary>
-        /// 获取描述文本
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDescText()
+        public override string GetItemDescText()
         {
-            var content = $"<color=#ffffff>{this.Define.Name}</color>\n" +
-              $"<color=yellow>{this.Define.Description}</color>\n\n" +
-              $"<color=bulue>堆叠上限：{this.Define.Capicity}</color>\n";
-            var attr = attrubuteData;
+            var content = $"<color=#ffffff>{this.ItemDefine.Name}</color>\n" +
+              $"<color=yellow>{this.ItemDefine.Description}</color>\n\n" +
+              $"<color=bulue>堆叠上限：{this.ItemDefine.Capicity}</color>\n";
+            var attr = m_attrubuteData;
             if (attr.Speed != 0)
                 content += $"<color=green>速度: {attr.Speed}</color>\n";
             if (attr.HPMax != 0)
@@ -133,9 +91,33 @@ namespace GameClient.InventorySystem
             return content;
         }
 
-
-
+        // tools
+        private EquipsType ParseEquipType(string value)
+        {
+            switch (value)
+            {
+                case "无":
+                    return EquipsType.Unset;
+                case "武器":
+                    return EquipsType.Weapon;
+                case "胸甲":
+                    return EquipsType.Chest;
+                case "腰带":
+                    return EquipsType.Belt;
+                case "裤子":
+                    return EquipsType.Legs;
+                case "鞋子":
+                    return EquipsType.Boots;
+                case "戒指":
+                    return EquipsType.Ring;
+                case "项链":
+                    return EquipsType.Neck;
+                case "翅膀":
+                    return EquipsType.Wings;
+                default:
+                    return EquipsType.Unset;
+            }
+        }
     }
-
 }
 

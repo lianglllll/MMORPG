@@ -12,7 +12,7 @@ namespace Player
             var target = ShareParameter.attacker;
             if (target != null)
             {
-                player.DirectLookTarget(target.renderObj.transform.position);
+                player.DirectLookTarget(target.RenderObj.transform.position);
                 ShareParameter.attacker = null;
             }
 

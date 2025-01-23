@@ -10,7 +10,6 @@ namespace GameClient.InventorySystem
         public Consumable(ItemInfo itemInfo) : base(itemInfo)
         {
         }
-
         public Consumable(ItemDefine define, int amount = 1, int position = 0) : base(define, amount, position)
         {
         }

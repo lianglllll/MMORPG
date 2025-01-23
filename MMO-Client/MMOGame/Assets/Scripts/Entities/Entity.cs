@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace GameClient.Entities
 {
+    // todo 目前这玩意只有一个功能，就是多态化
     public class Entity
     {
         private int m_entityId;
@@ -16,6 +17,8 @@ namespace GameClient.Entities
                 return m_entityId;
             }
         }
+
+        // 正常Unity里面的坐标
         public Vector3 Position
         {
             get

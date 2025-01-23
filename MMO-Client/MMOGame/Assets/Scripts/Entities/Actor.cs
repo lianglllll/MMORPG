@@ -1,29 +1,43 @@
 using GameClient.Combat;
-using GameClient.InventorySystem;
+using GameClient.Combat.Buffs;
 using GameClient.Manager;
-using Google.Protobuf.Collections;
-using HS.Protobuf.Combat.Buff;
 using HS.Protobuf.Combat.Skill;
-using HS.Protobuf.Game.Backpack;
 using HS.Protobuf.SceneEntity;
 using Player;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameClient.Entities
 {
     public class Actor:Entity
     {
-        private GameObject      m_renderObj;
-        private UnitDefine      m_define;                                               
+        protected GameObject      m_renderObj;
+        private UnitDefine      m_unitDefine;                                               
         private NetActorNode    m_netActorNode;                                     
         public BaseController   m_baseController;
         public SkillManager     m_skillManager;
-        public BuffManager      m_buffManager;
+        private BuffManager      m_buffManager;
         public EquipManager     m_equipManager;
 
+        public GameObject RenderObj {
+            get
+            {
+                return m_renderObj;
+            }
+            set
+            {
+                m_renderObj = value;
+            }
+        }
+        public UnitDefine UnitDefine => m_unitDefine;
+        public BuffManager BuffManager => m_buffManager;
+        public EquipManager EquipManager => m_equipManager;
         public bool IsDeath => m_netActorNode.NetActorState == NetActorState.Death;
+        public string ActorName => m_netActorNode.ActorName;
+        public int Hp => m_netActorNode.Hp;
+        public int MaxHp => m_netActorNode.MaxHp;
+        public int Mp => m_netActorNode.Mp;
+        public int MaxMp => m_netActorNode.MaxMp;
+        public int CurSceneId => m_netActorNode.SceneId;
         public int Level => m_netActorNode.Level;
         public long Exp => m_netActorNode.Exp;
         public int Speed { get => m_netActorNode.Speed; set => m_netActorNode.Speed = value; }
@@ -31,7 +45,7 @@ namespace GameClient.Entities
         public Actor(NetActorNode netAcotrNode) :base(netAcotrNode.EntityId, netAcotrNode.Transform)
         {
             m_netActorNode = netAcotrNode;
-            m_define = DataManager.Instance.unitDefineDict[netAcotrNode.ProfessionId];
+            m_unitDefine = DataManager.Instance.unitDefineDict[netAcotrNode.ProfessionId];
             m_skillManager = new();
             m_buffManager = new();
             m_equipManager = new();
@@ -49,16 +63,7 @@ namespace GameClient.Entities
             m_buffManager.Update(deltatime);
         }
 
-
-        public virtual void OnModeChanged(ActorMode old_value, ActorMode new_value)
-        {
-            this.actorMode = new_value;
-        }
-        public virtual void OnCombatModeChanged(ActorCombatMode old_value, ActorCombatMode new_value)
-        {
-            this.actorCombatMode = new_value;
-        }
-        public virtual void recvDamage(Damage damage)
+        public void OnRecvDamage(Damage damage)
         {
             //受伤，被别人打了，播放一下特效或者ui。不做数值更新
 
@@ -122,53 +127,50 @@ namespace GameClient.Entities
 
             }
         }
-        public void OnHpChanged(float oldHp,float newHp)
+        public void OnHpChanged(int oldHp,int newHp)
         {
-            //Debug.Log($"current hp = {newHp}");
-            this.m_netActorNode.Hp = newHp;
+            m_netActorNode.Hp = newHp;
             LocalOrTargetAcotrPropertyChange();
         }
-        public void OnMpChanged(float old_value, float new_value)
+        public void OnMpChanged(int old_value, int new_value)
         {
             this.m_netActorNode.Mp = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
         public virtual void OnDeath()
         {
-            //如果当前actor被关注，则需要通知
-            if (GameApp.target == this)
-            {
-                Kaiyun.Event.FireIn("TargetDeath");
-            }
-
         }
         public void OnLevelChanged(int old_value, int new_value)
         {
             //更新当前actor的数据
-            this.m_netActorNode.Level = new_value;
+            m_netActorNode.Level = new_value;
             //事件通知，level数据发送变化（可能某些ui组件需要这个信息）
             LocalOrTargetAcotrPropertyChange();
         }
-        public void OnHpmaxChanged(float old_value, float new_value)
+        public void OnExpChanged(long old_value, long new_value)
         {
-            this.m_netActorNode.HpMax = new_value;
+            // todo 感觉放在这里不太对劲
+            //更新当前actor的数据
+            m_netActorNode.Exp = new_value;
+            //事件通知，exp数据发送变化（可能某些ui组件需要这个信息）
+            Kaiyun.Event.FireOut("ExpChange");
+        }
+        public void OnHpmaxChanged(int old_value, int new_value)
+        {
+            m_netActorNode.MaxHp = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
-        public void OnMpmaxChanged(float old_value, float new_value)
+        public void OnMpmaxChanged(int old_value, int new_value)
         {
-            this.m_netActorNode.MpMax = new_value;
+            m_netActorNode.MaxMp = new_value;
             LocalOrTargetAcotrPropertyChange();
         }
         public void OnSpeedChanged(int old_value, int new_value)
         {
-            this.Speed = new_value;
+            Speed = new_value;
         }
 
-
-
-        /// <summary>
-        /// 本地玩家或者目标玩家的属性发送变化
-        /// </summary>
+        // tools
         public void LocalOrTargetAcotrPropertyChange()
         {
             if (this == GameApp.character || this == GameApp.target)
@@ -177,5 +179,17 @@ namespace GameClient.Entities
                 Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate", this);
             }
         }
+        /*
+        public virtual void OnModeChanged(ActorMode old_value, ActorMode new_value)
+        {
+            this.actorMode = new_value;
+        }
+
+        public virtual void OnCombatModeChanged(ActorCombatMode old_value, ActorCombatMode new_value)
+        {
+            this.actorCombatMode = new_value;
+        }
+
+        */
     }
 }

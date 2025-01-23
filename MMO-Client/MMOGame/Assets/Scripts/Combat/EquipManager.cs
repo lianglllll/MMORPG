@@ -1,4 +1,3 @@
-
 using GameClient.Entities;
 using GameClient.InventorySystem;
 using Google.Protobuf.Collections;
@@ -21,5 +20,7 @@ namespace GameClient.Combat
             }
             return true;
         }
+
+        public ConcurrentDictionary<EquipsType, Equipment> EquipsDict => m_equipsDict;
     }
 }

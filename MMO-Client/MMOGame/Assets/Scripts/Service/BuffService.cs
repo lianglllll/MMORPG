@@ -2,6 +2,7 @@ using Common.Summer.Net;
 using Common.Summer.Core;
 using HS.Protobuf.Combat.Buff;
 using BaseSystem.Tool.Singleton;
+using GameClient.Combat.Buffs;
 
 namespace Assets.Script.Service
 {
@@ -9,44 +10,38 @@ namespace Assets.Script.Service
     {
         public void Init()
         {
-            MessageRouter.Instance.Subscribe<BuffsAddResponse>(_BuffsAddResponse);
-            MessageRouter.Instance.Subscribe<BuffsRemoveResponse>(_BuffsRemoveResponse);
-            MessageRouter.Instance.Subscribe<BuffsUpdateResponse>(_BuffsUpdateResponse);
+            MessageRouter.Instance.Subscribe<BuffsAddResponse>(HandleBuffsAddResponse);
+            MessageRouter.Instance.Subscribe<BuffsRemoveResponse>(HandleBuffsRemoveResponse);
+            MessageRouter.Instance.Subscribe<BuffsUpdateResponse>(HandleBuffsUpdateResponse);
         }
         public void UnInit()
         {
-            MessageRouter.Instance.UnSubscribe<BuffsAddResponse>(_BuffsAddResponse);
-            MessageRouter.Instance.UnSubscribe<BuffsRemoveResponse>(_BuffsRemoveResponse);
-            MessageRouter.Instance.UnSubscribe<BuffsUpdateResponse>(_BuffsUpdateResponse);
+            MessageRouter.Instance.UnSubscribe<BuffsAddResponse>(HandleBuffsAddResponse);
+            MessageRouter.Instance.UnSubscribe<BuffsRemoveResponse>(HandleBuffsRemoveResponse);
+            MessageRouter.Instance.UnSubscribe<BuffsUpdateResponse>(HandleBuffsUpdateResponse);
         }
 
-        private void _BuffsAddResponse(Connection sender, BuffsAddResponse msg)
+        private void HandleBuffsAddResponse(Connection sender, BuffsAddResponse msg)
         {
             foreach(var info in msg.List)
             {
                 var buff = new Buff();
                 buff.Init(info);
                 if (buff.Owner == null) continue;
-
             }
         }
-
-
-        private void _BuffsRemoveResponse(Connection sender, BuffsRemoveResponse msg)
+        private void HandleBuffsRemoveResponse(Connection sender, BuffsRemoveResponse msg)
         {
             foreach (var info in msg.List)
             {
                 var actor = GameTools.GetActorById(info.OwnerId);
                 if (actor == null) continue;
-                actor.RemoveBuff(info.Id);
+                actor.BuffManager.RemoveBuff(info.Id);
             }
         }
-
-
-        private void _BuffsUpdateResponse(Connection sender, BuffsUpdateResponse msg)
+        private void HandleBuffsUpdateResponse(Connection sender, BuffsUpdateResponse msg)
         {
 
         }
-
     }
 }

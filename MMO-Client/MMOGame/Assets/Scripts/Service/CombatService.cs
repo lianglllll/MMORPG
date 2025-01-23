@@ -1,7 +1,5 @@
-using Summer;
 using UnityEngine;
 using GameClient.Entities;
-using Assets.Script.Entities;
 using GameClient;
 using GameClient.Combat;
 using System.Threading.Tasks;
@@ -14,15 +12,11 @@ using BaseSystem.Tool.Singleton;
 
 public class CombatService : SingletonNonMono<CombatService>
 {
-
     /// <summary>
     /// 初始化，gamemanager中启用
     /// </summary>
     public void Init()
     {
-        MessageRouter.Instance.Subscribe<SpaceEnterResponse>(_SpaceEnterResponse);
-        MessageRouter.Instance.Subscribe<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
-        MessageRouter.Instance.Subscribe<SpaceItemEnterResponse>(_SpaceItemEnterResponse);
         MessageRouter.Instance.Subscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
@@ -34,9 +28,6 @@ public class CombatService : SingletonNonMono<CombatService>
 
     public void UnInit()
     {
-        MessageRouter.Instance.UnSubscribe<SpaceEnterResponse>(_SpaceEnterResponse);
-        MessageRouter.Instance.UnSubscribe<SpaceCharactersEnterResponse>(_SpaceCharactersEnterResponse);
-        MessageRouter.Instance.UnSubscribe<SpaceItemEnterResponse>(_SpaceItemEnterResponse);
         MessageRouter.Instance.UnSubscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.UnSubscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.UnSubscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
@@ -46,109 +37,6 @@ public class CombatService : SingletonNonMono<CombatService>
         MessageRouter.Instance.UnSubscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
 
-    /// <summary>
-    /// 进入场景的响应(entity是自己)
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="msg"></param>
-    private void _SpaceEnterResponse(Connection sender, SpaceEnterResponse msg)
-    {
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            if (GameApp.character==null)
-            {
-                //1.切换场景
-                GameApp.SpaceId = msg.Character.SpaceId;
-                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
-
-                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
-
-                     await Task.Delay(800);
-
-                    //2.加载其他角色和ai
-                    foreach (var item in msg.CharacterList)
-                    {
-                        EntityManager.Instance.OnActorEnterScene(item);
-                    }
-
-                    //3.加载物品
-                    foreach (var item in msg.EItemList)
-                    {
-                        EntityManager.Instance.OnItemEnterScene(item);
-                    }
-
-                    //最后生成自己的角色,记录本机的数据
-                    GameApp.entityId = msg.Character.Entity.Id;
-                    EntityManager.Instance.OnActorEnterScene(msg.Character);
-                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
-
-                    //推入combatUI
-                    UIManager.Instance.OpenPanel("CombatPanel");
-                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
-                    UIManager.Instance.ShowTopMessage("" + def.Name);
-
-                });
-            }
-            else if(GameApp.character.m_netActorNode.SceneId != msg.Character.SpaceId)
-            {
-                //清理旧场景的对象
-                EntityManager.Instance.Clear();
-                GameApp.ClearGameAppData();
-                TP_CameraController.instance.OnStop();
-
-                //切换场景
-                GameApp.SpaceId = msg.Character.SpaceId;
-                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var spaceDef);
-                ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
-
-                    await Task.Delay(800);
-
-                    //加载其他角色和ai
-                    foreach (var item in msg.CharacterList)
-                    {
-                        EntityManager.Instance.OnActorEnterScene(item);
-                    }
-                    //加载物品
-                    foreach (var item in msg.EItemList)
-                    {
-                        EntityManager.Instance.OnItemEnterScene(item);
-                    }
-
-                    //最后生成自己的角色,记录本机的数据
-                    GameApp.entityId = msg.Character.Entity.Id;
-                    EntityManager.Instance.OnActorEnterScene(msg.Character);
-                    GameApp.character = EntityManager.Instance.GetEntity<Character>(msg.Character.Entity.Id);
-
-                    //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
-                    UIManager.Instance.ClosePanel("CombatPanel");
-                    UIManager.Instance.OpenPanel("CombatPanel");
-                    DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SpaceId, out var def);
-                    UIManager.Instance.ShowTopMessage("" + def.Name);
-
-                });
-            }
-            else
-            {
-                Debug.LogError("_SpaceEnterResponse:发生甚么事了，给我干哪里来了");
-            }
-
-        });
-
-    }
-
-    /// <summary>
-    /// 新角色进入场景通知（entity不是自己）
-    /// </summary>
-    /// <param name="conn"></param>
-    /// <param name="msg"></param>
-    private void _SpaceCharactersEnterResponse(Connection conn, SpaceCharactersEnterResponse msg)
-    {
-        foreach (var actorObj in msg.CharacterList)
-        {
-            //触发角色进入事件
-            EntityManager.Instance.OnActorEnterScene(actorObj);
-        }
-    }
 
     /// <summary>
     /// entity同步信息接收
@@ -276,7 +164,7 @@ public class CombatService : SingletonNonMono<CombatService>
             {
                 var target = GameTools.GetActorById(item.TargetId);
                 if (target == null) continue;
-                target.recvDamage(item);
+                target.OnRecvDamage(item);
             }
         });
     }
@@ -301,23 +189,23 @@ public class CombatService : SingletonNonMono<CombatService>
                 switch (item.Property)
                 {
                     case PropertyUpdate.Types.Prop.Hp:
-                        actor.OnHpChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
+                        actor.OnHpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
                     case PropertyUpdate.Types.Prop.Mp:
-                        actor.OnMpChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
+                        actor.OnMpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
                     case PropertyUpdate.Types.Prop.Hpmax:
-                        actor.OnHpmaxChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
+                        actor.OnHpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
                     case PropertyUpdate.Types.Prop.Mpmax:
-                        actor.OnMpmaxChanged(item.OldValue.FloatValue, item.NewValue.FloatValue);
+                        actor.OnMpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
-                    case PropertyUpdate.Types.Prop.Mode:
-                        actor.OnModeChanged(item.OldValue.ModeValue, item.NewValue.ModeValue);
-                        break;
-                    case PropertyUpdate.Types.Prop.CombatMode:
-                        actor.OnCombatModeChanged(item.OldValue.CombatModeValue, item.NewValue.CombatModeValue);
-                        break;
+                    //case PropertyUpdate.Types.Prop.Mode:
+                    //    actor.OnModeChanged(item.OldValue.ModeValue, item.NewValue.ModeValue);
+                    //    break;
+                    //case PropertyUpdate.Types.Prop.CombatMode:
+                    //    actor.OnCombatModeChanged(item.OldValue.CombatModeValue, item.NewValue.CombatModeValue);
+                    //    break;
                     case PropertyUpdate.Types.Prop.Level:
                         actor.OnLevelChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
@@ -327,26 +215,16 @@ public class CombatService : SingletonNonMono<CombatService>
                         chr = actor as Character;
                         chr.OnExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
                         break;
-                    case PropertyUpdate.Types.Prop.Golds:
-                        chr = actor as Character;
-                        chr.OnGoldChanged(item.OldValue.LongValue, item.NewValue.LongValue);
-                        break;
+                    //case PropertyUpdate.Types.Prop.Golds:
+                    //    chr = actor as Character;
+                    //    chr.OnGoldChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                    //    break;
                     case PropertyUpdate.Types.Prop.Speed:
                         actor.OnSpeedChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
                 }
             }
         });
-    }
-
-    /// <summary>
-    /// 物品进入场景
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="msg"></param>
-    private void _SpaceItemEnterResponse(Connection sender, SpaceItemEnterResponse msg)
-    {
-        EntityManager.Instance.OnItemEnterScene(msg.NetEItem);
     }
 
     /// <summary>

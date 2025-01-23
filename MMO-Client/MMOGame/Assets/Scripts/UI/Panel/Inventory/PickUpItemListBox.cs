@@ -1,7 +1,4 @@
 using GameClient.Entities;
-using GameServer.Model;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +17,7 @@ public class PickUpItemListBox : MonoBehaviour
     /// 重新设置
     /// </summary>
     /// <param name="itemEntitys"></param>
-    public void Reset(List<ItemEntity> itemEntitys)
+    public void Reset(List<ClientItem> itemEntitys)
     {
         //清理content下的子物体
         int childCount = Content.childCount;

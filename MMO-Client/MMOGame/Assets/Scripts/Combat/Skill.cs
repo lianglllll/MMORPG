@@ -188,7 +188,7 @@ namespace GameClient.Combat
                     var target = _sco.RealObj as Actor;
                     if (target != Owner)
                     {
-                        Owner.m_baseController.DirectLookTarget(target.renderObj.transform.position);
+                        Owner.m_baseController.DirectLookTarget(target.RenderObj.transform.position);
                     }
                 }
             });
@@ -208,7 +208,7 @@ namespace GameClient.Combat
                 var target = _sco.RealObj as Actor;
                 GameObject myObjcet = new GameObject("MyMissile");
                 var missile = myObjcet.AddComponent<Missile>();
-                missile.Init(this, Owner.renderObj.transform.position, target.m_renderObj);
+                missile.Init(this, Owner.RenderObj.transform.position, target.RenderObj);
             }
 
         }

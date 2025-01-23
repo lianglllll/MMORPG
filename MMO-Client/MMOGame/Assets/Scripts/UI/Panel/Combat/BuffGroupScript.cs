@@ -1,5 +1,5 @@
+using GameClient.Combat.Buffs;
 using GameClient.Entities;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +36,7 @@ public class BuffGroupScript : MonoBehaviour
         }
         buffUIdict.Clear();
 
-        foreach(var buf in actor.m_buffsDict.Values)
+        foreach(var buf in actor.BuffManager.GetBuffs())
         {
             AddBuffUI(buf);
         }
@@ -49,7 +49,7 @@ public class BuffGroupScript : MonoBehaviour
         //更新ui
         foreach(var item in buffUIdict)
         {
-            if (item.Value._buff.CurrentLevel == 0)
+            if (item.Value._buff.CurLevel == 0)
             {
 
             }
@@ -67,7 +67,7 @@ public class BuffGroupScript : MonoBehaviour
         var buffui = obj.GetComponent<BuffUIScript>();
         buffui.Init(buff);
         //加入字典中管理
-        buffUIdict.TryAdd(buff.ID, buffui);
+        buffUIdict.TryAdd(buff.InstanceId, buffui);
     }
 
     //remove

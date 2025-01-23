@@ -1,4 +1,3 @@
-using Assets.Script.Entities;
 using GameClient.Combat;
 using GameClient.Entities;
 using HS.Protobuf.Login;
@@ -30,7 +29,7 @@ namespace GameClient {
         public static WorldInfoNode curWorldInfoNode;
 
         //当前所在场景id
-        public static int SpaceId;
+        public static int SceneId;
 
         //角色的entityid
         public static int entityId;
@@ -51,7 +50,7 @@ namespace GameClient {
         //清空当前存储的数据
         public static void ClearGameAppData()
         {
-            SpaceId = -1;
+            SceneId = -1;
             entityId = -1;
             character = null;
             target = null;

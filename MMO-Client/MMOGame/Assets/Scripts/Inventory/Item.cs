@@ -1,91 +1,45 @@
 using HS.Protobuf.Game.Backpack;
-using System;
 
-/// <summary>
-/// 物品基类
-/// </summary>
-[Serializable]
 public class Item 
 {
-    public ItemDefine Define { get; set; } 
-    private ItemInfo _itmeInfo;                             //网络对象
+    private ItemInfo m_itmeInfo;
+    private ItemDefine m_itemDefine;
 
-    public int ItemId
-    {
-        get
-        {
-            return Define.ID;
-        }
-    }
+    public ItemDefine ItemDefine => m_itemDefine;
+    public int ItemId => m_itemDefine.ID;
+    public string ItemName => m_itemDefine.Name;
+    public int StackingUpperLimit => m_itemDefine.Capicity;
     public int Amount
     {
-        get { return _itmeInfo.Amount; }
-        set { _itmeInfo.Amount = value; }
+        get { return m_itmeInfo.Amount; }
+        set { m_itmeInfo.Amount = value; }
     }
     public int Position
     {
         get
         {
-            return _itmeInfo.Position;
+            return m_itmeInfo.Position;
         }
         set
         {
-            _itmeInfo.Position = value;
+            m_itmeInfo.Position = value;
         }
     }
-    public int StackingUpperLimit
-    {
-        get
-        {
-            return Define.Capicity;
-        }
-    }
-    public ItemInfo ItemInfo
-    {
-        get
-        {
-            return _itmeInfo;
-        }
-    }
+    public string IconPath => m_itemDefine.Icon;
 
-    /// <summary>
-    /// 无参构造
-    /// </summary>
-    public Item()
-    {
-    }
-
-    /// <summary>
-    /// 构造方法,用网络对象初始化
-    /// </summary>
-    /// <param name="itemInfo"></param>
     public Item(ItemInfo itemInfo)
     {
-        Define = DataManager.Instance.itemDefineDict[itemInfo.ItemId];
-        _itmeInfo = new ItemInfo() { ItemId = Define.ID };
-        this._itmeInfo.Amount = itemInfo.Amount;
-        this._itmeInfo.Position = itemInfo.Position;
+        m_itmeInfo = itemInfo;
     }
-
-    /// <summary>
-    /// 构造方法，添加用
-    /// </summary>
-    /// <param name="define"></param>
     public Item(ItemDefine define, int amount = 1, int position = 0)
     {
-        Define = define;
-        _itmeInfo = new ItemInfo() { ItemId = Define.ID };
-        this._itmeInfo.Amount = amount;
-        this._itmeInfo.Position = position;
+        m_itemDefine = define;
+        m_itmeInfo = new ItemInfo() { ItemId = ItemDefine.ID, Amount = amount, Position = position };
     }
 
-    /// <summary>
-    /// 获取item的类型
-    /// </summary>
-    /// <returns></returns>
     public ItemType GetItemType()
     {
-        switch (Define.ItemType)
+        switch (ItemDefine.ItemType)
         {
             case "消耗品": return ItemType.Consumable;
             case "道具": return ItemType.Material;
@@ -93,14 +47,9 @@ public class Item
         }
         return ItemType.Consumable;
     }
-
-    /// <summary>
-    /// 获取item的品质
-    /// </summary>
-    /// <returns></returns>
-    public Quality GetQuality()
+    public Quality GetItemQuality()
     {
-        switch (Define.Quality)
+        switch (ItemDefine.Quality)
         {
             case "普通": return Quality.Common;
             case "非凡": return Quality.Fine;
@@ -111,16 +60,11 @@ public class Item
         }
         return Quality.Common;
     }
-
-    /// <summary>
-    /// 获取描述文本
-    /// </summary>
-    /// <returns></returns>
-    public virtual string GetDescText()
+    public virtual string GetItemDescText()
     {
-       var content = $"<color=#ffffff>{this.Define.Name}</color>\n" +
-                     $"<color=yellow>{this.Define.Description}</color>\n\n" +
-                     $"<color=bulue>堆叠上限：{this.Define.Capicity}</color>";
+       var content = $"<color=#ffffff>{this.ItemDefine.Name}</color>\n" +
+                     $"<color=yellow>{this.ItemDefine.Description}</color>\n\n" +
+                     $"<color=bulue>堆叠上限：{this.ItemDefine.Capicity}</color>";
         return content;
     }
 

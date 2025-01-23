@@ -53,7 +53,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     {
         AmountText.text = ""+item.Amount;
         icon.gameObject.SetActive(true);
-        icon.sprite = Res.LoadAssetSync<Sprite>(item.Define.Icon);
+        icon.sprite = Res.LoadAssetSync<Sprite>(item.ItemDefine.Icon);
     }
 
     /// <summary>
@@ -175,7 +175,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         var content = "<color=#ffffff>物品信息为空</color>";
         if (item != null)
         {
-            content = this.item.GetDescText();
+            content = this.item.GetItemDescText();
         }
         ToolTip.Instance.Show(content);
     } 
@@ -268,7 +268,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private void ItemDiscard(int slotIndex, int count)
     {
         //弹出提示框，询问扔多少个
-        (UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") as KnapsackPanel).numberInputBox.Show(transform.position,item.Define.Name, item.Amount,
+        (UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") as KnapsackPanel).numberInputBox.Show(transform.position,item.ItemDefine.Name, item.Amount,
             (targetAmount) => {
                 ItemDataManager.Instance.ItemDiscard(item.Position, targetAmount, InventoryType.Knapsack);
             });
