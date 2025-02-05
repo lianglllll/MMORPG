@@ -150,6 +150,10 @@ public class NetManager : Singleton<NetManager>
     private void _LoginGateDisconnectedCallback(NetClient tcpClient)
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() => {
+
+            UIManager.Instance.MessagePanel.ShowTopMsg("与服务器断开连接.....");
+            UIManager.Instance.MessagePanel.ShowNetworkDisconnect();
+
             if (m_loginGateClient.IsHeartBeat)
             {
                 StopCoroutine(_SendLoginGateHeartBeatMessage());
@@ -157,9 +161,9 @@ public class NetManager : Singleton<NetManager>
             }
 
             //重连
-            m_loginGateClient.ReConnectToServer();
-            UIManager.Instance.MessagePanel.ShowNetworkDisconnect();
-            UIManager.Instance.MessagePanel.ShowLoadingBox("断线重连中...");
+            //m_loginGateClient.ReConnectToServer();
+            //UIManager.Instance.MessagePanel.ShowNetworkDisconnect();
+            //UIManager.Instance.MessagePanel.ShowLoadingBox("断线重连中...");
         });
     }
     private void _CloseLoginGateConnection()

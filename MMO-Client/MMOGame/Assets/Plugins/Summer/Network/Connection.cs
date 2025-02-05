@@ -31,6 +31,7 @@ namespace Common.Summer.Core
 
         public bool Init(Socket socket, DisconnectedHandler disconnected)
         {
+            m_onDisconnected = disconnected;
             m_socket = socket;
             m_encryptionManager = new EncryptionManager();
             m_encryptionManager.Init();

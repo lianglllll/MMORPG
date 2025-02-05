@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Player\Controller\CtrlController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\RegisterPanelScript.cs" />
+    <Compile Include="Assets\Scripts\Handle\SceneHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Net\Old\GameEntity.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Sub\Consumable.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ClientItem.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\ThirdPersonCamera.cs" />
+    <Compile Include="Assets\Scripts\Entities\Npc.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\SelectRolePanelScript.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Assets\Scripts\Combat\Buffs\BuffManager.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Defense.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Sub\Equipment.cs" />
     <Compile Include="Assets\Scripts\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Scripts\Entities\Actor.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Idle.cs" />
     <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
     <Compile Include="Assets\Scripts\Manager\GameTools.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Sub\MaterialItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingPanel.cs" />
     <Compile Include="Assets\Scripts\Player\Model\PlayerModel.cs" />
     <Compile Include="Assets\Scripts\Player\UnitUIController.cs" />
@@ -204,11 +209,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Sub\Equipment.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Sub\Consumable.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Sub\MaterialItem.cs" />
-    <Compile Include="Assets\Scripts\Entities\Npc.cs" />
-    <Compile Include="Assets\Scripts\Handle\SceneHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />

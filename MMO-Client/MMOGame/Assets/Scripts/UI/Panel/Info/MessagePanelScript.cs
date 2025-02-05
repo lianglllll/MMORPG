@@ -8,7 +8,6 @@ using DG.Tweening;
 
 public class MessagePanelScript : MonoBehaviour
 {
-
     //网络延迟text面板
     private Transform NetworkInfoBox;
     private Text NDelayText;
@@ -21,8 +20,7 @@ public class MessagePanelScript : MonoBehaviour
     private GameObject bottonMsgBox;
     private TextMeshProUGUI bottonMsgBoxText;
     private float showTime = 1f;
-    private float topMsgBoxCountdown;
-    private float bottonMsgBoxCountdown;
+    private Sequence currentTopMsgSequence; 
 
     //确认面板
     private bool selectionPanelActive;
@@ -57,11 +55,6 @@ public class MessagePanelScript : MonoBehaviour
     }
     private void Start()
     {
-        //因为消息提示默认是不显示的
-
-        topMsgBoxCountdown = 0f;
-        bottonMsgBoxCountdown = 0f;
-
         // 确保初始颜色为透明状态
         topMsgCanvasGroup.alpha = 0;
 
@@ -97,20 +90,31 @@ public class MessagePanelScript : MonoBehaviour
     /// <param name="msg"></param>
     public void ShowTopMsg(string msg)
     {
-        //设置提示信息并且启动text
+        // 如果已有动画正在运行，立即终止并重置
+        if (currentTopMsgSequence != null && currentTopMsgSequence.IsActive())
+        {
+            currentTopMsgSequence.Kill();
+            topMsgCanvasGroup.alpha = 0; // 立即重置透明度
+            topMsgBox.SetActive(false);  // 确保对象处于关闭状态
+        }
+
+        // 设置提示信息
         topMsgBoxText.text = msg;
         topMsgBox.SetActive(true);
 
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(topMsgCanvasGroup.DOFade(1, 1f));
-        sequence.AppendInterval(showTime);
-        sequence.Append(topMsgCanvasGroup.DOFade(0, 1f).OnComplete(()=> {
+        // 创建新动画序列
+        currentTopMsgSequence = DOTween.Sequence();
+        currentTopMsgSequence.Append(topMsgCanvasGroup.DOFade(1, 0.5f));
+        currentTopMsgSequence.AppendInterval(showTime);
+        currentTopMsgSequence.Append(topMsgCanvasGroup.DOFade(0, 0.5f).OnComplete(() => {
             topMsgBox.SetActive(false);
+            currentTopMsgSequence = null; // 动画完成后清除引用
         }));
 
-        //停留showTime秒后调用隐藏
-        topMsgBoxCountdown = showTime;
+        // 可选：设置自动回收（根据DOTween设置）
+        currentTopMsgSequence.SetAutoKill(true);
     }
+
     public void ShowBottonMsg(string msg,Color? color = null)
     {
         if (!color.HasValue)
@@ -121,8 +125,7 @@ public class MessagePanelScript : MonoBehaviour
         bottonMsgBoxText.color = (Color)color;
         bottonMsgBoxText.text = msg;
         bottonMsgBox.SetActive(true);
-        //停留showTime秒后调用隐藏
-        bottonMsgBoxCountdown = showTime;
+
     }
 
     /// <summary>
