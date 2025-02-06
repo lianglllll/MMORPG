@@ -1,7 +1,5 @@
 using BaseSystem.MyDelayedTaskScheduler;
 using BaseSystem.Tool;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TP_CameraController : MonoBehaviour
@@ -13,7 +11,7 @@ public class TP_CameraController : MonoBehaviour
     [SerializeField] private float _controllerSpeed = 0.3f;                                 //相机的移动速度
     [SerializeField] private float _positionSmoothTime = 10;                                //相机移动平滑时间
     [SerializeField] private float _rotateSmoothTime = 0.1f;                                //相机旋转平滑时间
-    [SerializeField] private Vector2 _cameraVerticalMaxAngle = new Vector2(-65,65);   //限制相机上下看的最大角度
+    [SerializeField] private Vector2 _cameraVerticalMaxAngle = new Vector2(-65,65);         //限制相机上下看的最大角度
 
     private Vector3 _currentRotateVelocity = Vector3.zero;                                  //当前相机的移动速度,这里设置为0
     private Vector2 _input;                                                                 //用于接收鼠标输入
@@ -45,7 +43,7 @@ public class TP_CameraController : MonoBehaviour
     private void Update()
     {
         //
-        if (isStart && Input.GetMouseButton(1))
+        if (isStart)
         {
             CameraInput();
         }

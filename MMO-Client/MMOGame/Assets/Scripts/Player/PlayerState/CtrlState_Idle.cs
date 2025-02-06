@@ -8,7 +8,7 @@ namespace Player
 
         public override void Enter()
         {
-            player.PlayAnimation("Idle");
+            player.PlayAnimation("Idle1");
         } 
 
         public override void Update()

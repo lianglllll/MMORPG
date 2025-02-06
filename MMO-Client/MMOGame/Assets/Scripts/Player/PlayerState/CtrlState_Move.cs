@@ -13,7 +13,7 @@ namespace Player
 
         public override void Enter()
         {
-            player.PlayAnimation("Move");
+            player.PlayAnimation("Normal_Walk");
             isMoveTo = false;
         }
 

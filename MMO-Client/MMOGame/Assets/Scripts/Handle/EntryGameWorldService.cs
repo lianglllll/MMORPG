@@ -152,7 +152,7 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
     }
     private void _HandleEnterGameResponse(Connection sender, EnterGameResponse msg)
     {
-        Log.Information("进入游戏回包");
+        // Log.Information("进入游戏回包");
 
         if(msg.ResultCode != 0)
         {
