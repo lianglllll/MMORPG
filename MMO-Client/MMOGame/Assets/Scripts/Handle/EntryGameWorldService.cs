@@ -175,7 +175,7 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
             //清理旧场景的对象
             EntityManager.Instance.Clear();
             GameApp.ClearGameAppData();
-            TP_CameraController.instance.OnStop();
+            TP_CameraController.Instance.OnStop();
 
             
             GameApp.SceneId = curSceneId;

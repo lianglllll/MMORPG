@@ -1,12 +1,14 @@
 using BaseSystem.MyDelayedTaskScheduler;
+using BaseSystem.Singleton;
 using BaseSystem.Tool;
 using UnityEngine;
 
-public class TP_CameraController : MonoBehaviour
+public class TP_CameraController : Singleton<TP_CameraController>
 {
+    private bool isStart;                                                                   //是否启用当前这个控制器
+
     [Header("相机参数配置")]
     private Transform _lookTarget;                                                          //注视对象
-
     [SerializeField] private float _positionOffset = 0.1f;                                  //相对于_currentLookTarget的偏移值
     [SerializeField] private float _controllerSpeed = 0.3f;                                 //相机的移动速度
     [SerializeField] private float _positionSmoothTime = 10;                                //相机移动平滑时间
@@ -19,42 +21,40 @@ public class TP_CameraController : MonoBehaviour
     private Transform _currentLookTarget;                                                   //摄像机当前注释的目标
     private bool _isFinish;                                                                 //是否处于摄像机处决模式
 
-    private bool isStart;                                                                   //是否启用当前这个控制器
-
-    public static TP_CameraController instance;
-
 
     private void OnEnable()
     {
         //开启相机处决模式
         Kaiyun.Event.RegisterOut("SetMainCameraTarget", this, "SetFnishTarget");
     }
-
     private void OnDisable()
     {
         Kaiyun.Event.UnregisterOut("SetMainCameraTarget", this, "SetFnishTarget");
     }
-
-    private void Start()
-    {
-        instance = this;
-    }
-
     private void Update()
     {
         //
         if (isStart)
         {
             CameraInput();
+            if (GameInputManager.Instance.SustainLeftAlt)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                // 隐藏并锁定光标
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
     }
-
-    /// <summary>
-    /// LateUpdate 通常用于处理摄像机的位置和方向，因为在 Update 阶段中可能会有其他物体的运动，而 LateUpdate 则确保在摄像机更新之前处理这些变化。
-    /// </summary>
     private void LateUpdate()
     {
+        //  LateUpdate 通常用于处理摄像机的位置和方向，因为在 Update 阶段中可能会有其他物体的运动，
+        //  而 LateUpdate 则确保在摄像机更新之前处理这些变化。
         if (isStart)
         {
             UpdateCameraRotation();
@@ -140,13 +140,10 @@ public class TP_CameraController : MonoBehaviour
         isStart = true;
         _isFinish = false;
     }
-
     public void OnStop()
     {
         isStart = false;
         _lookTarget = null;
         _currentLookTarget = _lookTarget;
-
     }
-
 }

@@ -56,55 +56,30 @@
     <Analyzer Include="D:\Tools\CodeTools\VS\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
-    <Compile Include="Assets\Scripts\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\CtrlController.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\RegisterPanelScript.cs" />
     <Compile Include="Assets\Scripts\Handle\SceneHandler.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
-    <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\SelectionPanel.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Idle.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfigImporter.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Net\Old\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\Consumable.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
-    <Compile Include="Assets\Scripts\Entities\ClientItem.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_JumpUp.cs" />
-    <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Scripts\Manager\GameApp.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
-    <Compile Include="Assets\Art\Hand_to_Hand_Set\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\Scripts\Player\Model\SyncModel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Death.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Evade.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityBarScript.cs" />
-    <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Move.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
-    <Compile Include="Assets\Scripts\Handle\UserService.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\SyncController.cs" />
-    <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
-    <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\CreateRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\Handle\SecurityService.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Skill.cs" />
-    <Compile Include="Assets\Scripts\Service\BuffService.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_AirDown.cs" />
     <Compile Include="Assets\Scripts\Interaction\PortalControl.cs" />
     <Compile Include="Assets\Scripts\Service\ChatService.cs" />
@@ -112,118 +87,147 @@
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\ThirdPersonCamera.cs" />
-    <Compile Include="Assets\Scripts\Entities\Npc.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityGroupScript.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\SelectRolePanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\controller.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Move.cs" />
     <Compile Include="Assets\Scripts\Player\Model\ModelBase.cs" />
-    <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Hurt.cs" />
-    <Compile Include="Assets\Scripts\Combat\Buffs\BuffManager.cs" />
-    <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Defense.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\Equipment.cs" />
     <Compile Include="Assets\Scripts\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Scripts\Entities\Actor.cs" />
     <Compile Include="Assets\Scripts\Combat\Skill.cs" />
-    <Compile Include="Assets\Scripts\Service\ItemService.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntitySend.cs" />
     <Compile Include="Assets\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
     <Compile Include="Assets\aExample\a\test.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\MessagePanelScript.cs" />
-    <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntityRecive.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Scripts\Camera\TP_CameraController.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\RoleListItemScript.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\VocationItem.cs" />
-    <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
-    <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Death.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ChatBoxScript.cs" />
-    <Compile Include="Assets\Res\Model\Unit\骷髅\Readme\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
-    <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
-    <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Dialog\DialogStepConfig.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingSelectOption.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\NumberInputBox.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_JumpUp.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState.cs" />
-    <Compile Include="Assets\Scripts\Entities\Character.cs" />
-    <Compile Include="Assets\Scripts\Service\CombatService.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\WorldInfoNodeUI.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogStopBackgroundAudioEvent.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_AirDown.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
-    <Compile Include="Assets\Scripts\Entities\Monster.cs" />
     <Compile Include="Assets\Scripts\Combat\EquipManager.cs" />
     <Compile Include="Assets\Scripts\Net\NetClient.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
-    <Compile Include="Assets\aExample\RecyclingListDemo\TestPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
-    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\Swapper.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\SpaceDefine.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\SkillDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\LoginPanelScript.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoBox.cs" />
-    <Compile Include="Assets\Scripts\Combat\Buffs\Buff.cs" />
     <Compile Include="Assets\Scripts\Manager\DataManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataDefine\DialogDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\CombatPanelScript.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Defense.cs" />
     <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Evade.cs" />
     <Compile Include="Assets\Scripts\Combat\Missile.cs" />
-    <Compile Include="Assets\Scripts\Entities\Entity.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\BasePanel.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\SelectWorldPanel.cs" />
-    <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Idle.cs" />
     <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
     <Compile Include="Assets\Scripts\Manager\GameTools.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Sub\MaterialItem.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingPanel.cs" />
     <Compile Include="Assets\Scripts\Player\Model\PlayerModel.cs" />
     <Compile Include="Assets\Scripts\Player\UnitUIController.cs" />
     <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\Action_Manage.cs" />
-    <Compile Include="Assets\aExample\Dialog\DialogPlayBackgroundAudioEvent.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Skill.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\MouseOrbitImproved.cs" />
-    <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Item.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\LoadingBox.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
+    <Compile Include="Assets\Scripts\Net\NetManager.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Dizzy.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\SelectionPanel.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
+    <Compile Include="Assets\Scripts\Entities\ClientItem.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_JumpUp.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
+    <Compile Include="Assets\Art\Hand_to_Hand_Set\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\Player\Model\SyncModel.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Death.cs" />
+    <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_Move.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
+    <Compile Include="Assets\Scripts\Handle\UserService.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
+    <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
+    <Compile Include="Assets\Scripts\Service\BuffService.cs" />
+    <Compile Include="Assets\Scripts\Entities\Npc.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\controller.cs" />
+    <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Hurt.cs" />
+    <Compile Include="Assets\Scripts\Combat\Buffs\BuffManager.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
+    <Compile Include="Assets\Scripts\Service\ItemService.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
+    <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntityRecive.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\VocationItem.cs" />
+    <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
+    <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Death.cs" />
+    <Compile Include="Assets\Res\Model\Unit\骷髅\Readme\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
+    <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Dialog\DialogStepConfig.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState.cs" />
+    <Compile Include="Assets\Scripts\Entities\Character.cs" />
+    <Compile Include="Assets\Scripts\Service\CombatService.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\WorldInfoNodeUI.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState\CtrlState_AirDown.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
+    <Compile Include="Assets\Scripts\Entities\Monster.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
+    <Compile Include="Assets\aExample\RecyclingListDemo\TestPanel.cs" />
+    <Compile Include="Assets\Art\Chr\Suriyun\Scripts\Swapper.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\SpaceDefine.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\SkillDefine.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoBox.cs" />
+    <Compile Include="Assets\Scripts\Combat\Buffs\Buff.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataDefine\DialogDefine.cs" />
+    <Compile Include="Assets\Scripts\Entities\Entity.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\BasePanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\SelectWorldPanel.cs" />
+    <Compile Include="Assets\Scripts\Player\SyncState\SyncState_Idle.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Sub\MaterialItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Setting\SettingPanel.cs" />
+    <Compile Include="Assets\aExample\Dialog\DialogPlayBackgroundAudioEvent.cs" />
+    <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Item.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />
     <None Include="Assets\Res\Shader\UI\Circular.shader" />
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\HDRP\Stand\Standard_Two_Sided .shader" />
     <None Include="Assets\Res\Shader\UI\CustomRoundCornerShader.shader" />
+    <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_Standard.shader" />
     <None Include="Assets\Res\Model\Unit\WizardPolyArt\Shader\PolyArtMaskTint.shader" />
+    <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_VFX_AlphaBlend.shader" />
     <None Include="Assets\HybridCLRGenerate\link.xml" />
     <None Include="Assets\Art\Chr\Suriyun\README.txt" />
     <None Include="Assets\Art\Chr\Ida Faber\Shaders\Built-in\GR_StandardS_DS.shader" />
     <None Include="Assets\Res\Model\Unit\牛头人\BOSS\Bull\Shader\Cartoon.shader" />
+    <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_Foliage.shader" />
     <None Include="Assets\Art\Chr\Ida Faber\Shaders\Built-in\Double-sided.shader" />
     <None Include="Assets\Res\UI\Fonts\zh-cn.txt" />
     <None Include="Assets\Res\Model\Unit\WizardPolyArt\SRP\HowToTestSRPs.txt" />
     <None Include="Assets\Art\Hovl Studio\Magic effects pack\Demo scene\Readme.txt" />
+    <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_StandardMultiBlend.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -469,14 +473,11 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.5f1c1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="DemiLib">
-      <HintPath>Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
-    </Reference>
     <Reference Include="LZ4">
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@4e172129d8\Plugins\LZ4.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog">
-      <HintPath>Assets\Plugins\Serilog.dll</HintPath>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="dnlib">
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@4e172129d8\Plugins\dnlib.dll</HintPath>
@@ -484,23 +485,41 @@
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>Assets\Plugins\protobuf\Google.Protobuf.dll</HintPath>
-    </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.0.1\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\Plugins\protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>Assets\Plugins\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
+    </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>Assets\Plugins\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>Assets\Plugins\protobuf\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Plugins\protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.5f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>
@@ -886,6 +905,9 @@
     <Reference Include="YooAsset.Editor">
       <HintPath>Library\ScriptAssemblies\YooAsset.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -897,6 +919,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -913,11 +938,23 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="YooAsset">
       <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
@@ -927,6 +964,12 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
@@ -939,6 +982,12 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
@@ -958,11 +1007,20 @@
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
@@ -973,6 +1031,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ScriptableBuildPipeline">
       <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
     </Reference>
@@ -981,6 +1042,9 @@
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>

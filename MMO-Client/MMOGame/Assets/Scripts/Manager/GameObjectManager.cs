@@ -152,7 +152,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             syncEntitySend.Init(ctl, initPosition, Vector3.zero);
 
             //启用第三人称摄像机
-            TP_CameraController.instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
+            TP_CameraController.Instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
         }
         else
         {

@@ -170,6 +170,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LetfAlt"",
+                    ""type"": ""Button"",
+                    ""id"": ""26da4fc1-785d-42d1-b55a-2d02add2d067"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -392,6 +401,45 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""BigJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3da953c3-a8f4-4f75-9f37-ec15ec95a89e"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LetfAlt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UIInput"",
+            ""id"": ""5b732d53-b905-47bc-8a83-0312b910587c"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ee5dbdf-05d3-41be-a41d-95e3a2ff8a9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f9307661-c9e4-4f17-b9d0-b056323d218c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -416,6 +464,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_AnyKey = m_GameInput.FindAction("AnyKey", throwIfNotFound: true);
         m_GameInput_Jump = m_GameInput.FindAction("Jump", throwIfNotFound: true);
         m_GameInput_BigJump = m_GameInput.FindAction("BigJump", throwIfNotFound: true);
+        m_GameInput_LetfAlt = m_GameInput.FindAction("LetfAlt", throwIfNotFound: true);
+        // UIInput
+        m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
+        m_UIInput_Newaction = m_UIInput.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -491,6 +543,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_AnyKey;
     private readonly InputAction m_GameInput_Jump;
     private readonly InputAction m_GameInput_BigJump;
+    private readonly InputAction m_GameInput_LetfAlt;
     public struct GameInputActions
     {
         private @InputActions m_Wrapper;
@@ -511,6 +564,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @AnyKey => m_Wrapper.m_GameInput_AnyKey;
         public InputAction @Jump => m_Wrapper.m_GameInput_Jump;
         public InputAction @BigJump => m_Wrapper.m_GameInput_BigJump;
+        public InputAction @LetfAlt => m_Wrapper.m_GameInput_LetfAlt;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -568,6 +622,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @BigJump.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnBigJump;
                 @BigJump.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnBigJump;
                 @BigJump.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnBigJump;
+                @LetfAlt.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
+                @LetfAlt.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
+                @LetfAlt.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
             }
             m_Wrapper.m_GameInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -620,10 +677,46 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @BigJump.started += instance.OnBigJump;
                 @BigJump.performed += instance.OnBigJump;
                 @BigJump.canceled += instance.OnBigJump;
+                @LetfAlt.started += instance.OnLetfAlt;
+                @LetfAlt.performed += instance.OnLetfAlt;
+                @LetfAlt.canceled += instance.OnLetfAlt;
             }
         }
     }
     public GameInputActions @GameInput => new GameInputActions(this);
+
+    // UIInput
+    private readonly InputActionMap m_UIInput;
+    private IUIInputActions m_UIInputActionsCallbackInterface;
+    private readonly InputAction m_UIInput_Newaction;
+    public struct UIInputActions
+    {
+        private @InputActions m_Wrapper;
+        public UIInputActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_UIInput_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_UIInput; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIInputActions set) { return set.Get(); }
+        public void SetCallbacks(IUIInputActions instance)
+        {
+            if (m_Wrapper.m_UIInputActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_UIInputActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_UIInputActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_UIInputActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_UIInputActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public UIInputActions @UIInput => new UIInputActions(this);
     public interface IGameInputActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -642,5 +735,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnAnyKey(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnBigJump(InputAction.CallbackContext context);
+        void OnLetfAlt(InputAction.CallbackContext context);
+    }
+    public interface IUIInputActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

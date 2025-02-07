@@ -1,6 +1,4 @@
 using BaseSystem.Tool;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraCollider : MonoBehaviour
@@ -36,7 +34,7 @@ public class CameraCollider : MonoBehaviour
 
     private void Update()
     {
-        UpdateCurDistanceOffset();
+        // UpdateCurDistanceOffset();
         UpadateCollider();
     }
 

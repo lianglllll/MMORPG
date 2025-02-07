@@ -59,76 +59,76 @@
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Select.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\AsyncEnumeratorBase.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToLookup.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Empty.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\TakeUntil.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Take.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SkipUntilCanceled.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Merge.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Join.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Repeat.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Subscribe.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Cast.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Never.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Union.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\TakeLast.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\AsUniTaskAsyncEnumerable.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToDictionary.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ElementAt.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\MinMax.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToUniTaskAsyncEnumerable.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Where.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\GroupBy.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\First.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\OfType.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Except.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\DistinctUntilChanged.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Publish.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Throw.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ForEach.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\All.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Sum.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Max.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Range.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\DefaultIfEmpty.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Zip.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\TakeUntilCanceled.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Aggregate.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Skip.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\GroupJoin.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Do.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Single.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SkipLast.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToArray.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Average.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\TakeWhile.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Contains.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SkipUntil.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Create.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Reverse.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\UnityExtensions\EveryValueChanged.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\UnityExtensions\EveryUpdate.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Pairwise.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SequenceEqual.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToList.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Distinct.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToObservable.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\CombineLatest.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToHashSet.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Intersect.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Return.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SelectMany.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Concat.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Last.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\LongCount.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Buffer.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Any.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Queue.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Count.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\OrderBy.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Min.cs" />
-    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\AppendPrepend.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\UnityExtensions\Timer.cs" />
     <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SkipWhile.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Empty.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\TakeUntil.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Take.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Merge.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Join.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Repeat.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Never.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Union.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToDictionary.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ElementAt.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\ToUniTaskAsyncEnumerable.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\OfType.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Except.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Sum.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\DefaultIfEmpty.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Zip.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Aggregate.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Skip.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\GroupJoin.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SkipLast.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Average.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\SkipUntil.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Pairwise.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\CombineLatest.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Intersect.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Return.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Concat.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\LongCount.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\Buffer.cs" />
+    <Compile Include="Assets\Plugins\UniTask\Runtime\Linq\AppendPrepend.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\UniTask\Runtime\Linq\UniTask.Linq.asmdef" />
@@ -383,41 +383,17 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.5f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="DemiLib">
-      <HintPath>Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
-    </Reference>
     <Reference Include="LZ4">
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@4e172129d8\Plugins\LZ4.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenProEditor">
-      <HintPath>Assets\Plugins\Demigiant\DOTweenPro\Editor\DOTweenProEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
     <Reference Include="DemiEditor">
       <HintPath>Assets\Plugins\Demigiant\DemiLib\Core\Editor\DemiEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.IonicZip">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog">
-      <HintPath>Assets\Plugins\Serilog.dll</HintPath>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -428,23 +404,62 @@
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>Assets\Plugins\protobuf\Google.Protobuf.dll</HintPath>
-    </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.0.1\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\Plugins\protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>Assets\Plugins\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.YamlDotNet">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenProEditor">
+      <HintPath>Assets\Plugins\Demigiant\DOTweenPro\Editor\DOTweenProEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>Assets\Plugins\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.5\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>Assets\Plugins\protobuf\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Plugins\protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.5f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>

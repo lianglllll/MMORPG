@@ -57,20 +57,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Proto\Game\Game.cs" />
-    <Compile Include="Assets\Scripts\Proto\Login\Login.cs" />
-    <Compile Include="Assets\Scripts\Proto\Login\LoginGateMgr.cs" />
     <Compile Include="Assets\Scripts\Proto\Scene\SceneEntity.cs" />
-    <Compile Include="Assets\Scripts\Proto\DBProxy\DBUser.cs" />
     <Compile Include="Assets\Scripts\Proto\Scene\Scene.cs" />
     <Compile Include="Assets\Scripts\Proto\Game\GameGate.cs" />
-    <Compile Include="Assets\Scripts\Proto\Chat\Chat.cs" />
-    <Compile Include="Assets\Scripts\Proto\Game\Backpack.cs" />
     <Compile Include="Assets\Scripts\Proto\Combat\Buff.cs" />
     <Compile Include="Assets\Scripts\Proto\Common\Common.cs" />
     <Compile Include="Assets\Scripts\Proto\Game\GameGateMgr.cs" />
+    <Compile Include="Assets\Scripts\Proto\Combat\Skill.cs" />
+    <Compile Include="Assets\Scripts\Proto\Login\Login.cs" />
+    <Compile Include="Assets\Scripts\Proto\Login\LoginGateMgr.cs" />
+    <Compile Include="Assets\Scripts\Proto\DBProxy\DBUser.cs" />
+    <Compile Include="Assets\Scripts\Proto\Chat\Chat.cs" />
+    <Compile Include="Assets\Scripts\Proto\Game\Backpack.cs" />
     <Compile Include="Assets\Scripts\Proto\DBProxy\DBWorld.cs" />
     <Compile Include="Assets\Scripts\Proto\DBProxy\DBCharacter.cs" />
-    <Compile Include="Assets\Scripts\Proto\Combat\Skill.cs" />
     <Compile Include="Assets\Scripts\Proto\Login\LoginGate.cs" />
   </ItemGroup>
   <ItemGroup>
