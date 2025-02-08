@@ -76,6 +76,13 @@ public class SelectWorldPanel : BasePanel
             currentServerName.text = "请选择世界.";
         }
     }
+    private void Update()
+    {
+        if(GameInputManager.Instance.Space)
+        {
+            OnStartBtn();
+        }
+    }
 
     private void OnOpenSelectWorldsBoxBtn()
     {

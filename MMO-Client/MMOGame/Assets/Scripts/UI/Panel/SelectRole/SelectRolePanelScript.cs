@@ -44,6 +44,15 @@ public class SelectRolePanelScript : BasePanel
         //拉取角色列表
         EntryGameWorldService.Instance.SendGetCharacterListRequest();
     }
+    private void Update()
+    {
+        if (GameInputManager.Instance.Space)
+        {
+            OnStartBtn();
+        }
+    }
+
+
     public void RefreshRoleListUI(GetCharacterListResponse msg)
     {
         //1.存储全部角色信息

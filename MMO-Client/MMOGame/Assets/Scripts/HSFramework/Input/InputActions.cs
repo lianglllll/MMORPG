@@ -179,6 +179,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""b10e1d3f-2957-4f7c-8b7d-4b418308dbc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -412,6 +421,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""LetfAlt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d45741dd-c76b-4d2c-8623-abd0af346526"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -465,6 +485,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_Jump = m_GameInput.FindAction("Jump", throwIfNotFound: true);
         m_GameInput_BigJump = m_GameInput.FindAction("BigJump", throwIfNotFound: true);
         m_GameInput_LetfAlt = m_GameInput.FindAction("LetfAlt", throwIfNotFound: true);
+        m_GameInput_Space = m_GameInput.FindAction("Space", throwIfNotFound: true);
         // UIInput
         m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
         m_UIInput_Newaction = m_UIInput.FindAction("New action", throwIfNotFound: true);
@@ -544,6 +565,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_Jump;
     private readonly InputAction m_GameInput_BigJump;
     private readonly InputAction m_GameInput_LetfAlt;
+    private readonly InputAction m_GameInput_Space;
     public struct GameInputActions
     {
         private @InputActions m_Wrapper;
@@ -565,6 +587,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_GameInput_Jump;
         public InputAction @BigJump => m_Wrapper.m_GameInput_BigJump;
         public InputAction @LetfAlt => m_Wrapper.m_GameInput_LetfAlt;
+        public InputAction @Space => m_Wrapper.m_GameInput_Space;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -625,6 +648,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @LetfAlt.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
                 @LetfAlt.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
                 @LetfAlt.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
+                @Space.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
+                @Space.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
+                @Space.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
             }
             m_Wrapper.m_GameInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -680,6 +706,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @LetfAlt.started += instance.OnLetfAlt;
                 @LetfAlt.performed += instance.OnLetfAlt;
                 @LetfAlt.canceled += instance.OnLetfAlt;
+                @Space.started += instance.OnSpace;
+                @Space.performed += instance.OnSpace;
+                @Space.canceled += instance.OnSpace;
             }
         }
     }
@@ -736,6 +765,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnBigJump(InputAction.CallbackContext context);
         void OnLetfAlt(InputAction.CallbackContext context);
+        void OnSpace(InputAction.CallbackContext context);
     }
     public interface IUIInputActions
     {

@@ -59,6 +59,14 @@ public class LoginPanelScript : BasePanel
     {
         UnInit();
     }
+    private void Update()
+    {
+        if (GameInputManager.Instance.Space)
+        {
+            OnLoginBtn();
+        }
+    }
+
 
     private void Init()
     {

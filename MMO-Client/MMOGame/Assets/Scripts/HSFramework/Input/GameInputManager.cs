@@ -21,7 +21,7 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool RAttackPerFormed => _inputActions.GameInput.RAttack.phase == InputActionPhase.Performed;
     public bool Defense => _inputActions.GameInput.Grab.triggered;
     public bool SustainLeftAlt => _inputActions.GameInput.LetfAlt.phase == InputActionPhase.Performed;
-
+    public bool Space => _inputActions.GameInput.Space.triggered;
 
 
     public bool Climb => _inputActions.GameInput.Climb.triggered;
