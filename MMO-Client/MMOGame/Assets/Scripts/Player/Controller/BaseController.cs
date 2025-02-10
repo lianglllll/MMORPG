@@ -62,14 +62,12 @@ namespace Player
         #region 状态机
 
         public StateMachine stateMachine { get; protected set; }
-        protected ActorState curState;
-        public ActorState CurState => curState;
+        protected NetActorState curState;
+        public NetActorState CurState => curState;
         private StateMachineParameter stateMachineParameter;
         public StateMachineParameter StateMachineParameter => stateMachineParameter;
-
-        public virtual void ChangeState(ActorState state, bool reCurrstate = false)
+        public virtual void ChangeState(NetActorState state, bool reCurrstate = false)
         {
-
         }
 
 

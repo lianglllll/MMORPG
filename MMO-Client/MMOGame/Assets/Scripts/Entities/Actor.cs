@@ -119,10 +119,10 @@ namespace GameClient.Entities
 
 
                 //切换到挨打的动作
-                if(m_baseController.CurState != ActorState.Move)
+                if(m_baseController.CurState != NetActorState.Motion)
                 {
                     m_baseController.StateMachineParameter.attacker = GameTools.GetActorById(damage.AttackerId);
-                    m_baseController.ChangeState(ActorState.Hurt);
+                    m_baseController.ChangeState(NetActorState.Hurt);
                 }
 
             }

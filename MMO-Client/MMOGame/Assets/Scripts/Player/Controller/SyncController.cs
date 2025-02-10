@@ -12,44 +12,43 @@ namespace Player.Controller
         {
             base.Init(actor, syncEntity);
             syncEntityRecive = syncEntity as SyncEntityRecive;
-            ChangeState(ActorState.Idle);
+            ChangeState(NetActorState.Idle);
         }
 
-        public override void ChangeState(ActorState state, bool reCurrstate = false)
+        public override void ChangeState(NetActorState state, bool reCurrstate = false)
         {
             if (curState == state && !reCurrstate) return;
-            if (state == ActorState.Constant) return;
             curState = state;
             switch (state)
             {
-                case ActorState.AirDown:
+                case NetActorState.Falling:
                     stateMachine.ChangeState<SyncState_AirDown>(reCurrstate);
                     break;
-                case ActorState.Death:
+                case NetActorState.Death:
                     stateMachine.ChangeState<SyncState_Death>(reCurrstate);
                     break;
-                case ActorState.Defense:
+                case NetActorState.Defense:
                     stateMachine.ChangeState<SyncState_Defense>(reCurrstate);
                     break;
-                case ActorState.Dizzy:
+                case NetActorState.Dizzy:
                     stateMachine.ChangeState<SyncState_Dizzy>(reCurrstate);
                     break;
-                case ActorState.Evade:
+                case NetActorState.Evade:
                     stateMachine.ChangeState<SyncState_Evade>(reCurrstate);
                     break;
-                case ActorState.Hurt:
+                case NetActorState.Hurt:
                     stateMachine.ChangeState<SyncState_Hurt>(reCurrstate);
                     break;
-                case ActorState.Idle:
+                case NetActorState.Idle:
                     stateMachine.ChangeState<SyncState_Idle>(reCurrstate);
                     break;
-                case ActorState.JumpUp:
+                case NetActorState.Jumpup:
                     stateMachine.ChangeState<SyncState_JumpUp>(reCurrstate);
                     break;
-                case ActorState.Move:
+                case NetActorState.Motion:
                     stateMachine.ChangeState<SyncState_Move>(reCurrstate);
                     break;
-                case ActorState.Skill:
+                case NetActorState.Skill:
                     stateMachine.ChangeState<SyncState_Skill>(reCurrstate);
                     break;
             }

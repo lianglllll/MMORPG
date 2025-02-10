@@ -55,7 +55,7 @@ namespace HSFramework.Net
 
             if(nEntitySync.State != ActorState.Constant)
             {
-                syncController.ChangeState(nEntitySync.State);
+                // syncController.ChangeState(nEntitySync.State);
             }
         }
         private void SetValueTo(Vec3 a, ref Vector3 b)

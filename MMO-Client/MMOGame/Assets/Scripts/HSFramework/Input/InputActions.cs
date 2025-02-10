@@ -188,6 +188,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""82cd8233-ae2d-4e13-8c34-6e3439c0144c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -432,6 +441,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""097e8bd2-797e-4942-8f96-c3d4de9170f7"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -486,6 +506,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_BigJump = m_GameInput.FindAction("BigJump", throwIfNotFound: true);
         m_GameInput_LetfAlt = m_GameInput.FindAction("LetfAlt", throwIfNotFound: true);
         m_GameInput_Space = m_GameInput.FindAction("Space", throwIfNotFound: true);
+        m_GameInput_Crouch = m_GameInput.FindAction("Crouch", throwIfNotFound: true);
         // UIInput
         m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
         m_UIInput_Newaction = m_UIInput.FindAction("New action", throwIfNotFound: true);
@@ -566,6 +587,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_BigJump;
     private readonly InputAction m_GameInput_LetfAlt;
     private readonly InputAction m_GameInput_Space;
+    private readonly InputAction m_GameInput_Crouch;
     public struct GameInputActions
     {
         private @InputActions m_Wrapper;
@@ -588,6 +610,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @BigJump => m_Wrapper.m_GameInput_BigJump;
         public InputAction @LetfAlt => m_Wrapper.m_GameInput_LetfAlt;
         public InputAction @Space => m_Wrapper.m_GameInput_Space;
+        public InputAction @Crouch => m_Wrapper.m_GameInput_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -651,6 +674,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Space.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
                 @Space.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
                 @Space.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
+                @Crouch.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
             }
             m_Wrapper.m_GameInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -709,6 +735,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Space.started += instance.OnSpace;
                 @Space.performed += instance.OnSpace;
                 @Space.canceled += instance.OnSpace;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
             }
         }
     }
@@ -766,6 +795,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnBigJump(InputAction.CallbackContext context);
         void OnLetfAlt(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
     public interface IUIInputActions
     {

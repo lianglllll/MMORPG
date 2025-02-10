@@ -1,4 +1,3 @@
-using Common.Summer.Net;
 using HS.Protobuf.Common;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
@@ -14,7 +13,7 @@ namespace HSFramework.Net
         private Coroutine m_AutoSendSyncRequestCorountine;
         private WaitForSeconds m_waitForSeconds = new WaitForSeconds(0.1f);//同步时间控制
 
-        private CtrlController m_ctrlController;
+        private LocalPlayerController m_ctrlController;
         private Vector3 m_position;
         private Vector3 m_direction;
         private int EntityId => m_ctrlController.Actor.EntityId;
@@ -29,7 +28,7 @@ namespace HSFramework.Net
             this.m_position = transform.position;
             this.m_direction = transform.rotation.eulerAngles;//记录的是欧拉角
         }
-        public void Init(CtrlController ctrlController, Vector3 pos, Vector3 dir)
+        public void Init(LocalPlayerController ctrlController, Vector3 pos, Vector3 dir)
         {
             if (m_isStart) return;
             m_isStart = true;
@@ -93,7 +92,7 @@ namespace HSFramework.Net
             SetValueTo(transform.position, req.EntitySync.Entity.Position);
             SetValueTo(transform.rotation.eulerAngles, req.EntitySync.Entity.Direction);
             req.EntitySync.Entity.Id = EntityId;
-            req.EntitySync.State = m_ctrlController.CurState;
+            // req.EntitySync.State = m_ctrlController.CurState;
             NetManager.Instance.Send(req);
 
             //重置

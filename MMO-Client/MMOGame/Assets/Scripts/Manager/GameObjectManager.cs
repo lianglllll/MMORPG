@@ -139,7 +139,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             // 模型层控制脚本
             PlayerModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<PlayerModel>();
             // 角色控制脚本
-            CtrlController ctl = actorObj.AddComponent<CtrlController>();                           
+            LocalPlayerController ctl = actorObj.AddComponent<LocalPlayerController>();                           
             // 战斗控制脚本
             PlayerCombatController combat = actorObj.AddComponent<PlayerCombatController>();
             // 同步脚本
@@ -269,7 +269,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
         if (nEntitySync.State != ActorState.Constant)
         {
             var ctrl = GameApp.character.m_baseController;
-            ctrl.ChangeState(nEntitySync.State);
+            // ctrl.ChangeState(nEntitySync.State);
         }
         //设置数据到entity中,这里强制设置
         SyncEntitySend syncEntitySend = obj.GetComponent<SyncEntitySend>();

@@ -38,7 +38,7 @@ public class ComboData
 public class PlayerCombatController : MonoBehaviour
 {
     private bool m_IsStart;
-    private CtrlController ctrlController;
+    private LocalPlayerController localPlayerController;
     private SkillManager skillManager;
 
     protected bool _applyAttackInput => GameApp.CurrSkill == null;               //当前是否可以进行攻击输入
@@ -52,7 +52,7 @@ public class PlayerCombatController : MonoBehaviour
     private float comboBufferTime = 2f;
 
     //敌人的范围检测
-    private Actor owner => ctrlController.Actor;
+    private Actor owner => localPlayerController.Actor;
     private Actor _currentEnemy;
     protected float _detectionRange = 15f;
     private LayerMask _enemyLayer;
@@ -92,9 +92,9 @@ public class PlayerCombatController : MonoBehaviour
     /// 组件初始化
     /// </summary>
     /// <param name="owner"></param>
-    public void Init(CtrlController ctrlController)
+    public void Init(LocalPlayerController ctrlController)
     {
-        this.ctrlController = ctrlController;
+        this.localPlayerController = ctrlController;
         skillManager = ctrlController.Actor.m_skillManager;
 
         //初始化普通攻击连招表
@@ -147,14 +147,14 @@ public class PlayerCombatController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))            
         {
             //施法范围圈
-            ctrlController.unitUIController.SetSpellRangeCanvas(true, currentComboData.next.skill.Define.SpellRangeRadius * 0.001f);
+            localPlayerController.unitUIController.SetSpellRangeCanvas(true, currentComboData.next.skill.Define.SpellRangeRadius * 0.001f);
         }
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             SetComboData(currentComboData.next);
             BaseComboActionExecute();
             //关闭攻击范围
-            ctrlController.unitUIController.SetSpellRangeCanvas(false);
+            localPlayerController.unitUIController.SetSpellRangeCanvas(false);
         }
 
         //qefzxc等技能攻击
@@ -169,11 +169,11 @@ public class PlayerCombatController : MonoBehaviour
     private bool CanAttackInput()
     {
         if (_applyAttackInput == false) return false;
-        if (ctrlController.CurState == ActorState.Hurt) return false;
-        if (ctrlController.CurState == ActorState.Skill) return false;
-        if (ctrlController.CurState == ActorState.Dizzy) return false;
-        if (ctrlController.CurState == ActorState.Death) return false;
-        if (ctrlController.CurState == ActorState.Defense) return false;
+        if (localPlayerController.CurState == NetActorState.Hurt) return false;
+        if (localPlayerController.CurState == NetActorState.Skill) return false;
+        if (localPlayerController.CurState == NetActorState.Dizzy) return false;
+        if (localPlayerController.CurState == NetActorState.Death) return false;
+        if (localPlayerController.CurState == NetActorState.Defense) return false;
         return true;
     }
 
@@ -300,7 +300,7 @@ public class PlayerCombatController : MonoBehaviour
                 }
                 else if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
-                    ctrlController.MoveToPostion(hitInfo.point);
+                    // localPlayerController.MoveToPostion(hitInfo.point);
                 }
                 else
                 {
@@ -384,7 +384,7 @@ public class PlayerCombatController : MonoBehaviour
     /// </summary>
     private void ClearEnemyWhenMotion()
     {
-        if(_currentEnemy !=null && ctrlController.CurState == ActorState.Move && 
+        if(_currentEnemy !=null && localPlayerController.CurState == NetActorState.Motion && 
             Vector3.Distance(transform.position,_currentEnemy.RenderObj.transform.position) > _detectionRange)
         {
             ClearEnemy();
@@ -458,7 +458,7 @@ public class PlayerCombatController : MonoBehaviour
     public void ShowSpellRangeUI(Skill skill)
     {
         //技能圈圈
-        ctrlController.unitUIController.SetSpellRangeCanvas(true, skill.Define.SpellRangeRadius * 0.001f);
+        localPlayerController.unitUIController.SetSpellRangeCanvas(true, skill.Define.SpellRangeRadius * 0.001f);
 
         if (skill.IsUnitTarget)
         {
@@ -475,7 +475,7 @@ public class PlayerCombatController : MonoBehaviour
             switch (skill.Define.EffectAreaType)
             {
                 case "扇形":
-                    ctrlController.unitUIController.SetSectorArea(true, skill.Define.SpellRangeRadius * 0.001f, 0f);
+                    localPlayerController.unitUIController.SetSectorArea(true, skill.Define.SpellRangeRadius * 0.001f, 0f);
                     break;
                 case "圆形":
 
@@ -494,8 +494,8 @@ public class PlayerCombatController : MonoBehaviour
     public void CloseSpellRangeUI()
     {
         selectedSkill = null;
-        ctrlController.unitUIController.SetSpellRangeCanvas(false);
-        ctrlController.unitUIController.SetSectorArea(false);
+        localPlayerController.unitUIController.SetSpellRangeCanvas(false);
+        localPlayerController.unitUIController.SetSectorArea(false);
 
     }
 
@@ -507,7 +507,7 @@ public class PlayerCombatController : MonoBehaviour
     {
 
         //关掉技能指示器
-        ctrlController.unitUIController.SetSpellRangeCanvas(false);
+        localPlayerController.unitUIController.SetSpellRangeCanvas(false);
 
         if (skill.IsUnitTarget)
         {
@@ -530,7 +530,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 case "扇形":
                     //拿最后指向的方向
-                    var dir = ctrlController.unitUIController.GetSectorAreaDir();
+                    var dir = localPlayerController.unitUIController.GetSectorAreaDir();
 
                     //设置到角色身上
                     if (dir != Quaternion.identity)
@@ -539,7 +539,7 @@ public class PlayerCombatController : MonoBehaviour
                     }
 
                     //指示器关闭
-                    ctrlController.unitUIController.SetSectorArea(false);
+                    localPlayerController.unitUIController.SetSectorArea(false);
 
                     break;
                 case "圆形":

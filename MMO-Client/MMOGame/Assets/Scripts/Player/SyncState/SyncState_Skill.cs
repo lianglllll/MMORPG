@@ -76,7 +76,7 @@ namespace Player
                     }
                     break;
                 case SkillChildState.Exit:
-                    syncer.ChangeState(ActorState.Idle);
+                    syncer.ChangeState(NetActorState.Idle);
                     return;
             }
         }
