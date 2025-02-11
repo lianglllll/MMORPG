@@ -1,3 +1,4 @@
+using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using System;
 using UnityEngine;
@@ -34,6 +35,11 @@ namespace Player.PlayerState
             }
         }
 
+        private float timer = 0f;
+        private const float SEND_INTERVAL = 0.1f; // 每100ms发送一次
+        ActorChangeMotionDataRequest actorChangeMotionDateRequest = new ActorChangeMotionDataRequest();
+
+
         public override void Enter()
         {
             player.PlayAnimation("Motion");
@@ -42,6 +48,17 @@ namespace Player.PlayerState
             walk2RunTransition = 0;
             //注册根运动
             player.Model.SetRootMotionAction(OnRootMotion);
+
+            timer = 0f;
+            actorChangeMotionDateRequest.SessionId = NetManager.Instance.sessionId;
+            actorChangeMotionDateRequest.EntityId = player.Actor.EntityId;
+            actorChangeMotionDateRequest.OriginalTransform = new NetTransform();
+            actorChangeMotionDateRequest.OriginalTransform.Position = new();
+            actorChangeMotionDateRequest.OriginalTransform.Rotation  = new();
+            actorChangeMotionDateRequest.OriginalTransform.Scale  = new();
+
+            // 发送状态改变请求
+            player.NetworkActor.SendActorChangeStateRequest();
         }
         public override void Exit()
         {
@@ -86,6 +103,7 @@ namespace Player.PlayerState
                     break;
             }
 
+            SendActorMotionChangeDateRequest();
         }
 
         private void WalkOnUpdate()
@@ -123,7 +141,7 @@ namespace Player.PlayerState
                 //让四元数和向量相乘：让这个向量按照这个四元数所表达的角度进行旋转后得到的新向量。
                 Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
                 player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(targetDir),
-                    Time.deltaTime * player.StateMachineParameter.rotationSpeed);
+                    Time.deltaTime * player.rotateSpeed);
             }
         }
         private void RunOnUpdate()
@@ -144,7 +162,7 @@ namespace Player.PlayerState
                 //让四元数和向量相乘：让这个向量按照这个四元数所表达的角度进行旋转后得到的新向量。
                 Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
                 player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(targetDir),
-                    Time.deltaTime * player.StateMachineParameter.rotationSpeed);
+                    Time.deltaTime * player.rotateSpeed);
             }
         }
 
@@ -159,5 +177,22 @@ namespace Player.PlayerState
             MotionState = MotionChildState.Run;
             player.Model.Animator.SetFloat("MotionSpeed",player.runSpeed);
         }
+        private bool SendActorMotionChangeDateRequest()
+        {
+            timer += Time.deltaTime;
+            if (timer >= SEND_INTERVAL)
+            {
+                timer = 0.0f;
+                actorChangeMotionDateRequest.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                player.NetworkActor.V3ToNV3(player.gameObject.transform.position, actorChangeMotionDateRequest.OriginalTransform.Position);
+                player.NetworkActor.V3ToNV3(player.gameObject.transform.eulerAngles, actorChangeMotionDateRequest.OriginalTransform.Rotation);
+                player.NetworkActor.V3ToNV3(player.gameObject.transform.localScale, actorChangeMotionDateRequest.OriginalTransform.Scale);
+                actorChangeMotionDateRequest.Speed = player.Model.Animator.GetFloat("MotionSpeed");
+                NetManager.Instance.Send(actorChangeMotionDateRequest);
+            }
+
+            return true;
+        }
+
     }
 }

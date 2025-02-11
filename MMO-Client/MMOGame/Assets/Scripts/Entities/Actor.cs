@@ -40,7 +40,7 @@ namespace GameClient.Entities
         public int CurSceneId => m_netActorNode.SceneId;
         public int Level => m_netActorNode.Level;
         public long Exp => m_netActorNode.Exp;
-        public int Speed { get => m_netActorNode.Speed; set => m_netActorNode.Speed = value; }
+        public float Speed { get => m_netActorNode.Speed; set => m_netActorNode.Speed = value; }
 
         public Actor(NetActorNode netAcotrNode) :base(netAcotrNode.EntityId, netAcotrNode.Transform)
         {

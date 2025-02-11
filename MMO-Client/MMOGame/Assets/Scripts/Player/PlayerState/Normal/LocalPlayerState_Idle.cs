@@ -8,6 +8,9 @@ namespace Player.PlayerState
         public override void Enter()
         {
             player.PlayAnimation("Idle");
+
+            // 发送状态改变请求
+            player.NetworkActor.SendActorChangeStateRequest();
         } 
 
         public override void Update()
@@ -43,7 +46,7 @@ namespace Player.PlayerState
             }
 
             //重力
-            player.CharacterController.Move(new Vector3(0, ShareParameter.gravity * Time.deltaTime, 0));
+            player.CharacterController.Move(new Vector3(0, player.gravity * Time.deltaTime, 0));
         }
     }
 }

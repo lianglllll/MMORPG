@@ -13,8 +13,6 @@ namespace Player
     /// </summary>
     public class StateMachineParameter
     {
-        public float gravity = -9.8f;
-        public float moveSpeed = 1f;
         public float rotationSpeed = 8f;
         public Actor attacker;
         public Skill curSkill;
@@ -40,6 +38,32 @@ namespace Player
         private Actor actor;
         public Actor Actor => actor;
 
+        #region Player配置信息
+
+        [Header("Player配置")]
+        public float gravity = -9.8f;
+
+        public float rotateSpeed = 5f;
+
+        public float walk2RunTransitionSpeed = 1f;
+        public float walkSpeed = 1.5f;
+        public float runSpeed = 5f;
+
+        public float jumpVelocity = 5f;
+        public float moveSpeedForJump = 1f;
+        public float moveSpeedForAirDown = 1f;
+
+        public float needPlayEndAnimationHeight = 5f;                  //如果空中检测到距离地面有3米则启动翻滚
+        public float playEndAnimationHeight = 1.8f;                    //End动画播放需要的高度
+        public float rollPower = 1f;
+        public float rotateSpeedForAttack = 5f;
+        public float DefenceTime;
+        public float WaitCounterAttackTime;
+
+        #endregion
+
+
+
         //初始化
         protected virtual void Awake()
         {
@@ -48,7 +72,7 @@ namespace Player
             audioSource = GetComponent<AudioSource>();
             unitUIController = GetComponent<UnitUIController>();
         }
-        public virtual void Init(Actor actor, SyncEntity syncEntity)
+        public virtual void Init(Actor actor, NetworkActor networkActor)
         {
             this.actor = actor;
             Model.Init();

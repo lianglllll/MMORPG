@@ -3,7 +3,6 @@ using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
 using GameClient.Entities;
-using HS.Protobuf.Login;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using System;
@@ -14,10 +13,18 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
     {
         // 协议注册
         ProtoHelper.Instance.Register<OtherEntityEnterSceneResponse>((int)SceneProtocl.OtherEntityEnterSceneResp);
+        ProtoHelper.Instance.Register<ActorChangeModeRequest>((int)SceneProtocl.ActorChangeModeReq);
+        ProtoHelper.Instance.Register<ActorChangeModeResponse>((int)SceneProtocl.ActorChangeModeResp);
+        ProtoHelper.Instance.Register<ActorChangeStateRequest>((int)SceneProtocl.ActorChangeStateReq);
+        ProtoHelper.Instance.Register<ActorChangeStateResponse>((int)SceneProtocl.ActorChangeStateResp);
+        ProtoHelper.Instance.Register<ActorChangeMotionDataRequest>((int)SceneProtocl.ActorChangeMotionDataReq);
+        ProtoHelper.Instance.Register<ActorChangeMotionDataResponse>((int)SceneProtocl.ActorChangeMotionDataResp);
 
         // 消息的订阅
         MessageRouter.Instance.Subscribe<OtherEntityEnterSceneResponse>(_HandleOtherEntityEnterSceneResponse);
-
+        MessageRouter.Instance.Subscribe<ActorChangeModeResponse>(_HandleActorChangeModeResponse);
+        MessageRouter.Instance.Subscribe<ActorChangeStateResponse>(_HandleActorChangeStateResponse);
+        MessageRouter.Instance.Subscribe<ActorChangeMotionDataResponse>(_HandleActorChangeMotionDataResponse);
     }
 
     private void _HandleOtherEntityEnterSceneResponse(Connection sender, OtherEntityEnterSceneResponse message)
@@ -40,5 +47,18 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
 
     End:
         return;
+    }
+
+    private void _HandleActorChangeModeResponse(Connection sender, ActorChangeModeResponse message)
+    {
+        throw new NotImplementedException();
+    }
+    private void _HandleActorChangeStateResponse(Connection sender, ActorChangeStateResponse message)
+    {
+        throw new NotImplementedException();
+    }
+    private void _HandleActorChangeMotionDataResponse(Connection sender, ActorChangeMotionDataResponse message)
+    {
+        throw new NotImplementedException();
     }
 }

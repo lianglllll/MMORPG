@@ -36,7 +36,7 @@ namespace Player.PlayerState
                 //让四元数和向量相乘：让这个向量按照这个四元数所表达的角度进行旋转后得到的新向量。
                 Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
                 player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(targetDir),
-                    Time.deltaTime * player.StateMachineParameter.rotationSpeed);
+                    Time.deltaTime * player.rotateSpeed);
 
                 player.PlayAnimation("Crouch_Walk");
             }

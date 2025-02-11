@@ -1,8 +1,5 @@
 using System.Collections;
-using System.IO;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using YooAsset;
 
 public class Main : MonoBehaviour

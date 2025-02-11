@@ -8,10 +8,10 @@ namespace Player.Controller
     {
         private SyncEntityRecive syncEntityRecive;
 
-        public override void Init(Actor actor,SyncEntity syncEntity)
+        public override void Init(Actor actor, NetworkActor networkActor)
         {
-            base.Init(actor, syncEntity);
-            syncEntityRecive = syncEntity as SyncEntityRecive;
+            base.Init(actor, networkActor);
+            //syncEntityRecive = syncEntity as SyncEntityRecive;
             ChangeState(NetActorState.Idle);
         }
 

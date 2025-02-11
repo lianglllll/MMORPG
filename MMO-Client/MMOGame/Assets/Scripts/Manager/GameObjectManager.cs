@@ -143,13 +143,13 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             // 战斗控制脚本
             PlayerCombatController combat = actorObj.AddComponent<PlayerCombatController>();
             // 同步脚本
-            SyncEntitySend syncEntitySend = actorObj.AddComponent<SyncEntitySend>();
+            NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
 
             modelBase.Init();
-            ctl.Init(actor, syncEntitySend);
+            ctl.Init(actor, networkActor);
             actor.Init(ctl);
             combat.Init(ctl);
-            syncEntitySend.Init(ctl, initPosition, Vector3.zero);
+            networkActor.Init(ctl);
 
             //启用第三人称摄像机
             TP_CameraController.Instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
@@ -164,12 +164,12 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             // 角色控制脚本
             SyncController ctl = actorObj.AddComponent<SyncController>();
             // 同步脚本
-            SyncEntityRecive syncEntityRecive = actorObj.AddComponent<SyncEntityRecive>();
+            NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
 
             modelBase.Init();
-            ctl.Init(actor, syncEntityRecive);
+            ctl.Init(actor, networkActor);
             actor.Init(ctl);
-            syncEntityRecive.Init(ctl, initPosition, Vector3.zero);
+            networkActor.Init(ctl);
         }
     }
 

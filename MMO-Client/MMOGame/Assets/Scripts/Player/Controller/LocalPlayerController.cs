@@ -2,43 +2,20 @@ using GameClient.Entities;
 using HS.Protobuf.SceneEntity;
 using HSFramework.Net;
 using Player.PlayerState;
-using UnityEngine;
 
 namespace Player.Controller
 {
     public class LocalPlayerController:BaseController
     {
-        private SyncEntitySend syncEntitySend;
+        // private SyncEntitySend syncEntitySend;
+        private NetworkActor m_networkActor;
+        public NetworkActor NetworkActor => m_networkActor;
 
-        #region Player配置信息
-
-        [Header("Player配置")]
-        public float gravity = -9.8f;
-
-        public float rotateSpeed = 5f;
-
-        public float walk2RunTransitionSpeed = 1f;
-        public float walkSpeed = 1.5f;
-        public float runSpeed = 5f;
-
-        public float jumpVelocity = 5f;
-        public float moveSpeedForJump = 1f;
-        public float moveSpeedForAirDown = 1f;
-
-
-        public float needPlayEndAnimationHeight = 5f;                  //如果空中检测到距离地面有3米则启动翻滚
-        public float playEndAnimationHeight = 1.8f;                    //End动画播放需要的高度
-        public float rollPower = 1f;
-        public float rotateSpeedForAttack = 5f;
-        public float DefenceTime;
-        public float WaitCounterAttackTime;
-
-        #endregion
-
-        public override void Init(Actor actor,SyncEntity syncEntity)
+        public override void Init(Actor actor, NetworkActor networkActor)
         {
-            base.Init(actor,syncEntity);
-            this.syncEntitySend = syncEntity as SyncEntitySend;
+            base.Init(actor, networkActor);
+            m_networkActor = networkActor;
+            // this.syncEntitySend = syncEntity as SyncEntitySend;
             ChangeState(NetActorState.Idle);
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
