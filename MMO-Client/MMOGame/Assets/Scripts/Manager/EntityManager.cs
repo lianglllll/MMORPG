@@ -31,11 +31,17 @@ namespace GameClient.Entities
         }
         public void RemoveEntity(int entityId)
         {
-            if (entityDict.ContainsKey(entityId))
-            {
-                entityDict.Remove(entityId,out Entity entity);
+            entityDict.TryRemove(entityId, out Entity entity);
+            if (entity != null) {
+                if(entity is Actor actor)
+                {
+                    GameObjectManager.Instance.ActorLeave(actor);
+                }
+                else
+                {
+                    GameObjectManager.Instance.EntityLeave(entity.EntityId);
+                }
             }
-            GameObjectManager.Instance.EntityLeave(entityId);
         }
         public void Clear()
         {

@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Dizzy : SyncState
+    public class RemotePlayerState_Hurt : RemotePlayerState
     {
         public override void Enter()
         {
-            syncer.PlayAnimation("Dizzy");
+            remotePlayer.PlayAnimation("Hurt");
         }
 
     }

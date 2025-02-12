@@ -19,6 +19,16 @@ namespace HSFramework.AI.StateMachine
         {
             this.owner = owner;
         }
+        public void UnInit()
+        {
+            if (curState != null)
+            {
+                curState.Exit();
+                MonoManager.Instance.RemoveUpdateListener(curState.Update);
+                MonoManager.Instance.RemoveFixedUpdateListener(curState.FixedUpdate);
+                MonoManager.Instance.RemoveLateUpdateListener(curState.LateUpdate);
+            }
+        }
         private StateBase GetState<T>() where T : StateBase, new()
         {
             Type type = typeof(T);
@@ -66,5 +76,7 @@ namespace HSFramework.AI.StateMachine
             }
             stateDict.Clear();
         }
+
+
     }
 }

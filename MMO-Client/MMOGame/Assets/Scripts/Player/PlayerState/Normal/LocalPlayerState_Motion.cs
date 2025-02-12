@@ -39,7 +39,6 @@ namespace Player.PlayerState
         private const float SEND_INTERVAL = 0.1f; // 每100ms发送一次
         ActorChangeMotionDataRequest actorChangeMotionDateRequest = new ActorChangeMotionDataRequest();
 
-
         public override void Enter()
         {
             player.PlayAnimation("Motion");
@@ -183,7 +182,7 @@ namespace Player.PlayerState
             if (timer >= SEND_INTERVAL)
             {
                 timer = 0.0f;
-                actorChangeMotionDateRequest.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                actorChangeMotionDateRequest.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.position, actorChangeMotionDateRequest.OriginalTransform.Position);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.eulerAngles, actorChangeMotionDateRequest.OriginalTransform.Rotation);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.localScale, actorChangeMotionDateRequest.OriginalTransform.Scale);

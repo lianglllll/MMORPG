@@ -2,7 +2,6 @@ using GameClient.Combat;
 using GameClient.Entities;
 using HS.Protobuf.SceneEntity;
 using HSFramework.AI.StateMachine;
-using HSFramework.Net;
 using UnityEngine;
 
 namespace Player
@@ -62,8 +61,6 @@ namespace Player
 
         #endregion
 
-
-
         //初始化
         protected virtual void Awake()
         {
@@ -81,7 +78,10 @@ namespace Player
             stateMachineParameter = new StateMachineParameter();
             stateMachine.Init(this);
         }
-
+        public virtual void UnInit()
+        {
+            stateMachine.UnInit();
+        }
 
         #region 状态机
 
@@ -123,6 +123,12 @@ namespace Player
         #endregion
 
         #region 工具
+        public void AdjustToOriginalTransform()
+        {
+            //
+            transform.position = actor.Position;
+            transform.rotation = Quaternion.Euler(actor.Rotation);
+        }
 
         public void DirectLookTarget(Vector3 pos)
         {
@@ -143,6 +149,8 @@ namespace Player
             // 立即将角色转向目标方向
             transform.rotation = targetRotation;
         }
+
+
 
         #endregion
 

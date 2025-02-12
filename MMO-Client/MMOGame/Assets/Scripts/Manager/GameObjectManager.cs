@@ -20,7 +20,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
 {
     private  ConcurrentDictionary<int, GameObject> currentGameObjectDict    = new();    //<entityid,gameobject>  entity和gameobject的映射
     private  ConcurrentQueue<Actor> preparCrateActorObjQueue                = new();    //创建actorObj的缓冲队列
-    private  ConcurrentQueue<ClientItem> preparCrateItemObjQueue              = new();    //创建itemObj的缓冲队列
+    private  ConcurrentQueue<ClientItem> preparCrateItemObjQueue              = new();  //创建itemObj的缓冲队列
 
     private void Update()
     {
@@ -97,6 +97,9 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             Log.Error("actor 实例化失败");
             yield break;
         }
+        // 调整旋转
+        actorObj.transform.rotation = Quaternion.Euler(actor.Rotation);
+
         if (!currentGameObjectDict.TryAdd(actor.EntityId, actorObj))
         {
             Log.Error("actor 加入字典失败");
@@ -162,7 +165,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             // 模型层控制脚本
             SyncModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<SyncModel>();
             // 角色控制脚本
-            SyncController ctl = actorObj.AddComponent<SyncController>();
+            RemotePlayerController ctl = actorObj.AddComponent<RemotePlayerController>();
             // 同步脚本
             NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
 
@@ -214,7 +217,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
         //下面的操作可能有问题，应该移动到LoadAsset的回调中吧。
 
         //3.获取坐标和方向
-        Vector3 initPosition = V3.Of(clientItem.Position) / 1000;
+        Vector3 initPosition = clientItem.Position;
         if (initPosition.y == 0)
         {
             initPosition.y = GameTools.CaculateGroundPosition(initPosition, 0.5f, 7).y;           //计算地面坐标
@@ -248,6 +251,18 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             Destroy(obj);
         }
     }
+    public void ActorLeave(Actor actor)
+    {
+        if (!currentGameObjectDict.ContainsKey(actor.EntityId)) return;
+        actor.m_baseController.UnInit();
+        currentGameObjectDict.TryRemove(actor.EntityId, out var obj);
+        if (obj != null && !obj.IsDestroyed())
+        {
+            Destroy(obj);
+        }
+    }
+
+
 
     public void EntitySync(NEntitySync nEntitySync)
     {

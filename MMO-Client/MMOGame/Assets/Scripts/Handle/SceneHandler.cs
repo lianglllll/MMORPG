@@ -5,14 +5,14 @@ using GameClient;
 using GameClient.Entities;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
-using System;
-
+using Serilog;
 public class SceneHandler : SingletonNonMono<SceneHandler>
 {
     public void Init()
     {
         // 协议注册
         ProtoHelper.Instance.Register<OtherEntityEnterSceneResponse>((int)SceneProtocl.OtherEntityEnterSceneResp);
+        ProtoHelper.Instance.Register<OtherEntityLeaveSceneResponse>((int)SceneProtocl.OtherEntityLeaveSceneResp);
         ProtoHelper.Instance.Register<ActorChangeModeRequest>((int)SceneProtocl.ActorChangeModeReq);
         ProtoHelper.Instance.Register<ActorChangeModeResponse>((int)SceneProtocl.ActorChangeModeResp);
         ProtoHelper.Instance.Register<ActorChangeStateRequest>((int)SceneProtocl.ActorChangeStateReq);
@@ -22,6 +22,7 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
 
         // 消息的订阅
         MessageRouter.Instance.Subscribe<OtherEntityEnterSceneResponse>(_HandleOtherEntityEnterSceneResponse);
+        MessageRouter.Instance.Subscribe<OtherEntityLeaveSceneResponse>(_HandleOtherEntityLeaveSceneResponse);
         MessageRouter.Instance.Subscribe<ActorChangeModeResponse>(_HandleActorChangeModeResponse);
         MessageRouter.Instance.Subscribe<ActorChangeStateResponse>(_HandleActorChangeStateResponse);
         MessageRouter.Instance.Subscribe<ActorChangeMotionDataResponse>(_HandleActorChangeMotionDataResponse);
@@ -33,7 +34,6 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
         {
             goto End;
         }
-
         if(message.EntityType == SceneEntityType.Actor)
         {
             EntityManager.Instance.OnActorEnterScene(message.ActorNode);
@@ -44,21 +44,64 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
         {
             // ...
         }
-
+    End:
+        return;
+    }
+    private void _HandleOtherEntityLeaveSceneResponse(Connection sender, OtherEntityLeaveSceneResponse message)
+    {
+        if(message.SceneId != GameApp.SceneId)
+        {
+            goto End;
+        }
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            EntityManager.Instance.RemoveEntity(message.EntityId);
+        });
     End:
         return;
     }
 
     private void _HandleActorChangeModeResponse(Connection sender, ActorChangeModeResponse message)
     {
-        throw new NotImplementedException();
+        var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
+        if (acotr == null)
+        {
+            goto End;
+        }
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            acotr.HandleActorChangeModeResponse(message);
+        });
+    End:
+        return;
     }
     private void _HandleActorChangeStateResponse(Connection sender, ActorChangeStateResponse message)
     {
-        throw new NotImplementedException();
+        var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
+        if (acotr == null)
+        {
+            goto End;
+        }
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            acotr.HandleActorChangeStateResponse(message);
+        });
+    End:
+        return;
     }
     private void _HandleActorChangeMotionDataResponse(Connection sender, ActorChangeMotionDataResponse message)
     {
-        throw new NotImplementedException();
+        var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
+        if (acotr == null)
+        {
+            goto End;
+        }
+        Log.Information("收到移动包了");
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            acotr.HandleActorMotionChangeDate(message);
+        });
+    End:
+        return;
     }
 }

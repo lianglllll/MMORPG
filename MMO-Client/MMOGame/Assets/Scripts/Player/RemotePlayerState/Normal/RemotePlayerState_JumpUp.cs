@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Evade : SyncState
+    public class RemotePlayerState_JumpUp: RemotePlayerState
     {
         public override void Enter()
         {
-            syncer.PlayAnimation("Evade");
+            remotePlayer.PlayAnimation("JumpUp");
         }
 
         public override void Update()

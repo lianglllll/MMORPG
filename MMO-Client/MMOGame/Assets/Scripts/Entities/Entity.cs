@@ -7,9 +7,9 @@ namespace GameClient.Entities
     public class Entity
     {
         private int m_entityId;
-        private Vector3 m_position;
-        private Vector3 m_rotation;
-        private Vector3 m_sacle;
+        protected Vector3 m_position;
+        protected Vector3 m_rotation;
+        protected Vector3 m_sacle;
 
         public int EntityId
         {
@@ -56,9 +56,9 @@ namespace GameClient.Entities
         public Entity(int entityId, NetTransform transform)
         {
             m_entityId = entityId;
-            NetVector3MoveToVector3(transform.Position, m_position);
-            NetVector3MoveToVector3(transform.Rotation, m_rotation);
-            NetVector3MoveToVector3(transform.Scale, m_sacle);
+            NetVector3MoveToVector3(transform.Position, ref m_position);
+            NetVector3MoveToVector3(transform.Rotation, ref m_rotation);
+            NetVector3MoveToVector3(transform.Scale, ref m_sacle);
         }
         public virtual void Update(float deltatime)
         {
@@ -66,7 +66,7 @@ namespace GameClient.Entities
         }
 
         // tools 
-        protected void NetVector3MoveToVector3(NetVector3 v1, Vector3 v2)
+        protected void NetVector3MoveToVector3(NetVector3 v1, ref Vector3 v2)
         {
             v2.x = v1.X * 0.001f;
             v2.y = v1.Y * 0.001f;

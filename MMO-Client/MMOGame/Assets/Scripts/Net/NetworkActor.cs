@@ -43,7 +43,7 @@ public class NetworkActor : MonoBehaviour
         netTransform.Scale = scale;
         req.OriginalTransform = netTransform;
         req.EntityId = m_actor.EntityId;
-        req.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        req.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         req.State = m_baseController.CurState;
         req.SessionId = NetManager.Instance.sessionId;
         if(m_baseController.CurState == NetActorState.Motion)
@@ -60,7 +60,7 @@ public class NetworkActor : MonoBehaviour
         b.Y = (int)(a.y * 1000);
         b.Z = (int)(a.z * 1000);
     }
-    private void NV3ToV3(NetVector3 a, ref Vector3 b)
+    public void NV3ToV3(NetVector3 a, Vector3 b)
     {
         b.x = a.X * 0.001f;
         b.y = a.Y * 0.001f;

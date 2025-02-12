@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Skill: SyncState
+    public class RemotePlayerState_Skill: RemotePlayerState
     {
         private Skill curSkill => ShareParameter.curSkill;
         //蓄气、执行
@@ -21,10 +21,10 @@ namespace Player
                 switch (value)
                 {
                     case SkillChildState.Intonate:
-                        syncer.PlayAnimation(curSkill.Define.IntonateAnimName);
+                        remotePlayer.PlayAnimation(curSkill.Define.IntonateAnimName);
                         break;
                     case SkillChildState.Active:
-                        syncer.PlayAnimation(curSkill.Define.ActiveAnimName);
+                        remotePlayer.PlayAnimation(curSkill.Define.ActiveAnimName);
                         break;
                 }
             }
@@ -60,7 +60,7 @@ namespace Player
                     if (curSkill.Define.IntonateArt != "")
                     {
                         var prefab = Res.LoadAssetSync<GameObject>(curSkill.Define.IntonateArt);
-                        var ins = GameObject.Instantiate(prefab, syncer.transform);
+                        var ins = GameObject.Instantiate(prefab, remotePlayer.transform);
                         GameObject.Destroy(ins, curSkill.Define.IntonateTime);
                     }
 
@@ -76,7 +76,7 @@ namespace Player
                     }
                     break;
                 case SkillChildState.Exit:
-                    syncer.ChangeState(NetActorState.Idle);
+                    remotePlayer.ChangeState(NetActorState.Idle);
                     return;
             }
         }

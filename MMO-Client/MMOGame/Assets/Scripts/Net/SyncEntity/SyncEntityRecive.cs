@@ -10,7 +10,7 @@ namespace HSFramework.Net
     public class SyncEntityRecive : SyncEntity
     {
         private bool isStart;
-        private SyncController syncController;
+        private RemotePlayerController syncController;
         [SerializeField]
         private Vector3 position;
         [SerializeField]
@@ -21,7 +21,7 @@ namespace HSFramework.Net
             isStart = false;
         }
 
-        public void Init(SyncController syncController, Vector3 pos, Vector3 dir)
+        public void Init(RemotePlayerController syncController, Vector3 pos, Vector3 dir)
         {
             if (isStart) return;
             isStart = true;

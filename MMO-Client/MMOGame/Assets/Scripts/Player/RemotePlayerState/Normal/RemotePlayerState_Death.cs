@@ -1,3 +1,4 @@
+using Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,16 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Idle:SyncState
+    public class RemotePlayerState_Death : RemotePlayerState
     {
         public override void Enter()
         {
-            syncer.PlayAnimation("Idle");
+            remotePlayer.PlayAnimation("Death");
+            remotePlayer.Actor.OnDeath();
+        }
+        public override void Exit()
+        {
         }
 
-        public override void Update()
-        {
-            //重力
-            syncer.CharacterController.Move(new Vector3(0, syncer.gravity * Time.deltaTime, 0));
-        }
     }
 }

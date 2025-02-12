@@ -8,19 +8,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_JumpUp: SyncState
+    public class RemotePlayerState_Dizzy : RemotePlayerState
     {
         public override void Enter()
         {
-            syncer.PlayAnimation("JumpUp");
-        }
-
-        public override void Update()
-        {
-        }
-
-        public override void Exit()
-        {
+            remotePlayer.PlayAnimation("Dizzy");
         }
 
     }

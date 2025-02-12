@@ -2,8 +2,10 @@ using GameClient.Combat;
 using GameClient.Combat.Buffs;
 using GameClient.Manager;
 using HS.Protobuf.Combat.Skill;
+using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using Player;
+using Player.Controller;
 using UnityEngine;
 
 namespace GameClient.Entities
@@ -31,6 +33,11 @@ namespace GameClient.Entities
         public UnitDefine UnitDefine => m_unitDefine;
         public BuffManager BuffManager => m_buffManager;
         public EquipManager EquipManager => m_equipManager;
+        public NetActorState NetActorState
+        {
+            get => m_netActorNode.NetActorState;
+            set => m_netActorNode.NetActorState = value;
+        }
         public bool IsDeath => m_netActorNode.NetActorState == NetActorState.Death;
         public string ActorName => m_netActorNode.ActorName;
         public int Hp => m_netActorNode.Hp;
@@ -171,6 +178,35 @@ namespace GameClient.Entities
         }
 
         // tools
+        public void HandleActorChangeModeResponse(ActorChangeModeResponse message)
+        {
+
+        }
+        public void HandleActorChangeStateResponse(ActorChangeStateResponse message)
+        {
+            NetActorState = message.State;
+            // 缓存信息
+            NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
+            NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);
+            m_baseController.AdjustToOriginalTransform();
+            m_baseController.ChangeState(NetActorState);
+        }
+        public void HandleActorMotionChangeDate(ActorChangeMotionDataResponse message)
+        {
+            if (NetActorState != NetActorState.Motion)
+            {
+                goto End;
+            }
+            // 缓存信息
+            NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
+            NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);
+            var ctl = m_baseController as RemotePlayerController;
+            var state = ctl.stateMachine.CurState as RemotePlayerState_Motion;
+            state.AddNetworkState(message);
+        End:
+            return;
+        }
+
         public void LocalOrTargetAcotrPropertyChange()
         {
             if (this == GameApp.character || this == GameApp.target)

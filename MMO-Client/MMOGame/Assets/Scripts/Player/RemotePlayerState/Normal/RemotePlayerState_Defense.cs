@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SyncState_Defense : SyncState
+    public class RemotePlayerState_Defense : RemotePlayerState
     {
         public override void Enter()
         {
