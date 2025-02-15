@@ -46,6 +46,7 @@
     <type fullname="HSFramework.AI.StateMachine.StateBase" preserve="all" />
     <type fullname="HSFramework.AI.StateMachine.StateMachine" preserve="all" />
     <type fullname="Kaiyun.Event" preserve="all" />
+    <type fullname="MonoManager" preserve="all" />
     <type fullname="Res" preserve="all" />
     <type fullname="UnityMainThreadDispatcher" preserve="all" />
   </assembly>
@@ -77,7 +78,6 @@
     <type fullname="HS.Protobuf.Combat.Skill.Damage" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.DamageResponse" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.DameageType" preserve="all" />
-    <type fullname="HS.Protobuf.Combat.Skill.SkillInfo" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.SpellCastRequest" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.SpellCastResponse" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.SpellFailResponse" preserve="all" />
@@ -87,6 +87,7 @@
     <type fullname="HS.Protobuf.Common.ExchangeCommunicationSecretKeyResponse" preserve="all" />
     <type fullname="HS.Protobuf.Common.ExchangePublicKeyRequest" preserve="all" />
     <type fullname="HS.Protobuf.Common.ExchangePublicKeyResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Common.ServerInfoNode" preserve="all" />
     <type fullname="HS.Protobuf.Common.Vec3" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.EquipsType" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.EquipsUpdateResponse" preserve="all" />
@@ -106,14 +107,22 @@
     <type fullname="HS.Protobuf.Game.Backpack.Quality" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.UnloadEquipmentRequest" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.WearEquipmentRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Login.CharacterCreateRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Login.CharacterCreateResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Login.CharacterDeleteRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Login.CharacterDeleteResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Login.CharacterListRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Login.CharacterListResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Game.CreateCharacterRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Game.CreateCharacterResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Game.DeleteCharacterRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Game.DeleteCharacterResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Game.EnterGameRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Game.EnterGameResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Game.GetCharacterListRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Game.GetCharacterListResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Game.SimpleCharacterInfoNode" preserve="all" />
+    <type fullname="HS.Protobuf.GameGate.VerifySessionRequeest" preserve="all" />
+    <type fullname="HS.Protobuf.GameGate.VerifySessionResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Login.GetAllWorldInfosRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Login.GetAllWorldInfosResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Login.GetGameGateByWorldIdRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Login.GetGameGateByWorldIdResponse" preserve="all" />
     <type fullname="HS.Protobuf.Login.KillRankingListItem" preserve="all" />
-    <type fullname="HS.Protobuf.Login.ReconnectRequest" preserve="all" />
     <type fullname="HS.Protobuf.Login.ReconnectResponse" preserve="all" />
     <type fullname="HS.Protobuf.Login.ServerInfoRequest" preserve="all" />
     <type fullname="HS.Protobuf.Login.ServerInfoResponse" preserve="all" />
@@ -121,33 +130,41 @@
     <type fullname="HS.Protobuf.Login.UserLoginResponse" preserve="all" />
     <type fullname="HS.Protobuf.Login.UserRegisterRequest" preserve="all" />
     <type fullname="HS.Protobuf.Login.UserRegisterResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Login.WORLD_LOAD_STATUS" preserve="all" />
+    <type fullname="HS.Protobuf.Login.WorldInfoNode" preserve="all" />
     <type fullname="HS.Protobuf.LoginGate.GetLoginGateTokenRequest" preserve="all" />
     <type fullname="HS.Protobuf.LoginGate.GetLoginGateTokenResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeModeRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeModeResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeMotionDataRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeMotionDataResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeStateRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeStateResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.CtlClientSpaceEntitySyncResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.GameEnterRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.GameEnterResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.NEntitySync" preserve="all" />
     <type fullname="HS.Protobuf.Scene.NetEItemSync" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.OtherEntityEnterSceneResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.OtherEntityLeaveSceneResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.PropertyUpdateRsponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.ReviveRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.SpaceCharactersEnterResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.SpaceDeliverRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.SpaceEnterResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.SpaceEntityLeaveResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.SpaceEntitySyncRequest" preserve="all" />
     <type fullname="HS.Protobuf.Scene.SpaceEntitySyncResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.SpaceItemEnterResponse" preserve="all" />
-    <type fullname="HS.Protobuf.SceneEntity.ActorCombatMode" preserve="all" />
-    <type fullname="HS.Protobuf.SceneEntity.ActorMode" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.ActorState" preserve="all" />
-    <type fullname="HS.Protobuf.SceneEntity.ActorType" preserve="all" />
-    <type fullname="HS.Protobuf.SceneEntity.NetActor" preserve="all" />
+    <type fullname="HS.Protobuf.SceneEntity.NetActorNode" preserve="all" />
+    <type fullname="HS.Protobuf.SceneEntity.NetActorState" preserve="all" />
+    <type fullname="HS.Protobuf.SceneEntity.NetActorType" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.NetEItem" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.NetEntity" preserve="all" />
+    <type fullname="HS.Protobuf.SceneEntity.NetItemNode" preserve="all" />
+    <type fullname="HS.Protobuf.SceneEntity.NetTransform" preserve="all" />
+    <type fullname="HS.Protobuf.SceneEntity.NetVector3" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.PropertyUpdate" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.PropertyUpdate/Types" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.PropertyUpdate/Types/Prop" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.PropertyUpdate/Types/PropertyValue" preserve="all" />
+    <type fullname="HS.Protobuf.SceneEntity.SceneEntityType" preserve="all" />
   </assembly>
   <assembly fullname="Serilog">
     <type fullname="Serilog.Log" preserve="all" />
@@ -176,8 +193,10 @@
   </assembly>
   <assembly fullname="System.Core">
     <type fullname="System.Linq.Enumerable" preserve="all" />
+    <type fullname="System.Linq.IOrderedEnumerable`1" preserve="all" />
   </assembly>
   <assembly fullname="UITools">
+    <type fullname="GlobalVideoPlayer" preserve="all" />
     <type fullname="IRecyclingListViewItem`1" preserve="all" />
     <type fullname="ItemMenu" preserve="all" />
     <type fullname="ItemMenu/MenuOptionCallback" preserve="all" />
@@ -186,6 +205,7 @@
     <type fullname="ToolTip" preserve="all" />
   </assembly>
   <assembly fullname="Unity.TextMeshPro">
+    <type fullname="TMPro.TMP_InputField" preserve="all" />
     <type fullname="TMPro.TMP_Text" preserve="all" />
     <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
   </assembly>
@@ -202,11 +222,13 @@
     <type fullname="UnityEngine.AudioSource" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.CoreModule">
+    <type fullname="UnityEngine.AddComponentMenu" preserve="all" />
     <type fullname="UnityEngine.AnimationCurve" preserve="all" />
     <type fullname="UnityEngine.Application" preserve="all" />
     <type fullname="UnityEngine.Behaviour" preserve="all" />
     <type fullname="UnityEngine.Camera" preserve="all" />
     <type fullname="UnityEngine.Color" preserve="all" />
+    <type fullname="UnityEngine.ColorUtility" preserve="all" />
     <type fullname="UnityEngine.Component" preserve="all" />
     <type fullname="UnityEngine.Coroutine" preserve="all" />
     <type fullname="UnityEngine.Cursor" preserve="all" />
@@ -218,40 +240,40 @@
     <type fullname="UnityEngine.GameObject" preserve="all" />
     <type fullname="UnityEngine.HeaderAttribute" preserve="all" />
     <type fullname="UnityEngine.KeyCode" preserve="all" />
-    <type fullname="UnityEngine.Keyframe" preserve="all" />
     <type fullname="UnityEngine.LayerMask" preserve="all" />
     <type fullname="UnityEngine.Mathf" preserve="all" />
     <type fullname="UnityEngine.MonoBehaviour" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.PlayerPrefs" preserve="all" />
     <type fullname="UnityEngine.Quaternion" preserve="all" />
-    <type fullname="UnityEngine.RangeAttribute" preserve="all" />
     <type fullname="UnityEngine.Ray" preserve="all" />
+    <type fullname="UnityEngine.Rect" preserve="all" />
+    <type fullname="UnityEngine.RequireComponent" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.Scene" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.SceneManager" preserve="all" />
     <type fullname="UnityEngine.Screen" preserve="all" />
-    <type fullname="UnityEngine.ScriptableObject" preserve="all" />
     <type fullname="UnityEngine.SerializeField" preserve="all" />
     <type fullname="UnityEngine.SpaceAttribute" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
-    <type fullname="UnityEngine.Texture2D" preserve="all" />
+    <type fullname="UnityEngine.Texture" preserve="all" />
     <type fullname="UnityEngine.Time" preserve="all" />
-    <type fullname="UnityEngine.TooltipAttribute" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
     <type fullname="UnityEngine.Vector2" preserve="all" />
     <type fullname="UnityEngine.Vector3" preserve="all" />
     <type fullname="UnityEngine.WaitForSeconds" preserve="all" />
   </assembly>
+  <assembly fullname="UnityEngine.IMGUIModule">
+    <type fullname="UnityEngine.GUI" preserve="all" />
+  </assembly>
   <assembly fullname="UnityEngine.InputLegacyModule">
     <type fullname="UnityEngine.Input" preserve="all" />
   </assembly>
-  <assembly fullname="UnityEngine.JSONSerializeModule">
-    <type fullname="UnityEngine.JsonUtility" preserve="all" />
-  </assembly>
   <assembly fullname="UnityEngine.PhysicsModule">
+    <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
     <type fullname="UnityEngine.CharacterController" preserve="all" />
     <type fullname="UnityEngine.Collider" preserve="all" />
     <type fullname="UnityEngine.CollisionFlags" preserve="all" />
+    <type fullname="UnityEngine.ForceMode" preserve="all" />
     <type fullname="UnityEngine.Physics" preserve="all" />
     <type fullname="UnityEngine.QueryTriggerInteraction" preserve="all" />
     <type fullname="UnityEngine.RaycastHit" preserve="all" />
@@ -264,7 +286,6 @@
     <type fullname="UnityEngine.EventSystems.IEndDragHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IEventSystemHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IPointerClickHandler" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.IPointerDownHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IPointerEnterHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IPointerExitHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.PointerEventData" preserve="all" />
@@ -298,6 +319,7 @@
     <type fullname="System.AppDomain" preserve="all" />
     <type fullname="System.Array" preserve="all" />
     <type fullname="System.AsyncCallback" preserve="all" />
+    <type fullname="System.Boolean" preserve="all" />
     <type fullname="System.Char" preserve="all" />
     <type fullname="System.Collections.Concurrent.ConcurrentDictionary`2" preserve="all" />
     <type fullname="System.Collections.Concurrent.ConcurrentQueue`1" preserve="all" />
@@ -309,7 +331,6 @@
     <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.ICollection`1" preserve="all" />
-    <type fullname="System.Collections.Generic.IDictionary`2" preserve="all" />
     <type fullname="System.Collections.Generic.IEnumerable`1" preserve="all" />
     <type fullname="System.Collections.Generic.IEnumerator`1" preserve="all" />
     <type fullname="System.Collections.Generic.IList`1" preserve="all" />
@@ -320,7 +341,9 @@
     <type fullname="System.Collections.Generic.List`1/Enumerator" preserve="all" />
     <type fullname="System.Collections.IEnumerable" preserve="all" />
     <type fullname="System.Collections.IEnumerator" preserve="all" />
+    <type fullname="System.Convert" preserve="all" />
     <type fullname="System.DateTime" preserve="all" />
+    <type fullname="System.DateTimeOffset" preserve="all" />
     <type fullname="System.Delegate" preserve="all" />
     <type fullname="System.Diagnostics.DebuggableAttribute" preserve="all" />
     <type fullname="System.Diagnostics.DebuggableAttribute/DebuggingModes" preserve="all" />
@@ -339,6 +362,7 @@
     <type fullname="System.NotSupportedException" preserve="all" />
     <type fullname="System.Nullable`1" preserve="all" />
     <type fullname="System.Object" preserve="all" />
+    <type fullname="System.ObsoleteAttribute" preserve="all" />
     <type fullname="System.Predicate`1" preserve="all" />
     <type fullname="System.Reflection.Assembly" preserve="all" />
     <type fullname="System.Reflection.MemberInfo" preserve="all" />

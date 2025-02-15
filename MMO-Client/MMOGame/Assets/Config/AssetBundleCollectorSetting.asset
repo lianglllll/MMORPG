@@ -37,14 +37,6 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Res/Units
-        CollectorGUID: 7e164e5c5d219cf4db497f25e584510f
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
       - CollectPath: Assets/Res/Items
         CollectorGUID: 8ff84da9b8a9ebd4eb98487be1077488
         CollectorType: 0
@@ -86,6 +78,19 @@ MonoBehaviour:
       Collectors:
       - CollectPath: Assets/Res/Texture
         CollectorGUID: 62749f5f6e24ee74c9a51694b28bf177
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Chr
+      GroupDesc: "\u89D2\u8272\u76F8\u5173"
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Res/Units
+        CollectorGUID: 7e164e5c5d219cf4db497f25e584510f
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory

@@ -1,3 +1,4 @@
+#nullable enable
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Summer
         {
             using (var stream = new MemoryStream())
             {
+                if (args == null) return stream.ToArray();
                 foreach (var arg in args)
                 {
                     if (arg is null) { stream.WriteByte(0); }
@@ -126,7 +128,9 @@ namespace Summer
                 while (stream.Position < stream.Length)
                 {
                     byte type = (byte)stream.ReadByte();
-                    if (type == 0) { list.Add(null); }
+                    if (type == 0) {
+                        // list.Add(null);
+                    }
                     else if (type == 1)
                     {
                         list.Add((sbyte)stream.ReadByte());

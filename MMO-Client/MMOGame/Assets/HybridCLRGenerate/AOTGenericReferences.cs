@@ -14,7 +14,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"System.Core.dll",
 		"UITools.dll",
 		"UnityEngine.CoreModule.dll",
-		"UnityEngine.JSONSerializeModule.dll",
 		"YooAsset.dll",
 		"mscorlib.dll",
 	};
@@ -28,16 +27,27 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// BaseSystem.Singleton.Singleton<object>
 	// Common.Summer.Net.MessageRouter.MessageHandler<object>
 	// Common.Summer.Tools.Singleton<object>
+	// Google.Protobuf.Collections.RepeatedField.<GetEnumerator>d__28<int>
 	// Google.Protobuf.Collections.RepeatedField.<GetEnumerator>d__28<object>
+	// Google.Protobuf.Collections.RepeatedField<int>
 	// Google.Protobuf.Collections.RepeatedField<object>
+	// Google.Protobuf.FieldCodec.<>c<int>
 	// Google.Protobuf.FieldCodec.<>c<object>
+	// Google.Protobuf.FieldCodec.<>c__DisplayClass38_0<int>
 	// Google.Protobuf.FieldCodec.<>c__DisplayClass38_0<object>
+	// Google.Protobuf.FieldCodec.<>c__DisplayClass39_0<int>
 	// Google.Protobuf.FieldCodec.<>c__DisplayClass39_0<object>
+	// Google.Protobuf.FieldCodec.InputMerger<int>
 	// Google.Protobuf.FieldCodec.InputMerger<object>
+	// Google.Protobuf.FieldCodec.ValuesMerger<int>
 	// Google.Protobuf.FieldCodec.ValuesMerger<object>
+	// Google.Protobuf.FieldCodec<int>
 	// Google.Protobuf.FieldCodec<object>
+	// Google.Protobuf.IDeepCloneable<int>
 	// Google.Protobuf.IDeepCloneable<object>
+	// Google.Protobuf.ValueReader<int>
 	// Google.Protobuf.ValueReader<object>
+	// Google.Protobuf.ValueWriter<int>
 	// Google.Protobuf.ValueWriter<object>
 	// IRecyclingListViewItem<object>
 	// Newtonsoft.Json.JsonConverter<object>
@@ -153,6 +163,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Comparison<int>
 	// System.Comparison<object>
 	// System.EventHandler<object>
+	// System.Func<int,int>
 	// System.Func<int,object,object>
 	// System.Func<int,object>
 	// System.Func<object,byte>
@@ -166,6 +177,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.Enumerable.WhereArrayIterator<object>
 	// System.Linq.Enumerable.WhereEnumerableIterator<object>
 	// System.Linq.Enumerable.WhereListIterator<object>
+	// System.Linq.EnumerableSorter<object,int>
+	// System.Linq.EnumerableSorter<object>
+	// System.Linq.OrderedEnumerable.<GetEnumerator>d__1<object>
+	// System.Linq.OrderedEnumerable<object,int>
+	// System.Linq.OrderedEnumerable<object>
 	// System.Nullable<UnityEngine.Color>
 	// System.Predicate<Entry.MyVec3>
 	// System.Predicate<int>
@@ -186,6 +202,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object DG.Tweening.TweenSettingsExtensions.From<object>(object)
 		// object DG.Tweening.TweenSettingsExtensions.From<object>(object,bool,bool)
 		// object DG.Tweening.TweenSettingsExtensions.OnComplete<object>(object,DG.Tweening.TweenCallback)
+		// object DG.Tweening.TweenSettingsExtensions.SetAutoKill<object>(object,bool)
 		// object DG.Tweening.TweenSettingsExtensions.SetEase<object>(object,DG.Tweening.Ease)
 		// bool HSFramework.AI.StateMachine.StateMachine.ChangeState<object>(bool)
 		// HSFramework.AI.StateMachine.StateBase HSFramework.AI.StateMachine.StateMachine.GetState<object>()
@@ -204,19 +221,17 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object System.Collections.Generic.CollectionExtensions.GetValueOrDefault<int,object>(System.Collections.Generic.IReadOnlyDictionary<int,object>,int)
 		// object System.Collections.Generic.CollectionExtensions.GetValueOrDefault<int,object>(System.Collections.Generic.IReadOnlyDictionary<int,object>,int,object)
 		// object System.Collections.Generic.CollectionExtensions.GetValueOrDefault<object,object>(System.Collections.Generic.IReadOnlyDictionary<object,object>,object,object)
-		// bool System.Collections.Generic.CollectionExtensions.Remove<int,object>(System.Collections.Generic.IDictionary<int,object>,int,object&)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Cast<object>(System.Collections.IEnumerable)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.CastIterator<object>(System.Collections.IEnumerable)
 		// object System.Linq.Enumerable.FirstOrDefault<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.OfType<object>(System.Collections.IEnumerable)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.OfTypeIterator<object>(System.Collections.IEnumerable)
+		// System.Linq.IOrderedEnumerable<object> System.Linq.Enumerable.OrderBy<object,int>(System.Collections.Generic.IEnumerable<object>,System.Func<object,int>)
 		// object[] System.Linq.Enumerable.ToArray<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d>(System.Runtime.CompilerServices.TaskAwaiter&,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d>(System.Runtime.CompilerServices.TaskAwaiter&,CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d>(CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__1>d&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d>(CombatService.<>c__DisplayClass2_0.<<_SpaceEnterResponse>b__2>d&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d>(System.Runtime.CompilerServices.TaskAwaiter&,EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d>(EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d&)
 		// object& System.Runtime.CompilerServices.Unsafe.As<object,object>(object&)
 		// System.Void* System.Runtime.CompilerServices.Unsafe.AsPointer<object>(object&)
 		// object UnityEngine.Component.GetComponent<object>()
@@ -228,7 +243,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object UnityEngine.GameObject.GetComponentInParent<object>()
 		// object UnityEngine.GameObject.GetComponentInParent<object>(bool)
 		// object[] UnityEngine.GameObject.GetComponentsInChildren<object>(bool)
-		// object UnityEngine.JsonUtility.FromJson<object>(string)
 		// object UnityEngine.Object.Instantiate<object>(object)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform,bool)

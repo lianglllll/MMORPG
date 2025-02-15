@@ -158,7 +158,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
-    <Compile Include="Assets\Art\Hand_to_Hand_Set\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\Player\Model\SyncModel.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Death.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
@@ -187,7 +186,6 @@
     <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Death.cs" />
-    <Compile Include="Assets\Res\Model\Unit\骷髅\Readme\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogStepConfig.cs" />
@@ -226,7 +224,6 @@
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\HDRP\Stand\Standard_Two_Sided .shader" />
     <None Include="Assets\Res\Shader\UI\CustomRoundCornerShader.shader" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_Standard.shader" />
-    <None Include="Assets\Res\Model\Unit\WizardPolyArt\Shader\PolyArtMaskTint.shader" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_VFX_AlphaBlend.shader" />
     <None Include="Assets\HybridCLRGenerate\link.xml" />
     <None Include="Assets\Art\Chr\Suriyun\README.txt" />
@@ -235,7 +232,6 @@
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_Foliage.shader" />
     <None Include="Assets\Art\Chr\Ida Faber\Shaders\Built-in\Double-sided.shader" />
     <None Include="Assets\Res\UI\Fonts\zh-cn.txt" />
-    <None Include="Assets\Res\Model\Unit\WizardPolyArt\SRP\HowToTestSRPs.txt" />
     <None Include="Assets\Art\Hovl Studio\Magic effects pack\Demo scene\Readme.txt" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_StandardMultiBlend.shader" />
   </ItemGroup>
