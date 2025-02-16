@@ -10,7 +10,7 @@ namespace Player.PlayerState
         public override void Enter()
         {
             m_verticalVelocity = player.jumpVelocity;
-            player.Model.Animator.SetFloat("VerticalSpeed", m_verticalVelocity);
+            player.Model.Animator.SetFloat("Normal_Vertical_Speed", m_verticalVelocity);
             player.PlayAnimation("Jump");
             player.Model.SetRootMotionAction(OnRootMotion);
         }
@@ -25,7 +25,7 @@ namespace Player.PlayerState
 
             // 重力影响
             m_verticalVelocity += player.gravity * Time.deltaTime;
-            player.Model.Animator.SetFloat("VerticalSpeed", m_verticalVelocity);
+            player.Model.Animator.SetFloat("Normal_Vertical_Speed", m_verticalVelocity);
         }
 
         public override void Exit()

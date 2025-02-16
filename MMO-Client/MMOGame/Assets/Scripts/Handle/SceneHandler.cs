@@ -96,7 +96,6 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
         {
             goto End;
         }
-        Log.Information("收到移动包了");
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
             acotr.HandleActorMotionChangeDate(message);

@@ -10,27 +10,49 @@ namespace Player.Controller
         private NetworkActor m_networkActor;
         public NetworkActor NetworkActor => m_networkActor;
 
+        private void Update()
+        {
+            if (GameInputManager.Instance.One)
+            {
+                ChangeMode(NetActorMode.Normal);
+            }else if (GameInputManager.Instance.Two) {
+                ChangeMode(NetActorMode.FlyNormal);
+            }
+        }
+
         public override void Init(Actor actor, NetworkActor networkActor)
         {
             base.Init(actor, networkActor);
             m_networkActor = networkActor;
-            // this.syncEntitySend = syncEntity as SyncEntitySend;
-            ChangeState(NetActorState.Idle);
+            ChangeMode(NetActorMode.Normal);
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
         {
-            if (curState == state && !reCurrstate) return;
-            curState = state;
+            if (m_curState == state && !reCurrstate) return;
+            m_curState = state;
             
             switch (state)
             {
                 case NetActorState.None:
                     break;
                 case NetActorState.Idle:
-                    stateMachine.ChangeState<LocalPlayerState_Idle>(reCurrstate);
+                    if(m_curMode == NetActorMode.Normal)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Idle>(reCurrstate);
+                    }else if(m_curMode == NetActorMode.FlyNormal)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Fly_Idle>(reCurrstate);
+                    }
                     break;
                 case NetActorState.Motion:
-                    stateMachine.ChangeState<LocalPlayerState_Motion>(reCurrstate);
+                    if (m_curMode == NetActorMode.Normal)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Motion>(reCurrstate);
+                    }
+                    else if (m_curMode == NetActorMode.FlyNormal)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Fly_Motion>(reCurrstate);
+                    }
                     break;
                 case NetActorState.Jumpup:
                     stateMachine.ChangeState<LocalPlayerState_JumpUp>(reCurrstate);
@@ -67,6 +89,15 @@ namespace Player.Controller
                     break;
                 case NetActorState.Custom:
                     stateMachine.ChangeState<LocalPlayerState_Skill>(reCurrstate);
+                    break;
+                case NetActorState.Changehight:
+                    if (m_curMode == NetActorMode.Normal)
+                    {
+                    }
+                    else if (m_curMode == NetActorMode.FlyNormal)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Fly_ChangeHight>(reCurrstate);
+                    }
                     break;
             }
 

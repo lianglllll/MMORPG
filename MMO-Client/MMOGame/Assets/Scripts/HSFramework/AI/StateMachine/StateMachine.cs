@@ -10,10 +10,7 @@ namespace HSFramework.AI.StateMachine
         private IStateMachineOwner owner;
         private StateBase curState;
         private Dictionary<Type, StateBase> stateDict = new();
-
         public StateBase CurState { get => curState; }
-        public bool HasState { get => curState != null; }
-        public Type CurrentStateType { get => curState.GetType(); }
 
         public void Init(IStateMachineOwner owner)
         {
@@ -29,6 +26,20 @@ namespace HSFramework.AI.StateMachine
                 MonoManager.Instance.RemoveLateUpdateListener(curState.LateUpdate);
             }
         }
+        public void Stop()
+        {
+            curState.Exit();
+            MonoManager.Instance.RemoveUpdateListener(curState.Update);
+            MonoManager.Instance.RemoveFixedUpdateListener(curState.FixedUpdate);
+            MonoManager.Instance.RemoveLateUpdateListener(curState.LateUpdate);
+            curState = null;
+
+            foreach (var item in stateDict.Values)
+            {
+                item.UnInit();
+            }
+            stateDict.Clear();
+        }
         private StateBase GetState<T>() where T : StateBase, new()
         {
             Type type = typeof(T);
@@ -42,7 +53,7 @@ namespace HSFramework.AI.StateMachine
         }
         public bool ChangeState<T>(bool reCurrstate = false) where T : StateBase, new()
         {
-            if (HasState && CurrentStateType == typeof(T) && !reCurrstate) return false;
+            if (curState != null && curState.GetType() == typeof(T) && !reCurrstate) return false;
 
             //退出当前状态
             if (curState != null)
@@ -62,21 +73,5 @@ namespace HSFramework.AI.StateMachine
 
             return false;
         }
-        public void Stop()
-        {
-            curState.Exit();
-            MonoManager.Instance.RemoveUpdateListener(curState.Update);
-            MonoManager.Instance.RemoveFixedUpdateListener(curState.FixedUpdate);
-            MonoManager.Instance.RemoveLateUpdateListener(curState.LateUpdate);
-            curState = null;
-
-            foreach (var item in stateDict.Values)
-            {
-                item.UnInit();
-            }
-            stateDict.Clear();
-        }
-
-
     }
 }

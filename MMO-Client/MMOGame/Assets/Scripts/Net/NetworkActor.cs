@@ -60,7 +60,7 @@ public class NetworkActor : MonoBehaviour
         b.Y = (int)(a.y * 1000);
         b.Z = (int)(a.z * 1000);
     }
-    public void NV3ToV3(NetVector3 a, Vector3 b)
+    public void NV3ToV3(NetVector3 a, ref Vector3 b)
     {
         b.x = a.X * 0.001f;
         b.y = a.Y * 0.001f;

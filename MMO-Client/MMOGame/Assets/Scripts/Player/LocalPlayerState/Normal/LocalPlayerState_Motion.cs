@@ -129,9 +129,11 @@ namespace Player.PlayerState
                         MotionState = MotionChildState.Run;
                     }
                 }
+                // 其实可以这样的,这个api是可以有插值的
+                // player.Model.Animator.SetFloat("Normal_Vertical_Speed", 0, 0, Time.deltaTime);
 
                 // 设置动画变量
-                player.Model.Animator.SetFloat("MotionSpeed", Mathf.Clamp(walk2RunTransition * player.runSpeed, player.walkSpeed, player.runSpeed));
+                player.Model.Animator.SetFloat("Normal_Vertical_Speed", Mathf.Clamp(walk2RunTransition * player.runSpeed, player.walkSpeed, player.runSpeed));
 
                 //处理旋转问题
                 Vector3 input = new Vector3(h, 0, v);
@@ -174,7 +176,7 @@ namespace Player.PlayerState
         public void SetRun()
         {
             MotionState = MotionChildState.Run;
-            player.Model.Animator.SetFloat("MotionSpeed",player.runSpeed);
+            player.Model.Animator.SetFloat("Normal_Vertical_Speed", player.runSpeed);
         }
         private bool SendActorMotionChangeDateRequest()
         {
@@ -186,7 +188,7 @@ namespace Player.PlayerState
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.position, actorChangeMotionDateRequest.OriginalTransform.Position);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.eulerAngles, actorChangeMotionDateRequest.OriginalTransform.Rotation);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.localScale, actorChangeMotionDateRequest.OriginalTransform.Scale);
-                actorChangeMotionDateRequest.Speed = player.Model.Animator.GetFloat("MotionSpeed");
+                actorChangeMotionDateRequest.Speed = player.Model.Animator.GetFloat("Normal_Vertical_Speed");
                 NetManager.Instance.Send(actorChangeMotionDateRequest);
             }
 

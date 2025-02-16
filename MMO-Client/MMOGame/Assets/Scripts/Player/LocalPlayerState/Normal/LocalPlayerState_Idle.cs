@@ -36,6 +36,8 @@ namespace Player.PlayerState
                 return;
             }
 
+
+
             // 玩家移动
             float h = GameInputManager.Instance.Movement.x;
             float v = GameInputManager.Instance.Movement.y;
@@ -47,6 +49,13 @@ namespace Player.PlayerState
 
             //重力
             player.CharacterController.Move(new Vector3(0, player.gravity * Time.deltaTime, 0));
+
+            //检测下落
+            if (player.CharacterController.isGrounded == false)
+            {
+                player.ChangeState(NetActorState.Falling);
+                return;
+            }
         }
     }
 }

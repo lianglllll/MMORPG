@@ -62,10 +62,10 @@
     <Compile Include="Assets\Scripts\Handle\SceneHandler.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Idle.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Idle.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfigImporter.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Hurt.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Net\Old\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\Consumable.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Knock.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Evade.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityBarScript.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Motion.cs" />
     <Compile Include="Assets\Scripts\Player\Model\ModelBase.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Defense.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Defense.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\Equipment.cs" />
     <Compile Include="Assets\Scripts\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\Action_Manage.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Skill.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Skill.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\MouseOrbitImproved.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
@@ -145,32 +145,32 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
     <Compile Include="Assets\Scripts\Net\NetManager.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Dizzy.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Knock.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Knock.cs" />
     <Compile Include="Assets\Scripts\Net\NetworkTime.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\SelectionPanel.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ClientItem.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Costom.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_JumpUp.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Costom.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Scripts\Player\Model\SyncModel.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Death.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Death.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\LevelDefine.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Motion.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Motion.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
     <Compile Include="Assets\Scripts\Handle\UserService.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Crouch.cs" />
     <Compile Include="Assets\Scripts\Service\BuffService.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Prone.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Prone.cs" />
     <Compile Include="Assets\Scripts\Entities\Npc.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Costom.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\controller.cs" />
@@ -189,12 +189,12 @@
     <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogStepConfig.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\LocalPlayerState.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\LocalPlayerState.cs" />
     <Compile Include="Assets\Scripts\Entities\Character.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Prone.cs" />
     <Compile Include="Assets\Scripts\Service\CombatService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\WorldInfoNodeUI.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Falling.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Falling.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
@@ -216,7 +216,10 @@
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState\Normal\LocalPlayerState_Crouch.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Crouch.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Motion.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Idle.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_ChangeHight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />
@@ -1117,6 +1120,12 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

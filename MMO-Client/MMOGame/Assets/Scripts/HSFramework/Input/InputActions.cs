@@ -73,7 +73,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Climb"",
+                    ""name"": ""Q"",
                     ""type"": ""Button"",
                     ""id"": ""2fa5cc7d-9677-4649-88d1-695865e8019e"",
                     ""expectedControlType"": ""Button"",
@@ -82,16 +82,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Grab"",
-                    ""type"": ""Button"",
-                    ""id"": ""1779e35e-cdfe-4253-8a64-aad87fac9a50"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TakeOut"",
+                    ""name"": ""E"",
                     ""type"": ""Button"",
                     ""id"": ""4b914b10-3a79-4c71-8aeb-c6e36f125a25"",
                     ""expectedControlType"": ""Button"",
@@ -193,6 +184,33 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""82cd8233-ae2d-4e13-8c34-6e3439c0144c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""One"",
+                    ""type"": ""Button"",
+                    ""id"": ""d69852f4-6bd3-4d13-8893-2d5cd2f880c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Two"",
+                    ""type"": ""Button"",
+                    ""id"": ""615f2ca0-a18d-444f-862a-2de5bcd1835f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab"",
+                    ""type"": ""Button"",
+                    ""id"": ""1779e35e-cdfe-4253-8a64-aad87fac9a50"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -301,23 +319,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fbbe2152-8f5b-45bd-bcf7-de640e48a504"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grab"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""44ebe68e-dbd6-4bac-9779-61dcb2e81e1f"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TakeOut"",
+                    ""action"": ""E"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -361,7 +368,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Climb"",
+                    ""action"": ""Q"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -452,6 +459,39 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cdc445b1-650b-434b-a533-a2a512b8529b"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""One"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d439dc5-7347-47d7-bbc2-9b66279a2a68"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Two"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbbe2152-8f5b-45bd-bcf7-de640e48a504"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -493,9 +533,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_Run = m_GameInput.FindAction("Run", throwIfNotFound: true);
         m_GameInput_LAttack = m_GameInput.FindAction("LAttack", throwIfNotFound: true);
         m_GameInput_RAttack = m_GameInput.FindAction("RAttack", throwIfNotFound: true);
-        m_GameInput_Climb = m_GameInput.FindAction("Climb", throwIfNotFound: true);
-        m_GameInput_Grab = m_GameInput.FindAction("Grab", throwIfNotFound: true);
-        m_GameInput_TakeOut = m_GameInput.FindAction("TakeOut", throwIfNotFound: true);
+        m_GameInput_Q = m_GameInput.FindAction("Q", throwIfNotFound: true);
+        m_GameInput_E = m_GameInput.FindAction("E", throwIfNotFound: true);
         m_GameInput_Dash = m_GameInput.FindAction("Dash", throwIfNotFound: true);
         m_GameInput_Parry = m_GameInput.FindAction("Parry", throwIfNotFound: true);
         m_GameInput_EquipWP = m_GameInput.FindAction("EquipWP", throwIfNotFound: true);
@@ -507,6 +546,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_LetfAlt = m_GameInput.FindAction("LetfAlt", throwIfNotFound: true);
         m_GameInput_Space = m_GameInput.FindAction("Space", throwIfNotFound: true);
         m_GameInput_Crouch = m_GameInput.FindAction("Crouch", throwIfNotFound: true);
+        m_GameInput_One = m_GameInput.FindAction("One", throwIfNotFound: true);
+        m_GameInput_Two = m_GameInput.FindAction("Two", throwIfNotFound: true);
+        m_GameInput_Grab = m_GameInput.FindAction("Grab", throwIfNotFound: true);
         // UIInput
         m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
         m_UIInput_Newaction = m_UIInput.FindAction("New action", throwIfNotFound: true);
@@ -574,9 +616,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_Run;
     private readonly InputAction m_GameInput_LAttack;
     private readonly InputAction m_GameInput_RAttack;
-    private readonly InputAction m_GameInput_Climb;
-    private readonly InputAction m_GameInput_Grab;
-    private readonly InputAction m_GameInput_TakeOut;
+    private readonly InputAction m_GameInput_Q;
+    private readonly InputAction m_GameInput_E;
     private readonly InputAction m_GameInput_Dash;
     private readonly InputAction m_GameInput_Parry;
     private readonly InputAction m_GameInput_EquipWP;
@@ -588,6 +629,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_LetfAlt;
     private readonly InputAction m_GameInput_Space;
     private readonly InputAction m_GameInput_Crouch;
+    private readonly InputAction m_GameInput_One;
+    private readonly InputAction m_GameInput_Two;
+    private readonly InputAction m_GameInput_Grab;
     public struct GameInputActions
     {
         private @InputActions m_Wrapper;
@@ -597,9 +641,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_GameInput_Run;
         public InputAction @LAttack => m_Wrapper.m_GameInput_LAttack;
         public InputAction @RAttack => m_Wrapper.m_GameInput_RAttack;
-        public InputAction @Climb => m_Wrapper.m_GameInput_Climb;
-        public InputAction @Grab => m_Wrapper.m_GameInput_Grab;
-        public InputAction @TakeOut => m_Wrapper.m_GameInput_TakeOut;
+        public InputAction @Q => m_Wrapper.m_GameInput_Q;
+        public InputAction @E => m_Wrapper.m_GameInput_E;
         public InputAction @Dash => m_Wrapper.m_GameInput_Dash;
         public InputAction @Parry => m_Wrapper.m_GameInput_Parry;
         public InputAction @EquipWP => m_Wrapper.m_GameInput_EquipWP;
@@ -611,6 +654,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @LetfAlt => m_Wrapper.m_GameInput_LetfAlt;
         public InputAction @Space => m_Wrapper.m_GameInput_Space;
         public InputAction @Crouch => m_Wrapper.m_GameInput_Crouch;
+        public InputAction @One => m_Wrapper.m_GameInput_One;
+        public InputAction @Two => m_Wrapper.m_GameInput_Two;
+        public InputAction @Grab => m_Wrapper.m_GameInput_Grab;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -635,15 +681,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @RAttack.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRAttack;
                 @RAttack.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRAttack;
                 @RAttack.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRAttack;
-                @Climb.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnClimb;
-                @Climb.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnClimb;
-                @Climb.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnClimb;
-                @Grab.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
-                @Grab.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
-                @Grab.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
-                @TakeOut.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTakeOut;
-                @TakeOut.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTakeOut;
-                @TakeOut.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTakeOut;
+                @Q.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
+                @Q.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
+                @Q.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
+                @E.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
+                @E.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
+                @E.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
                 @Dash.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnDash;
@@ -677,6 +720,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Crouch.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
+                @One.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnOne;
+                @One.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnOne;
+                @One.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnOne;
+                @Two.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTwo;
+                @Two.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTwo;
+                @Two.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTwo;
+                @Grab.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
+                @Grab.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
+                @Grab.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
             }
             m_Wrapper.m_GameInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -696,15 +748,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @RAttack.started += instance.OnRAttack;
                 @RAttack.performed += instance.OnRAttack;
                 @RAttack.canceled += instance.OnRAttack;
-                @Climb.started += instance.OnClimb;
-                @Climb.performed += instance.OnClimb;
-                @Climb.canceled += instance.OnClimb;
-                @Grab.started += instance.OnGrab;
-                @Grab.performed += instance.OnGrab;
-                @Grab.canceled += instance.OnGrab;
-                @TakeOut.started += instance.OnTakeOut;
-                @TakeOut.performed += instance.OnTakeOut;
-                @TakeOut.canceled += instance.OnTakeOut;
+                @Q.started += instance.OnQ;
+                @Q.performed += instance.OnQ;
+                @Q.canceled += instance.OnQ;
+                @E.started += instance.OnE;
+                @E.performed += instance.OnE;
+                @E.canceled += instance.OnE;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
@@ -738,6 +787,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @One.started += instance.OnOne;
+                @One.performed += instance.OnOne;
+                @One.canceled += instance.OnOne;
+                @Two.started += instance.OnTwo;
+                @Two.performed += instance.OnTwo;
+                @Two.canceled += instance.OnTwo;
+                @Grab.started += instance.OnGrab;
+                @Grab.performed += instance.OnGrab;
+                @Grab.canceled += instance.OnGrab;
             }
         }
     }
@@ -782,9 +840,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnLAttack(InputAction.CallbackContext context);
         void OnRAttack(InputAction.CallbackContext context);
-        void OnClimb(InputAction.CallbackContext context);
-        void OnGrab(InputAction.CallbackContext context);
-        void OnTakeOut(InputAction.CallbackContext context);
+        void OnQ(InputAction.CallbackContext context);
+        void OnE(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
         void OnEquipWP(InputAction.CallbackContext context);
@@ -796,6 +853,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnLetfAlt(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnOne(InputAction.CallbackContext context);
+        void OnTwo(InputAction.CallbackContext context);
+        void OnGrab(InputAction.CallbackContext context);
     }
     public interface IUIInputActions
     {

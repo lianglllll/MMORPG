@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Climb",
+                    "name": "Q",
                     "type": "Button",
                     "id": "2fa5cc7d-9677-4649-88d1-695865e8019e",
                     "expectedControlType": "Button",
@@ -60,16 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Grab",
-                    "type": "Button",
-                    "id": "1779e35e-cdfe-4253-8a64-aad87fac9a50",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TakeOut",
+                    "name": "E",
                     "type": "Button",
                     "id": "4b914b10-3a79-4c71-8aeb-c6e36f125a25",
                     "expectedControlType": "Button",
@@ -171,6 +162,33 @@
                     "name": "Crouch",
                     "type": "Button",
                     "id": "82cd8233-ae2d-4e13-8c34-6e3439c0144c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "One",
+                    "type": "Button",
+                    "id": "d69852f4-6bd3-4d13-8893-2d5cd2f880c2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Two",
+                    "type": "Button",
+                    "id": "615f2ca0-a18d-444f-862a-2de5bcd1835f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "1779e35e-cdfe-4253-8a64-aad87fac9a50",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -279,23 +297,12 @@
                 },
                 {
                     "name": "",
-                    "id": "fbbe2152-8f5b-45bd-bcf7-de640e48a504",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grab",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "44ebe68e-dbd6-4bac-9779-61dcb2e81e1f",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TakeOut",
+                    "action": "E",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -339,7 +346,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Climb",
+                    "action": "Q",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -428,6 +435,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cdc445b1-650b-434b-a533-a2a512b8529b",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "One",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d439dc5-7347-47d7-bbc2-9b66279a2a68",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbbe2152-8f5b-45bd-bcf7-de640e48a504",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

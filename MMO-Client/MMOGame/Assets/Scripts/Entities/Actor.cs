@@ -6,6 +6,7 @@ using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using Player;
 using Player.Controller;
+using Serilog;
 using UnityEngine;
 
 namespace GameClient.Entities

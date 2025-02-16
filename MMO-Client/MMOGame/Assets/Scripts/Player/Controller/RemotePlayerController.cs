@@ -16,8 +16,8 @@ namespace Player.Controller
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
         {
-            if (curState == state && !reCurrstate) return;
-            curState = state;
+            if (m_curState == state && !reCurrstate) return;
+            m_curState = state;
             switch (state)
             {
                 case NetActorState.None:

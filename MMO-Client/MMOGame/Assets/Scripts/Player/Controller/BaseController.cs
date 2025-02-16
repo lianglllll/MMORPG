@@ -59,6 +59,10 @@ namespace Player
         public float DefenceTime;
         public float WaitCounterAttackTime;
 
+        public float flyWalkSpeed = 10f;
+        public float flyRunSpeed = 20f;
+        public float flyChangeHightSpeed = 8f;
+
         #endregion
 
         //初始化
@@ -75,7 +79,7 @@ namespace Player
             Model.Init();
             unitUIController.Init(actor);
             stateMachine = new StateMachine();
-            stateMachineParameter = new StateMachineParameter();
+            m_stateMachineParameter = new StateMachineParameter();
             stateMachine.Init(this);
         }
         public virtual void UnInit()
@@ -86,15 +90,22 @@ namespace Player
         #region 状态机
 
         public StateMachine stateMachine { get; protected set; }
-        protected NetActorState curState;
-        public NetActorState CurState => curState;
-        private StateMachineParameter stateMachineParameter;
-        public StateMachineParameter StateMachineParameter => stateMachineParameter;
+        private StateMachineParameter m_stateMachineParameter;
+        protected NetActorState m_curState;
+        protected NetActorMode m_curMode;
+        public NetActorState CurState => m_curState;
+        public NetActorMode CurMode => m_curMode;
+        public StateMachineParameter StateMachineParameter => m_stateMachineParameter;
         public virtual void ChangeState(NetActorState state, bool reCurrstate = false)
         {
         }
-
-
+        public virtual void ChangeMode(NetActorMode mode)
+        {
+            if (m_curMode != mode) {
+                m_curMode = mode;
+                ChangeState(NetActorState.Idle,true);
+            }
+        }
         #endregion
 
         #region 动画相关
@@ -123,6 +134,7 @@ namespace Player
         #endregion
 
         #region 工具
+
         public void AdjustToOriginalTransform()
         {
             //
@@ -149,8 +161,6 @@ namespace Player
             // 立即将角色转向目标方向
             transform.rotation = targetRotation;
         }
-
-
 
         #endregion
 

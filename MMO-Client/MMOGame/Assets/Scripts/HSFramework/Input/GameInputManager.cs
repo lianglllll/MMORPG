@@ -23,16 +23,10 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool SustainLeftAlt => _inputActions.GameInput.LetfAlt.phase == InputActionPhase.Performed;
     public bool Space => _inputActions.GameInput.Space.triggered;
     public bool Crouch => _inputActions.GameInput.Crouch.triggered;
-
-
-    public bool Climb => _inputActions.GameInput.Climb.triggered;
-    public bool Grab => _inputActions.GameInput.Grab.triggered;
-    public bool TakeOut => _inputActions.GameInput.TakeOut.triggered;
-    public bool Dash => _inputActions.GameInput.Dash.triggered;
-    public bool Equip => _inputActions.GameInput.EquipWP.triggered;
-    public bool Quit => _inputActions.GameInput.Quit.triggered;
-    public bool Enter => _inputActions.GameInput.Enter.triggered;
-
+    public bool One => _inputActions.GameInput.One.triggered;
+    public bool Two => _inputActions.GameInput.Two.triggered;
+    public bool SustainQ => _inputActions.GameInput.Q.phase == InputActionPhase.Performed;
+    public bool SustainE => _inputActions.GameInput.E.phase == InputActionPhase.Performed;
     public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;
 
     #endregion

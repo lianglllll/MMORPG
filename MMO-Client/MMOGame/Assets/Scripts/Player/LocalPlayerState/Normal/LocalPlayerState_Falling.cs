@@ -11,7 +11,7 @@ namespace Player.PlayerState
         public override void Enter()
         {
             m_verticalVelocity = 0;
-            player.Model.Animator.SetFloat("VerticalSpeed", m_verticalVelocity);
+            player.Model.Animator.SetFloat("Normal_Vertical_Speed", m_verticalVelocity);
             player.PlayAnimation("Jump");
             player.Model.SetRootMotionAction(OnRootMotion);
         }
@@ -37,7 +37,7 @@ namespace Player.PlayerState
 
             // 重力及控制转向
             m_verticalVelocity += player.gravity * Time.deltaTime;
-            player.Model.Animator.SetFloat("VerticalSpeed", m_verticalVelocity);
+            player.Model.Animator.SetFloat("Normal_Vertical_Speed", m_verticalVelocity);
             AirControl();
         }
 

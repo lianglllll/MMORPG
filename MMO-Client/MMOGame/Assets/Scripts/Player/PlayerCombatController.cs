@@ -142,6 +142,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             return;
         }
+        return;
 
         //鼠标左键的base攻击
         if (Input.GetKeyDown(KeyCode.Alpha1))            
