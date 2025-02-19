@@ -73,6 +73,8 @@
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\ConsoleMethodAttribute.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\SceneCommands.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogManager.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Attributes\ConsoleCustomTypeParserAttribute.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Attributes\ConsoleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\IngameDebugConsole\IngameDebugConsole.Runtime.asmdef" />

@@ -23,8 +23,8 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool SustainLeftAlt => _inputActions.GameInput.LetfAlt.phase == InputActionPhase.Performed;
     public bool Space => _inputActions.GameInput.Space.triggered;
     public bool Crouch => _inputActions.GameInput.Crouch.triggered;
-    public bool One => _inputActions.GameInput.One.triggered;
-    public bool Two => _inputActions.GameInput.Two.triggered;
+    public bool KeyOneDown => _inputActions.GameInput.KeyOne.triggered;
+    public bool KeyTwoDown => _inputActions.GameInput.KeyTwo.triggered;
     public bool SustainQ => _inputActions.GameInput.Q.phase == InputActionPhase.Performed;
     public bool SustainE => _inputActions.GameInput.E.phase == InputActionPhase.Performed;
     public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;

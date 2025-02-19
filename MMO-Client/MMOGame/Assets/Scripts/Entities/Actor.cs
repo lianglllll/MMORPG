@@ -48,7 +48,7 @@ namespace GameClient.Entities
         public int CurSceneId => m_netActorNode.SceneId;
         public int Level => m_netActorNode.Level;
         public long Exp => m_netActorNode.Exp;
-        public float Speed { get => m_netActorNode.Speed; set => m_netActorNode.Speed = value; }
+        public float Speed { get => m_netActorNode.Speed * 0.001f;}
 
         public Actor(NetActorNode netAcotrNode) :base(netAcotrNode.EntityId, netAcotrNode.Transform)
         {
@@ -175,7 +175,7 @@ namespace GameClient.Entities
         }
         public void OnSpeedChanged(int old_value, int new_value)
         {
-            Speed = new_value;
+            // Speed = new_value;
         }
 
         // tools

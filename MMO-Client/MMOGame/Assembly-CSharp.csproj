@@ -137,11 +137,13 @@
     <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Skill.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\MouseOrbitImproved.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Motion.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\LoadingBox.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_ChangeHight.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\ItemDefine.cs" />
     <Compile Include="Assets\Scripts\Net\NetManager.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Service\ItemService.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
+    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Idle.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntityRecive.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
@@ -217,14 +220,9 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Crouch.cs" />
-    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Motion.cs" />
-    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Idle.cs" />
-    <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_ChangeHight.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\Built-in\Stand\Standard_Two_Sided .shader" />
     <None Include="Assets\Res\Shader\UI\Circular.shader" />
-    <None Include="Assets\Art\Chr\CosmoBunny\Render pipeline\HDRP\Stand\Standard_Two_Sided .shader" />
     <None Include="Assets\Res\Shader\UI\CustomRoundCornerShader.shader" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_Standard.shader" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_VFX_AlphaBlend.shader" />
@@ -989,6 +987,12 @@
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Purchasing.Codeless">
       <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Codeless.dll</HintPath>
     </Reference>
@@ -1120,12 +1124,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

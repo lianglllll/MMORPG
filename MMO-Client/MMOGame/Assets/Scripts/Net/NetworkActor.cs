@@ -48,7 +48,7 @@ public class NetworkActor : MonoBehaviour
         req.SessionId = NetManager.Instance.sessionId;
         if(m_baseController.CurState == NetActorState.Motion)
         {
-            req.Speed = m_actor.Speed;
+            req.Speed = m_actor.Speed * 1000;
         }
         NetManager.Instance.Send(req);
         return true;

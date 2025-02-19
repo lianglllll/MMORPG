@@ -26,6 +26,7 @@ namespace Player
             _latestDate.speed = remotePlayer.Actor.Speed;
             _latestDate.isCorrection = true;
             _latestDate.TimeStamp = 0;
+            remotePlayer.Model.Animator.SetFloat("Normal_Vertical_Speed", _latestDate.speed);
             remotePlayer.PlayAnimation("Motion");
         }
         public override void Update()
@@ -48,9 +49,10 @@ namespace Player
             }
             remotePlayer.NetworkActor.NV3ToV3(resp.OriginalTransform.Position, ref _latestDate.pos);
             remotePlayer.NetworkActor.NV3ToV3(resp.OriginalTransform.Rotation, ref _latestDate.rot);
-            _latestDate.speed = resp.Speed;
+            _latestDate.speed = resp.Speed * 0.001f;
             _latestDate.isCorrection = false;
             _latestDate.TimeStamp = resp.Timestamp;
+            remotePlayer.Model.Animator.SetFloat("Normal_Vertical_Speed", _latestDate.speed);
         End:
             return;
         }
@@ -64,6 +66,7 @@ namespace Player
             {
                 goto End;
             }
+            Log.Information("remoter 进入 QuickCorrection");
 
             bool isPosCorrenction = false;
             bool isRotCorrenction = false;
@@ -95,7 +98,7 @@ namespace Player
             if(isPosCorrenction && isRotCorrenction)
             {
                 _latestDate.isCorrection = true;
-                Log.Information("QuickCorrection 成功");
+                Log.Information("remoter QuickCorrection 成功");
             }
 
         End:

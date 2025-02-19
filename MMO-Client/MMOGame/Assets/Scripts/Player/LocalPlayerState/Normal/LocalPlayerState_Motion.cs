@@ -188,7 +188,7 @@ namespace Player.PlayerState
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.position, actorChangeMotionDateRequest.OriginalTransform.Position);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.eulerAngles, actorChangeMotionDateRequest.OriginalTransform.Rotation);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.localScale, actorChangeMotionDateRequest.OriginalTransform.Scale);
-                actorChangeMotionDateRequest.Speed = player.Model.Animator.GetFloat("Normal_Vertical_Speed");
+                actorChangeMotionDateRequest.Speed = (int)(player.Model.Animator.GetFloat("Normal_Vertical_Speed") * 1000);
                 NetManager.Instance.Send(actorChangeMotionDateRequest);
             }
 

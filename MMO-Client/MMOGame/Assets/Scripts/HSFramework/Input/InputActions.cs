@@ -190,7 +190,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""One"",
+                    ""name"": ""KeyOne"",
                     ""type"": ""Button"",
                     ""id"": ""d69852f4-6bd3-4d13-8893-2d5cd2f880c2"",
                     ""expectedControlType"": ""Button"",
@@ -199,7 +199,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Two"",
+                    ""name"": ""KeyTwo"",
                     ""type"": ""Button"",
                     ""id"": ""615f2ca0-a18d-444f-862a-2de5bcd1835f"",
                     ""expectedControlType"": ""Button"",
@@ -467,7 +467,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""One"",
+                    ""action"": ""KeyOne"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -478,7 +478,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Two"",
+                    ""action"": ""KeyTwo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -546,8 +546,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_LetfAlt = m_GameInput.FindAction("LetfAlt", throwIfNotFound: true);
         m_GameInput_Space = m_GameInput.FindAction("Space", throwIfNotFound: true);
         m_GameInput_Crouch = m_GameInput.FindAction("Crouch", throwIfNotFound: true);
-        m_GameInput_One = m_GameInput.FindAction("One", throwIfNotFound: true);
-        m_GameInput_Two = m_GameInput.FindAction("Two", throwIfNotFound: true);
+        m_GameInput_KeyOne = m_GameInput.FindAction("KeyOne", throwIfNotFound: true);
+        m_GameInput_KeyTwo = m_GameInput.FindAction("KeyTwo", throwIfNotFound: true);
         m_GameInput_Grab = m_GameInput.FindAction("Grab", throwIfNotFound: true);
         // UIInput
         m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
@@ -629,8 +629,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_LetfAlt;
     private readonly InputAction m_GameInput_Space;
     private readonly InputAction m_GameInput_Crouch;
-    private readonly InputAction m_GameInput_One;
-    private readonly InputAction m_GameInput_Two;
+    private readonly InputAction m_GameInput_KeyOne;
+    private readonly InputAction m_GameInput_KeyTwo;
     private readonly InputAction m_GameInput_Grab;
     public struct GameInputActions
     {
@@ -654,8 +654,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @LetfAlt => m_Wrapper.m_GameInput_LetfAlt;
         public InputAction @Space => m_Wrapper.m_GameInput_Space;
         public InputAction @Crouch => m_Wrapper.m_GameInput_Crouch;
-        public InputAction @One => m_Wrapper.m_GameInput_One;
-        public InputAction @Two => m_Wrapper.m_GameInput_Two;
+        public InputAction @KeyOne => m_Wrapper.m_GameInput_KeyOne;
+        public InputAction @KeyTwo => m_Wrapper.m_GameInput_KeyTwo;
         public InputAction @Grab => m_Wrapper.m_GameInput_Grab;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
@@ -720,12 +720,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Crouch.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
-                @One.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnOne;
-                @One.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnOne;
-                @One.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnOne;
-                @Two.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTwo;
-                @Two.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTwo;
-                @Two.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTwo;
+                @KeyOne.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyOne;
+                @KeyOne.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyOne;
+                @KeyOne.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyOne;
+                @KeyTwo.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyTwo;
+                @KeyTwo.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyTwo;
+                @KeyTwo.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyTwo;
                 @Grab.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
                 @Grab.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
                 @Grab.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
@@ -787,12 +787,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
-                @One.started += instance.OnOne;
-                @One.performed += instance.OnOne;
-                @One.canceled += instance.OnOne;
-                @Two.started += instance.OnTwo;
-                @Two.performed += instance.OnTwo;
-                @Two.canceled += instance.OnTwo;
+                @KeyOne.started += instance.OnKeyOne;
+                @KeyOne.performed += instance.OnKeyOne;
+                @KeyOne.canceled += instance.OnKeyOne;
+                @KeyTwo.started += instance.OnKeyTwo;
+                @KeyTwo.performed += instance.OnKeyTwo;
+                @KeyTwo.canceled += instance.OnKeyTwo;
                 @Grab.started += instance.OnGrab;
                 @Grab.performed += instance.OnGrab;
                 @Grab.canceled += instance.OnGrab;
@@ -853,8 +853,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnLetfAlt(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
-        void OnOne(InputAction.CallbackContext context);
-        void OnTwo(InputAction.CallbackContext context);
+        void OnKeyOne(InputAction.CallbackContext context);
+        void OnKeyTwo(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
     }
     public interface IUIInputActions

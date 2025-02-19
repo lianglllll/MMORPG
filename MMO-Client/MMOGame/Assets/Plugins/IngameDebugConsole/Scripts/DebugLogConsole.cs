@@ -197,17 +197,23 @@ namespace IngameDebugConsole
 		{
 			try
 			{
+				List<ConsoleAttribute> methods = new List<ConsoleAttribute>();
 				foreach( Type type in assembly.GetExportedTypes() )
 				{
 					foreach( MethodInfo method in type.GetMethods( BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly ) )
 					{
-						foreach( object attribute in method.GetCustomAttributes( typeof( ConsoleMethodAttribute ), false ) )
+						foreach( ConsoleAttribute consoleAttribute in method.GetCustomAttributes( typeof(ConsoleAttribute), false ) )
 						{
-							ConsoleMethodAttribute consoleMethod = attribute as ConsoleMethodAttribute;
-							if( consoleMethod != null )
-								AddCommand( consoleMethod.Command, consoleMethod.Description, method, null, consoleMethod.ParameterNames );
+							consoleAttribute.SetMethod(method);
+							methods.Add(consoleAttribute);
 						}
 					}
+				}
+
+				methods.Sort((a, b) => a.Order.CompareTo(b.Order));
+				for (int i = 0; i < methods.Count; i++)
+				{
+					methods[i].Load();
 				}
 			}
 			catch( NotSupportedException ) { }
@@ -439,7 +445,7 @@ namespace IngameDebugConsole
 			AddCommand( command, description, method, instance, parameterNames );
 		}
 
-		private static void AddCommand( string command, string description, MethodInfo method, object instance, string[] parameterNames )
+		internal static void AddCommand( string command, string description, MethodInfo method, object instance, string[] parameterNames )
 		{
 			if( string.IsNullOrEmpty( command ) )
 			{
@@ -1130,7 +1136,7 @@ namespace IngameDebugConsole
 		public static bool ParseFloat( string input, out object output )
 		{
 			float value;
-			bool result = float.TryParse( !input.EndsWith( "f", StringComparison.OrdinalIgnoreCase ) ? input : input.Substring( 0, input.Length - 1 ), out value );
+			bool result = float.TryParse( !input.EndsWith( "f", StringComparison.OrdinalIgnoreCase ) ? input : input.Substring( 0, input.Length - 1 ), NumberStyles.Float, CultureInfo.InvariantCulture, out value );
 
 			output = value;
 			return result;
@@ -1139,7 +1145,7 @@ namespace IngameDebugConsole
 		public static bool ParseDouble( string input, out object output )
 		{
 			double value;
-			bool result = double.TryParse( !input.EndsWith( "f", StringComparison.OrdinalIgnoreCase ) ? input : input.Substring( 0, input.Length - 1 ), out value );
+			bool result = double.TryParse( !input.EndsWith( "f", StringComparison.OrdinalIgnoreCase ) ? input : input.Substring( 0, input.Length - 1 ), NumberStyles.Float, CultureInfo.InvariantCulture, out value );
 
 			output = value;
 			return result;
@@ -1148,7 +1154,7 @@ namespace IngameDebugConsole
 		public static bool ParseDecimal( string input, out object output )
 		{
 			decimal value;
-			bool result = decimal.TryParse( !input.EndsWith( "f", StringComparison.OrdinalIgnoreCase ) ? input : input.Substring( 0, input.Length - 1 ), out value );
+			bool result = decimal.TryParse( !input.EndsWith( "f", StringComparison.OrdinalIgnoreCase ) ? input : input.Substring( 0, input.Length - 1 ), NumberStyles.Float, CultureInfo.InvariantCulture, out value );
 
 			output = value;
 			return result;

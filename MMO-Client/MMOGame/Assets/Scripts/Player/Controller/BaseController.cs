@@ -2,6 +2,7 @@ using GameClient.Combat;
 using GameClient.Entities;
 using HS.Protobuf.SceneEntity;
 using HSFramework.AI.StateMachine;
+using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -86,6 +87,28 @@ namespace Player
         {
             stateMachine.UnInit();
         }
+        protected virtual void Update()
+        {
+            if (isTransitioning)
+            {
+                lerpTime += Time.deltaTime;
+                float t = lerpTime / transitionDuration;
+                transform.position = Vector3.Lerp(transform.position, targetPosition, t);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, t);
+
+                // 检查是否接近目标位置
+                if (Vector3.Distance(transform.position, targetPosition) < positionThreshold &&
+                    Quaternion.Angle(transform.rotation, targetRotation) < rotationThreshold)
+                {
+                    isTransitioning = false;
+                    // 确保最终位置和旋转准确
+                    transform.position = targetPosition;
+                    transform.rotation = targetRotation;
+                    return;
+                }
+            }
+        }
+
 
         #region 状态机
 
@@ -99,6 +122,25 @@ namespace Player
         public virtual void ChangeState(NetActorState state, bool reCurrstate = false)
         {
         }
+
+        public float transitionDuration = 0.2f; // 转换持续时间
+        private Vector3 targetPosition;
+        private Quaternion targetRotation;
+        private float lerpTime;
+        private bool isTransitioning = false;
+        // 定义接近目标值的阈值
+        float positionThreshold = 0.01f; // 可根据需要调整
+        float rotationThreshold = 1.0f;  // 单位为度数，可根据需要调整
+        public void AdjustToOriginalTransform()
+        {
+            targetPosition = actor.Position;
+            targetRotation = Quaternion.Euler(actor.Rotation);
+
+            // 重置插值计时器
+            lerpTime = 0;
+            isTransitioning = true;
+        }
+
         public virtual void ChangeMode(NetActorMode mode)
         {
             if (m_curMode != mode) {
@@ -135,12 +177,6 @@ namespace Player
 
         #region 工具
 
-        public void AdjustToOriginalTransform()
-        {
-            //
-            transform.position = actor.Position;
-            transform.rotation = Quaternion.Euler(actor.Rotation);
-        }
 
         public void DirectLookTarget(Vector3 pos)
         {

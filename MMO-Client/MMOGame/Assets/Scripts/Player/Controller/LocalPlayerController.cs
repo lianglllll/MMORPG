@@ -1,6 +1,5 @@
 using GameClient.Entities;
 using HS.Protobuf.SceneEntity;
-using HSFramework.Net;
 using Player.PlayerState;
 
 namespace Player.Controller
@@ -10,12 +9,12 @@ namespace Player.Controller
         private NetworkActor m_networkActor;
         public NetworkActor NetworkActor => m_networkActor;
 
-        private void Update()
+        protected void Update()
         {
-            if (GameInputManager.Instance.One)
+            if (GameInputManager.Instance.KeyOneDown)
             {
                 ChangeMode(NetActorMode.Normal);
-            }else if (GameInputManager.Instance.Two) {
+            }else if (GameInputManager.Instance.KeyTwoDown) {
                 ChangeMode(NetActorMode.FlyNormal);
             }
         }
