@@ -9,8 +9,9 @@ namespace Player.Controller
         private NetworkActor m_networkActor;
         public NetworkActor NetworkActor => m_networkActor;
 
-        protected void Update()
+        protected override void Update()
         {
+            base.Update();
             if (GameInputManager.Instance.KeyOneDown)
             {
                 ChangeMode(NetActorMode.Normal);

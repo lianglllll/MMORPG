@@ -1,3 +1,4 @@
+using GameClient.HSFramework;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,12 +61,15 @@ public class CreateRolePanelScript : BasePanel
     }
     public void OnReturnBtn()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
         UIManager.Instance.ClosePanelWithFade("CreateRolePanel");
     }
     public void OnCreateBtn()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+
         //安全校验，姓名输入是否合理，有无选择角色
-        if(curItem == null)
+        if (curItem == null)
         {
             UIManager.Instance.ShowTopMessage("请选择你的角色");
             return;

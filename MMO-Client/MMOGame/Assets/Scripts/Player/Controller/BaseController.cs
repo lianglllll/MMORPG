@@ -2,6 +2,7 @@ using GameClient.Combat;
 using GameClient.Entities;
 using HS.Protobuf.SceneEntity;
 using HSFramework.AI.StateMachine;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -24,15 +25,16 @@ namespace Player
         private ModelBase model;
         public ModelBase Model { get => model; }
 
-        //声音源
-        protected AudioSource audioSource;
-
         //角色控制器
         private CharacterController characterController;
         public CharacterController CharacterController { get => characterController; }
 
         //ui控制
         public UnitUIController unitUIController;
+
+        // 声音控制
+        private UnitAudioManager m_unitAudioManager;
+
 
         //信息
         private Actor actor;
@@ -64,6 +66,8 @@ namespace Player
         public float flyRunSpeed = 20f;
         public float flyChangeHightSpeed = 8f;
 
+        public List<AudioClip> normal_Motion_AudioClip = new();
+
         #endregion
 
         //初始化
@@ -71,13 +75,13 @@ namespace Player
         {
             model = transform.Find("Model").GetComponent<ModelBase>();
             characterController = GetComponent<CharacterController>();
-            audioSource = GetComponent<AudioSource>();
             unitUIController = GetComponent<UnitUIController>();
+            m_unitAudioManager = transform.Find("UnitAudioManager").GetComponent<UnitAudioManager>();
         }
         public virtual void Init(Actor actor, NetworkActor networkActor)
         {
             this.actor = actor;
-            Model.Init();
+            // Model.Init();
             unitUIController.Init(actor);
             stateMachine = new StateMachine();
             m_stateMachineParameter = new StateMachineParameter();
@@ -163,14 +167,9 @@ namespace Player
             currentAnimationName = animationName;
             Model.Animator.CrossFadeInFixedTime(animationName, fixedTransitionDuration);
         }
-        public void PlayAudio(AudioClip audioClip)
-        {
-            if (audioClip == null) return;
-            audioSource.PlayOneShot(audioClip);
-        }
         public void OnFootStep()
         {
-
+            m_unitAudioManager.PlayFootAudioClip();
         }
 
         #endregion

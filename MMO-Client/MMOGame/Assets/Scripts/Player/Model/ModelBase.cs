@@ -9,14 +9,18 @@ namespace Player
     {
         protected Animator animator;
         public Animator Animator { get => animator; }
+        private BaseController m_baseController;
+
+
         protected void Awake()
         {
             animator = GetComponent<Animator>();
         }
 
         //初始化
-        public void Init()
+        public void Init(BaseController baseController)
         {
+            m_baseController = baseController;
         }
 
         #region 根运动
@@ -39,13 +43,13 @@ namespace Player
             rootMotionAction?.Invoke(animator.deltaPosition, animator.deltaRotation);
         }
 
-
         #endregion
 
         #region 动画事件
 
         protected void FootStep()
         {
+            m_baseController.OnFootStep();
         }
 
         protected void StartSkillHit(int weaponIndex)

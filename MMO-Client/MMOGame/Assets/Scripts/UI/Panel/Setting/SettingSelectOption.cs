@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
+using GameClient.HSFramework;
 
 public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
@@ -41,6 +42,7 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isClicked) return;
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
         settingPanel.Selected(this);
     }
 

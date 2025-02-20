@@ -74,7 +74,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Knock.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Evade.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\DeliverPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityBarScript.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\RemotePlayerController.cs" />
@@ -107,9 +107,9 @@
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\aExample\a\test.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestItem.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\MessagePanelScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\InfoPanelScript.cs" />
     <Compile Include="Assets\Scripts\Camera\TP_CameraController.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\RoleListItemScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\RoleListItemScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\ChatBoxScript.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
@@ -128,10 +128,10 @@
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Defense.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\Combat\Missile.cs" />
-    <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
+    <Compile Include="Assets\Scripts\Player\Tools\GroundChecker.cs" />
     <Compile Include="Assets\Scripts\Manager\GameTools.cs" />
     <Compile Include="Assets\Scripts\Player\Model\PlayerModel.cs" />
-    <Compile Include="Assets\Scripts\Player\UnitUIController.cs" />
+    <Compile Include="Assets\Scripts\Player\Tools\UnitUIController.cs" />
     <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\Action_Manage.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\BuffDefine.cs" />
@@ -140,7 +140,7 @@
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Motion.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\LoadingBox.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\LoadingBox.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_ChangeHight.cs" />
@@ -152,7 +152,7 @@
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Knock.cs" />
     <Compile Include="Assets\Scripts\Net\NetworkTime.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\SelectionPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ClientItem.cs" />
@@ -183,9 +183,9 @@
     <Compile Include="Assets\Scripts\Manager\DataDefine\RevivalPointDefine.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Idle.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntityRecive.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\ItemIOInfoItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\VocationItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\VocationItem.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Death.cs" />
@@ -205,7 +205,7 @@
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\Swapper.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SpaceDefine.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\SkillDefine.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Info\ItemIOInfoBox.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Scripts\Combat\Buffs\Buff.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\DialogDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Entity.cs" />
@@ -218,8 +218,10 @@
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerCombatController.cs" />
+    <Compile Include="Assets\Scripts\Player\Controller\PlayerCombatController.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Crouch.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Setting\AudioSettingPanel.cs" />
+    <Compile Include="Assets\Scripts\Player\Tools\UnitAudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Res\Shader\UI\Circular.shader" />

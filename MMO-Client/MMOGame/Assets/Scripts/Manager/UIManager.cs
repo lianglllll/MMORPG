@@ -17,7 +17,7 @@ public class UIManager
     private Dictionary<string, BasePanel> panelScriptDict = null;      //panelname  -> panelscript    这是当前打开的面板
 
     //用于展示消息的面板（如果有需要可以将panel的实例保存起来使用）
-    private MessagePanelScript messagePanel;                            
+    private InfoPanelScript messagePanel;                            
 
     private UIManager() { }
     public static UIManager Instance
@@ -59,13 +59,13 @@ public class UIManager
     /// <summary>
     /// 消息面板
     /// </summary>
-    public MessagePanelScript MessagePanel
+    public InfoPanelScript MessagePanel
     {
         get
         {
             if(messagePanel == null)
             {
-                messagePanel = GameObject.Find("Panel/InfoPanel").transform.GetComponent<MessagePanelScript>();
+                messagePanel = GameObject.Find("Panel/InfoPanel").transform.GetComponent<InfoPanelScript>();
             }
             return messagePanel;
         }

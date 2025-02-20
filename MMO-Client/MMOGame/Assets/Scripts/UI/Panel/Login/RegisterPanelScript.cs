@@ -1,3 +1,4 @@
+using GameClient.HSFramework;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -31,6 +32,8 @@ public class RegisterPanelScript : BasePanel
     /// </summary>
     private void OnRegister()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+
         string username = usernameInputField.text;
         string password = passwordInputField.text;
         string confirmPassword = confirmPasswordInputField.text;
@@ -66,14 +69,7 @@ public class RegisterPanelScript : BasePanel
     /// </summary>
     public void OnReturn()
     {
-        StartCoroutine(_OnReturn());
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+        UIManager.Instance.ClosePanelWithFade("RegisterPanel");
     }
-    private IEnumerator _OnReturn()
-    {
-        yield return ScenePoster.Instance.FadeIn();
-        UIManager.Instance.ClosePanel("RegisterPanel");
-        ScenePoster.Instance.StartCoroutine(ScenePoster.Instance.FadeOut());
-
-    }
-
 }

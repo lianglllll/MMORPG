@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using HS.Protobuf.Login;
+using GameClient.HSFramework;
 public class LoginPanelScript : BasePanel
 {
     private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来
@@ -93,6 +94,8 @@ public class LoginPanelScript : BasePanel
 
     private void OnLoginBtn()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+
         //与服务器没有建立连接时
         if (NetManager.Instance.curNetClient == null)
         {
@@ -149,16 +152,8 @@ public class LoginPanelScript : BasePanel
 
     private void OnRegisterBtn()
     {
-        StartCoroutine(_OnRegister());
-    }
-    private IEnumerator _OnRegister()
-    {
-        yield return ScenePoster.Instance.FadeIn();
-
-        //切换到registerpanel
-        UIManager.Instance.OpenPanel("RegisterPanel");
-
-        yield return ScenePoster.Instance.FadeOut();
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+        UIManager.Instance.OpenPanelWithFade("RegisterPanel");
     }
 
     private void OnRefreshServerInfoBtn()
@@ -191,6 +186,8 @@ public class LoginPanelScript : BasePanel
 
     private void OnExitBtn()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+
         //弹框提示
         UIManager.Instance.MessagePanel.ShowSelectionPanel("退出游戏", "是否退出游戏？", () =>
         {

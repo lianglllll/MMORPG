@@ -1,4 +1,5 @@
 using BaseSystem.MyDelayedTaskScheduler;
+using GameClient.HSFramework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ public class SettingPanel : BasePanel
     private SettingType curType;
     private SettingSelectOption curOption;
     private Dictionary<SettingType, Transform> menuDict = new();
-
 
     protected override void Start()
     {
@@ -42,6 +42,7 @@ public class SettingPanel : BasePanel
 
     public void Selected(SettingSelectOption option)
     {
+
         if(curOption != null)
         {
             curOption.CancelClick();

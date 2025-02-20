@@ -215,6 +215,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KeyEsc"",
+                    ""type"": ""Button"",
+                    ""id"": ""4146bf7d-96f3-4a1d-8642-41cda15cd406"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -492,6 +501,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc81e988-2d2f-4145-ac69-9bac62915882"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyEsc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -549,6 +569,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput_KeyOne = m_GameInput.FindAction("KeyOne", throwIfNotFound: true);
         m_GameInput_KeyTwo = m_GameInput.FindAction("KeyTwo", throwIfNotFound: true);
         m_GameInput_Grab = m_GameInput.FindAction("Grab", throwIfNotFound: true);
+        m_GameInput_KeyEsc = m_GameInput.FindAction("KeyEsc", throwIfNotFound: true);
         // UIInput
         m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
         m_UIInput_Newaction = m_UIInput.FindAction("New action", throwIfNotFound: true);
@@ -632,6 +653,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameInput_KeyOne;
     private readonly InputAction m_GameInput_KeyTwo;
     private readonly InputAction m_GameInput_Grab;
+    private readonly InputAction m_GameInput_KeyEsc;
     public struct GameInputActions
     {
         private @InputActions m_Wrapper;
@@ -657,6 +679,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @KeyOne => m_Wrapper.m_GameInput_KeyOne;
         public InputAction @KeyTwo => m_Wrapper.m_GameInput_KeyTwo;
         public InputAction @Grab => m_Wrapper.m_GameInput_Grab;
+        public InputAction @KeyEsc => m_Wrapper.m_GameInput_KeyEsc;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -729,6 +752,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Grab.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
                 @Grab.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
                 @Grab.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
+                @KeyEsc.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyEsc;
+                @KeyEsc.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyEsc;
+                @KeyEsc.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyEsc;
             }
             m_Wrapper.m_GameInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -796,6 +822,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Grab.started += instance.OnGrab;
                 @Grab.performed += instance.OnGrab;
                 @Grab.canceled += instance.OnGrab;
+                @KeyEsc.started += instance.OnKeyEsc;
+                @KeyEsc.performed += instance.OnKeyEsc;
+                @KeyEsc.canceled += instance.OnKeyEsc;
             }
         }
     }
@@ -856,6 +885,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnKeyOne(InputAction.CallbackContext context);
         void OnKeyTwo(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
+        void OnKeyEsc(InputAction.CallbackContext context);
     }
     public interface IUIInputActions
     {

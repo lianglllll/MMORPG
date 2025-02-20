@@ -56,6 +56,7 @@
     <Analyzer Include="D:\Tools\CodeTools\VS\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Attributes\ConsoleAttribute.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\InputFieldWarningsFixer.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\PlayerPrefsCommands.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogItem.cs" />
@@ -68,13 +69,12 @@
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugsOnScrollListener.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogPopup.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogConsole.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Attributes\ConsoleCustomTypeParserAttribute.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogEntry.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\EventSystemHandler.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\ConsoleMethodAttribute.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\SceneCommands.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogManager.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Attributes\ConsoleCustomTypeParserAttribute.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Attributes\ConsoleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\IngameDebugConsole\IngameDebugConsole.Runtime.asmdef" />

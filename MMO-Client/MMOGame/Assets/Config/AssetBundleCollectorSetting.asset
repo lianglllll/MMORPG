@@ -97,6 +97,19 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+    - GroupName: AudioClips
+      GroupDesc: "\u97F3\u6548"
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Res/Audios/Unit/Common/Foot
+        CollectorGUID: 6f261bccd57fde845aff103eee884578
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
   - PackageName: RawPackage
     PackageDesc: "\u539F\u751F\u8D44\u6E90\u5305"
     EnableAddressable: 1

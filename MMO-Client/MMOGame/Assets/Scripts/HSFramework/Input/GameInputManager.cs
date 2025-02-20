@@ -28,6 +28,7 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool SustainQ => _inputActions.GameInput.Q.phase == InputActionPhase.Performed;
     public bool SustainE => _inputActions.GameInput.E.phase == InputActionPhase.Performed;
     public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;
+    public bool ESC => _inputActions.GameInput.KeyEsc.triggered;
 
     #endregion
 

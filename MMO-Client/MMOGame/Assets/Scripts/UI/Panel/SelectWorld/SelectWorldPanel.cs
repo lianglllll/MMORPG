@@ -1,5 +1,6 @@
 using DG.Tweening;
 using GameClient;
+using GameClient.HSFramework;
 using HS.Protobuf.Login;
 using System.Linq;
 using TMPro;
@@ -105,6 +106,8 @@ public class SelectWorldPanel : BasePanel
     }
     public void OnStartBtn()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+
         if (!isCanStart) return;
         if (isStart)
         {
@@ -124,6 +127,8 @@ public class SelectWorldPanel : BasePanel
     private void OnExitPanelBtn()
     {
         // todo
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+        UIManager.Instance.ShowTopMessage("未开发...");
     }
     private void OnSelectWorldBtn(WorldInfoNode infoNode)
     {

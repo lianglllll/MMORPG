@@ -148,7 +148,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             // 同步脚本
             NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
 
-            modelBase.Init();
+            modelBase.Init(ctl);
             ctl.Init(actor, networkActor);
             actor.Init(ctl);
             combat.Init(ctl);
@@ -169,7 +169,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             // 同步脚本
             NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
 
-            modelBase.Init();
+            modelBase.Init(ctl);
             ctl.Init(actor, networkActor);
             actor.Init(ctl);
             networkActor.Init(ctl);

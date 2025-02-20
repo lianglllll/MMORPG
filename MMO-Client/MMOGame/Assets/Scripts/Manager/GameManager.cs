@@ -2,6 +2,7 @@ using Assets.Script.Service;
 using BaseSystem.PoolModule;
 using BaseSystem.Singleton;
 using GameClient.Entities;
+using GameClient.HSFramework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,12 +42,15 @@ public class GameManager : Singleton<GameManager>
         ItemService.Instance.Init();
         BuffService.Instance.Init();
         UIManager.Instance.Init();
+        GlobalAudioManager.Instance.Init();
 
         // gameObj对象池初始化
         UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;
 
         // 打开登录面板ui
         UIManager.Instance.OpenPanel("LoginPanel");
+        GlobalAudioManager.Instance.PlayBackgroundAudioRandomly();
+
         // 连接流程
         NetManager.Instance.Init();
     }

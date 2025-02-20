@@ -1,3 +1,4 @@
+using GameClient.HSFramework;
 using HS.Protobuf.Game;
 using HS.Protobuf.SceneEntity;
 using System.Collections;
@@ -113,12 +114,16 @@ public class SelectRolePanelScript : BasePanel
 
     public void OnCreateBtn()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
         //切换创建角色面板
         UIManager.Instance.OpenPanelWithFade("CreateRolePanel");
     }
     public void OnDeleteRoleBtn()
     {
-        if(curSelectedItem == null)
+
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+
+        if (curSelectedItem == null)
         {
             return;
         }
@@ -159,6 +164,8 @@ public class SelectRolePanelScript : BasePanel
     /// </summary>
     public void OnStartBtn()
     {
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+
         if (curSelectedItem == null || isStart == true)
         {
             goto End;
@@ -175,6 +182,8 @@ public class SelectRolePanelScript : BasePanel
     {
         if(reslutCode == 0)
         {
+            // 关闭bgm
+            GlobalAudioManager.Instance.StopBackgroundAudio();
             // 关闭动画
             curSelectedItem.Stop();
             // 关闭当前ui
