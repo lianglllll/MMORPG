@@ -34,6 +34,11 @@ namespace GameClient.Entities
         public UnitDefine UnitDefine => m_unitDefine;
         public BuffManager BuffManager => m_buffManager;
         public EquipManager EquipManager => m_equipManager;
+        public NetActorMode NetActorMode
+        {
+            get => m_netActorNode.NetActorMode;
+            set => m_netActorNode.NetActorMode = value;
+        }
         public NetActorState NetActorState
         {
             get => m_netActorNode.NetActorState;
@@ -181,7 +186,8 @@ namespace GameClient.Entities
         // tools
         public void HandleActorChangeModeResponse(ActorChangeModeResponse message)
         {
-
+            NetActorMode = message.Mode;
+            m_baseController.ChangeMode(NetActorMode);
         }
         public void HandleActorChangeStateResponse(ActorChangeStateResponse message)
         {

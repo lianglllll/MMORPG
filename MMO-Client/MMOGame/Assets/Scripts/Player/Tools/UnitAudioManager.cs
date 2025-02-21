@@ -19,4 +19,8 @@ public class UnitAudioManager : MonoBehaviour
             m_audioSource.PlayOneShot(footAudioClips[index]);
         }
     }
+
+    public void Init()
+    {
+    }
 }

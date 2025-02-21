@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Inventory\Sub\Consumable.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameApp.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Setting\AudioSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Knock.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Scripts\Player\Model\ModelBase.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Defense.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\Equipment.cs" />
+    <Compile Include="Assets\Scripts\Player\Tools\UnitAudioManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Scripts\Entities\Actor.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Assets\Scripts\Net\NetworkTime.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
+    <Compile Include="Assets\Scripts\Player\Tools\UnitEffectManager.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
     <Compile Include="Assets\Scripts\Manager\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ClientItem.cs" />
@@ -220,8 +223,9 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\PlayerCombatController.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Crouch.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Setting\AudioSettingPanel.cs" />
-    <Compile Include="Assets\Scripts\Player\Tools\UnitAudioManager.cs" />
+    <Compile Include="Assets\Scripts\Player\RemotePlayerState\Fly\RemotePlayerState_Fly_ChangeHight.cs" />
+    <Compile Include="Assets\Scripts\Player\RemotePlayerState\Fly\RemotePlayerState_Fly_Idle.cs" />
+    <Compile Include="Assets\Scripts\Player\RemotePlayerState\Fly\RemotePlayerState_Fly_Motion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Res\Shader\UI\Circular.shader" />

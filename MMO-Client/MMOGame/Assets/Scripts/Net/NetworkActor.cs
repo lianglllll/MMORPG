@@ -1,6 +1,7 @@
 using GameClient.Entities;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
+using HybridCLR.Editor.ABI;
 using Player;
 using System;
 using UnityEngine;
@@ -22,7 +23,19 @@ public class NetworkActor : MonoBehaviour
     }
     public bool SendActorChangeModeRequest()
     {
-        return true;
+        bool result = false;
+        if (!m_isStart)
+        {
+            goto End;
+        }
+        var req = new ActorChangeModeRequest();
+        req.EntityId = m_actor.EntityId;
+        req.Mode = m_baseController.CurMode;
+        req.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
+        NetManager.Instance.Send(req);
+        result = true;
+    End:
+        return result;
     }
     public bool SendActorChangeStateRequest()
     {
@@ -43,7 +56,7 @@ public class NetworkActor : MonoBehaviour
         netTransform.Scale = scale;
         req.OriginalTransform = netTransform;
         req.EntityId = m_actor.EntityId;
-        req.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        req.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
         req.State = m_baseController.CurState;
         req.SessionId = NetManager.Instance.sessionId;
         if(m_baseController.CurState == NetActorState.Motion)

@@ -35,6 +35,9 @@ namespace Player
         // 声音控制
         private UnitAudioManager m_unitAudioManager;
 
+        // 特效控制
+        public UnitEffectManager m_unitEffectManager;
+
 
         //信息
         private Actor actor;
@@ -77,12 +80,15 @@ namespace Player
             characterController = GetComponent<CharacterController>();
             unitUIController = GetComponent<UnitUIController>();
             m_unitAudioManager = transform.Find("UnitAudioManager").GetComponent<UnitAudioManager>();
+            m_unitEffectManager = transform.Find("UnitEffectManager").GetComponent<UnitEffectManager>();
         }
         public virtual void Init(Actor actor, NetworkActor networkActor)
         {
             this.actor = actor;
             // Model.Init();
             unitUIController.Init(actor);
+            m_unitAudioManager.Init();
+            m_unitEffectManager.Init();
             stateMachine = new StateMachine();
             m_stateMachineParameter = new StateMachineParameter();
             stateMachine.Init(this);
@@ -144,7 +150,6 @@ namespace Player
             lerpTime = 0;
             isTransitioning = true;
         }
-
         public virtual void ChangeMode(NetActorMode mode)
         {
             if (m_curMode != mode) {
@@ -152,6 +157,7 @@ namespace Player
                 ChangeState(NetActorState.Idle,true);
             }
         }
+
         #endregion
 
         #region 动画相关
@@ -175,7 +181,6 @@ namespace Player
         #endregion
 
         #region 工具
-
 
         public void DirectLookTarget(Vector3 pos)
         {

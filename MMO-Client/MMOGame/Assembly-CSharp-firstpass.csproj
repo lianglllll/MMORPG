@@ -57,13 +57,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\ExitType.cs" />
+    <Compile Include="Assets\Plugins\Trails FX\Demo\Scripts\RotateObject.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicTextData.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Demo\Scripts\Movement.cs" />
+    <Compile Include="Assets\Plugins\Trails FX\Scripts\TrailEffect.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\EnterType.cs" />
+    <Compile Include="Assets\Plugins\Trails FX\Scripts\TrailEffectProfile.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\AlternationMode.cs" />
+    <Compile Include="Assets\Plugins\Trails FX\Demo\Scripts\MoveObject.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicTextManager.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicText2D.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\Billboard.cs" />
+    <Compile Include="Assets\Plugins\Trails FX\Demo\Scripts\Shooter.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Scripts\DynamicText.cs" />
     <Compile Include="Assets\Plugins\Dynamic Floating Text\Demo\Scripts\Enemy.cs" />
   </ItemGroup>
@@ -72,13 +77,17 @@
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Plugins\protobuf\Google.Protobuf.xml" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailEffectDistort.shader" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailEffectOutline.shader" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Plugins\Demigiant\readme_DOTweenPro.txt" />
     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll" />
+    <None Include="Assets\Plugins\Trails FX\README.txt" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Plugins\protobuf\Google.Protobuf.dll" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailClearMask.shader" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -91,12 +100,17 @@
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Plugins\protobuf\System.Buffers.dll" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailEffectColor.shader" />
     <None Include="Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.xml" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailMask.shader" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailEffectClone.shader" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailEffectTextureStamp.shader" />
     <None Include="Assets\Plugins\Serilog.dll" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Plugins\Trails FX\Resources\TrailsFX\TrailEffectLaser.shader" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Plugins\Dynamic Floating Text\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Plugins\protobuf\System.Runtime.CompilerServices.Unsafe.dll" />

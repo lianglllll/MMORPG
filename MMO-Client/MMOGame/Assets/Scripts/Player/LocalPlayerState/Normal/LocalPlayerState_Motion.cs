@@ -184,11 +184,11 @@ namespace Player.PlayerState
             if (timer >= SEND_INTERVAL)
             {
                 timer = 0.0f;
-                actorChangeMotionDateRequest.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.position, actorChangeMotionDateRequest.OriginalTransform.Position);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.eulerAngles, actorChangeMotionDateRequest.OriginalTransform.Rotation);
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.localScale, actorChangeMotionDateRequest.OriginalTransform.Scale);
                 actorChangeMotionDateRequest.Speed = (int)(player.Model.Animator.GetFloat("Normal_Vertical_Speed") * 1000);
+                actorChangeMotionDateRequest.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
                 NetManager.Instance.Send(actorChangeMotionDateRequest);
             }
 

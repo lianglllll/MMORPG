@@ -12,7 +12,14 @@ namespace Player.Controller
         {
             base.Init(actor, networkActor);
             m_networkActor = networkActor;
-            ChangeState(NetActorState.Idle);
+            if(actor.NetActorMode != NetActorMode.None)
+            {
+                ChangeMode(actor.NetActorMode);
+            }
+            else
+            {
+                ChangeMode(NetActorMode.Normal);
+            }
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
         {
@@ -23,10 +30,23 @@ namespace Player.Controller
                 case NetActorState.None:
                     break;
                 case NetActorState.Idle:
-                    stateMachine.ChangeState<RemotePlayerState_Idle>(reCurrstate);
+                    if(CurMode == NetActorMode.Normal)
+                    {
+                        stateMachine.ChangeState<RemotePlayerState_Idle>(reCurrstate);
+                    }else if(CurMode == NetActorMode.FlyNormal)
+                    {
+                        stateMachine.ChangeState<RemotePlayerState_Fly_Idle>(reCurrstate);
+                    }
                     break;
                 case NetActorState.Motion:
-                    stateMachine.ChangeState<RemotePlayerState_Motion>(reCurrstate);
+                    if (CurMode == NetActorMode.Normal)
+                    {
+                        stateMachine.ChangeState<RemotePlayerState_Motion>(reCurrstate);
+                    }
+                    else if (CurMode == NetActorMode.FlyNormal)
+                    {
+                        stateMachine.ChangeState<RemotePlayerState_Fly_Motion>(reCurrstate);
+                    }
                     break;
                 case NetActorState.Jumpup:
                     stateMachine.ChangeState<RemotePlayerState_JumpUp>(reCurrstate);
@@ -63,6 +83,16 @@ namespace Player.Controller
                     break;
                 case NetActorState.Custom:
                     stateMachine.ChangeState<RemotePlayerState_Custom>(reCurrstate);
+                    break;
+                case NetActorState.Changehight:
+                    if (m_curMode == NetActorMode.Normal)
+                    {
+
+                    }
+                    else if (m_curMode == NetActorMode.FlyNormal)
+                    {
+                        stateMachine.ChangeState<RemotePlayerState_Fly_ChangeHight>(reCurrstate);
+                    }
                     break;
             }
         }

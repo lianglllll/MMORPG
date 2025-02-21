@@ -89,8 +89,14 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
 
         // 3.获取坐标和方向,实例化obj并初始化,将实例化的角色放到gamemanager下面
         Vector3 initPosition = actor.Position;
-        // 计算地面坐标,调整y轴
-        initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;
+
+        if(actor.NetActorMode != NetActorMode.FlyNormal)
+        {
+            // 如果不是flyMode的话，y轴是的重力来控制的。
+            // 计算地面坐标,调整y轴
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;
+        }
+
         GameObject actorObj = Instantiate(prefab, initPosition, Quaternion.identity, transform);
         if (actorObj == null)
         {

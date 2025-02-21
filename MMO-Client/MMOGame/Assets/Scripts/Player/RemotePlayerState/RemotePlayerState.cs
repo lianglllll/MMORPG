@@ -14,6 +14,12 @@ namespace Player
             remotePlayer = (RemotePlayerController)owner;
         }
 
+        // 同步位移数据接口
+        public virtual void  SyncTransformData()
+        {
+
+        }
+
 
     }
 }

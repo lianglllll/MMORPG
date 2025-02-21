@@ -93,6 +93,7 @@ namespace Player.Controller
                 case NetActorState.Changehight:
                     if (m_curMode == NetActorMode.Normal)
                     {
+
                     }
                     else if (m_curMode == NetActorMode.FlyNormal)
                     {
@@ -104,5 +105,13 @@ namespace Player.Controller
             // 发送状态变更包
             // syncEntitySend.SendSyncRequest();
         }
+
+        public override void ChangeMode(NetActorMode mode)
+        {
+            base.ChangeMode(mode);
+            // 告诉服务器
+            m_networkActor.SendActorChangeModeRequest();
+        }
+
     }
 }
