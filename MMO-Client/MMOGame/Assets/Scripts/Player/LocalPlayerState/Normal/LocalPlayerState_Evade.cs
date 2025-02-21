@@ -12,6 +12,8 @@ namespace Player.PlayerState
 
         public override void Enter()
         {
+            player.m_unitEffectManager.StartCloneTrailFX();
+
             //根据输入进行翻滚
             float h = GameInputManager.Instance.Movement.x;
             float v = GameInputManager.Instance.Movement.y;
@@ -63,6 +65,7 @@ namespace Player.PlayerState
             {
                 MonoManager.Instance.StopCoroutine(rollCorotine);
             }
+            player.m_unitEffectManager.StopCloneTrailFX();
         }
 
         private void OnRootMotion(Vector3 deltaPosition, Quaternion deltaRotation)
