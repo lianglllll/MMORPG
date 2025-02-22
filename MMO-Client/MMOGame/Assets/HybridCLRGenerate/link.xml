@@ -3,6 +3,8 @@
   <assembly fullname="Assembly-CSharp-firstpass">
     <type fullname="DynamicTextData" preserve="all" />
     <type fullname="DynamicTextManager" preserve="all" />
+    <type fullname="TrailsFX.TrailEffect" preserve="all" />
+    <type fullname="TrailsFX.TrailEffectProfile" preserve="all" />
   </assembly>
   <assembly fullname="DOTween">
     <type fullname="DG.Tweening.Core.TweenerCore`3" preserve="all" />
@@ -39,6 +41,7 @@
     <type fullname="BaseSystem.Tool.DevelopmentToos" preserve="all" />
     <type fullname="BaseSystem.Tool.Singleton.SingletonNonMono`1" preserve="all" />
     <type fullname="GameClient.HSFramework.GlobalAudioManager" preserve="all" />
+    <type fullname="GameClient.HSFramework.UIAudioClipType" preserve="all" />
     <type fullname="GameEffect" preserve="all" />
     <type fullname="GameEffectManager" preserve="all" />
     <type fullname="GameInputManager" preserve="all" />
@@ -197,7 +200,6 @@
     <type fullname="System.Linq.IOrderedEnumerable`1" preserve="all" />
   </assembly>
   <assembly fullname="UITools">
-    <type fullname="GlobalVideoPlayer" preserve="all" />
     <type fullname="IRecyclingListViewItem`1" preserve="all" />
     <type fullname="ItemMenu" preserve="all" />
     <type fullname="ItemMenu/MenuOptionCallback" preserve="all" />
@@ -206,6 +208,8 @@
     <type fullname="ToolTip" preserve="all" />
   </assembly>
   <assembly fullname="Unity.TextMeshPro">
+    <type fullname="TMPro.TMP_Dropdown" preserve="all" />
+    <type fullname="TMPro.TMP_Dropdown/DropdownEvent" preserve="all" />
     <type fullname="TMPro.TMP_InputField" preserve="all" />
     <type fullname="TMPro.TMP_Text" preserve="all" />
     <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
@@ -236,8 +240,10 @@
     <type fullname="UnityEngine.CursorLockMode" preserve="all" />
     <type fullname="UnityEngine.Debug" preserve="all" />
     <type fullname="UnityEngine.Events.UnityAction" preserve="all" />
+    <type fullname="UnityEngine.Events.UnityAction`1" preserve="all" />
     <type fullname="UnityEngine.Events.UnityEvent" preserve="all" />
     <type fullname="UnityEngine.Events.UnityEventBase" preserve="all" />
+    <type fullname="UnityEngine.Events.UnityEvent`1" preserve="all" />
     <type fullname="UnityEngine.GameObject" preserve="all" />
     <type fullname="UnityEngine.HeaderAttribute" preserve="all" />
     <type fullname="UnityEngine.KeyCode" preserve="all" />
@@ -247,6 +253,7 @@
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.PlayerPrefs" preserve="all" />
     <type fullname="UnityEngine.Quaternion" preserve="all" />
+    <type fullname="UnityEngine.Random" preserve="all" />
     <type fullname="UnityEngine.Ray" preserve="all" />
     <type fullname="UnityEngine.Rect" preserve="all" />
     <type fullname="UnityEngine.RequireComponent" preserve="all" />
@@ -254,6 +261,7 @@
     <type fullname="UnityEngine.SceneManagement.SceneManager" preserve="all" />
     <type fullname="UnityEngine.Screen" preserve="all" />
     <type fullname="UnityEngine.SerializeField" preserve="all" />
+    <type fullname="UnityEngine.SkinnedMeshRenderer" preserve="all" />
     <type fullname="UnityEngine.SpaceAttribute" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
     <type fullname="UnityEngine.Texture" preserve="all" />
@@ -299,6 +307,7 @@
     <type fullname="UnityEngine.UI.ScrollRect" preserve="all" />
     <type fullname="UnityEngine.UI.Scrollbar" preserve="all" />
     <type fullname="UnityEngine.UI.Slider" preserve="all" />
+    <type fullname="UnityEngine.UI.Slider/SliderEvent" preserve="all" />
     <type fullname="UnityEngine.UI.Text" preserve="all" />
     <type fullname="UnityEngine.UI.Toggle" preserve="all" />
   </assembly>

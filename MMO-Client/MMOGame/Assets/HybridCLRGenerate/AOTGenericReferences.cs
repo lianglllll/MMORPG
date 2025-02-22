@@ -188,8 +188,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<object>
 	// System.ValueTuple<object,object>
 	// UnityEngine.Events.InvokableCall<UnityEngine.Vector2>
+	// UnityEngine.Events.InvokableCall<float>
+	// UnityEngine.Events.InvokableCall<int>
 	// UnityEngine.Events.UnityAction<UnityEngine.Vector2>
+	// UnityEngine.Events.UnityAction<float>
+	// UnityEngine.Events.UnityAction<int>
 	// UnityEngine.Events.UnityEvent<UnityEngine.Vector2>
+	// UnityEngine.Events.UnityEvent<float>
+	// UnityEngine.Events.UnityEvent<int>
 	// }}
 
 	public void RefMethods()
