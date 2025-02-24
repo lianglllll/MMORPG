@@ -60,7 +60,7 @@ namespace GameClient.Combat.Buffs{
             }
             m_provider = GameTools.GetActorById(info.ProviderId);
 
-            m_buffDefine = DataManager.Instance.buffDefineDict.GetValueOrDefault(info.Bid, null);
+            m_buffDefine = LocalDataManager.Instance.buffDefineDict.GetValueOrDefault(info.Bid, null);
             if (m_buffDefine != null)
             {
                 m_BuffType = m_buffDefine.BuffType switch

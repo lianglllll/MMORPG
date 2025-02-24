@@ -5,7 +5,7 @@
 
 :: josn文件要复制到的目的地
 @SET DEST_FOLDER_1=..\..\MMO-Client\MMOGame\Assets\Res\Files\Data
-@SET DEST_FOLDER_2=..\..\MMO-Client\MMOGame\Assets\Scripts\Manager\DataDefine
+@SET DEST_FOLDER_2=..\..\MMO-Client\MMOGame\Assets\Scripts\LocalData\DataDefine
 
 
 :: execl转json和生成对应的define文件

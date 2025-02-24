@@ -1,4 +1,4 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using GameClient;
 using GameClient.Entities;
 using GameClient.InventorySystem;

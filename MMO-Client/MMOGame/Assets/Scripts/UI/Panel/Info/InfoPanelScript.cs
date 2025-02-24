@@ -36,10 +36,6 @@ public class InfoPanelScript : MonoBehaviour
     //传送面板
     private DeliverPanel deliverPanel;
 
-    // setting面板
-    private bool isOpenSettingPanel;
-    private GameObject settingPanel;
-
     private void Awake()
     {
         //获取自身身上的Text组件
@@ -56,7 +52,6 @@ public class InfoPanelScript : MonoBehaviour
         loadingBox = transform.Find("LoadingBox").GetComponent<LoadingBox>();
         itemIOInfoBox = transform.Find("ItemIOInfoBox").GetComponent<ItemIOInfoBox>();
         deliverPanel = transform.Find("DeliverPanel").GetComponent<DeliverPanel>();
-        settingPanel = transform.Find("SettingPanel").gameObject;
 
     }
     private void Start()
@@ -89,18 +84,8 @@ public class InfoPanelScript : MonoBehaviour
         NetworkInfoBox.gameObject.SetActive(true);
         ShowNetworkDisconnect();
 
-        //
-        settingPanel.SetActive(false);
-        isOpenSettingPanel = false;
     }
-    private void Update()
-    {
-        if (GameInputManager.Instance.ESC)
-        {
-            isOpenSettingPanel = isOpenSettingPanel == true ? false : true;
-            settingPanel.SetActive(isOpenSettingPanel);
-        }
-    }
+
 
     /// <summary>
     /// 外部调用需要显示提示信息

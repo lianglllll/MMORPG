@@ -1,6 +1,6 @@
 using System;
 
-namespace BaseSystem.MyDelayedTaskScheduler
+namespace HSFramework.MyDelayedTaskScheduler
 {
     public class DelayedTaskData
     {

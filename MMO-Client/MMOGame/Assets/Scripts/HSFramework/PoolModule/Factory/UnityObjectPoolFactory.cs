@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using BaseSystem.MyDelayedTaskScheduler;
-using BaseSystem.Tool.Singleton;
+using HSFramework.MyDelayedTaskScheduler;
+using HSFramework.Tool.Singleton;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     //Unity对象池工厂，负责创建对象池、创建对象池中的对象以及回收对象
     public class UnityObjectPoolFactory : SingletonNonMono<UnityObjectPoolFactory>

@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
-using GameClient.HSFramework;
+using HSFramework.Audio;
 
 public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
@@ -18,7 +16,7 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
     private float hoverDuration = 0.5f;
 
     public SettingType type;
-    private SettingPanel settingPanel;
+    private MainSettingPanel settingPanel;
 
     private void Awake()
     {
@@ -33,19 +31,11 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
         isExiting = false;
     }
 
-    public void Init(SettingPanel settingPanel, SettingType type)
+    public void Init(MainSettingPanel settingPanel, SettingType type)
     {
         this.type = type;
         this.settingPanel = settingPanel;
     }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (isClicked) return;
-        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
-        settingPanel.Selected(this);
-    }
-
     public void OnClick()
     {
         if (isClicked) return;
@@ -55,7 +45,6 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
         text.color = Color.black;
         Bg.DOFade(1, hoverDuration);
     }
-
     public void CancelClick()
     {
         if (!isClicked) return;
@@ -66,6 +55,12 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
 
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (isClicked) return;
+        GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
+        settingPanel.Selected(this);
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isClicked) return;
@@ -91,7 +86,6 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
         });
 
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         if (isClicked) return;
@@ -115,9 +109,6 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             isExiting = false;  // 动画完成，重置标记
         });
-
-
-
     }
 
 }

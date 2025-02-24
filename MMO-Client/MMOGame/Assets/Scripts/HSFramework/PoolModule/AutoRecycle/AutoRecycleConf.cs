@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     [Serializable]
     public class AutoRecycleConfigItem

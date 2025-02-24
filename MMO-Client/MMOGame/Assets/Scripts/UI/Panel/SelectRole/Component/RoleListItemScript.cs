@@ -76,7 +76,7 @@ public class RoleListItemScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
         //通过jobid可以在unitdefine中找到响应的图片资源，然后进行加载
         int tid = nCharacter.ProfessionId;
-        define = DataManager.Instance.unitDefineDict.GetValueOrDefault(tid, null);
+        define = LocalDataManager.Instance.unitDefineDict.GetValueOrDefault(tid, null);
         if(define == null)
         {
             Debug.LogError("define is null，tid is invalid");

@@ -7,7 +7,7 @@
 @SET DEST_FOLDER_1=..\..\MMO-Client\MMOGame\Assets\Res\Files\Data
 @SET DEST_FOLDER_2=..\..\MMO-SERVER\Common\Summer\StaticData\Data
 :: define文件要复制到的目的地
-@SET DEST_FOLDER_4=..\..\MMO-Client\MMOGame\Assets\Scripts\Manager\DataDefine
+@SET DEST_FOLDER_4=..\..\MMO-Client\MMOGame\Assets\Scripts\LocalData\DataDefine
 @SET DEST_FOLDER_5=..\..\MMO-SERVER\Common\Summer\StaticData\DataDefine
 
 :: execl转json和生成对应的define文件

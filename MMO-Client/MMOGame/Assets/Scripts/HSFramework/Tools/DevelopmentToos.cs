@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BaseSystem.Tool
+namespace HSFramework.Tool
 {
     public class DevelopmentToos
     {

@@ -1,4 +1,4 @@
-using BaseSystem.Singleton;
+using HSFramework.Singleton;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;

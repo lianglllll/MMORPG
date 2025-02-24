@@ -1,5 +1,4 @@
-using GameClient.HSFramework;
-using System.Collections;
+using HSFramework.Audio;
 using UnityEngine.UI;
 
 public class RegisterPanelScript : BasePanel

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BaseSystem.DataStruct
+namespace HSFramework.DataStruct
 {
     public enum HeapType
     {

@@ -82,7 +82,7 @@ namespace GameClient.Combat
         public Skill(Actor owner, int skid)
         {
             this.Owner = owner;
-            Define = DataManager.Instance.skillDefineDict[skid];
+            Define = LocalDataManager.Instance.skillDefineDict[skid];
         }
 
         /// <summary>

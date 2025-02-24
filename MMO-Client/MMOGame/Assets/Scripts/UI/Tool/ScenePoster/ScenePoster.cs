@@ -1,4 +1,4 @@
-using BaseSystem.Singleton;
+using HSFramework.Singleton;
 using DG.Tweening;
 using System;
 using System.Collections;

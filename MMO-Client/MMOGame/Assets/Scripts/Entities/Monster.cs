@@ -1,4 +1,4 @@
-using BaseSystem.MyDelayedTaskScheduler;
+using HSFramework.MyDelayedTaskScheduler;
 using GameClient;
 using GameClient.Entities;
 using HS.Protobuf.SceneEntity;

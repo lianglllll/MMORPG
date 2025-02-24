@@ -1,4 +1,4 @@
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     public interface IObjectPoolItem
     {

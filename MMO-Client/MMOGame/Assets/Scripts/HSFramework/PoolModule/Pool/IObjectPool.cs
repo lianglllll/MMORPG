@@ -1,6 +1,6 @@
 using System;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     //对象池接口
     public interface IObjectPool<T>

@@ -1,4 +1,4 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using HS.Protobuf.Chat;

@@ -1,6 +1,6 @@
-using BaseSystem.MyDelayedTaskScheduler;
-using BaseSystem.PoolModule;
-using BaseSystem.Singleton;
+using HSFramework.MyDelayedTaskScheduler;
+using HSFramework.PoolModule;
+using HSFramework.Singleton;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;

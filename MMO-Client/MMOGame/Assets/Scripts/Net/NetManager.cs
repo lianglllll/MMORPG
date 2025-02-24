@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using GameClient.Entities;
 using GameClient;
-using BaseSystem.Singleton;
+using HSFramework.Singleton;
 using HS.Protobuf.Common;
 using Common.Summer.Core;
 using Common.Summer.Net;

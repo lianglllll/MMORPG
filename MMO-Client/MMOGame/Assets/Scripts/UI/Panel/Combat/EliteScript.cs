@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameClient.Entities;
@@ -7,32 +5,21 @@ using TMPro;
 
 public class EliteScript : MonoBehaviour
 {
-    private Image Healthbar;
-    private Image Manabar;
-    private Text Name;
-    private Text Level;
-    private TextMeshProUGUI HpText;
-    private TextMeshProUGUI MpText;
-    private BuffGroupScript buffGroup;
-
+    private Image m_HPImage;
+    private Image m_MPImage;
+    private Text m_PlayerName;
+    private BuffGroupScript m_buffGroup;
     private Actor actor;                //UI显示要的目标
 
     private void Awake()
     {
-        Healthbar = transform.Find("Bars/Healthbar").GetComponent<Image>();
-        Manabar = transform.Find("Bars/Manabar").GetComponent<Image>();
-        Name = transform.Find("Name").GetComponent<Text>();
-        Level = transform.Find("Level/Text").GetComponent<Text>();
-        HpText = transform.Find("Bars/HpTxext").GetComponent<TextMeshProUGUI>();
-        MpText = transform.Find("Bars/MpText").GetComponent<TextMeshProUGUI>();
-        buffGroup = transform.Find("BuffGroup").GetComponent<BuffGroupScript>();
+        m_PlayerName = transform.Find("Name").GetComponent<Text>();
+        m_HPImage = transform.Find("HPBar/Image").GetComponent<Image>();
+        m_MPImage = transform.Find("MPBar/Image").GetComponent<Image>();
+        m_buffGroup = transform.Find("BuffGroup").GetComponent<BuffGroupScript>();
     }
 
-    /// <summary>
-    /// 设置状态栏归属者
-    /// </summary>
-    /// <param name="actor"></param>
-    public void SetOwner(Actor actor)
+    public void Init(Actor actor)
     {
         if (actor == null) {
             this.actor = null;
@@ -40,7 +27,7 @@ public class EliteScript : MonoBehaviour
         }
         if (this.actor == actor) return;
         this.actor = actor;
-        buffGroup.SetOwner(actor);
+        m_buffGroup.SetOwner(actor);
         RefreshUI();
     }
 
@@ -50,15 +37,10 @@ public class EliteScript : MonoBehaviour
     public void RefreshUI()
     {
         if (actor == null) return;
-        Level.text = actor.Level + "";
         float hp = actor.Hp / actor.MaxHp;
         float mp = actor.Mp / actor.MaxMp;
-        Healthbar.fillAmount = hp;
-        Manabar.fillAmount = mp;
-        Name.text = actor.ActorName;
-        HpText.text = (int)actor.Hp + "/" + actor.MaxHp;
-        MpText.text = (int)actor.Mp + "/" + actor.MaxMp;
-        
+        m_HPImage.fillAmount = hp;
+        m_MPImage.fillAmount = mp;
+        m_PlayerName.text = actor.ActorName;
     }
-
 }

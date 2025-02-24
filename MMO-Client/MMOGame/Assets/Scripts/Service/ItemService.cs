@@ -1,4 +1,4 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
@@ -179,7 +179,7 @@ public class ItemService : SingletonNonMono<ItemService>
             Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
 
             Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
-            var item = DataManager.Instance.itemDefineDict[msg.ItemId];
+            var item = LocalDataManager.Instance.itemDefineDict[msg.ItemId];
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
                 UIManager.Instance.MessagePanel.ShowItemIOInfo($"拾取物品:{item.Name}X{msg.Amount}");
@@ -212,7 +212,7 @@ public class ItemService : SingletonNonMono<ItemService>
         if(msg.ResultCode == 0)
         {
             Kaiyun.Event.FireOut("UpdateCharacterKnapsackPickupItemBox");
-            var item = DataManager.Instance.itemDefineDict[msg.ItemId];
+            var item = LocalDataManager.Instance.itemDefineDict[msg.ItemId];
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
                 UIManager.Instance.MessagePanel.ShowItemIOInfo($"丢弃物品:{item.Name}X{msg.Amount}");

@@ -1,11 +1,12 @@
-using BaseSystem.Singleton;
+using HSFramework.Setting;
+using HSFramework.Singleton;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace GameClient.HSFramework
+namespace HSFramework.Audio
 {
     public enum UIAudioClipType
     {
@@ -78,7 +79,7 @@ namespace GameClient.HSFramework
             m_bGAudioSource = transform.Find("BGAudioManager").GetComponent<AudioSource>();
             m_UIAudioSource = transform.Find("UIAudioManager").GetComponent<AudioSource>();
         }
-        public void Init()
+        public void Init(AudioSettingData audioSetting)
         {
             m_uiAudioClipDictionary = new Dictionary<UIAudioClipType, AudioClip>();
             foreach (var entry in UIAudioClips)
@@ -88,6 +89,11 @@ namespace GameClient.HSFramework
                     m_uiAudioClipDictionary.Add(entry.ClipType, entry.Clip);
                 }
             }
+
+            // 音量设置
+            MasterVolume = audioSetting.masterVolume;
+            BGMVolume = audioSetting.bgVolume;
+            UIVolume = audioSetting.uiVolume;
         }
 
         public void PlayBackgroundAudio(string clipName)

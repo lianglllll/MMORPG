@@ -1,4 +1,4 @@
-using BaseSystem.Tool;
+using HSFramework.Tool;
 using UnityEngine;
 
 public class CameraCollider : MonoBehaviour

@@ -58,7 +58,7 @@ namespace GameClient.Entities
         public Actor(NetActorNode netAcotrNode) :base(netAcotrNode.EntityId, netAcotrNode.Transform)
         {
             m_netActorNode = netAcotrNode;
-            m_unitDefine = DataManager.Instance.unitDefineDict[netAcotrNode.ProfessionId];
+            m_unitDefine = LocalDataManager.Instance.unitDefineDict[netAcotrNode.ProfessionId];
             m_skillManager = new();
             m_buffManager = new();
             m_equipManager = new();
@@ -120,7 +120,7 @@ namespace GameClient.Entities
                 //被技能击中的粒子效果
                 if (damage.SkillId != 0)
                 {
-                    var skillDef = DataManager.Instance.skillDefineDict[damage.SkillId];
+                    var skillDef = LocalDataManager.Instance.skillDefineDict[damage.SkillId];
                     if (skillDef != null)
                     {
                         GameEffectManager.AddEffectTarget(skillDef.HitArt, m_renderObj, new Vector3(0, 1, 0));

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     public class TestBullet : MonoBehaviour
     {

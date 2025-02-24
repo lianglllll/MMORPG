@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     /// <summary>
     /// 多线程版本的对象池, ConcurrentBag内部自己实现了线程安全

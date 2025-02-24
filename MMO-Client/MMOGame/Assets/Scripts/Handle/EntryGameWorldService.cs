@@ -1,4 +1,4 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
@@ -182,7 +182,7 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
             GameApp.entityId = selfEntityId;
 
             //切换场景
-            DataManager.Instance.spaceDefineDict.TryGetValue(curSceneId, out var spaceDef);
+            LocalDataManager.Instance.spaceDefineDict.TryGetValue(curSceneId, out var spaceDef);
             ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
 
                 // 关闭选择角色的面板
@@ -212,7 +212,7 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
                 //刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
                 // UIManager.Instance.ClosePanel("CombatPanel");
                 UIManager.Instance.OpenPanel("CombatPanel");
-                DataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SceneId, out var def);
+                LocalDataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SceneId, out var def);
                 UIManager.Instance.ShowTopMessage("" + def.Name);
 
             });

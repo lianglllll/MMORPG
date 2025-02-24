@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BaseSystem.MyDelayedTaskScheduler
+namespace HSFramework.MyDelayedTaskScheduler
 {
     public class DelayedTaskList : IComparable, IEnumerable<DelayedTaskData>, IDisposable
     {

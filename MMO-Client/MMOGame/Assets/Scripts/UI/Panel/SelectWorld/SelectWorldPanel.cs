@@ -1,7 +1,7 @@
 using DG.Tweening;
 using GameClient;
-using GameClient.HSFramework;
 using HS.Protobuf.Login;
+using HSFramework.Audio;
 using System.Linq;
 using TMPro;
 using UnityEngine;

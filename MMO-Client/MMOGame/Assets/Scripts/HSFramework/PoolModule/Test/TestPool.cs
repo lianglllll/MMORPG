@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     public class TestPool : MonoBehaviour
     {

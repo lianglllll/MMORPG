@@ -1,4 +1,4 @@
-using BaseSystem.Singleton;
+using HSFramework.Singleton;
 using System;
 
 public class NetworkTime : Singleton<NetworkTime>

@@ -18,40 +18,31 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public string desc;
     public float coldDown;
     public float maxColdDown;
-
-    private Image iconImag;                 //技能图标
-    private Image coldDownImag;             //冷却图层
-    private Text coldDownTimeText;          //冷却数字文字
-
-    private TextMeshProUGUI TipsKeyText;
-
     private Skill _skill;
     private bool isUpdate;
+
+    private Image iconImag;                 // 技能图标
+    private Image coldDownImag;             // 冷却图层
+    private Text coldDownTimeText;          // 冷却数字文字
+    private TextMeshProUGUI TipsKeyText;    // 按键提示
 
     private void Awake()
     {
         iconImag = transform.Find("Icon").GetComponent<Image>();
         coldDownImag = transform.Find("ColdDown").GetComponent<Image>();
         coldDownTimeText = transform.Find("ColdDownTime").GetComponent<Text>();
-        TipsKeyText = transform.Find("TipsKeyText").GetComponent<TextMeshProUGUI>();
-        //添加一个btn
-        var btn = gameObject.AddComponent<Button>();
-        btn.onClick.AddListener(OnClick);
+        TipsKeyText = transform.Find("TipsKey/TipsKeyText").GetComponent<TextMeshProUGUI>();
     }
-
     private void Start()
     {
         isUpdate = false;
         coldDownImag.enabled = false;
         Kaiyun.Event.RegisterIn("SkillEnterColdDown", this, "_SkillEnterColdDown");
     }
-
     private void OnDestroy()
     {
         Kaiyun.Event.UnregisterIn("SkillEnterColdDown", this, "_SkillEnterColdDown");
     }
-
-
     private void Update()
     {
         if (isUpdate)

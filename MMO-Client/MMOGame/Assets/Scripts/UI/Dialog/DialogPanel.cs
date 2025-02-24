@@ -56,7 +56,7 @@ public class DialogPanel : MonoBehaviour
     //临时模拟调用
     void Start()
     {
-        DataManager.Instance.init();
+        LocalDataManager.Instance.init();
         DialogConfigImporter.Instance.Init();
         var item = DialogConfigImporter.Instance.GetDialogConfigByDid(0);
         Init(item);

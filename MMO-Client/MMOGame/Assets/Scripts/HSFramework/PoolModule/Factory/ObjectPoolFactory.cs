@@ -1,8 +1,8 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using System;
 using System.Collections.Generic;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     /// <summary>
     /// 通用对象池工厂，维护多个对象池

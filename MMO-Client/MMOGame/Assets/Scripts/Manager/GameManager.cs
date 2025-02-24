@@ -1,8 +1,8 @@
 using Assets.Script.Service;
-using BaseSystem.PoolModule;
-using BaseSystem.Singleton;
+using HSFramework.PoolModule;
+using HSFramework.Singleton;
 using GameClient.Entities;
-using GameClient.HSFramework;
+using HSFramework.Audio;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,30 +19,30 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         //设置初始优先窗口大小
-        Screen.SetResolution(1920, 1080, false);
+        LocalDataManager.Instance.init();
+        var videoSetting = LocalDataManager.Instance.gameSettings.videoSetting;
+        Screen.SetResolution(videoSetting.resolutionWidth, videoSetting.resolutionHeight, videoSetting.isFull);
+
+        //初始化服务
+        SecurityService.Instance.Init();
+        UserService.Instance.Init();
+        EntryGameWorldService.Instance.Init();
+        SceneHandler.Instance.Init();
+        CombatService.Instance.Init();
+        ChatService.Instance.Init();
+        ItemService.Instance.Init();
+        BuffService.Instance.Init();
+        UIManager.Instance.Init();
+        GlobalAudioManager.Instance.Init(LocalDataManager.Instance.gameSettings.audioSetting);
+
+        //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
+        Physics.IgnoreLayerCollision(6, 6, true);
 
         //设置游戏对象不被销毁
         foreach (GameObject obj in keepAlive)
         {
             DontDestroyOnLoad(obj);
         }
-
-        //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
-        Physics.IgnoreLayerCollision(6, 6, true);
-
-        //初始化服务
-        DataManager.Instance.init();
-        SecurityService.Instance.Init();
-        UserService.Instance.Init();
-        EntryGameWorldService.Instance.Init();
-        SceneHandler.Instance.Init();
-
-        CombatService.Instance.Init();
-        ChatService.Instance.Init();
-        ItemService.Instance.Init();
-        BuffService.Instance.Init();
-        UIManager.Instance.Init();
-        GlobalAudioManager.Instance.Init();
 
         // gameObj对象池初始化
         UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;

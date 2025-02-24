@@ -1,4 +1,4 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using GameClient.UI.Dialog;
 using Newtonsoft.Json;
 using System;
@@ -46,7 +46,7 @@ namespace GameClient.UI.Dialog
 
         public DialogConfig GetDialogConfigByDid(int dId)
         {
-            string path = DataManager.Instance.GetDialogConfigPathByDid(dId);
+            string path = LocalDataManager.Instance.GetDialogConfigPathByDid(dId);
             string fileText = Res.LoadRawJsonFileSync(path);
             // 反序列化为字典
             var dictionary = JsonConvert.DeserializeObject<Dictionary<string, RawDialogStepConfig>>(fileText);

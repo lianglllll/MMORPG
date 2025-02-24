@@ -1,6 +1,6 @@
 using System;
 
-namespace BaseSystem.DataStruct
+namespace HSFramework.DataStruct
 {
     public class MaxHeap<T> : Heap<T> where T : IComparable
     {

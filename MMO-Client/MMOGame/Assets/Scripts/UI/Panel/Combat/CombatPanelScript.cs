@@ -6,25 +6,22 @@ using UnityEngine.UI;
 
 public class CombatPanelScript : BasePanel
 {
-    
     private EliteScript myElite;                            //自己的角色的状态栏
-    private EliteScript targetElite;                        //目标的角色的状态栏
     private Slider intonateSlider;
     private Button KnapsackBtn;
     public ChatBoxScript chatBoxScript;
     private ExpBoxScript expBoxScript;
-    private AbilityGroupScript abilityGroupScript;
+    private AbilityManager abilityGroupScript;
 
     protected override void Awake()
     {
         base.Awake();
         myElite = transform.Find("MyElite").GetComponent<EliteScript>();
-        targetElite = transform.Find("TargetElite").GetComponent<EliteScript>();
         intonateSlider = transform.Find("IntonateSlider/Slider").GetComponent<Slider>();
         KnapsackBtn = transform.Find("KnapsackBtn").GetComponent<Button>();
         chatBoxScript = transform.Find("ChatBox").GetComponent<ChatBoxScript>();
         expBoxScript = transform.Find("ExpBox").GetComponent<ExpBoxScript>();
-        abilityGroupScript = transform.Find("AbilityGroup").GetComponent<AbilityGroupScript>();
+        abilityGroupScript = transform.Find("AbilityGroup").GetComponent<AbilityManager>();
     }
 
     protected override void Start()
@@ -88,8 +85,7 @@ public class CombatPanelScript : BasePanel
     {
         //ui
         KnapsackBtn.onClick.AddListener(OnKnaspackBtn);
-        targetElite.gameObject.SetActive(false);
-        myElite.SetOwner(GameApp.character);                    //设置一下我们主角的状态栏
+        myElite.Init(GameApp.character);                    //设置一下我们主角的状态栏
         expBoxScript.Init(GameApp.character);                   //初始化经验条
         abilityGroupScript.Init();
 
@@ -133,16 +129,16 @@ public class CombatPanelScript : BasePanel
         var actor = GameApp.target;
         if (actor == null) return;
         //设置状态栏UI
-        targetElite.gameObject.SetActive(true);
-        targetElite.SetOwner(actor);
+        //targetElite.gameObject.SetActive(true);
+        //targetElite.SetOwner(actor);
     }
 
     /// <summary>
     /// 取消选中目标
     /// </summary>
     public void _CancelSelectTarget() {
-        targetElite.SetOwner(null);
-        targetElite.gameObject.SetActive(false);
+        //targetElite.SetOwner(null);
+        //targetElite.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -155,7 +151,7 @@ public class CombatPanelScript : BasePanel
             myElite.RefreshUI();
         }else if(actor == GameApp.target)
         {
-            targetElite.RefreshUI();
+            //targetElite.RefreshUI();
         }
     }
 

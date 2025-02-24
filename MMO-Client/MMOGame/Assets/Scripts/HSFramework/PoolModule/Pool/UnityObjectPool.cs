@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     [Serializable]
     public class UnityObjectPool : IObjectPool<Object>, IDisposable

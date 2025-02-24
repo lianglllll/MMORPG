@@ -3579,7 +3579,6 @@ Shader "PCShaders/StandardBlend"
 
 			ENDHLSL
 		}
-		
 	}
 	
 	CustomEditor "UnityEditor.ShaderGraphLitGUI"

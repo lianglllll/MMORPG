@@ -20,7 +20,7 @@ public class PortalControl : InteractionBehaviour
         if (!other.CompareTag("CtlPlayer")) return;
 
         //设置数据
-        var spaceDefine = DataManager.Instance.GetSpaceDefineById(tagetSpaceId);
+        var spaceDefine = LocalDataManager.Instance.GetSpaceDefineById(tagetSpaceId);
         string DeliverText;     //提示语句
         Action onBtnAction = null ;
 

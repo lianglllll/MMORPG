@@ -16,7 +16,7 @@ using Serilog;
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject
 /// </summary>
-public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManager>
+public class GameObjectManager : HSFramework.Singleton.Singleton<GameObjectManager>
 {
     private  ConcurrentDictionary<int, GameObject> currentGameObjectDict    = new();    //<entityid,gameobject>  entity和gameobject的映射
     private  ConcurrentQueue<Actor> preparCrateActorObjQueue                = new();    //创建actorObj的缓冲队列
@@ -150,7 +150,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
             // 角色控制脚本
             LocalPlayerController ctl = actorObj.AddComponent<LocalPlayerController>();                           
             // 战斗控制脚本
-            PlayerCombatController combat = actorObj.AddComponent<PlayerCombatController>();
+            LocalPlayerCombatController combat = actorObj.AddComponent<LocalPlayerCombatController>();
             // 同步脚本
             NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
 
@@ -212,7 +212,7 @@ public class GameObjectManager : BaseSystem.Singleton.Singleton<GameObjectManage
     }
     private IEnumerator LoadItem(ClientItem clientItem)
     {
-        var define = DataManager.Instance.itemDefineDict[clientItem.ItemId];
+        var define = LocalDataManager.Instance.itemDefineDict[clientItem.ItemId];
 
         GameObject prefab = null;
         yield return Res.LoadAssetAsyncWithTimeout<GameObject>(define.Model, (obj) => {

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     //通用的对象池实现(只存放某个对象)
     public class ObjectPool<T> : IObjectPool<T>, IDisposable where T : new()

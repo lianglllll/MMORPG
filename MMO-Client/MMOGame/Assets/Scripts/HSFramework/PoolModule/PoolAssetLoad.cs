@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BaseSystem.PoolModule
+namespace HSFramework.PoolModule
 {
     public static class PoolAssetLoad
     {

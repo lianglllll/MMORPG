@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using BaseSystem.MyDelayedTaskScheduler;
-using BaseSystem.PoolModule;
+using HSFramework.MyDelayedTaskScheduler;
+using HSFramework.PoolModule;
 using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace BaseSystem.MyDelayedTaskScheduler
+namespace HSFramework.MyDelayedTaskScheduler
 {
     public class TestDelayTask : MonoBehaviour
     {

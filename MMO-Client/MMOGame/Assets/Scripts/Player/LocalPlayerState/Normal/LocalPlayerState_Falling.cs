@@ -6,7 +6,7 @@ namespace Player.PlayerState
     public class LocalPlayerState_Falling: LocalPlayerState
     {
         private float m_verticalVelocity;
-        private LayerMask groundLayerMask = LayerMask.GetMask("Env");
+        private LayerMask groundLayerMask = LayerMask.GetMask("Ground");
         private float offset = 1f;
         public override void Enter()
         {

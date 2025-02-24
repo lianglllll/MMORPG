@@ -1,4 +1,4 @@
-using GameClient.HSFramework;
+using HSFramework.Audio;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +33,7 @@ public class CreateRolePanelScript : BasePanel
         GameObject panelPrefab = null;
         GameObject panelObject = null;
         panelPrefab = UIManager.Instance.GetPanelPrefab("VocationItem");
-        var defines = DataManager.Instance.unitDefineDict.Values;
+        var defines = LocalDataManager.Instance.unitDefineDict.Values;
 
         VocationItem first = null;
         foreach(var item in defines)

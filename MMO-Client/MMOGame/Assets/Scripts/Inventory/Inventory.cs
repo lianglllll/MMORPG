@@ -50,7 +50,7 @@ public class Inventory
         this.capacity = info.Capacity;
         foreach(var iteminfo in info.List)
         {
-            var def = DataManager.Instance.itemDefineDict[iteminfo.ItemId];
+            var def = LocalDataManager.Instance.itemDefineDict[iteminfo.ItemId];
             Item item = null;
             switch (def.ItemType)
             {
@@ -190,7 +190,7 @@ public class Inventory
     public int AddItem(int itemId, int amount = 1)
     {
         //不做太多的判断，因为服务器已经做过判断了，在做一次就是多余
-        var def = DataManager.Instance.itemDefineDict[itemId];
+        var def = LocalDataManager.Instance.itemDefineDict[itemId];
         var counter = amount;
 
         //3.循环放置

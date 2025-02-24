@@ -1,4 +1,4 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using System;

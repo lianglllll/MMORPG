@@ -8,7 +8,7 @@ using Common.Summer.Net;
 using HS.Protobuf.Scene;
 using HS.Protobuf.Combat.Skill;
 using HS.Protobuf.SceneEntity;
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 
 public class CombatService : SingletonNonMono<CombatService>
 {

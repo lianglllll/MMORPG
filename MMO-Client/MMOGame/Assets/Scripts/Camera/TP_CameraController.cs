@@ -1,6 +1,6 @@
-using BaseSystem.MyDelayedTaskScheduler;
-using BaseSystem.Singleton;
-using BaseSystem.Tool;
+using HSFramework.MyDelayedTaskScheduler;
+using HSFramework.Singleton;
+using HSFramework.Tool;
 using UnityEngine;
 
 public class TP_CameraController : Singleton<TP_CameraController>

@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using Google.Protobuf;
 using Common.Summer.Core;
 using Serilog;
-using BaseSystem.MyDelayedTaskScheduler;
+using HSFramework.MyDelayedTaskScheduler;
 using Common.Summer.Security;
 
 

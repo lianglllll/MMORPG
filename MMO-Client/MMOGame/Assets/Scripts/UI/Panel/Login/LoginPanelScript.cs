@@ -1,10 +1,8 @@
-using GameClient;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using HS.Protobuf.Login;
-using GameClient.HSFramework;
+using HSFramework.Audio;
 public class LoginPanelScript : BasePanel
 {
     private bool isOnClickLoginBtn;             //是否已经点击登录了，这里需要等响应回来

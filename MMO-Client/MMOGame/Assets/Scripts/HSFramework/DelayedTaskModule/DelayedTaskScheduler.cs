@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using BaseSystem.DataStruct;
+using HSFramework.DataStruct;
 using UnityEngine;
-using BaseSystem.Singleton;
-using BaseSystem.PoolModule;
+using HSFramework.Singleton;
+using HSFramework.PoolModule;
 
-namespace BaseSystem.MyDelayedTaskScheduler
+namespace HSFramework.MyDelayedTaskScheduler
 {
     /// <summary>
     /// 延时任务调度器

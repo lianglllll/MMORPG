@@ -1,7 +1,7 @@
 using System;
 
 
-namespace BaseSystem.Tool.Singleton
+namespace HSFramework.Tool.Singleton
 {
     public abstract class SingletonNonMono<T> : IDisposable where T : class, new()
     {

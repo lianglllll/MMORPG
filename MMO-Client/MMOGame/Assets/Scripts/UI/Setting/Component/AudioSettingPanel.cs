@@ -1,15 +1,16 @@
-using GameClient.HSFramework;
+using HSFramework.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AudioSettingPanel : MonoBehaviour
+public class AudioSettingPanel : BaseSettingPanel
 {
     private Slider masterVolumeSlider;
     private Slider bgVolumeSlider;
     private Slider uiVolumeSlider;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         masterVolumeSlider = transform.Find("MasterVolumeSettingBar/Slider").GetComponent<Slider>();
         bgVolumeSlider = transform.Find("BgVolumeSettingBar/Slider").GetComponent<Slider>();
         uiVolumeSlider = transform.Find("UIVolumeSettingBar/Slider").GetComponent<Slider>();
@@ -26,6 +27,8 @@ public class AudioSettingPanel : MonoBehaviour
         masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
         bgVolumeSlider.onValueChanged.AddListener(SetBGVolume);
         uiVolumeSlider.onValueChanged.AddListener(SetUIVolume);
+
+        isChangeSetting = false;
     }
 
     private void OnDisable()
@@ -41,14 +44,28 @@ public class AudioSettingPanel : MonoBehaviour
     {
         GlobalAudioManager.Instance.MasterVolume = value; 
     }
-
     private void SetBGVolume(float value)
     {
         GlobalAudioManager.Instance.BGMVolume = value; 
     }
-
     private void SetUIVolume(float value)
     {
         GlobalAudioManager.Instance.UIVolume = value; 
     }
+
+    protected override void OnReset()
+    {
+        base.OnReset();
+        LocalDataManager.Instance.gameSettings.audioSetting.Reset();
+    }
+    protected override void OnSave()
+    {
+        base.OnSave();
+        var audioSetting = LocalDataManager.Instance.gameSettings.audioSetting;
+        audioSetting.masterVolume = masterVolumeSlider.value;
+        audioSetting.bgVolume = bgVolumeSlider.value;
+        audioSetting.uiVolume = uiVolumeSlider.value;
+        LocalDataManager.Instance.SaveSettings();
+    }
+
 }

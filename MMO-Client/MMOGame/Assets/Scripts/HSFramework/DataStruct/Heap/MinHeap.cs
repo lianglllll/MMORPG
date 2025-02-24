@@ -1,6 +1,6 @@
 using System;
 
-namespace BaseSystem.DataStruct
+namespace HSFramework.DataStruct
 {
     public class MinHeap<T> : Heap<T> where T : IComparable
     {

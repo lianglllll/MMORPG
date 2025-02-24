@@ -1,4 +1,4 @@
-using BaseSystem.Tool.Singleton;
+using HSFramework.Tool.Singleton;
 using Google.Protobuf.Collections;
 using HS.Protobuf.Chat;
 using System;
