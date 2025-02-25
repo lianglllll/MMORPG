@@ -498,9 +498,9 @@
             "id": "5b732d53-b905-47bc-8a83-0312b910587c",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "KeyEsc",
                     "type": "Button",
-                    "id": "2ee5dbdf-05d3-41be-a41d-95e3a2ff8a9c",
+                    "id": "c09c6716-80c0-4c34-a74a-9a052c4984f6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -510,12 +510,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "f9307661-c9e4-4f17-b9d0-b056323d218c",
-                    "path": "",
+                    "id": "dbefd47a-e0db-4aa0-b932-41dcd8b0459e",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "KeyEsc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

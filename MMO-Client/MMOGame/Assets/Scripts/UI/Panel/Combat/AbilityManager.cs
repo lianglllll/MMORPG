@@ -8,11 +8,14 @@ using UnityEngine;
 /// </summary>
 public class AbilityManager : MonoBehaviour
 {
-    public List<AbilityBarScript> bars = new List<AbilityBarScript>();
+    public List<AbilitySlotScript> bars = new List<AbilitySlotScript>();
 
     public void Init()
     {
         if (GameApp.character == null) return;
+
+        // todo 按键从配置中获取
+        // LocalDataManager.Instance.gameSettings;
         string tipKeys = "QEFZXC";
         var skillList = GameApp.character.m_skillManager.GetActiveSkills();
         for (int i = 0; i < bars.Count; i++)
@@ -20,12 +23,9 @@ public class AbilityManager : MonoBehaviour
             var bar = bars[i];
             if (i < skillList.Count)
             {
+                bar.gameObject.SetActive(true);
                 var skill = skillList[i];
-                bar.SetAbilityBar(skill,tipKeys[i].ToString());
-            }
-            else
-            {
-                bar.SetAbilityBar(null);
+                bar.SetAbilityBarInfo(skill,tipKeys[i].ToString());
             }
         }
     }

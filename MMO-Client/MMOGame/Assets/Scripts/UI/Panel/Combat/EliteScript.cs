@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using GameClient.Entities;
-using TMPro;
 
 public class EliteScript : MonoBehaviour
 {

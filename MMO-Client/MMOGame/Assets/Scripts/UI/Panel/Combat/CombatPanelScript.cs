@@ -6,24 +6,36 @@ using UnityEngine.UI;
 
 public class CombatPanelScript : BasePanel
 {
-    private EliteScript myElite;                            //自己的角色的状态栏
+    private bool m_isShowRelatedCombatUI;
+    private float m_notCombatOperationTime = 0;
+    private float m_maxNotCombatOperationTime = 10;
+
+    private EliteScript m_elite;                            
+    private AbilityManager m_ablityManager;
+    private ExpBoxScript m_expBox;
+
     private Slider intonateSlider;
     private Button KnapsackBtn;
     public ChatBoxScript chatBoxScript;
-    private ExpBoxScript expBoxScript;
-    private AbilityManager abilityGroupScript;
+
+    private bool m_isShowTopAndRightUI;
+    public GameObject TopPart;
+    public GameObject RightPart;
+
 
     protected override void Awake()
     {
         base.Awake();
-        myElite = transform.Find("MyElite").GetComponent<EliteScript>();
+        m_elite = transform.Find("Elite").GetComponent<EliteScript>();
         intonateSlider = transform.Find("IntonateSlider/Slider").GetComponent<Slider>();
         KnapsackBtn = transform.Find("KnapsackBtn").GetComponent<Button>();
         chatBoxScript = transform.Find("ChatBox").GetComponent<ChatBoxScript>();
-        expBoxScript = transform.Find("ExpBox").GetComponent<ExpBoxScript>();
-        abilityGroupScript = transform.Find("AbilityGroup").GetComponent<AbilityManager>();
-    }
+        m_expBox = transform.Find("ExpBox").GetComponent<ExpBoxScript>();
+        m_ablityManager = transform.Find("AbilityManager").GetComponent<AbilityManager>();
 
+        TopPart = transform.Find("TopPart").gameObject;
+        RightPart = transform.Find("RightPart").gameObject;
+    }
     protected override void Start()
     {
         Init();
@@ -35,10 +47,7 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.RegisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI"); 
         Kaiyun.Event.RegisterOut("ExpChange", this, "ExpBoxREfreshUI");
         Kaiyun.Event.RegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
-
-
     }
-
     private void OnDestroy()
     {
         Kaiyun.Event.UnregisterOut("SelectTarget", this, "_SelectTarget");
@@ -49,9 +58,38 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.UnregisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
 
     }
-
     private void Update()
     {
+        // top right part的显隐
+        if (GameInputManager.Instance.GI_ESC && !m_isShowTopAndRightUI)
+        {
+            ShowTopAndRightUI();
+        }
+        if (GameInputManager.Instance.UI_ESC && m_isShowTopAndRightUI)
+        {
+            HideTopAndRightUI();
+        }
+
+        // 战斗相关的ui,脱战自动隐藏
+        if (GameInputManager.Instance.LAttack)
+        {
+            if(!m_isShowRelatedCombatUI)
+            {
+                ShowRelatedCombatUI();
+            }
+            m_notCombatOperationTime = 0;
+        }
+        else
+        {
+            m_notCombatOperationTime += Time.deltaTime;
+            if(m_notCombatOperationTime > m_maxNotCombatOperationTime)
+            {
+                if (m_isShowRelatedCombatUI)
+                {
+                    HideRelatedCombatUI();
+                }
+            }
+        }
 
         //技能释放进度条UI
         var sk = GameApp.CurrSkill;
@@ -65,7 +103,6 @@ public class CombatPanelScript : BasePanel
             intonateSlider.gameObject.SetActive(false);
         }
 
-
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if(UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") == null)
@@ -74,21 +111,51 @@ public class CombatPanelScript : BasePanel
             }
         }
 
-
-
     }
 
-    /// <summary>
-    /// 初始化
-    /// </summary>
     private void Init()
     {
-        //ui
-        KnapsackBtn.onClick.AddListener(OnKnaspackBtn);
-        myElite.Init(GameApp.character);                    //设置一下我们主角的状态栏
-        expBoxScript.Init(GameApp.character);                   //初始化经验条
-        abilityGroupScript.Init();
+        m_elite.Init(GameApp.character);                    //设置一下我们主角的状态栏
+        m_expBox.Init(GameApp.character);                   //初始化经验条
+        m_ablityManager.Init();
 
+        KnapsackBtn.onClick.AddListener(OnKnaspackBtn);
+
+        HideRelatedCombatUI();
+        HideTopAndRightUI();
+    }
+    private void ShowRelatedCombatUI()
+    {
+        m_isShowRelatedCombatUI = true;
+        m_elite.gameObject.SetActive(true);
+        m_ablityManager.gameObject.SetActive(true);
+    }
+    private void HideRelatedCombatUI()
+    {
+        m_isShowRelatedCombatUI = false;
+        m_elite.gameObject.SetActive(false);
+        m_ablityManager.gameObject.SetActive(false);
+    }
+
+    private void ShowTopAndRightUI()
+    {
+        m_isShowTopAndRightUI = true;
+        if (m_isShowRelatedCombatUI)
+        {
+            HideRelatedCombatUI();
+        }
+        GameInputManager.Instance.SetGameInputActions(false);
+        GameInputManager.Instance.SetUIInputActions(true);
+        TopPart.SetActive(true);
+        RightPart.SetActive(true);
+    }
+    private void HideTopAndRightUI()
+    {
+        m_isShowTopAndRightUI = false;
+        GameInputManager.Instance.SetUIInputActions(false);
+        GameInputManager.Instance.SetGameInputActions(true);
+        TopPart.SetActive(false);
+        RightPart.SetActive(false);
     }
 
     /// <summary>
@@ -148,7 +215,7 @@ public class CombatPanelScript : BasePanel
     {
         if(actor == GameApp.character)
         {
-            myElite.RefreshUI();
+            m_elite.RefreshUI();
         }else if(actor == GameApp.target)
         {
             //targetElite.RefreshUI();
@@ -160,6 +227,6 @@ public class CombatPanelScript : BasePanel
     /// </summary>
     public void ExpBoxREfreshUI()
     {
-        expBoxScript.RefrashUI();
+        m_expBox.RefrashUI();
     }
 }

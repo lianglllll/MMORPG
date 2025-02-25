@@ -78,7 +78,7 @@
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Knock.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\DeliverPanel.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityBarScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilitySlotScript.cs" />
     <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\SurfaceManager.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Fly\RemotePlayerState_Fly_Idle.cs" />
@@ -199,7 +199,7 @@
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_Idle.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntityRecive.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\ItemIOInfoItem.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\UnitBillboard.cs" />
+    <Compile Include="Assets\Scripts\Player\Tools\UnitBillboard.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\VocationItem.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />

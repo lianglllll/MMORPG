@@ -8,7 +8,7 @@ public class GameInputManager : Singleton<GameInputManager>
     private InputActions _inputActions;
     private Dictionary<string, List<string>>  m_originalActionBindings = new Dictionary<string, List<string>>();
 
-    #region 输入
+    #region Game Input
 
     public Vector2 Movement => _inputActions.GameInput.Movement.ReadValue<Vector2>();           //获取二维输入
     public Vector2 CameraLook => _inputActions.GameInput.CameraLook.ReadValue<Vector2>();
@@ -28,7 +28,13 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool SustainQ => _inputActions.GameInput.Q.phase == InputActionPhase.Performed;
     public bool SustainE => _inputActions.GameInput.E.phase == InputActionPhase.Performed;
     public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;
-    public bool ESC => _inputActions.GameInput.KeyEsc.triggered;
+    public bool GI_ESC => _inputActions.GameInput.KeyEsc.triggered;
+
+    #endregion
+
+    #region UI Input
+
+    public bool UI_ESC => _inputActions.UIInput.KeyEsc.triggered;
 
     #endregion
 
@@ -37,7 +43,10 @@ public class GameInputManager : Singleton<GameInputManager>
         base.Awake();
         _inputActions ??= new InputActions();       //判断是否为null，如果是就new一个新的        
     }
-
+    private void Start()
+    {
+        GetAllActionBindings();
+    }
     private void OnEnable()
     {
         _inputActions.Enable();//启用所有map
@@ -46,21 +55,36 @@ public class GameInputManager : Singleton<GameInputManager>
         //_inputActions.GameInput.Enable();
         //_inputActions.GameInput.Disable();
     }
-
     private void OnDisable()
     {
         _inputActions.Disable();
     }
-
-
-    private void Start()
-    {
-        GetAllActionBindings();
-    }
-
     private void Update()
     {
 
+    }
+
+    public void SetGameInputActions(bool active)
+    {
+        if (active)
+        {
+            _inputActions.GameInput.Enable();
+        }
+        else
+        {
+            _inputActions.GameInput.Disable();
+        }
+    }
+    public void SetUIInputActions(bool active)
+    {
+        if (active)
+        {
+            _inputActions.UIInput.Enable();
+        }
+        else
+        {
+            _inputActions.UIInput.Disable();
+        }
     }
 
     public void Change()
@@ -78,7 +102,6 @@ public class GameInputManager : Singleton<GameInputManager>
             jumpAction.Enable();
         }
     }
-
     public void  GetAllActionBindings()
     {
         //todo获取 的时候顺便吧action也保存起来。
@@ -102,6 +125,4 @@ public class GameInputManager : Singleton<GameInputManager>
         }
 
     }
-
-
 }

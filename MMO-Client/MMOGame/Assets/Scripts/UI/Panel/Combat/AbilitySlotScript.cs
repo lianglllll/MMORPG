@@ -11,7 +11,7 @@ using GameClient;
 /// 让当前这个脚本自己管自己，skill只提供了触发和倒计时
 /// 这里设置一个标记为flag来标记是否进入倒计时
 /// </summary>
-public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Sprite icon;
     public string aName;
@@ -21,22 +21,24 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Skill _skill;
     private bool isUpdate;
 
-    private Image iconImag;                 // 技能图标
-    private Image coldDownImag;             // 冷却图层
-    private Text coldDownTimeText;          // 冷却数字文字
-    private TextMeshProUGUI TipsKeyText;    // 按键提示
+    private Image iconImag;                     // 技能图标
+    private Image coldDownImag;                 // 冷却图层
+    private TextMeshProUGUI coldDownTimeText;   // 冷却数字文字
+    private TextMeshProUGUI TipsKeyText;        // 按键提示
 
     private void Awake()
     {
         iconImag = transform.Find("Icon").GetComponent<Image>();
         coldDownImag = transform.Find("ColdDown").GetComponent<Image>();
-        coldDownTimeText = transform.Find("ColdDownTime").GetComponent<Text>();
+        coldDownTimeText = transform.Find("ColdDownTime").GetComponent<TextMeshProUGUI>();
         TipsKeyText = transform.Find("TipsKey/TipsKeyText").GetComponent<TextMeshProUGUI>();
     }
     private void Start()
     {
         isUpdate = false;
         coldDownImag.enabled = false;
+        coldDownTimeText.enabled = false;
+
         Kaiyun.Event.RegisterIn("SkillEnterColdDown", this, "_SkillEnterColdDown");
     }
     private void OnDestroy()
@@ -51,12 +53,9 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
     }
 
-    /// <summary>
-    /// 设置技能格中的信息
-    /// </summary>
-    /// <param name="skillInfo"></param>
-    public void SetAbilityBar(Skill skillInfo,string tipKey = "A")
+    public void SetAbilityBarInfo(Skill skillInfo,string tipKey = "")
     {
+        // 数据初始化
         if(skillInfo != null)
         {
             _skill = skillInfo;
@@ -77,32 +76,31 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
             desc = "";
         }
 
-        //初始化一下技能格子的ui
-        iconImag.enabled = icon != null;                        //是否显示技能图标  
-        iconImag.sprite = icon;
-        isUpdate = false;
+        // 显示
+        if(icon == null)
+        {
+            iconImag.enabled = false;
+        }
+        else
+        {
+            iconImag.sprite = icon;
+            iconImag.enabled = true;
+        }
 
+        isUpdate = false;
     }
 
-    /// <summary>
-    /// 技能进入冷却事件回调
-    /// </summary>
-    public void _SkillEnterColdDown()
-    {
 
+    public void SkillEnterColdDownEvent()
+    {
         if (_skill != null && _skill.ColddownTime != 0)
         {
             isUpdate = true;
         }
-
     }
-
-    /// <summary>
-    /// 更新技能格的信息，主要是冷却的信息
-    /// 根据skill来进行更新ui
-    /// </summary>
     void UpdateAbilityBar()
     {
+        // 更新技能格的信息，主要是冷却的信息,根据skill来进行更新ui
 
         coldDown = _skill.ColddownTime;                         //设置当前的冷却时间
         if (coldDown <= 0)
@@ -127,9 +125,7 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     }
 
-    /// <summary>
-    /// 技能格被点击事件
-    /// </summary>
+
     private void OnClick()
     {
         if (_skill == null) return;
@@ -146,12 +142,6 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         CombatService.Instance.SpellSkill(_skill,GameApp.target);
     }
-
-
-    /// <summary>
-    /// 鼠标掠过的事件
-    /// </summary>
-    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         var content = "<color=#ffffff>技能信息信息为空</color>";
@@ -161,7 +151,6 @@ public class AbilityBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
         ToolTip.Instance.Show(content);
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         ToolTip.Instance?.Hide();
