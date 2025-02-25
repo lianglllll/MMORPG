@@ -7,7 +7,6 @@
 @SET DEST_FOLDER_1=..\..\MMO-Client\MMOGame\Assets\Res\Files\Data
 @SET DEST_FOLDER_2=..\..\MMO-Client\MMOGame\Assets\Scripts\LocalData\DataDefine
 
-
 :: execl转json和生成对应的define文件
 @ECHO Converting excel files in folder %EXCEL_FOLDER% ...
 for %%i in ("%EXCEL_FOLDER%\*.xlsx") do (

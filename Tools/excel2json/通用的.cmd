@@ -33,6 +33,5 @@ for %%i in (%CODE_FOLDER%\*.cs) do (
     @COPY "%%i" "%DEST_FOLDER_5%\%%~nxi"
 )
 
-
 echo "OK"
 pause
