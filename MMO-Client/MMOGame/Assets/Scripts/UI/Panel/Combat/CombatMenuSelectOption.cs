@@ -4,7 +4,13 @@ using UnityEngine.UI;
 using DG.Tweening;
 using HSFramework.Audio;
 
-public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
+
+public enum CombatMenuOptionType
+{
+    Settings, ExitPanel, ExitGame
+}
+
+public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
     private Image Bg;
     private Text text;
@@ -14,52 +20,59 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
     private bool isExiting;
     private float hoverA = 0.5f;
     private float hoverDuration = 0.5f;
+    public CombatMenuOptionType type;
 
-    public SettingType type;
-    private MainSettingPanel settingPanel;
-
+    private CombatPanelScript combatPanel;
+    private CombatPanelScript CombatPanelScript
+    {
+        get
+        {
+            if (combatPanel == null)
+            {
+                combatPanel = UIManager.Instance.GetOpeningPanelByName("CombatPanel") as CombatPanelScript;
+            }
+            return combatPanel;
+        }
+    }
     private void Awake()
     {
         Bg = transform.Find("Bg").GetComponent<Image>();
         text = transform.Find("Text").GetComponent<Text>();
     }
-
-    private void Start()
+    private void OnEnable()
     {
         isClicked = false;
         isEntering = false;
         isExiting = false;
+        Color color = Bg.color;
+        color.a = 0;
+        Bg.color = color;
     }
-
-    public void Init(MainSettingPanel settingPanel, SettingType type)
+    private void OnDisable()
     {
-        this.type = type;
-        this.settingPanel = settingPanel;
-    }
-    public void OnClick()
-    {
-        if (isClicked) return;
-        isClicked = true;
-        //bg透明度->1
-        //字体变黑
-        text.color = Color.black;
-        Bg.DOFade(1, hoverDuration);
-    }
-    public void CancelClick()
-    {
-        if (!isClicked) return;
-        text.color = Color.white;
-        Bg.DOFade(0, hoverDuration).OnComplete(() => {
-            isClicked = false;
-        });
-
+        // Kill all tweens associated with this object to ensure no animations are left running
+        DOTween.Kill(Bg);
+        isEntering = false;  // Reset entering state
+        isExiting = false;   // Reset exiting state
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isClicked) return;
         GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
-        settingPanel.Selected(this);
+
+        switch(type)
+        {
+            case CombatMenuOptionType.Settings:
+                OnSettingOption();
+                break;
+            case CombatMenuOptionType.ExitPanel:
+                OnExitPanelOption();
+                break;
+            case CombatMenuOptionType.ExitGame:
+                OnExitGameOption();
+                break;
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -109,5 +122,21 @@ public class SettingSelectOption : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             isExiting = false;  // 动画完成，重置标记
         });
+    }
+
+
+    private void OnSettingOption()
+    {
+        CombatPanelScript.ShowSettingPanel();
+    }
+
+    private void OnExitPanelOption()
+    {
+        CombatPanelScript.HideTopAndRightUI();
+    }
+
+    private void OnExitGameOption()
+    {
+
     }
 }

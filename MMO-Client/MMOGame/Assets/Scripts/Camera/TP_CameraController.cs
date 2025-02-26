@@ -37,19 +37,7 @@ public class TP_CameraController : Singleton<TP_CameraController>
         if (isStart)
         {
             CameraInput();
-            if (GameInputManager.Instance.SustainLeftAlt)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                // 隐藏并锁定光标
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
         }
-
     }
     private void LateUpdate()
     {

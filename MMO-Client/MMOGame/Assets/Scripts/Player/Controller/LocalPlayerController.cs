@@ -15,7 +15,9 @@ namespace Player.Controller
             if (GameInputManager.Instance.KeyOneDown)
             {
                 ChangeMode(NetActorMode.Normal);
-            }else if (GameInputManager.Instance.KeyTwoDown) {
+            }
+            else if (GameInputManager.Instance.KeyTwoDown)
+            {
                 ChangeMode(NetActorMode.FlyNormal);
             }
         }

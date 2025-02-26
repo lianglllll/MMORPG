@@ -37,7 +37,13 @@ public class MainSettingPanel : BasePanel
             Selected(option);
         });
     }
-
+    private void Update()
+    {
+        if(GameInputManager.Instance.UI_ESC)
+        {
+            Close();
+        }
+    }
     public void Selected(SettingSelectOption option)
     {
 
@@ -52,4 +58,9 @@ public class MainSettingPanel : BasePanel
         menuDict[curType].gameObject.SetActive(true);
     }
 
+    public void Close()
+    {
+        UIManager.Instance.ClosePanel("SettingPanel");
+        Kaiyun.Event.FireIn("CloseSettingPanel");
+    }
 }

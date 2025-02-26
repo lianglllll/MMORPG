@@ -10,22 +10,23 @@ public class CombatPanelScript : BasePanel
     private float m_notCombatOperationTime = 0;
     private float m_maxNotCombatOperationTime = 10;
 
+    private int m_haveOtherPanelFromThisOpen;
+
     private EliteScript m_elite;                            
     private AbilityManager m_ablityManager;
     private ExpBoxScript m_expBox;
 
     private Slider intonateSlider;
     private Button KnapsackBtn;
-    public ChatBoxScript chatBoxScript;
+    private ChatBoxScript chatBoxScript;
 
     private bool m_isShowTopAndRightUI;
-    public GameObject TopPart;
-    public GameObject RightPart;
+    private GameObject TopPart;
+    private GameObject RightPart;
 
 
     protected override void Awake()
     {
-        base.Awake();
         m_elite = transform.Find("Elite").GetComponent<EliteScript>();
         intonateSlider = transform.Find("IntonateSlider/Slider").GetComponent<Slider>();
         KnapsackBtn = transform.Find("KnapsackBtn").GetComponent<Button>();
@@ -38,8 +39,6 @@ public class CombatPanelScript : BasePanel
     }
     protected override void Start()
     {
-        Init();
-
         //监听事件
         Kaiyun.Event.RegisterOut("SelectTarget", this, "_SelectTarget");
         Kaiyun.Event.RegisterOut("TargetDeath", this, "_CancelSelectTarget");
@@ -47,6 +46,9 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.RegisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI"); 
         Kaiyun.Event.RegisterOut("ExpChange", this, "ExpBoxREfreshUI");
         Kaiyun.Event.RegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
+
+        Kaiyun.Event.RegisterIn("CloseSettingPanel", this, "HanleCloseSettingPanelEvent");
+        Init();
     }
     private void OnDestroy()
     {
@@ -60,12 +62,22 @@ public class CombatPanelScript : BasePanel
     }
     private void Update()
     {
+        // 鼠标显示隐藏
+        if (GameInputManager.Instance.SustainLeftAlt)
+        {
+            SetMouseShowAndHide(true);
+        }
+        else if(GameInputManager.Instance.GameInputMode == GameInputMode.Game)
+        {
+            SetMouseShowAndHide(false);
+        }
+
         // top right part的显隐
         if (GameInputManager.Instance.GI_ESC && !m_isShowTopAndRightUI)
         {
             ShowTopAndRightUI();
         }
-        if (GameInputManager.Instance.UI_ESC && m_isShowTopAndRightUI)
+        if (GameInputManager.Instance.UI_ESC && m_isShowTopAndRightUI && m_haveOtherPanelFromThisOpen == 0)
         {
             HideTopAndRightUI();
         }
@@ -92,25 +104,24 @@ public class CombatPanelScript : BasePanel
         }
 
         //技能释放进度条UI
-        var sk = GameApp.CurrSkill;
-        if(sk != null && sk.Stage == SkillStage.Intonate && sk.Define.IntonateTime > 0.1f)
-        {
-            intonateSlider.gameObject.SetActive(true);
-            intonateSlider.value = sk.IntonateProgress;
-        }
-        else
-        {
-            intonateSlider.gameObject.SetActive(false);
-        }
+        //var sk = GameApp.CurrSkill;
+        //if(sk != null && sk.Stage == SkillStage.Intonate && sk.Define.IntonateTime > 0.1f)
+        //{
+        //    intonateSlider.gameObject.SetActive(true);
+        //    intonateSlider.value = sk.IntonateProgress;
+        //}
+        //else
+        //{
+        //    intonateSlider.gameObject.SetActive(false);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if(UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") == null)
-            {
-                OnKnaspackBtn();
-            }
-        }
-
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    if(UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") == null)
+        //    {
+        //        OnKnaspackBtn();
+        //    }
+        //}
     }
 
     private void Init()
@@ -123,6 +134,10 @@ public class CombatPanelScript : BasePanel
 
         HideRelatedCombatUI();
         HideTopAndRightUI();
+
+        m_haveOtherPanelFromThisOpen = 0;
+
+        GameInputManager.Instance.SwitchGameInputMode(GameInputMode.Game);
     }
     private void ShowRelatedCombatUI()
     {
@@ -144,19 +159,46 @@ public class CombatPanelScript : BasePanel
         {
             HideRelatedCombatUI();
         }
-        GameInputManager.Instance.SetGameInputActions(false);
-        GameInputManager.Instance.SetUIInputActions(true);
+        GameInputManager.Instance.SwitchGameInputMode(GameInputMode.UI);
         TopPart.SetActive(true);
         RightPart.SetActive(true);
+
+        SetMouseShowAndHide(true);
     }
-    private void HideTopAndRightUI()
+    public void HideTopAndRightUI()
     {
         m_isShowTopAndRightUI = false;
-        GameInputManager.Instance.SetUIInputActions(false);
-        GameInputManager.Instance.SetGameInputActions(true);
+        GameInputManager.Instance.SwitchGameInputMode(GameInputMode.Game);
         TopPart.SetActive(false);
         RightPart.SetActive(false);
+
+        SetMouseShowAndHide(false);
     }
+    private void SetMouseShowAndHide(bool active)
+    {
+        if (active)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    // 设置面板
+    public void ShowSettingPanel()
+    {
+        UIManager.Instance.OpenPanel("SettingPanel");
+        m_haveOtherPanelFromThisOpen++;
+    }
+    public void HanleCloseSettingPanelEvent()
+    {
+        m_haveOtherPanelFromThisOpen--;
+    }
+
 
     /// <summary>
     /// 死亡面板
@@ -179,10 +221,6 @@ public class CombatPanelScript : BasePanel
         UIManager.Instance.OpenPanel("KnapsackPanel");
 
     }
-
-    /// <summary>
-    /// 关闭背包的回调
-    /// </summary>
     public void CloseKnaspackCallback()
     {
 

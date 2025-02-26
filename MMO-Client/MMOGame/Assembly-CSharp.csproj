@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\CombatMenuSelectOption.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\LocalPlayerController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\RegisterPanelScript.cs" />
     <Compile Include="Assets\Scripts\Handle\SceneHandler.cs" />
@@ -72,13 +73,13 @@
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameApp.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\AudioSettingPanel.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroup\BuffGroupScript.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\ControlSettingPanel.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Knock.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\DeliverPanel.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilitySlotScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\EquipSkillSlot\AbilitySlotScript.cs" />
     <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\SurfaceManager.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Fly\RemotePlayerState_Fly_Idle.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\DemoUI.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\AbilityManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\EquipSkillSlot\AbilityManager.cs" />
     <Compile Include="Assets\Scripts\Net\NetworkActor.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\SelectRolePanelScript.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Assets\Scripts\Camera\TP_CameraController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\RoleListItemScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\ChatBoxScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Chat\ChatBoxScript.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\SettingSelectOption.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\GameSettingPanel.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="Assets\Scripts\Player\Model\SyncModel.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Death.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\ExpBoxScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\PlayerStateInfoBox\ExpBoxScript.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\LevelDefine.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Motion.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\EquipSlot.cs" />
@@ -202,7 +203,7 @@
     <Compile Include="Assets\Scripts\Player\Tools\UnitBillboard.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\VocationItem.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffUIScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroup\BuffUIScript.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Death.cs" />
     <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\Manager\EntityManager.cs" />
@@ -216,7 +217,7 @@
     <Compile Include="Assets\Scripts\LocalData\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
     <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\CameraView.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Combat\EliteScript.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Combat\PlayerStateInfoBox\EliteScript.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestPanel.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\Swapper.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\SpaceDefine.cs" />

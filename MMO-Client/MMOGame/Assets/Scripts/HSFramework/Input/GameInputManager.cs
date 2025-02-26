@@ -2,9 +2,17 @@ using HSFramework.Singleton;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static InputActions;
+
+
+public enum GameInputMode
+{
+    Game,UI
+}
 
 public class GameInputManager : Singleton<GameInputManager>
 {
+    private GameInputMode m_gameInputMode;
     private InputActions _inputActions;
     private Dictionary<string, List<string>>  m_originalActionBindings = new Dictionary<string, List<string>>();
 
@@ -20,7 +28,6 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool RAttack => _inputActions.GameInput.RAttack.triggered;
     public bool RAttackPerFormed => _inputActions.GameInput.RAttack.phase == InputActionPhase.Performed;
     public bool Defense => _inputActions.GameInput.Grab.triggered;
-    public bool SustainLeftAlt => _inputActions.GameInput.LetfAlt.phase == InputActionPhase.Performed;
     public bool Space => _inputActions.GameInput.Space.triggered;
     public bool Crouch => _inputActions.GameInput.Crouch.triggered;
     public bool KeyOneDown => _inputActions.GameInput.KeyOne.triggered;
@@ -29,6 +36,7 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool SustainE => _inputActions.GameInput.E.phase == InputActionPhase.Performed;
     public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;
     public bool GI_ESC => _inputActions.GameInput.KeyEsc.triggered;
+    public bool SustainLeftAlt => _inputActions.GameInput.LetfAlt.phase == InputActionPhase.Performed;
 
     #endregion
 
@@ -38,6 +46,8 @@ public class GameInputManager : Singleton<GameInputManager>
 
     #endregion
 
+    public GameInputMode GameInputMode => m_gameInputMode;
+
     protected override void Awake()
     {
         base.Awake();
@@ -45,15 +55,15 @@ public class GameInputManager : Singleton<GameInputManager>
     }
     private void Start()
     {
-        GetAllActionBindings();
+
     }
     private void OnEnable()
     {
-        _inputActions.Enable();//启用所有map
+        m_gameInputMode = GameInputMode.UI;
+        _inputActions.GameInput.Disable();
+        _inputActions.UIInput.Enable();
 
-        //可以创建多张输入表
-        //_inputActions.GameInput.Enable();
-        //_inputActions.GameInput.Disable();
+        GetAllActionBindings();
     }
     private void OnDisable()
     {
@@ -64,28 +74,51 @@ public class GameInputManager : Singleton<GameInputManager>
 
     }
 
-    public void SetGameInputActions(bool active)
+
+    public void SwitchGameInputMode(GameInputMode mode)
     {
-        if (active)
+        if (m_gameInputMode == mode)
         {
-            _inputActions.GameInput.Enable();
+            goto End;
         }
-        else
+        _inputActions.Disable();
+        m_gameInputMode = mode;
+        switch (m_gameInputMode)
         {
-            _inputActions.GameInput.Disable();
+            case GameInputMode.Game:
+                _inputActions.GameInput.Enable();
+                break;
+            case GameInputMode.UI:
+                _inputActions.UIInput.Enable();
+                break;
         }
+
+    End:
+        return;
     }
-    public void SetUIInputActions(bool active)
-    {
-        if (active)
-        {
-            _inputActions.UIInput.Enable();
-        }
-        else
-        {
-            _inputActions.UIInput.Disable();
-        }
-    }
+
+    //public void SetGameInputActions(bool active)
+    //{
+    //    if (active)
+    //    {
+    //        _inputActions.GameInput.Enable();
+    //    }
+    //    else
+    //    {
+    //        _inputActions.GameInput.Disable();
+    //    }
+    //}
+    //public void SetUIInputActions(bool active)
+    //{
+    //    if (active)
+    //    {
+    //        _inputActions.UIInput.Enable();
+    //    }
+    //    else
+    //    {
+    //        _inputActions.UIInput.Disable();
+    //    }
+    //}
 
     public void Change()
     {
