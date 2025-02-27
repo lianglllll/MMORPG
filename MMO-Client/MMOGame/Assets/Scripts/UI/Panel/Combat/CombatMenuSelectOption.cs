@@ -3,17 +3,20 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 using HSFramework.Audio;
+using TMPro;
 
 
 public enum CombatMenuOptionType
 {
-    Settings, ExitPanel, ExitGame
+    Settings, Mail, Backpack,ExitPanel, ExitGame
 }
 
 public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
     private Image Bg;
-    private Text text;
+    private Image Icon1;
+    private Image Icon2;
+    private TextMeshProUGUI FastBtnTipsText;
 
     private bool isClicked;
     private bool isEntering;
@@ -37,7 +40,9 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
     private void Awake()
     {
         Bg = transform.Find("Bg").GetComponent<Image>();
-        text = transform.Find("Text").GetComponent<Text>();
+        Icon1 = transform.Find("Icon/Icon1").GetComponent<Image>();
+        Icon2 = transform.Find("Icon/Icon2").GetComponent<Image>();
+        FastBtnTipsText = transform.Find("FastBtnTips/FastBtnTipsText")?.GetComponent<TextMeshProUGUI>();
     }
     private void OnEnable()
     {
@@ -47,6 +52,9 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         Color color = Bg.color;
         color.a = 0;
         Bg.color = color;
+
+        Icon1.enabled = true;
+        Icon2.enabled = false;
     }
     private void OnDisable()
     {
@@ -66,6 +74,12 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
             case CombatMenuOptionType.Settings:
                 OnSettingOption();
                 break;
+            case CombatMenuOptionType.Mail:
+                OnMailOption();
+                break;
+            case CombatMenuOptionType.Backpack:
+                OnBackpackOption();
+                break;
             case CombatMenuOptionType.ExitPanel:
                 OnExitPanelOption();
                 break;
@@ -79,7 +93,6 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         if (isClicked) return;
 
         //bg透明度从0->0.5
-
         // 如果正在淡入或者当前已经完全不透明，不触发淡入动画
         if (isEntering || Bg.color.a == hoverA)
             return;
@@ -92,6 +105,8 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         }
 
         isEntering = true;  // 标记淡入动画开始
+        Icon1.enabled = false;
+        Icon2.enabled = true;
 
         Bg.DOFade(hoverA, hoverDuration).OnComplete(() =>
         {
@@ -117,6 +132,8 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         }
 
         isExiting = true;  // 标记淡入动画开始
+        Icon1.enabled = true;
+        Icon2.enabled = false;
 
         Bg.DOFade(0, hoverDuration).OnComplete(() =>
         {
@@ -124,19 +141,24 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         });
     }
 
-
     private void OnSettingOption()
     {
         CombatPanelScript.ShowSettingPanel();
     }
-
+    private void OnMailOption()
+    {
+        CombatPanelScript.ShowMailPanel();
+    }
+    private void OnBackpackOption()
+    {
+        CombatPanelScript.ShowBackpackPanel();
+    }
     private void OnExitPanelOption()
     {
         CombatPanelScript.HideTopAndRightUI();
     }
-
     private void OnExitGameOption()
     {
-
+        UIManager.Instance.ShowTopMessage("不准退！臭杂鱼~");
     }
 }

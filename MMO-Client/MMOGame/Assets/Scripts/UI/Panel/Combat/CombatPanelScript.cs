@@ -1,6 +1,7 @@
 using GameClient;
 using GameClient.Combat;
 using GameClient.Entities;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -198,6 +199,17 @@ public class CombatPanelScript : BasePanel
     {
         m_haveOtherPanelFromThisOpen--;
     }
+    public void ShowMailPanel()
+    {
+        throw new NotImplementedException();
+    }
+    public void ShowBackpackPanel()
+    {
+        throw new NotImplementedException();
+    }
+
+
+
 
 
     /// <summary>
@@ -267,4 +279,6 @@ public class CombatPanelScript : BasePanel
     {
         m_expBox.RefrashUI();
     }
+
+
 }

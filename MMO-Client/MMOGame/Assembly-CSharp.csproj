@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Player\Controller\LocalPlayerController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\RegisterPanelScript.cs" />
     <Compile Include="Assets\Scripts\Handle\SceneHandler.cs" />
+    <Compile Include="Assets\Art\Suntail Village\Scripts\LightCulling.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Fly\RemotePlayerState_Fly_ChangeHight.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
@@ -121,8 +122,10 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Chat\ChatBoxScript.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
+    <Compile Include="Assets\Art\Suntail Village\Scripts\SuntailStartDemo.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\SettingSelectOption.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\GameSettingPanel.cs" />
+    <Compile Include="Assets\Art\Suntail Village\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\NumberInputBox.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_JumpUp.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogStopBackgroundAudioEvent.cs" />
@@ -166,6 +169,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\UnitEffectManager.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\AnimatorController.cs" />
+    <Compile Include="Assets\Art\Suntail Village\Scripts\PlayerInteractions.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\ClientItem.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Costom.cs" />
@@ -175,6 +179,7 @@
     <Compile Include="Assets\Scripts\Player\Model\SyncModel.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Death.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
+    <Compile Include="Assets\Art\Suntail Village\Scripts\PhysicsObject.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\PlayerStateInfoBox\ExpBoxScript.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\LevelDefine.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Motion.cs" />
@@ -187,7 +192,9 @@
     <Compile Include="Assets\Scripts\Service\BuffService.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Prone.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\KeySettingPanel.cs" />
+    <Compile Include="Assets\Art\Suntail Village\Scripts\AudioZoneControl.cs" />
     <Compile Include="Assets\Scripts\Entities\Npc.cs" />
+    <Compile Include="Assets\Art\Suntail Village\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Costom.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\controller.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Hurt.cs" />
@@ -244,15 +251,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Res\Shader\UI\Circular.shader" />
+    <None Include="Assets\Art\Suntail Village\Demo\Fonts\Fonts License.txt" />
     <None Include="Assets\Res\Shader\UI\CustomRoundCornerShader.shader" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_Standard.shader" />
+    <None Include="Assets\Art\Chr\frieren_240110_0\frieren_240110_0.MMD4Mecanim.xml" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_VFX_AlphaBlend.shader" />
+    <None Include="Assets\Art\Suntail Village\Shaders\Suntail_Water.shader" />
+    <None Include="Assets\Art\Suntail Village\Shaders\Suntail_Surface.shader" />
     <None Include="Assets\HybridCLRGenerate\link.xml" />
+    <None Include="Assets\Art\Suntail Village\URP Shaders\Important.txt" />
     <None Include="Assets\Art\Chr\Suriyun\README.txt" />
+    <None Include="Assets\Art\Chr\frieren_240110_0\frieren_240110_0.xml" />
     <None Include="Assets\Art\Chr\Ida Faber\Shaders\Built-in\GR_StandardS_DS.shader" />
     <None Include="Assets\Res\Model\Unit\牛头人\BOSS\Bull\Shader\Cartoon.shader" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_Foliage.shader" />
+    <None Include="Assets\Art\Suntail Village\Documentation\Readme.txt" />
     <None Include="Assets\Art\Chr\Ida Faber\Shaders\Built-in\Double-sided.shader" />
+    <None Include="Assets\Art\Suntail Village\Shaders\Suntail_Foliage.shader" />
     <None Include="Assets\Res\UI\Fonts\zh-cn.txt" />
     <None Include="Assets\Res\Model\Env\PrinceCreates\PCShaders\PCS_StandardMultiBlend.shader" />
   </ItemGroup>
