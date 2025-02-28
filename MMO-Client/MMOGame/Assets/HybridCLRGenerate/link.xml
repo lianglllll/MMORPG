@@ -33,21 +33,26 @@
     <type fullname="Google.Protobuf.IMessage" preserve="all" />
   </assembly>
   <assembly fullname="HSFramework">
-    <type fullname="BaseSystem.MyDelayedTaskScheduler.DelayedTaskScheduler" preserve="all" />
-    <type fullname="BaseSystem.PoolModule.PoolAssetLoad" preserve="all" />
-    <type fullname="BaseSystem.PoolModule.UnityObjectPoolFactory" preserve="all" />
-    <type fullname="BaseSystem.PoolModule.UnityObjectPoolFactory/LoadFuncDel`1" preserve="all" />
-    <type fullname="BaseSystem.Singleton.Singleton`1" preserve="all" />
-    <type fullname="BaseSystem.Tool.DevelopmentToos" preserve="all" />
-    <type fullname="BaseSystem.Tool.Singleton.SingletonNonMono`1" preserve="all" />
-    <type fullname="GameClient.HSFramework.GlobalAudioManager" preserve="all" />
-    <type fullname="GameClient.HSFramework.UIAudioClipType" preserve="all" />
     <type fullname="GameEffect" preserve="all" />
     <type fullname="GameEffectManager" preserve="all" />
     <type fullname="GameInputManager" preserve="all" />
+    <type fullname="GameInputMode" preserve="all" />
     <type fullname="HSFramework.AI.StateMachine.IStateMachineOwner" preserve="all" />
     <type fullname="HSFramework.AI.StateMachine.StateBase" preserve="all" />
     <type fullname="HSFramework.AI.StateMachine.StateMachine" preserve="all" />
+    <type fullname="HSFramework.Audio.GlobalAudioManager" preserve="all" />
+    <type fullname="HSFramework.Audio.UIAudioClipType" preserve="all" />
+    <type fullname="HSFramework.MyDelayedTaskScheduler.DelayedTaskScheduler" preserve="all" />
+    <type fullname="HSFramework.MySingleton.SingletonNonMono`1" preserve="all" />
+    <type fullname="HSFramework.MySingleton.Singleton`1" preserve="all" />
+    <type fullname="HSFramework.PoolModule.PoolAssetLoad" preserve="all" />
+    <type fullname="HSFramework.PoolModule.UnityObjectPoolFactory" preserve="all" />
+    <type fullname="HSFramework.PoolModule.UnityObjectPoolFactory/LoadFuncDel`1" preserve="all" />
+    <type fullname="HSFramework.Setting.AudioSettingData" preserve="all" />
+    <type fullname="HSFramework.Setting.BaseSettingData" preserve="all" />
+    <type fullname="HSFramework.Setting.GameSettingDatas" preserve="all" />
+    <type fullname="HSFramework.Setting.VideoSettingData" preserve="all" />
+    <type fullname="HSFramework.Tool.DevelopmentToos" preserve="all" />
     <type fullname="Kaiyun.Event" preserve="all" />
     <type fullname="MonoManager" preserve="all" />
     <type fullname="Res" preserve="all" />
@@ -223,6 +228,8 @@
     <type fullname="UnityEngine.AnimatorStateInfo" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.AudioModule">
+    <type fullname="UnityEngine.Audio.AudioMixer" preserve="all" />
+    <type fullname="UnityEngine.Audio.AudioMixerSnapshot" preserve="all" />
     <type fullname="UnityEngine.AudioClip" preserve="all" />
     <type fullname="UnityEngine.AudioSource" preserve="all" />
   </assembly>
@@ -246,16 +253,22 @@
     <type fullname="UnityEngine.Events.UnityEvent`1" preserve="all" />
     <type fullname="UnityEngine.GameObject" preserve="all" />
     <type fullname="UnityEngine.HeaderAttribute" preserve="all" />
+    <type fullname="UnityEngine.HideInInspector" preserve="all" />
     <type fullname="UnityEngine.KeyCode" preserve="all" />
     <type fullname="UnityEngine.LayerMask" preserve="all" />
+    <type fullname="UnityEngine.Light" preserve="all" />
+    <type fullname="UnityEngine.LightShadows" preserve="all" />
+    <type fullname="UnityEngine.Material" preserve="all" />
     <type fullname="UnityEngine.Mathf" preserve="all" />
     <type fullname="UnityEngine.MonoBehaviour" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.PlayerPrefs" preserve="all" />
     <type fullname="UnityEngine.Quaternion" preserve="all" />
     <type fullname="UnityEngine.Random" preserve="all" />
+    <type fullname="UnityEngine.RangeAttribute" preserve="all" />
     <type fullname="UnityEngine.Ray" preserve="all" />
     <type fullname="UnityEngine.Rect" preserve="all" />
+    <type fullname="UnityEngine.Renderer" preserve="all" />
     <type fullname="UnityEngine.RequireComponent" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.Scene" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.SceneManager" preserve="all" />
@@ -265,7 +278,9 @@
     <type fullname="UnityEngine.SpaceAttribute" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
     <type fullname="UnityEngine.Texture" preserve="all" />
+    <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.Time" preserve="all" />
+    <type fullname="UnityEngine.TooltipAttribute" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
     <type fullname="UnityEngine.Vector2" preserve="all" />
     <type fullname="UnityEngine.Vector3" preserve="all" />
@@ -277,16 +292,26 @@
   <assembly fullname="UnityEngine.InputLegacyModule">
     <type fullname="UnityEngine.Input" preserve="all" />
   </assembly>
+  <assembly fullname="UnityEngine.JSONSerializeModule">
+    <type fullname="UnityEngine.JsonUtility" preserve="all" />
+  </assembly>
   <assembly fullname="UnityEngine.PhysicsModule">
     <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
     <type fullname="UnityEngine.CharacterController" preserve="all" />
     <type fullname="UnityEngine.Collider" preserve="all" />
+    <type fullname="UnityEngine.Collision" preserve="all" />
     <type fullname="UnityEngine.CollisionFlags" preserve="all" />
     <type fullname="UnityEngine.ForceMode" preserve="all" />
     <type fullname="UnityEngine.Physics" preserve="all" />
     <type fullname="UnityEngine.QueryTriggerInteraction" preserve="all" />
     <type fullname="UnityEngine.RaycastHit" preserve="all" />
     <type fullname="UnityEngine.Rigidbody" preserve="all" />
+    <type fullname="UnityEngine.RigidbodyConstraints" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.TerrainModule">
+    <type fullname="UnityEngine.Terrain" preserve="all" />
+    <type fullname="UnityEngine.TerrainData" preserve="all" />
+    <type fullname="UnityEngine.TerrainLayer" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.UI">
     <type fullname="UnityEngine.EventSystems.EventSystem" preserve="all" />
@@ -364,6 +389,8 @@
     <type fullname="System.Func`2" preserve="all" />
     <type fullname="System.IAsyncResult" preserve="all" />
     <type fullname="System.IDisposable" preserve="all" />
+    <type fullname="System.IO.File" preserve="all" />
+    <type fullname="System.IO.Path" preserve="all" />
     <type fullname="System.Int32" preserve="all" />
     <type fullname="System.Int64" preserve="all" />
     <type fullname="System.Math" preserve="all" />

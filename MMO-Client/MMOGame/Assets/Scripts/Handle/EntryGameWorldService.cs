@@ -1,4 +1,4 @@
-using HSFramework.Tool.Singleton;
+using HSFramework.MySingleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
@@ -6,8 +6,6 @@ using GameClient.Entities;
 using HS.Protobuf.Game;
 using HS.Protobuf.Login;
 using HS.Protobuf.SceneEntity;
-using Serilog;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
@@ -176,7 +174,6 @@ public class EntryGameWorldService : SingletonNonMono<EntryGameWorldService>
             EntityManager.Instance.Clear();
             GameApp.ClearGameAppData();
             TP_CameraController.Instance.OnStop();
-
             
             GameApp.SceneId = curSceneId;
             GameApp.entityId = selfEntityId;

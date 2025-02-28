@@ -1,5 +1,4 @@
-using HSFramework.Tool.Singleton;
-using GameClient.UI.Dialog;
+using HSFramework.MySingleton;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

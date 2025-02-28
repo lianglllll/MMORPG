@@ -1,8 +1,8 @@
-using HSFramework.Tool.Singleton;
 using Google.Protobuf.Collections;
 using HS.Protobuf.Chat;
 using System;
 using System.Collections.Generic;
+using HSFramework.MySingleton;
 
 public class ChatManager : SingletonNonMono<ChatManager>
 {

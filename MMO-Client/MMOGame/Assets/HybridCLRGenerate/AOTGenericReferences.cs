@@ -14,6 +14,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"System.Core.dll",
 		"UITools.dll",
 		"UnityEngine.CoreModule.dll",
+		"UnityEngine.JSONSerializeModule.dll",
 		"YooAsset.dll",
 		"mscorlib.dll",
 	};
@@ -23,8 +24,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
-	// BaseSystem.PoolModule.UnityObjectPoolFactory.LoadFuncDel<object>
-	// BaseSystem.Singleton.Singleton<object>
 	// Common.Summer.Net.MessageRouter.MessageHandler<object>
 	// Common.Summer.Tools.Singleton<object>
 	// Google.Protobuf.Collections.RepeatedField.<GetEnumerator>d__28<int>
@@ -49,6 +48,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Google.Protobuf.ValueReader<object>
 	// Google.Protobuf.ValueWriter<int>
 	// Google.Protobuf.ValueWriter<object>
+	// HSFramework.MySingleton.Singleton<object>
+	// HSFramework.PoolModule.UnityObjectPoolFactory.LoadFuncDel<object>
 	// IRecyclingListViewItem<object>
 	// Newtonsoft.Json.JsonConverter<object>
 	// RecyclingListView<object,object>
@@ -200,8 +201,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 
 	public void RefMethods()
 	{
-		// object BaseSystem.PoolModule.PoolAssetLoad.LoadAssetByResource<object>(string)
-		// object BaseSystem.PoolModule.PoolAssetLoad.LoadAssetByYoo<object>(string)
 		// System.Void Common.Summer.Net.MessageRouter.Subscribe<object>(Common.Summer.Net.MessageRouter.MessageHandler<object>)
 		// System.Void Common.Summer.Net.MessageRouter.UnSubscribe<object>(Common.Summer.Net.MessageRouter.MessageHandler<object>)
 		// bool Common.Summer.Net.ProtoHelper.Register<object>(int)
@@ -212,6 +211,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object DG.Tweening.TweenSettingsExtensions.SetEase<object>(object,DG.Tweening.Ease)
 		// bool HSFramework.AI.StateMachine.StateMachine.ChangeState<object>(bool)
 		// HSFramework.AI.StateMachine.StateBase HSFramework.AI.StateMachine.StateMachine.GetState<object>()
+		// object HSFramework.PoolModule.PoolAssetLoad.LoadAssetByResource<object>(string)
+		// object HSFramework.PoolModule.PoolAssetLoad.LoadAssetByYoo<object>(string)
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string)
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string,Newtonsoft.Json.JsonSerializerSettings)
 		// System.Collections.IEnumerator Res.LoadAssetAsyncWithTimeout<object>(string,System.Action<object>,float)
@@ -246,9 +247,12 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object[] UnityEngine.Component.GetComponentsInChildren<object>(bool)
 		// object UnityEngine.GameObject.AddComponent<object>()
 		// object UnityEngine.GameObject.GetComponent<object>()
+		// object UnityEngine.GameObject.GetComponentInChildren<object>()
+		// object UnityEngine.GameObject.GetComponentInChildren<object>(bool)
 		// object UnityEngine.GameObject.GetComponentInParent<object>()
 		// object UnityEngine.GameObject.GetComponentInParent<object>(bool)
 		// object[] UnityEngine.GameObject.GetComponentsInChildren<object>(bool)
+		// object UnityEngine.JsonUtility.FromJson<object>(string)
 		// object UnityEngine.Object.Instantiate<object>(object)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform,bool)

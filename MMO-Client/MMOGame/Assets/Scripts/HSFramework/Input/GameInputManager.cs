@@ -1,9 +1,7 @@
-using HSFramework.Singleton;
+using HSFramework.MySingleton;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static InputActions;
-
 
 public enum GameInputMode
 {
@@ -96,29 +94,6 @@ public class GameInputManager : Singleton<GameInputManager>
     End:
         return;
     }
-
-    //public void SetGameInputActions(bool active)
-    //{
-    //    if (active)
-    //    {
-    //        _inputActions.GameInput.Enable();
-    //    }
-    //    else
-    //    {
-    //        _inputActions.GameInput.Disable();
-    //    }
-    //}
-    //public void SetUIInputActions(bool active)
-    //{
-    //    if (active)
-    //    {
-    //        _inputActions.UIInput.Enable();
-    //    }
-    //    else
-    //    {
-    //        _inputActions.UIInput.Disable();
-    //    }
-    //}
 
     public void Change()
     {

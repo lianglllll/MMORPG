@@ -1,5 +1,5 @@
 using HSFramework.MyDelayedTaskScheduler;
-using HSFramework.Singleton;
+using HSFramework.MySingleton;
 using HSFramework.Tool;
 using UnityEngine;
 

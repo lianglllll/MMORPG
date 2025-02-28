@@ -794,14 +794,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Serilog.Sinks.Unity3D.csproj">
-      <Project>{0A987264-62ED-5DCB-7BC0-BDE50C35B58B}</Project>
-      <Name>Serilog.Sinks.Unity3D</Name>
-    </ProjectReference>
-    <ProjectReference Include="HSFramework.csproj">
-      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
-      <Name>HSFramework</Name>
-    </ProjectReference>
     <ProjectReference Include="DOTween.Modules.csproj">
       <Project>{682213BC-AB5A-6785-DF80-1FFA307A26DD}</Project>
       <Name>DOTween.Modules</Name>
@@ -809,6 +801,14 @@
     <ProjectReference Include="DOTweenPro.Scripts.csproj">
       <Project>{60AA8189-A213-5FFA-E458-926497B4DFAA}</Project>
       <Name>DOTweenPro.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="HSFramework.csproj">
+      <Project>{57542652-B052-B1D2-E6C7-EE7B390F2563}</Project>
+      <Name>HSFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="Serilog.Sinks.Unity3D.csproj">
+      <Project>{0A987264-62ED-5DCB-7BC0-BDE50C35B58B}</Project>
+      <Name>Serilog.Sinks.Unity3D</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

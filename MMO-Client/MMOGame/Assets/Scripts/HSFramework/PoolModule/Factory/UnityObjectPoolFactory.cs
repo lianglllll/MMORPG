@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HSFramework.MyDelayedTaskScheduler;
-using HSFramework.Tool.Singleton;
+using HSFramework.MySingleton;
 
 namespace HSFramework.PoolModule
 {

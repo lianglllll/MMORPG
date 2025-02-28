@@ -1,10 +1,8 @@
-using HSFramework.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using HS.Protobuf.Common;
-using HS.Protobuf.Login;
+using HSFramework.MySingleton;
 using Serilog;
-using System;
 
 public class SecurityService : SingletonNonMono<SecurityService>
 {

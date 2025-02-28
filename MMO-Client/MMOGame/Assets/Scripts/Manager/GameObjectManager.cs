@@ -16,7 +16,7 @@ using Serilog;
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject
 /// </summary>
-public class GameObjectManager : HSFramework.Singleton.Singleton<GameObjectManager>
+public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectManager>
 {
     private  ConcurrentDictionary<int, GameObject> currentGameObjectDict    = new();    //<entityid,gameobject>  entity和gameobject的映射
     private  ConcurrentQueue<Actor> preparCrateActorObjQueue                = new();    //创建actorObj的缓冲队列

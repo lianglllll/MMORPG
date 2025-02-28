@@ -81,7 +81,6 @@
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EquipSkillSlot\AbilitySlotScript.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\SurfaceManager.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogTestEvent.cs" />
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Fly\RemotePlayerState_Fly_Idle.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\RemotePlayerController.cs" />
@@ -95,7 +94,6 @@
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\ThirdPersonCamera.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\DemoUI.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EquipSkillSlot\AbilityManager.cs" />
     <Compile Include="Assets\Scripts\Net\NetworkActor.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
@@ -158,9 +156,7 @@
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Fly\LocalPlayerState_Fly_ChangeHight.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\ItemDefine.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Net\NetManager.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\TopDownController.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Dizzy.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Knock.cs" />
@@ -200,6 +196,7 @@
     <Compile Include="Assets\Scripts\Player\RemotePlayerState\Normal\RemotePlayerState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Combat\Buffs\BuffManager.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
+    <Compile Include="Assets\Scripts\Scene\FootStepsDatabase.cs" />
     <Compile Include="Assets\Scripts\Service\ItemService.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\VideoSettingPanel.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\RevivalPointDefine.cs" />
@@ -223,7 +220,6 @@
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Falling.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\PanelDefine.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\CameraView.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\PlayerStateInfoBox\EliteScript.cs" />
     <Compile Include="Assets\aExample\RecyclingListDemo\TestPanel.cs" />
     <Compile Include="Assets\Art\Chr\Suriyun\Scripts\Swapper.cs" />
@@ -232,7 +228,6 @@
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\ItemIOInfoBox.cs" />
     <Compile Include="Assets\Scripts\Combat\Buffs\Buff.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\DialogDefine.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\CharacterFootsteps.cs" />
     <Compile Include="Assets\Scripts\Entities\Entity.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\BasePanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\SelectWorldPanel.cs" />
@@ -241,12 +236,10 @@
     <Compile Include="Assets\Scripts\Inventory\Sub\MaterialItem.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\MainSettingPanel.cs" />
     <Compile Include="Assets\aExample\Dialog\DialogPlayBackgroundAudioEvent.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
-    <Compile Include="Assets\Art\Audio\FREE Footsteps System\scripts\FootstepTrigger.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
-    <Compile Include="Assets\Scripts\Player\Controller\LocalPlayerCombatController.cs" />
+    <Compile Include="Assets\Scripts\Player\Controller\Combat\LocalPlayerCombatController.cs" />
     <Compile Include="Assets\Scripts\Player\LocalPlayerState\Normal\LocalPlayerState_Crouch.cs" />
   </ItemGroup>
   <ItemGroup>

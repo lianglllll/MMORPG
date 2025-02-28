@@ -1,4 +1,4 @@
-using HSFramework.Singleton;
+using HSFramework.MySingleton;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;

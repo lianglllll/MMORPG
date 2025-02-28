@@ -1,4 +1,4 @@
-using HSFramework.Singleton;
+using HSFramework.MySingleton;
 using DG.Tweening;
 using System;
 using System.Collections;
@@ -21,7 +21,6 @@ public class ScenePoster : Singleton<ScenePoster>
     private TextMeshProUGUI m_randomContentText;    //场景名称
 
     private bool m_isUpdatingProgress;
-    private bool m_isShowPoster;
     private float m_initialProgress = 0f;
     private float m_targetProgress = 0f;
     private float m_elapsedTime = 0f;
@@ -57,7 +56,6 @@ public class ScenePoster : Singleton<ScenePoster>
         //淡出，透明
         StartCoroutine(FadeOut());
 
-        m_isShowPoster = false;
         m_isUpdatingProgress = false;
 
         // todo
@@ -109,12 +107,9 @@ public class ScenePoster : Singleton<ScenePoster>
         m_initialProgress = m_progressBar.value;
         m_elapsedTime = 0f;
 
-        //只有开启的时候才会调用
-        if(!m_isShowPoster)
-        {
-            m_isShowPoster = true;
-            StartCoroutine(_ShowPoster());
-        }
+
+        // 开始模拟更新进度
+        m_isUpdatingProgress = true;
     }
     public void SetNameText(string name)
     {
@@ -130,7 +125,10 @@ public class ScenePoster : Singleton<ScenePoster>
 
     private IEnumerator _ShowPoster()
     {
+        // 先变全黑
         yield return FadeIn();
+
+        // 随机显示海报
         m_poster.SetActive(true);
         int randomNumber = random.Next(0, bgImgResPath.Count);
         string randomStr = bgImgResPath[randomNumber];
@@ -139,12 +137,17 @@ public class ScenePoster : Singleton<ScenePoster>
             sprite = Res.LoadAssetSync<Sprite>(bgImgResPath[randomNumber]);
         }
         m_bgImage.sprite = sprite;
+
+        // 进度条请零
         m_progressBar.value = 0f;
+
+        // 随机显示文本
         randomNumber = random.Next(0, contents.Count);
         m_randomContentText.text = contents[randomNumber];
 
+        // 变透明
         yield return FadeOut();
-        m_isUpdatingProgress = true;
+
     }
     private IEnumerator _HidePosterAfterDelay(float delay)
     {
@@ -153,7 +156,6 @@ public class ScenePoster : Singleton<ScenePoster>
         m_poster.SetActive(false);
         m_progressBar.value = 0f;
         yield return FadeOut();
-        m_isShowPoster = false;
     }
 
     public IEnumerator FadeIn()
@@ -185,6 +187,8 @@ public class ScenePoster : Singleton<ScenePoster>
     }
     private  IEnumerator _LoadSpaceWithPosterStart(string name, string resPath, Action<Scene> endAction)
     {
+        yield return _ShowPoster();
+
         //展示转场UI,这里需要在4秒内模拟到进度的百分之90，这个是模拟出来假的进度。
         ScenePoster.Instance.SetNameText(name);
         ScenePoster.Instance.SetProgress(0.9f, 4.0f);
@@ -195,7 +199,6 @@ public class ScenePoster : Singleton<ScenePoster>
         {
             UnityMainThreadDispatcher.Instance().StartCoroutine(_LoadSpaceWithPosterEnd(s, endAction));
         };
-
     }
     private  IEnumerator _LoadSpaceWithPosterEnd(Scene s, Action<Scene> endAction)
     {

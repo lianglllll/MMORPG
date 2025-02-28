@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using HSFramework.Tool.Singleton;
 using UnityEngine;
 using System.IO;
 using HSFramework.Setting;
+using HSFramework.MySingleton;
 
 public class LocalDataManager : SingletonNonMono<LocalDataManager>
 {

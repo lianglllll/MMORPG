@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR;
 using YooAsset;
 
 
@@ -48,6 +45,7 @@ public class Res
         var handle = new ResHandle<Scene>();
         UnityMainThreadDispatcher.Instance().StartCoroutine(_loadSceneAsync(path, handle));
         return handle;
+
     }
     private static IEnumerator _loadSceneAsync(string sceneName, ResHandle<Scene> handle)
     {
@@ -58,15 +56,21 @@ public class Res
             handle.Progress = 0;
             LoadSceneParameters parameters = new LoadSceneParameters() { loadSceneMode = LoadSceneMode.Single, localPhysicsMode = LocalPhysicsMode.None };
             AsyncOperation asyncOperation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(assetPath, parameters);
+            asyncOperation.allowSceneActivation = false; // 禁用自动激活
+
             // 等待加载完成
             while (!asyncOperation.isDone)
             {
                 handle.Progress = asyncOperation.progress;
+                if(asyncOperation.progress >= 0.9f)
+                {
+                    asyncOperation.allowSceneActivation = true;
+                }
                 yield return null;
             }
-            Scene loadedScene = SceneManager.GetSceneByPath(assetPath);
             handle.Progress = 1;
-            yield return null;
+            yield return asyncOperation;
+            Scene loadedScene = SceneManager.GetSceneByPath(assetPath);
             handle.OnLoaded?.Invoke(loadedScene);
         }
 #else

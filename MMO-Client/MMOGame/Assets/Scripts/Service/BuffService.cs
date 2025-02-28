@@ -1,8 +1,8 @@
 using Common.Summer.Net;
 using Common.Summer.Core;
 using HS.Protobuf.Combat.Buff;
-using HSFramework.Tool.Singleton;
 using GameClient.Combat.Buffs;
+using HSFramework.MySingleton;
 
 namespace Assets.Script.Service
 {

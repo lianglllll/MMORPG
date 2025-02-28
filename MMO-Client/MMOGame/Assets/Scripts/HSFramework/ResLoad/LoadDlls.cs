@@ -64,18 +64,27 @@ public class LoadDlls
     }
     private static void RunCode()
     {
-        LoadMetadataForAOTAssemblies();
+        try
+        {
+            // 加载程序集代码
+            LoadMetadataForAOTAssemblies();
 
 #if !UNITY_EDITOR
         HotAssembly = Assembly.Load(s_assetDatas["Assembly-CSharp.dll"]);
 #else
-        HotAssembly = System.AppDomain.CurrentDomain.GetAssemblies()
-            .First(a => a.GetName().Name == "Assembly-CSharp");
+            HotAssembly = System.AppDomain.CurrentDomain.GetAssemblies()
+                .First(a => a.GetName().Name == "Assembly-CSharp");
 #endif
-        //Type entryType = _hotUpdateAss.GetType("Entry");
-        //entryType.GetMethod("Start").Invoke(null, null);
+            //Type entryType = _hotUpdateAss.GetType("Entry");
+            //entryType.GetMethod("Start").Invoke(null, null);
 
-        Run_InstantiateComponentByAsset();
+            Run_InstantiateComponentByAsset();
+
+        }
+        catch (TypeLoadException ex)
+        {
+            Debug.LogError($"TypeLoadException: {ex.Message}\nType: {ex.TypeName}\nAssembly: {ex}");
+        }
     }
     private static void LoadMetadataForAOTAssemblies()
     {
@@ -107,7 +116,6 @@ public class LoadDlls
         handle.Completed += Handle_Completed;*/
 
     }
-
     private static void Handle_Completed(AssetHandle obj)
     {
         GameObject go = obj.InstantiateSync();

@@ -2,13 +2,12 @@ using UnityEngine;
 using GameClient.Entities;
 using GameClient;
 using GameClient.Combat;
-using System.Threading.Tasks;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using HS.Protobuf.Scene;
 using HS.Protobuf.Combat.Skill;
 using HS.Protobuf.SceneEntity;
-using HSFramework.Tool.Singleton;
+using HSFramework.MySingleton;
 
 public class CombatService : SingletonNonMono<CombatService>
 {

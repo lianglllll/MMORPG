@@ -1,7 +1,7 @@
-using HSFramework.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using HS.Protobuf.Login;
+using HSFramework.MySingleton;
 
 public class UserService : SingletonNonMono<UserService>
 {

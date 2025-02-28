@@ -1,4 +1,4 @@
-using HSFramework.Singleton;
+using HSFramework.MySingleton;
 using System;
 using System.Collections;
 using System.Collections.Generic;

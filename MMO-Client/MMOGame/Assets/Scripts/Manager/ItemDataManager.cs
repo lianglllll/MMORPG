@@ -1,10 +1,10 @@
-using HSFramework.Tool.Singleton;
 using GameClient;
 using GameClient.Entities;
 using GameClient.InventorySystem;
 using Google.Protobuf.Collections;
 using HS.Protobuf.Game.Backpack;
 using System.Collections.Concurrent;
+using HSFramework.MySingleton;
 
 //缓存itemUI的操作
 public class ItemUIAction

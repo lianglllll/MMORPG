@@ -1,6 +1,6 @@
 using Assets.Script.Service;
 using HSFramework.PoolModule;
-using HSFramework.Singleton;
+using HSFramework.MySingleton;
 using GameClient.Entities;
 using HSFramework.Audio;
 using System.Collections.Generic;

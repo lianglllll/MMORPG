@@ -1,11 +1,10 @@
-using HSFramework.Tool.Singleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
 using GameClient.Entities;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
-using Serilog;
+using HSFramework.MySingleton;
 public class SceneHandler : SingletonNonMono<SceneHandler>
 {
     public void Init()

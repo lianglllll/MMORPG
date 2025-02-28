@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using HSFramework.DataStruct;
 using UnityEngine;
-using HSFramework.Singleton;
+using HSFramework.MySingleton;
 using HSFramework.PoolModule;
 
 namespace HSFramework.MyDelayedTaskScheduler

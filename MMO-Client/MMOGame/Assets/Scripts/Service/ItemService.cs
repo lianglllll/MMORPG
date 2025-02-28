@@ -1,4 +1,4 @@
-using HSFramework.Tool.Singleton;
+using HSFramework.MySingleton;
 using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
