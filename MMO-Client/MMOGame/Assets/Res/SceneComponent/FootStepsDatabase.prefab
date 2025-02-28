@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1173563129421314687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4581930722980987608}
+  - component: {fileID: 3603768625934407813}
+  m_Layer: 0
+  m_Name: FootStepsDatabase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4581930722980987608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173563129421314687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 151.70963, y: 11.427058, z: 176.20497}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3603768625934407813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173563129421314687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1534654f4ba0941a5f8c4c8406ebd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayers:
+  - layerName: Grass
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: f0c02e5bc39799a44958457031464f19, type: 3}
+    - {fileID: 8300000, guid: dbafedb7a32049848b25bc73d49bea31, type: 3}
+    - {fileID: 8300000, guid: 55541c9f6e0419842b903c12ed745f33, type: 3}
+    - {fileID: 8300000, guid: 00e260a481fe16947b91654e2be41330, type: 3}
+    - {fileID: 8300000, guid: dbc548ade0e65f043942f25ab59f33f9, type: 3}
+  - layerName: Dirt
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: 7a75790979eba2d4d94aa4abb7b7e96b, type: 3}
+    - {fileID: 8300000, guid: 200834ed15c4f1542bf1933a16ccb8ac, type: 3}
+    - {fileID: 8300000, guid: cbf3d36b0c254c346b36f7f820f4460d, type: 3}
+    - {fileID: 8300000, guid: 860f4b6e9d98c5f42ab7a86535b4b8d5, type: 3}
+    - {fileID: 8300000, guid: c0860d43559cba9469a3b90eff151c1c, type: 3}
+  - layerName: Stone
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: 03e16bfc3867ab742b657020c6d300b8, type: 3}
+    - {fileID: 8300000, guid: 06f146d10663b244d9a48d820c341763, type: 3}
+    - {fileID: 8300000, guid: 15b17286776be8a46bd1dacbbb28ed0c, type: 3}
+    - {fileID: 8300000, guid: 1340c4020d32c4c4a9eefde3a90793a8, type: 3}
+    - {fileID: 8300000, guid: cd8ddb4fad2fc724c9357e669bddb2da, type: 3}
+  - layerName: Wood
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: 8a0be01796b323e43a8fda59acb405a6, type: 3}
+    - {fileID: 8300000, guid: d0f177050f3466142be61b88fb9de67c, type: 3}
+    - {fileID: 8300000, guid: 263b8d46578913d4fbb9795eaaa80686, type: 3}
+    - {fileID: 8300000, guid: ed4aca9eacf69aa43a7e767375cf3fe1, type: 3}
+    - {fileID: 8300000, guid: 9bb43b77de433bc40a5f7cec7656fb66, type: 3}
+  - layerName: Concrete
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: 20d2d7095a3b13c43baf263091e3a359, type: 3}
+    - {fileID: 8300000, guid: 860f1173a910ecd45bc17ddefecfd75f, type: 3}
+    - {fileID: 8300000, guid: f3e564ab55b5ba24d824b7ca71950c73, type: 3}
+    - {fileID: 8300000, guid: 804ccf0daf6961c44be50e798ad6aec4, type: 3}
+  - layerName: Metal
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: 22fd99ad9764748459c360765644b57e, type: 3}
+    - {fileID: 8300000, guid: 7d1f874cf81685942aaba56ac1ba3f30, type: 3}
+    - {fileID: 8300000, guid: c79b904bd5af9994f8fbafa81ca7d07f, type: 3}
+    - {fileID: 8300000, guid: 4b294111e8f0e234cb49570c23af2352, type: 3}
+  - layerName: Snow
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: 06c956466747e764aa6d69fbee1b0935, type: 3}
+    - {fileID: 8300000, guid: 23eec9c94cd24a54087125f67f12f5a5, type: 3}
+    - {fileID: 8300000, guid: 28864cb8aba39f742b2e52c3a5a4b113, type: 3}
+    - {fileID: 8300000, guid: 69ce65de178f68c409ed53debc0c8148, type: 3}
+    - {fileID: 8300000, guid: 152baa2c7a679d547883e6585674da7a, type: 3}
+    - {fileID: 8300000, guid: c4ef324bf90bc9b45878c7e5acf7e4a5, type: 3}
+    - {fileID: 8300000, guid: 4477d53a3a60ea643b87fe82504aee67, type: 3}
+    - {fileID: 8300000, guid: 706fe9682ff24844e9b6f71d56f9b9e1, type: 3}
+    - {fileID: 8300000, guid: 2227cea3c6513a8418c2e66b6e823f6f, type: 3}
+    - {fileID: 8300000, guid: 071e5d5bdeb478746927080a2b18c5cd, type: 3}
+    - {fileID: 8300000, guid: 9fbc8e15df2ca7842affcbcfde0ab937, type: 3}
+    - {fileID: 8300000, guid: 30d86af66b44dea418980eaeec35dcf2, type: 3}
+    - {fileID: 8300000, guid: 214703d4bec78a34f980ea6353c598f0, type: 3}
+    - {fileID: 8300000, guid: d42e78e130487f347b81e8233d4072a2, type: 3}
+    - {fileID: 8300000, guid: 16b97fcb6c0d1e44aa05eb14bfd08c95, type: 3}
+    - {fileID: 8300000, guid: b6ffe1fb51eac3e419f6a7f43694cb6b, type: 3}
+    - {fileID: 8300000, guid: 9418997ac6c37094e8a0076e4fb92864, type: 3}
+    - {fileID: 8300000, guid: 4acc9d4b8ecfa8d4e9fdb67c95d93ca7, type: 3}
+    - {fileID: 8300000, guid: 5c59b22cb633543429b5029c416d4a3d, type: 3}
+    - {fileID: 8300000, guid: 0910c40703d2dcc4c842236bd4401aeb, type: 3}
+    - {fileID: 8300000, guid: 793ce870ec4e6d84fbd6662d8b662c94, type: 3}
+    - {fileID: 8300000, guid: d0da27383b628e04799479cdd77eda95, type: 3}
+    - {fileID: 8300000, guid: 64b1dbeff75967b4bb6a10aa2bd3a1be, type: 3}
+    - {fileID: 8300000, guid: 9441aac338d9a2e4fb8af849b5fc0fe0, type: 3}
+    - {fileID: 8300000, guid: d982ed62eb524e042814e3f5e6c45365, type: 3}
+    - {fileID: 8300000, guid: 485d5d916988a1849ab14a7d44a79cf6, type: 3}
+    - {fileID: 8300000, guid: 2ebec63f97bff5b4297dfca4f605c672, type: 3}
+    - {fileID: 8300000, guid: 3e64e1c9f6856814c9beeedddba28085, type: 3}
+    - {fileID: 8300000, guid: 176389e2310462040be2f30f80316207, type: 3}
+    - {fileID: 8300000, guid: 27eb110229c1c2940b9e1cf4c05d2d41, type: 3}
+  - layerName: Water
+    groundTextures: []
+    footstepSounds:
+    - {fileID: 8300000, guid: 7800f7bda4bc68f43a86d88827cd082a, type: 3}
+    - {fileID: 8300000, guid: c7449f353fcce324787a755ffee82b68, type: 3}
+    - {fileID: 8300000, guid: 62ac9bf37e313514e81b24534d632d69, type: 3}
+    - {fileID: 8300000, guid: de00eccdf54c99c40b5bd4bddfb8502c, type: 3}
