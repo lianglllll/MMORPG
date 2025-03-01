@@ -49,7 +49,7 @@ public class Res
     }
     private static IEnumerator _loadSceneAsync(string sceneName, ResHandle<Scene> handle)
     {
-        string location = $"{Prefix}/Scenes/{sceneName}.unity";
+        string location = $"{Prefix}/Scenes/{sceneName}/{sceneName}.unity";
 #if (UNITY_EDITOR)
         {
             var assetPath = location;

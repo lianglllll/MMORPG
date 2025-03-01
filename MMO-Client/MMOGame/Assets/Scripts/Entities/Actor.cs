@@ -191,11 +191,12 @@ namespace GameClient.Entities
         }
         public void HandleActorChangeStateResponse(ActorChangeStateResponse message)
         {
-            NetActorState = message.State;
-            // 缓存信息
+            // 缓存transform信息
             NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
             NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);
-            m_baseController.AdjustToOriginalTransform();
+            m_baseController.AdjustToOriginalTransform(message);
+            // 状态切换
+            NetActorState = message.State;
             m_baseController.ChangeState(NetActorState);
         }
         public void HandleActorMotionChangeDate(ActorChangeMotionDataResponse message)
@@ -204,9 +205,10 @@ namespace GameClient.Entities
             {
                 goto End;
             }
-            // 缓存信息
+            // 缓存transform信息
             NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
             NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);
+
             var ctl = m_baseController as RemotePlayerController;
             var state = ctl.stateMachine.CurState as RemotePlayerState_Motion;
             state.AddNetworkState(message);

@@ -76,6 +76,7 @@ namespace Player.Controller
                     stateMachine.ChangeState<RemotePlayerState_Defense>(reCurrstate);
                     break;
                 case NetActorState.Evade:
+                    StateMachineParameter.evadeStatePayload = curActorChangeStateResponse.PayLoad.EvadePayLoad;
                     stateMachine.ChangeState<RemotePlayerState_Evade>(reCurrstate);
                     break;
                 case NetActorState.Skill:

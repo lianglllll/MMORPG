@@ -10,12 +10,35 @@ public class NetworkActor : MonoBehaviour
     private BaseController m_baseController;
     private Actor m_actor;
     private Transform m_transform;
+    // temp
+    ActorChangeModeRequest acmReq;
+    private ActorChangeStateRequest acsReq;
+
 
     public bool Init(BaseController baseController)
     {
         m_baseController = baseController;
         m_actor = baseController.Actor;
         m_transform = baseController.CharacterController.gameObject.transform;
+
+        //
+        acmReq = new ActorChangeModeRequest();
+        acmReq.EntityId = m_actor.EntityId;
+        // 
+        acsReq = new ActorChangeStateRequest();
+        var netTransform = new NetTransform();
+        var pos = new NetVector3();
+        var rotation = new NetVector3();
+        var scale = new NetVector3();
+        var payLoad = new ActorChangeStatePayLoad();
+        netTransform.Position = pos;
+        netTransform.Rotation = rotation;
+        netTransform.Scale = scale;
+        acsReq.OriginalTransform = netTransform;
+        acsReq.EntityId = m_actor.EntityId;
+        acsReq.SessionId = NetManager.Instance.sessionId;
+        acsReq.PayLoad = payLoad;
+
         m_isStart = true;
         return true;
     }
@@ -26,11 +49,9 @@ public class NetworkActor : MonoBehaviour
         {
             goto End;
         }
-        var req = new ActorChangeModeRequest();
-        req.EntityId = m_actor.EntityId;
-        req.Mode = m_baseController.CurMode;
-        req.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
-        NetManager.Instance.Send(req);
+        acmReq.Mode = m_baseController.CurMode;
+        acmReq.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
+        NetManager.Instance.Send(acmReq);
         result = true;
     End:
         return result;
@@ -41,27 +62,20 @@ public class NetworkActor : MonoBehaviour
         {
             return false;
         }
-        var req = new ActorChangeStateRequest();
-        var netTransform = new NetTransform();
-        var pos = new NetVector3();
-        var rotation = new NetVector3();
-        var scale = new NetVector3();
-        V3ToNV3(m_transform.position, pos);
-        V3ToNV3(m_transform.eulerAngles, rotation);
-        V3ToNV3(m_transform.localScale, scale);
-        netTransform.Position = pos;
-        netTransform.Rotation = rotation;
-        netTransform.Scale = scale;
-        req.OriginalTransform = netTransform;
-        req.EntityId = m_actor.EntityId;
-        req.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
-        req.State = m_baseController.CurState;
-        req.SessionId = NetManager.Instance.sessionId;
+        V3ToNV3(m_transform.position, acsReq.OriginalTransform.Position);
+        V3ToNV3(m_transform.eulerAngles, acsReq.OriginalTransform.Rotation);
+        V3ToNV3(m_transform.localScale, acsReq.OriginalTransform.Scale);    // todo
+        acsReq.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
+        acsReq.State = m_baseController.CurState;
         if(m_baseController.CurState == NetActorState.Motion)
         {
-            req.Speed = m_actor.Speed * 1000;
+            acsReq.PayLoad.Speed = m_actor.Speed * 1000;
+        }else if(m_baseController.CurState == NetActorState.Evade)
+        {
+            acsReq.PayLoad.EvadePayLoad = m_baseController.StateMachineParameter.evadeStatePayload;
+            V3ToNV3(m_baseController.StateMachineParameter.evadeRotation, acsReq.OriginalTransform.Rotation);
         }
-        NetManager.Instance.Send(req);
+        NetManager.Instance.Send(acsReq);
         return true;
     }
 
@@ -77,5 +91,4 @@ public class NetworkActor : MonoBehaviour
         b.y = a.Y * 0.001f;
         b.z = a.Z * 0.001f;
     }
-
 }

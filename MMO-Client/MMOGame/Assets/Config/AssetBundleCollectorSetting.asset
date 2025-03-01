@@ -50,8 +50,24 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Res/Scenes
-        CollectorGUID: 1cfde826d94eee9478e45047a4bf500b
+      - CollectPath: Assets/Res/Scenes/Game
+        CollectorGUID: edbef7aa25cfb3e4cac19a1e1fe26cb1
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Res/Scenes/Scene1
+        CollectorGUID: 8957f717242aa464ea2146422c273944
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Res/Scenes/Scene2
+        CollectorGUID: 0d83d9ed16e10bc41b88c8b6e03531d8
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory

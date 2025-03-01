@@ -248,7 +248,7 @@ public class Main : MonoBehaviour
     }
     public void OnStartDownloadFileFunction(string fileName, long sizeBytes)
     {
-        Debug.LogError($"开始下载");
+        Debug.Log($"开始下载");
         mainScenePanel.TipsText.text = "开始下载";
         mainScenePanel.UpdatePercentageText.enabled = true;
         mainScenePanel.UpdatePercentageText.text = "";
@@ -257,7 +257,7 @@ public class Main : MonoBehaviour
     }
     public void OnDownloadOverFunction(bool isSucceed)
     {
-        Debug.LogError($"下载结束");
+        Debug.Log($"下载结束");
         mainScenePanel.TipsText.text = "下载结束";
         mainScenePanel.UpdatePercentageText.enabled = false;
 

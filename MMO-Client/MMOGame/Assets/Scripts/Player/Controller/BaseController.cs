@@ -1,5 +1,6 @@
 using GameClient.Combat;
 using GameClient.Entities;
+using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using HSFramework.AI.StateMachine;
 using System.Collections.Generic;
@@ -14,9 +15,12 @@ namespace Player
     /// </summary>
     public class StateMachineParameter
     {
-        public float rotationSpeed = 8f;
         public Actor attacker;
         public Skill curSkill;
+
+        // evade相关共享参数
+        public NetAcotrEvadeStatePayload evadeStatePayload;
+        public Vector3 evadeRotation;
     }
 
     public abstract class BaseController: MonoBehaviour,IStateMachineOwner
@@ -133,6 +137,7 @@ namespace Player
         {
         }
 
+        public bool IsTransitioning => isTransitioning;
         public float transitionDuration = 0.2f; // 转换持续时间
         private Vector3 targetPosition;
         private Quaternion targetRotation;
@@ -141,8 +146,12 @@ namespace Player
         // 定义接近目标值的阈值
         float positionThreshold = 0.01f; // 可根据需要调整
         float rotationThreshold = 1.0f;  // 单位为度数，可根据需要调整
-        public void AdjustToOriginalTransform()
+
+        protected ActorChangeStateResponse curActorChangeStateResponse;
+        public void AdjustToOriginalTransform(ActorChangeStateResponse message)
         {
+            curActorChangeStateResponse = message;
+
             targetPosition = actor.Position;
             targetRotation = Quaternion.Euler(actor.Rotation);
 
