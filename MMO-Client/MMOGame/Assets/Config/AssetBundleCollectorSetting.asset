@@ -74,6 +74,14 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/Res/Scenes/Terrain
+        CollectorGUID: 3d4c660bdba5732439d537ba9892cf7f
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
     - GroupName: UI
       GroupDesc: "ui\u7D20\u6750"
       AssetTags: 
