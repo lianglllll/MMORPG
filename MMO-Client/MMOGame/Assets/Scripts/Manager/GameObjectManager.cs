@@ -42,8 +42,6 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
 
     public void CreateActorObject(Actor actor)
     {
-        Log.Debug("wgiaogiao");
-
         // 二次验证这玩意到底是不是在我们这个场景的
         if (GameApp.SceneId != actor.CurSceneId) return;
 

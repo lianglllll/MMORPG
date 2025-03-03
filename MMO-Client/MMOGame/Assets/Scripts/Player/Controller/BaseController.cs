@@ -4,7 +4,6 @@ using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using HSFramework.AI.StateMachine;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -174,7 +173,18 @@ namespace Player
                 ChangeState(NetActorState.Idle,true);
             }
         }
-
+        public void InitModeAndState(NetActorMode mode, NetActorState state = NetActorState.None)
+        {
+            m_curMode = mode;
+            if(state != NetActorState.None)
+            {
+                ChangeState(state);
+            }
+            else
+            {
+                ChangeState(NetActorState.Idle);
+            }
+        }
         #endregion
 
         #region 动画相关

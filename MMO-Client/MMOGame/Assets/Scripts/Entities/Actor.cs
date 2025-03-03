@@ -191,16 +191,29 @@ namespace GameClient.Entities
         }
         public void HandleActorChangeStateResponse(ActorChangeStateResponse message)
         {
+            if (m_baseController == null)
+            {
+                Log.Warning("Actor:HandleActorChangeStateResponse m_baseController is null");
+                return;
+            }
+
             // 缓存transform信息
             NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
             NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);
-            m_baseController.AdjustToOriginalTransform(NetActorState,message);// todo有个报错nullrefenrence
+            m_baseController.AdjustToOriginalTransform(NetActorState,message);
+
             // 状态切换
             NetActorState = message.State;
             m_baseController.ChangeState(NetActorState);
         }
         public void HandleActorChangeTransformDate(ActorChangeTransformDataResponse message)
         {
+            if (m_baseController == null)
+            {
+                Log.Warning("Actor:HandleActorChangeTransformDate m_baseController is null");
+                return;
+            }
+
             // 缓存transform信息
             NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
             NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);

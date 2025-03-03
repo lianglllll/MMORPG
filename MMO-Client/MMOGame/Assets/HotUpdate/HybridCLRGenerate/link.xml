@@ -144,13 +144,15 @@
     <type fullname="HS.Protobuf.LoginGate.GetLoginGateTokenResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.ActorChangeModeRequest" preserve="all" />
     <type fullname="HS.Protobuf.Scene.ActorChangeModeResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.ActorChangeMotionDataRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.ActorChangeMotionDataResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Scene.ActorChangeStatePayLoad" preserve="all" />
     <type fullname="HS.Protobuf.Scene.ActorChangeStateRequest" preserve="all" />
     <type fullname="HS.Protobuf.Scene.ActorChangeStateResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeTransformDataPayLoad" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeTransformDataRequest" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorChangeTransformDataResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.ActorStatePayLoad" preserve="all" />
     <type fullname="HS.Protobuf.Scene.CtlClientSpaceEntitySyncResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.NEntitySync" preserve="all" />
+    <type fullname="HS.Protobuf.Scene.NetAcotrEvadeStatePayload" preserve="all" />
     <type fullname="HS.Protobuf.Scene.NetEItemSync" preserve="all" />
     <type fullname="HS.Protobuf.Scene.OtherEntityEnterSceneResponse" preserve="all" />
     <type fullname="HS.Protobuf.Scene.OtherEntityLeaveSceneResponse" preserve="all" />
@@ -161,7 +163,6 @@
     <type fullname="HS.Protobuf.Scene.SpaceEntitySyncRequest" preserve="all" />
     <type fullname="HS.Protobuf.Scene.SpaceEntitySyncResponse" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.ActorState" preserve="all" />
-    <type fullname="HS.Protobuf.SceneEntity.NetAcotrEvadeStatePayload" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.NetActorMode" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.NetActorNode" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.NetActorState" preserve="all" />

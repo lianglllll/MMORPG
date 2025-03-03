@@ -13,14 +13,7 @@ namespace Player.Controller
         {
             base.Init(actor, networkActor);
             m_networkActor = networkActor;
-            if(actor.NetActorMode != NetActorMode.None)
-            {
-                ChangeMode(actor.NetActorMode);
-            }
-            else
-            {
-                ChangeMode(NetActorMode.Normal);
-            }
+            InitModeAndState(actor.NetActorMode, actor.NetActorState);
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
         {

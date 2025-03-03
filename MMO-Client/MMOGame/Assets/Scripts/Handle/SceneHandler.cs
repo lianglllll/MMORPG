@@ -5,6 +5,7 @@ using GameClient.Entities;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using HSFramework.MySingleton;
+using Serilog;
 public class SceneHandler : SingletonNonMono<SceneHandler>
 {
     public void Init()
@@ -31,9 +32,19 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
     {
         if(GameApp.SceneId != message.SceneId)
         {
+            Log.Warning("不是本场景的消息：_HandleOtherEntityEnterSceneResponse，curSceneId = {0} , msgSceneId = {1}", GameApp.SceneId, message.SceneId);
             goto End;
         }
-        if(message.EntityType == SceneEntityType.Actor)
+
+        // 判断是否已经存在？
+        var entity = EntityManager.Instance.GetEntity<Actor>(message.ActorNode.EntityId);
+        if(entity != null)
+        {
+            Log.Warning("msg entityId = {0}, 错误重复加入", message.ActorNode.EntityId);
+            goto End;
+        }
+
+        if (message.EntityType == SceneEntityType.Actor)
         {
             EntityManager.Instance.OnActorEnterScene(message.ActorNode);
         }else if(message.EntityType == SceneEntityType.Item)
@@ -93,6 +104,8 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
         var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
         if (acotr == null)
         {
+            Log.Information("SceneHandler:_HandleActorChangeTransformDataResponse不存在该actor");
+            Log.Information("ss");
             goto End;
         }
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
