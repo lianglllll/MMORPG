@@ -1,3 +1,4 @@
+using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using System.Collections;
 using UnityEngine;
@@ -65,8 +66,8 @@ namespace Player.PlayerState
             }
 
             // 发包
-            ShareParameter.evadeStatePayload = payload;
-            ShareParameter.evadeRotation = targetRotation.eulerAngles;
+            StateMachineParameter.evadeStatePayload = payload;
+            StateMachineParameter.evadeRotation = targetRotation.eulerAngles;
             player.NetworkActor.SendActorChangeStateRequest();
         }
         public override void Update()

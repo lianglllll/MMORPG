@@ -35,8 +35,8 @@ MonoBehaviour:
   - UnityEngine.CoreModule
   - YooAsset
   - mscorlib
-  outputLinkFile: HybridCLRGenerate/link.xml
-  outputAOTGenericReferenceFile: HybridCLRGenerate/AOTGenericReferences.cs
+  outputLinkFile: HotUpdate/HybridCLRGenerate/link.xml
+  outputAOTGenericReferenceFile: HotUpdate/HybridCLRGenerate/AOTGenericReferences.cs
   maxGenericReferenceIteration: 10
   maxMethodBridgeGenericIteration: 10
   enableProfilerInReleaseBuild: 0

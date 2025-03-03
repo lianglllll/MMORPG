@@ -18,6 +18,9 @@ namespace Player
         public Actor attacker;
         public Skill curSkill;
 
+        // jump
+        public float jumpVelocity;
+
         // evade相关共享参数
         public NetAcotrEvadeStatePayload evadeStatePayload;
         public Vector3 evadeRotation;
@@ -34,12 +37,14 @@ namespace Player
         public CharacterController CharacterController { get => characterController; }
 
         //ui控制
+        [HideInInspector]
         public UnitUIController unitUIController;
 
         // 声音控制
         private UnitAudioManager m_unitAudioManager;
 
         // 特效控制
+        [HideInInspector]
         public UnitEffectManager m_unitEffectManager;
 
 
@@ -130,7 +135,7 @@ namespace Player
         private StateMachineParameter m_stateMachineParameter;
         protected NetActorState m_curState;
         protected NetActorMode m_curMode;
-        public NetActorState CurState => m_curState;
+        public  NetActorState CurState => m_curState;
         public NetActorMode CurMode => m_curMode;
         public StateMachineParameter StateMachineParameter => m_stateMachineParameter;
         public virtual void ChangeState(NetActorState state, bool reCurrstate = false)
@@ -148,11 +153,14 @@ namespace Player
         float rotationThreshold = 1.0f;  // 单位为度数，可根据需要调整
 
         protected ActorChangeStateResponse curActorChangeStateResponse;
-        public void AdjustToOriginalTransform(ActorChangeStateResponse message)
+        public void AdjustToOriginalTransform(NetActorState oldNetActorState, ActorChangeStateResponse message)
         {
             curActorChangeStateResponse = message;
-
             targetPosition = actor.Position;
+            if(oldNetActorState == NetActorState.Falling)
+            {
+                targetPosition.y = transform.position.y;
+            }
             targetRotation = Quaternion.Euler(actor.Rotation);
 
             // 重置插值计时器

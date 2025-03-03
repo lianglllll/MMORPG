@@ -1,5 +1,6 @@
+using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
-using Serilog;
+using HSFramework.AI.StateMachine;
 using UnityEngine;
 
 namespace Player.PlayerState
@@ -32,6 +33,22 @@ namespace Player.PlayerState
             }
         }
 
+        private float timer = 0f;
+        private const float SEND_INTERVAL = 0.2f; // 每100ms发送一次
+        private ActorChangeTransformDataRequest actdReq;
+
+        public override void Init(IStateMachineOwner owner)
+        {
+            base.Init(owner);
+            actdReq = new ActorChangeTransformDataRequest();
+            actdReq.PayLoad = new ActorChangeTransformDataPayLoad();
+            actdReq.SessionId = NetManager.Instance.sessionId;
+            actdReq.EntityId = player.Actor.EntityId;
+            actdReq.OriginalTransform = new NetTransform();
+            actdReq.OriginalTransform.Position = new();
+            actdReq.OriginalTransform.Rotation = new();
+            actdReq.OriginalTransform.Scale = new();
+        }
         public override void Enter()
         {
             player.PlayAnimation("Fly_Motion");
@@ -39,6 +56,9 @@ namespace Player.PlayerState
 
             // 发送状态改变请求
             player.NetworkActor.SendActorChangeStateRequest();
+
+            // 定时发送位置信息
+            timer = 0f;
         }
         public override void Update()
         {
@@ -69,6 +89,8 @@ namespace Player.PlayerState
             }
             deltaPos.y = changeHightSpeed * Time.deltaTime;
             player.CharacterController.Move(deltaPos);
+
+            SendActorChangeTransformDataRequest();
         }
 
         private void WalkOnUpdate()
@@ -89,8 +111,8 @@ namespace Player.PlayerState
                 }
 
                 // 设置动画参数
-                player.Model.Animator.SetFloat("Fly_Horizontal_Speed", h);
-                player.Model.Animator.SetFloat("Fly_Vertical_Speed", v);
+                player.Model.Animator.SetFloat("Fly_Horizontal_Speed", h, 0.2f, Time.deltaTime);
+                player.Model.Animator.SetFloat("Fly_Vertical_Speed", v, 0.2f, Time.deltaTime);
 
                 Vector3 moveDirection = (player.transform.right * h + player.transform.forward * v).normalized;
                 if (v > 0)
@@ -164,6 +186,23 @@ namespace Player.PlayerState
                 Vector3 moveVector = targetDir * currentSpeed * Time.deltaTime;
                 player.CharacterController.Move(moveVector);
             }
+        }
+
+        private bool SendActorChangeTransformDataRequest()
+        {
+            timer += Time.deltaTime;
+            if (timer >= SEND_INTERVAL)
+            {
+                timer = 0.0f;
+                player.NetworkActor.V3ToNV3(player.gameObject.transform.position, actdReq.OriginalTransform.Position);
+                player.NetworkActor.V3ToNV3(player.gameObject.transform.eulerAngles, actdReq.OriginalTransform.Rotation);
+                // player.NetworkActor.V3ToNV3(player.gameObject.transform.localScale, actdReq.OriginalTransform.Scale);
+                actdReq.PayLoad.HorizontalSpeed = (int)(player.Model.Animator.GetFloat("Fly_Horizontal_Speed") * 1000);
+                actdReq.PayLoad.VerticalSpeed = (int)(player.Model.Animator.GetFloat("Fly_Vertical_Speed") * 1000);
+                actdReq.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
+                NetManager.Instance.Send(actdReq);
+            }
+            return true;
         }
 
     }

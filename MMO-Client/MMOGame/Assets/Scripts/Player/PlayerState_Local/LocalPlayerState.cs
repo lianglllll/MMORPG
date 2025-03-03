@@ -7,12 +7,13 @@ namespace Player
     public class LocalPlayerState : StateBase
     {
         protected LocalPlayerController player;
-        protected StateMachineParameter ShareParameter => player.StateMachineParameter;
+        protected StateMachineParameter StateMachineParameter;
 
         public override void Init(IStateMachineOwner owner)
         {
             base.Init(owner);
             player = (LocalPlayerController)owner;
+            StateMachineParameter = player.StateMachineParameter;
         }
 
         //由于animator的缺陷，第一次到达update时，动画可能还不是jump（过渡状态）

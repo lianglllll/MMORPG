@@ -1,39 +1,28 @@
 using HS.Protobuf.Scene;
-using Serilog;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
 {
-    public class MotionChangeDate
-    {
-        public Vector3 pos;
-        public Vector3 rot;
-        public float speed;
-        public bool isCorrection;   // 是否已经纠正了
-        public long TimeStamp;
-    }
-
 
     public class RemotePlayerState_Motion:RemotePlayerState
     {
-        private MotionChangeDate _latestDate = new();
+        private TransformChangeDate _latestDate = new();
 
         public override void Enter()
         {
             _latestDate.pos = remotePlayer.transform.position;
             _latestDate.rot = remotePlayer.transform.eulerAngles;
-            _latestDate.speed = remotePlayer.Actor.Speed;
+            _latestDate.verticalSpeed = remotePlayer.Actor.Speed;
             _latestDate.isCorrection = true;
             _latestDate.TimeStamp = 0;
-            remotePlayer.Model.Animator.SetFloat("Normal_Vertical_Speed", _latestDate.speed);
+            remotePlayer.Model.Animator.SetFloat("Normal_Vertical_Speed", _latestDate.verticalSpeed);
             remotePlayer.PlayAnimation("Motion");
         }
         public override void Update()
         {
-            Interpolation();
             QuickCorrection();
-            Prediction();
+            //Prediction();
+            //Interpolation();
             //重力
             remotePlayer.CharacterController.Move(new Vector3(0, remotePlayer.gravity * Time.deltaTime, 0));
         }
@@ -41,7 +30,7 @@ namespace Player
         {
         }
 
-        public void AddNetworkState(ActorChangeMotionDataResponse resp)
+        public override void SyncTransformData(ActorChangeTransformDataResponse resp)
         {
             if (resp.Timestamp < _latestDate.TimeStamp)
             {
@@ -49,16 +38,12 @@ namespace Player
             }
             remotePlayer.NetworkActor.NV3ToV3(resp.OriginalTransform.Position, ref _latestDate.pos);
             remotePlayer.NetworkActor.NV3ToV3(resp.OriginalTransform.Rotation, ref _latestDate.rot);
-            _latestDate.speed = resp.Speed * 0.001f;
+            _latestDate.verticalSpeed = resp.PayLoad.VerticalSpeed * 0.001f;
             _latestDate.isCorrection = false;
             _latestDate.TimeStamp = resp.Timestamp;
-            remotePlayer.Model.Animator.SetFloat("Normal_Vertical_Speed", _latestDate.speed);
+            remotePlayer.Model.Animator.SetFloat("Normal_Vertical_Speed", _latestDate.verticalSpeed);
         End:
             return;
-        }
-        private void Interpolation()
-        {
-
         }
         private void QuickCorrection()
         {
@@ -66,14 +51,13 @@ namespace Player
             {
                 goto End;
             }
-            Log.Information("remoter 进入 QuickCorrection");
 
             bool isPosCorrenction = false;
             bool isRotCorrenction = false;
 
             // 位置插值处理
             Vector3 taret = new Vector3(_latestDate.pos.x, remotePlayer.transform.position.y, _latestDate.pos.z);
-            if(Vector3.Distance(remotePlayer.transform.position, taret) < 0.01f)
+            if (Vector3.Distance(remotePlayer.transform.position, taret) <= 0.01f)
             {
                 isPosCorrenction = true;
                 remotePlayer.transform.position = taret;
@@ -84,7 +68,7 @@ namespace Player
             }
 
             // 旋转四元数，插值处理
-            if(Quaternion.Angle(remotePlayer.transform.rotation, Quaternion.Euler(_latestDate.rot)) < 1f)
+            if(Quaternion.Angle(remotePlayer.transform.rotation, Quaternion.Euler(_latestDate.rot)) <= 1f)
             {
                 isRotCorrenction = true;
                 remotePlayer.transform.rotation = Quaternion.Euler(_latestDate.rot);
@@ -98,7 +82,6 @@ namespace Player
             if(isPosCorrenction && isRotCorrenction)
             {
                 _latestDate.isCorrection = true;
-                Log.Information("remoter QuickCorrection 成功");
             }
 
         End:
@@ -118,7 +101,7 @@ namespace Player
             moveDirection.Normalize();
 
             // 计算帧间移动量
-            float predictedDistance = _latestDate.speed * Time.deltaTime;
+            float predictedDistance = _latestDate.verticalSpeed * Time.deltaTime;
             Vector3 predictedMovement = moveDirection * predictedDistance;
 
             // 使用CharacterController进行带碰撞检测的移动
@@ -129,6 +112,9 @@ namespace Player
 
         End:
             return;
+        }
+        private void Interpolation()
+        {
         }
     }
 }

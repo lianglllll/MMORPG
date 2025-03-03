@@ -194,26 +194,19 @@ namespace GameClient.Entities
             // 缓存transform信息
             NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
             NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);
-            m_baseController.AdjustToOriginalTransform(message);
+            m_baseController.AdjustToOriginalTransform(NetActorState,message);// todo有个报错nullrefenrence
             // 状态切换
             NetActorState = message.State;
             m_baseController.ChangeState(NetActorState);
         }
-        public void HandleActorMotionChangeDate(ActorChangeMotionDataResponse message)
+        public void HandleActorChangeTransformDate(ActorChangeTransformDataResponse message)
         {
-            if (NetActorState != NetActorState.Motion)
-            {
-                goto End;
-            }
             // 缓存transform信息
             NetVector3MoveToVector3(message.OriginalTransform.Position, ref m_position);
             NetVector3MoveToVector3(message.OriginalTransform.Rotation, ref m_rotation);
 
-            var ctl = m_baseController as RemotePlayerController;
-            var state = ctl.stateMachine.CurState as RemotePlayerState_Motion;
-            state.AddNetworkState(message);
-        End:
-            return;
+            var state = m_baseController.stateMachine.CurState as RemotePlayerState;
+            state.SyncTransformData(message);
         }
 
         public void LocalOrTargetAcotrPropertyChange()

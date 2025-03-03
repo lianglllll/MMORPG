@@ -8,6 +8,7 @@ namespace Player.Controller
     {
         private NetworkActor m_networkActor;
         public NetworkActor NetworkActor => m_networkActor;
+
         public override void Init(Actor actor, NetworkActor networkActor)
         {
             base.Init(actor, networkActor);
@@ -49,6 +50,7 @@ namespace Player.Controller
                     }
                     break;
                 case NetActorState.Jumpup:
+                    StateMachineParameter.jumpVelocity = curActorChangeStateResponse.PayLoad.JumpVerticalVelocity * 0.001f;
                     stateMachine.ChangeState<RemotePlayerState_JumpUp>(reCurrstate);
                     break;
                 case NetActorState.Falling:

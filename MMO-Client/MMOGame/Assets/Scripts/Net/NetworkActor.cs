@@ -30,7 +30,7 @@ public class NetworkActor : MonoBehaviour
         var pos = new NetVector3();
         var rotation = new NetVector3();
         var scale = new NetVector3();
-        var payLoad = new ActorChangeStatePayLoad();
+        var payLoad = new ActorStatePayLoad();
         netTransform.Position = pos;
         netTransform.Rotation = rotation;
         netTransform.Scale = scale;
@@ -62,6 +62,7 @@ public class NetworkActor : MonoBehaviour
         {
             return false;
         }
+
         V3ToNV3(m_transform.position, acsReq.OriginalTransform.Position);
         V3ToNV3(m_transform.eulerAngles, acsReq.OriginalTransform.Rotation);
         V3ToNV3(m_transform.localScale, acsReq.OriginalTransform.Scale);    // todo
@@ -74,6 +75,9 @@ public class NetworkActor : MonoBehaviour
         {
             acsReq.PayLoad.EvadePayLoad = m_baseController.StateMachineParameter.evadeStatePayload;
             V3ToNV3(m_baseController.StateMachineParameter.evadeRotation, acsReq.OriginalTransform.Rotation);
+        }else if(m_baseController.CurState == NetActorState.Jumpup)
+        {
+            acsReq.PayLoad.JumpVerticalVelocity = m_baseController.StateMachineParameter.jumpVelocity * 1000;
         }
         NetManager.Instance.Send(acsReq);
         return true;

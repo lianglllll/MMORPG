@@ -16,15 +16,15 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
         ProtoHelper.Instance.Register<ActorChangeModeResponse>((int)SceneProtocl.ActorChangeModeResp);
         ProtoHelper.Instance.Register<ActorChangeStateRequest>((int)SceneProtocl.ActorChangeStateReq);
         ProtoHelper.Instance.Register<ActorChangeStateResponse>((int)SceneProtocl.ActorChangeStateResp);
-        ProtoHelper.Instance.Register<ActorChangeMotionDataRequest>((int)SceneProtocl.ActorChangeMotionDataReq);
-        ProtoHelper.Instance.Register<ActorChangeMotionDataResponse>((int)SceneProtocl.ActorChangeMotionDataResp);
+        ProtoHelper.Instance.Register<ActorChangeTransformDataRequest>((int)SceneProtocl.ActorChangeTransformDataReq);
+        ProtoHelper.Instance.Register<ActorChangeTransformDataResponse>((int)SceneProtocl.ActorChangeTransformDataResp);
 
         // 消息的订阅
         MessageRouter.Instance.Subscribe<OtherEntityEnterSceneResponse>(_HandleOtherEntityEnterSceneResponse);
         MessageRouter.Instance.Subscribe<OtherEntityLeaveSceneResponse>(_HandleOtherEntityLeaveSceneResponse);
         MessageRouter.Instance.Subscribe<ActorChangeModeResponse>(_HandleActorChangeModeResponse);
         MessageRouter.Instance.Subscribe<ActorChangeStateResponse>(_HandleActorChangeStateResponse);
-        MessageRouter.Instance.Subscribe<ActorChangeMotionDataResponse>(_HandleActorChangeMotionDataResponse);
+        MessageRouter.Instance.Subscribe<ActorChangeTransformDataResponse>(_HandleActorChangeTransformDataResponse);
     }
 
     private void _HandleOtherEntityEnterSceneResponse(Connection sender, OtherEntityEnterSceneResponse message)
@@ -88,7 +88,7 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
     End:
         return;
     }
-    private void _HandleActorChangeMotionDataResponse(Connection sender, ActorChangeMotionDataResponse message)
+    private void _HandleActorChangeTransformDataResponse(Connection sender, ActorChangeTransformDataResponse message)
     {
         var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
         if (acotr == null)
@@ -97,7 +97,7 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
         }
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            acotr.HandleActorMotionChangeDate(message);
+            acotr.HandleActorChangeTransformDate(message);
         });
     End:
         return;

@@ -9,11 +9,11 @@ namespace Player.PlayerState
             player.PlayAnimation("Hurt");
 
             //看向敌人
-            var target = ShareParameter.attacker;
+            var target = StateMachineParameter.attacker;
             if (target != null)
             {
                 player.DirectLookTarget(target.RenderObj.transform.position);
-                ShareParameter.attacker = null;
+                StateMachineParameter.attacker = null;
             }
         }
 

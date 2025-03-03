@@ -6,7 +6,7 @@ namespace Player.PlayerState
 {
     public class LocalPlayerState_Skill: LocalPlayerState
     {
-        private Skill curSkill => ShareParameter.curSkill;
+        private Skill curSkill => StateMachineParameter.curSkill;
         //蓄气、执行
         enum SkillChildState
         {
@@ -83,7 +83,7 @@ namespace Player.PlayerState
         }
         public override void Exit()
         {
-            ShareParameter.curSkill = null;
+            StateMachineParameter.curSkill = null;
         }
 
     }

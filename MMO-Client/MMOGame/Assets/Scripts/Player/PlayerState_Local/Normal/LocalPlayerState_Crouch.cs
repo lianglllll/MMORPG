@@ -10,6 +10,9 @@ namespace Player.PlayerState
             player.PlayAnimation("Crouch_Idle");
             //注册根运动
             player.Model.SetRootMotionAction(OnRootMotion);
+
+            // 发送状态改变请求
+            player.NetworkActor.SendActorChangeStateRequest();
         }
         public override void Exit()
         {

@@ -12,7 +12,7 @@ namespace HybridCLR.Editor
 {
     public static class BuildAssetsCommand
     {
-        public static string HybridCLRBuildCacheDir => Application.dataPath + "/HybridCLRBuildCache";
+        public static string HybridCLRBuildCacheDir => Application.dataPath + "/HotUpdate/HybridCLRBuildCache";
 
         public static string AssetBundleOutputDir => $"{HybridCLRBuildCacheDir}/AssetBundleOutput";
 
@@ -78,6 +78,7 @@ namespace HybridCLR.Editor
             CopyABAOTHotUpdateDlls(target);
             AssetDatabase.Refresh();
         }
+
         [MenuItem("HybridCLR/Builds/BuildAndCopyDlls")]
         public static void CopyABAOTHotUpdateDlls()
         {

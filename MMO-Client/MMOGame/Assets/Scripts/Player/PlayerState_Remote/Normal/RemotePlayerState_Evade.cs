@@ -1,4 +1,4 @@
-using HS.Protobuf.SceneEntity;
+using HS.Protobuf.Scene;
 using System.Collections;
 using UnityEngine;
 namespace Player
