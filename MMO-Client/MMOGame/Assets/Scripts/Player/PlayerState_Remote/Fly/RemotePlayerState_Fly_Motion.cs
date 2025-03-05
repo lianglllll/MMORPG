@@ -18,7 +18,6 @@ namespace Player.PlayerState
 
             remotePlayer.Model.Animator.SetFloat("Fly_Horizontal_Speed", 0);
             remotePlayer.Model.Animator.SetFloat("Fly_Vertical_Speed", 0);
-            remotePlayer.PlayAnimation("Fly_Motion");
         }
         public override void Update()
         {
@@ -26,6 +25,8 @@ namespace Player.PlayerState
             //Prediction();
             //Interpolation();
         }
+
+
 
         public override void SyncTransformData(ActorChangeTransformDataResponse resp)
         {
@@ -41,6 +42,12 @@ namespace Player.PlayerState
             _latestDate.TimeStamp = resp.Timestamp;
             remotePlayer.Model.Animator.SetFloat("Fly_Horizontal_Speed", _latestDate.horizontalSpeed, 0.1f, Time.deltaTime);
             remotePlayer.Model.Animator.SetFloat("Fly_Vertical_Speed", _latestDate.verticalSpeed);
+
+            if(_latestDate.verticalSpeed >= 1.8f)
+            {
+                remotePlayer.m_unitEffectManager.StartFlyTrailFX();
+            }
+
         End:
             return;
         }
