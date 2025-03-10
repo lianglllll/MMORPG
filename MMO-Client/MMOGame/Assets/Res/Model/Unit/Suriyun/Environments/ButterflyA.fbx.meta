@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 81fbf65c97ee7af4d862aabfd2258428
+timeCreated: 1465189975
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Butterfly1
+    100002: Butterfly2
+    100004: Butterfly3
+    100006: Butterfly_Mesh
+    100008: //RootNode
+    100010: pCube3
+    100012: pCube4
+    100014: pCube5
+    400000: Butterfly1
+    400002: Butterfly2
+    400004: Butterfly3
+    400006: Butterfly_Mesh
+    400008: //RootNode
+    400010: pCube3
+    400012: pCube4
+    400014: pCube5
+    2300000: pCube3
+    2300002: pCube4
+    2300004: pCube5
+    3300000: pCube3
+    3300002: pCube4
+    3300004: pCube5
+    4300000: pCube3
+    4300002: pCube4
+    4300004: pCube5
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: pCube3
+    13700002: pCube4
+    13700004: pCube5
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 150
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Butterfly1
+        weight: 1
+      - path: Butterfly1/Butterfly2
+        weight: 1
+      - path: Butterfly1/Butterfly3
+        weight: 1
+      - path: Butterfly_Mesh
+        weight: 1
+      - path: Butterfly_Mesh/pCube3
+        weight: 1
+      - path: Butterfly_Mesh/pCube4
+        weight: 1
+      - path: Butterfly_Mesh/pCube5
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

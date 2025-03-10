@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using TrailsFX;
 using UnityEngine;
 
+
+
 public class UnitEffectManager : MonoBehaviour
 {
     public TrailEffectProfile UnitEffectProfile;
@@ -22,8 +24,11 @@ public class UnitEffectManager : MonoBehaviour
             trailEffects.Add(te);
             te.enabled = false;
         }
-        flyTrailEffect = flyMeshRenderer.GetComponent<TrailEffect>();
-        flyTrailEffect.enabled = false;
+        if(flyMeshRenderer != null)
+        {
+            flyTrailEffect = flyMeshRenderer.GetComponent<TrailEffect>();
+            flyTrailEffect.enabled = false;
+        }
     }
 
     public void StartCloneTrailFX()
