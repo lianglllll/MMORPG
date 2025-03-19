@@ -21,7 +21,15 @@ public class GameManager : Singleton<GameManager>
         //设置初始优先窗口大小
         LocalDataManager.Instance.init();
         var videoSetting = LocalDataManager.Instance.gameSettings.videoSetting;
+        if(videoSetting.resolutionWidth == 0 || videoSetting.resolutionHeight == 0)
+        {
+            videoSetting.resolutionWidth = 1920;
+            videoSetting.resolutionHeight = 1080;
+            videoSetting.isFull = true;
+            LocalDataManager.Instance.SaveSettings();
+        }
         Screen.SetResolution(videoSetting.resolutionWidth, videoSetting.resolutionHeight, videoSetting.isFull);
+
 
         //初始化服务
         SecurityService.Instance.Init();

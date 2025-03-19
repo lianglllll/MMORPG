@@ -480,7 +480,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="dnlib">
-      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@756b906a21\Plugins\dnlib.dll</HintPath>
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@528240b52b\Plugins\dnlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
@@ -492,7 +492,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LZ4">
-      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@756b906a21\Plugins\LZ4.dll</HintPath>
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@528240b52b\Plugins\LZ4.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Serilog">
@@ -1211,6 +1211,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="WuHuan.ParticleSystemPreview.Editor">
+      <HintPath>Library\ScriptAssemblies\WuHuan.ParticleSystemPreview.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1404,10 +1408,6 @@
     <ProjectReference Include="UniTask.Addressables.csproj">
       <Project>{2F3FA87D-7750-1DC8-AD86-313FBE0C2E3B}</Project>
       <Name>UniTask.Addressables</Name>
-    </ProjectReference>
-    <ProjectReference Include="HotUpdate.csproj">
-      <Project>{E759DA4C-59DC-1809-C862-E6716DE69777}</Project>
-      <Name>HotUpdate</Name>
     </ProjectReference>
     <ProjectReference Include="DOTween.Modules.csproj">
       <Project>{682213BC-AB5A-6785-DF80-1FFA307A26DD}</Project>

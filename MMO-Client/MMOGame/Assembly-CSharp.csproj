@@ -63,16 +63,20 @@
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
+    <Compile Include="Assets\Art\Animation\Fly\player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Crouch.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\controller.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerModel\SyncModel.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_Model.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\VocationItem.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerModel\Component\ModelAnimationData.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroup\BuffUIScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Motion.cs" />
+    <Compile Include="Assets\Scripts\Combat\Skill\LocalSkillConfig\LocalSkill_Config_SO.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\LocalPlayerState.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\AETimelineDirector.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Fly\RemotePlayerState_Fly_Idle.cs" />
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\RevivalPointDefine.cs" />
@@ -84,6 +88,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
     <Compile Include="Assets\Scripts\Net\NetClient.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Skill.cs" />
+    <Compile Include="Assets\Scripts\Combat\Skill\LocalSkillConfig\LocalSkill_Hit_EF_Config_SO.cs" />
     <Compile Include="Assets\Scripts\Entities\Entity.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_RollState.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\RemotePlayerController.cs" />
@@ -92,7 +97,7 @@
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\IInteraction.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Prone.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Audio\AEAudioRuntimeBehaviour.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_MoveState.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\aExample\aMyTest\GameTest.cs" />
@@ -105,18 +110,21 @@
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_State.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\DialogButton.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Effect\AEEffectClip.cs" />
     <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr2.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Prone.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\ControlSettingPanel.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Death.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\AEPlayableStateEnum.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Slash_Light.cs" />
     <Compile Include="Assets\Scripts\Entities\Npc.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\MaterialItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\SelectWorldPanel.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\aExample\CombatSystem\StateMachine\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Costom.cs" />
     <Compile Include="Assets\Scripts\Net\Old\GameEntity.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Teleport.cs" />
     <Compile Include="Assets\Scripts\Combat\Missile.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\Consumable.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Evade.cs" />
@@ -125,6 +133,7 @@
     <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\LookAtTarget.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_IdelState.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Audio\AEAudioEditorBehaviour.cs" />
     <Compile Include="Assets\Scripts\Entities\Character.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_RunState.cs" />
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
@@ -137,26 +146,30 @@
     <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\WorldInfoNodeUI.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\SelectRolePanelScript.cs" />
     <Compile Include="Assets\aExample\aMyTest\SyncMovementController.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\DialogDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\KeyMapSettingPanel.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Slash_UIEffectList.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Costom.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\RoleListItemScript.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\Swapper.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\AETimelineTick.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\GroundChecker.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillConfig.cs" />
     <Compile Include="Assets\Scripts\Entities\Actor.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\SuntailStartDemo.cs" />
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\AnimationEventEffects.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\KeySettingPanel.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\SkillDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\CombatPanelScript.cs" />
     <Compile Include="Assets\aExample\aMyTest\ReplayMgr.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_AirDownState.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Slash_WroomWroom.cs" />
     <Compile Include="Assets\Scripts\Camera\old\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\BaseController.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\BaseSettingPanel.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\MobileBloom\Slashes_MobileBloom.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Knock.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\Dialog.cs" />
     <Compile Include="Assets\Art\joker-Combat\Flooded_Grounds\Scripts\WaterFloat.cs" />
@@ -170,6 +183,7 @@
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntityRecive.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\IHurter.cs" />
     <Compile Include="Assets\Scripts\Manager\GameObjectManager.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Audio\AEAudioClip.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\ISkillOwner.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillHitEFConfig.cs" />
@@ -182,13 +196,17 @@
     <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogStepConfig.cs" />
     <Compile Include="Assets\aExample\aMyTest\MovementController.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Slash_AxisRotateByTime.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Slash_GrvityPoint.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Idle.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\BaseData\StandardTrack.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\VideoSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfigImporter.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\BaseData\AETimelineAsset.cs" />
     <Compile Include="Assets\aExample\CombatSystem\StateMachine\StateBase.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Config\Skill\Skill2.cs" />
     <Compile Include="Assets\aExample\aMyTest\Mechanism\BackInTime\TimeMachineManager.cs" />
@@ -201,19 +219,24 @@
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_Controller.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_StateBase.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventorySlot.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Aniamtion\AEAnimationTrack.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Defense.cs" />
     <Compile Include="Assets\Scripts\Combat\Skill.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Fly\LocalPlayerState_Fly_Idle.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerModel\PlayerModel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\UISlot.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\Interface\IEditorBehaviour.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Frame\CharacterBase.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Attribute\AEBindClipAttribute.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Attribute\AETrackColorAttribute.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_State.cs" />
     <Compile Include="Assets\aExample\aMyTest\Action\LightInteraction.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\SceneResources\Other\Slash_MouseOrbit.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Aniamtion\AEAnimationEditorBehaviour.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Attribute\AETrackNameAttribute.cs" />
     <Compile Include="Assets\Scripts\Service\ItemService.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\UnitAudioManager.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\HotUpdate\HybridCLRGenerate\AOTGenericReferences.cs" />
-    <Compile Include="Assets\Art\Effects\刀光剑影\Demo scene\CameraHolder.cs" />
     <Compile Include="Assets\Art\joker-Combat\RzFX_BloodSpray\KillTime.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\CreateRolePanelScript.cs" />
@@ -234,9 +257,11 @@
     <Compile Include="Assets\aExample\CombatSystem\Skill\Weapon_Controller.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\LevelDefine.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillInfo.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Effect\AEEffectBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_HurtState.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_SkillAttackState.cs" />
+    <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\SceneResources\Other\Slash_DemoGUI.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\AudioSettingPanel.cs" />
     <Compile Include="Assets\Scripts\Handle\SceneHandler.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\MainSettingPanel.cs" />
@@ -250,6 +275,7 @@
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Fly\LocalPlayerState_Fly_Motion.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Frame\ModelBase.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Effect\AEEffectTrack.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\Action_Manage.cs" />
     <Compile Include="Assets\aExample\aMyTest\Mechanism\BackInTime\Boomer.cs" />
     <Compile Include="Assets\Scripts\Net\SyncEntity\SyncEntity.cs" />
@@ -258,20 +284,25 @@
     <Compile Include="Assets\Scripts\Combat\EquipManager.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCollider.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\PlayerStateInfoBox\ExpBoxScript.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\AEPlayableBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Death.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\ItemDefine.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\LocalPlayerController.cs" />
     <Compile Include="Assets\Scripts\Interaction\PortalControl.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Aniamtion\AEAnimationRuntimeBehaviour.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\MouseOrbitImproved.cs" />
     <Compile Include="Assets\Scripts\Manager\ChatManager.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Aniamtion\AEAnimationClip.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Attribute\AEClipStyleAttribute.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Falling.cs" />
     <Compile Include="Assets\Scripts\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\LoginPanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EquipSkillSlot\AbilityManager.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LcalPlayerState_ChangeModeTo.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\GameSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\UnitBillboard.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Audio\AEAudioTrack.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\SpaceDefine.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\AudioZoneControl.cs" />
     <Compile Include="Assets\aExample\aMyTest\Action\LigthContrl.cs" />
@@ -279,6 +310,8 @@
     <Compile Include="Assets\Scripts\UI\Panel\Chat\ChatBoxScript.cs" />
     <Compile Include="Assets\Scripts\Scene\FootStepsDatabase.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_Controller.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\BaseData\StandardClip.cs" />
+    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\Interface\IRuntimeBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Motion.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\PhysicsObject.cs" />
@@ -293,67 +326,57 @@
     <Compile Include="Assets\Scripts\LocalData\DataDefine\BuffDefine.cs" />
     <Compile Include="Assets\Scripts\Service\BuffService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_StateBase.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_IdleState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerModel\ModelBase.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Defense.cs" />
-    <Compile Include="Assets\aExample\Scenes\Test.cs" />
-    <Compile Include="Assets\Art\Effects\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />
+    <None Include="Assets\Art\Effects\Red_clue\Slash_effects\Documentaion\How to use.txt" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuNNDV1.MMD4Mecanim.xml" />
     <None Include="Assets\Res\Shader\UI\Circular.shader" />
-    <None Include="Assets\Art\Effects\刀光剑影\Demo scene\HDRP and URP.txt" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\NiloZOffset.hlsl" />
     <None Include="Assets\Res\Env\Suntail Village\Demo\Fonts\Fonts License.txt" />
+    <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\MobileBloom\Resources\Slashes_Bloom.shader" />
     <None Include="Assets\Res\Shader\UI\CustomRoundCornerShader.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuNNDV1.xml" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\SimpleURPToonLitOutlineExample.shader" />
     <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_SpotLit.shader" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\DissolveNoise.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBark.shader" />
     <None Include="Assets\Res\Env\Suntail Village\Shaders\Suntail_Water.shader" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Add_Fresnel.shader" />
     <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.xml" />
     <None Include="Assets\Res\Env\Suntail Village\Shaders\Suntail_Surface.shader" />
     <None Include="Assets\HotUpdate\HybridCLRGenerate\link.xml" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Ice.shader" />
     <None Include="Assets\Art\joker-Combat\MeleeWeaponTrail\README.txt" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Distortion.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeavesOptimized.shader" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Blend_TwoSides.shader" />
     <None Include="Assets\Res\Env\Suntail Village\URP Shaders\Important.txt" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Res\Model\Unit\Suriyun\README.txt" />
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.xml" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\SimpleURPToonLitOutlineExample_Shared.hlsl" />
-    <None Include="Assets\Art\Effects\刀光剑影\Demo scene\Readme.txt" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\NiloInvLerpRemap.hlsl" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Lightning.shader" />
     <None Include="Assets\Res\Model\Unit\牛头人\BOSS\Bull\Shader\Cartoon.shader" />
     <None Include="Assets\Res\Env\Suntail Village\Documentation\Readme.txt" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_PBR_TopBlend.shader" />
     <None Include="Assets\Art\Unit\明日香紧身作战服\使用规则.txt" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuV1武器.xml" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\BlendDistort.shader" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Scroll.shader" />
+    <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\MobileBloom\Resources\Slashes_Bloom_Inc.cginc" />
+    <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\Slash_AnimBlended.shader" />
+    <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\SlashBird.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\WavingGrass.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBarkOptimized.shader" />
     <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_MeshMask.shader" />
+    <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\SlashShader.shader" />
+    <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\SceneResources\Other\CullOffMobileDiffuse.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuV1武器.MMD4Mecanim.xml" />
     <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_NoiseDissolve.shader" />
     <None Include="Assets\Res\Env\Suntail Village\Shaders\Suntail_Foliage.shader" />
     <None Include="Assets\Res\UI\Fonts\zh-cn.txt" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeaves.shader" />
     <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.MMD4Mecanim.xml" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\NiloOutlineUtil.hlsl" />
+    <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\SlashParticles.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_Triplanar_BumpSpec.shader" />
-    <None Include="Assets\Art\Effects\Hovl Studio\Magic effects pack\Demo scene\Readme.txt" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\Explosion.shader" />
-    <None Include="Assets\Art\Effects\刀光剑影\Shaders\SwordSlash.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_Skybox_Rotating.shader" />
     <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_PBR_Water.shader" />
   </ItemGroup>
@@ -719,7 +742,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="dnlib">
-      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@756b906a21\Plugins\dnlib.dll</HintPath>
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@528240b52b\Plugins\dnlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
@@ -731,7 +754,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LZ4">
-      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@756b906a21\Plugins\LZ4.dll</HintPath>
+      <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@528240b52b\Plugins\LZ4.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Serilog">
@@ -1432,6 +1455,10 @@
     </Reference>
     <Reference Include="Unity.Animation.Rigging.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WuHuan.ParticleSystemPreview.Editor">
+      <HintPath>Library\ScriptAssemblies\WuHuan.ParticleSystemPreview.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rider.Editor">

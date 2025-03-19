@@ -26,6 +26,9 @@ public class Main : MonoBehaviour
 
         isStart = false;
 
+        // temp
+        Screen.SetResolution(1920, 1080, true);
+
         StartCoroutine(Init());
     }
 

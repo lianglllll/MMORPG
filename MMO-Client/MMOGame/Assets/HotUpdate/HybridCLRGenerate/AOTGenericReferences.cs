@@ -32,6 +32,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Google.Protobuf.Collections.RepeatedField<object>
 	// Google.Protobuf.FieldCodec.<>c<int>
 	// Google.Protobuf.FieldCodec.<>c<object>
+	// Google.Protobuf.FieldCodec.<>c__DisplayClass38_0<int>
+	// Google.Protobuf.FieldCodec.<>c__DisplayClass38_0<object>
 	// Google.Protobuf.FieldCodec.<>c__DisplayClass39_0<int>
 	// Google.Protobuf.FieldCodec.<>c__DisplayClass39_0<object>
 	// Google.Protobuf.FieldCodec.InputMerger<int>

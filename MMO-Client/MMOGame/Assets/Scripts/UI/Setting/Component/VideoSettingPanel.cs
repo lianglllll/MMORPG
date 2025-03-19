@@ -90,7 +90,8 @@ public class VideoSettingPanel : BaseSettingPanel
         viodeSetting.resolutionHeight = selectedResolution.height;
         viodeSetting.resolutionIdx = CurIdx;
         viodeSetting.isFull = isFull;
-        Screen.SetResolution(selectedResolution.width, selectedResolution.height, false);
+
+        Screen.SetResolution(selectedResolution.width, selectedResolution.height, isFull);
         LocalDataManager.Instance.SaveSettings();
     }
     private void OnResolutionChange(int value)
