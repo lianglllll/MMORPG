@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2455a1ccaa08bd848818fa6ea417a232, type: 3}
+  m_Name: Skill_1001
+  m_EditorClassIdentifier: 
+  SkillId: 0
+  releaseData:
+    SpawnObj:
+      prefab: {fileID: 0}
+      pos: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+      audioClip: {fileID: 0}
+      delayTime: 0
+    ReleaseAudioClip: {fileID: 0}
+    CanRotate: 0
+  attackData:
+  - SpawnObj:
+      prefab: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
+      pos: {x: -0.45, y: 0.98, z: -0.19}
+      rotation: {x: 197.798, y: 3.723007, z: 120.38}
+      Scale: {x: 1, y: 1, z: 1}
+      audioClip: {fileID: 0}
+      delayTime: 0
+    attackAudioClip: {fileID: 0}
+    hitEFConfigSo: {fileID: 0}
+    hitData:
+      DamageValue: 0
+      HardTime: 0
+      Down: 0
+      RepelVelocity: {x: 0, y: 0, z: 0}
+      RepelTime: 0
+      IsForcedDisplacement: 0
+      IsBreak: 0
+    ScreenImpulseValue: 0
+    ChromaticAberrationValue: 0
+    FreezeFrameTime: 0
+    FreezeGameTime: 0
