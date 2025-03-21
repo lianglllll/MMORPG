@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
         UserService.Instance.Init();
         EntryGameWorldService.Instance.Init();
         SceneHandler.Instance.Init();
-        CombatService.Instance.Init();
+        CombatHandler.Instance.Init();
         ChatService.Instance.Init();
         ItemService.Instance.Init();
         BuffService.Instance.Init();

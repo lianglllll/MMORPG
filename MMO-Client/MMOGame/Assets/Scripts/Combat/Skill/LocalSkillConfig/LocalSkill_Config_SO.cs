@@ -8,8 +8,9 @@ namespace GameClient.Combat.LocalSkill.Config
     [CreateAssetMenu(menuName ="Custom/SkillConfig/SkillSO")]
     public class LocalSkill_Config_SO : ScriptableObject
     {
-        public int SkillId;
-        public LocalSkill_ReleaseData releaseData;  // 技能释放的时候涉及到的东西。
+        public string IntonateAnimName;
+        public string ActiveAnimName;
+        public LocalSkill_ReleaseData releaseData;  // 技能释放的时候涉及到的东西。前摇相关
         public LocalSkill_AttackData[] attackData;  // 攻击时候的数据
     }
 

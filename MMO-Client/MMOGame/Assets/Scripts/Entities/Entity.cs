@@ -1,3 +1,4 @@
+using HS.Protobuf.Common;
 using HS.Protobuf.SceneEntity;
 using UnityEngine;
 

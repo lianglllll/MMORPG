@@ -17,9 +17,9 @@ public class V3
     {
         return new Vector3(nv.X, nv.Y, nv.Z);
     }
-    public static Vec3 ToVec3(Vector3 v)
+    public static NetVector3 ToNetVector3(Vector3 v)
     {
-        return new Vec3() { X = (int)v.x, Y = (int)v.y, Z = (int)v.z };
+        return new NetVector3() { X = (int)v.x, Y = (int)v.y, Z = (int)v.z };
     }
 
 }

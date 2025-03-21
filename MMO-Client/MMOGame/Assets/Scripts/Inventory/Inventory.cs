@@ -48,6 +48,7 @@ public class Inventory
     {
         itemDict.Clear();
         this.capacity = info.Capacity;
+        /*
         foreach(var iteminfo in info.List)
         {
             var def = LocalDataManager.Instance.itemDefineDict[iteminfo.ItemId];
@@ -68,6 +69,7 @@ public class Inventory
             }
             itemDict.TryAdd(item.Position, item);
         }
+        */
 
     }
 

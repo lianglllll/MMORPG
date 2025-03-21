@@ -19,6 +19,9 @@ namespace Player.Controller
             else if (GameInputManager.Instance.KeyTwoDown)
             {
                 ChangeMode(NetActorMode.FlyNormal);
+            }else if (GameInputManager.Instance.KeyThreeDown)
+            {
+                ChangeMode(NetActorMode.EquipSword);
             }
         }
 
@@ -30,7 +33,7 @@ namespace Player.Controller
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
         {
-            if (m_curState == state && !reCurrstate) return;
+             if (m_curState == state && !reCurrstate) return;
             m_curState = state;
             
             switch (state)
@@ -44,6 +47,9 @@ namespace Player.Controller
                     }else if(m_curMode == NetActorMode.FlyNormal)
                     {
                         stateMachine.ChangeState<LocalPlayerState_Fly_Idle>(reCurrstate);
+                    }else if(m_curMode == NetActorMode.EquipSword)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Weapon_Idle>(reCurrstate);
                     }
                     break;
                 case NetActorState.Motion:

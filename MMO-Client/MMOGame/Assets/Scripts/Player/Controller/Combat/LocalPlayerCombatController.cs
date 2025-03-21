@@ -98,7 +98,9 @@ public class LocalPlayerCombatController : MonoBehaviour
         skillManager = ctrlController.Actor.m_skillManager;
 
         //初始化普通攻击连招表
-        var baseSkillIds = ctrlController.Actor.UnitDefine.DefaultSkills;
+        var tmpDef = LocalDataManager.Instance.
+            WeaponSkillArsenalDefineDict[ctrlController.Actor.UnitDefine.weaponSkillArsenalId];
+        var baseSkillIds = tmpDef.SkillIds;
         int count = baseSkillIds.Length;
         if (count <= 0) return;     //没有基础攻击就返回
 
@@ -203,7 +205,7 @@ public class LocalPlayerCombatController : MonoBehaviour
             //尝试给自己获取一个最近的目标,如果没有成功就讲自己设置为敌人
             if (LockInRecentTargets() != 0)
             {
-                CombatService.Instance.SpellSkill(currentComboData.skill, owner);
+                CombatHandler.Instance.SendSpellCastReq(currentComboData.skill, owner);
                 return;
             }
             else
@@ -214,7 +216,7 @@ public class LocalPlayerCombatController : MonoBehaviour
                     //打不到敌人，自己原地平啊
                     //获取移动到可以攻击到敌人的位置
                     LookAtTarget(_currentEnemy);
-                    CombatService.Instance.SpellSkill(currentComboData.skill, owner);
+                    CombatHandler.Instance.SendSpellCastReq(currentComboData.skill, owner);
                     return;
                 }
 
@@ -232,7 +234,7 @@ public class LocalPlayerCombatController : MonoBehaviour
                 //获取移动到可以攻击到敌人的位置
                 //transform.LookAt(_currentEnemy.renderObj.transform.position);
                 LookAtTarget(_currentEnemy);
-                CombatService.Instance.SpellSkill(currentComboData.skill, owner);
+                CombatHandler.Instance.SendSpellCastReq(currentComboData.skill, owner);
                 return;
 
             }
@@ -242,7 +244,7 @@ public class LocalPlayerCombatController : MonoBehaviour
         }
 
         LookAtTarget(_currentEnemy);
-        CombatService.Instance.SpellSkill(currentComboData.skill,_currentEnemy);
+        CombatHandler.Instance.SendSpellCastReq(currentComboData.skill,_currentEnemy);
 
     }
 
@@ -558,7 +560,7 @@ public class LocalPlayerCombatController : MonoBehaviour
         }
 
         //向服务器发请求
-        CombatService.Instance.SpellSkill(skill, _currentEnemy);
+        CombatHandler.Instance.SendSpellCastReq(skill, _currentEnemy);
     }
     private void ShowExecuteMsg(string context)
     {

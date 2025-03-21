@@ -17,10 +17,14 @@ public class InfoPanelScript : MonoBehaviour
     private GameObject topMsgBox;
     private Text topMsgBoxText;
     private CanvasGroup topMsgCanvasGroup;
+
     private GameObject bottonMsgBox;
     private TextMeshProUGUI bottonMsgBoxText;
+    private CanvasGroup bottonMsgCanvasGroup;
+
     private float showTime = 1f;
     private Sequence currentTopMsgSequence; 
+    private Sequence currentBottonMsgSequence; 
 
     //确认面板
     private bool selectionPanelActive;
@@ -39,11 +43,14 @@ public class InfoPanelScript : MonoBehaviour
     private void Awake()
     {
         //获取自身身上的Text组件
+        topMsgBox = transform.Find("TopMessageBox").gameObject;
         topMsgBoxText = transform.Find("TopMessageBox/MessageText").GetComponent<Text>();
         topMsgCanvasGroup = transform.Find("TopMessageBox").GetComponent<CanvasGroup>();
+
+        bottonMsgCanvasGroup = transform.Find("BottonMessageBox").GetComponent<CanvasGroup>();
         bottonMsgBoxText = transform.Find("BottonMessageBox/MessageText").GetComponent<TextMeshProUGUI>();
-        topMsgBox = transform.Find("TopMessageBox").gameObject;
         bottonMsgBox = transform.Find("BottonMessageBox").gameObject;
+
         NetworkInfoBox = transform.Find("NetworkInfoBox");
         NDelayText = transform.Find("NetworkInfoBox/NetworkDelay").GetComponent<Text>();
         NSignalImage = transform.Find("NetworkInfoBox/SignalImage").GetComponent<Image>();
@@ -97,8 +104,8 @@ public class InfoPanelScript : MonoBehaviour
         if (currentTopMsgSequence != null && currentTopMsgSequence.IsActive())
         {
             currentTopMsgSequence.Kill();
-            topMsgCanvasGroup.alpha = 0; // 立即重置透明度
-            topMsgBox.SetActive(false);  // 确保对象处于关闭状态
+            topMsgCanvasGroup.alpha = 0;         // 立即重置透明度
+            topMsgBox.SetActive(false);     // 确保对象处于关闭状态
         }
 
         // 设置提示信息
@@ -117,18 +124,37 @@ public class InfoPanelScript : MonoBehaviour
         // 可选：设置自动回收（根据DOTween设置）
         currentTopMsgSequence.SetAutoKill(true);
     }
-
     public void ShowBottonMsg(string msg,Color? color = null)
     {
+        // 如果已有动画正在运行，立即终止并重置
+        if (currentBottonMsgSequence != null && currentBottonMsgSequence.IsActive())
+        {
+            currentBottonMsgSequence.Kill();
+            bottonMsgCanvasGroup.alpha = 0; // 立即重置透明度
+            bottonMsgBox.SetActive(false);  // 确保对象处于关闭状态
+        }
+
         if (!color.HasValue)
         {
             color = Color.red;
         }
-        //设置提示信息并且启动text
         bottonMsgBoxText.color = (Color)color;
+
+        // 设置提示信息
         bottonMsgBoxText.text = msg;
         bottonMsgBox.SetActive(true);
 
+        // 创建新动画序列
+        currentBottonMsgSequence = DOTween.Sequence();
+        currentBottonMsgSequence.Append(bottonMsgCanvasGroup.DOFade(1, 0.5f));
+        currentBottonMsgSequence.AppendInterval(showTime);
+        currentBottonMsgSequence.Append(bottonMsgCanvasGroup.DOFade(0, 0.5f).OnComplete(() => {
+            bottonMsgBox.SetActive(false);
+            currentBottonMsgSequence = null; // 动画完成后清除引用
+        }));
+
+        // 可选：设置自动回收（根据DOTween设置）
+        currentBottonMsgSequence.SetAutoKill(true);
     }
 
     /// <summary>

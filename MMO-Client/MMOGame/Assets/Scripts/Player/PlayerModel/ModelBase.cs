@@ -11,7 +11,6 @@ namespace Player
         public Animator Animator { get => animator; }
         private BaseController m_baseController;
 
-
         protected void Awake()
         {
             animator = GetComponent<Animator>();
@@ -47,6 +46,20 @@ namespace Player
 
         #region 动画事件
 
+        protected Action<int> m_startSkillHitAction;
+        protected Action<int> m_stopSkillHitAction;
+
+        public void SetSkillHitAction(Action<int> startSkillHitAction, Action<int> stopSkillHitAction)
+        {
+            m_startSkillHitAction = startSkillHitAction;
+            m_stopSkillHitAction = stopSkillHitAction;
+        }
+        public void ClearSkillHitAction()
+        {
+            m_startSkillHitAction = null;
+            m_stopSkillHitAction = null;
+        }
+
         protected void FootStep()
         {
             m_baseController.OnFootStep();
@@ -54,10 +67,12 @@ namespace Player
 
         protected void StartSkillHit(int weaponIndex)
         {
+            m_startSkillHitAction?.Invoke(weaponIndex);
         }
 
         protected void StopSkillHit(int weaponIndex)
         {
+            m_stopSkillHitAction?.Invoke(weaponIndex);
         }
 
         //允许变招
@@ -75,6 +90,24 @@ namespace Player
         {
         }
 
+        protected void EquipAction()
+        {
+            m_baseController.EquipAction();
+        }
+        protected void EquipEndAction()
+        {
+            m_baseController.EquipEndAction();
+
+        }
+        protected void UnEquipAction()
+        {
+            m_baseController.UnEquipAction();
+
+        }
+        protected void UnEquipEndAction()
+        {
+            m_baseController.UnEquipEndAction();
+        }
         #endregion
 
 

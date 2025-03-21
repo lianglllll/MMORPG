@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Hurt.cs" />
     <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
+    <Compile Include="Assets\Scripts\Handle\CombatHandler.cs" />
     <Compile Include="Assets\Art\Animation\Fly\player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Crouch.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\controller.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Effect\AEEffectClip.cs" />
     <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr2.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState_Local\Weapon\LocalPlayerState_Weapon_Idle.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Prone.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\ControlSettingPanel.cs" />
@@ -142,13 +144,14 @@
     <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\SwooshTest.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\UnitDefine.cs" />
+    <Compile Include="Assets\Scripts\Player\Controller\Combat\Weapon.cs" />
     <Compile Include="Assets\Scripts\Combat\Buffs\BuffManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\WorldInfoNodeUI.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\SelectRolePanelScript.cs" />
     <Compile Include="Assets\aExample\aMyTest\SyncMovementController.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\DialogDefine.cs" />
-    <Compile Include="Assets\Scripts\UI\Setting\Component\KeyMapSettingPanel.cs" />
     <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Slash_UIEffectList.cs" />
+    <Compile Include="Assets\Scripts\UI\Setting\Component\KeyMapSettingPanel.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Costom.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\RoleListItemScript.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\Swapper.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_JumpUpState.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_JumpUp.cs" />
+    <Compile Include="Assets\Scripts\Test\IMGUI_SkillTester.cs" />
     <Compile Include="Assets\Scripts\Combat\SkillManager.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_HurtState.cs" />
     <Compile Include="Assets\Scripts\Manager\ItemDataManager.cs" />
@@ -209,6 +213,7 @@
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\BaseData\AETimelineAsset.cs" />
     <Compile Include="Assets\aExample\CombatSystem\StateMachine\StateBase.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Config\Skill\Skill2.cs" />
+    <Compile Include="Assets\Scripts\Player\Controller\Combat\WeaponManager.cs" />
     <Compile Include="Assets\aExample\aMyTest\Mechanism\BackInTime\TimeMachineManager.cs" />
     <Compile Include="Assets\aExample\aMyTest\InteractionManager.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\ChibiDialogDemo\Scripts\ChibiDialogMain.cs" />
@@ -236,6 +241,7 @@
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Attribute\AETrackNameAttribute.cs" />
     <Compile Include="Assets\Scripts\Service\ItemService.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\UnitAudioManager.cs" />
+    <Compile Include="Assets\Scripts\LocalData\DataDefine\WeaponSkillArsenalDefine.cs" />
     <Compile Include="Assets\HotUpdate\HybridCLRGenerate\AOTGenericReferences.cs" />
     <Compile Include="Assets\Art\joker-Combat\RzFX_BloodSpray\KillTime.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\DeliverPanel.cs" />
@@ -245,7 +251,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Idle.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\NumberInputBox.cs" />
-    <Compile Include="Assets\Scripts\Service\CombatService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\BasePanel.cs" />
     <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\MouseMove.cs" />
     <Compile Include="Assets\Scripts\Manager\GameTools.cs" />

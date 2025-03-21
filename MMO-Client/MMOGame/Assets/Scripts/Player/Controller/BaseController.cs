@@ -1,8 +1,10 @@
 using GameClient.Combat;
+using GameClient.Combat.LocalSkill.Config;
 using GameClient.Entities;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using HSFramework.AI.StateMachine;
+using HSFramework.MyDelayedTaskScheduler;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,15 +29,18 @@ namespace Player
 
     public abstract class BaseController: MonoBehaviour,IStateMachineOwner
     {
-        //角色模型
+        // 角色模型
         private ModelBase model;
         public ModelBase Model { get => model; }
 
-        //角色控制器
+        // 角色控制器
         private CharacterController characterController;
         public CharacterController CharacterController { get => characterController; }
 
-        //ui控制
+        // 武器
+        private WeaponManager m_weaponManaager;
+
+        // ui控制
         [HideInInspector]
         public UnitUIController unitUIController;
 
@@ -45,7 +50,6 @@ namespace Player
         // 特效控制
         [HideInInspector]
         public UnitEffectManager m_unitEffectManager;
-
 
         //信息
         private Actor actor;
@@ -85,6 +89,7 @@ namespace Player
         protected virtual void Awake()
         {
             model = transform.Find("Model").GetComponent<ModelBase>();
+            m_weaponManaager = transform.Find("Model").GetComponent<WeaponManager>();
             characterController = GetComponent<CharacterController>();
             unitUIController = GetComponent<UnitUIController>();
             m_unitAudioManager = transform.Find("UnitAudioManager").GetComponent<UnitAudioManager>();
@@ -100,6 +105,7 @@ namespace Player
             stateMachine = new StateMachine();
             m_stateMachineParameter = new StateMachineParameter();
             stateMachine.Init(this);
+            m_weaponManaager.Init();
         }
         public virtual void UnInit()
         {
@@ -168,10 +174,26 @@ namespace Player
         }
         public virtual void ChangeMode(NetActorMode mode)
         {
-            if (m_curMode != mode) {
-                m_curMode = mode;
-                ChangeState(NetActorState.Idle,true);
+            if (m_curMode == mode) {
+                goto End;
             }
+            var old_Mode = m_curMode;
+            if(old_Mode == NetActorMode.EquipSword)
+            {
+                model.Animator.SetBool("UnEquiping", true);
+            }
+
+            m_curMode = mode;
+            ChangeState(NetActorState.Idle, true);
+
+
+            if (m_curMode == NetActorMode.EquipSword)
+            {
+                model.Animator.SetBool("Equiping", true);
+            }
+
+        End:
+            return;
         }
         public void InitModeAndState(NetActorMode mode, NetActorState state = NetActorState.None)
         {
@@ -204,6 +226,24 @@ namespace Player
         {
             m_unitAudioManager.PlayFootAudioClip();
         }
+        public void EquipAction()
+        {
+            // 设置武器显隐等
+            m_weaponManaager.ShowCurWeapon();
+        }
+        public void EquipEndAction()
+        {
+            model.Animator.SetBool("Equiping", false);
+        }
+        public void UnEquipAction()
+        {
+            // 设置武器显隐等
+            m_weaponManaager.HideCurWeapon();
+        }
+        public void UnEquipEndAction()
+        {
+            model.Animator.SetBool("UnEquiping", false);
+        }
 
         #endregion
 
@@ -227,6 +267,39 @@ namespace Player
 
             // 立即将角色转向目标方向
             transform.rotation = targetRotation;
+        }
+        public void CreateSpawnObjectAtPos(LocalSkill_SpawnObject spawnObj, Vector3 spawnPoint)
+        {
+            if (spawnObj != null && spawnObj.prefab != null)
+            {
+                DelayedTaskScheduler.Instance.AddDelayedTask(spawnObj.delayTime, () => {
+                    var tmp = Instantiate(spawnObj.prefab);
+                    tmp.transform.position = spawnPoint + spawnObj.pos;
+                    tmp.transform.eulerAngles += spawnObj.rotation;
+                    tmp.transform.localScale += spawnObj.rotation;
+                    tmp.transform.LookAt(Camera.main.transform);
+                    PlayAudio(spawnObj.audioClip);
+                });
+            }
+
+        }
+        public void CreateSpawnObjectAroundOwner(LocalSkill_SpawnObject spawnObj)
+        {
+            if (spawnObj != null && spawnObj.prefab != null)
+            {
+                DelayedTaskScheduler.Instance.AddDelayedTask(spawnObj.delayTime, () => {
+                    // 一般特效的生成位置是相对于主角的
+                    var obj = Instantiate(spawnObj.prefab);
+                    obj.transform.position = transform.TransformPoint(spawnObj.pos);                
+                    obj.transform.rotation = transform.rotation * Quaternion.Euler(spawnObj.rotation);
+                    PlayAudio(spawnObj.audioClip);
+                });
+            }
+        }
+        public void PlayAudio(AudioClip audioClip)
+        {
+            if (audioClip == null) return;
+            m_unitAudioManager.PlayAudio(audioClip);
         }
 
         #endregion

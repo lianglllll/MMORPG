@@ -140,7 +140,7 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
             return;
         }
 
-        CombatService.Instance.SpellSkill(_skill,GameApp.target);
+        CombatHandler.Instance.SendSpellCastReq(_skill,GameApp.target);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

@@ -198,7 +198,6 @@ public class Res
             return handle.AssetObject as T;
         }
 #endif
-
     }
 
     public static String LoadRawJsonFileSync(string location)

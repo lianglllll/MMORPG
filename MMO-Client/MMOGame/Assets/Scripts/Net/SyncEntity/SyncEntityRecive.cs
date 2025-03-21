@@ -58,7 +58,7 @@ namespace HSFramework.Net
                 // syncController.ChangeState(nEntitySync.State);
             }
         }
-        private void SetValueTo(Vec3 a, ref Vector3 b)
+        private void SetValueTo(NetVector3 a, ref Vector3 b)
         {
             b.x = a.X * 0.001f;
             b.y = a.Y * 0.001f;

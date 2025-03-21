@@ -45,12 +45,12 @@ namespace GameClient.Entities
         public ClientItem(NetItemNode netItemNode) :base(netItemNode.EntityId, netItemNode.Transform)
         {
             m_netItemNode = netItemNode;
-            m_item = new Item(netItemNode.ItemInfo);
+            m_item = new Item(netItemNode.NetItemDataNode);
         }
         public void UpdateInfo(NetItemNode netItemNode)
         {
             m_netItemNode = netItemNode;
-            m_item = new Item(netItemNode.ItemInfo);
+            m_item = new Item(netItemNode.NetItemDataNode);
         }
     }
 }

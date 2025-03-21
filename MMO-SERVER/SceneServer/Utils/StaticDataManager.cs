@@ -15,6 +15,10 @@ namespace SceneServer.Utils
         public Dictionary<int, UnitDefine> unitDefineDict = null;
         public Dictionary<int, SkillDefine> skillDefineDict = null;
         public Dictionary<int, BuffDefine> buffDefineDict = null;
+        public Dictionary<int, SpawnDefine> spawnDefineDict = null;
+        public Dictionary<int, RevivalPointDefine> revivalPointDefineDict = null;
+        public Dictionary<int, WeaponSkillArsenalDefine> weaponSkillArsenalDefineDict = null;
+
 
         //初始化，就是将文件中的数据读入
         public void Init()
@@ -24,6 +28,9 @@ namespace SceneServer.Utils
             unitDefineDict = Load<UnitDefine>("UnitDefine.json");
             skillDefineDict = Load<SkillDefine>("SkillDefine.json");
             buffDefineDict = Load<BuffDefine>("BuffDefine.json");
+            spawnDefineDict = Load<SpawnDefine>("SpawnDefine.json");
+            revivalPointDefineDict = Load<RevivalPointDefine>("RevivalPointDefine.json");
+            weaponSkillArsenalDefineDict = Load<WeaponSkillArsenalDefine>("WeaponSkillArsenalDefine.json");
         }
 
         //根据path加载解析json文件转换为dict

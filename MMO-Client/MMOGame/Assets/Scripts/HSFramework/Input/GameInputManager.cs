@@ -30,6 +30,8 @@ public class GameInputManager : Singleton<GameInputManager>
     public bool Crouch => _inputActions.GameInput.Crouch.triggered;
     public bool KeyOneDown => _inputActions.GameInput.KeyOne.triggered;
     public bool KeyTwoDown => _inputActions.GameInput.KeyTwo.triggered;
+    public bool KeyThreeDown => _inputActions.GameInput.KeyThree.triggered;
+
     public bool SustainQ => _inputActions.GameInput.Q.phase == InputActionPhase.Performed;
     public bool SustainE => _inputActions.GameInput.E.phase == InputActionPhase.Performed;
     public bool AnyKey => _inputActions.GameInput.AnyKey.triggered;

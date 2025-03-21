@@ -6,10 +6,12 @@ using UnityEngine;
 using System.IO;
 using HSFramework.Setting;
 using HSFramework.MySingleton;
+using GameClient.Combat.LocalSkill.Config;
 
 public class LocalDataManager : SingletonNonMono<LocalDataManager>
 {
     private const string _prefix = "Files/Data";
+    private const string skillConfigPrefix = "Combat/SkillConfig/Skill_";
     private string settingsFilePath;
 
     JsonSerializerSettings settings = new JsonSerializerSettings
@@ -27,7 +29,9 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
     //panel路径映射
     public Dictionary<string, PanelDefine> panelDefineDict = null;
     //技能信息
+    public Dictionary<int, WeaponSkillArsenalDefine> WeaponSkillArsenalDefineDict = null;
     public Dictionary<int, SkillDefine> skillDefineDict = null;
+    public Dictionary<int, LocalSkill_Config_SO> localSkillConfigSODict;
     //物品信息
     public Dictionary<int, ItemDefine> itemDefineDict = null;
     //等级经验信息
@@ -44,6 +48,8 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
         spaceDefineDict = _LoadJsonAnd2Dict<int,SpaceDefine>("SpaceDefine");
         unitDefineDict = _LoadJsonAnd2Dict<int, UnitDefine>("UnitDefine");
         skillDefineDict = _LoadJsonAnd2Dict<int, SkillDefine>("SkillDefine");
+        WeaponSkillArsenalDefineDict = _LoadJsonAnd2Dict<int, WeaponSkillArsenalDefine>("WeaponSkillArsenalDefine");
+        localSkillConfigSODict = new();
         itemDefineDict = _LoadJsonAnd2Dict<int, ItemDefine>("ItemDefine");
         levelDefineDict = _LoadJsonAnd2Dict<int, LevelDefine>("LevelDefine");
         buffDefineDict = _LoadJsonAnd2Dict<int, BuffDefine>("BuffDefine");
@@ -73,6 +79,7 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
         return def.DialogFilePath;
     }
 
+    // 设置面板相关
     private GameSettingDatas LoadSettings()
     {
         if (File.Exists(settingsFilePath))
@@ -107,6 +114,26 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
             Debug.LogError("Failed to save game settings: " + e.Message);
         }
     }
+
+    // 技能相关
+    public LocalSkill_Config_SO GetLocalSkillConfigSOBySkillId(int skillId)
+    {
+        LocalSkill_Config_SO resultSo;
+        if (localSkillConfigSODict.TryGetValue(skillId, out resultSo))
+        {
+            goto End;
+        }
+
+        string path = skillConfigPrefix + skillId + ".asset";
+        resultSo = Res.LoadAssetSync<LocalSkill_Config_SO>(path);
+
+        // 缓存一下
+        localSkillConfigSODict.Add(skillId, resultSo);
+
+    End:
+        return resultSo;
+    }
+
 }
 
 //自定义的JsonConverter,用于解决普通的JsonConverter无法转换float[]的问题

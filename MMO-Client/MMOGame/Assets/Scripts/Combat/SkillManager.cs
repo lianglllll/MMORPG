@@ -22,6 +22,16 @@ namespace GameClient.Manager
         public void Init(Actor owner, Google.Protobuf.Collections.RepeatedField<int> equippedSkills)
         {
             m_owner = owner;
+
+            var tmpDef = LocalDataManager.Instance.
+                WeaponSkillArsenalDefineDict[m_owner.UnitDefine.weaponSkillArsenalId];
+            var baseSkillIds = tmpDef.SkillIds;
+            foreach (var skillId in baseSkillIds)
+            {
+                var skill = new Skill(owner, skillId);
+                Skills.Add(skill);
+            }
+
             //初始化技能信息，处理服务器传送过来的
             foreach (var skillId in equippedSkills)
             {

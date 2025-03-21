@@ -25,7 +25,6 @@ public class UnitAudioManager : MonoBehaviour
     {
     }
 
-
     private RaycastHit _groundHit;
     public void PlayFootAudioClip()
     {
@@ -51,6 +50,10 @@ public class UnitAudioManager : MonoBehaviour
         }
     End:
         return;
+    }
+    public void PlayAudio(AudioClip audioClip)
+    {
+        m_audioSource.PlayOneShot(audioClip);
     }
 
 }

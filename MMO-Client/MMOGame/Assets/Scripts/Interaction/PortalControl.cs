@@ -37,7 +37,7 @@ public class PortalControl : InteractionBehaviour
                     return;
                 }
                 //给服务器发送请求
-                CombatService.Instance.SpaceDeliver(spaceId, pointId);
+                CombatHandler.Instance.SpaceDeliver(spaceId, pointId);
             };
 
 

@@ -12,10 +12,10 @@ namespace GameClient.InventorySystem
         private AttrubuteData m_attrubuteData;
         public EquipsType EquipsType => m_equipsType;
 
-        public Equipment(ItemInfo itemInfo) : base(itemInfo)
+        public Equipment(NetItemDataNode itemInfo) : base(itemInfo)
         {
             m_equipsType = ParseEquipType(ItemDefine.EquipType);
-            LoadAttrubuteData(itemInfo);
+            // LoadAttrubuteData(itemInfo);
         }
         public Equipment(ItemDefine define,int position = 0) : base(define, 1, position)
         {

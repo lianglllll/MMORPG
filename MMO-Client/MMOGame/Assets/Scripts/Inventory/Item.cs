@@ -2,7 +2,7 @@ using HS.Protobuf.Game.Backpack;
 
 public class Item 
 {
-    private ItemInfo m_itmeInfo;
+    private NetItemDataNode m_itmeInfo;
     private ItemDefine m_itemDefine;
 
     public ItemDefine ItemDefine => m_itemDefine;
@@ -18,23 +18,23 @@ public class Item
     {
         get
         {
-            return m_itmeInfo.Position;
+            return m_itmeInfo.GridIdx;
         }
         set
         {
-            m_itmeInfo.Position = value;
+            m_itmeInfo.GridIdx = value;
         }
     }
     public string IconPath => m_itemDefine.Icon;
 
-    public Item(ItemInfo itemInfo)
+    public Item(NetItemDataNode itemInfo)
     {
         m_itmeInfo = itemInfo;
     }
     public Item(ItemDefine define, int amount = 1, int position = 0)
     {
         m_itemDefine = define;
-        m_itmeInfo = new ItemInfo() { ItemId = ItemDefine.ID, Amount = amount, Position = position };
+        m_itmeInfo = new NetItemDataNode() { ItemId = ItemDefine.ID, Amount = amount, GridIdx = position };
     }
 
     public ItemType GetItemType()

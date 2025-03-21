@@ -186,6 +186,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "KeyThree",
+                    "type": "Button",
+                    "id": "7befb25f-6c57-4713-928b-01fcd9a6db3b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Grab",
                     "type": "Button",
                     "id": "1779e35e-cdfe-4253-8a64-aad87fac9a50",
@@ -488,6 +497,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "KeyEsc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "430428b2-fe22-4617-a497-f0408cae7abd",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyThree",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

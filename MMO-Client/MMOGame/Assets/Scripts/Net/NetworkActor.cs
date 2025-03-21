@@ -1,4 +1,5 @@
 using GameClient.Entities;
+using HS.Protobuf.Common;
 using HS.Protobuf.Scene;
 using HS.Protobuf.SceneEntity;
 using Player;

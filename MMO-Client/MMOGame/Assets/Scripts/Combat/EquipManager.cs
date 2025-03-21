@@ -15,8 +15,8 @@ namespace GameClient.Combat
             m_equipsDict.Clear();
             foreach (var itemInfo in itemInfos)
             {
-                var item = new Equipment(itemInfo);
-                m_equipsDict[item.EquipsType] = item;
+                // var item = new Equipment(itemInfo);
+                // m_equipsDict[item.EquipsType] = item;
             }
             return true;
         }

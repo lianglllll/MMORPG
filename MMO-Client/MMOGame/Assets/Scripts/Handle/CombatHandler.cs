@@ -9,31 +9,129 @@ using HS.Protobuf.Combat.Skill;
 using HS.Protobuf.SceneEntity;
 using HSFramework.MySingleton;
 
-public class CombatService : SingletonNonMono<CombatService>
+public class CombatHandler : SingletonNonMono<CombatHandler>
 {
     /// <summary>
     /// 初始化，gamemanager中启用
     /// </summary>
     public void Init()
     {
+        ProtoHelper.Instance.Register<SpellCastRequest>((int)SkillProtocol.SpellCastReq);
+        ProtoHelper.Instance.Register<SpellCastResponse>((int)SkillProtocol.SpellCastResp);
+        ProtoHelper.Instance.Register<SpellCastFailResponse>((int)SkillProtocol.SpellCastFailResp);
+
+        MessageRouter.Instance.Subscribe<SpellCastResponse>(HandleSpellCastResponse);
+        MessageRouter.Instance.Subscribe<SpellCastFailResponse>(HandleSpellFailResponse);
+
+
         MessageRouter.Instance.Subscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
-        MessageRouter.Instance.Subscribe<SpellCastResponse>(_SpellCastResponse);
-        MessageRouter.Instance.Subscribe<SpellFailResponse>(_SpellFailResponse);
         MessageRouter.Instance.Subscribe<DamageResponse>(_DamageResponse);
         MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
-
     public void UnInit()
     {
+        MessageRouter.Instance.UnSubscribe<SpellCastResponse>(HandleSpellCastResponse);
+        MessageRouter.Instance.UnSubscribe<SpellCastFailResponse>(HandleSpellFailResponse);
         MessageRouter.Instance.UnSubscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.UnSubscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.UnSubscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
-        MessageRouter.Instance.UnSubscribe<SpellCastResponse>(_SpellCastResponse);
-        MessageRouter.Instance.UnSubscribe<SpellFailResponse>(_SpellFailResponse);
         MessageRouter.Instance.UnSubscribe<DamageResponse>(_DamageResponse);
         MessageRouter.Instance.UnSubscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
+    }
+
+
+    public void SendSpellCastReq(Skill skill, Actor target)
+    {
+        if (skill == null) return;
+        //向服务器发送施法请求
+        SpellCastRequest req = new SpellCastRequest() { Info = new CastInfo() };
+        req.Info.SkillId = skill.Define.ID;
+        req.Info.CasterId = skill.Owner.EntityId;
+        if (skill.IsUnitTarget)
+        {
+            //传个目标id
+            req.Info.TargetId = target.EntityId;
+        }
+        else if (skill.IsPointTarget)
+        {
+            //传个pos即可
+            req.Info.Point = V3.ToNetVector3(target.Position);
+        }
+        else if (skill.IsNoneTarget)
+        {
+            //无目标就啥也不用填了，这种技能类似旋风斩的，跟随主角的范围伤害。在这一点上和点目标技能进行了区分。
+        }
+        NetManager.Instance.Send(req);
+    }
+    private void HandleSpellFailResponse(Connection sender, SpellCastFailResponse msg)
+    {
+        string msgContext = "";
+        switch (msg.Reason)
+        {
+            case CastResult.Success:
+                break;
+            case CastResult.IsPassive:
+                msgContext = "被动技能";
+                break;
+            case CastResult.MpLack:
+                msgContext = "MP不足";
+                break;
+            case CastResult.EntityDead:
+                msgContext = "目标已经死亡";
+                break;
+            case CastResult.OutOfRange:
+                msgContext = "目标超出范围";
+                break;
+            case CastResult.Running:
+                msgContext = "技能正在释放";
+                break;
+            case CastResult.ColdDown:
+                msgContext = "技能正在冷却";
+                break;
+            case CastResult.TargetError:
+                msgContext = "目标错误";
+                break;
+        }
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            UIManager.Instance.MessagePanel.ShowBottonMsg(msgContext);
+        });
+    }
+    private void HandleSpellCastResponse(Connection conn, SpellCastResponse msg)
+    {
+
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            foreach (CastInfo item in msg.List)
+            {
+                var caster = EntityManager.Instance.GetEntity<Actor>(item.CasterId);
+                if (caster == null) continue;
+
+                var skill = caster.m_skillManager.GetSkillBySkillId(item.SkillId);
+                if (skill.IsUnitTarget)
+                {
+                    var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);
+                    skill.Use(new SCEntity(target));
+                }
+                else if (skill.IsPointTarget)
+                {
+
+                }
+                else if (skill.IsNoneTarget)
+                {
+                    skill.Use(new SCEntity(caster));
+                }
+
+                //skill ui
+                if (GameApp.character.EntityId == skill.Owner.EntityId)
+                {
+                    UIManager.Instance.MessagePanel.ShowBottonMsg(skill.Define.Name, Color.green);
+                }
+            }
+        });
+
     }
 
 
@@ -70,85 +168,6 @@ public class CombatService : SingletonNonMono<CombatService>
         EntityManager.Instance.RemoveEntity(msg.EntityId);
     }
 
-    /// <summary>
-    /// 施法失败的响应
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="msg"></param>
-    private void _SpellFailResponse(Connection sender, SpellFailResponse msg)
-    {
-        string msgContext = "";
-        switch (msg.Reason)
-        {
-            case CastResult.Success:
-                break;
-            case CastResult.IsPassive:
-                msgContext = "被动技能";
-                break;
-            case CastResult.MpLack:
-                msgContext = "MP不足";
-                break;
-            case CastResult.EntityDead:
-                msgContext = "目标已经死亡";
-                break;
-            case CastResult.OutOfRange:
-                msgContext = "目标超出范围";
-                break;
-            case CastResult.Running:
-                msgContext = "技能正在释放";
-                break;
-            case CastResult.ColdDown:
-                msgContext = "技能正在冷却";
-                break;
-            case CastResult.TargetError:
-                msgContext = "目标错误";
-                break;
-        }
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            UIManager.Instance.MessagePanel.ShowBottonMsg(msgContext);
-        });
-    }
-
-    /// <summary>
-    /// actor施法通知
-    /// </summary>
-    /// <param name="conn"></param>
-    /// <param name="msg"></param>
-    private void _SpellCastResponse(Connection conn, SpellCastResponse msg)
-    {
-
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            foreach (CastInfo item in msg.List)
-            {
-                var caster = EntityManager.Instance.GetEntity<Actor>(item.CasterId);
-                if (caster == null) continue;
-
-                var skill = caster.m_skillManager.GetSkillBySkillId(item.SkillId);
-                if (skill.IsUnitTarget)
-                {
-                    var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);
-                    skill.Use(new SCEntity(target));
-                }
-                else if (skill.IsPointTarget)
-                {
-
-                }
-                else if (skill.IsNoneTarget)
-                {
-                    skill.Use(new SCEntity(caster));
-                }
-
-                //skill ui
-                if (GameApp.character.EntityId == skill.Owner.EntityId)
-                {
-                    UIManager.Instance.MessagePanel.ShowBottonMsg(skill.Define.Name, Color.green);
-                }
-            }
-        });
-
-    }
 
     /// <summary>
     /// actor的伤害响应包
@@ -226,32 +245,6 @@ public class CombatService : SingletonNonMono<CombatService>
         });
     }
 
-    /// <summary>
-    /// 释放技能
-    /// </summary>
-    /// <param name="skill"></param>
-    public  void SpellSkill(Skill skill,Actor target)
-    {
-        if (skill == null) return;
-        //向服务器发送施法请求
-        SpellCastRequest req = new SpellCastRequest() { Info = new CastInfo() };
-        req.Info.SkillId = skill.Define.ID;
-        req.Info.CasterId = skill.Owner.EntityId ;
-        if (skill.IsUnitTarget)
-        {
-            //传个目标id
-            req.Info.TargetId = target.EntityId;
-        }
-        else if (skill.IsPointTarget)
-        {
-            //传个pos即可
-            req.Info.Point = V3.ToVec3(target.Position);
-        }else if (skill.IsNoneTarget)
-        {
-            //无目标就啥也不用填了，这种技能类似旋风斩的，跟随主角的范围伤害。在这一点上和点目标技能进行了区分。
-        }
-        NetManager.Instance.Send(req);
-    }
 
     /// <summary>
     /// 传送

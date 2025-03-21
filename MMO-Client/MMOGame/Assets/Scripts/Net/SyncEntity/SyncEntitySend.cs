@@ -69,8 +69,8 @@ namespace HSFramework.Net
             {
                 Entity = new NetEntity()
                 {
-                    Position = new Vec3(),
-                    Direction = new Vec3()
+                    Position = new NetVector3(),
+                    Direction = new NetVector3()
                 }
             }
         };
@@ -99,7 +99,7 @@ namespace HSFramework.Net
             transform.hasChanged = false;
             req.EntitySync.State = ActorState.Constant;
         }
-        private void SetValueTo(Vector3 a, Vec3 b)
+        private void SetValueTo(Vector3 a, NetVector3 b)
         {
             b.X = (int)(a.x * 1000);
             b.Y = (int)(a.y * 1000);
@@ -128,7 +128,7 @@ namespace HSFramework.Net
             transform.position = m_position;
 
         }
-        private void SetValueTo(Vec3 a, ref Vector3 b)
+        private void SetValueTo(NetVector3 a, ref Vector3 b)
         {
             b.x = a.X * 0.001f;
             b.y = a.Y * 0.001f;
