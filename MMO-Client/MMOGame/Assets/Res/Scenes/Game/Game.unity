@@ -472,6 +472,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918d204f6c7d132489e250b79ad693e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _config:
+    inputBufferTime: 0.15
+    analogDeadzone: 0.1
+    holdThreshold: 0.2
 --- !u!114 &1757756325
 MonoBehaviour:
   m_ObjectHideFlags: 0
