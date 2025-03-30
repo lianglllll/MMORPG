@@ -46,7 +46,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Run"",
+                    ""name"": ""LeftShift"",
                     ""type"": ""Button"",
                     ""id"": ""64975ad2-313c-42d3-a918-e09d75222e6c"",
                     ""expectedControlType"": ""Button"",
@@ -55,7 +55,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LAttack"",
+                    ""name"": ""MouseLeft"",
                     ""type"": ""Button"",
                     ""id"": ""25d0162b-c3b1-4113-8e51-8928c9e74620"",
                     ""expectedControlType"": ""Button"",
@@ -64,126 +64,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RAttack"",
+                    ""name"": ""MouseRight"",
                     ""type"": ""Button"",
                     ""id"": ""206ebc11-3526-4d70-9392-33453d4c7466"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Q"",
-                    ""type"": ""Button"",
-                    ""id"": ""2fa5cc7d-9677-4649-88d1-695865e8019e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""E"",
-                    ""type"": ""Button"",
-                    ""id"": ""4b914b10-3a79-4c71-8aeb-c6e36f125a25"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""113b744e-e80f-4950-be47-3ce2d447dcf1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Parry"",
-                    ""type"": ""Button"",
-                    ""id"": ""15007945-c042-48b0-b7fc-d2cdd603cb73"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""EquipWP"",
-                    ""type"": ""Button"",
-                    ""id"": ""3defcaec-03a7-4122-9c72-98341bce3828"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Quit"",
-                    ""type"": ""Button"",
-                    ""id"": ""f33ab4f1-1921-43b2-bbd1-02fb86e8936c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Enter"",
-                    ""type"": ""Button"",
-                    ""id"": ""5a923448-2431-4793-8970-8fb72c3b4b1e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AnyKey"",
-                    ""type"": ""Button"",
-                    ""id"": ""6fe22e67-e748-476a-941f-49bd389ada9e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""6901df71-c6ee-443c-b698-a2fe19576475"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""BigJump"",
-                    ""type"": ""Button"",
-                    ""id"": ""5f48c80c-0f28-45bf-b4a9-7add90211dac"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LetfAlt"",
-                    ""type"": ""Button"",
-                    ""id"": ""26da4fc1-785d-42d1-b55a-2d02add2d067"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Space"",
-                    ""type"": ""Button"",
-                    ""id"": ""b10e1d3f-2957-4f7c-8b7d-4b418308dbc0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Crouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""82cd8233-ae2d-4e13-8c34-6e3439c0144c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -217,9 +100,99 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Grab"",
+                    ""name"": ""KeyFour"",
+                    ""type"": ""Button"",
+                    ""id"": ""465cd2d3-0309-4192-b55b-8aecb87576b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""C"",
+                    ""type"": ""Button"",
+                    ""id"": ""82cd8233-ae2d-4e13-8c34-6e3439c0144c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""E"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b914b10-3a79-4c71-8aeb-c6e36f125a25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""F"",
                     ""type"": ""Button"",
                     ""id"": ""1779e35e-cdfe-4253-8a64-aad87fac9a50"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""G"",
+                    ""type"": ""Button"",
+                    ""id"": ""15007945-c042-48b0-b7fc-d2cdd603cb73"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Q"",
+                    ""type"": ""Button"",
+                    ""id"": ""2fa5cc7d-9677-4649-88d1-695865e8019e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Z"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bebb768-c608-4e2f-81fb-c2ded6274580"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""b10e1d3f-2957-4f7c-8b7d-4b418308dbc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""f33ab4f1-1921-43b2-bbd1-02fb86e8936c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a923448-2431-4793-8970-8fb72c3b4b1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LetfAlt"",
+                    ""type"": ""Button"",
+                    ""id"": ""26da4fc1-785d-42d1-b55a-2d02add2d067"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -229,6 +202,33 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""name"": ""KeyEsc"",
                     ""type"": ""Button"",
                     ""id"": ""4146bf7d-96f3-4a1d-8642-41cda15cd406"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AnyKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""6fe22e67-e748-476a-941f-49bd389ada9e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tab"",
+                    ""type"": ""Button"",
+                    ""id"": ""717e37a7-d4ae-4cce-adbe-ac1a3406fb4e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Caps"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8cf703d-c5bd-4f2f-b6cd-e5c0441f9d52"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -309,7 +309,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""LeftShift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -320,7 +320,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LAttack"",
+                    ""action"": ""MouseLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -331,7 +331,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RAttack"",
+                    ""action"": ""MouseRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -343,50 +343,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""E"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fc2edcbb-719e-4f49-aa55-0548240d0d4e"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fb443539-de40-45f3-80e8-316c3b031591"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Parry"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""da316c71-d3d2-4eac-a822-01e1e1100d2e"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""EquipWP"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d6c60285-2625-420c-bff5-91d68846df33"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Q"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -414,39 +370,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5153b7dc-fd5c-4c9a-b7ad-4d642e575c2b"",
-                    ""path"": ""<Keyboard>/anyKey"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AnyKey"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d268c015-60e1-462c-ac94-1c8807e783c4"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe4432e7-9431-42fc-a3e2-9e954bfaf8d4"",
-                    ""path"": ""<Keyboard>/v"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BigJump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3da953c3-a8f4-4f75-9f37-ec15ec95a89e"",
                     ""path"": ""<Keyboard>/leftAlt"",
                     ""interactions"": """",
@@ -458,23 +381,23 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d45741dd-c76b-4d2c-8623-abd0af346526"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""bc81e988-2d2f-4145-ac69-9bac62915882"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Space"",
+                    ""action"": ""KeyEsc"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""097e8bd2-797e-4942-8f96-c3d4de9170f7"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""id"": ""6ba826c9-60eb-4373-8cee-8523c672e805"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Crouch"",
+                    ""action"": ""KeyFour"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -502,34 +425,111 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fbbe2152-8f5b-45bd-bcf7-de640e48a504"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grab"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bc81e988-2d2f-4145-ac69-9bac62915882"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""KeyEsc"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""430428b2-fe22-4617-a497-f0408cae7abd"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""KeyThree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d45741dd-c76b-4d2c-8623-abd0af346526"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbbe2152-8f5b-45bd-bcf7-de640e48a504"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""F"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb443539-de40-45f3-80e8-316c3b031591"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""G"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""097e8bd2-797e-4942-8f96-c3d4de9170f7"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""C"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6c60285-2625-420c-bff5-91d68846df33"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Q"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5153b7dc-fd5c-4c9a-b7ad-4d642e575c2b"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f497fcf5-9e8b-4089-b38d-d2f598d22c8f"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ea4a53c-7977-4b5f-8c37-6b0b250e2f2a"",
+                    ""path"": ""<Keyboard>/capsLock"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Caps"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2dbe7ede-ef5d-4273-89da-81c8acd774dc"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Z"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -570,27 +570,27 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_GameInput = asset.FindActionMap("GameInput", throwIfNotFound: true);
         m_GameInput_Movement = m_GameInput.FindAction("Movement", throwIfNotFound: true);
         m_GameInput_CameraLook = m_GameInput.FindAction("CameraLook", throwIfNotFound: true);
-        m_GameInput_Run = m_GameInput.FindAction("Run", throwIfNotFound: true);
-        m_GameInput_LAttack = m_GameInput.FindAction("LAttack", throwIfNotFound: true);
-        m_GameInput_RAttack = m_GameInput.FindAction("RAttack", throwIfNotFound: true);
-        m_GameInput_Q = m_GameInput.FindAction("Q", throwIfNotFound: true);
-        m_GameInput_E = m_GameInput.FindAction("E", throwIfNotFound: true);
-        m_GameInput_Dash = m_GameInput.FindAction("Dash", throwIfNotFound: true);
-        m_GameInput_Parry = m_GameInput.FindAction("Parry", throwIfNotFound: true);
-        m_GameInput_EquipWP = m_GameInput.FindAction("EquipWP", throwIfNotFound: true);
-        m_GameInput_Quit = m_GameInput.FindAction("Quit", throwIfNotFound: true);
-        m_GameInput_Enter = m_GameInput.FindAction("Enter", throwIfNotFound: true);
-        m_GameInput_AnyKey = m_GameInput.FindAction("AnyKey", throwIfNotFound: true);
-        m_GameInput_Jump = m_GameInput.FindAction("Jump", throwIfNotFound: true);
-        m_GameInput_BigJump = m_GameInput.FindAction("BigJump", throwIfNotFound: true);
-        m_GameInput_LetfAlt = m_GameInput.FindAction("LetfAlt", throwIfNotFound: true);
-        m_GameInput_Space = m_GameInput.FindAction("Space", throwIfNotFound: true);
-        m_GameInput_Crouch = m_GameInput.FindAction("Crouch", throwIfNotFound: true);
+        m_GameInput_LeftShift = m_GameInput.FindAction("LeftShift", throwIfNotFound: true);
+        m_GameInput_MouseLeft = m_GameInput.FindAction("MouseLeft", throwIfNotFound: true);
+        m_GameInput_MouseRight = m_GameInput.FindAction("MouseRight", throwIfNotFound: true);
         m_GameInput_KeyOne = m_GameInput.FindAction("KeyOne", throwIfNotFound: true);
         m_GameInput_KeyTwo = m_GameInput.FindAction("KeyTwo", throwIfNotFound: true);
         m_GameInput_KeyThree = m_GameInput.FindAction("KeyThree", throwIfNotFound: true);
-        m_GameInput_Grab = m_GameInput.FindAction("Grab", throwIfNotFound: true);
+        m_GameInput_KeyFour = m_GameInput.FindAction("KeyFour", throwIfNotFound: true);
+        m_GameInput_C = m_GameInput.FindAction("C", throwIfNotFound: true);
+        m_GameInput_E = m_GameInput.FindAction("E", throwIfNotFound: true);
+        m_GameInput_F = m_GameInput.FindAction("F", throwIfNotFound: true);
+        m_GameInput_G = m_GameInput.FindAction("G", throwIfNotFound: true);
+        m_GameInput_Q = m_GameInput.FindAction("Q", throwIfNotFound: true);
+        m_GameInput_Z = m_GameInput.FindAction("Z", throwIfNotFound: true);
+        m_GameInput_Space = m_GameInput.FindAction("Space", throwIfNotFound: true);
+        m_GameInput_Quit = m_GameInput.FindAction("Quit", throwIfNotFound: true);
+        m_GameInput_Enter = m_GameInput.FindAction("Enter", throwIfNotFound: true);
+        m_GameInput_LetfAlt = m_GameInput.FindAction("LetfAlt", throwIfNotFound: true);
         m_GameInput_KeyEsc = m_GameInput.FindAction("KeyEsc", throwIfNotFound: true);
+        m_GameInput_AnyKey = m_GameInput.FindAction("AnyKey", throwIfNotFound: true);
+        m_GameInput_Tab = m_GameInput.FindAction("Tab", throwIfNotFound: true);
+        m_GameInput_Caps = m_GameInput.FindAction("Caps", throwIfNotFound: true);
         // UIInput
         m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
         m_UIInput_KeyEsc = m_UIInput.FindAction("KeyEsc", throwIfNotFound: true);
@@ -655,54 +655,54 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private IGameInputActions m_GameInputActionsCallbackInterface;
     private readonly InputAction m_GameInput_Movement;
     private readonly InputAction m_GameInput_CameraLook;
-    private readonly InputAction m_GameInput_Run;
-    private readonly InputAction m_GameInput_LAttack;
-    private readonly InputAction m_GameInput_RAttack;
-    private readonly InputAction m_GameInput_Q;
-    private readonly InputAction m_GameInput_E;
-    private readonly InputAction m_GameInput_Dash;
-    private readonly InputAction m_GameInput_Parry;
-    private readonly InputAction m_GameInput_EquipWP;
-    private readonly InputAction m_GameInput_Quit;
-    private readonly InputAction m_GameInput_Enter;
-    private readonly InputAction m_GameInput_AnyKey;
-    private readonly InputAction m_GameInput_Jump;
-    private readonly InputAction m_GameInput_BigJump;
-    private readonly InputAction m_GameInput_LetfAlt;
-    private readonly InputAction m_GameInput_Space;
-    private readonly InputAction m_GameInput_Crouch;
+    private readonly InputAction m_GameInput_LeftShift;
+    private readonly InputAction m_GameInput_MouseLeft;
+    private readonly InputAction m_GameInput_MouseRight;
     private readonly InputAction m_GameInput_KeyOne;
     private readonly InputAction m_GameInput_KeyTwo;
     private readonly InputAction m_GameInput_KeyThree;
-    private readonly InputAction m_GameInput_Grab;
+    private readonly InputAction m_GameInput_KeyFour;
+    private readonly InputAction m_GameInput_C;
+    private readonly InputAction m_GameInput_E;
+    private readonly InputAction m_GameInput_F;
+    private readonly InputAction m_GameInput_G;
+    private readonly InputAction m_GameInput_Q;
+    private readonly InputAction m_GameInput_Z;
+    private readonly InputAction m_GameInput_Space;
+    private readonly InputAction m_GameInput_Quit;
+    private readonly InputAction m_GameInput_Enter;
+    private readonly InputAction m_GameInput_LetfAlt;
     private readonly InputAction m_GameInput_KeyEsc;
+    private readonly InputAction m_GameInput_AnyKey;
+    private readonly InputAction m_GameInput_Tab;
+    private readonly InputAction m_GameInput_Caps;
     public struct GameInputActions
     {
         private @InputActions m_Wrapper;
         public GameInputActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_GameInput_Movement;
         public InputAction @CameraLook => m_Wrapper.m_GameInput_CameraLook;
-        public InputAction @Run => m_Wrapper.m_GameInput_Run;
-        public InputAction @LAttack => m_Wrapper.m_GameInput_LAttack;
-        public InputAction @RAttack => m_Wrapper.m_GameInput_RAttack;
-        public InputAction @Q => m_Wrapper.m_GameInput_Q;
-        public InputAction @E => m_Wrapper.m_GameInput_E;
-        public InputAction @Dash => m_Wrapper.m_GameInput_Dash;
-        public InputAction @Parry => m_Wrapper.m_GameInput_Parry;
-        public InputAction @EquipWP => m_Wrapper.m_GameInput_EquipWP;
-        public InputAction @Quit => m_Wrapper.m_GameInput_Quit;
-        public InputAction @Enter => m_Wrapper.m_GameInput_Enter;
-        public InputAction @AnyKey => m_Wrapper.m_GameInput_AnyKey;
-        public InputAction @Jump => m_Wrapper.m_GameInput_Jump;
-        public InputAction @BigJump => m_Wrapper.m_GameInput_BigJump;
-        public InputAction @LetfAlt => m_Wrapper.m_GameInput_LetfAlt;
-        public InputAction @Space => m_Wrapper.m_GameInput_Space;
-        public InputAction @Crouch => m_Wrapper.m_GameInput_Crouch;
+        public InputAction @LeftShift => m_Wrapper.m_GameInput_LeftShift;
+        public InputAction @MouseLeft => m_Wrapper.m_GameInput_MouseLeft;
+        public InputAction @MouseRight => m_Wrapper.m_GameInput_MouseRight;
         public InputAction @KeyOne => m_Wrapper.m_GameInput_KeyOne;
         public InputAction @KeyTwo => m_Wrapper.m_GameInput_KeyTwo;
         public InputAction @KeyThree => m_Wrapper.m_GameInput_KeyThree;
-        public InputAction @Grab => m_Wrapper.m_GameInput_Grab;
+        public InputAction @KeyFour => m_Wrapper.m_GameInput_KeyFour;
+        public InputAction @C => m_Wrapper.m_GameInput_C;
+        public InputAction @E => m_Wrapper.m_GameInput_E;
+        public InputAction @F => m_Wrapper.m_GameInput_F;
+        public InputAction @G => m_Wrapper.m_GameInput_G;
+        public InputAction @Q => m_Wrapper.m_GameInput_Q;
+        public InputAction @Z => m_Wrapper.m_GameInput_Z;
+        public InputAction @Space => m_Wrapper.m_GameInput_Space;
+        public InputAction @Quit => m_Wrapper.m_GameInput_Quit;
+        public InputAction @Enter => m_Wrapper.m_GameInput_Enter;
+        public InputAction @LetfAlt => m_Wrapper.m_GameInput_LetfAlt;
         public InputAction @KeyEsc => m_Wrapper.m_GameInput_KeyEsc;
+        public InputAction @AnyKey => m_Wrapper.m_GameInput_AnyKey;
+        public InputAction @Tab => m_Wrapper.m_GameInput_Tab;
+        public InputAction @Caps => m_Wrapper.m_GameInput_Caps;
         public InputActionMap Get() { return m_Wrapper.m_GameInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -718,54 +718,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @CameraLook.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCameraLook;
                 @CameraLook.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCameraLook;
                 @CameraLook.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCameraLook;
-                @Run.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRun;
-                @Run.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRun;
-                @Run.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRun;
-                @LAttack.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLAttack;
-                @LAttack.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLAttack;
-                @LAttack.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLAttack;
-                @RAttack.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRAttack;
-                @RAttack.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRAttack;
-                @RAttack.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnRAttack;
-                @Q.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
-                @Q.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
-                @Q.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
-                @E.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
-                @E.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
-                @E.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
-                @Dash.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnDash;
-                @Parry.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnParry;
-                @Parry.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnParry;
-                @Parry.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnParry;
-                @EquipWP.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEquipWP;
-                @EquipWP.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEquipWP;
-                @EquipWP.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEquipWP;
-                @Quit.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQuit;
-                @Quit.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQuit;
-                @Quit.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQuit;
-                @Enter.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
-                @Enter.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
-                @Enter.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
-                @AnyKey.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
-                @AnyKey.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
-                @AnyKey.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
-                @Jump.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnJump;
-                @BigJump.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnBigJump;
-                @BigJump.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnBigJump;
-                @BigJump.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnBigJump;
-                @LetfAlt.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
-                @LetfAlt.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
-                @LetfAlt.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
-                @Space.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
-                @Space.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
-                @Space.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
-                @Crouch.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
-                @Crouch.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
-                @Crouch.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCrouch;
+                @LeftShift.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLeftShift;
+                @LeftShift.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLeftShift;
+                @LeftShift.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLeftShift;
+                @MouseLeft.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnMouseLeft;
+                @MouseLeft.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnMouseLeft;
+                @MouseLeft.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnMouseLeft;
+                @MouseRight.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnMouseRight;
+                @MouseRight.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnMouseRight;
+                @MouseRight.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnMouseRight;
                 @KeyOne.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyOne;
                 @KeyOne.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyOne;
                 @KeyOne.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyOne;
@@ -775,12 +736,51 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @KeyThree.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyThree;
                 @KeyThree.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyThree;
                 @KeyThree.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyThree;
-                @Grab.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
-                @Grab.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
-                @Grab.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnGrab;
+                @KeyFour.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyFour;
+                @KeyFour.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyFour;
+                @KeyFour.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyFour;
+                @C.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnC;
+                @C.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnC;
+                @C.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnC;
+                @E.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
+                @E.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
+                @E.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnE;
+                @F.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnF;
+                @F.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnF;
+                @F.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnF;
+                @G.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnG;
+                @G.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnG;
+                @G.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnG;
+                @Q.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
+                @Q.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
+                @Q.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQ;
+                @Z.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnZ;
+                @Z.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnZ;
+                @Z.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnZ;
+                @Space.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
+                @Space.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
+                @Space.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnSpace;
+                @Quit.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnQuit;
+                @Enter.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
+                @Enter.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
+                @Enter.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnEnter;
+                @LetfAlt.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
+                @LetfAlt.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
+                @LetfAlt.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnLetfAlt;
                 @KeyEsc.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyEsc;
                 @KeyEsc.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyEsc;
                 @KeyEsc.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnKeyEsc;
+                @AnyKey.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
+                @AnyKey.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
+                @AnyKey.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnAnyKey;
+                @Tab.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTab;
+                @Tab.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTab;
+                @Tab.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnTab;
+                @Caps.started -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCaps;
+                @Caps.performed -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCaps;
+                @Caps.canceled -= m_Wrapper.m_GameInputActionsCallbackInterface.OnCaps;
             }
             m_Wrapper.m_GameInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -791,54 +791,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @CameraLook.started += instance.OnCameraLook;
                 @CameraLook.performed += instance.OnCameraLook;
                 @CameraLook.canceled += instance.OnCameraLook;
-                @Run.started += instance.OnRun;
-                @Run.performed += instance.OnRun;
-                @Run.canceled += instance.OnRun;
-                @LAttack.started += instance.OnLAttack;
-                @LAttack.performed += instance.OnLAttack;
-                @LAttack.canceled += instance.OnLAttack;
-                @RAttack.started += instance.OnRAttack;
-                @RAttack.performed += instance.OnRAttack;
-                @RAttack.canceled += instance.OnRAttack;
-                @Q.started += instance.OnQ;
-                @Q.performed += instance.OnQ;
-                @Q.canceled += instance.OnQ;
-                @E.started += instance.OnE;
-                @E.performed += instance.OnE;
-                @E.canceled += instance.OnE;
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
-                @Parry.started += instance.OnParry;
-                @Parry.performed += instance.OnParry;
-                @Parry.canceled += instance.OnParry;
-                @EquipWP.started += instance.OnEquipWP;
-                @EquipWP.performed += instance.OnEquipWP;
-                @EquipWP.canceled += instance.OnEquipWP;
-                @Quit.started += instance.OnQuit;
-                @Quit.performed += instance.OnQuit;
-                @Quit.canceled += instance.OnQuit;
-                @Enter.started += instance.OnEnter;
-                @Enter.performed += instance.OnEnter;
-                @Enter.canceled += instance.OnEnter;
-                @AnyKey.started += instance.OnAnyKey;
-                @AnyKey.performed += instance.OnAnyKey;
-                @AnyKey.canceled += instance.OnAnyKey;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
-                @BigJump.started += instance.OnBigJump;
-                @BigJump.performed += instance.OnBigJump;
-                @BigJump.canceled += instance.OnBigJump;
-                @LetfAlt.started += instance.OnLetfAlt;
-                @LetfAlt.performed += instance.OnLetfAlt;
-                @LetfAlt.canceled += instance.OnLetfAlt;
-                @Space.started += instance.OnSpace;
-                @Space.performed += instance.OnSpace;
-                @Space.canceled += instance.OnSpace;
-                @Crouch.started += instance.OnCrouch;
-                @Crouch.performed += instance.OnCrouch;
-                @Crouch.canceled += instance.OnCrouch;
+                @LeftShift.started += instance.OnLeftShift;
+                @LeftShift.performed += instance.OnLeftShift;
+                @LeftShift.canceled += instance.OnLeftShift;
+                @MouseLeft.started += instance.OnMouseLeft;
+                @MouseLeft.performed += instance.OnMouseLeft;
+                @MouseLeft.canceled += instance.OnMouseLeft;
+                @MouseRight.started += instance.OnMouseRight;
+                @MouseRight.performed += instance.OnMouseRight;
+                @MouseRight.canceled += instance.OnMouseRight;
                 @KeyOne.started += instance.OnKeyOne;
                 @KeyOne.performed += instance.OnKeyOne;
                 @KeyOne.canceled += instance.OnKeyOne;
@@ -848,12 +809,51 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @KeyThree.started += instance.OnKeyThree;
                 @KeyThree.performed += instance.OnKeyThree;
                 @KeyThree.canceled += instance.OnKeyThree;
-                @Grab.started += instance.OnGrab;
-                @Grab.performed += instance.OnGrab;
-                @Grab.canceled += instance.OnGrab;
+                @KeyFour.started += instance.OnKeyFour;
+                @KeyFour.performed += instance.OnKeyFour;
+                @KeyFour.canceled += instance.OnKeyFour;
+                @C.started += instance.OnC;
+                @C.performed += instance.OnC;
+                @C.canceled += instance.OnC;
+                @E.started += instance.OnE;
+                @E.performed += instance.OnE;
+                @E.canceled += instance.OnE;
+                @F.started += instance.OnF;
+                @F.performed += instance.OnF;
+                @F.canceled += instance.OnF;
+                @G.started += instance.OnG;
+                @G.performed += instance.OnG;
+                @G.canceled += instance.OnG;
+                @Q.started += instance.OnQ;
+                @Q.performed += instance.OnQ;
+                @Q.canceled += instance.OnQ;
+                @Z.started += instance.OnZ;
+                @Z.performed += instance.OnZ;
+                @Z.canceled += instance.OnZ;
+                @Space.started += instance.OnSpace;
+                @Space.performed += instance.OnSpace;
+                @Space.canceled += instance.OnSpace;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
+                @Enter.started += instance.OnEnter;
+                @Enter.performed += instance.OnEnter;
+                @Enter.canceled += instance.OnEnter;
+                @LetfAlt.started += instance.OnLetfAlt;
+                @LetfAlt.performed += instance.OnLetfAlt;
+                @LetfAlt.canceled += instance.OnLetfAlt;
                 @KeyEsc.started += instance.OnKeyEsc;
                 @KeyEsc.performed += instance.OnKeyEsc;
                 @KeyEsc.canceled += instance.OnKeyEsc;
+                @AnyKey.started += instance.OnAnyKey;
+                @AnyKey.performed += instance.OnAnyKey;
+                @AnyKey.canceled += instance.OnAnyKey;
+                @Tab.started += instance.OnTab;
+                @Tab.performed += instance.OnTab;
+                @Tab.canceled += instance.OnTab;
+                @Caps.started += instance.OnCaps;
+                @Caps.performed += instance.OnCaps;
+                @Caps.canceled += instance.OnCaps;
             }
         }
     }
@@ -895,27 +895,27 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCameraLook(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
-        void OnLAttack(InputAction.CallbackContext context);
-        void OnRAttack(InputAction.CallbackContext context);
-        void OnQ(InputAction.CallbackContext context);
-        void OnE(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
-        void OnParry(InputAction.CallbackContext context);
-        void OnEquipWP(InputAction.CallbackContext context);
-        void OnQuit(InputAction.CallbackContext context);
-        void OnEnter(InputAction.CallbackContext context);
-        void OnAnyKey(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnBigJump(InputAction.CallbackContext context);
-        void OnLetfAlt(InputAction.CallbackContext context);
-        void OnSpace(InputAction.CallbackContext context);
-        void OnCrouch(InputAction.CallbackContext context);
+        void OnLeftShift(InputAction.CallbackContext context);
+        void OnMouseLeft(InputAction.CallbackContext context);
+        void OnMouseRight(InputAction.CallbackContext context);
         void OnKeyOne(InputAction.CallbackContext context);
         void OnKeyTwo(InputAction.CallbackContext context);
         void OnKeyThree(InputAction.CallbackContext context);
-        void OnGrab(InputAction.CallbackContext context);
+        void OnKeyFour(InputAction.CallbackContext context);
+        void OnC(InputAction.CallbackContext context);
+        void OnE(InputAction.CallbackContext context);
+        void OnF(InputAction.CallbackContext context);
+        void OnG(InputAction.CallbackContext context);
+        void OnQ(InputAction.CallbackContext context);
+        void OnZ(InputAction.CallbackContext context);
+        void OnSpace(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
+        void OnLetfAlt(InputAction.CallbackContext context);
         void OnKeyEsc(InputAction.CallbackContext context);
+        void OnAnyKey(InputAction.CallbackContext context);
+        void OnTab(InputAction.CallbackContext context);
+        void OnCaps(InputAction.CallbackContext context);
     }
     public interface IUIInputActions
     {

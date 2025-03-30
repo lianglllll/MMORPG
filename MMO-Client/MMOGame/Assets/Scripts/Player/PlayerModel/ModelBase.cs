@@ -78,11 +78,13 @@ namespace Player
         //允许变招
         protected void CanSwitchSkill()
         {
+            m_baseController.OnCanSwitchSkill();
         }
 
         //允许打断
         protected void CanCancelSkill()
         {
+            m_baseController.OnCanCancelSkill();
         }
 
         //技能结束

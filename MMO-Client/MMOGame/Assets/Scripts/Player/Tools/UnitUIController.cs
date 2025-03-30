@@ -18,9 +18,10 @@ public class UnitUIController : MonoBehaviour
     //最后技能指示器拿到的就是一个dir or 坐标，用于技能的释放请求的参数。
     private Canvas SelectMarkCanvas;        //被锁定锁定目标的ui
     private Canvas SpellRangeCanvas;        //攻击距离的ui
-    private Image SpellRangeImage;
     private Canvas SectorAreaCanvas;        //扇形区域
+    private Image SpellRangeImage;
     private Image SectorAreaImage;
+
     private RaycastHit hit;                 //中间使用到的东西
     private Ray ray;
     private Vector3 curPos;
@@ -36,64 +37,72 @@ public class UnitUIController : MonoBehaviour
         SectorAreaImage = SectorAreaCanvas.GetComponentInChildren<Image>();
         unitBillboard = transform.Find("MyCanvas/UnitBillboard").GetComponent<UnitBillboard>();
     }
-
     private void Start()
     {
         groundLayer = LayerMask.GetMask("Ground");
+        SelectMarkCanvas.gameObject.SetActive(true);
+        SpellRangeCanvas.gameObject.SetActive(true);
+        SectorAreaCanvas.gameObject.SetActive(true);
+
         SetSelectedMark(false);
         SetSpellRangeCanvas(false);
         SetSectorArea(false,0,0);
     }
-
     private void Update()
     {
-        //扇形ui被激活
+        // 扇形ui被激活
         if (SectorAreaImage.enabled)
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // 直接获取摄像机的Y轴旋转角度
+            float targetYRotation = Camera.main.transform.eulerAngles.y;
+
+            // 保留Canvas原有的X和Z轴旋转，仅同步Y轴
+            Quaternion targetRotation = Quaternion.Euler(
+                SectorAreaCanvas.transform.eulerAngles.x,
+                targetYRotation,
+                SectorAreaCanvas.transform.eulerAngles.z
+            );
+
+            // 应用旋转
+            SectorAreaCanvas.transform.rotation = Quaternion.Lerp(
+                SectorAreaCanvas.transform.rotation,
+                targetRotation,
+                Time.deltaTime * 20f  // 调整插值速度
+            );
+
+/*            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
             {
                 curPos = new(hit.point.x, hit.point.y, hit.point.z);
             }
 
-            //让图标转向我们鼠标指向的地方
+            // 让图标转向我们鼠标指向的地方
             Quaternion ab1canvas = Quaternion.LookRotation(curPos - transform.position);
             ab1canvas.eulerAngles = new Vector3(0, ab1canvas.eulerAngles.y, ab1canvas.eulerAngles.z);
-            SectorAreaCanvas.transform.rotation = Quaternion.Lerp(ab1canvas, SectorAreaCanvas.transform.rotation, 0);
+            SectorAreaCanvas.transform.rotation = Quaternion.Lerp(ab1canvas, SectorAreaCanvas.transform.rotation, 0);*/
         }
 
         if(owner != null)
         {
-            ShowEntityInfoBar();
+            // ShowEntityInfoBar();
         }
 
     }
-
-    //被外部调用的初始化
     public void Init(Actor actor)
     {
         this.owner = actor;
     }
 
-    /// <summary>
-    /// 设置选中标志是否显示
-    /// </summary>
     public void SetSelectedMark(bool enable)
     {
         SelectMarkCanvas.enabled = enable;
     }
-
-    /// <summary>
-    /// 设置攻击距离的ui
-    /// </summary>
-    /// <param name="enable"></param>
-    /// <param name="range"></param>
     public void SetSpellRangeCanvas(bool enable,float range = 3.0f)
     {
         if (enable)
         {
-            SpellRangeImage.transform.localScale = Vector3.one*range;
+            SpellRangeImage.transform.localScale = Vector3.one * range;
             SpellRangeCanvas.enabled = enable;
         }
         else
@@ -101,10 +110,6 @@ public class UnitUIController : MonoBehaviour
             SpellRangeCanvas.enabled = enable;
         }
     }
-
-    /// <summary>
-    /// 设置扇形的攻击范围
-    /// </summary>
     public void SetSectorArea(bool enable,float radius = 0f,float angle = 0f)
     {
         if (enable)
@@ -114,6 +119,18 @@ public class UnitUIController : MonoBehaviour
             SectorAreaImage.enabled = enable;
             SectorAreaImage.transform.localScale = new Vector3(radius, radius, radius);
             SectorAreaImage.transform.localPosition = new Vector3(SectorAreaImage.transform.localPosition.x, SectorAreaImage.transform.localPosition.y, radius / 2);
+
+            // 方向和摄像机对准
+            // 直接获取摄像机的Y轴旋转角度
+            float targetYRotation = Camera.main.transform.eulerAngles.y;
+
+            // 保留Canvas原有的X和Z轴旋转，仅同步Y轴
+            Vector3 newRotation = SectorAreaCanvas.transform.eulerAngles;
+            newRotation.y = targetYRotation;
+
+            // 直接应用旋转（无插值，立即同步）
+            SectorAreaCanvas.transform.eulerAngles = newRotation;
+
         }
         else
         {
@@ -121,10 +138,6 @@ public class UnitUIController : MonoBehaviour
             SectorAreaImage.enabled = enable;
         }
     }
-
-    /// <summary>
-    /// 根据当前运行的技能指示器，获取对应的信息
-    /// </summary>
     public Quaternion  GetSectorAreaDir()
     {
         //扇形：dir

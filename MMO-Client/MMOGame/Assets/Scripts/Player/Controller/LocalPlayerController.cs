@@ -6,29 +6,34 @@ namespace Player.Controller
 {
     public class LocalPlayerController:BaseController
     {
-        private NetworkActor m_networkActor;
-        public NetworkActor NetworkActor => m_networkActor;
-
         protected override void Update()
         {
             base.Update();
-            if (GameInputManager.Instance.KeyOneDown)
+
+            if (GameInputManager.Instance.GI_Tab)
             {
-                ChangeMode(NetActorMode.Normal);
-            }
-            else if (GameInputManager.Instance.KeyTwoDown)
-            {
-                ChangeMode(NetActorMode.FlyNormal);
-            }else if (GameInputManager.Instance.KeyThreeDown)
-            {
-                ChangeMode(NetActorMode.EquipSword);
+                if(m_curMode == NetActorMode.Normal)
+                {
+                    ChangeMode(NetActorMode.Fly);
+                }
+                else if(m_curMode == NetActorMode.NormalEquip)
+                {
+                    ChangeMode(NetActorMode.FlyEquip);
+                }
+                else if(m_curMode == NetActorMode.Fly)
+                {
+                    ChangeMode(NetActorMode.Normal);
+                }
+                else if(m_curMode == NetActorMode.FlyEquip)
+                {
+                    ChangeMode(NetActorMode.NormalEquip);
+                }
             }
         }
 
-        public override void Init(Actor actor, NetworkActor networkActor)
+        public override void Init(Actor actor)
         {
-            base.Init(actor, networkActor);
-            m_networkActor = networkActor;
+            base.Init(actor);
             ChangeMode(NetActorMode.Normal);
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
@@ -44,20 +49,24 @@ namespace Player.Controller
                     if(m_curMode == NetActorMode.Normal)
                     {
                         stateMachine.ChangeState<LocalPlayerState_Idle>(reCurrstate);
-                    }else if(m_curMode == NetActorMode.FlyNormal)
+                    }else if(m_curMode == NetActorMode.NormalEquip)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Normal_Equip_Idle>(reCurrstate);
+                    }
+                    else if (m_curMode == NetActorMode.Fly)
                     {
                         stateMachine.ChangeState<LocalPlayerState_Fly_Idle>(reCurrstate);
-                    }else if(m_curMode == NetActorMode.EquipSword)
-                    {
-                        stateMachine.ChangeState<LocalPlayerState_Weapon_Idle>(reCurrstate);
                     }
                     break;
                 case NetActorState.Motion:
                     if (m_curMode == NetActorMode.Normal)
                     {
                         stateMachine.ChangeState<LocalPlayerState_Motion>(reCurrstate);
+                    }else if(m_curMode == NetActorMode.NormalEquip)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Normal_Equip_Motion>(reCurrstate);
                     }
-                    else if (m_curMode == NetActorMode.FlyNormal)
+                    else if (m_curMode == NetActorMode.Fly)
                     {
                         stateMachine.ChangeState<LocalPlayerState_Fly_Motion>(reCurrstate);
                     }
@@ -90,7 +99,13 @@ namespace Player.Controller
                     stateMachine.ChangeState<LocalPlayerState_Defense>(reCurrstate);
                     break;
                 case NetActorState.Evade:
-                    stateMachine.ChangeState<LocalPlayerState_Evade>(reCurrstate);
+                    if(m_curMode == NetActorMode.Normal)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Evade>(reCurrstate);
+                    }else if(m_curMode == NetActorMode.NormalEquip)
+                    {
+                        stateMachine.ChangeState<LocalPlayerState_Normal_Equip_Evade>(reCurrstate);
+                    }
                     break;
                 case NetActorState.Skill:
                     stateMachine.ChangeState<LocalPlayerState_Skill>(reCurrstate);
@@ -103,7 +118,7 @@ namespace Player.Controller
                     {
 
                     }
-                    else if (m_curMode == NetActorMode.FlyNormal)
+                    else if (m_curMode == NetActorMode.Fly)
                     {
                         stateMachine.ChangeState<LocalPlayerState_Fly_ChangeHight>(reCurrstate);
                     }
@@ -115,9 +130,25 @@ namespace Player.Controller
         }
         public override void ChangeMode(NetActorMode mode)
         {
+            if (m_curMode == mode)
+            {
+                goto End;
+            }
+
+            if(CurSkill != null && !IsCanCancelSkill)
+            {
+                goto End;
+            }
+
             base.ChangeMode(mode);
+
+            // 事件触发
+            Kaiyun.Event.FireIn("LocalPlayerModeChange");
+
             // 告诉服务器
-            m_networkActor.SendActorChangeModeRequest();
+            NetworkActor.SendActorChangeModeRequest();
+        End:
+            return;
         }
     }
 }

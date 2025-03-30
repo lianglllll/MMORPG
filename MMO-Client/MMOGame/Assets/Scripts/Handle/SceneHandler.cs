@@ -44,16 +44,22 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
             goto End;
         }
 
-        if (message.EntityType == SceneEntityType.Actor)
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            EntityManager.Instance.OnActorEnterScene(message.ActorNode);
-        }else if(message.EntityType == SceneEntityType.Item)
-        {
-            EntityManager.Instance.OnItemEnterScene(message.ItemNode);
-        }else if(message.EntityType == SceneEntityType.Interactivo)
-        {
-            // ...
-        }
+            if (message.EntityType == SceneEntityType.Actor)
+            {
+                EntityManager.Instance.OnActorEnterScene(message.ActorNode);
+            }
+            else if (message.EntityType == SceneEntityType.Item)
+            {
+                EntityManager.Instance.OnItemEnterScene(message.ItemNode);
+            }
+            else if (message.EntityType == SceneEntityType.Interactivo)
+            {
+                // ...
+            }
+        });
+
     End:
         return;
     }
@@ -73,6 +79,10 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
 
     private void _HandleActorChangeModeResponse(Connection sender, ActorChangeModeResponse message)
     {
+        if(message.SceneId != GameApp.SceneId)
+        {
+            goto End;
+        }
         var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
         if (acotr == null)
         {
@@ -87,6 +97,10 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
     }
     private void _HandleActorChangeStateResponse(Connection sender, ActorChangeStateResponse message)
     {
+        if (message.SceneId != GameApp.SceneId)
+        {
+            goto End;
+        }
         var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
         if (acotr == null)
         {
@@ -101,11 +115,14 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
     }
     private void _HandleActorChangeTransformDataResponse(Connection sender, ActorChangeTransformDataResponse message)
     {
+        if (message.SceneId != GameApp.SceneId)
+        {
+            goto End;
+        }
         var acotr = EntityManager.Instance.GetEntity<Actor>(message.EntityId);
         if (acotr == null)
         {
-            Log.Information("SceneHandler:_HandleActorChangeTransformDataResponse不存在该actor");
-            Log.Information("ss");
+            Log.Warning("SceneHandler:_HandleActorChangeTransformDataResponse不存在该actor");
             goto End;
         }
         UnityMainThreadDispatcher.Instance().Enqueue(() =>

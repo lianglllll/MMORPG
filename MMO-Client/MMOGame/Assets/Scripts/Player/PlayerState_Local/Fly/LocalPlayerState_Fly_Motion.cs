@@ -162,6 +162,12 @@ namespace Player.PlayerState
             }
             else
             {
+                if (!GameInputManager.Instance.SustainLeftShift)
+                {
+                    MotionState = MotionChildState.Walk;
+                    return;
+                }
+
                 // 设置动画参数（优化插值方式）
                 player.Model.Animator.SetFloat("Fly_Horizontal_Speed", 0, 0.1f, Time.deltaTime);
                 player.Model.Animator.SetFloat("Fly_Vertical_Speed", 2, 0.1f, Time.deltaTime);

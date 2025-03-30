@@ -10,7 +10,7 @@ namespace Player.PlayerState
     {
         private LocalSkill_Config_SO curLocalSkillConfig;
         private int curHitIdx;
-        private Skill curSkill => StateMachineParameter.curSkill;
+        private Skill curSkill;
 
         // 蓄气、执行
         enum SkillChildState
@@ -38,7 +38,8 @@ namespace Player.PlayerState
 
         public override void Enter()
         {
-            if(curSkill == null || (curSkill.Stage != SkillStage.Intonate && curSkill.Stage != SkillStage.Active))
+            curSkill = StateMachineParameter.curSkill;
+            if (curSkill == null || (curSkill.Stage != SkillStage.Intonate && curSkill.Stage != SkillStage.Active))
             {
                 ChildState = SkillChildState.Exit;
                 goto End;
@@ -64,13 +65,19 @@ namespace Player.PlayerState
             player.Model.SetRootMotionAction(OnRootMotion);
             player.Model.SetSkillHitAction(OnStartSkillHitAction, OnStopSkillHitAction);
             curHitIdx = 0;
-
-            
         End:
             return;
         }
         public override void Update()
         {
+            // 闪避打断
+            if (GameInputManager.Instance.Shift && player.IsCanCancelSkill)
+            {
+                curSkill.CancelSkill();
+                player.ChangeState(NetActorState.Evade);
+                goto End;
+            }
+
             switch (ChildState)
             {
                 case SkillChildState.Intonate:
@@ -98,14 +105,22 @@ namespace Player.PlayerState
                     break;
                 case SkillChildState.Exit:
                     player.ChangeState(NetActorState.Idle);
-                    return;
+                    goto End;
             }
+        End:
+            return;
         }
         public override void Exit()
         {
             player.Model.ClearRootMotionAction();
-            StateMachineParameter.curSkill = null;
             curLocalSkillConfig = null;
+            // 正常解释才走这个分支。
+            if(StateMachineParameter.curSkill == curSkill)
+            {
+                StateMachineParameter.curSkill = null;
+                Kaiyun.Event.FireIn("SkillActiveEnd");
+            }
+            curSkill = null;
         }
 
         private void OnRootMotion(Vector3 deltaPosition, Quaternion deltaRotation)
@@ -115,11 +130,27 @@ namespace Player.PlayerState
         }
         private void OnStartSkillHitAction(int obj)
         {
+            if(curLocalSkillConfig == null)
+            {
+                goto End;
+            }
             var attackData = curLocalSkillConfig.attackData[curHitIdx];
+            if(attackData == null)
+            {
+                goto End;
+            }
             // 技能释放时音响：例如武器挥砍空气的声音
-            player.PlayAudio(attackData.attackAudioClip);
+            if(attackData.attackAudioClip != null)
+            {
+                player.PlayAudio(attackData.attackAudioClip);
+            }
             // 技能释放时产生的物体：例如剑气
-            player.CreateSpawnObjectAroundOwner(attackData.SpawnObj);
+            if(attackData.SpawnObj != null)
+            {
+                player.CreateSpawnObjectAroundOwner(attackData.SpawnObj);
+            }
+        End:
+            return;
         }
         private void OnStopSkillHitAction(int obj)
         {

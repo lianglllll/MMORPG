@@ -9,7 +9,7 @@ public class GameEffect : MonoBehaviour
     public ParticleSystem particle;             //粒子系统，如果加载的不是粒子则为null
     public GameObject target;                   //跟随物体，如果此物体不为空，特效会跟随父物体移动，直到父物体变为null
     public Vector3 offset = Vector3.zero;       //相对于target的偏移
-    //private float lifeTime = float.MaxValue;    //生命周期
+    //private float lifeTime = float.MaxValue;  //生命周期
 
     void Update()
     {

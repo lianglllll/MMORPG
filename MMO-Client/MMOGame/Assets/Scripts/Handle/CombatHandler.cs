@@ -8,6 +8,7 @@ using HS.Protobuf.Scene;
 using HS.Protobuf.Combat.Skill;
 using HS.Protobuf.SceneEntity;
 using HSFramework.MySingleton;
+using Serilog;
 
 public class CombatHandler : SingletonNonMono<CombatHandler>
 {
@@ -42,7 +43,7 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
     }
 
 
-    public void SendSpellCastReq(Skill skill, Actor target)
+    public void SendSpellCastReq(Skill skill, Actor target = null)
     {
         if (skill == null) return;
         //向服务器发送施法请求
@@ -101,15 +102,29 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
     }
     private void HandleSpellCastResponse(Connection conn, SpellCastResponse msg)
     {
+        if(GameApp.SceneId != msg.SceneId)
+        {
+            Log.Warning("非本场景{0}的消息", GameApp.SceneId);
+            goto End;
+        }
 
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
             foreach (CastInfo item in msg.List)
             {
+                // Log.Warning("entityId = {0}, skillId = {1}", item.CasterId, item.SkillId);
                 var caster = EntityManager.Instance.GetEntity<Actor>(item.CasterId);
                 if (caster == null) continue;
 
+                // 因为其他的远端角色我们是不需要记录他的技能的，所以我们采用懒加载
                 var skill = caster.m_skillManager.GetSkillBySkillId(item.SkillId);
+                if(skill == null)
+                {
+                    skill = new Skill(caster, item.SkillId);
+                    caster.m_skillManager.AddSkill(skill);
+                }
+
+
                 if (skill.IsUnitTarget)
                 {
                     var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);
@@ -131,7 +146,8 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
                 }
             }
         });
-
+    End:
+        return;
     }
 
 

@@ -9,7 +9,7 @@ public class CombatPanelScript : BasePanel
 {
     private bool m_isShowRelatedCombatUI;
     private float m_notCombatOperationTime = 0;
-    private float m_maxNotCombatOperationTime = 10;
+    private float m_maxNotCombatOperationTime = 15;
 
     private int m_haveOtherPanelFromThisOpen;
 
@@ -84,18 +84,10 @@ public class CombatPanelScript : BasePanel
         }
 
         // 战斗相关的ui,脱战自动隐藏
-        if (GameInputManager.Instance.LAttack)
-        {
-            if(!m_isShowRelatedCombatUI)
-            {
-                ShowRelatedCombatUI();
-            }
-            m_notCombatOperationTime = 0;
-        }
-        else
+        if (m_isShowRelatedCombatUI)
         {
             m_notCombatOperationTime += Time.deltaTime;
-            if(m_notCombatOperationTime > m_maxNotCombatOperationTime)
+            if (m_notCombatOperationTime > m_maxNotCombatOperationTime)
             {
                 if (m_isShowRelatedCombatUI)
                 {
@@ -103,6 +95,7 @@ public class CombatPanelScript : BasePanel
                 }
             }
         }
+
 
         //技能释放进度条UI
         //var sk = GameApp.CurrSkill;
@@ -124,6 +117,14 @@ public class CombatPanelScript : BasePanel
         //    }
         //}
     }
+    private void OnEnable()
+    {
+        Kaiyun.Event.RegisterIn("EnterCombatEvent", this, "EnterCombatEvent");
+    }
+    private void OnDisable()
+    {
+        Kaiyun.Event.UnRegisterIn("EnterCombatEvent", this, "EnterCombatEvent");
+    }
 
     private void Init()
     {
@@ -138,7 +139,7 @@ public class CombatPanelScript : BasePanel
 
         m_haveOtherPanelFromThisOpen = 0;
 
-        GameInputManager.Instance.SwitchGameInputMode(GameInputMode.Game);
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.Game);
     }
     private void ShowRelatedCombatUI()
     {
@@ -160,7 +161,7 @@ public class CombatPanelScript : BasePanel
         {
             HideRelatedCombatUI();
         }
-        GameInputManager.Instance.SwitchGameInputMode(GameInputMode.UI);
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.UI);
         TopPart.SetActive(true);
         RightPart.SetActive(true);
 
@@ -169,11 +170,16 @@ public class CombatPanelScript : BasePanel
     public void HideTopAndRightUI()
     {
         m_isShowTopAndRightUI = false;
-        GameInputManager.Instance.SwitchGameInputMode(GameInputMode.Game);
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.Game);
         TopPart.SetActive(false);
         RightPart.SetActive(false);
 
         SetMouseShowAndHide(false);
+
+        if (!m_isShowRelatedCombatUI)
+        {
+            ShowRelatedCombatUI();
+        }
     }
     private void SetMouseShowAndHide(bool active)
     {
@@ -208,9 +214,16 @@ public class CombatPanelScript : BasePanel
         throw new NotImplementedException();
     }
 
+    public void EnterCombatEvent()
+    {
+        if (!m_isShowRelatedCombatUI)
+        {
+            ShowRelatedCombatUI();
+        }
+        m_notCombatOperationTime = 0;
+    }
 
-
-
+    // =======================================================================================
 
     /// <summary>
     /// 死亡面板
@@ -279,6 +292,4 @@ public class CombatPanelScript : BasePanel
     {
         m_expBox.RefrashUI();
     }
-
-
 }

@@ -88,7 +88,7 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
         // 3.获取坐标和方向,实例化obj并初始化,将实例化的角色放到gamemanager下面
         Vector3 initPosition = actor.Position;
 
-        if(actor.NetActorMode != NetActorMode.FlyNormal)
+        if(actor.NetActorMode != NetActorMode.Fly || actor.NetActorMode != NetActorMode.FlyEquip)
         {
             // 如果不是flyMode的话，y轴是的重力来控制的。
             // 计算地面坐标,调整y轴
@@ -113,15 +113,49 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
         //actor 和 gameobj关联
         actor.RenderObj = actorObj; 
 
+        //7.给我们控制的角色添加一些控制脚本
+        if (isMine)
+        {
+            //打标签
+            actorObj.tag = "CtlPlayer";
+            // 模型层控制脚本
+            PlayerModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<PlayerModel>();
+            // 角色控制脚本
+            LocalPlayerController ctl = actorObj.AddComponent<LocalPlayerController>();                           
+            // 战斗控制脚本
+            LocalPlayerCombatController combat = actorObj.AddComponent<LocalPlayerCombatController>();
+
+            modelBase.Init(ctl);
+            ctl.Init(actor);
+            actor.Init(ctl);
+            combat.Init(ctl);
+
+            //启用第三人称摄像机
+            TP_CameraController.Instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
+        }
+        else
+        {
+            actorObj.tag = "SyncPlayer";                                                             //打标签
+
+            // 模型层控制脚本
+            SyncModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<SyncModel>();
+            // 角色控制脚本
+            RemotePlayerController ctl = actorObj.AddComponent<RemotePlayerController>();
+
+            modelBase.Init(ctl);
+            ctl.Init(actor);
+            actor.Init(ctl);
+        }
+
         // 4.设置实例的一些信息
-        // 加入actor图层
-        actorObj.layer = 6;
+        actorObj.layer = 6;        // 加入actor图层
         // 名字
         if (actor is Character chr)
         {
             actorObj.name = "Character_" + actor.EntityId;
 
-        }else if(actor is Monster mon)
+        }
+        else if (actor is Monster mon)
         {
             actorObj.name = "Monster_" + actor.EntityId;
             //如果怪物死亡，就不要显示了
@@ -130,54 +164,12 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
                 actorObj.SetActive(false);
                 //actor.actorMode = ActorMode.Dead;
             }
-        }else if(actor is Npc npc)
+        }
+        else if (actor is Npc npc)
         {
             actorObj.name = "Npc_" + actor.EntityId;
         }
 
-
-        //7.给我们控制的角色添加一些控制脚本
-        if (isMine)
-        {
-            //打标签
-            actorObj.tag = "CtlPlayer";
-            // ui控制器脚本
-            UnitUIController uuc = actorObj.AddComponent<UnitUIController>();
-            // 模型层控制脚本
-            PlayerModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<PlayerModel>();
-            // 角色控制脚本
-            LocalPlayerController ctl = actorObj.AddComponent<LocalPlayerController>();                           
-            // 战斗控制脚本
-            LocalPlayerCombatController combat = actorObj.AddComponent<LocalPlayerCombatController>();
-            // 同步脚本
-            NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
-
-            modelBase.Init(ctl);
-            ctl.Init(actor, networkActor);
-            actor.Init(ctl);
-            combat.Init(ctl);
-            networkActor.Init(ctl);
-
-            //启用第三人称摄像机
-            TP_CameraController.Instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
-        }
-        else
-        {
-            actorObj.tag = "SyncPlayer";                                                             //打标签
-            // ui控制器脚本
-            UnitUIController uuc = actorObj.AddComponent<UnitUIController>();
-            // 模型层控制脚本
-            SyncModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<SyncModel>();
-            // 角色控制脚本
-            RemotePlayerController ctl = actorObj.AddComponent<RemotePlayerController>();
-            // 同步脚本
-            NetworkActor networkActor = actorObj.AddComponent<NetworkActor>();
-
-            modelBase.Init(ctl);
-            ctl.Init(actor, networkActor);
-            actor.Init(ctl);
-            networkActor.Init(ctl);
-        }
     }
 
     public void CreateItemObject(ClientItem clientItem)
@@ -265,8 +257,6 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
             Destroy(obj);
         }
     }
-
-
 
     public void EntitySync(NEntitySync nEntitySync)
     {

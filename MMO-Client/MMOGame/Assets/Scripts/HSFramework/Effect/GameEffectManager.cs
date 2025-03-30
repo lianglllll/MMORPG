@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameEffectManager
 {
-
     /// <summary>
     /// 添加特效到世界
     /// </summary>

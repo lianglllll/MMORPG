@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
     <Compile Include="Assets\Scripts\Handle\CombatHandler.cs" />
-    <Compile Include="Assets\Art\Animation\Fly\player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Crouch.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\controller.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerModel\SyncModel.cs" />
@@ -113,7 +112,6 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Effect\AEEffectClip.cs" />
     <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr2.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState_Local\Weapon\LocalPlayerState_Weapon_Idle.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Prone.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\ControlSettingPanel.cs" />
@@ -155,6 +153,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Costom.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\RoleListItemScript.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\Swapper.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal_Equip\LocalPlayerState_Normal_Equip_Evade.cs" />
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\AETimelineTick.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\GroundChecker.cs" />
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
@@ -207,6 +206,7 @@
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\BaseData\StandardTrack.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr.cs" />
+    <Compile Include="Assets\Res\Animations\Other\Fly\player.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\VideoSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\IDialogEvent.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfigImporter.cs" />
@@ -265,6 +265,7 @@
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Effect\AEEffectBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_HurtState.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal_Equip\LocalPlayerState_Normal_Equip_Idle.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_SkillAttackState.cs" />
     <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\SceneResources\Other\Slash_DemoGUI.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\AudioSettingPanel.cs" />
@@ -303,7 +304,6 @@
     <Compile Include="Assets\Scripts\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Login\LoginPanelScript.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EquipSkillSlot\AbilityManager.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LcalPlayerState_ChangeModeTo.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\GameSettingPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\UnitBillboard.cs" />
@@ -318,6 +318,7 @@
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\BaseData\StandardClip.cs" />
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\Interface\IRuntimeBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Motion.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal_Equip\LocalPlayerState_Normal_Equip_Motion.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\PhysicsObject.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Crouch.cs" />

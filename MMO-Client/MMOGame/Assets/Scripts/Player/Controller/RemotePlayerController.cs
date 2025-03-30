@@ -6,13 +6,10 @@ namespace Player.Controller
 {
     public class RemotePlayerController : BaseController
     {
-        private NetworkActor m_networkActor;
-        public NetworkActor NetworkActor => m_networkActor;
 
-        public override void Init(Actor actor, NetworkActor networkActor)
+        public override void Init(Actor actor)
         {
-            base.Init(actor, networkActor);
-            m_networkActor = networkActor;
+            base.Init(actor);
             InitModeAndState(actor.NetActorMode, actor.NetActorState);
         }
         public override void ChangeState(NetActorState state, bool reCurrstate = false)
@@ -27,7 +24,7 @@ namespace Player.Controller
                     if(CurMode == NetActorMode.Normal)
                     {
                         stateMachine.ChangeState<RemotePlayerState_Idle>(reCurrstate);
-                    }else if(CurMode == NetActorMode.FlyNormal)
+                    }else if(CurMode == NetActorMode.Fly)
                     {
                         stateMachine.ChangeState<RemotePlayerState_Fly_Idle>(reCurrstate);
                     }
@@ -37,7 +34,7 @@ namespace Player.Controller
                     {
                         stateMachine.ChangeState<RemotePlayerState_Motion>(reCurrstate);
                     }
-                    else if (CurMode == NetActorMode.FlyNormal)
+                    else if (CurMode == NetActorMode.Fly)
                     {
                         stateMachine.ChangeState<RemotePlayerState_Fly_Motion>(reCurrstate);
                     }
@@ -85,7 +82,7 @@ namespace Player.Controller
                     {
 
                     }
-                    else if (m_curMode == NetActorMode.FlyNormal)
+                    else if (m_curMode == NetActorMode.Fly)
                     {
                         stateMachine.ChangeState<RemotePlayerState_Fly_ChangeHight>(reCurrstate);
                     }

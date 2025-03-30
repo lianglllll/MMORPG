@@ -9,7 +9,7 @@ namespace Player
     {
         private LocalSkill_Config_SO curLocalSkillConfig;
         private int curHitIdx;
-        private Skill curSkill => StateMachineParameter.curSkill;
+        private Skill curSkill;
 
         // 蓄气、执行
         enum SkillChildState
@@ -37,6 +37,7 @@ namespace Player
 
         public override void Enter()
         {
+            curSkill = StateMachineParameter.curSkill;
             if (curSkill == null || (curSkill.Stage != SkillStage.Intonate && curSkill.Stage != SkillStage.Active))
             {
                 ChildState = SkillChildState.Exit;
@@ -104,8 +105,12 @@ namespace Player
         public override void Exit()
         {
             remotePlayer.Model.ClearRootMotionAction();
-            StateMachineParameter.curSkill = null;
             curLocalSkillConfig = null;
+            if (StateMachineParameter.curSkill == curSkill)
+            {
+                StateMachineParameter.curSkill = null;
+            }
+            curSkill = null;
         }
 
         private void OnRootMotion(Vector3 deltaPosition, Quaternion deltaRotation)
@@ -116,10 +121,22 @@ namespace Player
         private void OnStartSkillHitAction(int obj)
         {
             var attackData = curLocalSkillConfig.attackData[curHitIdx];
+            if (attackData == null)
+            {
+                goto End;
+            }
             // 技能释放时音响：例如武器挥砍空气的声音
-            remotePlayer.PlayAudio(attackData.attackAudioClip);
+            if (attackData.attackAudioClip != null)
+            {
+                remotePlayer.PlayAudio(attackData.attackAudioClip);
+            }
             // 技能释放时产生的物体：例如剑气
-            remotePlayer.CreateSpawnObjectAroundOwner(attackData.SpawnObj);
+            if (attackData.SpawnObj != null)
+            {
+                remotePlayer.CreateSpawnObjectAroundOwner(attackData.SpawnObj);
+            }
+        End:
+            return;
         }
         private void OnStopSkillHitAction(int obj)
         {

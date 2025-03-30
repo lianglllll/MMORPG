@@ -1,3 +1,4 @@
+using GameClient;
 using GameClient.Combat;
 using GameClient.Combat.LocalSkill.Config;
 using GameClient.Entities;
@@ -51,9 +52,13 @@ namespace Player
         [HideInInspector]
         public UnitEffectManager m_unitEffectManager;
 
-        //信息
+        // 信息
         private Actor actor;
         public Actor Actor => actor;
+
+        // 网络相关
+        private NetworkActor m_networkActor;
+        public NetworkActor NetworkActor => m_networkActor;
 
         #region Player配置信息
 
@@ -85,7 +90,7 @@ namespace Player
 
         #endregion
 
-        //初始化
+        // 初始化
         protected virtual void Awake()
         {
             model = transform.Find("Model").GetComponent<ModelBase>();
@@ -94,18 +99,21 @@ namespace Player
             unitUIController = GetComponent<UnitUIController>();
             m_unitAudioManager = transform.Find("UnitAudioManager").GetComponent<UnitAudioManager>();
             m_unitEffectManager = transform.Find("UnitEffectManager").GetComponent<UnitEffectManager>();
+            m_networkActor = GetComponent<NetworkActor>();
         }
-        public virtual void Init(Actor actor, NetworkActor networkActor)
+        public virtual void Init(Actor actor)
         {
             this.actor = actor;
-            // Model.Init();
-            unitUIController.Init(actor);
+
             m_unitAudioManager.Init();
             m_unitEffectManager.Init();
+            unitUIController.Init(actor);
+
             stateMachine = new StateMachine();
             m_stateMachineParameter = new StateMachineParameter();
             stateMachine.Init(this);
             m_weaponManaager.Init();
+            m_networkActor.Init(this);
         }
         public virtual void UnInit()
         {
@@ -162,7 +170,7 @@ namespace Player
         {
             curActorChangeStateResponse = message;
             targetPosition = actor.Position;
-            if(oldNetActorState == NetActorState.Falling)
+            if(oldNetActorState == NetActorState.Falling || (CurMode != NetActorMode.Fly && CurMode != NetActorMode.FlyEquip))
             {
                 targetPosition.y = transform.position.y;
             }
@@ -177,21 +185,25 @@ namespace Player
             if (m_curMode == mode) {
                 goto End;
             }
+
             var old_Mode = m_curMode;
-            if(old_Mode == NetActorMode.EquipSword)
-            {
-                model.Animator.SetBool("UnEquiping", true);
-            }
-
             m_curMode = mode;
-            ChangeState(NetActorState.Idle, true);
-
-
-            if (m_curMode == NetActorMode.EquipSword)
+            if(old_Mode == NetActorMode.NormalEquip || old_Mode == NetActorMode.FlyEquip || old_Mode == NetActorMode.MountedEquip)
             {
-                model.Animator.SetBool("Equiping", true);
+                if (m_curMode != NetActorMode.NormalEquip && m_curMode != NetActorMode.FlyEquip && m_curMode != NetActorMode.MountedEquip)
+                {
+                    model.Animator.SetBool("UnEquiping", true);
+                }
+            }
+            else
+            {
+                if (m_curMode == NetActorMode.NormalEquip || m_curMode == NetActorMode.FlyEquip || m_curMode == NetActorMode.MountedEquip)
+                {
+                    model.Animator.SetBool("Equiping", true);
+                }
             }
 
+            ChangeState(NetActorState.Idle, true);
         End:
             return;
         }
@@ -247,6 +259,59 @@ namespace Player
 
         #endregion
 
+        #region Skill
+        public Skill CurSkill
+        {
+            get;
+            set;
+        }
+        public bool IsCanCancelSkill
+        {
+            get;
+            set;
+        }
+        public bool IsCanSwitchSkill
+        {
+            get;
+            set;
+        }
+        public bool UseSkill(Skill skill)
+        {
+            if(actor.EntityId == GameApp.character.EntityId)
+            {
+                // 有可能是在技能没结束的时候变招了，也有可能是打断
+                if(CurSkill != null)
+                {
+                    CurSkill.CancelSkill();
+                }
+
+                CurSkill = skill;
+                IsCanCancelSkill = false;
+                IsCanSwitchSkill = false;
+            }
+            m_stateMachineParameter.curSkill = skill;
+
+            return true;
+        }
+        public void OnCanCancelSkill()
+        {
+            IsCanCancelSkill = true;
+        }
+        public void OnCanSwitchSkill()
+        {
+            IsCanSwitchSkill = true;
+        }
+        public void OnSkillOver(Skill skill)
+        {
+            Kaiyun.Event.FireIn("SkillEnterColdDown");
+            if (CurSkill != skill) return;
+            CurSkill = null;
+            IsCanCancelSkill = false;
+            IsCanSwitchSkill = false;
+        }
+        #endregion
+
+
         #region 工具
 
         public void DirectLookTarget(Vector3 pos)
@@ -285,14 +350,18 @@ namespace Player
         }
         public void CreateSpawnObjectAroundOwner(LocalSkill_SpawnObject spawnObj)
         {
-            if (spawnObj != null && spawnObj.prefab != null)
+            if (spawnObj.prefab != null)
             {
                 DelayedTaskScheduler.Instance.AddDelayedTask(spawnObj.delayTime, () => {
                     // 一般特效的生成位置是相对于主角的
                     var obj = Instantiate(spawnObj.prefab);
                     obj.transform.position = transform.TransformPoint(spawnObj.pos);                
                     obj.transform.rotation = transform.rotation * Quaternion.Euler(spawnObj.rotation);
-                    PlayAudio(spawnObj.audioClip);
+                    Destroy(obj, 2f);
+                    if (spawnObj.audioClip != null)
+                    {
+                        PlayAudio(spawnObj.audioClip);
+                    }
                 });
             }
         }

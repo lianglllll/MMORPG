@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Player.PlayerState
 {
-    public class LocalPlayerState_Motion: LocalPlayerState
+    public class LocalPlayerState_Normal_Equip_Motion : LocalPlayerState
     {
         private enum MotionChildState
         {
@@ -53,7 +53,7 @@ namespace Player.PlayerState
         }
         public override void Enter()
         {
-            player.PlayAnimation("Motion");
+            player.PlayAnimation("Normal_Equip_Motion");
             MotionState = MotionChildState.Walk;
             isTransferToRun = false;
             walk2RunTransition = 0;
@@ -83,14 +83,14 @@ namespace Player.PlayerState
             //检测跳跃
             if (GameInputManager.Instance.Space)
             {
-                player.ChangeState(NetActorState.Jumpup);
+                // player.ChangeState(NetActorState.Jumpup);
                 return;
             }
 
             // 检测蹲下
             if (GameInputManager.Instance.Crouch)
             {
-                player.ChangeState(NetActorState.Crouch);
+                // player.ChangeState(NetActorState.Crouch);
                 return;
             }
 

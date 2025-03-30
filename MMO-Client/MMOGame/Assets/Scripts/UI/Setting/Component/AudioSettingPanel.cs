@@ -7,6 +7,7 @@ public class AudioSettingPanel : BaseSettingPanel
     private Slider masterVolumeSlider;
     private Slider bgVolumeSlider;
     private Slider uiVolumeSlider;
+    private Slider unitVolumeSlider;
 
     protected override void Awake()
     {
@@ -14,29 +15,31 @@ public class AudioSettingPanel : BaseSettingPanel
         masterVolumeSlider = transform.Find("MasterVolumeSettingBar/Slider").GetComponent<Slider>();
         bgVolumeSlider = transform.Find("BgVolumeSettingBar/Slider").GetComponent<Slider>();
         uiVolumeSlider = transform.Find("UIVolumeSettingBar/Slider").GetComponent<Slider>();
+        unitVolumeSlider = transform.Find("PlayerVolumeSettingBar/Slider").GetComponent<Slider>();
     }
-
     private void OnEnable()
     {
         // Initialize sliders with current volume levels
         masterVolumeSlider.value = Mathf.Pow(10, GlobalAudioManager.Instance.MasterVolume / 20) ;
         bgVolumeSlider.value = Mathf.Pow(10, GlobalAudioManager.Instance.BGMVolume / 20) ;
         uiVolumeSlider.value = Mathf.Pow(10, GlobalAudioManager.Instance.UIVolume / 20) ;
+        unitVolumeSlider.value = Mathf.Pow(10, GlobalAudioManager.Instance.UnitVolume / 20) ;
 
         // Add listeners
         masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
         bgVolumeSlider.onValueChanged.AddListener(SetBGVolume);
         uiVolumeSlider.onValueChanged.AddListener(SetUIVolume);
+        unitVolumeSlider.onValueChanged.AddListener(SetUnitVolume);
 
         isChangeSetting = false;
     }
-
     private void OnDisable()
     {
         // Remove listeners to avoid memory leaks
         masterVolumeSlider.onValueChanged.RemoveListener(SetMasterVolume);
         bgVolumeSlider.onValueChanged.RemoveListener(SetBGVolume);
         uiVolumeSlider.onValueChanged.RemoveListener(SetUIVolume);
+        unitVolumeSlider.onValueChanged.RemoveListener(SetUnitVolume);
     }
 
     // Methods to update the audio manager's settings
@@ -52,6 +55,10 @@ public class AudioSettingPanel : BaseSettingPanel
     {
         GlobalAudioManager.Instance.UIVolume = value; 
     }
+    private void SetUnitVolume(float value)
+    {
+        GlobalAudioManager.Instance.UnitVolume = value;
+    }
 
     protected override void OnReset()
     {
@@ -65,6 +72,7 @@ public class AudioSettingPanel : BaseSettingPanel
         audioSetting.masterVolume = masterVolumeSlider.value;
         audioSetting.bgVolume = bgVolumeSlider.value;
         audioSetting.uiVolume = uiVolumeSlider.value;
+        audioSetting.unitVolume = unitVolumeSlider.value;
         LocalDataManager.Instance.SaveSettings();
     }
 

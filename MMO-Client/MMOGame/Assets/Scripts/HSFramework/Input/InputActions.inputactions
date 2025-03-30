@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Run",
+                    "name": "LeftShift",
                     "type": "Button",
                     "id": "64975ad2-313c-42d3-a918-e09d75222e6c",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LAttack",
+                    "name": "MouseLeft",
                     "type": "Button",
                     "id": "25d0162b-c3b1-4113-8e51-8928c9e74620",
                     "expectedControlType": "Button",
@@ -42,126 +42,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RAttack",
+                    "name": "MouseRight",
                     "type": "Button",
                     "id": "206ebc11-3526-4d70-9392-33453d4c7466",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Q",
-                    "type": "Button",
-                    "id": "2fa5cc7d-9677-4649-88d1-695865e8019e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "E",
-                    "type": "Button",
-                    "id": "4b914b10-3a79-4c71-8aeb-c6e36f125a25",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "113b744e-e80f-4950-be47-3ce2d447dcf1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Parry",
-                    "type": "Button",
-                    "id": "15007945-c042-48b0-b7fc-d2cdd603cb73",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "EquipWP",
-                    "type": "Button",
-                    "id": "3defcaec-03a7-4122-9c72-98341bce3828",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Quit",
-                    "type": "Button",
-                    "id": "f33ab4f1-1921-43b2-bbd1-02fb86e8936c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Enter",
-                    "type": "Button",
-                    "id": "5a923448-2431-4793-8970-8fb72c3b4b1e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "AnyKey",
-                    "type": "Button",
-                    "id": "6fe22e67-e748-476a-941f-49bd389ada9e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "6901df71-c6ee-443c-b698-a2fe19576475",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "BigJump",
-                    "type": "Button",
-                    "id": "5f48c80c-0f28-45bf-b4a9-7add90211dac",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LetfAlt",
-                    "type": "Button",
-                    "id": "26da4fc1-785d-42d1-b55a-2d02add2d067",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Space",
-                    "type": "Button",
-                    "id": "b10e1d3f-2957-4f7c-8b7d-4b418308dbc0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "82cd8233-ae2d-4e13-8c34-6e3439c0144c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -195,9 +78,99 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Grab",
+                    "name": "KeyFour",
+                    "type": "Button",
+                    "id": "465cd2d3-0309-4192-b55b-8aecb87576b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "C",
+                    "type": "Button",
+                    "id": "82cd8233-ae2d-4e13-8c34-6e3439c0144c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "E",
+                    "type": "Button",
+                    "id": "4b914b10-3a79-4c71-8aeb-c6e36f125a25",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "F",
                     "type": "Button",
                     "id": "1779e35e-cdfe-4253-8a64-aad87fac9a50",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "G",
+                    "type": "Button",
+                    "id": "15007945-c042-48b0-b7fc-d2cdd603cb73",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Q",
+                    "type": "Button",
+                    "id": "2fa5cc7d-9677-4649-88d1-695865e8019e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Z",
+                    "type": "Button",
+                    "id": "1bebb768-c608-4e2f-81fb-c2ded6274580",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Space",
+                    "type": "Button",
+                    "id": "b10e1d3f-2957-4f7c-8b7d-4b418308dbc0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Quit",
+                    "type": "Button",
+                    "id": "f33ab4f1-1921-43b2-bbd1-02fb86e8936c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "5a923448-2431-4793-8970-8fb72c3b4b1e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LetfAlt",
+                    "type": "Button",
+                    "id": "26da4fc1-785d-42d1-b55a-2d02add2d067",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -207,6 +180,33 @@
                     "name": "KeyEsc",
                     "type": "Button",
                     "id": "4146bf7d-96f3-4a1d-8642-41cda15cd406",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AnyKey",
+                    "type": "Button",
+                    "id": "6fe22e67-e748-476a-941f-49bd389ada9e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Tab",
+                    "type": "Button",
+                    "id": "717e37a7-d4ae-4cce-adbe-ac1a3406fb4e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Caps",
+                    "type": "Button",
+                    "id": "d8cf703d-c5bd-4f2f-b6cd-e5c0441f9d52",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -287,7 +287,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Run",
+                    "action": "LeftShift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -298,7 +298,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LAttack",
+                    "action": "MouseLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -309,7 +309,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RAttack",
+                    "action": "MouseRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -321,50 +321,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "E",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fc2edcbb-719e-4f49-aa55-0548240d0d4e",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fb443539-de40-45f3-80e8-316c3b031591",
-                    "path": "<Keyboard>/g",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Parry",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "da316c71-d3d2-4eac-a822-01e1e1100d2e",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EquipWP",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d6c60285-2625-420c-bff5-91d68846df33",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Q",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -392,39 +348,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5153b7dc-fd5c-4c9a-b7ad-4d642e575c2b",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AnyKey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d268c015-60e1-462c-ac94-1c8807e783c4",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fe4432e7-9431-42fc-a3e2-9e954bfaf8d4",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "BigJump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3da953c3-a8f4-4f75-9f37-ec15ec95a89e",
                     "path": "<Keyboard>/leftAlt",
                     "interactions": "",
@@ -436,23 +359,23 @@
                 },
                 {
                     "name": "",
-                    "id": "d45741dd-c76b-4d2c-8623-abd0af346526",
-                    "path": "<Keyboard>/space",
+                    "id": "bc81e988-2d2f-4145-ac69-9bac62915882",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Space",
+                    "action": "KeyEsc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "097e8bd2-797e-4942-8f96-c3d4de9170f7",
-                    "path": "<Keyboard>/c",
+                    "id": "6ba826c9-60eb-4373-8cee-8523c672e805",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Crouch",
+                    "action": "KeyFour",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -480,34 +403,111 @@
                 },
                 {
                     "name": "",
-                    "id": "fbbe2152-8f5b-45bd-bcf7-de640e48a504",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grab",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bc81e988-2d2f-4145-ac69-9bac62915882",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "KeyEsc",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "430428b2-fe22-4617-a497-f0408cae7abd",
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "KeyThree",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d45741dd-c76b-4d2c-8623-abd0af346526",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbbe2152-8f5b-45bd-bcf7-de640e48a504",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "F",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb443539-de40-45f3-80e8-316c3b031591",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "G",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "097e8bd2-797e-4942-8f96-c3d4de9170f7",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "C",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6c60285-2625-420c-bff5-91d68846df33",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Q",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5153b7dc-fd5c-4c9a-b7ad-4d642e575c2b",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f497fcf5-9e8b-4089-b38d-d2f598d22c8f",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ea4a53c-7977-4b5f-8c37-6b0b250e2f2a",
+                    "path": "<Keyboard>/capsLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Caps",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dbe7ede-ef5d-4273-89da-81c8acd774dc",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Z",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

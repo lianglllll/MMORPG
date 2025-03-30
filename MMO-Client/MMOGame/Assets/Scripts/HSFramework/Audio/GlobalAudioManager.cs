@@ -72,6 +72,19 @@ namespace HSFramework.Audio
                 audioMixer.SetFloat("UIVolume", Mathf.Log10(adjustedValue) * 20);   // 转换为分贝
             }
         }
+        public float UnitVolume
+        {
+            get
+            {
+                audioMixer.GetFloat("UnitVolume", out float value); // 转换为分贝
+                return value;
+            }
+            set
+            {
+                float adjustedValue = Mathf.Max(value, minVolumValue);              // 确保 value 不小于 minValue
+                audioMixer.SetFloat("UnitVolume", Mathf.Log10(adjustedValue) * 20);   // 转换为分贝
+            }
+        }
 
         protected override void Awake()
         {
@@ -94,6 +107,7 @@ namespace HSFramework.Audio
             MasterVolume = audioSetting.masterVolume;
             BGMVolume = audioSetting.bgVolume;
             UIVolume = audioSetting.uiVolume;
+            UnitVolume = audioSetting.unitVolume;
         }
 
         public void PlayBackgroundAudio(string clipName)

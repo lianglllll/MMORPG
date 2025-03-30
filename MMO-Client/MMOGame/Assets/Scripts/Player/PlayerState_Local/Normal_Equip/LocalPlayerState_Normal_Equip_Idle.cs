@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Player.PlayerState
 {
 
-    public class LocalPlayerState_Weapon_Idle : LocalPlayerState
+    public class LocalPlayerState_Normal_Equip_Idle : LocalPlayerState
     {
         private enum IdleFomat
         {
@@ -27,7 +27,7 @@ namespace Player.PlayerState
         }
         public override void Enter()
         {
-            player.PlayAnimation("Weapon_Idle");
+            player.PlayAnimation("Normal_Equip_Idle");
             m_switchExtraIdleTime = 0f;
             m_idleFomat = IdleFomat.Normal;
 
@@ -44,7 +44,7 @@ namespace Player.PlayerState
             }
 
             //检测跳跃
-            if (GameInputManager.Instance.Jump)
+            if (GameInputManager.Instance.Space)
             {
                 player.ChangeState(NetActorState.Jumpup);
                 goto End;

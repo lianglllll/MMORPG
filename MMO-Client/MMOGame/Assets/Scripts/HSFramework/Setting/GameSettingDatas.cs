@@ -39,6 +39,7 @@ namespace HSFramework.Setting
         public float masterVolume;
         public float bgVolume;
         public float uiVolume;
+        public float unitVolume;
 
         public AudioSettingData()
         {
@@ -50,6 +51,7 @@ namespace HSFramework.Setting
             masterVolume = 0.5f;
             bgVolume = 0.5f;
             uiVolume = 0.5f;
+            unitVolume = 0.5f;
         }
     }
 

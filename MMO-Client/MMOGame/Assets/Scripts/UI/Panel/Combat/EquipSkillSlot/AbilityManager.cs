@@ -16,16 +16,20 @@ public class AbilityManager : MonoBehaviour
 
         // todo 按键从配置中获取
         // LocalDataManager.Instance.gameSettings;
-        string tipKeys = "QEFZXC";
-        var skillList = GameApp.character.m_skillManager.GetActiveSkills();
+        string tipKeys = "12345678";
+
+        var fixedSkillDict = GameApp.character.m_skillManager.GetFixedSkills();
         for (int i = 0; i < bars.Count; i++)
         {
             var bar = bars[i];
-            if (i < skillList.Count)
+            if(fixedSkillDict.TryGetValue(i + 1, out var skill))
             {
                 bar.gameObject.SetActive(true);
-                var skill = skillList[i];
-                bar.SetAbilityBarInfo(skill,tipKeys[i].ToString());
+                bar.SetAbilityBarInfo(skill, tipKeys[i].ToString());
+            }
+            else
+            {
+                bar.gameObject.SetActive(false);
             }
         }
     }

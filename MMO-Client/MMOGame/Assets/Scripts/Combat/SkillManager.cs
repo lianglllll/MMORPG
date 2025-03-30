@@ -1,5 +1,7 @@
 using GameClient.Combat;
 using GameClient.Entities;
+using Google.Protobuf.Collections;
+using HS.Protobuf.Combat.Skill;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -17,31 +19,30 @@ namespace GameClient.Manager
     public class SkillManager
     {
         private Actor m_owner;        
-        public List<Skill> Skills = new List<Skill>();
+        // public List<Skill> Skills = new();
+        private Dictionary<int, Skill> skillDict = new();       // <skillId, Skill>
+        private Dictionary<int, Skill> fixedSkillDict = new();  // <pos, Skill>
         
-        public void Init(Actor owner, Google.Protobuf.Collections.RepeatedField<int> equippedSkills)
+        public void Init(Actor owner, RepeatedField<FixedSkillInfo> skills)
         {
             m_owner = owner;
 
-            var tmpDef = LocalDataManager.Instance.
-                WeaponSkillArsenalDefineDict[m_owner.UnitDefine.weaponSkillArsenalId];
-            var baseSkillIds = tmpDef.SkillIds;
-            foreach (var skillId in baseSkillIds)
-            {
-                var skill = new Skill(owner, skillId);
-                Skills.Add(skill);
-            }
+            AddSkillArsenal(m_owner.UnitDefine.weaponSkillArsenalId);
 
-            //初始化技能信息，处理服务器传送过来的
-            foreach (var skillId in equippedSkills)
+            // 初始化固定技能组技能信息，处理服务器传送过来的
+            if(skills != null)
             {
-                var skill = new Skill(owner, skillId);
-                Skills.Add(skill);
+                foreach (var item in skills)
+                {
+                    var skill = new Skill(owner, item.SkillId);
+                    skillDict.Add(skill.SkillId, skill);
+                    fixedSkillDict.Add(item.Pos, skill);
+                }
             }
         }
         public void Update(float deltatime)
         {
-            foreach(Skill skill in Skills)
+            foreach(Skill skill in skillDict.Values)
             {
                 skill.OnUpdate(deltatime);
             }
@@ -49,16 +50,35 @@ namespace GameClient.Manager
 
         public Skill GetSkillBySkillId(int skillId)
         {
-            return Skills.FirstOrDefault(s => s.Define.ID == skillId);
+            if(skillDict.TryGetValue(skillId, out var skill))
+            {
+                return skill;
+            }
+            return null;
         }
-        public List<Skill> GetCommonSkills()
+        public Dictionary<int, Skill> GetFixedSkills()
         {
-            return Skills.Where(skill => skill.IsNormal).ToList();
+            return fixedSkillDict;
         }
-        public List<Skill> GetActiveSkills()
+        public void AddSkillArsenal(int weaponSkillArsenalId)
         {
-            return Skills.Where(skill => skill.IsActiveSkill).ToList();
+            var tmpDef = LocalDataManager.Instance.
+                            WeaponSkillArsenalDefineDict[weaponSkillArsenalId];
+            var baseSkillIds = tmpDef.SkillIds;
+            foreach (var skillId in baseSkillIds)
+            {
+                var skill = new Skill(m_owner, skillId);
+                skillDict.Add(skill.SkillId, skill);
+            }
         }
-
+        public void AddSkill(Skill skill)
+        {
+            if(skill == null){
+                goto End;
+            }
+            skillDict.Add(skill.SkillId, skill);
+        End:
+            return;
+        }
     }
 }

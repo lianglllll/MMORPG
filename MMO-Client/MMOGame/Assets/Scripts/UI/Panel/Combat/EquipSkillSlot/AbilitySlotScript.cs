@@ -13,12 +13,13 @@ using GameClient;
 /// </summary>
 public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    private Skill m_skill;
     public Sprite icon;
+
     public string aName;
     public string desc;
     public float coldDown;
     public float maxColdDown;
-    private Skill _skill;
     private bool isUpdate;
 
     private Image iconImag;                     // 技能图标
@@ -39,11 +40,11 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
         coldDownImag.enabled = false;
         coldDownTimeText.enabled = false;
 
-        Kaiyun.Event.RegisterIn("SkillEnterColdDown", this, "_SkillEnterColdDown");
+        Kaiyun.Event.RegisterIn("SkillEnterColdDown", this, "SkillEnterColdDownEvent");
     }
     private void OnDestroy()
     {
-        Kaiyun.Event.UnregisterIn("SkillEnterColdDown", this, "_SkillEnterColdDown");
+        Kaiyun.Event.UnRegisterIn("SkillEnterColdDown", this, "SkillEnterColdDownEvent");
     }
     private void Update()
     {
@@ -58,7 +59,7 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
         // 数据初始化
         if(skillInfo != null)
         {
-            _skill = skillInfo;
+            m_skill = skillInfo;
             icon = Res.LoadAssetSync<Sprite>(skillInfo.Define.Icon);
             aName = skillInfo.Define.Name;
             maxColdDown = skillInfo.Define.CD;
@@ -68,7 +69,7 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
         else
         {
-            _skill = null;
+            m_skill = null;
             icon = null;
             aName = "";
             maxColdDown = 1;
@@ -89,11 +90,9 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
         isUpdate = false;
     }
-
-
     public void SkillEnterColdDownEvent()
     {
-        if (_skill != null && _skill.ColddownTime != 0)
+        if (m_skill != null && m_skill.ColddownTime != 0)
         {
             isUpdate = true;
         }
@@ -102,7 +101,7 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         // 更新技能格的信息，主要是冷却的信息,根据skill来进行更新ui
 
-        coldDown = _skill.ColddownTime;                         //设置当前的冷却时间
+        coldDown = m_skill.ColddownTime;                         //设置当前的冷却时间
         if (coldDown <= 0)
         {
             isUpdate = false;
@@ -128,8 +127,8 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private void OnClick()
     {
-        if (_skill == null) return;
-        if (_skill.IsUnitTarget && GameApp.target == null)
+        if (m_skill == null) return;
+        if (m_skill.IsUnitTarget && GameApp.target == null)
         {
             UIManager.Instance.MessagePanel.ShowBottonMsg("当前没有选中目标");
             return;
@@ -140,14 +139,16 @@ public class AbilitySlotScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
             return;
         }
 
-        CombatHandler.Instance.SendSpellCastReq(_skill,GameApp.target);
+        CombatHandler.Instance.SendSpellCastReq(m_skill,GameApp.target);
+        Kaiyun.Event.FireIn("EnterCombatEvent");
+
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
         var content = "<color=#ffffff>技能信息信息为空</color>";
-        if(_skill != null)
+        if(m_skill != null)
         {
-            content = _skill.GetDescText();
+            content = m_skill.GetDescText();
         }
         ToolTip.Instance.Show(content);
     }

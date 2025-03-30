@@ -59,12 +59,22 @@ namespace GameClient.Entities
         {
             m_netActorNode = netAcotrNode;
             m_unitDefine = LocalDataManager.Instance.unitDefineDict[netAcotrNode.ProfessionId];
-            m_skillManager = new();
+
             m_buffManager = new();
-            m_equipManager = new();
-            m_skillManager.Init(this, netAcotrNode.EquippedSkills);
             m_buffManager.Init(this, netAcotrNode.Buffs);
+
+            m_equipManager = new();
             m_equipManager.Init(this, netAcotrNode.WornEquipments);
+
+            m_skillManager = new();
+            if(GameApp.entityId == EntityId)
+            {
+                m_skillManager.Init(this, netAcotrNode.FixedSkillGroupInfo.Skills);
+            }
+            else
+            {
+                m_skillManager.Init(this, null);
+            }
         }
         public void Init(BaseController baseController)
         {

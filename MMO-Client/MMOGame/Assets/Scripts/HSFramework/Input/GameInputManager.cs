@@ -250,43 +250,52 @@ public class GameInputManager : Singleton<GameInputManager>
 
     public GameInputMode GameInputMode => _currentMode;
 
-    #region Public Properties
-    // 基础输入（已实现）
+    #region Game
+
     public Vector2 Movement => GetAnalogValue("Movement");
     public Vector2 CameraLook => GetAnalogValue("CameraLook");
 
-    // 持续状态输入
-    public bool SustainLeftShift => GetState("Run").Holding;
     public bool SustainQ => GetState("Q").Holding;
     public bool SustainE => GetState("E").Holding;
+    public bool Crouch => GetState("C").Pressed;
+    public bool Equip => GetState("Z").Pressed;
+
+    public bool SustainLeftShift => GetState("LeftShift").Holding;
     public bool SustainLeftAlt => GetState("LetfAlt").Holding;
+    public bool Shift => GetState("LeftShift").Pressed;
 
-    public bool LAttackHolding => GetState("LAttack").Holding;
-    public bool LAttackPressed => GetState("LAttack").Pressed;
-    public bool LAttackReleased => GetState("LAttack").Released;
+    public bool LAttackHolding => GetState("MouseLeft").Holding;
+    public bool LAttackPressed => GetState("MouseLeft").Pressed;
+    public bool LAttackReleased => GetState("MouseLeft").Released;
+    public bool RAttack => GetState("MouseRight").Pressed;
 
-
-    // 瞬时触发输入
-    public bool Jump => GetState("Jump").Pressed;
-    public bool Shift => GetState("Run").Pressed;
-    public bool LAttack => GetState("LAttack").Pressed;
-
-    public bool RAttack => GetState("RAttack").Pressed;
-    public bool Defense => GetState("Grab").Pressed;
     public bool Space => GetState("Space").Pressed;
-    public bool Crouch => GetState("Crouch").Pressed;
+
     public bool KeyOneDown => GetState("KeyOne").Pressed;
     public bool KeyTwoDown => GetState("KeyTwo").Pressed;
     public bool KeyThreeDown => GetState("KeyThree").Pressed;
+    public bool KeyFourDown => GetState("KeyFour").Pressed;
+    public bool KeyOneReleased => GetState("KeyOne").Released;
+    public bool KeyTwoReleased => GetState("KeyTwo").Released;
+    public bool KeyThreeReleased => GetState("KeyThree").Released;
+    public bool KeyFourReleased => GetState("KeyFour").Released;
+
+
     public bool AnyKey => GetState("AnyKey").Pressed;
     public bool GI_ESC => GetState("KeyEsc").Pressed;
-    public bool UI_ESC => GetUIState("KeyEsc").Pressed;
+    public bool GI_Enter => GetState("Enter").Pressed;
+    public bool GI_Tab => GetState("Tab").Pressed;
+    public bool GI_Caps => GetState("Caps").Pressed;
 
-    // 特殊状态检测
-    public bool LAttackPerformed => GetState("LAttack").HoldDuration >= _config.holdThreshold;
-    public bool RAttackPerformed => GetState("RAttack").HoldDuration >= _config.holdThreshold;
+    // 遗弃
+    public bool Defense => GetState("F").Pressed;
+
     #endregion
 
+    #region UI
+    public bool UI_ESC => GetUIState("KeyEsc").Pressed;
+
+    #endregion
 
     #region Lifecycle
     protected override void Awake()
@@ -442,7 +451,5 @@ public class GameInputManager : Singleton<GameInputManager>
         }
     }
     #endregion
-
-
 }
 

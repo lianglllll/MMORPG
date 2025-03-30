@@ -119,7 +119,7 @@ namespace Kaiyun
             }
         }
 
-        public static void UnregisterIn(string eventName, object target, string methodName)
+        public static void UnRegisterIn(string eventName, object target, string methodName)
         {
             lock (eventInDict)
             {

@@ -91,29 +91,27 @@ namespace GameClient.Combat
         /// <param name="deltatime"></param>
         public void OnUpdate(float deltatime)
         {
-            //1.技能从被使用那一阶段开始推动
+            // 1.技能从被使用那一阶段开始推动
             if (Stage == SkillStage.None && ColddownTime == 0) return;
 
-            //2.记录技能的运行时间
+            // 2.记录技能的运行时间
             RunTime += deltatime;
 
-            //3.如果当前的蓄气状态且蓄气已经达到目标值，就切换到激活状态
+            // 3.如果当前的蓄气状态且蓄气已经达到目标值，就切换到激活状态
             if (Stage == SkillStage.Intonate && RunTime >= Define.IntonateTime)
             {
                 Stage = SkillStage.Active;
                 OnActive();
             }
 
-            //4.active状态达到最大值,进入冷却
+            // 4.active状态达到最大值,进入冷却
             if (Stage == SkillStage.Active)
             {
                 //技能执行结束
                 if (RunTime >= Define.IntonateTime + Define.Duration)
                 {
                     Stage = SkillStage.Colding;
-
                     OnColdDown();
-
                 }
             }
 
@@ -138,22 +136,8 @@ namespace GameClient.Combat
         /// <param name="target"></param>
         public void Use(SCObject target)
         {
-            //只有本机玩家才会用到这个值
-            if (Owner.EntityId == GameApp.character.EntityId)
-            {
-                GameApp.CurrSkill = this;
-            }
-
-            if (Owner.m_baseController.StateMachineParameter.curSkill == null)
-            {
-                Owner.m_baseController.StateMachineParameter.curSkill = this;
-            }
-            else
-            {
-                //有东西要中断当前技能active
-                Log.Error("当前状态机skill参数不为空！！");
-                return;
-            }
+            bool success = Owner.m_baseController.UseSkill(this);
+            if (!success) return;
 
             _sco = target;
             RunTime = 0;
@@ -169,7 +153,8 @@ namespace GameClient.Combat
                 Stage = SkillStage.Active;
                 OnActive();
             }
-            Owner.m_baseController.ChangeState(NetActorState.Skill);
+
+            Owner.m_baseController.ChangeState(NetActorState.Skill, true);
         }
 
         /// <summary>
@@ -216,12 +201,10 @@ namespace GameClient.Combat
         /// </summary>
         private void OnColdDown()
         {
-            //需要刷新一些个ui
+            // 需要刷新一些个ui
             if (Owner == GameApp.character)
             {
-                GameApp.CurrSkill = null;
-                Kaiyun.Event.FireIn("SkillEnterColdDown");
-                Kaiyun.Event.FireIn("SkillActiveEnd");
+                Owner.m_baseController.OnSkillOver(this);
             }
         }
 
@@ -244,5 +227,20 @@ namespace GameClient.Combat
                           $"<color=bulue>技能冷却时间：{this.Define.CD}</color>";
             return content;
         }
+
+        public virtual void CancelSkill()
+        {
+            if(Stage == SkillStage.None || Stage == SkillStage.Colding)
+            {
+                goto End;
+            }
+            // 提前进入冷却
+            Stage = SkillStage.Colding;
+            OnColdDown();
+
+        End:
+            return;
+        }
+
     }
 }
