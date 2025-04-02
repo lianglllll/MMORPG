@@ -11,14 +11,14 @@ using UnityEngine;
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {
-    public List<GameObject> keepAlive;          //切换场景时不销毁的对象
+    public List<GameObject> keepAlive;          // 切换场景时不销毁的对象
     protected override void Awake()
     {
         base.Awake();
     }
     void Start()
     {
-        //设置初始优先窗口大小
+        // 设置初始优先窗口大小
         LocalDataManager.Instance.init();
         var videoSetting = LocalDataManager.Instance.gameSettings.videoSetting;
         if(videoSetting.resolutionWidth == 0 || videoSetting.resolutionHeight == 0)
@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
         Screen.SetResolution(videoSetting.resolutionWidth, videoSetting.resolutionHeight, videoSetting.isFull);
 
 
-        //初始化服务
+        // 初始化服务
         SecurityService.Instance.Init();
         UserService.Instance.Init();
         EntryGameWorldService.Instance.Init();
@@ -43,17 +43,18 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.Init();
         GlobalAudioManager.Instance.Init(LocalDataManager.Instance.gameSettings.audioSetting);
 
-        //忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
+        // 忽略图层之间的碰撞，6号图层layer无视碰撞，可以把角色 npc 怪物，全都放入6号图层
         Physics.IgnoreLayerCollision(6, 6, true);
 
-        //设置游戏对象不被销毁
+        // 设置游戏对象不被销毁
         foreach (GameObject obj in keepAlive)
         {
             DontDestroyOnLoad(obj);
         }
 
         // gameObj对象池初始化
-        UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;
+        // UnityObjectPoolFactory.Instance.Init(PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>);
+        UnityObjectPoolFactory.Instance.Init(Res.LoadAssetSync<UnityEngine.Object>);
 
         // 打开登录面板ui
         UIManager.Instance.OpenPanel("LoginPanel");
@@ -64,7 +65,7 @@ public class GameManager : Singleton<GameManager>
     }
     void Update()
     {
-        //执行事件系统
+        // 执行事件系统
         Kaiyun.Event.Tick();
     }
     private void FixedUpdate()

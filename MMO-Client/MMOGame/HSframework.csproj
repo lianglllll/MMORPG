@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\HSFramework\Audio\Old\AudioDefine.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\Implementation\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Input\GameInputManager.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\AutoRecycle\AutoRecycleConf.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestPool.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ObjectPoolFactory.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DataStruct\Heap\MaxHeap.cs" />
     <Compile Include="Assets\Scripts\HSFramework\AI\StateMachine\StateMachine.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\UnityObjectPool.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\PostProcessMananger.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskScheduler.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Setting\GameSettingDatas.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\HSFramework\ResLoad\LoadDlls.cs" />
     <Compile Include="Assets\Scripts\HSFramework\DelayedTaskModule\DelayedTaskData.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Test\TestBullet.cs" />
+    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\Implementation\UnityObjectPool.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\Old\Timer\GameTimer.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\UnityObjectPoolFactory.cs" />
     <Compile Include="Assets\Scripts\HSFramework\PoolModule\Factory\ThreadObjectPool.cs" />
@@ -104,7 +105,6 @@
     <Compile Include="Assets\Scripts\HSFramework\Log\SerilogConfig.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Audio\GlobalAudioManager.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\DevelopmentToos.cs" />
-    <Compile Include="Assets\Scripts\HSFramework\PoolModule\Pool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\HSFramework\Tools\UnityMainThreadDispatcher.cs" />
   </ItemGroup>
   <ItemGroup>

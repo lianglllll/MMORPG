@@ -181,8 +181,8 @@ public class Res
     /// <param name="location"></param>
     /// <param name="priority"></param>
     /// <returns></returns>
-    public static T LoadAssetSync<T>(string location, uint priority = 0)where T : UnityEngine.Object
-    {
+    public static T LoadAssetSync<T>(string location) where T : UnityEngine.Object
+    {//, uint priority = 0
         if (string.IsNullOrEmpty(location)) return null;
 
         var path = $"{Prefix}/{location}";

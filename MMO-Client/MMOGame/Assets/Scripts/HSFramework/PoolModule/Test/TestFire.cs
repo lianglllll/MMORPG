@@ -16,7 +16,7 @@ namespace HSFramework.PoolModule
             _transform = transform;
             _mainCamera = Camera.main;
             //这里应该放在一个更合适的地方，这里只是为了演示所以放在这里
-            UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByResource<UnityEngine.Object>;
+            UnityObjectPoolFactory.Instance.Init(PoolAssetLoad.LoadAssetByResource<UnityEngine.Object>);
         }
         private void Update()
         {

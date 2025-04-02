@@ -29,7 +29,7 @@ public class AudioManager : Singleton<AudioManager>
                 audioDic.Add(audioData.key, audioData);
             }
         }
-        UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;
+        // UnityObjectPoolFactory.Instance.m_loadResFunc = PoolAssetLoad.LoadAssetByYoo<UnityEngine.Object>;
 
 
     }

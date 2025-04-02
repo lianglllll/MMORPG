@@ -9,62 +9,58 @@ namespace HSFramework.PoolModule
     /// </summary>
     public class ObjectPoolFactory : SingletonNonMono<ObjectPoolFactory>
     {
-        private readonly Dictionary<System.Type, object> _pools = new Dictionary<Type, object>();
-        private const int DefaultPoolSize = 2;
-        private const int DefaultPoolMaxSize = 500;
+        private readonly Dictionary<System.Type, object> m_pools    = new();
+        private const int m_defaultPoolSize                         = 2;
+        private const int m_defaultPoolMaxSize                      = 500;
+        private bool m_disposed                                     = false;
 
         public ObjectPoolFactory()
         {
-            _disposed = false;
-        }
-
-        private ObjectPool<T> GetPool<T>(Func<T> objectGenerator = null, int poolSize = DefaultPoolSize) where T : new()
-        {
-            var type = typeof(T);
-            if (!_pools.TryGetValue(type, out var pool))
-            {
-                pool = new ObjectPool<T>(objectGenerator, poolSize, DefaultPoolMaxSize);
-                _pools.Add(type, pool);
-            }
-
-            return pool as ObjectPool<T>;
-        }
-
-
-        public T GetItem<T>() where T : new()
-        {
-            //使用列表时一定要注意清空列表，防止残留前面的数据导致Bug
-            return GetPool<T>().Get();
-        }
-        public void RecycleItem<T>(T item) where T : new()
-        {
-            GetPool<T>().Recycle(item);
-        }
-
-        private bool _disposed = false;
-        protected override void Dispose(bool disposing)
-        {
-            if (_disposed)
-                return;
-            if (disposing)
-            {
-                foreach (var pool in _pools)
-                {
-                    (pool.Value as IDisposable)?.Dispose();
-                }
-
-                _pools.Clear();
-            }
-
-            // 确保调用父类的 Dispose 方法
-            base.Dispose(disposing);
-
-            _disposed = true;
+            m_disposed = false;
         }
         ~ObjectPoolFactory()
         {
             Dispose(false);
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (m_disposed)
+                return;
+            m_disposed = true;
 
+            if (disposing)
+            {
+                foreach (var pool in m_pools)
+                {
+                    (pool.Value as IDisposable)?.Dispose();
+                }
+                m_pools.Clear();
+            }
+
+            // 确保调用父类的 Dispose 方法
+            base.Dispose(disposing);
+        }
+
+        private ObjectPool<T> _GetPool<T>(Func<T> objectGenerator = null, int poolSize = m_defaultPoolSize) where T : new()
+        {
+            var type = typeof(T);
+            if (!m_pools.TryGetValue(type, out var pool))
+            {
+                pool = new ObjectPool<T>(objectGenerator, poolSize, m_defaultPoolMaxSize);
+                m_pools.Add(type, pool);
+            }
+
+            return pool as ObjectPool<T>;
+        }
+
+        public T GetItem<T>() where T : new()
+        {
+            // 使用列表时一定要注意清空列表，防止残留前面的数据导致Bug
+            return _GetPool<T>().Get();
+        }
+        public void RecycleItem<T>(T item) where T : new()
+        {
+            _GetPool<T>().Recycle(item);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace HSFramework.PoolModule
 
         private void Awake()
         {
-            UnityObjectPoolFactory.Instance.LoadFuncDelegate = PoolAssetLoad.LoadAssetByResource<UnityEngine.Object>;
+            UnityObjectPoolFactory.Instance.Init(PoolAssetLoad.LoadAssetByResource<UnityEngine.Object>) ;
             // UnityObjectPoolFactory.Instance.LoadFunc = TestAssetLoad.LoadAsset;
         }
 

@@ -42,7 +42,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         MessageRouter.Instance.UnSubscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
 
-
     public void SendSpellCastReq(Skill skill, Actor target = null)
     {
         if (skill == null) return;
@@ -149,7 +148,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
     End:
         return;
     }
-
 
     /// <summary>
     /// entity同步信息接收
@@ -261,7 +259,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         });
     }
 
-
     /// <summary>
     /// 传送
     /// </summary>
@@ -273,6 +270,4 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         req.PointId = point;
         NetManager.Instance.Send(req);
     }
-
-
 }
