@@ -33,24 +33,14 @@ namespace GameClient.Entities
         {
             entityDict.TryRemove(entityId, out Entity entity);
             if (entity != null) {
-                if(entity is Actor actor)
-                {
-                    GameObjectManager.Instance.ActorLeave(actor);
-                }
-                else
-                {
-                    GameObjectManager.Instance.EntityLeave(entity.EntityId);
-                }
+                GameObjectManager.Instance.EntityLeave(entity);
             }
         }
         public void Clear()
         {
             foreach(var entity in entityDict.Values)
             {
-                if(entity is Actor actor)
-                {
-                    GameObjectManager.Instance.EntityLeave(actor.EntityId);
-                }
+                GameObjectManager.Instance.EntityLeave(entity);
             }
             entityDict.Clear();
         }

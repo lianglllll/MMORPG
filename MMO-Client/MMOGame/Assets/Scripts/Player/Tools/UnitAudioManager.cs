@@ -12,7 +12,6 @@ public class UnitAudioManager : MonoBehaviour
     [Tooltip("What are the layers that should be taken into account when checking for ground.")]
     [SerializeField] LayerMask groundLayers;
 
-
     private void Awake()
     {
         m_audioSource = GetComponent<AudioSource>();
@@ -22,6 +21,9 @@ public class UnitAudioManager : MonoBehaviour
         m_thisTransform = transform;
     }
     public void Init()
+    {
+    }
+    public void UnInit()
     {
     }
 

@@ -15,17 +15,9 @@ public class NetworkActor : MonoBehaviour
     ActorChangeModeRequest acmReq;
     private ActorChangeStateRequest acsReq;
 
-
-    public bool Init(BaseController baseController)
+    private void Awake()
     {
-        m_baseController = baseController;
-        m_actor = baseController.Actor;
-        m_transform = baseController.CharacterController.gameObject.transform;
-
-        //
         acmReq = new ActorChangeModeRequest();
-        acmReq.EntityId = m_actor.EntityId;
-        // 
         acsReq = new ActorChangeStateRequest();
         var netTransform = new NetTransform();
         var pos = new NetVector3();
@@ -36,11 +28,26 @@ public class NetworkActor : MonoBehaviour
         netTransform.Rotation = rotation;
         netTransform.Scale = scale;
         acsReq.OriginalTransform = netTransform;
-        acsReq.EntityId = m_actor.EntityId;
         acsReq.SessionId = NetManager.Instance.sessionId;
         acsReq.PayLoad = payLoad;
+    }
+
+    public bool Init(BaseController baseController)
+    {
+        m_baseController = baseController;
+        m_actor = baseController.Actor;
+        m_transform = baseController.CharacterController.gameObject.transform;
+
+        acmReq.EntityId = m_actor.EntityId;
+        acsReq.EntityId = m_actor.EntityId;
 
         m_isStart = true;
+
+        return true;
+    }
+    public bool UnInit()
+    {
+        m_isStart = false;
         return true;
     }
     public bool SendActorChangeModeRequest()

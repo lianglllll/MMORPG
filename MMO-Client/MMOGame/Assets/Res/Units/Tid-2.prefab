@@ -1343,6 +1343,8 @@ GameObject:
   - component: {fileID: 1092050570434303085}
   - component: {fileID: 4887783681366123616}
   - component: {fileID: 1681440739680965846}
+  - component: {fileID: 9205390943021564317}
+  - component: {fileID: 299096122088993423}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -1404,6 +1406,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExtraIdleCnt: 7
+--- !u!114 &9205390943021564317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318751279961575127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd31d1ac4c46d341892fb5f21a711b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &299096122088993423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318751279961575127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1281919530160b54791cd06bcd8fac18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons: []
 --- !u!1 &349738915582067220
 GameObject:
   m_ObjectHideFlags: 0

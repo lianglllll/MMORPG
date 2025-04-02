@@ -9,6 +9,9 @@ using HS.Protobuf.Combat.Skill;
 using HS.Protobuf.SceneEntity;
 using HSFramework.MySingleton;
 using Serilog;
+using HS.Protobuf.Combat.Buff;
+using System;
+using GameClient.Combat.Buffs;
 
 public class CombatHandler : SingletonNonMono<CombatHandler>
 {
@@ -20,11 +23,16 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         ProtoHelper.Instance.Register<SpellCastRequest>((int)SkillProtocol.SpellCastReq);
         ProtoHelper.Instance.Register<SpellCastResponse>((int)SkillProtocol.SpellCastResp);
         ProtoHelper.Instance.Register<SpellCastFailResponse>((int)SkillProtocol.SpellCastFailResp);
+        ProtoHelper.Instance.Register<BuffOperationResponse>((int)BuffProtocol.BuffOperationResp);
+
 
         MessageRouter.Instance.Subscribe<SpellCastResponse>(HandleSpellCastResponse);
         MessageRouter.Instance.Subscribe<SpellCastFailResponse>(HandleSpellFailResponse);
+        MessageRouter.Instance.Subscribe<BuffOperationResponse>(HandleBuffOperationResponse);
 
 
+
+        // 老旧：
         MessageRouter.Instance.Subscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
@@ -42,6 +50,7 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         MessageRouter.Instance.UnSubscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
 
+    // skill
     public void SendSpellCastReq(Skill skill, Actor target = null)
     {
         if (skill == null) return;
@@ -149,6 +158,49 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         return;
     }
 
+    // buff
+    private void HandleBuffOperationResponse(Connection sender, BuffOperationResponse msg)
+    {
+        if (GameApp.SceneId != msg.SceneId)
+        {
+            Log.Warning("非本场景{0}的消息 BuffOperationResponse", GameApp.SceneId);
+            goto End;
+        }
+
+        var buffInfo = msg.BuffInfo;
+        Actor owner = EntityManager.Instance.GetEntity<Actor>(buffInfo.OwnerId);
+        if(owner == null)
+        {
+            Log.Warning("BuffOperationResponse无效，actor[{0}]不存在", buffInfo.OwnerId);
+            goto End;
+        }
+
+        if(msg.OperationType == BuffOperationType.BuffOperationAdd)
+        {
+            owner.BuffManager.AddBuff(buffInfo);
+        }
+        else if (msg.OperationType == BuffOperationType.BuffOperationRemove)
+        {
+            owner.BuffManager.RemoveBuff(msg.RemoveInstanceIds);
+        }
+        else if (msg.OperationType == BuffOperationType.BuffOperationUpdate)
+        {
+            owner.BuffManager.UpdateBuff(buffInfo);
+        }
+        else if (msg.OperationType == BuffOperationType.BuffOperationRemoveeAll)
+        {
+            owner.BuffManager.RemoveAllBuff();
+        }
+
+    End:
+        return;
+    }
+
+
+
+
+
+
     /// <summary>
     /// entity同步信息接收
     /// </summary>
@@ -160,7 +212,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         //所以对游戏对象的获取和访问都需要在主线程中完成
         EntityManager.Instance.OnEntitySync(msg.EntitySync);
     }
-
     /// <summary>
     /// 自己控制的角色，entity同步
     /// </summary>
@@ -170,7 +221,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
     {
         EntityManager.Instance.OnCtlEntitySync(msg.EntitySync);
     }
-
     /// <summary>
     /// 有emtity离开当前地图
     /// </summary>
@@ -179,9 +229,8 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
     private void _SpaceEntityLeaveResponse(Connection sender, SpaceEntityLeaveResponse msg)
     {
         //触发角色离开事件
-        EntityManager.Instance.RemoveEntity(msg.EntityId);
+        // EntityManager.Instance.RemoveEntity(msg.EntityId);
     }
-
 
     /// <summary>
     /// actor的伤害响应包
@@ -258,7 +307,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
             }
         });
     }
-
     /// <summary>
     /// 传送
     /// </summary>

@@ -46,7 +46,7 @@ public class UnitUIController : MonoBehaviour
 
         SetSelectedMark(false);
         SetSpellRangeCanvas(false);
-        SetSectorArea(false,0,0);
+        SetSectorArea(false, 0, 0);
     }
     private void Update()
     {
@@ -87,11 +87,17 @@ public class UnitUIController : MonoBehaviour
         {
             // ShowEntityInfoBar();
         }
-
     }
     public void Init(Actor actor)
     {
         this.owner = actor;
+        SetSelectedMark(false);
+        SetSpellRangeCanvas(false);
+        SetSectorArea(false, 0, 0);
+    }
+    public void UnInit()
+    {
+        owner = null;
     }
 
     public void SetSelectedMark(bool enable)

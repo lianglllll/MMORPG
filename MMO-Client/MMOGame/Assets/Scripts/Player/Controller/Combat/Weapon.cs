@@ -32,7 +32,6 @@ public class Weapon : MonoBehaviour
     }
 
 
-
     protected void ShowEnd()
     {
         animator.SetBool("Showing", false);

@@ -53,8 +53,8 @@ namespace Player
         public UnitEffectManager m_unitEffectManager;
 
         // 信息
-        private Actor actor;
-        public Actor Actor => actor;
+        private Actor m_actor;
+        public Actor Actor => m_actor;
 
         // 网络相关
         private NetworkActor m_networkActor;
@@ -101,23 +101,35 @@ namespace Player
             m_unitEffectManager = transform.Find("UnitEffectManager").GetComponent<UnitEffectManager>();
             m_networkActor = GetComponent<NetworkActor>();
         }
+        private void Start()
+        {
+            model.Init(this);
+            m_unitAudioManager.Init();
+            m_weaponManaager.Init();
+        }
+
+
         public virtual void Init(Actor actor)
         {
-            this.actor = actor;
+            m_actor = actor;
 
-            m_unitAudioManager.Init();
-            m_unitEffectManager.Init();
             unitUIController.Init(actor);
-
-            stateMachine = new StateMachine();
-            m_stateMachineParameter = new StateMachineParameter();
-            stateMachine.Init(this);
-            m_weaponManaager.Init();
+            m_unitEffectManager.Init();
             m_networkActor.Init(this);
+            stateMachine.Init(this);
+
+            isTransitioning = false;
+            CurSkill = null;
         }
         public virtual void UnInit()
         {
+            unitUIController.UnInit();
+            m_unitEffectManager.Init();
+            m_networkActor.UnInit();
             stateMachine.UnInit();
+
+            isTransitioning = false;
+            CurSkill = null;
         }
         protected virtual void Update()
         {
@@ -144,8 +156,8 @@ namespace Player
 
         #region 状态机
 
-        public StateMachine stateMachine { get; protected set; }
-        private StateMachineParameter m_stateMachineParameter;
+        public StateMachine stateMachine = new();
+        private StateMachineParameter m_stateMachineParameter = new();
         protected NetActorState m_curState;
         protected NetActorMode m_curMode;
         public  NetActorState CurState => m_curState;
@@ -169,12 +181,12 @@ namespace Player
         public void AdjustToOriginalTransform(NetActorState oldNetActorState, ActorChangeStateResponse message)
         {
             curActorChangeStateResponse = message;
-            targetPosition = actor.Position;
+            targetPosition = m_actor.Position;
             if(oldNetActorState == NetActorState.Falling || (CurMode != NetActorMode.Fly && CurMode != NetActorMode.FlyEquip))
             {
                 targetPosition.y = transform.position.y;
             }
-            targetRotation = Quaternion.Euler(actor.Rotation);
+            targetRotation = Quaternion.Euler(m_actor.Rotation);
 
             // 重置插值计时器
             lerpTime = 0;
@@ -277,7 +289,7 @@ namespace Player
         }
         public bool UseSkill(Skill skill)
         {
-            if(actor.EntityId == GameApp.character.EntityId)
+            if(m_actor.EntityId == GameApp.character.EntityId)
             {
                 // 有可能是在技能没结束的时候变招了，也有可能是打断
                 if(CurSkill != null)

@@ -15,20 +15,29 @@ public class UnitEffectManager : MonoBehaviour
     public MeshRenderer flyMeshRenderer;
     private TrailEffect flyTrailEffect;
 
-
-    public void Init()
+    private void Start()
     {
-        foreach(var smr in skinnedMeshRenderers)
+        foreach (var smr in skinnedMeshRenderers)
         {
             var te = smr.GetComponent<TrailEffect>();
             trailEffects.Add(te);
             te.enabled = false;
         }
-        if(flyMeshRenderer != null)
+        if (flyMeshRenderer != null)
         {
             flyTrailEffect = flyMeshRenderer.GetComponent<TrailEffect>();
             flyTrailEffect.enabled = false;
         }
+    }
+
+
+    public void Init()
+    {
+
+    }
+    public void UnInit()
+    {
+
     }
 
     public void StartCloneTrailFX()

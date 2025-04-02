@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public abstract class ModelBase : MonoBehaviour
+    public class ModelBase : MonoBehaviour
     {
         protected Animator animator;
         public Animator Animator { get => animator; }

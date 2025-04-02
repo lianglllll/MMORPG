@@ -85,6 +85,11 @@ namespace GameClient.Combat.Buffs{
 
             }
         }
+        public void UpdataInfo(BuffInfo buffInfo)
+        {
+            m_buffInfo = buffInfo;
+        }
+
         public virtual void OnGet() { }
         public virtual void OnLost() { }
         public virtual void OnUpdate(float delta) { }

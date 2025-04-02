@@ -9,19 +9,29 @@ public class WeaponManager : MonoBehaviour
     private Dictionary<int, Weapon> weaponsDict;
     private int curWeaponId;
 
-    public void Init()
+    private void Start()
     {
-        foreach(var item in weapons){
+        foreach (var item in weapons)
+        {
             item.GetComponent<Weapon>().Init();
         }
     }
+
+    public void Init()
+    {
+
+    }
+    public void UnInit()
+    {
+
+    }
+
 
     public void ShowCurWeapon()
     {
         weapons[0].gameObject.SetActive(true);
         weapons[0].gameObject.GetComponent<Weapon>().Show();
     }
-
     public void HideCurWeapon()
     {
         weapons[0].gameObject.GetComponent<Weapon>().Hide();

@@ -12,6 +12,7 @@ using HS.Protobuf.SceneEntity;
 using HS.Protobuf.Scene;
 using Unity.VisualScripting;
 using Serilog;
+using HSFramework.PoolModule;
 
 /// <summary>
 /// 游戏对象管理器，管理当前场景中的Gameobject
@@ -73,103 +74,89 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
     }
     private IEnumerator LoadActor(Actor actor)
     {
-        // 1.判断合法性
-        bool isMine = (actor.EntityId == GameApp.entityId);
+        /*
+    GameObject prefab = null;
+    yield return Res.LoadAssetAsyncWithTimeout<GameObject>(unitDefine.Resource, (obj) => {
+        prefab = obj;
+    });
+    actorObj = Instantiate(prefab, initPosition, Quaternion.identity, transform);
+    // 下一帧再执行接下去的
+    yield return prefab;
+*/
 
-        // 2.异步加载资源
-        UnitDefine unitDefine = actor.UnitDefine;
-        GameObject prefab = null;
-        yield return Res.LoadAssetAsyncWithTimeout<GameObject>(unitDefine.Resource, (obj) => {
-            prefab = obj;
-        });
-        // 下一帧再执行接下去的
-        yield return prefab;
-
-        // 3.获取坐标和方向,实例化obj并初始化,将实例化的角色放到gamemanager下面
-        Vector3 initPosition = actor.Position;
-
-        if(actor.NetActorMode != NetActorMode.Fly || actor.NetActorMode != NetActorMode.FlyEquip)
-        {
-            // 如果不是flyMode的话，y轴是的重力来控制的。
-            // 计算地面坐标,调整y轴
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;
-        }
-
-        GameObject actorObj = Instantiate(prefab, initPosition, Quaternion.identity, transform);
+        // 实例化游戏对象
+        GameObject actorObj = UnityObjectPoolFactory.Instance.GetItem<GameObject>(actor.UnitDefine.Resource);
         if (actorObj == null)
         {
             Log.Error("actor 实例化失败");
             yield break;
         }
-        // 调整旋转
+
+        // 设置Transfrom信息
+        actorObj.transform.SetParent(transform);
+        Vector3 initPosition = actor.Position;
+        if (actor.NetActorMode != NetActorMode.Fly || actor.NetActorMode != NetActorMode.FlyEquip)
+        {
+            // 如果不是flyMode的话，y轴是的重力来控制的。
+            // 计算地面坐标,调整y轴
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;
+        }
+        actorObj.transform.position = initPosition;
         actorObj.transform.rotation = Quaternion.Euler(actor.Rotation);
 
+        // 加入GameObjcet字典管理
         if (!currentGameObjectDict.TryAdd(actor.EntityId, actorObj))
         {
             Log.Error("actor 加入字典失败");
             Destroy(actorObj);
             yield break;
         }
-        //actor 和 gameobj关联
-        actor.RenderObj = actorObj; 
 
-        //7.给我们控制的角色添加一些控制脚本
-        if (isMine)
+        //  添加控制脚本
+        BaseController ctl = null;
+        LocalPlayerCombatController combat = null;
+        if (actor.EntityId == GameApp.entityId)
         {
-            //打标签
             actorObj.tag = "CtlPlayer";
-            // 模型层控制脚本
-            PlayerModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<PlayerModel>();
-            // 角色控制脚本
-            LocalPlayerController ctl = actorObj.AddComponent<LocalPlayerController>();                           
-            // 战斗控制脚本
-            LocalPlayerCombatController combat = actorObj.AddComponent<LocalPlayerCombatController>();
+            actorObj.name = "[本地玩家] " + "Character_" + actor.EntityId;
+            ctl = actorObj.AddComponent<LocalPlayerController>();
+            combat = actorObj.AddComponent<LocalPlayerCombatController>();
 
-            modelBase.Init(ctl);
-            ctl.Init(actor);
-            actor.Init(ctl);
-            combat.Init(ctl);
-
-            //启用第三人称摄像机
+            // 启用第三人称摄像机
             TP_CameraController.Instance.OnStart(actorObj.transform.Find("CameraLookTarget").transform);
         }
         else
         {
-            actorObj.tag = "SyncPlayer";                                                             //打标签
+            actorObj.tag = "SyncPlayer";                                                           
 
-            // 模型层控制脚本
-            SyncModel modelBase = actorObj.transform.Find("Model").gameObject.AddComponent<SyncModel>();
-            // 角色控制脚本
-            RemotePlayerController ctl = actorObj.AddComponent<RemotePlayerController>();
-
-            modelBase.Init(ctl);
-            ctl.Init(actor);
-            actor.Init(ctl);
-        }
-
-        // 4.设置实例的一些信息
-        actorObj.layer = 6;        // 加入actor图层
-        // 名字
-        if (actor is Character chr)
-        {
-            actorObj.name = "Character_" + actor.EntityId;
-
-        }
-        else if (actor is Monster mon)
-        {
-            actorObj.name = "Monster_" + actor.EntityId;
-            //如果怪物死亡，就不要显示了
-            if (Mathf.Approximately(actor.Hp, 0))
+            if (actor is Character chr)
             {
-                actorObj.SetActive(false);
-                //actor.actorMode = ActorMode.Dead;
+                actorObj.name = "Character_" + actor.EntityId;
             }
-        }
-        else if (actor is Npc npc)
-        {
-            actorObj.name = "Npc_" + actor.EntityId;
-        }
+            else if (actor is Monster mon)
+            {
+                actorObj.name = "Monster_" + actor.EntityId;
+                //如果怪物死亡，就不要显示了
+                if (Mathf.Approximately(actor.Hp, 0))
+                {
+                    actorObj.SetActive(false);
+                    //actor.actorMode = ActorMode.Dead;
+                }
+            }
+            else if (actor is Npc npc)
+            {
+                actorObj.name = "Npc_" + actor.EntityId;
+            }
 
+            ctl = actorObj.AddComponent<RemotePlayerController>();
+        }
+        ctl.Init(actor);
+        actor.Init(ctl);
+        actorObj.layer = 6;             // 加入actor图层
+        if(combat != null)
+        {
+            combat.Init(ctl as LocalPlayerController);
+        }
     }
 
     public void CreateItemObject(ClientItem clientItem)
@@ -238,24 +225,34 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
 
     }
 
-    public void EntityLeave(int entityId)
+    public void EntityLeave(Entity entity)
     {
-        if (!currentGameObjectDict.ContainsKey(entityId)) return;
-        currentGameObjectDict.TryRemove(entityId, out var obj);
-        if(obj != null && !obj.IsDestroyed())
+        if (!currentGameObjectDict.ContainsKey(entity.EntityId))
+        {
+            goto End;
+        }
+        currentGameObjectDict.TryRemove(entity.EntityId, out var obj);
+        if(obj == null && obj.IsDestroyed())
+        {
+            goto End;
+        }
+
+        // 返还给对象池
+        if(entity is Actor actor)
+        {
+            actor.m_baseController.UnInit();
+            UnityObjectPoolFactory.Instance.RecycleItem(actor.UnitDefine.Resource, obj);
+        }else if(entity is ClientItem item)
         {
             Destroy(obj);
         }
-    }
-    public void ActorLeave(Actor actor)
-    {
-        if (!currentGameObjectDict.ContainsKey(actor.EntityId)) return;
-        actor.m_baseController.UnInit();
-        currentGameObjectDict.TryRemove(actor.EntityId, out var obj);
-        if (obj != null && !obj.IsDestroyed())
+        else
         {
             Destroy(obj);
         }
+
+    End:
+        return;
     }
 
     public void EntitySync(NEntitySync nEntitySync)

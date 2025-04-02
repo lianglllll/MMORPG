@@ -6896,6 +6896,7 @@ GameObject:
   - component: {fileID: 1199411954201583486}
   - component: {fileID: 6684966611480930458}
   - component: {fileID: 2185879194125690600}
+  - component: {fileID: 420575544199553930}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -6967,6 +6968,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons: []
+--- !u!114 &420575544199553930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552611413312626622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd31d1ac4c46d341892fb5f21a711b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5554647092470012990
 GameObject:
   m_ObjectHideFlags: 0

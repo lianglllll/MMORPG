@@ -19,9 +19,7 @@ namespace GameClient.Combat.Buffs
 
             foreach (var buffInfo in buffsList)
             {
-                var buff = new Buff();
-                buff.Init(buffInfo, m_owner);
-                AddBuff(buff);
+                AddBuff(buffInfo);
             }
             return true;
         }
@@ -57,9 +55,10 @@ namespace GameClient.Combat.Buffs
             }
 
         }
-
-        public void AddBuff(Buff buff)
+        internal void AddBuff(BuffInfo buffInfo)
         {
+            var buff = new Buff();
+            buff.Init(buffInfo, m_owner);
             m_buffsDict[buff.InstanceId] = buff;
             if (GameApp.character == m_owner || GameApp.target == m_owner)
             {
@@ -76,9 +75,20 @@ namespace GameClient.Combat.Buffs
                 }
             }
         }
+        public void RemoveAllBuff()
+        {
+            m_buffsDict.Clear();
+        }
         public List<Buff> GetBuffs()
         {
             return m_buffsDict.Values.ToList();
-        } 
+        }
+        public void UpdateBuff(BuffInfo buffInfo)
+        {
+            if(m_buffsDict.TryGetValue(buffInfo.Id, out var buff))
+            {
+                buff.UpdataInfo(buffInfo);
+            }
+        }
     }
 }

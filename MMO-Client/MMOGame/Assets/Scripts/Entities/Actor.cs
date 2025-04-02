@@ -79,6 +79,7 @@ namespace GameClient.Entities
         public void Init(BaseController baseController)
         {
             this.m_baseController = baseController;
+            RenderObj = m_baseController.gameObject;
         }
         public override void Update(float deltatime)
         {
