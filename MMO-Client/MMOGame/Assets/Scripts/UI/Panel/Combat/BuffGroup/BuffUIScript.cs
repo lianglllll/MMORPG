@@ -36,8 +36,5 @@ public class BuffUIScript : MonoBehaviour
         coldDownLayer.fillAmount = 1 - (_buff.RemainingTime / _buff.MaxDuration);
         levelText.text = _buff.CurLevel.ToString();
         levelText.gameObject.SetActive(_buff.CurLevel > 1);
-
     }
-
-
 }

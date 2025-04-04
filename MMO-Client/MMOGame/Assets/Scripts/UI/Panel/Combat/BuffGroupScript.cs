@@ -42,7 +42,6 @@ public class BuffGroupScript : MonoBehaviour
     {
         if (buffUIdict.Count <= 0) return;
 
-        //更新ui
         foreach(var item in buffUIdict)
         {
             if (item.Value._buff.CurLevel == 0)
@@ -54,19 +53,18 @@ public class BuffGroupScript : MonoBehaviour
 
     }
 
-    //add
     private void AddBuffUI(Buff buff)
     {
         if (buff == null) return;
+
         //实例化ui，放在当前对象下面
         var obj = Instantiate(buffPrefab, transform);
         var buffui = obj.GetComponent<BuffUIScript>();
         buffui.Init(buff);
+
         //加入字典中管理
         buffUIdict.TryAdd(buff.InstanceId, buffui);
     }
-
-    //remove
     private void RemoveBuffUI(int id) {
         if (buffUIdict.ContainsKey(id))
         {
@@ -75,7 +73,7 @@ public class BuffGroupScript : MonoBehaviour
         }
     }
 
-    //event
+    // event
     public void AddBuffEvent(Buff buff)
     {
         if(owner != null && buff != null &&buff.Owner.EntityId == owner.EntityId)

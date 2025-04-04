@@ -6,7 +6,6 @@ namespace Player.Controller
 {
     public class RemotePlayerController : BaseController
     {
-
         public override void Init(Actor actor)
         {
             base.Init(actor);

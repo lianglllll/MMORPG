@@ -13,6 +13,7 @@ namespace GameClient.Entities
 {
     public class Actor:Entity
     {
+        private bool m_isInit;
         protected GameObject      m_renderObj;
         private UnitDefine      m_unitDefine;                                               
         private NetActorNode    m_netActorNode;                                     
@@ -78,8 +79,9 @@ namespace GameClient.Entities
         }
         public void Init(BaseController baseController)
         {
-            this.m_baseController = baseController;
+            m_baseController = baseController;
             RenderObj = m_baseController.gameObject;
+            m_isInit = true;
         }
         public override void Update(float deltatime)
         {
@@ -219,7 +221,7 @@ namespace GameClient.Entities
         }
         public void HandleActorChangeTransformDate(ActorChangeTransformDataResponse message)
         {
-            if (m_baseController == null)
+            if (!m_isInit)
             {
                 Log.Warning("Actor:HandleActorChangeTransformDate m_baseController is null");
                 return;

@@ -18,7 +18,7 @@ public class GameTools
     /// <returns></returns>
     public static Vector3 CaculateGroundPosition(Vector3 position,float upOffset,int targetLayer)
     {
-        Vector3 tmp = position + new Vector3(0, 1000f, 0);//物体位置上面1000个单位
+        Vector3 tmp = position + new Vector3(0, 1000f, 0);// 物体位置上面1000个单位
         RaycastHit hit;
         int layerMask = ~(1 << targetLayer);
         //向下发送射线
@@ -34,7 +34,6 @@ public class GameTools
             tmp.y += upOffset;
             return tmp;
         }
-         
     }
 
     /// <summary>

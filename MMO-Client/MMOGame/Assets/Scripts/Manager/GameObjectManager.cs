@@ -74,16 +74,6 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
     }
     private IEnumerator LoadActor(Actor actor)
     {
-        /*
-    GameObject prefab = null;
-    yield return Res.LoadAssetAsyncWithTimeout<GameObject>(unitDefine.Resource, (obj) => {
-        prefab = obj;
-    });
-    actorObj = Instantiate(prefab, initPosition, Quaternion.identity, transform);
-    // 下一帧再执行接下去的
-    yield return prefab;
-*/
-
         // 实例化游戏对象
         GameObject actorObj = UnityObjectPoolFactory.Instance.GetItem<GameObject>(actor.UnitDefine.Resource);
         if (actorObj == null)
@@ -99,7 +89,7 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
         {
             // 如果不是flyMode的话，y轴是的重力来控制的。
             // 计算地面坐标,调整y轴
-            initPosition.y = GameTools.CaculateGroundPosition(initPosition, 1.5f, 7).y;
+            initPosition.y = GameTools.CaculateGroundPosition(initPosition, 2f, 7).y;
         }
         actorObj.transform.position = initPosition;
         actorObj.transform.rotation = Quaternion.Euler(actor.Rotation);

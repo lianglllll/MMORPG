@@ -36,14 +36,6 @@ public class SceneHandler : SingletonNonMono<SceneHandler>
             goto End;
         }
 
-        // 判断是否已经存在？
-        var entity = EntityManager.Instance.GetEntity<Actor>(message.ActorNode.EntityId);
-        if(entity != null)
-        {
-            Log.Warning("msg entityId = {0}, 错误重复加入", message.ActorNode.EntityId);
-            goto End;
-        }
-
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
             if (message.EntityType == SceneEntityType.Actor)

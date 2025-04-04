@@ -118,7 +118,6 @@ namespace Player
             m_networkActor.Init(this);
             stateMachine.Init(this);
 
-            isTransitioning = false;
             CurSkill = null;
         }
         public virtual void UnInit()

@@ -66,7 +66,7 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         else if (skill.IsPointTarget)
         {
             //传个pos即可
-            req.Info.Point = V3.ToNetVector3(target.Position);
+            // req.Info.Point = V3.ToNetVector3(target.Position);
         }
         else if (skill.IsNoneTarget)
         {

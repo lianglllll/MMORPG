@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Serilog;
 
 namespace GameClient.Entities
 {
@@ -46,10 +47,11 @@ namespace GameClient.Entities
         }
         public void OnActorEnterScene(NetActorNode netActorNode)
         {
-            //判断是否已经存在？
+            // 判断是否已经存在？
             if(entityDict.TryGetValue(netActorNode.EntityId,out _))
             {
-                entityDict.TryRemove(netActorNode.EntityId ,out _);
+                Log.Warning("msg entityId = {0}, 重复加入", netActorNode.EntityId);
+                goto End;
             }
 
             //根据不同类型生成不同的actor：玩家角色、怪物、npc
@@ -80,11 +82,13 @@ namespace GameClient.Entities
             //判断是否已经存在？
             if (entityDict.TryGetValue(netItemNode.EntityId, out _))
             {
-                entityDict.TryRemove(netItemNode.EntityId, out _);
+                goto End;
             }
             ClientItem clientItem = new ClientItem(netItemNode);
             AddEntity(clientItem);
             GameObjectManager.Instance.CreateItemObject(clientItem);
+        End:
+            return;
         }
 
 
