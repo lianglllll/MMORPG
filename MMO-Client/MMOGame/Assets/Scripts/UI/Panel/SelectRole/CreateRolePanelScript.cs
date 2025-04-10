@@ -76,7 +76,7 @@ public class CreateRolePanelScript : BasePanel
         }
 
         //发送网络请求
-        EntryGameWorldService.Instance.SendCreateCharacterRequest(usernameFileid.text, curItem.JobId);
+        EntryGameWorldHandler.Instance.SendCreateCharacterRequest(usernameFileid.text, curItem.JobId);
 
     }
     public void OnSelectBtn(VocationItem vocationItem)

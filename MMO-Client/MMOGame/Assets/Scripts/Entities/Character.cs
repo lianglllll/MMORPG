@@ -4,7 +4,7 @@ using HS.Protobuf.SceneEntity;
 
 namespace GameClient.Entities
 {
-    public class Character:Actor
+    public class Character : Actor
     {
         public Character(NetActorNode nCharacter) : base(nCharacter)
         {
@@ -20,12 +20,10 @@ namespace GameClient.Entities
                 Kaiyun.Event.FireIn("TargetDeath");
             }else if (GameApp.character == this)
             {
-                GameApp._CombatPanelScript.ShowDeathBox();
+                GameApp.CombatPanelScript.ShowDeathBox();
                 //主角死亡事件发生
                 Kaiyun.Event.FireOut("CtlChrDeath");
             }
         }
-
     }
-
 }

@@ -547,6 +547,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KeyEnter"",
+                    ""type"": ""Button"",
+                    ""id"": ""79b8535f-aff9-476b-8a68-9544a975befe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -558,6 +567,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""KeyEsc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb8bbcc4-7b58-4620-9c70-30ed84d7bfd8"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyEnter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -594,6 +614,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         // UIInput
         m_UIInput = asset.FindActionMap("UIInput", throwIfNotFound: true);
         m_UIInput_KeyEsc = m_UIInput.FindAction("KeyEsc", throwIfNotFound: true);
+        m_UIInput_KeyEnter = m_UIInput.FindAction("KeyEnter", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -863,11 +884,13 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UIInput;
     private IUIInputActions m_UIInputActionsCallbackInterface;
     private readonly InputAction m_UIInput_KeyEsc;
+    private readonly InputAction m_UIInput_KeyEnter;
     public struct UIInputActions
     {
         private @InputActions m_Wrapper;
         public UIInputActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @KeyEsc => m_Wrapper.m_UIInput_KeyEsc;
+        public InputAction @KeyEnter => m_Wrapper.m_UIInput_KeyEnter;
         public InputActionMap Get() { return m_Wrapper.m_UIInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -880,6 +903,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @KeyEsc.started -= m_Wrapper.m_UIInputActionsCallbackInterface.OnKeyEsc;
                 @KeyEsc.performed -= m_Wrapper.m_UIInputActionsCallbackInterface.OnKeyEsc;
                 @KeyEsc.canceled -= m_Wrapper.m_UIInputActionsCallbackInterface.OnKeyEsc;
+                @KeyEnter.started -= m_Wrapper.m_UIInputActionsCallbackInterface.OnKeyEnter;
+                @KeyEnter.performed -= m_Wrapper.m_UIInputActionsCallbackInterface.OnKeyEnter;
+                @KeyEnter.canceled -= m_Wrapper.m_UIInputActionsCallbackInterface.OnKeyEnter;
             }
             m_Wrapper.m_UIInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -887,6 +913,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @KeyEsc.started += instance.OnKeyEsc;
                 @KeyEsc.performed += instance.OnKeyEsc;
                 @KeyEsc.canceled += instance.OnKeyEsc;
+                @KeyEnter.started += instance.OnKeyEnter;
+                @KeyEnter.performed += instance.OnKeyEnter;
+                @KeyEnter.canceled += instance.OnKeyEnter;
             }
         }
     }
@@ -920,5 +949,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     public interface IUIInputActions
     {
         void OnKeyEsc(InputAction.CallbackContext context);
+        void OnKeyEnter(InputAction.CallbackContext context);
     }
 }

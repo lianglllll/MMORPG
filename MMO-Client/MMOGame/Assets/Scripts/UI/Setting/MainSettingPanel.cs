@@ -18,7 +18,7 @@ public class MainSettingPanel : BasePanel
     {
         base.Start();
 
-        //建立映射
+        // 建立映射
         SettingType[] values = (SettingType[])Enum.GetValues(typeof(SettingType));
         var options = transform.Find("SelectOptions");
         var menus = transform.Find("Menu");
@@ -31,7 +31,7 @@ public class MainSettingPanel : BasePanel
             menuDict[values[index]] = obj;
         }
 
-        //默认选择第一个menu
+        // 默认选择第一个menu
         DelayedTaskScheduler.Instance.AddDelayedTask(0.1f, () => {
             var option = options.GetChild(0).GetComponent<SettingSelectOption>();
             Selected(option);

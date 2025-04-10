@@ -32,12 +32,12 @@ public class GameManager : Singleton<GameManager>
 
 
         // 初始化服务
-        SecurityService.Instance.Init();
-        UserService.Instance.Init();
-        EntryGameWorldService.Instance.Init();
+        SecurityHandler.Instance.Init();
+        UserHandler.Instance.Init();
+        EntryGameWorldHandler.Instance.Init();
         SceneHandler.Instance.Init();
         CombatHandler.Instance.Init();
-        ChatService.Instance.Init();
+        ChatHandler.Instance.Init();
         ItemService.Instance.Init();
         BuffService.Instance.Init();
         UIManager.Instance.Init();

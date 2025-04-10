@@ -43,7 +43,7 @@ public class SelectRolePanelScript : BasePanel
         deleteBtn.onClick.AddListener(OnDeleteRoleBtn);
 
         //拉取角色列表
-        EntryGameWorldService.Instance.SendGetCharacterListRequest();
+        EntryGameWorldHandler.Instance.SendGetCharacterListRequest();
     }
     private void Update()
     {
@@ -132,7 +132,7 @@ public class SelectRolePanelScript : BasePanel
         UIManager.Instance.MessagePanel.ShowSelectionPanelWithInput("删除角色", "是否删除角色？若是，请输入登录密码。", (password) =>
         {
             //发送请求
-            EntryGameWorldService.Instance.SendDeleteCharacterRequest(curSelectedItem.ChrId, password);
+            EntryGameWorldHandler.Instance.SendDeleteCharacterRequest(curSelectedItem.ChrId, password);
         });
 
     }
@@ -173,7 +173,7 @@ public class SelectRolePanelScript : BasePanel
         isStart = true;
         //获取当前roleItemId对应的role信息，将角色id发送到服务端进行处理
         //发送网络请求
-        EntryGameWorldService.Instance.SendEnterGameRequest(curSelectedItem.ChrId);
+        EntryGameWorldHandler.Instance.SendEnterGameRequest(curSelectedItem.ChrId);
 
     End:
         return;

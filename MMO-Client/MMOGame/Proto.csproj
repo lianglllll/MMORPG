@@ -68,12 +68,14 @@
     <Compile Include="Assets\Scripts\Proto\Login\LoginGateMgr.cs" />
     <Compile Include="Assets\Scripts\Proto\Login\Login.cs" />
     <Compile Include="Assets\Scripts\Proto\Game\Game.cs" />
+    <Compile Include="Assets\Scripts\Proto\DBProxy\DBTask.cs" />
     <Compile Include="Assets\Scripts\Proto\Combat\Skill.cs" />
     <Compile Include="Assets\Scripts\Proto\Chat\Chat.cs" />
     <Compile Include="Assets\Scripts\Proto\Game\GameGate.cs" />
     <Compile Include="Assets\Scripts\Proto\Game\GameGateMgr.cs" />
     <Compile Include="Assets\Scripts\Proto\Scene\SceneEntity.cs" />
     <Compile Include="Assets\Scripts\Proto\Common\Common.cs" />
+    <Compile Include="Assets\Scripts\Proto\Game\GameTask.cs" />
     <Compile Include="Assets\Scripts\Proto\DBProxy\DBWorld.cs" />
     <Compile Include="Assets\Scripts\Proto\Login\LoginGate.cs" />
   </ItemGroup>

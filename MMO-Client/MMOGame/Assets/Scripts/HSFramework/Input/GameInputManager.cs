@@ -294,6 +294,7 @@ public class GameInputManager : Singleton<GameInputManager>
 
     #region UI
     public bool UI_ESC => GetUIState("KeyEsc").Pressed;
+    public bool UI_Enter => GetUIState("KeyEnter").Pressed;
 
     #endregion
 

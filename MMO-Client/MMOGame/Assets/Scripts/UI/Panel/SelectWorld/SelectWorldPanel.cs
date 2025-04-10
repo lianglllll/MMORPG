@@ -59,7 +59,7 @@ public class SelectWorldPanel : BasePanel
 
 
         // 拉取世界信息
-        EntryGameWorldService.Instance.SendGetAllWorldInfosRequest();
+        EntryGameWorldHandler.Instance.SendGetAllWorldInfosRequest();
 
         //加载上次的服务器信息
         string myServerInfo = PlayerPrefs.GetString("myWorldInfoNode");

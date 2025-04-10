@@ -14,13 +14,13 @@ namespace GameClient.Entities
     public class Actor:Entity
     {
         private bool m_isInit;
-        protected GameObject      m_renderObj;
-        private UnitDefine      m_unitDefine;                                               
-        private NetActorNode    m_netActorNode;                                     
-        public BaseController   m_baseController;
-        public SkillManager     m_skillManager;
-        private BuffManager      m_buffManager;
-        public EquipManager     m_equipManager;
+        protected GameObject        m_renderObj;
+        private UnitDefine          m_unitDefine;                                               
+        private NetActorNode        m_netActorNode;                                     
+        public BaseController       m_baseController;
+        public SkillManager         m_skillManager;
+        private BuffManager         m_buffManager;
+        public EquipManager         m_equipManager;
 
         public GameObject RenderObj {
             get

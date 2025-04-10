@@ -57,7 +57,7 @@ public class RegisterPanelScript : BasePanel
             goto End;
         }
 
-        UserService.Instance.SendUserRegisterRequest(username, password);
+        UserHandler.Instance.SendUserRegisterRequest(username, password);
 
     End:
         return;

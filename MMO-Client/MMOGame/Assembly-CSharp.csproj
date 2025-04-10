@@ -61,14 +61,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Hurt.cs" />
-    <Compile Include="Assets\Scripts\Handle\EntryGameWorldService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Chat\ChatBoxScript.cs" />
     <Compile Include="Assets\Scripts\Handle\CombatHandler.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Crouch.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\controller.cs" />
+    <Compile Include="Assets\Scripts\Handle\SecurityHandler.cs" />
+    <Compile Include="Assets\Scripts\Handle\EntryGameWorldHandler.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerModel\SyncModel.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_Model.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\Component\VocationItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Chat\ChatMsgLine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerModel\Component\ModelAnimationData.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_JumpUp.cs" />
     <Compile Include="Assets\Scripts\Entities\Monster.cs" />
@@ -81,7 +84,6 @@
     <Compile Include="Assets\Scripts\UI\Anim\PanelAnim.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\RevivalPointDefine.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\ItemIOInfoBox.cs" />
-    <Compile Include="Assets\Scripts\Handle\SecurityService.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\LoadingBox.cs" />
     <Compile Include="Assets\Scripts\Net\NetworkActor.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\RemotePlayerState.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Assets\Scripts\Net\NetClient.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Skill.cs" />
     <Compile Include="Assets\Scripts\Combat\Skill\LocalSkillConfig\LocalSkill_Hit_EF_Config_SO.cs" />
+    <Compile Include="Assets\Scripts\Handle\UserHandler.cs" />
     <Compile Include="Assets\Scripts\Entities\Entity.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_RollState.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\RemotePlayerController.cs" />
@@ -134,6 +137,7 @@
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_IdelState.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Audio\AEAudioEditorBehaviour.cs" />
+    <Compile Include="Assets\Scripts\UI\Chat\ChatSelectOption.cs" />
     <Compile Include="Assets\Scripts\Entities\Character.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_RunState.cs" />
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
@@ -142,6 +146,7 @@
     <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\SwooshTest.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\UnitDefine.cs" />
+    <Compile Include="Assets\Scripts\LocalData\DataDefine\TaskDefine.cs" />
     <Compile Include="Assets\Scripts\Player\Controller\Combat\Weapon.cs" />
     <Compile Include="Assets\Scripts\Combat\Buffs\BuffManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\WorldInfoNodeUI.cs" />
@@ -189,7 +194,6 @@
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\KnapsackPanel.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\ISkillOwner.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillHitEFConfig.cs" />
-    <Compile Include="Assets\Scripts\Handle\UserService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_JumpUpState.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_JumpUp.cs" />
@@ -277,7 +281,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Knock.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Dizzy.cs" />
     <Compile Include="Assets\Art\joker-Combat\RzFX_BloodSpray\PlayFX.cs" />
-    <Compile Include="Assets\Scripts\Service\ChatService.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Fly\LocalPlayerState_Fly_Motion.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Frame\ModelBase.cs" />
@@ -312,10 +315,10 @@
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\AudioZoneControl.cs" />
     <Compile Include="Assets\aExample\aMyTest\Action\LigthContrl.cs" />
     <Compile Include="Assets\Scripts\UI\Dialog\DialogConfig.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Chat\ChatBoxScript.cs" />
     <Compile Include="Assets\Scripts\Scene\FootStepsDatabase.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_Controller.cs" />
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\BaseData\StandardClip.cs" />
+    <Compile Include="Assets\Scripts\Handle\ChatHandler.cs" />
     <Compile Include="Assets\aExample\AE_SkillEditor_Plus\RunTime\Driver\Interface\IRuntimeBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Motion.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal_Equip\LocalPlayerState_Normal_Equip_Motion.cs" />

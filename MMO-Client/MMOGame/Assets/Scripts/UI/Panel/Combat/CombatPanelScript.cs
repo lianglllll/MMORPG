@@ -20,6 +20,7 @@ public class CombatPanelScript : BasePanel
     private Slider intonateSlider;
     private Button KnapsackBtn;
     private ChatBoxScript chatBoxScript;
+    private bool m_isShowChatBox;
 
     private bool m_isShowTopAndRightUI;
     private GameObject TopPart;
@@ -51,6 +52,21 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.RegisterIn("CloseSettingPanel", this, "HanleCloseSettingPanelEvent");
         Init();
     }
+    private void Init()
+    {
+        m_elite.Init(GameApp.character);                    //设置一下我们主角的状态栏
+        m_expBox.Init(GameApp.character);                   //初始化经验条
+        m_ablityManager.Init();
+
+        KnapsackBtn.onClick.AddListener(ShowChatBox);
+
+        HideRelatedCombatUI();
+        HideTopAndRightUI();
+
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.Game);
+
+        chatBoxScript.Init();
+    }
     private void OnDestroy()
     {
         Kaiyun.Event.UnregisterOut("SelectTarget", this, "_SelectTarget");
@@ -63,26 +79,6 @@ public class CombatPanelScript : BasePanel
     }
     private void Update()
     {
-        // 鼠标显示隐藏
-        if (GameInputManager.Instance.SustainLeftAlt)
-        {
-            SetMouseShowAndHide(true);
-        }
-        else if(GameInputManager.Instance.GameInputMode == GameInputMode.Game)
-        {
-            SetMouseShowAndHide(false);
-        }
-
-        // top right part的显隐
-        if (GameInputManager.Instance.GI_ESC && !m_isShowTopAndRightUI)
-        {
-            ShowTopAndRightUI();
-        }
-        if (GameInputManager.Instance.UI_ESC && m_isShowTopAndRightUI && m_haveOtherPanelFromThisOpen == 0)
-        {
-            HideTopAndRightUI();
-        }
-
         // 战斗相关的ui,脱战自动隐藏
         if (m_isShowRelatedCombatUI)
         {
@@ -96,6 +92,35 @@ public class CombatPanelScript : BasePanel
             }
         }
 
+        // 鼠标显示隐藏
+        if (GameInputManager.Instance.SustainLeftAlt)
+        {
+            SetMouseShowAndHide(true);
+        }
+        else if(GameInputManager.Instance.GameInputMode == GameInputMode.Game)
+        {
+            SetMouseShowAndHide(false);
+        }
+
+        // top right part的显隐
+        if (!m_isShowTopAndRightUI && GameInputManager.Instance.GI_ESC && m_haveOtherPanelFromThisOpen == 0)
+        {
+            ShowTopAndRightUI();
+        }
+        if (m_isShowTopAndRightUI && GameInputManager.Instance.UI_ESC && m_haveOtherPanelFromThisOpen == 0)
+        {
+            HideTopAndRightUI();
+        }
+
+        // chat面板显隐
+        if (!m_isShowChatBox && GameInputManager.Instance.GI_Enter)
+        {
+            ShowChatBox();
+        }
+        else if(m_isShowChatBox && GameInputManager.Instance.UI_ESC)
+        {
+            HideChatBox();
+        }
 
         //技能释放进度条UI
         //var sk = GameApp.CurrSkill;
@@ -119,28 +144,14 @@ public class CombatPanelScript : BasePanel
     }
     private void OnEnable()
     {
-        Kaiyun.Event.RegisterIn("EnterCombatEvent", this, "EnterCombatEvent");
+        Kaiyun.Event.RegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
     }
     private void OnDisable()
     {
-        Kaiyun.Event.UnRegisterIn("EnterCombatEvent", this, "EnterCombatEvent");
+        Kaiyun.Event.UnRegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
     }
 
-    private void Init()
-    {
-        m_elite.Init(GameApp.character);                    //设置一下我们主角的状态栏
-        m_expBox.Init(GameApp.character);                   //初始化经验条
-        m_ablityManager.Init();
-
-        KnapsackBtn.onClick.AddListener(OnKnaspackBtn);
-
-        HideRelatedCombatUI();
-        HideTopAndRightUI();
-
-        m_haveOtherPanelFromThisOpen = 0;
-
-        GameInputManager.Instance.SwitchInputMode(GameInputMode.Game);
-    }
+    // 战斗相关UI
     private void ShowRelatedCombatUI()
     {
         m_isShowRelatedCombatUI = true;
@@ -154,6 +165,7 @@ public class CombatPanelScript : BasePanel
         m_ablityManager.gameObject.SetActive(false);
     }
 
+    // 顶部和右边UI 
     private void ShowTopAndRightUI()
     {
         m_isShowTopAndRightUI = true;
@@ -161,19 +173,19 @@ public class CombatPanelScript : BasePanel
         {
             HideRelatedCombatUI();
         }
-        GameInputManager.Instance.SwitchInputMode(GameInputMode.UI);
         TopPart.SetActive(true);
         RightPart.SetActive(true);
 
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.UI);
         SetMouseShowAndHide(true);
     }
     public void HideTopAndRightUI()
     {
         m_isShowTopAndRightUI = false;
-        GameInputManager.Instance.SwitchInputMode(GameInputMode.Game);
         TopPart.SetActive(false);
         RightPart.SetActive(false);
 
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.Game);
         SetMouseShowAndHide(false);
 
         if (!m_isShowRelatedCombatUI)
@@ -214,7 +226,28 @@ public class CombatPanelScript : BasePanel
         throw new NotImplementedException();
     }
 
-    public void EnterCombatEvent()
+    // 聊天面板
+    private void ShowChatBox()
+    {
+        if (m_isShowChatBox) return;
+        m_isShowChatBox = true;
+        m_haveOtherPanelFromThisOpen++;
+        chatBoxScript.ChangeChatShowMode(ChatShowType.Complex);
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.UI);
+        SetMouseShowAndHide(true);
+    }
+    private void HideChatBox()
+    {
+        if (!m_isShowChatBox) return;
+        m_isShowChatBox = false;
+        m_haveOtherPanelFromThisOpen--;
+        chatBoxScript.ChangeChatShowMode(ChatShowType.Simple);
+        GameInputManager.Instance.SwitchInputMode(GameInputMode.Game);
+        SetMouseShowAndHide(false);
+    }
+
+    // 相关事件
+    public void HandleEnterCombatEvent()
     {
         if (!m_isShowRelatedCombatUI)
         {
@@ -222,6 +255,7 @@ public class CombatPanelScript : BasePanel
         }
         m_notCombatOperationTime = 0;
     }
+
 
     // =======================================================================================
 
@@ -234,21 +268,8 @@ public class CombatPanelScript : BasePanel
         string deathText = "你已死亡，是否选择最近复活点复活？";     //提示语句
         UIManager.Instance.MessagePanel.ShowSelectionPanel("复活", deathText, () =>
         {
-            GameApp._Revive();
+            GameApp.SendReviveReq();
         });
-    }
-
-    /// <summary>
-    /// 背包
-    /// </summary>
-    public void OnKnaspackBtn()
-    {
-        UIManager.Instance.OpenPanel("KnapsackPanel");
-
-    }
-    public void CloseKnaspackCallback()
-    {
-
     }
 
     /// <summary>

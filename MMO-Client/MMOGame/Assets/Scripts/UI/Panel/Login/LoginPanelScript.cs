@@ -118,7 +118,7 @@ public class LoginPanelScript : BasePanel
         }
 
         //向server发送登录请求
-        UserService.Instance.SendUserLoginRequest(username, password);
+        UserHandler.Instance.SendUserLoginRequest(username, password);
     End:
         return;
     }
@@ -156,7 +156,7 @@ public class LoginPanelScript : BasePanel
 
     private void OnRefreshServerInfoBtn()
     {
-        UserService.Instance.GetServerInfoRequest();
+        UserHandler.Instance.GetServerInfoRequest();
     }
     public void OnServerInfoResponse(ServerInfoResponse message)
     {

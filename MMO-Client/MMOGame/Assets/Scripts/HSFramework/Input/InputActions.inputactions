@@ -525,6 +525,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "KeyEnter",
+                    "type": "Button",
+                    "id": "79b8535f-aff9-476b-8a68-9544a975befe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -536,6 +545,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "KeyEsc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb8bbcc4-7b58-4620-9c70-30ed84d7bfd8",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyEnter",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

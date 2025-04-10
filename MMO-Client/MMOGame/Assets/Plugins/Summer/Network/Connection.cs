@@ -33,6 +33,7 @@ namespace Common.Summer.Core
         {
             m_onDisconnected = disconnected;
             m_socket = socket;
+            // m_socket.NoDelay = true;
             m_encryptionManager = new EncryptionManager();
             m_encryptionManager.Init();
             //给这个客户端连接创建一个解码器
