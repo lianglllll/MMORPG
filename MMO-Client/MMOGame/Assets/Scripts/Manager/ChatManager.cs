@@ -22,6 +22,8 @@ public class ChatManager : SingletonNonMono<ChatManager>
     }
     public void AddMessages(RepeatedField<ChatMessageV2> chatMessages)
     {
+        bool isHaveCurShowChannelMsg = false;
+
         foreach (var msg in chatMessages)
         {
             var channel = msg.Channel;
@@ -49,23 +51,26 @@ public class ChatManager : SingletonNonMono<ChatManager>
                 case ChatMessageChannel.Private:
                     break;
             }
-
             m_reciveChannels[channel].Add(msg);
-
             if(m_curChannel == channel)
             {
-                // 通知频道UI该更新
-                UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                    OnChat?.Invoke();
-                });
+                isHaveCurShowChannelMsg = true;
             }
+        }
+
+        if (isHaveCurShowChannelMsg)
+        {
+            // 通知频道UI该更新
+            UnityMainThreadDispatcher.Instance().Enqueue(() => {
+                OnChat?.Invoke();
+            });
         }
     }
     public void SendChatMessage(string content)
     {
         ChatHandler.Instance.SendChatMessage(m_curChannel, content, PrivateID, PrivateName);
     }
-    public List<ChatMessageV2> GetAllCurChanelMsg()
+    public List<ChatMessageV2> GetAllCurChannelMsg()
     {
         m_reciveChannels.TryGetValue(m_curChannel, out var msgs);
         if(msgs == null)

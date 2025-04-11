@@ -49,9 +49,8 @@
     <type fullname="HSFramework.MyDelayedTaskScheduler.DelayedTaskScheduler" preserve="all" />
     <type fullname="HSFramework.MySingleton.SingletonNonMono`1" preserve="all" />
     <type fullname="HSFramework.MySingleton.Singleton`1" preserve="all" />
-    <type fullname="HSFramework.PoolModule.PoolAssetLoad" preserve="all" />
     <type fullname="HSFramework.PoolModule.UnityObjectPoolFactory" preserve="all" />
-    <type fullname="HSFramework.PoolModule.UnityObjectPoolFactory/LoadFuncDel`1" preserve="all" />
+    <type fullname="HSFramework.PoolModule.UnityObjectPoolFactory/LoadResFuncDelegate`1" preserve="all" />
     <type fullname="HSFramework.Setting.AudioSettingData" preserve="all" />
     <type fullname="HSFramework.Setting.BaseSettingData" preserve="all" />
     <type fullname="HSFramework.Setting.GameSettingDatas" preserve="all" />
@@ -75,13 +74,14 @@
     <type fullname="Newtonsoft.Json.Linq.JTokenType" preserve="all" />
   </assembly>
   <assembly fullname="Proto">
-    <type fullname="HS.Protobuf.Chat.ChatChannel" preserve="all" />
-    <type fullname="HS.Protobuf.Chat.ChatMessage" preserve="all" />
-    <type fullname="HS.Protobuf.Chat.ChatRequest" preserve="all" />
-    <type fullname="HS.Protobuf.Chat.ChatResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Chat.ChatResponseOne" preserve="all" />
+    <type fullname="HS.Protobuf.Chat.ChatMessageChannel" preserve="all" />
+    <type fullname="HS.Protobuf.Chat.ChatMessageResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Chat.ChatMessageV2" preserve="all" />
+    <type fullname="HS.Protobuf.Chat.SendChatMessageRequest" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Buff.BuffConflict" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Buff.BuffInfo" preserve="all" />
+    <type fullname="HS.Protobuf.Combat.Buff.BuffOperationResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Combat.Buff.BuffOperationType" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Buff.BuffType" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Buff.BuffsAddResponse" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Buff.BuffsRemoveResponse" preserve="all" />
@@ -91,17 +91,19 @@
     <type fullname="HS.Protobuf.Combat.Skill.Damage" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.DamageResponse" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.DameageType" preserve="all" />
+    <type fullname="HS.Protobuf.Combat.Skill.FixedSkillGroupInfo" preserve="all" />
+    <type fullname="HS.Protobuf.Combat.Skill.FixedSkillInfo" preserve="all" />
+    <type fullname="HS.Protobuf.Combat.Skill.SpellCastFailResponse" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.SpellCastRequest" preserve="all" />
     <type fullname="HS.Protobuf.Combat.Skill.SpellCastResponse" preserve="all" />
-    <type fullname="HS.Protobuf.Combat.Skill.SpellFailResponse" preserve="all" />
     <type fullname="HS.Protobuf.Common.CSHeartBeatRequest" preserve="all" />
     <type fullname="HS.Protobuf.Common.CSHeartBeatResponse" preserve="all" />
     <type fullname="HS.Protobuf.Common.ExchangeCommunicationSecretKeyRequest" preserve="all" />
     <type fullname="HS.Protobuf.Common.ExchangeCommunicationSecretKeyResponse" preserve="all" />
     <type fullname="HS.Protobuf.Common.ExchangePublicKeyRequest" preserve="all" />
     <type fullname="HS.Protobuf.Common.ExchangePublicKeyResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Common.NetVector3" preserve="all" />
     <type fullname="HS.Protobuf.Common.ServerInfoNode" preserve="all" />
-    <type fullname="HS.Protobuf.Common.Vec3" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.EquipsType" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.EquipsUpdateResponse" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.InventoryInfo" preserve="all" />
@@ -117,6 +119,7 @@
     <type fullname="HS.Protobuf.Game.Backpack.ItemType" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.ItemUseRequest" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.ItemUseResponse" preserve="all" />
+    <type fullname="HS.Protobuf.Game.Backpack.NetItemDataNode" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.Quality" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.UnloadEquipmentRequest" preserve="all" />
     <type fullname="HS.Protobuf.Game.Backpack.WearEquipmentRequest" preserve="all" />
@@ -176,7 +179,6 @@
     <type fullname="HS.Protobuf.SceneEntity.NetEntity" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.NetItemNode" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.NetTransform" preserve="all" />
-    <type fullname="HS.Protobuf.SceneEntity.NetVector3" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.PropertyUpdate" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.PropertyUpdate/Types" preserve="all" />
     <type fullname="HS.Protobuf.SceneEntity.PropertyUpdate/Types/Prop" preserve="all" />
@@ -194,7 +196,6 @@
     <type fullname="Common.Summer.Net.ProtoHelper" preserve="all" />
     <type fullname="Common.Summer.Security.EncryptionManager" preserve="all" />
     <type fullname="Common.Summer.Tools.Singleton`1" preserve="all" />
-    <type fullname="V3" preserve="all" />
   </assembly>
   <assembly fullname="System">
     <type fullname="System.CodeDom.Compiler.GeneratedCodeAttribute" preserve="all" />
@@ -218,8 +219,10 @@
     <type fullname="System.Linq.IOrderedEnumerable`1" preserve="all" />
   </assembly>
   <assembly fullname="UITools">
+    <type fullname="IRecyclingListViewItem`1" preserve="all" />
     <type fullname="ItemMenu" preserve="all" />
     <type fullname="ItemMenu/MenuOptionCallback" preserve="all" />
+    <type fullname="RecyclingListView`2" preserve="all" />
     <type fullname="ScenePoster" preserve="all" />
     <type fullname="ToolTip" preserve="all" />
   </assembly>
@@ -268,7 +271,10 @@
     <type fullname="UnityEngine.Events.UnityEvent" preserve="all" />
     <type fullname="UnityEngine.Events.UnityEventBase" preserve="all" />
     <type fullname="UnityEngine.Events.UnityEvent`1" preserve="all" />
+    <type fullname="UnityEngine.ExecuteInEditMode" preserve="all" />
     <type fullname="UnityEngine.GameObject" preserve="all" />
+    <type fullname="UnityEngine.Gradient" preserve="all" />
+    <type fullname="UnityEngine.Graphics" preserve="all" />
     <type fullname="UnityEngine.HeaderAttribute" preserve="all" />
     <type fullname="UnityEngine.HideInInspector" preserve="all" />
     <type fullname="UnityEngine.KeyCode" preserve="all" />
@@ -288,6 +294,10 @@
     <type fullname="UnityEngine.RangeAttribute" preserve="all" />
     <type fullname="UnityEngine.Ray" preserve="all" />
     <type fullname="UnityEngine.Rect" preserve="all" />
+    <type fullname="UnityEngine.ReflectionProbe" preserve="all" />
+    <type fullname="UnityEngine.RenderSettings" preserve="all" />
+    <type fullname="UnityEngine.RenderTexture" preserve="all" />
+    <type fullname="UnityEngine.RenderTextureFormat" preserve="all" />
     <type fullname="UnityEngine.Renderer" preserve="all" />
     <type fullname="UnityEngine.RequireComponent" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.Scene" preserve="all" />
@@ -295,9 +305,11 @@
     <type fullname="UnityEngine.Screen" preserve="all" />
     <type fullname="UnityEngine.ScriptableObject" preserve="all" />
     <type fullname="UnityEngine.SerializeField" preserve="all" />
+    <type fullname="UnityEngine.Shader" preserve="all" />
     <type fullname="UnityEngine.SkinnedMeshRenderer" preserve="all" />
     <type fullname="UnityEngine.SpaceAttribute" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
+    <type fullname="UnityEngine.SystemInfo" preserve="all" />
     <type fullname="UnityEngine.Texture" preserve="all" />
     <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.Time" preserve="all" />
@@ -310,7 +322,7 @@
   </assembly>
   <assembly fullname="UnityEngine.IMGUIModule">
     <type fullname="UnityEngine.GUI" preserve="all" />
-    <type fullname="UnityEngine.ScaleMode" preserve="all" />
+    <type fullname="UnityEngine.GUIStyle" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.InputLegacyModule">
     <type fullname="UnityEngine.Input" preserve="all" />
@@ -321,7 +333,8 @@
   <assembly fullname="UnityEngine.ParticleSystemModule">
     <type fullname="UnityEngine.ParticleSystem" preserve="all" />
     <type fullname="UnityEngine.ParticleSystem/MainModule" preserve="all" />
-    <type fullname="UnityEngine.ParticleSystem/MinMaxGradient" preserve="all" />
+    <type fullname="UnityEngine.ParticleSystem/Particle" preserve="all" />
+    <type fullname="UnityEngine.ParticleSystemSimulationSpace" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.PhysicsModule">
     <type fullname="UnityEngine.BoxCollider" preserve="all" />
@@ -358,7 +371,9 @@
     <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.InputField" preserve="all" />
     <type fullname="UnityEngine.UI.InputField/ContentType" preserve="all" />
+    <type fullname="UnityEngine.UI.ScrollRect" preserve="all" />
     <type fullname="UnityEngine.UI.Scrollbar" preserve="all" />
+    <type fullname="UnityEngine.UI.Selectable" preserve="all" />
     <type fullname="UnityEngine.UI.Slider" preserve="all" />
     <type fullname="UnityEngine.UI.Slider/SliderEvent" preserve="all" />
     <type fullname="UnityEngine.UI.Text" preserve="all" />
@@ -390,8 +405,6 @@
     <type fullname="System.Collections.Generic.CollectionExtensions" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/Enumerator" preserve="all" />
-    <type fullname="System.Collections.Generic.Dictionary`2/KeyCollection" preserve="all" />
-    <type fullname="System.Collections.Generic.Dictionary`2/KeyCollection/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.EqualityComparer`1" preserve="all" />

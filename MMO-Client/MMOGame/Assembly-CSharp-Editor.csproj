@@ -60,34 +60,8 @@
     <Analyzer Include="D:\MygameTools\2022.3.59f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Controller\TimeLine.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Factory\AETimelineSearchWindow.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Factory\AETimelineFactory.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\AEUIEventType.cs" />
     <Compile Include="Assets\HotUpdate\Editor\HybridCLR\BuildPlayerCommand.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Driver\AETimelineEditorTick.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Interface\IClipStyle.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Track\TrackStyle.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\Events\LeftMouseUpEvent.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\EventCenter.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Data\TrackStyleData.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Factory\AETimelineAssetsCreator.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Track\TrackBodyStyle.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Excample\BuiltTracks\Aniamtion\Editor\CustomAnimationClip.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\Events\ClipEvent.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Window\AETimelineEditorWindow.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\Events\ControllerEvent.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\Events\BodyRightClick.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Inspector\AETimelineInspector.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\Events\BaseEvent.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Data\ClipStyleData.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Track\TrackClipStyle.cs" />
     <Compile Include="Assets\HotUpdate\Editor\HybridCLR\BuildAssetsCommand.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Track\TrackHeadStyle.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\Events\HeadRightClickEvent.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Event\Events\Timeline.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\Interface\ClipUIAction.cs" />
-    <Compile Include="Assets\aExample\AE_SkillEditor_Plus\Editor\UI\Controller\Controller.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

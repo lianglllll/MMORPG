@@ -12,7 +12,7 @@ namespace HSFramework.PoolModule
     public class UnityObjectPoolFactory : SingletonNonMono<UnityObjectPoolFactory>
     {
         public delegate T LoadResFuncDelegate<out T>(string path);                      // 协变
-        private LoadResFuncDelegate<UnityEngine.Object>              m_loadResFunc;     // 资源加载方法
+        private LoadResFuncDelegate<UnityEngine.Object>             m_loadResFunc;     // 资源加载方法
         private bool                                                m_disposed;
         private readonly Dictionary<string, UnityObjectPool>        m_pools = new();
         private Dictionary<UnityEngine.Object, AutoRecycleItem>     m_autoRecycleItems = new();

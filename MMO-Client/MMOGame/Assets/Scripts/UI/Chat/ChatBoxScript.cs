@@ -64,11 +64,11 @@ public class ChatBoxScript : MonoBehaviour
 
         complexrecyclingListView = new RecyclingListView<ChatMessageV2, ChatMsgLine>();
         complexrecyclingListView.Init(scrollRect, 630, 50, 1, "UI/Prefabs/Chat/ChatComplexBoxMsgLine.prefab",
-            ChatManager.Instance.GetAllCurChanelMsg());
+            ChatManager.Instance.GetAllCurChannelMsg());
 
         simplerecyclingListView = new RecyclingListView<ChatMessageV2, ChatMsgLine>();
         simplerecyclingListView.Init(scrollRect, 450, 50, 1, "UI/Prefabs/Chat/ChatSimpleBoxMsgLine.prefab",
-            ChatManager.Instance.GetAllCurChanelMsg());
+            ChatManager.Instance.GetAllCurChannelMsg());
     }
     public void Init()
     {
@@ -107,8 +107,8 @@ public class ChatBoxScript : MonoBehaviour
         curOption = option;
         curOption.OnClick();
         curChannel = option.m_curChannel;
-
-        ChatManager.Instance.SetCurChannel(curChannel);            
+        ChatManager.Instance.SetCurChannel(curChannel);
+        complexrecyclingListView.UpdateItems(ChatManager.Instance.GetAllCurChannelMsg());
     }
     private void OnSendMsgBtn()
     {
@@ -126,7 +126,7 @@ public class ChatBoxScript : MonoBehaviour
     }
     public void UpdateChatBox()
     {
-        complexrecyclingListView.UpdateItems(ChatManager.Instance.GetAllCurChanelMsg());
+        complexrecyclingListView.UpdateItems(ChatManager.Instance.GetAllCurChannelMsg());
     }
     public void ChangeChatShowMode(ChatShowType chatShowType)
     {

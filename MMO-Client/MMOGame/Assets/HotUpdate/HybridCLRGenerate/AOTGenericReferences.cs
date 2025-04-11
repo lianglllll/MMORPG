@@ -13,6 +13,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"Summer.dll",
 		"System.Core.dll",
 		"System.dll",
+		"UITools.dll",
 		"UnityEngine.CoreModule.dll",
 		"UnityEngine.JSONSerializeModule.dll",
 		"YooAsset.dll",
@@ -26,35 +27,28 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// {{ AOT generic types
 	// Common.Summer.Net.MessageRouter.MessageHandler<object>
 	// Common.Summer.Tools.Singleton<object>
-	// Google.Protobuf.Collections.RepeatedField.<GetEnumerator>d__28<int>
 	// Google.Protobuf.Collections.RepeatedField.<GetEnumerator>d__28<object>
-	// Google.Protobuf.Collections.RepeatedField<int>
 	// Google.Protobuf.Collections.RepeatedField<object>
-	// Google.Protobuf.FieldCodec.<>c<int>
 	// Google.Protobuf.FieldCodec.<>c<object>
-	// Google.Protobuf.FieldCodec.<>c__DisplayClass38_0<int>
 	// Google.Protobuf.FieldCodec.<>c__DisplayClass38_0<object>
-	// Google.Protobuf.FieldCodec.<>c__DisplayClass39_0<int>
 	// Google.Protobuf.FieldCodec.<>c__DisplayClass39_0<object>
-	// Google.Protobuf.FieldCodec.InputMerger<int>
 	// Google.Protobuf.FieldCodec.InputMerger<object>
-	// Google.Protobuf.FieldCodec.ValuesMerger<int>
 	// Google.Protobuf.FieldCodec.ValuesMerger<object>
-	// Google.Protobuf.FieldCodec<int>
 	// Google.Protobuf.FieldCodec<object>
-	// Google.Protobuf.IDeepCloneable<int>
 	// Google.Protobuf.IDeepCloneable<object>
-	// Google.Protobuf.ValueReader<int>
 	// Google.Protobuf.ValueReader<object>
-	// Google.Protobuf.ValueWriter<int>
 	// Google.Protobuf.ValueWriter<object>
+	// HSFramework.DataStruct.Heap<object>
 	// HSFramework.MySingleton.Singleton<object>
-	// HSFramework.PoolModule.UnityObjectPoolFactory.LoadFuncDel<object>
+	// HSFramework.PoolModule.ObjectPool<object>
+	// HSFramework.PoolModule.UnityObjectPoolFactory.<>c__DisplayClass9_0<object>
+	// HSFramework.PoolModule.UnityObjectPoolFactory.LoadResFuncDelegate<object>
+	// IRecyclingListViewItem<object>
 	// Newtonsoft.Json.JsonConverter<object>
+	// RecyclingListView<object,object>
 	// Res.<>c__DisplayClass4_0<object>
 	// Res.<LoadAssetAsyncWithTimeout>d__4<object>
 	// Res.ResHandle<object>
-	// System.Action<CameraHolder.SVA>
 	// System.Action<Entry.MyVec3>
 	// System.Action<System.ValueTuple<object,int>>
 	// System.Action<UnityEngine.SceneManagement.Scene>
@@ -77,55 +71,60 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Concurrent.ConcurrentQueue.<Enumerate>d__28<object>
 	// System.Collections.Concurrent.ConcurrentQueue.Segment<object>
 	// System.Collections.Concurrent.ConcurrentQueue<object>
-	// System.Collections.Generic.ArraySortHelper<CameraHolder.SVA>
 	// System.Collections.Generic.ArraySortHelper<Entry.MyVec3>
 	// System.Collections.Generic.ArraySortHelper<System.ValueTuple<object,int>>
 	// System.Collections.Generic.ArraySortHelper<UnityEngine.Vector3>
 	// System.Collections.Generic.ArraySortHelper<int>
 	// System.Collections.Generic.ArraySortHelper<object>
-	// System.Collections.Generic.Comparer<CameraHolder.SVA>
 	// System.Collections.Generic.Comparer<Entry.MyVec3>
 	// System.Collections.Generic.Comparer<System.ValueTuple<object,int>>
 	// System.Collections.Generic.Comparer<UnityEngine.Vector3>
 	// System.Collections.Generic.Comparer<int>
 	// System.Collections.Generic.Comparer<object>
-	// System.Collections.Generic.Dictionary.Enumerator<int,int>
 	// System.Collections.Generic.Dictionary.Enumerator<int,object>
+	// System.Collections.Generic.Dictionary.Enumerator<long,object>
+	// System.Collections.Generic.Dictionary.Enumerator<object,float>
 	// System.Collections.Generic.Dictionary.Enumerator<object,int>
 	// System.Collections.Generic.Dictionary.Enumerator<object,object>
-	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,int>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,object>
+	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<long,object>
+	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,float>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,int>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,object>
-	// System.Collections.Generic.Dictionary.KeyCollection<int,int>
 	// System.Collections.Generic.Dictionary.KeyCollection<int,object>
+	// System.Collections.Generic.Dictionary.KeyCollection<long,object>
+	// System.Collections.Generic.Dictionary.KeyCollection<object,float>
 	// System.Collections.Generic.Dictionary.KeyCollection<object,int>
 	// System.Collections.Generic.Dictionary.KeyCollection<object,object>
-	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,int>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,object>
+	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<long,object>
+	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,float>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,int>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,object>
-	// System.Collections.Generic.Dictionary.ValueCollection<int,int>
 	// System.Collections.Generic.Dictionary.ValueCollection<int,object>
+	// System.Collections.Generic.Dictionary.ValueCollection<long,object>
+	// System.Collections.Generic.Dictionary.ValueCollection<object,float>
 	// System.Collections.Generic.Dictionary.ValueCollection<object,int>
 	// System.Collections.Generic.Dictionary.ValueCollection<object,object>
-	// System.Collections.Generic.Dictionary<int,int>
 	// System.Collections.Generic.Dictionary<int,object>
+	// System.Collections.Generic.Dictionary<long,object>
+	// System.Collections.Generic.Dictionary<object,float>
 	// System.Collections.Generic.Dictionary<object,int>
 	// System.Collections.Generic.Dictionary<object,object>
+	// System.Collections.Generic.EqualityComparer<float>
 	// System.Collections.Generic.EqualityComparer<int>
+	// System.Collections.Generic.EqualityComparer<long>
 	// System.Collections.Generic.EqualityComparer<object>
-	// System.Collections.Generic.ICollection<CameraHolder.SVA>
 	// System.Collections.Generic.ICollection<Entry.MyVec3>
-	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,int>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,object>>
+	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<long,object>>
+	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,float>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,int>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.Generic.ICollection<System.ValueTuple<object,int>>
 	// System.Collections.Generic.ICollection<UnityEngine.Vector3>
 	// System.Collections.Generic.ICollection<int>
 	// System.Collections.Generic.ICollection<object>
-	// System.Collections.Generic.IComparer<CameraHolder.SVA>
 	// System.Collections.Generic.IComparer<Entry.MyVec3>
 	// System.Collections.Generic.IComparer<System.ValueTuple<object,int>>
 	// System.Collections.Generic.IComparer<UnityEngine.Vector3>
@@ -133,10 +132,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IComparer<object>
 	// System.Collections.Generic.IDictionary<int,object>
 	// System.Collections.Generic.IDictionary<object,object>
-	// System.Collections.Generic.IEnumerable<CameraHolder.SVA>
 	// System.Collections.Generic.IEnumerable<Entry.MyVec3>
-	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,int>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,object>>
+	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<long,object>>
+	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,float>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,int>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.Generic.IEnumerable<System.ValueTuple<object,int>>
@@ -144,10 +143,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerable<float>
 	// System.Collections.Generic.IEnumerable<int>
 	// System.Collections.Generic.IEnumerable<object>
-	// System.Collections.Generic.IEnumerator<CameraHolder.SVA>
 	// System.Collections.Generic.IEnumerator<Entry.MyVec3>
-	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,int>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,object>>
+	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<long,object>>
+	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,float>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,int>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.Generic.IEnumerator<System.ValueTuple<object,int>>
@@ -156,8 +155,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerator<int>
 	// System.Collections.Generic.IEnumerator<object>
 	// System.Collections.Generic.IEqualityComparer<int>
+	// System.Collections.Generic.IEqualityComparer<long>
 	// System.Collections.Generic.IEqualityComparer<object>
-	// System.Collections.Generic.IList<CameraHolder.SVA>
 	// System.Collections.Generic.IList<Entry.MyVec3>
 	// System.Collections.Generic.IList<System.ValueTuple<object,int>>
 	// System.Collections.Generic.IList<UnityEngine.Vector3>
@@ -165,42 +164,42 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<object>
 	// System.Collections.Generic.IReadOnlyDictionary<int,object>
 	// System.Collections.Generic.IReadOnlyDictionary<object,object>
-	// System.Collections.Generic.KeyValuePair<int,int>
 	// System.Collections.Generic.KeyValuePair<int,object>
+	// System.Collections.Generic.KeyValuePair<long,object>
+	// System.Collections.Generic.KeyValuePair<object,float>
 	// System.Collections.Generic.KeyValuePair<object,int>
 	// System.Collections.Generic.KeyValuePair<object,object>
 	// System.Collections.Generic.LinkedList.Enumerator<object>
 	// System.Collections.Generic.LinkedList<object>
 	// System.Collections.Generic.LinkedListNode<object>
-	// System.Collections.Generic.List.Enumerator<CameraHolder.SVA>
 	// System.Collections.Generic.List.Enumerator<Entry.MyVec3>
 	// System.Collections.Generic.List.Enumerator<System.ValueTuple<object,int>>
 	// System.Collections.Generic.List.Enumerator<UnityEngine.Vector3>
 	// System.Collections.Generic.List.Enumerator<int>
 	// System.Collections.Generic.List.Enumerator<object>
-	// System.Collections.Generic.List<CameraHolder.SVA>
 	// System.Collections.Generic.List<Entry.MyVec3>
 	// System.Collections.Generic.List<System.ValueTuple<object,int>>
 	// System.Collections.Generic.List<UnityEngine.Vector3>
 	// System.Collections.Generic.List<int>
 	// System.Collections.Generic.List<object>
-	// System.Collections.Generic.ObjectComparer<CameraHolder.SVA>
 	// System.Collections.Generic.ObjectComparer<Entry.MyVec3>
 	// System.Collections.Generic.ObjectComparer<System.ValueTuple<object,int>>
 	// System.Collections.Generic.ObjectComparer<UnityEngine.Vector3>
 	// System.Collections.Generic.ObjectComparer<int>
 	// System.Collections.Generic.ObjectComparer<object>
+	// System.Collections.Generic.ObjectEqualityComparer<float>
 	// System.Collections.Generic.ObjectEqualityComparer<int>
+	// System.Collections.Generic.ObjectEqualityComparer<long>
 	// System.Collections.Generic.ObjectEqualityComparer<object>
 	// System.Collections.Generic.Queue.Enumerator<ItemIOInfoSt>
+	// System.Collections.Generic.Queue.Enumerator<object>
 	// System.Collections.Generic.Queue<ItemIOInfoSt>
-	// System.Collections.ObjectModel.ReadOnlyCollection<CameraHolder.SVA>
+	// System.Collections.Generic.Queue<object>
 	// System.Collections.ObjectModel.ReadOnlyCollection<Entry.MyVec3>
 	// System.Collections.ObjectModel.ReadOnlyCollection<System.ValueTuple<object,int>>
 	// System.Collections.ObjectModel.ReadOnlyCollection<UnityEngine.Vector3>
 	// System.Collections.ObjectModel.ReadOnlyCollection<int>
 	// System.Collections.ObjectModel.ReadOnlyCollection<object>
-	// System.Comparison<CameraHolder.SVA>
 	// System.Comparison<Entry.MyVec3>
 	// System.Comparison<System.ValueTuple<object,int>>
 	// System.Comparison<UnityEngine.Vector3>
@@ -208,15 +207,16 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Comparison<object>
 	// System.EventHandler<object>
 	// System.Func<System.ValueTuple<object,int>,byte>
-	// System.Func<int,int>
 	// System.Func<int,object,object>
 	// System.Func<int,object>
 	// System.Func<object,System.ValueTuple<object,int>>
 	// System.Func<object,byte>
 	// System.Func<object,int,object>
 	// System.Func<object,int>
+	// System.Func<object,object,byte>
 	// System.Func<object,object,object>
 	// System.Func<object,object>
+	// System.Func<object>
 	// System.Linq.Buffer<object>
 	// System.Linq.Enumerable.<CastIterator>d__99<object>
 	// System.Linq.Enumerable.<OfTypeIterator>d__97<object>
@@ -236,7 +236,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.OrderedEnumerable<object,int>
 	// System.Linq.OrderedEnumerable<object>
 	// System.Nullable<UnityEngine.Color>
-	// System.Predicate<CameraHolder.SVA>
 	// System.Predicate<Entry.MyVec3>
 	// System.Predicate<System.ValueTuple<object,int>>
 	// System.Predicate<UnityEngine.Vector3>
@@ -244,10 +243,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<object>
 	// System.ValueTuple<object,int>
 	// System.ValueTuple<object,object>
+	// UnityEngine.Events.InvokableCall<UnityEngine.Vector2>
 	// UnityEngine.Events.InvokableCall<float>
 	// UnityEngine.Events.InvokableCall<int>
+	// UnityEngine.Events.UnityAction<UnityEngine.Vector2>
 	// UnityEngine.Events.UnityAction<float>
 	// UnityEngine.Events.UnityAction<int>
+	// UnityEngine.Events.UnityEvent<UnityEngine.Vector2>
 	// UnityEngine.Events.UnityEvent<float>
 	// UnityEngine.Events.UnityEvent<int>
 	// }}
@@ -264,11 +266,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object DG.Tweening.TweenSettingsExtensions.SetEase<object>(object,DG.Tweening.Ease)
 		// bool HSFramework.AI.StateMachine.StateMachine.ChangeState<object>(bool)
 		// HSFramework.AI.StateMachine.StateBase HSFramework.AI.StateMachine.StateMachine.GetState<object>()
-		// object HSFramework.PoolModule.PoolAssetLoad.LoadAssetByYoo<object>(string)
+		// object HSFramework.PoolModule.ObjectPoolFactory.GetItem<object>()
+		// HSFramework.PoolModule.ObjectPool<object> HSFramework.PoolModule.ObjectPoolFactory._GetPool<object>(System.Func<object>,int)
+		// object HSFramework.PoolModule.UnityObjectPoolFactory.GetItem<object>(string)
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string)
 		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string,Newtonsoft.Json.JsonSerializerSettings)
 		// System.Collections.IEnumerator Res.LoadAssetAsyncWithTimeout<object>(string,System.Action<object>,float)
-		// object Res.LoadAssetSync<object>(string,uint)
+		// object Res.LoadAssetSync<object>(string)
 		// System.Void Serilog.ILogger.Write<UnityEngine.Vector3>(Serilog.Events.LogEventLevel,string,UnityEngine.Vector3)
 		// System.Void Serilog.ILogger.Write<int,int>(Serilog.Events.LogEventLevel,string,int,int)
 		// System.Void Serilog.ILogger.Write<int>(Serilog.Events.LogEventLevel,string,int)
@@ -300,8 +304,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<System.ValueTuple<object,int>> System.Linq.Enumerable.Iterator<object>.Select<System.ValueTuple<object,int>>(System.Func<object,System.ValueTuple<object,int>>)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d>(System.Runtime.CompilerServices.TaskAwaiter&,EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d>(EntryGameWorldService.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,EntryGameWorldHandler.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d>(System.Runtime.CompilerServices.TaskAwaiter&,EntryGameWorldHandler.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<EntryGameWorldHandler.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d>(EntryGameWorldHandler.<>c__DisplayClass11_0.<<_HandleEnterGameResponse>b__2>d&)
 		// object& System.Runtime.CompilerServices.Unsafe.As<object,object>(object&)
 		// System.Void* System.Runtime.CompilerServices.Unsafe.AsPointer<object>(object&)
 		// object UnityEngine.Component.GetComponent<object>()
@@ -315,15 +319,16 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object UnityEngine.GameObject.GetComponentInChildren<object>(bool)
 		// object UnityEngine.GameObject.GetComponentInParent<object>()
 		// object UnityEngine.GameObject.GetComponentInParent<object>(bool)
-		// object[] UnityEngine.GameObject.GetComponentsInChildren<object>()
 		// object[] UnityEngine.GameObject.GetComponentsInChildren<object>(bool)
 		// bool UnityEngine.GameObject.TryGetComponent<object>(object&)
 		// object UnityEngine.JsonUtility.FromJson<object>(string)
+		// object[] UnityEngine.Object.FindObjectsOfType<object>()
 		// object UnityEngine.Object.Instantiate<object>(object)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform,bool)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Vector3,UnityEngine.Quaternion)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)
+		// object[] UnityEngine.Resources.ConvertObjects<object>(UnityEngine.Object[])
 		// YooAsset.AssetHandle YooAsset.ResourcePackage.LoadAssetSync<object>(string)
 	}
 }

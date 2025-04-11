@@ -18,7 +18,7 @@ using HS.Protobuf.GameGate;
 
 public class NetManager : Singleton<NetManager>
 {
-    private WaitForSeconds m_waitForSeconds = new WaitForSeconds(1222f);             //心跳包时间控制
+    private WaitForSeconds m_waitForSeconds = new WaitForSeconds(2f);             //心跳包时间控制
     private DateTime m_lastBeatTime = DateTime.MinValue;                          //上一次发送心跳包的时间
 
     private NetClient m_loginGateClient = new NetClient();

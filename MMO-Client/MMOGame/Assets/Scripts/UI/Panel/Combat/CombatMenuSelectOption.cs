@@ -8,7 +8,7 @@ using TMPro;
 
 public enum CombatMenuOptionType
 {
-    Settings, Mail, Backpack,ExitPanel, ExitGame
+    Settings, Mail, Backpack,ExitPanel, ExitGame, TaskPanel
 }
 
 public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
@@ -86,6 +86,9 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
             case CombatMenuOptionType.ExitGame:
                 OnExitGameOption();
                 break;
+            case CombatMenuOptionType.TaskPanel:
+                OnExitGameOption();
+                break;
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
@@ -159,6 +162,10 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
     }
     private void OnExitGameOption()
     {
-        UIManager.Instance.ShowTopMessage("不准退！臭杂鱼~");
+        CombatPanelScript.ExitGame();
+    }
+    private void OnTaskOption()
+    {
+        CombatPanelScript.ShowTaskPanel();
     }
 }

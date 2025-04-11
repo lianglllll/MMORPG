@@ -24,18 +24,15 @@ public class SelectionPanel : MonoBehaviour
         DetailTipsText = transform.Find("TipsBox/DetailTipsText").GetComponent<TextMeshProUGUI>();
         ComfirmBtn = transform.Find("TipsBox/ComfirmBtn").GetComponent<Button>();
         CancelBtn = transform.Find("TipsBox/CancelBtn").GetComponent<Button>();
-    }
-    private void Start()
-    {
         ComfirmBtn.onClick.AddListener(OnComfirm);
         CancelBtn.onClick.AddListener(OnCancel);
-        m_isInput = false;
         inputField.gameObject.SetActive(false);
     }
 
     public void Init(Action action)
     {
         cancelAction = action;
+        m_isInput = false;
     }
 
     public void OpenPanel(string simpleTipsText,string detailTipsText, Action comfirmAction)
@@ -50,6 +47,7 @@ public class SelectionPanel : MonoBehaviour
         DetailTipsText.text = detailTipsText;
         m_comfirmAction2 = comfirmAction;
         m_isInput = true;
+        inputField.gameObject.SetActive(true);
         inputField.gameObject.SetActive(true);
     }
 

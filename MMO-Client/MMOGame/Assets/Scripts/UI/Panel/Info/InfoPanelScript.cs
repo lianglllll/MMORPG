@@ -73,8 +73,7 @@ public class InfoPanelScript : MonoBehaviour
         selectionPanelActive = false;
         selectionPanel.Init(() =>
         {
-            selectionPanelActive = false;
-            selectionPanel.gameObject.SetActive(false);
+            CloseSelectionPanel();
         });
         selectionPanel.gameObject.SetActive(false);
 
@@ -205,7 +204,9 @@ public class InfoPanelScript : MonoBehaviour
     {
         if (selectionPanelActive == false) return;
         selectionPanelActive = false;
-        selectionPanel.gameObject.SetActive(false);
+        selectionPanelCanvasGroup.DOFade(0, 1f).OnComplete(() => {
+            selectionPanel.gameObject.SetActive(false);
+        });
     }
 
     /// <summary>

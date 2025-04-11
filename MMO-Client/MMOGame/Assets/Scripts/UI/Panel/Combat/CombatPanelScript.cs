@@ -26,7 +26,7 @@ public class CombatPanelScript : BasePanel
     private GameObject TopPart;
     private GameObject RightPart;
 
-
+    #region 生命周期函数
     protected override void Awake()
     {
         m_elite = transform.Find("Elite").GetComponent<EliteScript>();
@@ -142,6 +142,9 @@ public class CombatPanelScript : BasePanel
         //    }
         //}
     }
+
+
+
     private void OnEnable()
     {
         Kaiyun.Event.RegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
@@ -150,6 +153,7 @@ public class CombatPanelScript : BasePanel
     {
         Kaiyun.Event.UnRegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
     }
+    #endregion
 
     // 战斗相关UI
     private void ShowRelatedCombatUI()
@@ -217,13 +221,23 @@ public class CombatPanelScript : BasePanel
     {
         m_haveOtherPanelFromThisOpen--;
     }
+
+    // 邮箱面板
     public void ShowMailPanel()
     {
-        throw new NotImplementedException();
+        UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
     }
+
+    // 背包面板
     public void ShowBackpackPanel()
     {
-        throw new NotImplementedException();
+        UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
+    }
+
+    // 任务面板
+    public void ShowTaskPanel()
+    {
+        UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
     }
 
     // 聊天面板
@@ -254,6 +268,12 @@ public class CombatPanelScript : BasePanel
             ShowRelatedCombatUI();
         }
         m_notCombatOperationTime = 0;
+    }
+
+    // 退出游戏
+    public void ExitGame()
+    {
+        UIManager.Instance.ShowTopMessage("不准退！臭杂鱼~");
     }
 
 

@@ -45,6 +45,14 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/Res/Combat/SkillConfig
+        CollectorGUID: c6db437a41a1c4b459eb0dab50ec9eab
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
     - GroupName: Scenes
       GroupDesc: "\u573A\u666F"
       AssetTags: 
