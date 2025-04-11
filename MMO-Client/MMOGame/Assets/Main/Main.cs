@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
     private string packageVersion;                          //包的版本
     private int readyCount = 0;                             // 准备就绪的包数量（DefaultPackage，RawPackage）
 
+    private bool m_isStart;
 
     void Start()
     {
@@ -36,8 +37,9 @@ public class Main : MonoBehaviour
     {
         if(isStart)
         {
-            if (Input.anyKeyDown)
+            if (Input.anyKeyDown && !m_isStart)
             {
+                m_isStart = true;
                 StartGame();
             }
         }
