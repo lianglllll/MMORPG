@@ -179,7 +179,7 @@ public class GameObjectManager : HSFramework.MySingleton.Singleton<GameObjectMan
     }
     private IEnumerator LoadItem(ClientItem clientItem)
     {
-        var define = LocalDataManager.Instance.itemDefineDict[clientItem.ItemId];
+        var define = LocalDataManager.Instance.m_itemDefineDict[clientItem.ItemId];
 
         GameObject prefab = null;
         yield return Res.LoadAssetAsyncWithTimeout<GameObject>(define.Model, (obj) => {

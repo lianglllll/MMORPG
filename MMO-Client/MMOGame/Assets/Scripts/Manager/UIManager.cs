@@ -77,7 +77,7 @@ public class UIManager
     public void Init()
     {
         //获取各个面板的数据
-        pathDict = LocalDataManager.Instance.panelDefineDict;
+        pathDict = LocalDataManager.Instance.m_panelDefineDict;
         prefabsDict = new Dictionary<string, GameObject>();
         panelScriptDict = new Dictionary<string, BasePanel>();
     }

@@ -177,7 +177,7 @@ public class EntryGameWorldHandler : SingletonNonMono<EntryGameWorldHandler>
             GameApp.chrId = msg.CharacterId;
 
             // 切换场景
-            LocalDataManager.Instance.spaceDefineDict.TryGetValue(curSceneId, out var spaceDef);
+            LocalDataManager.Instance.m_sceneDefineDict.TryGetValue(curSceneId, out var spaceDef);
             ScenePoster.Instance.LoadSpaceWithPoster(spaceDef.Name, spaceDef.Resource, async (scene) => {
 
                 // 关闭选择角色的面板
@@ -207,12 +207,15 @@ public class EntryGameWorldHandler : SingletonNonMono<EntryGameWorldHandler>
                 // 刷新战斗面板,因为很多ui都依赖各种entity，刷新场景它们的依赖就失效了
                 // UIManager.Instance.ClosePanel("CombatPanel");
                 UIManager.Instance.OpenPanel("CombatPanel");
-                LocalDataManager.Instance.spaceDefineDict.TryGetValue(GameApp.SceneId, out var def);
+                LocalDataManager.Instance.m_sceneDefineDict.TryGetValue(GameApp.SceneId, out var def);
                 UIManager.Instance.ShowTopMessage("" + def.Name);
 
             });
 
         });
+
+        // 需要获取一些与本端玩家的信息
+        TaskDataManager.Instance.Init();
 
     End:
         return;

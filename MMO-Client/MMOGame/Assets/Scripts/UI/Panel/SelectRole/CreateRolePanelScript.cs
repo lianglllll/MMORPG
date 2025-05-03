@@ -33,7 +33,7 @@ public class CreateRolePanelScript : BasePanel
         GameObject panelPrefab = null;
         GameObject panelObject = null;
         panelPrefab = UIManager.Instance.GetPanelPrefab("VocationItem");
-        var defines = LocalDataManager.Instance.unitDefineDict.Values;
+        var defines = LocalDataManager.Instance.m_unitDefineDict.Values;
 
         VocationItem first = null;
         foreach(var item in defines)

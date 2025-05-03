@@ -192,7 +192,7 @@ public class Inventory
     public int AddItem(int itemId, int amount = 1)
     {
         //不做太多的判断，因为服务器已经做过判断了，在做一次就是多余
-        var def = LocalDataManager.Instance.itemDefineDict[itemId];
+        var def = LocalDataManager.Instance.m_itemDefineDict[itemId];
         var counter = amount;
 
         //3.循环放置

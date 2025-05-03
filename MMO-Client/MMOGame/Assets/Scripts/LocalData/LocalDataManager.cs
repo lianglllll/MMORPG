@@ -22,39 +22,34 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
         }
     };
 
-    //地图场景数据
-    public Dictionary<int, SpaceDefine> spaceDefineDict = null;
-    //职业|野怪的数据
-    public Dictionary<int, UnitDefine> unitDefineDict = null;
-    //panel路径映射
-    public Dictionary<string, PanelDefine> panelDefineDict = null;
-    //技能信息
-    public Dictionary<int, WeaponSkillArsenalDefine> WeaponSkillArsenalDefineDict = null;
-    public Dictionary<int, SkillDefine> skillDefineDict = null;
-    public Dictionary<int, LocalSkill_Config_SO> localSkillConfigSODict;
-    //物品信息
-    public Dictionary<int, ItemDefine> itemDefineDict = null;
-    //等级经验信息
-    public Dictionary<int, LevelDefine> levelDefineDict = null;
-    //buff信息
-    public Dictionary<int, BuffDefine> buffDefineDict = null;
-    //对话映射
-    private Dictionary<int,DialogDefine> _dialogDefineDict = null;
+    public Dictionary<int, SpaceDefine> m_sceneDefineDict = null;
+    public Dictionary<int, UnitDefine> m_unitDefineDict = null;
+    public Dictionary<string, PanelDefine> m_panelDefineDict = null;
+    public Dictionary<int, WeaponSkillArsenalDefine> m_weaponSkillArsenalDefineDict = null;
+    public Dictionary<int, SkillDefine> m_skillDefineDict = null;
+    public Dictionary<int, LocalSkill_Config_SO> m_localSkillConfigSODict;
+    public Dictionary<int, BuffDefine> m_buffDefineDict = null;
+    public Dictionary<int, ItemDefine> m_itemDefineDict = null;
+    public Dictionary<int, LevelDefine> m_levelDefineDict = null;
+    public Dictionary<int,DialogDefine> m_dialogDefineDict = null;
+    public Dictionary<int, TaskDefine> m_taskDefineDict = null;
     public GameSettingDatas gameSettings = null;
+
 
     public void init()
     {
         //todo 就是将文件中的数据读入,真的有必要全部读入吗？懒加载可以吗
-        spaceDefineDict = _LoadJsonAnd2Dict<int,SpaceDefine>("SpaceDefine");
-        unitDefineDict = _LoadJsonAnd2Dict<int, UnitDefine>("UnitDefine");
-        skillDefineDict = _LoadJsonAnd2Dict<int, SkillDefine>("SkillDefine");
-        WeaponSkillArsenalDefineDict = _LoadJsonAnd2Dict<int, WeaponSkillArsenalDefine>("WeaponSkillArsenalDefine");
-        localSkillConfigSODict = new();
-        itemDefineDict = _LoadJsonAnd2Dict<int, ItemDefine>("ItemDefine");
-        levelDefineDict = _LoadJsonAnd2Dict<int, LevelDefine>("LevelDefine");
-        buffDefineDict = _LoadJsonAnd2Dict<int, BuffDefine>("BuffDefine");
-        panelDefineDict = _LoadJsonAnd2Dict<string, PanelDefine>("PanelDefine");
-        _dialogDefineDict = _LoadJsonAnd2Dict<int, DialogDefine>("DialogDefine");
+        m_sceneDefineDict = _LoadJsonAnd2Dict<int,SpaceDefine>("SpaceDefine");
+        m_unitDefineDict = _LoadJsonAnd2Dict<int, UnitDefine>("UnitDefine");
+        m_skillDefineDict = _LoadJsonAnd2Dict<int, SkillDefine>("SkillDefine");
+        m_weaponSkillArsenalDefineDict = _LoadJsonAnd2Dict<int, WeaponSkillArsenalDefine>("WeaponSkillArsenalDefine");
+        m_localSkillConfigSODict = new();
+        m_itemDefineDict = _LoadJsonAnd2Dict<int, ItemDefine>("ItemDefine");
+        m_levelDefineDict = _LoadJsonAnd2Dict<int, LevelDefine>("LevelDefine");
+        m_buffDefineDict = _LoadJsonAnd2Dict<int, BuffDefine>("BuffDefine");
+        m_panelDefineDict = _LoadJsonAnd2Dict<string, PanelDefine>("PanelDefine");
+        m_dialogDefineDict = _LoadJsonAnd2Dict<int, DialogDefine>("DialogDefine");
+        m_taskDefineDict = _LoadJsonAnd2Dict<int, TaskDefine>("TaskDefine");
 
         settingsFilePath = Path.Combine(Application.persistentDataPath, "gamesettings.json");
         gameSettings = LoadSettings();
@@ -67,11 +62,11 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
     }
     public SpaceDefine GetSpaceDefineById(int spaceId)
     {
-        return spaceDefineDict.GetValueOrDefault(spaceId,null);
+        return m_sceneDefineDict.GetValueOrDefault(spaceId,null);
     }
     public string GetDialogConfigPathByDid(int dId)
     {
-        DialogDefine def = _dialogDefineDict.GetValueOrDefault(dId, null);
+        DialogDefine def = m_dialogDefineDict.GetValueOrDefault(dId, null);
         if(def == null)
         {
             return null;
@@ -119,7 +114,7 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
     public LocalSkill_Config_SO GetLocalSkillConfigSOBySkillId(int skillId)
     {
         LocalSkill_Config_SO resultSo;
-        if (localSkillConfigSODict.TryGetValue(skillId, out resultSo))
+        if (m_localSkillConfigSODict.TryGetValue(skillId, out resultSo))
         {
             goto End;
         }
@@ -128,7 +123,7 @@ public class LocalDataManager : SingletonNonMono<LocalDataManager>
         resultSo = Res.LoadAssetSync<LocalSkill_Config_SO>(path);
 
         // 缓存一下
-        localSkillConfigSODict.Add(skillId, resultSo);
+        m_localSkillConfigSODict.Add(skillId, resultSo);
 
     End:
         return resultSo;

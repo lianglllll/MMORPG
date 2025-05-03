@@ -63,7 +63,7 @@ namespace GameClient.Manager
         public void AddSkillArsenal(int weaponSkillArsenalId)
         {
             var tmpDef = LocalDataManager.Instance.
-                            WeaponSkillArsenalDefineDict[weaponSkillArsenalId];
+                            m_weaponSkillArsenalDefineDict[weaponSkillArsenalId];
             var baseSkillIds = tmpDef.SkillIds;
             foreach (var skillId in baseSkillIds)
             {

@@ -119,7 +119,7 @@ public class LocalPlayerCombatController : MonoBehaviour
         // 初始化普通攻击连招表
         m_defaultComboDataDict = new();
         WeaponSkillArsenalDefine nDef = LocalDataManager.Instance.
-            WeaponSkillArsenalDefineDict[ctrlController.Actor.UnitDefine.weaponSkillArsenalId];
+            m_weaponSkillArsenalDefineDict[ctrlController.Actor.UnitDefine.weaponSkillArsenalId];
         LocalComboData nCb = new LocalComboData();
         m_defaultComboDataDict.Add(NetActorMode.Normal, nCb);
         LocalComboData lastComboData = nCb;
@@ -137,7 +137,7 @@ public class LocalPlayerCombatController : MonoBehaviour
         m_skillManager.AddSkillArsenal(1);
         LocalComboData nECb = new LocalComboData();
         m_defaultComboDataDict.Add(NetActorMode.NormalEquip, nECb);
-        WeaponSkillArsenalDefine nEDef = LocalDataManager.Instance.WeaponSkillArsenalDefineDict[1];
+        WeaponSkillArsenalDefine nEDef = LocalDataManager.Instance.m_weaponSkillArsenalDefineDict[1];
         lastComboData = nECb;
         foreach (int skillId in nEDef.SkillIds)
         {
