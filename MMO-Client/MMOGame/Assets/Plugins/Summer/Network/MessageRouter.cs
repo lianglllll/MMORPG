@@ -150,14 +150,16 @@ namespace Common.Summer.Net
         private void executeMessage(Connection sender, IMessage message)
         {
             var fullName = message.GetType().FullName;
-            if(delegateMap.TryGetValue(fullName,out var handler))
+            if (delegateMap.TryGetValue(fullName,out var handler))
             {
                 try
                 {
                     handler.DynamicInvoke(sender, message);
-                }catch(Exception e)
+                }catch(Exception ex)
                 {
-                    Log.Error("[MessageRouter.executeMessage]" + e.StackTrace);
+                    // 输出内部异常的真实堆栈
+                    Log.Error($"反射调用失败: {ex.InnerException?.Message}");
+                    Log.Error($"完整堆栈: {ex.InnerException?.StackTrace}");
                 }
             }
         }
