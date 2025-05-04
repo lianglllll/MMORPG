@@ -5,6 +5,7 @@ using GameClient.Entities;
 using HSFramework.Audio;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// 全局游戏管理器
@@ -72,5 +73,15 @@ public class GameManager : Singleton<GameManager>
     private void FixedUpdate()
     {
         EntityManager.Instance.OnUpdate(Time.fixedDeltaTime);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+
+        // 编辑器内停止播放
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }

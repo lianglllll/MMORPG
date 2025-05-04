@@ -1,6 +1,7 @@
 using GameClient;
 using GameClient.Combat;
 using GameClient.Entities;
+using HS.Protobuf.Game;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -273,7 +274,12 @@ public class CombatPanelScript : BasePanel
     // 退出游戏
     public void ExitGame()
     {
-        UIManager.Instance.ShowTopMessage("不准退！臭杂鱼~");
+        // UIManager.Instance.ShowTopMessage("不准退！臭杂鱼~");
+        var req = new ExitGameRequest();
+        NetManager.Instance.Send(req);
+
+        // 游戏结束
+        GameManager.Instance.ExitGame();
     }
 
 

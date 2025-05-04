@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using HS.Protobuf.LoginGate;
 using Google.Protobuf;
 using HS.Protobuf.GameGate;
+using HS.Protobuf.Game;
 
 public class NetManager : Singleton<NetManager>
 {
@@ -45,6 +46,8 @@ public class NetManager : Singleton<NetManager>
         ProtoHelper.Instance.Register<GetGameGateByWorldIdResponse>((int)LoginProtocl.GetGameGateByWorldidResp);
         ProtoHelper.Instance.Register<VerifySessionRequeest>((int)GameGateProtocl.VerifySessionReq);
         ProtoHelper.Instance.Register<VerifySessionResponse>((int)GameGateProtocl.VerifySessionResp);
+        ProtoHelper.Instance.Register<ExitGameRequest>((int)GameProtocl.ExitGameReq);
+        ProtoHelper.Instance.Register<ExitGameResponse>((int)GameProtocl.ExitGameResp);
 
         //消息分发注册
         MessageRouter.Instance.Subscribe<CSHeartBeatResponse>(_HandleCSHeartBeatResponse);
@@ -52,10 +55,11 @@ public class NetManager : Singleton<NetManager>
         MessageRouter.Instance.Subscribe<GetGameGateByWorldIdResponse>(_HandleGetGameGateByWorldIdResponse);
         MessageRouter.Instance.Subscribe<VerifySessionResponse>(_HandleVerifySessionResponse);
 
-
         StartCoroutine(_SendGetLoginGatesRequest("http://8.138.30.5:12345/mmo/game-config.json"));
 
     }
+
+
     public void UnInit()
     {
         MessageRouter.Instance.UnSubscribe<CSHeartBeatResponse>(_HandleCSHeartBeatResponse);
@@ -356,7 +360,6 @@ public class NetManager : Singleton<NetManager>
 
 
     }
-
 
     // 工具
     public bool Send(IMessage message)
