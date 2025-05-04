@@ -275,13 +275,16 @@ public class CombatPanelScript : BasePanel
     public void ExitGame()
     {
         // UIManager.Instance.ShowTopMessage("不准退！臭杂鱼~");
-        var req = new ExitGameRequest();
-        NetManager.Instance.Send(req);
 
-        // 游戏结束
-        GameManager.Instance.ExitGame();
+        UIManager.Instance.MessagePanel.ShowSelectionPanel("退出游戏", "是否退出游戏？", () =>
+        {
+            var req = new ExitGameRequest();
+            NetManager.Instance.Send(req);
+
+            // 游戏结束
+            GameManager.Instance.ExitGame();
+        });
     }
-
 
     // =======================================================================================
 
