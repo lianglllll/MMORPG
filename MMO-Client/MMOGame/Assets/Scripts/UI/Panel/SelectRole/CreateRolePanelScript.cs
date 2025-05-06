@@ -17,10 +17,10 @@ public class CreateRolePanelScript : BasePanel
     protected override void Awake()
     {
         SelectedJobInfo = transform.Find("Canvas/Below/SelectedJobInfo/Text").GetComponent<Text>();
-        usernameFileid = transform.Find("Canvas/Below/HeroNameInputField").GetComponent<InputField>();
-        createBtn = transform.Find("Canvas/Below/CreateBtn").GetComponent<Button>();
-        returnBtn = transform.Find("Canvas/Below/ReturnBtn").GetComponent<Button>();
-        ItemMountPoint = transform.Find("Canvas/Left/ItemMountPoint");
+        usernameFileid  = transform.Find("Canvas/Below/HeroNameInputField").GetComponent<InputField>();
+        createBtn       = transform.Find("Canvas/Below/CreateBtn").GetComponent<Button>();
+        returnBtn       = transform.Find("Canvas/Below/ReturnBtn").GetComponent<Button>();
+        ItemMountPoint  = transform.Find("Canvas/Left/ItemMountPoint");
     }
     protected override void Start()
     {
@@ -77,8 +77,12 @@ public class CreateRolePanelScript : BasePanel
 
         //发送网络请求
         EntryGameWorldHandler.Instance.SendCreateCharacterRequest(usernameFileid.text, curItem.JobId);
-
     }
+    public void HandleCreateChrResponse()
+    {
+        UIManager.Instance.ClosePanelWithFade("CreateRolePanel");
+    }
+
     public void OnSelectBtn(VocationItem vocationItem)
     {
         if(curItem != null)

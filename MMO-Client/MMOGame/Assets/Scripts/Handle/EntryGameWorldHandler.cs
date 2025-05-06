@@ -86,19 +86,19 @@ public class EntryGameWorldHandler : SingletonNonMono<EntryGameWorldHandler>
     {
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
-            //显示消息内容
+            // 显示消息内容
             if (msg.ResultMsg != null)
             {
                 UIManager.Instance.ShowTopMessage(msg.ResultMsg);
             }
 
-            //如果成功就进行跳转
+            // 如果成功就进行跳转
             if (msg.ResultCode == 0)
             {
-                //发起角色列表的请求，刷新角色列表
+                // 发起角色列表的请求，刷新角色列表
                 SendGetCharacterListRequest();
                 CreateRolePanelScript panel = (CreateRolePanelScript)UIManager.Instance.GetOpeningPanelByName("CreateRolePanel");
-                panel.OnReturnBtn();
+                panel.HandleCreateChrResponse();
             }
 
         });
