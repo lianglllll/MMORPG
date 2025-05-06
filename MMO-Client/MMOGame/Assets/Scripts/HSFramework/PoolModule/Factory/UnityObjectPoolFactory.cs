@@ -97,6 +97,7 @@ namespace HSFramework.PoolModule
                 ObjectPoolFactory.Instance.RecycleItem(autoRecycleItem);
             }
         }
+
         public void ClearALL()
         {
             //_pools在不同场景中，使用到的gameobjcet频率可能是不一致的，所有重新获取比较合理一点把。

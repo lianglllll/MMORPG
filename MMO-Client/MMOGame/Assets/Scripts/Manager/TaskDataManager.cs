@@ -66,4 +66,10 @@ public class TaskDataManager : SingletonNonMono<TaskDataManager>
             dict.Add(item.TaskId, item);
         }
     }
+    public Dictionary<GameTaskState, Dictionary<int, NetGameTaskNode>> GetTaskByTaskType(GameTaskType type)
+    {
+        m_allTasks.TryGetValue(type, out var tasks);
+        return tasks;
+    }
+
 }

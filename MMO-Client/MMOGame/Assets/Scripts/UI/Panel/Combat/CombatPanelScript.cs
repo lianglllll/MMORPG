@@ -50,7 +50,8 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.RegisterOut("ExpChange", this, "ExpBoxREfreshUI");
         Kaiyun.Event.RegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
 
-        Kaiyun.Event.RegisterIn("CloseSettingPanel", this, "HanleCloseSettingPanelEvent");
+        Kaiyun.Event.RegisterIn("CloseSettingPanel", this, "HanleCloseOtherPanelEvent");
+        Kaiyun.Event.RegisterIn("CloseTaskPanel", this, "HanleCloseOtherPanelEvent");
         Init();
     }
     private void Init()
@@ -218,7 +219,7 @@ public class CombatPanelScript : BasePanel
         UIManager.Instance.OpenPanel("SettingPanel");
         m_haveOtherPanelFromThisOpen++;
     }
-    public void HanleCloseSettingPanelEvent()
+    public void HanleCloseOtherPanelEvent()
     {
         m_haveOtherPanelFromThisOpen--;
     }
@@ -238,8 +239,11 @@ public class CombatPanelScript : BasePanel
     // 任务面板
     public void ShowTaskPanel()
     {
-        UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
+        // UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
+        UIManager.Instance.OpenPanel("TaskPanel");
+        m_haveOtherPanelFromThisOpen++;
     }
+
 
     // 聊天面板
     private void ShowChatBox()

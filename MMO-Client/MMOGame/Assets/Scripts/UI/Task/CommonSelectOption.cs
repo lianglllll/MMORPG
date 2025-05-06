@@ -20,6 +20,10 @@ public class CommonSelectOption : MonoBehaviour, IPointerEnterHandler, IPointerE
     private int m_flag;
     private ICommonSelectOpionMgr m_mgr;
 
+    #region getset
+    public int Flag => m_flag;
+    #endregion
+
     private void Awake()
     {
         Bg = transform.Find("Bg").GetComponent<Image>();

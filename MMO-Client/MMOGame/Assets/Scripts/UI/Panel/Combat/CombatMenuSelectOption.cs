@@ -87,7 +87,7 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
                 OnExitGameOption();
                 break;
             case CombatMenuOptionType.TaskPanel:
-                OnExitGameOption();
+                OnTaskOption();
                 break;
         }
     }

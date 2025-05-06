@@ -153,7 +153,6 @@ public class UIManager
         panelScriptDict.Remove(name);
         panel.ClosePanel();
         return true;
-
     }
     /// <summary>
     /// 获取某个打开的penel
