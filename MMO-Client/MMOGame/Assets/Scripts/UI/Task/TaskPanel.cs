@@ -1,15 +1,16 @@
 using HS.Protobuf.GameTask;
 using HSFramework.PoolModule;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TaskPanel : BasePanel, ICommonSelectOpionMgr
+public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
 {
     [Header("任务类型选项")]
-    [SerializeField] private List<CommonSelectOption> optionObjs;
-    private CommonSelectOption curTaskTypeOption;
+    [SerializeField] private List<CommonListSelectOption> optionObjs;
+    private CommonListSelectOption curTaskTypeOption;
 
     [Header("任务列表")]
     private string taskListItemPrefabPath = "UI/Prefabs/Task/TaskListItem.prefab";
@@ -24,14 +25,30 @@ public class TaskPanel : BasePanel, ICommonSelectOpionMgr
     [SerializeField] private TextMeshProUGUI TaskCompelteText;
     [SerializeField] private TextMeshProUGUI TaskRewardText;
 
-    private void Awake()
+    [Header("其他的按钮")]
+    [SerializeField] private CommonOption ExitBtn;
+    [SerializeField] private CommonOption TakeTaskBtn;
+    [SerializeField] private CommonOption TrackTaskBtn;
+    [SerializeField] private CommonOption ReTakeTaskBtn;
+    [SerializeField] private CommonOption ClaimRewardBtn;
+    [SerializeField] private List<Transform> gameStatePart;
+    private Dictionary<GameTaskState, Transform> gameStateBtnPartMap;
+    private Transform curGameStateBtnPart;
+    
+    protected override void Start()
     {
+        gameStateBtnPartMap = new();
+        gameStateBtnPartMap.Add(GameTaskState.Locked,       gameStatePart[0]);
+        gameStateBtnPartMap.Add(GameTaskState.Unlocked,     gameStatePart[1]);
+        gameStateBtnPartMap.Add(GameTaskState.InProgress,   gameStatePart[2]);
+        gameStateBtnPartMap.Add(GameTaskState.Completed,    gameStatePart[3]);
+        gameStateBtnPartMap.Add(GameTaskState.Rewarded,     gameStatePart[4]);
+        foreach (var item in gameStatePart)
+        {
+            item.gameObject.SetActive(false);
+        }
 
-    }
-    private void Start()
-    {
         m_taskListItems = new();
-
         List<string> optionNames = new()
         {
             "主线",
@@ -45,6 +62,12 @@ public class TaskPanel : BasePanel, ICommonSelectOpionMgr
             (int)GameTaskType.Common,
         };
         InitOptions(optionObjs, optionNames, flags);
+
+        ExitBtn.Init(Close);
+        TakeTaskBtn.Init(OnTakeTaskBtn);
+        TrackTaskBtn.Init(OnTrackTaskBtn);
+        ReTakeTaskBtn.Init(OnReTakeTaskBtn);
+        ClaimRewardBtn.Init(OnClaimRewardBtn);
     }
     private void Update()
     {
@@ -53,8 +76,20 @@ public class TaskPanel : BasePanel, ICommonSelectOpionMgr
             Close();
         }
     }
+
+    private void OnEnable()
+    {
+        Kaiyun.Event.RegisterIn("OneGameTaskInfoUpdate", this, "HandleOneGameTaskInfoUpdateEvent");
+        Kaiyun.Event.RegisterIn("OneGameTaskInfoUpdate2", this, "HandleOneGameTaskInfoUpdate2Event");
+    }
+    private void OnDisable()
+    {
+        Kaiyun.Event.UnRegisterIn("OneGameTaskInfoUpdate", this, "HandleOneGameTaskInfoUpdateEvent");
+        Kaiyun.Event.UnRegisterIn("OneGameTaskInfoUpdate2", this, "HandleOneGameTaskInfoUpdate2Event");
+    }
+
     // 任务分类的
-    public void InitOptions(List<CommonSelectOption> options, List<string> optionNames, List<int> flags)
+    public void InitOptions(List<CommonListSelectOption> options, List<string> optionNames, List<int> flags)
     {
         for (int i = 0; i < options.Count; ++i)
         {
@@ -64,7 +99,7 @@ public class TaskPanel : BasePanel, ICommonSelectOpionMgr
         // 默认选中第一个
         Selected(options[0]);
     }
-    public void Selected(CommonSelectOption commonSelectOption)
+    public void Selected(CommonListSelectOption commonSelectOption)
     {
         if (curTaskTypeOption != null)
         {
@@ -234,6 +269,8 @@ public class TaskPanel : BasePanel, ICommonSelectOpionMgr
         if(curTaskListItem == null)
         {
             TaskDetailBox.gameObject.SetActive(false);
+            curGameStateBtnPart?.gameObject.SetActive(false);
+            curGameStateBtnPart = null;
         }
         else
         {
@@ -244,12 +281,68 @@ public class TaskPanel : BasePanel, ICommonSelectOpionMgr
             TaskCompelteText.text = curTaskListItem.Condition;
             // 任务奖励？
             TaskRewardText.text = curTaskListItem.Reward;
+            // 相关的选项
+            var btnPart = gameStateBtnPartMap[curTaskListItem.GameTaskState];
+            curGameStateBtnPart?.gameObject.SetActive(false);
+            btnPart.gameObject.SetActive(true);
+            curGameStateBtnPart = btnPart;
         }
     }
 
+    // tools
     public void Close()
     {
         UIManager.Instance.ClosePanel("TaskPanel");
         Kaiyun.Event.FireIn("CloseTaskPanel");
+    }
+    private void OnTakeTaskBtn()
+    {
+        if(curTaskListItem != null && curTaskListItem.GameTaskState == GameTaskState.Unlocked)
+        {
+            TaskHandler.Instance.SendTakeGameTaskRequest(curTaskListItem.TaskId);
+        }
+    }
+    private void OnTrackTaskBtn()
+    {
+        UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
+        if (curTaskListItem != null && curTaskListItem.GameTaskState == GameTaskState.InProgress)
+        {
+        }
+    }
+    private void OnReTakeTaskBtn()
+    {
+        if (curTaskListItem != null && curTaskListItem.GameTaskState == GameTaskState.InProgress)
+        {
+            TaskHandler.Instance.SendReTakeGameTaskRequest(curTaskListItem.TaskId);
+        }
+    }
+    private void OnClaimRewardBtn()
+    {
+        if (curTaskListItem != null && curTaskListItem.GameTaskState == GameTaskState.Completed)
+        {
+            TaskHandler.Instance.SendClaimTaskRewardsRequest(curTaskListItem.TaskId);
+        }
+    }
+
+    // event
+    public void HandleOneGameTaskInfoUpdateEvent(int taskId)
+    {
+        if(curTaskListItem == null || curTaskListItem.TaskId != taskId)
+        {
+            goto End;
+        }
+        RefreshTaskDetail();
+    End:
+        return;
+    }
+    public void HandleOneGameTaskInfoUpdate2Event(GameTaskType type)
+    {
+        if(type != (GameTaskType)curTaskTypeOption.Flag)
+        {
+            goto End;
+        }
+        RefreshTaskList();
+    End:
+        return;
     }
 }

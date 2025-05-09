@@ -119,8 +119,8 @@ public class RecyclingListView<T,K> where K:IRecyclingListViewItem<T>
                 obj.transform.SetParent(content);
                 // 重置相对缩放大小
                 obj.transform.localScale = Vector3.one;
-                // 重置位置
-                obj.transform.localPosition = new Vector3((index % col) * itemW + (itemW * 0.5f), ((-index / col) * itemH) - (itemH * 0.5f), 0);
+                // 重置位置 todo 这里x+5 其实是向左的间隔
+                obj.transform.localPosition = new Vector3((index % col) * itemW + (itemW * 0.5f) + 5, ((-index / col) * itemH) - (itemH * 0.5f), 0);
                 // 更新格子信息
                 obj.GetComponent<K>().InitInfo(m_items[index]);
 

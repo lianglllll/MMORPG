@@ -16,7 +16,10 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
     private Image Bg;
     private Image Icon1;
     private Image Icon2;
-    private TextMeshProUGUI FastBtnTipsText;
+    private TextMeshProUGUI TipsText1;
+    private TextMeshProUGUI TipsText2;
+
+    private TextMeshProUGUI FastBtnTips;
 
     private bool isClicked;
     private bool isEntering;
@@ -42,7 +45,8 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         Bg = transform.Find("Bg").GetComponent<Image>();
         Icon1 = transform.Find("Icon/Icon1").GetComponent<Image>();
         Icon2 = transform.Find("Icon/Icon2").GetComponent<Image>();
-        FastBtnTipsText = transform.Find("FastBtnTips/FastBtnTipsText")?.GetComponent<TextMeshProUGUI>();
+        TipsText1 = transform.Find("TipsText/Text1")?.GetComponent<TextMeshProUGUI>();
+        TipsText2 = transform.Find("TipsText/Text2")?.GetComponent<TextMeshProUGUI>();
     }
     private void OnEnable()
     {
@@ -55,6 +59,9 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
 
         Icon1.enabled = true;
         Icon2.enabled = false;
+
+        TipsText1.enabled = true;
+        TipsText2.enabled = false;
     }
     private void OnDisable()
     {
@@ -66,7 +73,6 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (isClicked) return;
         GlobalAudioManager.Instance.PlayUIAudio(UIAudioClipType.ButtonClick);
 
         switch(type)
@@ -93,7 +99,6 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isClicked) return;
 
         //bg透明度从0->0.5
         // 如果正在淡入或者当前已经完全不透明，不触发淡入动画
@@ -111,6 +116,9 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         Icon1.enabled = false;
         Icon2.enabled = true;
 
+        TipsText1.enabled = false;
+        TipsText2.enabled = true;
+
         Bg.DOFade(hoverA, hoverDuration).OnComplete(() =>
         {
             isEntering = false;  // 动画完成，重置标记
@@ -119,8 +127,6 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (isClicked) return;
-
         //bg透明度变回0
 
         // 如果正在淡出或者当前已经完全透明，不触发淡出动画
@@ -137,6 +143,9 @@ public class CombatMenuSelectOption : MonoBehaviour, IPointerEnterHandler, IPoin
         isExiting = true;  // 标记淡入动画开始
         Icon1.enabled = true;
         Icon2.enabled = false;
+
+        TipsText1.enabled = true;
+        TipsText2.enabled = false;
 
         Bg.DOFade(0, hoverDuration).OnComplete(() =>
         {

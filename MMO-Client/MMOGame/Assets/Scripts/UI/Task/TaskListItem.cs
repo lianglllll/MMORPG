@@ -65,6 +65,8 @@ public class TaskListItem : MonoBehaviour, IPointerClickHandler
         }
     }
     public string Reward => m_def.Reward_items;
+    public GameTaskState GameTaskState => m_task.TaskState;
+    public int TaskId => m_def.Task_id;
     #endregion
 
     private void Awake()
