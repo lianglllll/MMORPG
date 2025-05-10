@@ -132,7 +132,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
                     caster.m_skillManager.AddSkill(skill);
                 }
 
-
                 if (skill.IsUnitTarget)
                 {
                     var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);

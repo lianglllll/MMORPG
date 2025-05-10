@@ -140,7 +140,6 @@ namespace GameClient.Entities
                     }
                 }
 
-
                 //被击中的音效
 
 
@@ -148,9 +147,8 @@ namespace GameClient.Entities
                 if(m_baseController.CurState != NetActorState.Motion)
                 {
                     m_baseController.StateMachineParameter.attacker = GameTools.GetActorById(damage.AttackerId);
-                    m_baseController.ChangeState(NetActorState.Hurt);
+                    m_baseController.ChangeState(NetActorState.Hurt, true);
                 }
-
             }
         }
         public void OnHpChanged(int oldHp,int newHp)
@@ -243,17 +241,6 @@ namespace GameClient.Entities
                 Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate", this);
             }
         }
-        /*
-        public virtual void OnModeChanged(ActorMode old_value, ActorMode new_value)
-        {
-            this.actorMode = new_value;
-        }
 
-        public virtual void OnCombatModeChanged(ActorCombatMode old_value, ActorCombatMode new_value)
-        {
-            this.actorCombatMode = new_value;
-        }
-
-        */
     }
 }

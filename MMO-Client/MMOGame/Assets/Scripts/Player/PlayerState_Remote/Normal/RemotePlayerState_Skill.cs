@@ -64,8 +64,6 @@ namespace Player
             remotePlayer.Model.SetRootMotionAction(OnRootMotion);
             remotePlayer.Model.SetSkillHitAction(OnStartSkillHitAction, OnStopSkillHitAction);
             curHitIdx = 0;
-
-
         End:
             return;
         }
