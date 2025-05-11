@@ -56,9 +56,9 @@ namespace GameClient.Combat.Buffs{
             }
             else
             {
-                m_owner = GameTools.GetActorById(info.OwnerId);
+                m_owner = EntityManager.Instance.GetEntity<Actor>(info.OwnerId);
             }
-            m_provider = GameTools.GetActorById(info.ProviderId);
+            m_provider = EntityManager.Instance.GetEntity<Actor>(info.ProviderId);
 
             m_buffDefine = LocalDataManager.Instance.m_buffDefineDict.GetValueOrDefault(info.Bid, null);
             if (m_buffDefine != null)

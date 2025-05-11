@@ -24,11 +24,14 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         ProtoHelper.Instance.Register<SpellCastResponse>((int)SkillProtocol.SpellCastResp);
         ProtoHelper.Instance.Register<SpellCastFailResponse>((int)SkillProtocol.SpellCastFailResp);
         ProtoHelper.Instance.Register<BuffOperationResponse>((int)BuffProtocol.BuffOperationResp);
-
+        ProtoHelper.Instance.Register<ActorPropertyUpdateRsponse>((int)SceneProtocl.ActorPropertyUpdateResp);
+        ProtoHelper.Instance.Register<DamageResponse>((int)SkillProtocol.DamageResp);
 
         MessageRouter.Instance.Subscribe<SpellCastResponse>(HandleSpellCastResponse);
         MessageRouter.Instance.Subscribe<SpellCastFailResponse>(HandleSpellFailResponse);
         MessageRouter.Instance.Subscribe<BuffOperationResponse>(HandleBuffOperationResponse);
+        MessageRouter.Instance.Subscribe<ActorPropertyUpdateRsponse>(HandleActorPropertyUpdateRsponse);
+        MessageRouter.Instance.Subscribe<DamageResponse>(HandleDamageResponse);
 
 
 
@@ -36,8 +39,8 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         MessageRouter.Instance.Subscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.Subscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
-        MessageRouter.Instance.Subscribe<DamageResponse>(_DamageResponse);
-        MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
+        //MessageRouter.Instance.Subscribe<DamageResponse>(_DamageResponse);
+        //MessageRouter.Instance.Subscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
     }
     public void UnInit()
     {
@@ -46,8 +49,8 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         MessageRouter.Instance.UnSubscribe<SpaceEntitySyncResponse>(_SpaceEntitySyncResponse);
         MessageRouter.Instance.UnSubscribe<CtlClientSpaceEntitySyncResponse>(_CtlClientSpaceEntitySyncResponse);
         MessageRouter.Instance.UnSubscribe<SpaceEntityLeaveResponse>(_SpaceEntityLeaveResponse);
-        MessageRouter.Instance.UnSubscribe<DamageResponse>(_DamageResponse);
-        MessageRouter.Instance.UnSubscribe<PropertyUpdateRsponse>(_PropertyUpdateRsponse);
+        MessageRouter.Instance.UnSubscribe<ActorPropertyUpdateRsponse>(HandleActorPropertyUpdateRsponse);
+        MessageRouter.Instance.UnSubscribe<DamageResponse>(HandleDamageResponse);
     }
 
     // skill
@@ -156,6 +159,57 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
     End:
         return;
     }
+    private void HandleActorPropertyUpdateRsponse(Connection conn, ActorPropertyUpdateRsponse msg)
+    {
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            foreach (var item in msg.Propertys)
+            {
+                // 防止在aoi体系下，actor突然从我们的视野中消失
+                var actor = EntityManager.Instance.GetEntity<Actor>(item.EntityId);
+                if (actor == null) continue;
+
+                Character chr;
+                switch (item.PropertyType)
+                {
+                    case ActorPropertyUpdate.Types.PropType.Hp:
+                        actor.OnHpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                        break;
+                    case ActorPropertyUpdate.Types.PropType.Mp:
+                        actor.OnMpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                        break;
+                    case ActorPropertyUpdate.Types.PropType.Hpmax:
+                        actor.OnHpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                        break;
+                    case ActorPropertyUpdate.Types.PropType.Mpmax:
+                        actor.OnMpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                        break;
+                    case ActorPropertyUpdate.Types.PropType.Speed:
+                        actor.OnSpeedChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                        break;
+                    case ActorPropertyUpdate.Types.PropType.Level:
+                        actor.OnLevelChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                        break;
+                    case ActorPropertyUpdate.Types.PropType.Exp:
+                        chr = actor as Character;
+                        chr.OnExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                        break;
+                }
+            }
+        });
+    }
+    private void HandleDamageResponse(Connection conn, DamageResponse msg)
+    {
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            foreach (Damage item in msg.Damages)
+            {
+                var target = EntityManager.Instance.GetEntity<Actor>(item.TargetId);
+                if (target == null) continue;
+                target.OnRecvDamage(item);
+            }
+        });
+    }
 
     // buff
     private void HandleBuffOperationResponse(Connection sender, BuffOperationResponse msg)
@@ -198,8 +252,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
 
 
 
-
-
     /// <summary>
     /// entity同步信息接收
     /// </summary>
@@ -231,81 +283,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         // EntityManager.Instance.RemoveEntity(msg.EntityId);
     }
 
-    /// <summary>
-    /// actor的伤害响应包
-    /// </summary>
-    /// <param name="conn"></param>
-    /// <param name="msg"></param>
-    private void _DamageResponse(Connection conn, DamageResponse msg)
-    {
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            foreach (Damage item in msg.List)
-            {
-                var target = GameTools.GetActorById(item.TargetId);
-                if (target == null) continue;
-                target.OnRecvDamage(item);
-            }
-        });
-    }
-
-    /// <summary>
-    /// 数值更新响应
-    /// 主要一些经常修改的数据
-    /// </summary>
-    /// <param name="conn"></param>
-    /// <param name="msg"></param>
-    private void _PropertyUpdateRsponse(Connection conn, PropertyUpdateRsponse msg)
-    {
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            foreach (PropertyUpdate item in msg.List)
-            {
-
-                var actor = GameTools.GetActorById(item.EntityId);
-                if (actor == null) continue;                    //防止在aoi体系下，actor突然从我们的视野中消失
-
-                Character chr;
-                switch (item.Property)
-                {
-                    case PropertyUpdate.Types.Prop.Hp:
-                        actor.OnHpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
-                        break;
-                    case PropertyUpdate.Types.Prop.Mp:
-                        actor.OnMpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
-                        break;
-                    case PropertyUpdate.Types.Prop.Hpmax:
-                        actor.OnHpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
-                        break;
-                    case PropertyUpdate.Types.Prop.Mpmax:
-                        actor.OnMpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
-                        break;
-                    //case PropertyUpdate.Types.Prop.Mode:
-                    //    actor.OnModeChanged(item.OldValue.ModeValue, item.NewValue.ModeValue);
-                    //    break;
-                    //case PropertyUpdate.Types.Prop.CombatMode:
-                    //    actor.OnCombatModeChanged(item.OldValue.CombatModeValue, item.NewValue.CombatModeValue);
-                    //    break;
-                    case PropertyUpdate.Types.Prop.Level:
-                        actor.OnLevelChanged(item.OldValue.IntValue, item.NewValue.IntValue);
-                        break;
-                    case PropertyUpdate.Types.Prop.Name:
-                        break;
-                    case PropertyUpdate.Types.Prop.Exp:
-                        chr = actor as Character;
-                        chr.OnExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
-                        break;
-                    //case PropertyUpdate.Types.Prop.Golds:
-                    //    chr = actor as Character;
-                    //    chr.OnGoldChanged(item.OldValue.LongValue, item.NewValue.LongValue);
-                    //    break;
-                    case PropertyUpdate.Types.Prop.Speed:
-                        actor.OnSpeedChanged(item.OldValue.IntValue, item.NewValue.IntValue);
-                        break;
-                }
-            }
-        });
-    }
     /// <summary>
     /// 传送
     /// </summary>

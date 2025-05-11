@@ -95,6 +95,7 @@ namespace GameClient.Entities
 
             if (m_renderObj == null) return;
             if (IsDeath) return;
+
             //ui
             var ownerPos = m_renderObj.transform.position;
             if (damage.IsImmune)
@@ -140,13 +141,12 @@ namespace GameClient.Entities
                     }
                 }
 
-                //被击中的音效
+                // 被击中的音效
 
-
-                //切换到挨打的动作
+                // 切换到挨打的动作
                 if(m_baseController.CurState != NetActorState.Motion)
                 {
-                    m_baseController.StateMachineParameter.attacker = GameTools.GetActorById(damage.AttackerId);
+                    m_baseController.StateMachineParameter.attacker = EntityManager.Instance.GetEntity<Actor>(damage.AttackerId);
                     m_baseController.ChangeState(NetActorState.Hurt, true);
                 }
             }
