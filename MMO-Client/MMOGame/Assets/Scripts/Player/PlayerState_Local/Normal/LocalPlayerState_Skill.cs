@@ -113,6 +113,7 @@ namespace Player.PlayerState
         public override void Exit()
         {
             player.Model.ClearRootMotionAction();
+            player.Model.ClearSkillHitAction();
             curLocalSkillConfig = null;
             // 正常解释才走这个分支。
             if(StateMachineParameter.curSkill == curSkill)

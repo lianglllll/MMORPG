@@ -63,7 +63,6 @@ namespace Player
             //注册根运动
             remotePlayer.Model.SetRootMotionAction(OnRootMotion);
             remotePlayer.Model.SetSkillHitAction(OnStartSkillHitAction, OnStopSkillHitAction);
-            curHitIdx = 0;
         End:
             return;
         }
@@ -103,12 +102,15 @@ namespace Player
         public override void Exit()
         {
             remotePlayer.Model.ClearRootMotionAction();
+            remotePlayer.Model.ClearSkillHitAction();
+
             curLocalSkillConfig = null;
             if (StateMachineParameter.curSkill == curSkill)
             {
                 StateMachineParameter.curSkill = null;
             }
             curSkill = null;
+            curHitIdx = 0;
         }
 
         private void OnRootMotion(Vector3 deltaPosition, Quaternion deltaRotation)
@@ -118,6 +120,9 @@ namespace Player
         }
         private void OnStartSkillHitAction(int obj)
         {
+            // 因为动作融合的问题，不同技能的事件可能带到下一个技能去了
+
+
             var attackData = curLocalSkillConfig.attackData[curHitIdx];
             if (attackData == null)
             {
