@@ -29,7 +29,7 @@ public class TP_CameraController : Singleton<TP_CameraController>
     }
     private void OnDisable()
     {
-        Kaiyun.Event.UnregisterOut("SetMainCameraTarget", this, "SetFnishTarget");
+        Kaiyun.Event.UnRegisterOut("SetMainCameraTarget", this, "SetFnishTarget");
     }
     private void Update()
     {

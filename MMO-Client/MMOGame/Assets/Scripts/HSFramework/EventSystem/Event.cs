@@ -128,7 +128,7 @@ namespace Kaiyun
             }
         }
 
-        public static void UnregisterOut(string eventName, object target, string methodName)
+        public static void UnRegisterOut(string eventName, object target, string methodName)
         {
             lock (eventOutDict)
             {

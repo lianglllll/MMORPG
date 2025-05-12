@@ -108,7 +108,7 @@ public class LocalPlayerCombatController : MonoBehaviour
         Kaiyun.Event.UnRegisterIn("LocalPlayerModeChange", this, "ChangeOrResetCurCombo");
 
         Kaiyun.Event.UnRegisterIn("TargetDeath", this, "ClearEnemy");
-        Kaiyun.Event.UnregisterOut("CtlChrDeath", this, "ClearEnemy");
+        Kaiyun.Event.UnRegisterOut("CtlChrDeath", this, "ClearEnemy");
         Kaiyun.Event.UnRegisterIn("SkillActiveEnd", this, "SkillActiveEnd");
     }
     public void Init(LocalPlayerController ctrlController)
@@ -556,7 +556,6 @@ public class LocalPlayerCombatController : MonoBehaviour
 
         // 立即将角色转向目标方向
         transform.rotation = targetRotation;
-
     }
     public void MoveToActorUntilCloseAttackRange()
     {

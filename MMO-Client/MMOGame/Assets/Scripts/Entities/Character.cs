@@ -14,7 +14,7 @@ namespace GameClient.Entities
         {
             if (RenderObj == null) return;
 
-            //如果当前actor被关注，则需要通知
+/*            // 如果当前actor被关注，则需要通知
             if (GameApp.target == this)
             {
                 Kaiyun.Event.FireIn("TargetDeath");
@@ -23,7 +23,7 @@ namespace GameClient.Entities
                 GameApp.CombatPanelScript.ShowDeathBox();
                 //主角死亡事件发生
                 Kaiyun.Event.FireOut("CtlChrDeath");
-            }
+            }*/
         }
     }
 }

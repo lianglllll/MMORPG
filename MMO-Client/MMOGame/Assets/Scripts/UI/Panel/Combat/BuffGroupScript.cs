@@ -18,8 +18,8 @@ public class BuffGroupScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        Kaiyun.Event.UnregisterOut("SpecialActorAddBuff", this, "AddBuffEvent");
-        Kaiyun.Event.UnregisterOut("SpecialActorRemoveBuff", this, "RemoveBuffEvent");
+        Kaiyun.Event.UnRegisterOut("SpecialActorAddBuff", this, "AddBuffEvent");
+        Kaiyun.Event.UnRegisterOut("SpecialActorRemoveBuff", this, "RemoveBuffEvent");
     }
 
     public void SetOwner(Actor actor)

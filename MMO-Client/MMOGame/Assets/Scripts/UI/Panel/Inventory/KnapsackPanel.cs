@@ -69,10 +69,10 @@ public class KnapsackPanel:BasePanel
 
     private void OnDestroy()
     {
-        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackData", this, "RefreshKnapsackUI");
-        Kaiyun.Event.UnregisterOut("UpdateCharacterKnapsackPickupItemBox", this, "RefreshPickUpBox");
-        Kaiyun.Event.UnregisterOut("GoldChange", this, "UpdateCurrency");
-        Kaiyun.Event.UnregisterOut("UpdateCharacterEquipmentData", this, "RefreshEquipsUI");
+        Kaiyun.Event.UnRegisterOut("UpdateCharacterKnapsackData", this, "RefreshKnapsackUI");
+        Kaiyun.Event.UnRegisterOut("UpdateCharacterKnapsackPickupItemBox", this, "RefreshPickUpBox");
+        Kaiyun.Event.UnRegisterOut("GoldChange", this, "UpdateCurrency");
+        Kaiyun.Event.UnRegisterOut("UpdateCharacterEquipmentData", this, "RefreshEquipsUI");
     }
 
     /// <summary>

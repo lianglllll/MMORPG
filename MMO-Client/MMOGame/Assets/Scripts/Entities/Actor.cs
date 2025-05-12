@@ -91,23 +91,22 @@ namespace GameClient.Entities
 
         public void OnRecvDamage(Damage damage)
         {
-            //受伤，被别人打了，播放一下特效或者ui。不做数值更新
-
+            // 受伤，被别人打了，播放一下特效或者ui。不做数值更新
             if (m_renderObj == null) return;
             if (IsDeath) return;
 
-            //ui
+            // ui
             var ownerPos = m_renderObj.transform.position;
             if (damage.IsImmune)
             {
                 DynamicTextManager.CreateText(ownerPos, "免疫", DynamicTextManager.missData);
             }
             else if (damage.IsMiss)
-            {   //闪避了，显示一下闪避ui
+            {   // 闪避了，显示一下闪避ui
                 DynamicTextManager.CreateText(ownerPos, "Miss", DynamicTextManager.missData);
             }
             else{
-                //伤害飘字
+                // 伤害飘字
                 if(damage.DamageType == DameageType.Magical)
                 {
                     DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"), DynamicTextManager.Spell);
@@ -125,13 +124,13 @@ namespace GameClient.Entities
                     DynamicTextManager.CreateText(ownerPos, damage.Amount.ToString("0"));
                 }
 
-                //暴击做一些处理，震屏..
+                // 暴击做一些处理，震屏..
                 if (damage.IsCrit)
                 {
                     DynamicTextManager.CreateText(ownerPos, "Crit!", DynamicTextManager.critData);
                 }
 
-                //被技能击中的粒子效果
+                // 被技能击中的粒子效果
                 if (damage.SkillId != 0)
                 {
                     var skillDef = LocalDataManager.Instance.m_skillDefineDict[damage.SkillId];
@@ -143,56 +142,59 @@ namespace GameClient.Entities
 
                 // 被击中的音效
 
+
+
                 // 切换到挨打的动作
-                if(m_baseController.CurState != NetActorState.Motion)
+                if (m_baseController.CurState != NetActorState.Motion)
                 {
                     m_baseController.StateMachineParameter.attacker = EntityManager.Instance.GetEntity<Actor>(damage.AttackerId);
                     m_baseController.ChangeState(NetActorState.Hurt, true);
+                }
+
+                if(EntityId == GameApp.entityId)
+                {
+                    Kaiyun.Event.FireIn("EnterCombatEvent");
                 }
             }
         }
         public void OnHpChanged(int oldHp,int newHp)
         {
             m_netActorNode.Hp = newHp;
-            LocalOrTargetAcotrPropertyChange();
+            if(EntityId != GameApp.entityId)
+            {
+                m_baseController.unitUIController.UpdateHpBar();
+            }
         }
         public void OnMpChanged(int old_value, int new_value)
         {
             this.m_netActorNode.Mp = new_value;
-            LocalOrTargetAcotrPropertyChange();
-        }
-        public virtual void OnDeath()
-        {
         }
         public void OnLevelChanged(int old_value, int new_value)
         {
             //更新当前actor的数据
             m_netActorNode.Level = new_value;
-            //事件通知，level数据发送变化（可能某些ui组件需要这个信息）
-            LocalOrTargetAcotrPropertyChange();
         }
         public void OnExpChanged(long old_value, long new_value)
         {
-            // todo 感觉放在这里不太对劲
             //更新当前actor的数据
             m_netActorNode.Exp = new_value;
-            //事件通知，exp数据发送变化（可能某些ui组件需要这个信息）
-            Kaiyun.Event.FireOut("ExpChange");
         }
-        public void OnHpmaxChanged(int old_value, int new_value)
+        public void OnMaxHpChanged(int old_value, int new_value)
         {
             m_netActorNode.MaxHp = new_value;
-            LocalOrTargetAcotrPropertyChange();
         }
-        public void OnMpmaxChanged(int old_value, int new_value)
+        public void OnMaxMpChanged(int old_value, int new_value)
         {
             m_netActorNode.MaxMp = new_value;
-            LocalOrTargetAcotrPropertyChange();
         }
         public void OnSpeedChanged(int old_value, int new_value)
         {
             // Speed = new_value;
         }
+        public virtual void OnDeath()
+        {
+        }
+        public virtual void OnRevive() { }
 
         // tools
         public void HandleActorChangeModeResponse(ActorChangeModeResponse message)
@@ -232,15 +234,5 @@ namespace GameClient.Entities
             var state = m_baseController.stateMachine.CurState as RemotePlayerState;
             state.SyncTransformData(message);
         }
-
-        public void LocalOrTargetAcotrPropertyChange()
-        {
-            if (this == GameApp.character || this == GameApp.target)
-            {
-                //CombatPanelScript、这个事件给需要更新本地chr和targetChr的UI用的
-                Kaiyun.Event.FireOut("SpecificAcotrPropertyUpdate", this);
-            }
-        }
-
     }
 }

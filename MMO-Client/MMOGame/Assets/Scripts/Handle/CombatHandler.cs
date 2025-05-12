@@ -149,7 +149,7 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
                     skill.Use(new SCEntity(caster));
                 }
 
-                //skill ui
+                // skill ui
                 if (GameApp.character.EntityId == skill.Owner.EntityId)
                 {
                     UIManager.Instance.MessagePanel.ShowBottonMsg(skill.Define.Name, Color.green);
@@ -168,32 +168,33 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
                 // 防止在aoi体系下，actor突然从我们的视野中消失
                 var actor = EntityManager.Instance.GetEntity<Actor>(item.EntityId);
                 if (actor == null) continue;
-
-                Character chr;
                 switch (item.PropertyType)
                 {
-                    case ActorPropertyUpdate.Types.PropType.Hp:
+                    case PropertyType.Hp:
                         actor.OnHpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
-                    case ActorPropertyUpdate.Types.PropType.Mp:
+                    case PropertyType.Mp:
                         actor.OnMpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
-                    case ActorPropertyUpdate.Types.PropType.Hpmax:
-                        actor.OnHpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                    case PropertyType.MaxHp:
+                        actor.OnMaxHpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
-                    case ActorPropertyUpdate.Types.PropType.Mpmax:
-                        actor.OnMpmaxChanged(item.OldValue.IntValue, item.NewValue.IntValue);
+                    case PropertyType.MaxMp:
+                        actor.OnMaxMpChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
-                    case ActorPropertyUpdate.Types.PropType.Speed:
+                    case PropertyType.Speed:
                         actor.OnSpeedChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
-                    case ActorPropertyUpdate.Types.PropType.Level:
+                    case PropertyType.Level:
                         actor.OnLevelChanged(item.OldValue.IntValue, item.NewValue.IntValue);
                         break;
-                    case ActorPropertyUpdate.Types.PropType.Exp:
-                        chr = actor as Character;
-                        chr.OnExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
+                    case PropertyType.Exp:
+                        actor.OnExpChanged(item.OldValue.LongValue, item.NewValue.LongValue);
                         break;
+                }
+                if(actor.EntityId == GameApp.entityId)
+                {
+                    Kaiyun.Event.FireOut("LocalPlayerPropertyUpdate", item.PropertyType);
                 }
             }
         });
@@ -282,7 +283,6 @@ public class CombatHandler : SingletonNonMono<CombatHandler>
         //触发角色离开事件
         // EntityManager.Instance.RemoveEntity(msg.EntityId);
     }
-
     /// <summary>
     /// 传送
     /// </summary>

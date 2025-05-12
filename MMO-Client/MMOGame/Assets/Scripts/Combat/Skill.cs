@@ -142,17 +142,9 @@ namespace GameClient.Combat
             _sco = target;
             RunTime = 0;
 
-            if (Define.IntonateTime > 0)
-            {
-                //技能阶段从none切换到蓄气阶段
-                Stage = SkillStage.Intonate;
-                OnIntonate();
-            }
-            else
-            {
-                Stage = SkillStage.Active;
-                OnActive();
-            }
+            //技能阶段从none切换到蓄气阶段
+            Stage = SkillStage.Intonate;
+            OnIntonate();
 
             Owner.m_baseController.ChangeState(NetActorState.Skill, true);
         }

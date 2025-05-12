@@ -17,6 +17,7 @@ namespace Player
         }
         public override void Exit()
         {
+            remotePlayer.Actor.OnRevive();
         }
 
     }

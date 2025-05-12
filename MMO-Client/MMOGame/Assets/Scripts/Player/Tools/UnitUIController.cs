@@ -1,3 +1,4 @@
+using GameClient;
 using GameClient.Entities;
 using System;
 using System.Collections;
@@ -7,12 +8,10 @@ using UnityEngine.UI;
 
 public class UnitUIController : MonoBehaviour
 {
-
     private Actor owner;
 
-    //actor的角色名和血条ui模块
-    private UnitBillboard unitBillboard;
-
+    // actor的角色名和血条ui模块
+    private UnitBillboard m_unitBillboard;
 
     //技能指示器模块
     //最后技能指示器拿到的就是一个dir or 坐标，用于技能的释放请求的参数。
@@ -21,6 +20,8 @@ public class UnitUIController : MonoBehaviour
     private Canvas SectorAreaCanvas;        //扇形区域
     private Image SpellRangeImage;
     private Image SectorAreaImage;
+
+
 
     private RaycastHit hit;                 //中间使用到的东西
     private Ray ray;
@@ -31,23 +32,20 @@ public class UnitUIController : MonoBehaviour
     private void Awake()
     {
         SelectMarkCanvas = transform.Find("MyCanvas/SelectMarkCanvas").GetComponent<Canvas>();
+
         SpellRangeCanvas = transform.Find("MyCanvas/SpellRangeCanvas").GetComponent<Canvas>();
         SpellRangeImage = SpellRangeCanvas.GetComponentInChildren<Image>();
         SectorAreaCanvas = transform.Find("MyCanvas/SectorAreaCanvas").GetComponent<Canvas>();
         SectorAreaImage = SectorAreaCanvas.GetComponentInChildren<Image>();
-        unitBillboard = transform.Find("MyCanvas/UnitBillboard").GetComponent<UnitBillboard>();
-    }
-    private void Start()
-    {
-        groundLayer = LayerMask.GetMask("Ground");
+
+        m_unitBillboard = transform.Find("MyCanvas/UnitBillboard").GetComponent<UnitBillboard>();
+
         SelectMarkCanvas.gameObject.SetActive(true);
         SpellRangeCanvas.gameObject.SetActive(true);
         SectorAreaCanvas.gameObject.SetActive(true);
-
-        SetSelectedMark(false);
-        SetSpellRangeCanvas(false);
-        SetSectorArea(false, 0, 0);
+        m_unitBillboard.gameObject.SetActive(true);
     }
+
     private void Update()
     {
         // 扇形ui被激活
@@ -90,10 +88,21 @@ public class UnitUIController : MonoBehaviour
     }
     public void Init(Actor actor)
     {
+        groundLayer = LayerMask.GetMask("Ground");
+
         this.owner = actor;
         SetSelectedMark(false);
         SetSpellRangeCanvas(false);
         SetSectorArea(false, 0, 0);
+        
+        if(actor.EntityId != GameApp.entityId)
+        {
+            m_unitBillboard.Init(actor);
+        }
+        else
+        {
+            m_unitBillboard.gameObject.SetActive(false);
+        }
     }
     public void UnInit()
     {
@@ -155,6 +164,20 @@ public class UnitUIController : MonoBehaviour
         }
 
         return Quaternion.identity;
+    }
+
+    // tools
+    public void UpdateHpBar()
+    {
+        m_unitBillboard.UpdateHpBar();
+    }
+    public void HideUnitBillboard()
+    {
+        m_unitBillboard.gameObject.SetActive(false);
+    }
+    public void ShowUnitBillboard()
+    {
+        m_unitBillboard.gameObject.SetActive(true);
     }
 
     #region 技能指示器ui（还没用上）
@@ -243,10 +266,11 @@ public class UnitUIController : MonoBehaviour
     private void ShowEntityInfoBar()
     {
         // 面板看向摄像机的代码再Billboard中
-        unitBillboard.slider.value = owner.Hp;
-        unitBillboard.slider.maxValue = owner.MaxHp;
-        unitBillboard.nameText.text = owner.ActorName;
-        unitBillboard.gameObject.SetActive(owner.Hp > 0);
+/*        m_unitBillboard.slider.value = owner.Hp;
+        m_unitBillboard.slider.maxValue = owner.MaxHp;
+        m_unitBillboard.nameText.text = owner.ActorName;*/
+        m_unitBillboard.gameObject.SetActive(owner.Hp > 0);
     }
+
 
 }

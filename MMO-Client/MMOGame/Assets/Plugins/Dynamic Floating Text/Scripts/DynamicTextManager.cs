@@ -42,12 +42,7 @@ public class DynamicTextManager : MonoBehaviour
         Spell = _spell;
         Real = _real;
 
-
-
         canvasPrefab = _canvasPrefab;
-
-
-
 
     }
 

@@ -1,6 +1,7 @@
 using GameClient.Combat;
 using GameClient.Combat.LocalSkill.Config;
 using HS.Protobuf.SceneEntity;
+using Serilog;
 using UnityEngine;
 
 namespace Player
@@ -121,8 +122,11 @@ namespace Player
         private void OnStartSkillHitAction(int obj)
         {
             // 因为动作融合的问题，不同技能的事件可能带到下一个技能去了
-
-
+            if(curHitIdx >= curLocalSkillConfig.attackData.Length)
+            {
+                curHitIdx = curLocalSkillConfig.attackData.Length - 1;
+                Log.Warning("{0}技能攻击数据超出", curLocalSkillConfig.ActiveAnimName);
+            }
             var attackData = curLocalSkillConfig.attackData[curHitIdx];
             if (attackData == null)
             {

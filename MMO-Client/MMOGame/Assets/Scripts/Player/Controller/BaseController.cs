@@ -322,12 +322,10 @@ namespace Player
         }
         #endregion
 
-
         #region 工具
 
         public void DirectLookTarget(Vector3 pos)
         {
-
             // 计算角色应该朝向目标点的方向
             Vector3 targetDirection = pos - transform.position;
 

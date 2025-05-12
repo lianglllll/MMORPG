@@ -2,6 +2,7 @@ using GameClient;
 using GameClient.Combat;
 using GameClient.Entities;
 using HS.Protobuf.Game;
+using HS.Protobuf.Scene;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,18 +47,14 @@ public class CombatPanelScript : BasePanel
         Kaiyun.Event.RegisterOut("SelectTarget", this, "_SelectTarget");
         Kaiyun.Event.RegisterOut("TargetDeath", this, "_CancelSelectTarget");
         Kaiyun.Event.RegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
-        Kaiyun.Event.RegisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI"); 
-        Kaiyun.Event.RegisterOut("ExpChange", this, "ExpBoxREfreshUI");
         Kaiyun.Event.RegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
 
-        Kaiyun.Event.RegisterIn("CloseSettingPanel", this, "HanleCloseOtherPanelEvent");
-        Kaiyun.Event.RegisterIn("CloseTaskPanel", this, "HanleCloseOtherPanelEvent");
         Init();
     }
     private void Init()
     {
-        m_elite.Init(GameApp.character);                    //设置一下我们主角的状态栏
-        m_expBox.Init(GameApp.character);                   //初始化经验条
+        m_elite.Init(GameApp.character);                    // 设置一下我们主角的状态栏
+        m_expBox.Init(GameApp.character);                   // 初始化经验条
         m_ablityManager.Init();
 
         KnapsackBtn.onClick.AddListener(ShowChatBox);
@@ -71,12 +68,10 @@ public class CombatPanelScript : BasePanel
     }
     private void OnDestroy()
     {
-        Kaiyun.Event.UnregisterOut("SelectTarget", this, "_SelectTarget");
-        Kaiyun.Event.UnregisterOut("TargetDeath", this, "_CancelSelectTarget");
-        Kaiyun.Event.UnregisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
-        Kaiyun.Event.UnregisterOut("SpecificAcotrPropertyUpdate", this, "EliteRefreshUI");
-        Kaiyun.Event.UnregisterOut("ExpChange", this, "ExpBoxREfreshUI");
-        Kaiyun.Event.UnregisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
+        Kaiyun.Event.UnRegisterOut("SelectTarget", this, "_SelectTarget");
+        Kaiyun.Event.UnRegisterOut("TargetDeath", this, "_CancelSelectTarget");
+        Kaiyun.Event.UnRegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
+        Kaiyun.Event.UnRegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
 
     }
     private void Update()
@@ -144,16 +139,19 @@ public class CombatPanelScript : BasePanel
         //    }
         //}
     }
-
-
-
     private void OnEnable()
     {
         Kaiyun.Event.RegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
+        Kaiyun.Event.RegisterIn("CloseSettingPanel", this, "HanleCloseOtherPanelEvent");
+        Kaiyun.Event.RegisterIn("CloseTaskPanel", this, "HanleCloseOtherPanelEvent");
+        Kaiyun.Event.RegisterOut("LocalPlayerPropertyUpdate", this, "HanleLocalPlayerPropertyUpdateEvent");
     }
     private void OnDisable()
     {
         Kaiyun.Event.UnRegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
+        Kaiyun.Event.UnRegisterIn("CloseSettingPanel", this, "HanleCloseOtherPanelEvent");
+        Kaiyun.Event.UnRegisterIn("CloseTaskPanel", this, "HanleCloseOtherPanelEvent");
+        Kaiyun.Event.UnRegisterOut("LocalPlayerPropertyUpdate", this, "HanleLocalPlayerPropertyUpdateEvent");
     }
     #endregion
 
@@ -244,7 +242,6 @@ public class CombatPanelScript : BasePanel
         m_haveOtherPanelFromThisOpen++;
     }
 
-
     // 聊天面板
     private void ShowChatBox()
     {
@@ -265,16 +262,6 @@ public class CombatPanelScript : BasePanel
         SetMouseShowAndHide(false);
     }
 
-    // 相关事件
-    public void HandleEnterCombatEvent()
-    {
-        if (!m_isShowRelatedCombatUI)
-        {
-            ShowRelatedCombatUI();
-        }
-        m_notCombatOperationTime = 0;
-    }
-
     // 退出游戏
     public void ExitGame()
     {
@@ -288,6 +275,47 @@ public class CombatPanelScript : BasePanel
             // 游戏结束
             GameManager.Instance.ExitGame();
         });
+    }
+
+    // 相关事件
+    public void HandleEnterCombatEvent()
+    {
+        if (!m_isShowRelatedCombatUI)
+        {
+            ShowRelatedCombatUI();
+        }
+        m_notCombatOperationTime = 0;
+    }
+    public void HanleLocalPlayerPropertyUpdateEvent(PropertyType type)
+    {
+        if(type == PropertyType.Hp)
+        {
+            m_elite.RefreshUI();
+        }
+        else if(type == PropertyType.Mp)
+        {
+            m_elite.RefreshUI();
+        }
+        else if (type == PropertyType.MaxHp)
+        {
+            m_elite.RefreshUI();
+        }
+        else if (type == PropertyType.MaxMp)
+        {
+            m_elite.RefreshUI();
+        }
+        else if (type == PropertyType.Speed)
+        {
+
+        }
+        else if (type == PropertyType.Exp)
+        {
+            m_expBox.RefrashUI();
+        }
+        else if (type == PropertyType.Level)
+        {
+
+        }
     }
 
     // =======================================================================================
@@ -323,27 +351,5 @@ public class CombatPanelScript : BasePanel
     public void _CancelSelectTarget() {
         //targetElite.SetOwner(null);
         //targetElite.gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// SpecificAcotrPropertyUpdate事件回调,刷新EliteUI
-    /// </summary>
-    public void EliteRefreshUI(Actor actor)
-    {
-        if(actor == GameApp.character)
-        {
-            m_elite.RefreshUI();
-        }else if(actor == GameApp.target)
-        {
-            //targetElite.RefreshUI();
-        }
-    }
-
-    /// <summary>
-    /// 刷新经验条
-    /// </summary>
-    public void ExpBoxREfreshUI()
-    {
-        m_expBox.RefrashUI();
     }
 }
