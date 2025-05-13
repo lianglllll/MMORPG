@@ -33,6 +33,8 @@ namespace Player.PlayerState
             player.Model.Animator.SetFloat("Normal_Vertical_Speed", m_verticalVelocity);
             player.PlayAnimation("Jump");
             player.Model.SetRootMotionAction(OnRootMotion);
+
+            player.NetworkActor.SendActorChangeStateRequest();
         }
         public override void Exit()
         {
@@ -105,6 +107,7 @@ namespace Player.PlayerState
                 player.NetworkActor.V3ToNV3(player.gameObject.transform.eulerAngles, actdReq.OriginalTransform.Rotation);
                 // player.NetworkActor.V3ToNV3(player.gameObject.transform.localScale, actdReq.OriginalTransform.Scale);
                 // actdReq.PayLoad.VerticalSpeed = (int)(player.Model.Animator.GetFloat("Normal_Vertical_Speed") * 1000);
+                actdReq.State = NetActorState.Falling;
                 actdReq.Timestamp = NetworkTime.Instance.GetCurNetWorkTime();
                 NetManager.Instance.Send(actdReq);
             }

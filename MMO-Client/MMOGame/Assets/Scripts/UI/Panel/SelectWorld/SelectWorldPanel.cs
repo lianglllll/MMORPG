@@ -156,7 +156,6 @@ public class SelectWorldPanel : BasePanel
     {
         if (reslutCode == 0)
         {
-            UIManager.Instance.MessagePanel.ShowTopMsg("giaogiao");
             // 记录进入世界成功时的id和name
             PlayerPrefs.SetString("myLastSelectWorldId",curSelectWorldId.ToString());
             PlayerPrefs.SetString("myLastSelectWorldName", currentServerName.text);

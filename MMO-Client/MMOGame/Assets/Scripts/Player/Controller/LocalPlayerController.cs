@@ -1,6 +1,7 @@
 using GameClient.Entities;
 using HS.Protobuf.SceneEntity;
 using Player.PlayerState;
+using Serilog;
 
 namespace Player.Controller
 {

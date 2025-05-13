@@ -13,7 +13,7 @@ namespace Player
     {
         public override void Enter()
         {
-            remotePlayer.PlayAnimation("Hurt");
+            remotePlayer.PlayAnimation("Hurt", true);
             LookAtTarget(StateMachineParameter.attacker);
         }
 
