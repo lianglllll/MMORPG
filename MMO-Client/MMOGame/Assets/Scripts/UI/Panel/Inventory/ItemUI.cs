@@ -1,5 +1,5 @@
 using GameClient.InventorySystem;
-using HS.Protobuf.Game.Backpack;
+using HS.Protobuf.Backpack;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,32 +19,27 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private Vector3 originPosition;
     private bool isDragging;
 
+    #region 生命周期
     private void Awake()
     {
         icon = transform.Find("Icon").GetComponent<Image>();
         AmountText = transform.Find("AmountText").GetComponent<Text>();
     }
-
     private void Start()
     {
         AmountText.raycastTarget = false;
     }
-
     private void OnDisable()
     {
-        //防止提示框没关
+        // 防止提示框没关
         ToolTip.Instance?.Hide();
     }
-
-    /// <summary>
-    /// 初始化
-    /// </summary>
-    /// <param name="item"></param>
     public void Init(Item item)
     {
         this.item = item;
         UpdateItemUI();
     }
+    #endregion
 
     /// <summary>
     /// 根据item更新当前的UI
@@ -153,7 +148,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         {
             //指向了一个非ui物体上，丢弃
             originSlot.SetItemUI(this);            // 还原物品位置和父级格子,因为可能没有一次性丢完
-            ItemDiscard(this.item.Position, 1);
+            ItemDiscard(this.item.SlotId, 1);
         }
 
         // 取消拖拽标记
@@ -236,13 +231,13 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
                 ItemUse();
                 break;
             case "穿戴":
-                WearEquipment(item.Position);
+                WearEquipment(item.SlotId);
                 break;
             case "卸下":
                 UnloadEquipment((item as Equipment).EquipsType);
                 break;
             case "丢弃":
-                ItemDiscard(this.item.Position, 1);
+                ItemDiscard(this.item.SlotId, 1);
                 break;
 
         }
@@ -268,9 +263,10 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private void ItemDiscard(int slotIndex, int count)
     {
         //弹出提示框，询问扔多少个
-        (UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") as KnapsackPanel).numberInputBox.Show(transform.position,item.ItemDefine.Name, item.Amount,
+        var panel = UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") as KnapsackPanel;
+        panel.NumberInputBox.Show(transform.position,item.ItemDefine.Name, item.Amount,
             (targetAmount) => {
-                ItemDataManager.Instance.ItemDiscard(item.Position, targetAmount, InventoryType.Knapsack);
+                ItemDataManager.Instance.ItemDiscard(item.SlotId, targetAmount, InventoryType.Knapsack);
             });
     }
 

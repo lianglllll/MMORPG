@@ -1,40 +1,42 @@
-using HS.Protobuf.Game.Backpack;
+using HS.Protobuf.Backpack;
 
 public class Item 
 {
-    private NetItemDataNode m_itmeInfo;
+    private NetItemDataNode m_itmeDataNode;
     private ItemDefine m_itemDefine;
 
+    #region GetSet
     public ItemDefine ItemDefine => m_itemDefine;
     public int ItemId => m_itemDefine.ID;
     public string ItemName => m_itemDefine.Name;
     public int StackingUpperLimit => m_itemDefine.Capicity;
     public int Amount
     {
-        get { return m_itmeInfo.Amount; }
-        set { m_itmeInfo.Amount = value; }
+        get { return m_itmeDataNode.Amount; }
+        set { m_itmeDataNode.Amount = value; }
     }
-    public int Position
+    public int SlotId
     {
         get
         {
-            return m_itmeInfo.GridIdx;
+            return m_itmeDataNode.GridIdx;
         }
         set
         {
-            m_itmeInfo.GridIdx = value;
+            m_itmeDataNode.GridIdx = value;
         }
     }
     public string IconPath => m_itemDefine.Icon;
+    #endregion
 
-    public Item(NetItemDataNode itemInfo)
+    public Item(NetItemDataNode itemDataNode)
     {
-        m_itmeInfo = itemInfo;
+        m_itmeDataNode = itemDataNode;
     }
     public Item(ItemDefine define, int amount = 1, int position = 0)
     {
         m_itemDefine = define;
-        m_itmeInfo = new NetItemDataNode() { ItemId = ItemDefine.ID, Amount = amount, GridIdx = position };
+        m_itmeDataNode = new NetItemDataNode() { ItemId = ItemDefine.ID, Amount = amount, GridIdx = position };
     }
 
     public ItemType GetItemType()

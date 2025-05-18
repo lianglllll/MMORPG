@@ -214,6 +214,7 @@ public class EntryGameWorldHandler : SingletonNonMono<EntryGameWorldHandler>
 
             // 需要获取一些与本端玩家的信息
             TaskDataManager.Instance.Init();
+            ItemDataManager.Instance.Init();
 
         });
     End:

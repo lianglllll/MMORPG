@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class UISlot : MonoBehaviour
 {
-    protected int _index;                                                           //在背包中第几个格子
-    protected ItemUI _itemUI;
-    protected KnapsackPanel _knapsackPanel;
-    private Transform _itemUITmpParent;
+    protected int           m_index;                                       //在背包中第几个格子
+    protected ItemUI        m_itemUI;
+    protected KnapsackPanel m_knapsackPanel;
+    private Transform       m_itemUITmpParent;
 
     /// <summary>
     /// 拿itemui
@@ -29,7 +29,7 @@ public class UISlot : MonoBehaviour
     {
         get
         {
-            return _index;
+            return m_index;
         }
     }
 
@@ -40,9 +40,9 @@ public class UISlot : MonoBehaviour
     /// <param name="index"></param>
     public virtual void Init(KnapsackPanel knapsackPanel, int index)
     {
-        this._index = index;
-        this._knapsackPanel = knapsackPanel;
-        _itemUITmpParent = knapsackPanel.ItemUITmpParent;
+        this.m_index = index;
+        this.m_knapsackPanel = knapsackPanel;
+        m_itemUITmpParent = knapsackPanel.ItemUITmpParent;
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class UISlot : MonoBehaviour
     /// <param name="itemUI"></param>
     public virtual void SetItemUI(ItemUI itemUI)
     {
-        _itemUI = itemUI;
+        m_itemUI = itemUI;
         itemUI.transform.SetParent(transform);
         itemUI.transform.position = transform.position;
     }
@@ -61,9 +61,9 @@ public class UISlot : MonoBehaviour
     /// </summary>
     public virtual void RemoveItemUI()
     {
-        if (_itemUI == null) return;
-        _itemUI.transform.SetParent(_itemUITmpParent);
-        _itemUI = null;
+        if (m_itemUI == null) return;
+        m_itemUI.transform.SetParent(m_itemUITmpParent);
+        m_itemUI = null;
     }
 
     /// <summary>
@@ -72,10 +72,10 @@ public class UISlot : MonoBehaviour
     public virtual void DeleteItemUI()
     {
         //清空slot中的itemui
-        if (_itemUI != null && !_itemUI.gameObject.IsDestroyed())
+        if (m_itemUI != null && !m_itemUI.gameObject.IsDestroyed())
         {
-            Destroy(_itemUI.gameObject);
-            _itemUI = null;
+            Destroy(m_itemUI.gameObject);
+            m_itemUI = null;
         }
     }
 
@@ -104,11 +104,11 @@ public class UISlot : MonoBehaviour
     {
         if(amount != -1)
         {
-            _itemUI?.UpdateAmountUI(_itemUI.item.Amount);
+            m_itemUI?.UpdateAmountUI(m_itemUI.item.Amount);
         }
         else
         {
-            _itemUI?.UpdateAmountUI(-1);
+            m_itemUI?.UpdateAmountUI(-1);
         }
     }
 }

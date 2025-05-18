@@ -2,9 +2,11 @@ using GameClient;
 using GameClient.Entities;
 using GameClient.InventorySystem;
 using Google.Protobuf.Collections;
-using HS.Protobuf.Game.Backpack;
+using HS.Protobuf.Backpack;
 using System.Collections.Concurrent;
 using HSFramework.MySingleton;
+using GameClient.Combat;
+using System;
 
 //缓存itemUI的操作
 public class ItemUIAction
@@ -20,109 +22,49 @@ public class ItemUIAction
 /// </summary>
 public class ItemDataManager : SingletonNonMono<ItemDataManager>
 {
-    //缓存的背包数据
-    public Inventory localCharacterKnapsack;
+    private Inventory m_localCharacterKnapsack;
+    private EquipManager m_equipManager;
 
-    /// <summary>
-    ///获取本地角色的背包信息
-    /// </summary>
-    public Inventory GetLocalCharacterKnapsack()
+    #region GetSet
+    public Inventory Backpack => m_localCharacterKnapsack;
+    public EquipManager EquipManager => m_equipManager;
+    public ConcurrentDictionary<EquipsType, Equipment> EquipmentDict => m_equipManager.EquipsDict;
+    #endregion
+
+
+    #region 生命周期
+    public void Init()
     {
-        if (localCharacterKnapsack != null)
+        // 获取背包和装备信息
+        m_localCharacterKnapsack = new Inventory();
+        m_localCharacterKnapsack.Init(GameApp.character);
+        m_equipManager = new EquipManager();
+        m_equipManager.Init(GameApp.character);
+        ItemHandler.Instance.SendGetItemInventoryDataRequest(ItemInventoryType.Backpack);
+        ItemHandler.Instance.SendGetItemInventoryDataRequest(ItemInventoryType.Equipments);
+    }
+    public void ReloadInventoryData(NetItemInventoryDataNode node)
+    {
+        if(node.InventoryType == ItemInventoryType.Backpack)
         {
-            return localCharacterKnapsack;
+            m_localCharacterKnapsack.ReloadInventoryData(node);
+            // 刷ui
+            Kaiyun.Event.FireOut("UpdateCharacterKnapsackData");
         }
-        else
+        else if(node.InventoryType == ItemInventoryType.Equipments)
         {
-            ItemService.Instance._InventoryInfoRequest();
-            return null;
-        }
-    }
-
-    /// <summary>
-    /// 获取本地角色的装备数据
-    /// </summary>
-    /// <returns></returns>
-    public ConcurrentDictionary<EquipsType, Equipment> GetEquipmentDict()
-    {
-        return GameApp.character.EquipManager.EquipsDict;
-    }
-
-    /// <summary>
-    /// 重新缓存缓存背包数据
-    /// </summary>
-    /// <param name="knapsackInfo"></param>
-    public void ReloadKnapsackData(InventoryInfo knapsackInfo)
-    {
-        localCharacterKnapsack = new Inventory(GameApp.character);
-        localCharacterKnapsack.Init(knapsackInfo);
-
-        //刷ui
-        Kaiyun.Event.FireOut("UpdateCharacterKnapsackData");
-    }
-
-    /// <summary>
-    /// 重新加载装备数据
-    /// </summary>
-    /// <param name="equipmentInfo"></param>
-    public void ReloadEquipData(Actor actor, RepeatedField<ItemInfo> equipsList)
-    {
-        // actor.LoadEquips(equipsList);
-
-        //刷ui
-        if (GameApp.character != null && GameApp.character.EntityId == actor.EntityId)
-        {
+            m_equipManager.ReloadInventoryData(node);
+            // 刷ui
             Kaiyun.Event.FireOut("UpdateCharacterEquipmentData");
         }
+        else if(node.InventoryType == ItemInventoryType.Warehouse)
+        {
+
+        }
+
     }
+    #endregion
 
-
-    /// <summary>
-    /// 物品拾起请求
-    /// </summary>
-    /// <param name="msg"></param>
-    public void ItemPickup(int entityId)
-    {
-        ItemService.Instance.ItemPickupRequest(entityId);
-    }
-
-    public void ItemDiscard(int slotIndex, int number, InventoryType type)
-    {
-        ItemService.Instance.ItemDiscardRequest(slotIndex, number, type);
-    }
-
-
-    /// <summary>
-    /// 物品使用请求
-    /// </summary>
-    public void ItemUse(int slotIndex,int count)
-    {
-        ItemService.Instance.ItemUseRequest(slotIndex, count);
-    }
-
-    /// <summary>
-    /// 穿戴装备请求
-    /// </summary>
-    public void WearEquipment(int knapsackSlotIndex)
-    {
-        ItemService.Instance._WearEquipmentRequest(knapsackSlotIndex);
-    }
-
-    /// <summary>
-    /// 装备卸载请求
-    /// </summary>
-    /// <param name="type"></param>
-    public void UnloadEquipment(EquipsType type)
-    {
-    }
-
-    /// <summary>
-    /// 背包物品的位置变换请求
-    /// </summary>
-    /// <param name="originType"></param>
-    /// <param name="targetType"></param>
-    /// <param name="originIndex"></param>
-    /// <param name="targetIndex"></param>
     public void ItemPlacement(InventoryType originType, int originIndex, int targetIndex)
     {
         ItemPlacementRequest req = new ItemPlacementRequest();
@@ -133,20 +75,34 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
 
         ItemService.Instance.ItemPlacementRequeset(req);
     }
-
-    /// <summary>
-    /// 更新背包ui中某个itemui的数量显示
-    /// </summary>
-    /// <param name="resp"></param>
+    public void ItemPickup(int entityId)
+    {
+        ItemService.Instance.ItemPickupRequest(entityId);
+    }
+    public void ItemDiscard(int slotIndex, int number, InventoryType type)
+    {
+        ItemService.Instance.ItemDiscardRequest(slotIndex, number, type);
+    }
+    public void ItemUse(int slotIndex,int count)
+    {
+        ItemService.Instance.ItemUseRequest(slotIndex, count);
+    }
+    public void WearEquipment(int knapsackSlotIndex)
+    {
+        ItemService.Instance._WearEquipmentRequest(knapsackSlotIndex);
+    }
+    public void UnloadEquipment(EquipsType type)
+    {
+    }
     public void UpdateKnapsackItemAmount(ItemUseResponse resp)
     {
-        var item = localCharacterKnapsack.GetItemByIndex(resp.SlotIndex);
+        var item = m_localCharacterKnapsack.GetItemBySlotId(resp.SlotIndex);
         if (item != null)
         {
             item.Amount -= resp.Count;
             if(item.Amount <= 0)
             {
-                localCharacterKnapsack.removeSlot(resp.SlotIndex);
+                m_localCharacterKnapsack.removeSlotBySlotId(resp.SlotIndex);
                 Kaiyun.Event.FireOut("UpdateCharacterKnapsackData");
 
             }
@@ -160,9 +116,7 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
         else
         {
             //说明客户端的数据可能有问题。我们重新拉取一下背包数据
-            GetLocalCharacterKnapsack();
+            ItemHandler.Instance.SendGetItemInventoryDataRequest(ItemInventoryType.Backpack);
         }
     }
-
-
 }

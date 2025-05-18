@@ -43,12 +43,6 @@ public class CombatPanelScript : BasePanel
     }
     protected override void Start()
     {
-        //监听事件
-        Kaiyun.Event.RegisterOut("SelectTarget", this, "_SelectTarget");
-        Kaiyun.Event.RegisterOut("TargetDeath", this, "_CancelSelectTarget");
-        Kaiyun.Event.RegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
-        Kaiyun.Event.RegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
-
         Init();
     }
     private void Init()
@@ -66,14 +60,7 @@ public class CombatPanelScript : BasePanel
 
         chatBoxScript.Init();
     }
-    private void OnDestroy()
-    {
-        Kaiyun.Event.UnRegisterOut("SelectTarget", this, "_SelectTarget");
-        Kaiyun.Event.UnRegisterOut("TargetDeath", this, "_CancelSelectTarget");
-        Kaiyun.Event.UnRegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
-        Kaiyun.Event.UnRegisterOut("CloseKnaspack", this, "CloseKnaspackCallback");
 
-    }
     private void Update()
     {
         // 战斗相关的ui,脱战自动隐藏
@@ -142,16 +129,30 @@ public class CombatPanelScript : BasePanel
     private void OnEnable()
     {
         Kaiyun.Event.RegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
-        Kaiyun.Event.RegisterIn("CloseSettingPanel", this, "HanleCloseOtherPanelEvent");
-        Kaiyun.Event.RegisterIn("CloseTaskPanel", this, "HanleCloseOtherPanelEvent");
         Kaiyun.Event.RegisterOut("LocalPlayerPropertyUpdate", this, "HanleLocalPlayerPropertyUpdateEvent");
+
+        Kaiyun.Event.RegisterIn("CloseSettingPanel",    this, "HanleCloseOtherPanelEvent");
+        Kaiyun.Event.RegisterIn("CloseTaskPanel",       this, "HanleCloseOtherPanelEvent");
+        Kaiyun.Event.RegisterIn("CloseKnapsackPanel",   this, "HanleCloseKnapsackPanelEvent");
+
+        // 未确认
+        Kaiyun.Event.RegisterOut("SelectTarget", this, "_SelectTarget");
+        Kaiyun.Event.RegisterOut("TargetDeath", this, "_CancelSelectTarget");
+        Kaiyun.Event.RegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
     }
     private void OnDisable()
     {
         Kaiyun.Event.UnRegisterIn("EnterCombatEvent", this, "HandleEnterCombatEvent");
+        Kaiyun.Event.UnRegisterOut("LocalPlayerPropertyUpdate", this, "HanleLocalPlayerPropertyUpdateEvent");
+
         Kaiyun.Event.UnRegisterIn("CloseSettingPanel", this, "HanleCloseOtherPanelEvent");
         Kaiyun.Event.UnRegisterIn("CloseTaskPanel", this, "HanleCloseOtherPanelEvent");
-        Kaiyun.Event.UnRegisterOut("LocalPlayerPropertyUpdate", this, "HanleLocalPlayerPropertyUpdateEvent");
+        Kaiyun.Event.UnRegisterIn("CloseKnapsackPanel", this, "HanleCloseKnapsackPanelEvent");
+
+        // 未确认
+        Kaiyun.Event.UnRegisterOut("SelectTarget", this, "_SelectTarget");
+        Kaiyun.Event.UnRegisterOut("TargetDeath", this, "_CancelSelectTarget");
+        Kaiyun.Event.UnRegisterOut("CancelSelectTarget", this, "_CancelSelectTarget");
     }
     #endregion
 
@@ -211,6 +212,8 @@ public class CombatPanelScript : BasePanel
         }
     }
 
+    #region 各种打开面版的Opiton
+
     // 设置面板
     public void ShowSettingPanel()
     {
@@ -231,7 +234,18 @@ public class CombatPanelScript : BasePanel
     // 背包面板
     public void ShowBackpackPanel()
     {
-        UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
+        // UIManager.Instance.ShowTopMessage("杂鱼~，这个功能可没有完成哦，嚯嚯嚯！");
+        UIManager.Instance.OpenPanel("KnapsackPanel");
+        m_haveOtherPanelFromThisOpen++;
+        TopPart.SetActive(false);
+        RightPart.SetActive(false);
+
+    }
+    public void HanleCloseKnapsackPanelEvent()
+    {
+        m_haveOtherPanelFromThisOpen--;
+        TopPart.SetActive(true);
+        RightPart.SetActive(true);
     }
 
     // 任务面板
@@ -276,6 +290,8 @@ public class CombatPanelScript : BasePanel
             GameManager.Instance.ExitGame();
         });
     }
+
+    #endregion
 
     // 相关事件
     public void HandleEnterCombatEvent()

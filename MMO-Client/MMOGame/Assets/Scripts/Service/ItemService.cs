@@ -3,7 +3,7 @@ using Common.Summer.Core;
 using Common.Summer.Net;
 using GameClient;
 using GameClient.Entities;
-using HS.Protobuf.Game.Backpack;
+using HS.Protobuf.Backpack;
 using HS.Protobuf.Scene;
 
 public class ItemService : SingletonNonMono<ItemService>
@@ -20,8 +20,6 @@ public class ItemService : SingletonNonMono<ItemService>
         MessageRouter.Instance.Subscribe<ItemDiscardResponse>(_ItemDiscardResponse);
         MessageRouter.Instance.Subscribe<ItemPickupResponse>(_ItemPickupResponse);
     }
-
-
     public void UnInit()
     {
         MessageRouter.Instance.UnSubscribe<InventoryInfoResponse>(_InventoryInfoResponse);
@@ -59,11 +57,11 @@ public class ItemService : SingletonNonMono<ItemService>
         if (msg.KnapsackInfo != null)
         {
             //缓存背包信息
-            ItemDataManager.Instance.ReloadKnapsackData(msg.KnapsackInfo);
+            //ItemDataManager.Instance.ReloadKnapsackData(msg.KnapsackInfo);
 
         }else if(msg.EquipmentInfo != null)
         {
-            ItemDataManager.Instance.ReloadEquipData(chr,msg.EquipmentInfo.List);
+            //ItemDataManager.Instance.ReloadEquipData(chr,msg.EquipmentInfo.List);
         }
         else if(msg.WarehouseInfo != null)
         {
@@ -81,7 +79,7 @@ public class ItemService : SingletonNonMono<ItemService>
     {
         var actor = GameTools.GetActorById(msg.EntityId);
         if (actor == null) return;
-        ItemDataManager.Instance.ReloadEquipData(actor, msg.EquipsList);
+        //ItemDataManager.Instance.ReloadEquipData(actor, msg.EquipsList);
     }
 
     /// <summary>

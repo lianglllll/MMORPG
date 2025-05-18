@@ -13,14 +13,11 @@ public class TaskDataManager : SingletonNonMono<TaskDataManager>
     private bool m_IsInit;
     private Dictionary<GameTaskType,
                 Dictionary<GameTaskState,
-                    Dictionary<int, NetGameTaskNode>>> m_allTasksMap;
-    private Dictionary<int, NetGameTaskNode> m_allTask;
+                    Dictionary<int, NetGameTaskNode>>> m_allTasksMap = new();
+    private Dictionary<int, NetGameTaskNode> m_allTask = new();
 
     public bool Init()
     {
-        m_allTask = new();
-
-        m_allTasksMap = new();
         m_allTasksMap.Add(GameTaskType.MainStory, new Dictionary<GameTaskState, Dictionary<int, NetGameTaskNode>>());
         m_allTasksMap.Add(GameTaskType.SideStory, new Dictionary<GameTaskState, Dictionary<int, NetGameTaskNode>>());
         m_allTasksMap.Add(GameTaskType.Common, new Dictionary<GameTaskState, Dictionary<int, NetGameTaskNode>>());
@@ -83,10 +80,18 @@ public class TaskDataManager : SingletonNonMono<TaskDataManager>
         {
             goto End;
         }
+        // 移除
+        var def = LocalDataManager.Instance.m_taskDefineDict[task.TaskId];
+        m_allTasksMap[(GameTaskType)def.Task_type][task.TaskState].Remove(task.TaskId);
+
+        // 变更
         task.TaskState = newState;
         task.TaskProgress = newConditions;
 
-        Kaiyun.Event.FireIn("OneGameTaskInfoUpdate", taskId);
+        // 添加
+        m_allTasksMap[(GameTaskType)def.Task_type][task.TaskState].Add(task.TaskId, task);
+
+        Kaiyun.Event.FireIn("OneGameTaskInfoUpdate2", taskId);
     End:
         return;
     }

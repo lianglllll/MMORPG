@@ -1,6 +1,6 @@
 using GameClient.Entities;
 using GameClient.InventorySystem;
-using HS.Protobuf.Game.Backpack;
+using HS.Protobuf.Backpack;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,87 +11,54 @@ using System.Linq;
 /// </summary>
 public class Inventory
 {
-    protected Actor actor;                                                                   //归属者
-    protected int capacity;                                                                  //背包/仓库的大小
-    public ConcurrentDictionary<int, Item> itemDict = new ConcurrentDictionary<int, Item>(); //<插槽索引，物品对象> 
+    protected Actor m_owner;                                        
+    protected int m_capacity;                                       // 背包/仓库的大小
+    public ConcurrentDictionary<int, Item> itemDict = new();        // <插槽索引，物品对象> 
 
-    public int Capacity
+    #region GetSet
+    public int Capacity => m_capacity;
+    #endregion
+    #region 生命周期
+    public void Init(Actor actor)
     {
-        get
-        {
-            return capacity;
-        }
-    }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    public Inventory()
-    {
-
-    }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="_chr"></param>
-    public Inventory(Actor actor)
-    {
-        this.actor = actor;
-    }
-
-    /// <summary>
-    /// 初始化
-    /// </summary>
-    /// <param name="info"></param>
-    public void Init(InventoryInfo info)
-    {
+        this.m_owner = actor;
         itemDict.Clear();
-        this.capacity = info.Capacity;
-        /*
-        foreach(var iteminfo in info.List)
+        this.m_capacity = 0;
+    }
+    public void ReloadInventoryData(NetItemInventoryDataNode node)
+    {
+        m_capacity = node.Capacity;
+
+        foreach (var itemNode in node.ItemDataNodes)
         {
-            var def = LocalDataManager.Instance.itemDefineDict[iteminfo.ItemId];
+            var def = LocalDataManager.Instance.m_itemDefineDict[itemNode.ItemId];
             Item item = null;
             switch (def.ItemType)
             {
                 case "消耗品":
-                    item = new Consumable(iteminfo);
+                    item = new Consumable(itemNode);
                     break;
                 case "道具":
-                    item = new MaterialItem(iteminfo);
+                    item = new MaterialItem(itemNode);
                     break;
                 case "装备":
-                    item = new Equipment(iteminfo);
+                    item = new Equipment(itemNode);
                     break;
                 default:
                     throw new Exception("物品初始化失败");
             }
-            itemDict.TryAdd(item.Position, item);
+            itemDict.TryAdd(item.SlotId, item);
         }
-        */
-
     }
-
-    /// <summary>
-    /// 根据下标获取item
-    /// </summary>
-    /// <param name="i"></param>
-    /// <returns></returns>
-    public Item GetItemByIndex(int i)
+    #endregion
+    #region 工具类
+    public Item GetItemBySlotId(int slotId)
     {
-        return itemDict.GetValueOrDefault(i, null);
+        return itemDict.GetValueOrDefault(slotId, null);
     }
-
-    /// <summary>
-    /// 设置插槽中的物品，index从0开始
-    /// </summary>
-    /// <param name="slotIndex"></param>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public bool SetItem(int slotIndex, Item item)
+    public bool SetItemToSlot(int slotIndex, Item item)
     {
-        if (slotIndex < 0 || slotIndex >= capacity)
+        if (slotIndex < 0 || slotIndex >= m_capacity)
         {
             return false;
         }
@@ -100,25 +67,20 @@ public class Inventory
 
         //设置插槽
         itemDict[slotIndex] = item;
-        item.Position = slotIndex;
+        item.SlotId = slotIndex;
         return true;
     }
-
-    /// <summary>
-    /// 移除某个格子
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    public Item removeSlot(int slotIndex)
+    public Item removeSlotBySlotId(int slotIndex)
     {
-        if (slotIndex < 0 || slotIndex >= capacity)
+        if (slotIndex < 0 || slotIndex >= m_capacity)
         {
             return null;
         }
         itemDict.TryRemove(slotIndex, out var _value);
         return _value;
     }
-
+    #endregion
+    #region 暂未使用
     /// <summary>
     /// 交换两个格子的数据
     /// </summary>
@@ -136,8 +98,8 @@ public class Inventory
         //2.查找目标插槽物品，如果为空直接放置
         if (!itemDict.TryGetValue(targetIndex, out var targetItem))
         {
-            SetItem(targetIndex, originItem);
-            removeSlot(originIndex);
+            SetItemToSlot(targetIndex, originItem);
+            removeSlotBySlotId(originIndex);
         }
 
         //3.查找目标物品不为空
@@ -151,7 +113,7 @@ public class Inventory
                 if (originItem.Amount <= processAmount)
                 {
                     targetItem.Amount += originItem.Amount;
-                    removeSlot(originIndex);
+                    removeSlotBySlotId(originIndex);
                 }
                 else
                 {
@@ -163,12 +125,11 @@ public class Inventory
             //物品类型不同，那就交换
             else
             {
-                SetItem(originIndex, targetItem);
-                SetItem(targetIndex, originItem);
+                SetItemToSlot(originIndex, targetItem);
+                SetItemToSlot(targetIndex, originItem);
             }
         }
     }
-
     /// <summary>
     /// 修改某个格子中item的数量,changeAmount是变化量有正负
     /// </summary>
@@ -176,14 +137,13 @@ public class Inventory
     /// <param name="changeAmount"></param>
     public void SetItemAmount(int slot,int changeAmount)
     {
-        var item = GetItemByIndex(slot);
+        var item = GetItemBySlotId(slot);
         item.Amount += changeAmount;
         if(item.Amount <= 0)
         {
-            removeSlot(slot);
+            removeSlotBySlotId(slot);
         }
     }
-
     /// <summary>
     /// 添加物品
     /// </summary>
@@ -199,7 +159,7 @@ public class Inventory
         while (counter > 0)
         {
             //寻找背包种存放着相同物品的格子
-            var sameItem = FindFirstItemByItemIdAndNotFull(itemId);
+            var sameItem = _FindFirstItemByItemIdAndNotFull(itemId);
             if (sameItem != null)
             {
                 //本次可以处理的数量
@@ -210,13 +170,13 @@ public class Inventory
             else
             {
                 //找个空格
-                var emptyIndex = FindEmptyIndex();
+                var emptyIndex = _FindEmptyIndex();
                 if (emptyIndex != -1)
                 {
                     //本次可以处理的数量
                     var currentProcessAmount = Math.Min(counter, def.Capicity);
                     var newItem = new Item(def, currentProcessAmount, emptyIndex);
-                    SetItem(emptyIndex, newItem);
+                    SetItemToSlot(emptyIndex, newItem);
                     counter -= currentProcessAmount;
                 }
                 else
@@ -230,14 +190,13 @@ public class Inventory
         //返回成功添加的个数
         return amount - counter;
     }
-
     /// <summary>
     /// 寻找一个空的背包索引
     /// </summary>
     /// <returns></returns>
-    private int FindEmptyIndex()
+    private int _FindEmptyIndex()
     {
-        for (int i = 0; i < capacity; ++i)
+        for (int i = 0; i < m_capacity; ++i)
         {
             if (!itemDict.TryGetValue(i, out var item))
             {
@@ -247,16 +206,15 @@ public class Inventory
         }
         return -1;
     }
-
     /// <summary>
     /// 寻找相同的item并且没有达到堆叠上限
     /// </summary>
     /// <param name="itemId"></param>
     /// <returns></returns>
-    private Item FindFirstItemByItemIdAndNotFull(int itemId)
+    private Item _FindFirstItemByItemIdAndNotFull(int itemId)
     {
         return itemDict.Values.FirstOrDefault(item => item.ItemDefine.ID == itemId && item.Amount < item.StackingUpperLimit);
     }
-
+    #endregion
 }
 

@@ -1,4 +1,4 @@
-using HS.Protobuf.Game.Backpack;
+using HS.Protobuf.Backpack;
 using UnityEngine;
 
 public class EquipSlot : UISlot

@@ -20,7 +20,6 @@ namespace GameClient.Entities
         public BaseController       m_baseController;
         public SkillManager         m_skillManager;
         private BuffManager         m_buffManager;
-        public EquipManager         m_equipManager;
 
         public GameObject RenderObj {
             get
@@ -34,7 +33,6 @@ namespace GameClient.Entities
         }
         public UnitDefine UnitDefine => m_unitDefine;
         public BuffManager BuffManager => m_buffManager;
-        public EquipManager EquipManager => m_equipManager;
         public NetActorMode NetActorMode
         {
             get => m_netActorNode.NetActorMode;
@@ -64,8 +62,8 @@ namespace GameClient.Entities
             m_buffManager = new();
             m_buffManager.Init(this, netAcotrNode.Buffs);
 
-            m_equipManager = new();
-            m_equipManager.Init(this, netAcotrNode.WornEquipments);
+            // m_equipManager = new();
+            // m_equipManager.Init(this, netAcotrNode.WornEquipments);
 
             m_skillManager = new();
             if(GameApp.entityId == EntityId)
