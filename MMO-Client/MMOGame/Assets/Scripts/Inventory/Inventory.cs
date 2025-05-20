@@ -28,7 +28,7 @@ public class Inventory
     public void ReloadInventoryData(NetItemInventoryDataNode node)
     {
         m_capacity = node.Capacity;
-
+        itemDict.Clear();
         foreach (var itemNode in node.ItemDataNodes)
         {
             var def = LocalDataManager.Instance.m_itemDefineDict[itemNode.ItemId];
@@ -81,6 +81,7 @@ public class Inventory
     }
     #endregion
     #region 暂未使用
+    /*
     /// <summary>
     /// 交换两个格子的数据
     /// </summary>
@@ -215,6 +216,7 @@ public class Inventory
     {
         return itemDict.Values.FirstOrDefault(item => item.ItemDefine.ID == itemId && item.Amount < item.StackingUpperLimit);
     }
+    */
     #endregion
 }
 

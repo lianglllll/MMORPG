@@ -36,6 +36,11 @@ namespace GameClient.Entities
             if (entity != null) {
                 GameObjectManager.Instance.EntityLeave(entity);
             }
+
+            if(entity is ClientItem)
+            {
+                Kaiyun.Event.FireOut("SceneItemChange");
+            }
         }
         public void Clear()
         {
@@ -87,6 +92,8 @@ namespace GameClient.Entities
             ClientItem clientItem = new ClientItem(netItemNode);
             AddEntity(clientItem);
             GameObjectManager.Instance.CreateItemObject(clientItem);
+
+            Kaiyun.Event.FireOut("SceneItemChange");
         End:
             return;
         }
@@ -173,5 +180,32 @@ namespace GameClient.Entities
                 .ToList();
         }
 
+        #region Tools
+        public List<T> FindEntitiesWithinRadius<T>(Vector3 position, float radius) where T : Entity
+        {
+            List<T> result = new List<T>();
+            float radiusSquared = radius * radius; // 预计算平方值优化性能
+
+            foreach (var entity in entityDict.Values)
+            {
+                // 合并类型检查和空值判断
+                if (entity is T item && item != null)
+                {
+                    // 使用转换后的item访问属性
+                    Vector3 entityPos = item.Position;
+
+                    // 计算平方距离避免开方运算
+                    float distanceSquared = (entityPos - position).sqrMagnitude;
+
+                    if (distanceSquared <= radiusSquared)
+                    {
+                        result.Add(item); // 添加转换后的对象
+                    }
+                }
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

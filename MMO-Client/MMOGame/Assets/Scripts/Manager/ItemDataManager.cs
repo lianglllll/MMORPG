@@ -28,7 +28,7 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
     #region GetSet
     public Inventory Backpack => m_localCharacterKnapsack;
     public EquipManager EquipManager => m_equipManager;
-    public ConcurrentDictionary<EquipsType, Equipment> EquipmentDict => m_equipManager.EquipsDict;
+    public ConcurrentDictionary<EquipSlotType, Equipment> EquipmentDict => m_equipManager.EquipsDict;
     #endregion
 
 
@@ -65,24 +65,22 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
     }
     #endregion
 
-    public void ItemPlacement(InventoryType originType, int originIndex, int targetIndex)
+    #region 工具
+    public void ItemPlacement(ItemInventoryType originInventoryType, ItemInventoryType targetInventoryType, int originIndex, int targetIndex)
     {
-        ItemPlacementRequest req = new ItemPlacementRequest();
-        req.EntityId = GameApp.character.EntityId;
-        req.OriginInventoryTpey = originType;
-        req.OriginIndex = originIndex;
-        req.TargetIndex = targetIndex;
+        // 可能做一下其他的记录
 
-        ItemService.Instance.ItemPlacementRequeset(req);
+        ItemHandler.Instance.SendChangeItemPositionRequest(originInventoryType, targetInventoryType, originIndex, targetIndex);
+    }
+    public void ItemDiscard(int slotIndex, int number, ItemInventoryType type)
+    {
+        ItemHandler.Instance.SendDiscardItemRequest(slotIndex, number, type);
     }
     public void ItemPickup(int entityId)
     {
-        ItemService.Instance.ItemPickupRequest(entityId);
+        ItemHandler.Instance.SendPickupSceneItemRequest(entityId);
     }
-    public void ItemDiscard(int slotIndex, int number, InventoryType type)
-    {
-        ItemService.Instance.ItemDiscardRequest(slotIndex, number, type);
-    }
+
     public void ItemUse(int slotIndex,int count)
     {
         ItemService.Instance.ItemUseRequest(slotIndex, count);
@@ -119,4 +117,5 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
             ItemHandler.Instance.SendGetItemInventoryDataRequest(ItemInventoryType.Backpack);
         }
     }
+    #endregion
 }

@@ -32,6 +32,7 @@ public class Item
     public Item(NetItemDataNode itemDataNode)
     {
         m_itmeDataNode = itemDataNode;
+        m_itemDefine = LocalDataManager.Instance.m_itemDefineDict[itemDataNode.ItemId];
     }
     public Item(ItemDefine define, int amount = 1, int position = 0)
     {

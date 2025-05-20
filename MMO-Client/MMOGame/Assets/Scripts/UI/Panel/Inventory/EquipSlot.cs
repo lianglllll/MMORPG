@@ -3,17 +3,13 @@ using UnityEngine;
 
 public class EquipSlot : UISlot
 {
-    public EquipsType equipsType;        //装备格子类型、inspector界面设置
-    public Transform defaultBg;
+    public EquipSlotType equipsType;        // 装备格子类型、inspector界面设置
+    private Transform defaultBg;
 
     private void Awake()
     {
         defaultBg = transform.Find("Bg");
         SetDefaultBg(true);
-    }
-
-    private void Start()
-    {
     }
 
     public override void SetItemUI(ItemUI itemUI)

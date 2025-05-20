@@ -50,7 +50,7 @@ public class PickUpItemCell : MonoBehaviour
     /// </summary>
     private void OnPickupBtn()
     {
-        //发包
+        // 发包
         ItemDataManager.Instance.ItemPickup(itemEntity.EntityId);
     }
 

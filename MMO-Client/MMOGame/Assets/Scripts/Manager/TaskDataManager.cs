@@ -82,14 +82,32 @@ public class TaskDataManager : SingletonNonMono<TaskDataManager>
         }
         // 移除
         var def = LocalDataManager.Instance.m_taskDefineDict[task.TaskId];
-        m_allTasksMap[(GameTaskType)def.Task_type][task.TaskState].Remove(task.TaskId);
+        var tasks = m_allTasksMap[(GameTaskType)def.Task_type];
+        if (tasks == null)
+        {
+            Log.Warning($"不存储当前任务类型：taskType = {((GameTaskType)def.Task_type).ToString()}");
+            goto End;
+        }
+        tasks.TryGetValue(task.TaskState, out var dict);
+        if (dict == null)
+        {
+            Log.Warning($"不存储当前任务状态的列表：taskState = {(task.TaskState).ToString()}");
+            goto End;
+        }
+        dict.Remove(task.TaskId);
 
         // 变更
         task.TaskState = newState;
         task.TaskProgress = newConditions;
 
         // 添加
-        m_allTasksMap[(GameTaskType)def.Task_type][task.TaskState].Add(task.TaskId, task);
+        tasks.TryGetValue(task.TaskState, out var dict2);
+        if(dict2 == null)
+        {
+            dict2 = new Dictionary<int, NetGameTaskNode>();
+            tasks.Add(task.TaskState, dict2);
+        }
+        dict2.Add(task.TaskId, task);
 
         Kaiyun.Event.FireIn("OneGameTaskInfoUpdate2", taskId);
     End:

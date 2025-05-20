@@ -41,46 +41,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     }
     #endregion
 
-    /// <summary>
-    /// 根据item更新当前的UI
-    /// </summary>
-    public void UpdateItemUI()
-    {
-        AmountText.text = ""+item.Amount;
-        icon.gameObject.SetActive(true);
-        icon.sprite = Res.LoadAssetSync<Sprite>(item.ItemDefine.Icon);
-    }
-
-    /// <summary>
-    /// 更新物品数量
-    /// </summary>
-    public void UpdateAmountUI(int count)
-    {
-        if(count == -1)
-        {
-            AmountText.text = "";
-
-        }
-        else
-        {
-            AmountText.text = "" + count;
-        }
-    }
-
-    /// <summary>
-    /// 背包内放置物品
-    /// </summary>
-    /// <param name="originIndex"></param>
-    /// <param name="targetIndex"></param>
-    private void ItemPlacement(int originIndex, int targetIndex)
-    {
-        ItemDataManager.Instance.ItemPlacement(InventoryType.Knapsack,originIndex, targetIndex);
-    }
-
-    /// <summary>
-    /// 下面这三个函数是鼠标拖拽ui的事件
-    /// </summary>
-    /// <param name="eventData"></param>
+    #region 鼠标事件
     public void OnBeginDrag(PointerEventData eventData)
     {
         // 记录初始位置和偏移量
@@ -98,25 +59,23 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         // 隐藏物品的RaycastTarget，避免干扰鼠标事件
         icon.raycastTarget = false;
     }
-
     public void OnDrag(PointerEventData eventData)
     {
         if (!isDragging) return;
         // 更新物品位置
         transform.position = Input.mousePosition + offset;
     }
-
     public void OnEndDrag(PointerEventData eventData)
     {
-
         if (!isDragging) return;
 
-        //是否指向UI组件
+        // 是否指向UI组件
         if (EventSystem.current.IsPointerOverGameObject()) 
         {
-            //获取鼠标位置的游戏对象
+            // 获取鼠标位置的游戏对象
             InventorySlot targetSlot = eventData.pointerEnter.gameObject.GetComponent<InventorySlot>();
-            //可能碰到了icon
+
+            // 可能碰到了icon, 找它父亲
             if(targetSlot == null)
             {
                 targetSlot = eventData.pointerEnter.GetComponentInParent<InventorySlot>();
@@ -146,7 +105,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         }
         else
         {
-            //指向了一个非ui物体上，丢弃
+            // 指向了一个非ui物体上，丢弃
             originSlot.SetItemUI(this);            // 还原物品位置和父级格子,因为可能没有一次性丢完
             ItemDiscard(this.item.SlotId, 1);
         }
@@ -156,15 +115,8 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
         // 恢复物品的RaycastTarget
         icon.raycastTarget = true;
-
     }
 
-
-
-    /// <summary>
-    /// 鼠标掠过的事件
-    /// </summary>
-    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         var content = "<color=#ffffff>物品信息为空</color>";
@@ -173,35 +125,29 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             content = this.item.GetItemDescText();
         }
         ToolTip.Instance.Show(content);
-    } 
-
+    }
     public void OnPointerExit(PointerEventData eventData)
     {
         ToolTip.Instance?.Hide();
     }
 
-    /// <summary>
-    /// 鼠标点击事件
-    /// </summary>
-    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
-        string[] options1 = { "使用","丢弃" };
+        string[] options1 = { "使用", "丢弃" };
         string[] options2 = { "穿戴", "丢弃" };
         string[] options3 = { "卸下" };
         string[] options4 = { "丢弃" };
 
-
         string[] opt = { };
-        
+
         var slot = transform.parent.GetComponent<UISlot>();
-        if(slot is InventorySlot)
+        if (slot is InventorySlot)
         {
             if (item.GetItemType() == ItemType.Equipment)
             {
                 opt = options2;
             }
-            else if(item.GetItemType() == ItemType.Material)
+            else if (item.GetItemType() == ItemType.Material)
             {
                 opt = options4;
             }
@@ -210,7 +156,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
                 opt = options1;
             }
         }
-        else if(slot is EquipSlot)
+        else if (slot is EquipSlot)
         {
             opt = options3;
         }
@@ -218,11 +164,6 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         if (opt.Length == 0) return;
         ItemMenu.Show(Input.mousePosition, opt, OnClickAction);
     }
-
-    /// <summary>
-    /// 行为
-    /// </summary>
-    /// <param name="value"></param>
     public void OnClickAction(string value)
     {
         switch (value)
@@ -239,13 +180,36 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             case "丢弃":
                 ItemDiscard(this.item.SlotId, 1);
                 break;
-
         }
     }
+    #endregion
 
-    /// <summary>
-    /// 物品使用
-    /// </summary>
+    #region UI更新
+    public void UpdateItemUI()
+    {
+        AmountText.text = "" + item.Amount;
+        icon.gameObject.SetActive(true);
+        icon.sprite = Res.LoadAssetSync<Sprite>(item.ItemDefine.Icon);
+    }
+    public void UpdateAmountUI(int count)
+    {
+        if (count == -1)
+        {
+            AmountText.text = "";
+
+        }
+        else
+        {
+            AmountText.text = "" + count;
+        }
+    }
+    #endregion
+
+    #region 行为
+    private void ItemPlacement(int originIndex, int targetIndex)
+    {
+        ItemDataManager.Instance.ItemPlacement(ItemInventoryType.Backpack, ItemInventoryType.Backpack, originIndex, targetIndex);
+    }
     private void ItemUse()
     {
         var slot = transform.parent.GetComponent<UISlot>();
@@ -254,39 +218,22 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             ItemDataManager.Instance.ItemUse(slot.SlotIndex, 1);
         }
     }
-
-    /// <summary>
-    /// 丢弃物品
-    /// </summary>
-    /// <param name="slotIndex"></param>
-    /// <param name="count"></param>
     private void ItemDiscard(int slotIndex, int count)
     {
         //弹出提示框，询问扔多少个
         var panel = UIManager.Instance.GetOpeningPanelByName("KnapsackPanel") as KnapsackPanel;
         panel.NumberInputBox.Show(transform.position,item.ItemDefine.Name, item.Amount,
             (targetAmount) => {
-                ItemDataManager.Instance.ItemDiscard(item.SlotId, targetAmount, InventoryType.Knapsack);
+                ItemDataManager.Instance.ItemDiscard(item.SlotId, targetAmount, ItemInventoryType.Backpack);
             });
     }
-
-    /// <summary>
-    /// 武器穿戴
-    /// </summary>
-    /// <param name="slotIndex"></param>
-    /// <param name="type"></param>
     private void WearEquipment(int knapsackSlotIndex)
     {
         ItemDataManager.Instance.WearEquipment(knapsackSlotIndex);
     }
-
-    /// <summary>
-    /// 装备卸载
-    /// </summary>
-    /// <param name="type"></param>
     private void UnloadEquipment(EquipsType type)
     {
         ItemService.Instance._UnloadEquipmentRequest(type);
     }
-
+    #endregion
 }

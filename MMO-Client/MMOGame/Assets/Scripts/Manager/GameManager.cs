@@ -42,6 +42,7 @@ public class GameManager : Singleton<GameManager>
         ItemService.Instance.Init();
         BuffService.Instance.Init();
         TaskHandler.Instance.Init();
+        ItemHandler.Instance.Init();
         UIManager.Instance.Init();
         GlobalAudioManager.Instance.Init(LocalDataManager.Instance.gameSettings.audioSetting);
 
