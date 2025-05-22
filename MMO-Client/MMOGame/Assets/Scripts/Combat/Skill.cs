@@ -142,18 +142,16 @@ namespace GameClient.Combat
             _sco = target;
             RunTime = 0;
 
-            //技能阶段从none切换到蓄气阶段
-            Stage = SkillStage.Intonate;
-            OnIntonate();
-
-            Owner.m_baseController.ChangeState(NetActorState.Skill, true);
-        }
-
-        /// <summary>
-        /// 蓄气阶段，让游戏对象切换动画状态
-        /// </summary>
-        public void OnIntonate()
-        {
+            if(Define.IntonateTime != 0)
+            {
+                Stage = SkillStage.Intonate;
+                OnIntonate();
+            }
+            else
+            {
+                Stage = SkillStage.Active;
+                OnActive();
+            }
 
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
@@ -167,6 +165,17 @@ namespace GameClient.Combat
                     }
                 }
             });
+
+            Owner.m_baseController.ChangeState(NetActorState.Skill, true);
+        }
+
+        /// <summary>
+        /// 蓄气阶段，让游戏对象切换动画状态
+        /// </summary>
+        public void OnIntonate()
+        {
+
+
 
         }
 

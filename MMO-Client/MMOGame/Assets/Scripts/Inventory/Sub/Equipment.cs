@@ -10,19 +10,21 @@ namespace GameClient.InventorySystem
     {
         private EquipsType m_equipsType;
         private AttrubuteData m_attrubuteData;
-        public EquipsType EquipsType => m_equipsType;
 
-        public Equipment(NetItemDataNode itemInfo) : base(itemInfo)
+        public EquipsType EquipsType => m_equipsType;
+        public EquipSlotType EquipSlotType => m_itmeDataNode.Equipdata.SlotType;
+
+        public Equipment(NetItemDataNode itemDataNode) : base(itemDataNode)
         {
             m_equipsType = ParseEquipType(ItemDefine.EquipType);
-            // LoadAttrubuteData(itemInfo);
+            LoadAttrubuteData(itemDataNode);
         }
         public Equipment(ItemDefine define,int position = 0) : base(define, 1, position)
         {
             LoadAttrubuteData(null);
         }
 
-        private void LoadAttrubuteData(ItemInfo itemInfo)
+        private void LoadAttrubuteData(NetItemDataNode itemDataNode)
         {
             m_attrubuteData = new AttrubuteData
             {

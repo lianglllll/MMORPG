@@ -66,9 +66,16 @@ public class ItemHandler : SingletonNonMono<ItemHandler>
         SendGetItemInventoryDataRequest(ItemInventoryType.Backpack);
     }
 
+    public void SendUseItemRequest(int slotIndex, int count)
+    {
+        var req = new UseItemRequest();
+        req.GridIndex = slotIndex;
+        req.Count = count;
+        NetManager.Instance.Send(req);
+    }
     private void HandleUseItemResponse(Connection sender, UseItemResponse message)
     {
-        throw new NotImplementedException();
+        SendGetItemInventoryDataRequest(ItemInventoryType.Backpack);
     }
 
     public void SendDiscardItemRequest(int slotIndex, int count, ItemInventoryType type)
@@ -122,21 +129,28 @@ public class ItemHandler : SingletonNonMono<ItemHandler>
         }
     }
 
-
-    public void SendWearEquipResponse()
+    public void SendWearEquipRequest(int knapsackSlotIndex, EquipSlotType type)
     {
-
+        var req = new WearEquipRequest();
+        req.GridIndex = knapsackSlotIndex;
+        req.EquipSlotType = type;
+        NetManager.Instance.Send(req);
     }
     private void HandleWearEquipResponse(Connection sender, WearEquipResponse message)
     {
         SendGetItemInventoryDataRequest(ItemInventoryType.Equipments);
+        SendGetItemInventoryDataRequest(ItemInventoryType.Backpack);
     }
-    public void SendUnloadEquipResponse()
-    {
 
+    public void SendUnloadEquipRequest(EquipSlotType type)
+    {
+        var req = new UnloadEquipRequest();
+        req.Type = type;
+        NetManager.Instance.Send(req);
     }
     private void HandleUnloadEquipResponse(Connection sender, UnloadEquipResponse message)
     {
         SendGetItemInventoryDataRequest(ItemInventoryType.Equipments);
+        SendGetItemInventoryDataRequest(ItemInventoryType.Backpack);
     }
 }

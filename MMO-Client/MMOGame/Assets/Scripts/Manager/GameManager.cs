@@ -1,4 +1,3 @@
-using Assets.Script.Service;
 using HSFramework.PoolModule;
 using HSFramework.MySingleton;
 using GameClient.Entities;
@@ -39,8 +38,6 @@ public class GameManager : Singleton<GameManager>
         SceneHandler.Instance.Init();
         CombatHandler.Instance.Init();
         ChatHandler.Instance.Init();
-        ItemService.Instance.Init();
-        BuffService.Instance.Init();
         TaskHandler.Instance.Init();
         ItemHandler.Instance.Init();
         UIManager.Instance.Init();

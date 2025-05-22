@@ -2,7 +2,7 @@ using HS.Protobuf.Backpack;
 
 public class Item 
 {
-    private NetItemDataNode m_itmeDataNode;
+    protected NetItemDataNode m_itmeDataNode;
     private ItemDefine m_itemDefine;
 
     #region GetSet

@@ -61,7 +61,6 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
         {
 
         }
-
     }
     #endregion
 
@@ -83,14 +82,15 @@ public class ItemDataManager : SingletonNonMono<ItemDataManager>
 
     public void ItemUse(int slotIndex,int count)
     {
-        ItemService.Instance.ItemUseRequest(slotIndex, count);
+        ItemHandler.Instance.SendUseItemRequest(slotIndex, count);
     }
-    public void WearEquipment(int knapsackSlotIndex)
+    public void WearEquipment(int knapsackSlotIndex, EquipSlotType type)
     {
-        ItemService.Instance._WearEquipmentRequest(knapsackSlotIndex);
+        ItemHandler.Instance.SendWearEquipRequest(knapsackSlotIndex, type);
     }
-    public void UnloadEquipment(EquipsType type)
+    public void UnloadEquipment(EquipSlotType type)
     {
+        ItemHandler.Instance.SendUnloadEquipRequest(type);
     }
     public void UpdateKnapsackItemAmount(ItemUseResponse resp)
     {

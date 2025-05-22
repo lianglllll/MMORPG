@@ -124,7 +124,15 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
         needItemNum++;
         tasks.TryGetValue(GameTaskState.InProgress, out var inProgress);
         tasks.TryGetValue(GameTaskState.Completed, out var completed);
-        if (inProgress != null)
+        tasks.TryGetValue(GameTaskState.Unlocked, out var unLocked);
+        tasks.TryGetValue(GameTaskState.Locked, out var Locked);
+
+        bool haveInProgress = inProgress != null && inProgress.Count > 0;
+        bool haveCompleted = completed != null && completed.Count > 0;
+        bool haveUnLocked = unLocked != null && unLocked.Count > 0;
+        bool haveLocked = Locked != null && Locked.Count > 0;
+
+        if (haveInProgress)
         {
             if(defaultShowIdx == -1)
             {
@@ -132,7 +140,7 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
             }
             needItemNum += inProgress.Count;
         }
-        if(completed != null)
+        if(haveCompleted)
         {
             if (defaultShowIdx == -1)
             {
@@ -143,8 +151,7 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
 
         // 待接取
         needItemNum++;
-        tasks.TryGetValue(GameTaskState.Unlocked, out var unLocked);
-        if(unLocked != null)
+        if(haveUnLocked)
         {
             if (defaultShowIdx == -1)
             {
@@ -155,8 +162,7 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
 
         // 未解锁
         needItemNum++;
-        tasks.TryGetValue(GameTaskState.Locked, out var Locked);
-        if (Locked != null)
+        if (haveLocked)
         {
             if (defaultShowIdx == -1)
             {
@@ -194,7 +200,7 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
         m_taskListItems[curIdx].UnInit();
         m_taskListItems[curIdx].Init(TaskListItemMode.Tips, "进行中", null, null);
         curIdx++;
-        if (inProgress != null)
+        if (haveInProgress)
         {
             foreach (var item in inProgress.Values)
             {
@@ -203,7 +209,7 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
                 curIdx++;
             }
         }
-        if (completed != null)
+        if (haveCompleted)
         {
             foreach (var item in completed.Values)
             {
@@ -217,7 +223,7 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
         m_taskListItems[curIdx].UnInit();
         m_taskListItems[curIdx].Init(TaskListItemMode.Tips, "待接取", null, null);
         curIdx++;
-        if (unLocked != null)
+        if (haveUnLocked)
         {
             foreach (var item in unLocked.Values)
             {
@@ -231,7 +237,7 @@ public class TaskPanel : BasePanel, ICommonListSelectOpionMgr
         m_taskListItems[curIdx].UnInit();
         m_taskListItems[curIdx].Init(TaskListItemMode.Tips, "未解锁", null, null);
         curIdx++;
-        if (Locked != null)
+        if (haveLocked)
         {
             foreach (var item in Locked.Values)
             {

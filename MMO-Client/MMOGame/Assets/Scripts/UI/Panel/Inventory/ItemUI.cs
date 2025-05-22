@@ -172,10 +172,10 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
                 ItemUse();
                 break;
             case "穿戴":
-                WearEquipment(item.SlotId);
+                WearEquipment(item);
                 break;
             case "卸下":
-                UnloadEquipment((item as Equipment).EquipsType);
+                UnloadEquipment((item as Equipment).EquipSlotType);
                 break;
             case "丢弃":
                 ItemDiscard(this.item.SlotId, 1);
@@ -227,13 +227,36 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
                 ItemDataManager.Instance.ItemDiscard(item.SlotId, targetAmount, ItemInventoryType.Backpack);
             });
     }
-    private void WearEquipment(int knapsackSlotIndex)
+    private void WearEquipment(Item item)
     {
-        ItemDataManager.Instance.WearEquipment(knapsackSlotIndex);
+        EquipSlotType equipSlotType = _SpeculateSuitableLocation((item as Equipment).EquipsType);
+        ItemDataManager.Instance.WearEquipment(item.SlotId, equipSlotType);
     }
-    private void UnloadEquipment(EquipsType type)
+    private void UnloadEquipment(EquipSlotType type)
     {
-        ItemService.Instance._UnloadEquipmentRequest(type);
+        ItemDataManager.Instance.UnloadEquipment(type);
     }
+    #endregion
+
+    #region tools
+    private EquipSlotType _SpeculateSuitableLocation(EquipsType equipsType)
+    {
+        return equipsType switch
+        {
+            EquipsType.Weapon => EquipSlotType.Weapon1,  // 武器默认装在主武器槽
+            EquipsType.Helmet => EquipSlotType.Helmet,
+            EquipsType.Neck => EquipSlotType.Neck,
+            EquipsType.Chest => EquipSlotType.Chest,
+            EquipsType.Wristband => EquipSlotType.Wristband,
+            EquipsType.Bracelet => EquipSlotType.Bracelet,
+            EquipsType.Ring => EquipSlotType.Ring,
+            EquipsType.Belt => EquipSlotType.Belt,
+            EquipsType.Legs => EquipSlotType.Legs,
+            EquipsType.Boots => EquipSlotType.Boots,
+            EquipsType.Wings => EquipSlotType.Wings,
+            _ => EquipSlotType.None
+        };
+    }
+
     #endregion
 }
