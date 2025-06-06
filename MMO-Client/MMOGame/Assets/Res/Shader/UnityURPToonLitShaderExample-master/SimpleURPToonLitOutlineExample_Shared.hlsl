@@ -43,6 +43,8 @@
 // subfix VS means view space       (e.g. positionVS = position view space)
 // subfix CS means clip space       (e.g. positionCS = position clip space)
 
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
+
 // all pass will share this Attributes struct (define data needed from Unity app to our vertex shader)
 struct Attributes
 {

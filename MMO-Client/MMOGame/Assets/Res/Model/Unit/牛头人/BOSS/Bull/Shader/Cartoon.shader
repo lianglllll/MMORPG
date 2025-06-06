@@ -1,4 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
 Shader "TAZO/Cartoon" {
     Properties {
@@ -44,6 +44,7 @@ Shader "TAZO/Cartoon" {
  
                 fixed4 c;
                 c.rgb = ((s.Albedo * _Color.rgb * ramp * _LightColor0.rgb + _LightColor0.rgb * spec) * (atten * 2));
+                c.a = 1; // 添加这一行，确保 Alpha 通道被赋值
                 return c;
             }
    

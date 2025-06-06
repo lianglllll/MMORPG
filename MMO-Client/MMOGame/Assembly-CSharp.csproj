@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\SelectionPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Chat\ChatBoxScript.cs" />
     <Compile Include="Assets\Scripts\Handle\CombatHandler.cs" />
+    <Compile Include="Assets\Art\Unit\IdaFaber\Demo\S_CameraController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Crouch.cs" />
     <Compile Include="Assets\Res\Model\Unit\Suriyun\Scripts\controller.cs" />
     <Compile Include="Assets\Scripts\Handle\SecurityHandler.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\RemotePlayerState.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemCell.cs" />
     <Compile Include="Assets\Scripts\Net\NetClient.cs" />
+    <Compile Include="Assets\Art\Unit\Malbers Animations\Common\Scripts\Readme\Readme.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Skill.cs" />
     <Compile Include="Assets\Scripts\Combat\Skill\LocalSkillConfig\LocalSkill_Hit_EF_Config_SO.cs" />
     <Compile Include="Assets\Scripts\Handle\UserHandler.cs" />
@@ -111,12 +113,15 @@
     <Compile Include="Assets\aExample\CombatSystem\Player\Player_State.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\DialogButton.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\PickUpItemListBox.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\RzFX_BloodSpray\KillTime.cs" />
     <Compile Include="Assets\aExample\aMyTest\TimeMachineMgr2.cs" />
     <Compile Include="Assets\Res\Model\Unit\牛头人\DemoScene\demo.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Prone.cs" />
     <Compile Include="Assets\Scripts\UI\Setting\Component\ControlSettingPanel.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\MeleeWeaponTrail\Scripts\MeleeWeaponTrail.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Death.cs" />
     <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\Slash_Light.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\MeleeWeaponTrail\Example\Scripts\MouseMove.cs" />
     <Compile Include="Assets\Scripts\Entities\Npc.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\MaterialItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectWorld\SelectWorldPanel.cs" />
@@ -127,10 +132,8 @@
     <Compile Include="Assets\Scripts\Combat\Missile.cs" />
     <Compile Include="Assets\Scripts\Inventory\Sub\Consumable.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Evade.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Scripts\Interpolate.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\Boss_Model.cs" />
     <Compile Include="Assets\Scripts\Manager\TaskDataManager.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\LookAtTarget.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_IdelState.cs" />
     <Compile Include="Assets\Scripts\Interaction\Base\InteractionBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\Chat\ChatSelectOption.cs" />
@@ -139,7 +142,6 @@
     <Compile Include="Assets\Scripts\Combat\Attributes.cs" />
     <Compile Include="Assets\Scripts\Combat\Buffs\Buff.cs" />
     <Compile Include="Assets\aExample\aMyTest2\TimeLeap.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\SwooshTest.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Evade.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\UnitDefine.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\TaskDefine.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Assets\Scripts\Combat\SCObject.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillConfig.cs" />
     <Compile Include="Assets\Scripts\Entities\Actor.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\MeleeWeaponTrail\Example\Scripts\SwooshTest.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\SuntailStartDemo.cs" />
     <Compile Include="Assets\Scripts\Combat\AttrubuteData.cs" />
     <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Scripts\AnimationEventEffects.cs" />
@@ -174,7 +177,6 @@
     <Compile Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\MobileBloom\Slashes_MobileBloom.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Knock.cs" />
     <Compile Include="Assets\Art\UI\ChibiDialog\Scripts\Dialog.cs" />
-    <Compile Include="Assets\Art\joker-Combat\Flooded_Grounds\Scripts\WaterFloat.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_StrandAttackState.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\PlayerInteractions.cs" />
     <Compile Include="Assets\Scripts\Net\NetworkTime.cs" />
@@ -234,17 +236,14 @@
     <Compile Include="Assets\Scripts\Player\Tools\UnitAudioManager.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\WeaponSkillArsenalDefine.cs" />
     <Compile Include="Assets\HotUpdate\HybridCLRGenerate\AOTGenericReferences.cs" />
-    <Compile Include="Assets\Art\joker-Combat\RzFX_BloodSpray\KillTime.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Info\Componet\DeliverPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\SelectRole\CreateRolePanelScript.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Scripts\MeleeWeaponTrail.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Config\Skill\SkillObjBase.cs" />
     <Compile Include="Assets\Scripts\Test\DrawRangeGizmo.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Idle.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\NumberInputBox.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\BasePanel.cs" />
-    <Compile Include="Assets\Art\joker-Combat\MeleeWeaponTrail\Example\Scripts\MouseMove.cs" />
     <Compile Include="Assets\Scripts\Manager\GameTools.cs" />
     <Compile Include="Assets\Scripts\Player\Tools\UnitUIController.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Boss\State\Boss_AttackState.cs" />
@@ -254,6 +253,7 @@
     <Compile Include="Assets\aExample\CombatSystem\Skill\Weapon_Controller.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\LevelDefine.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Skill\SkillInfo.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\RzFX_BloodSpray\PlayFX.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Inventory\InventoryService.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Player\Player\Player_HurtState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal_Equip\LocalPlayerState_Normal_Equip_Idle.cs" />
@@ -267,7 +267,7 @@
     <Compile Include="Assets\Scripts\UI\Panel\Combat\EquipSkillSlot\AbilitySlotScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Knock.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Dizzy.cs" />
-    <Compile Include="Assets\Art\joker-Combat\RzFX_BloodSpray\PlayFX.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\MeleeWeaponTrail\Example\Scripts\LookAtTarget.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Fly\LocalPlayerState_Fly_Motion.cs" />
     <Compile Include="Assets\aExample\CombatSystem\Frame\ModelBase.cs" />
@@ -303,8 +303,10 @@
     <Compile Include="Assets\Scripts\Handle\ChatHandler.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Remote\Normal\RemotePlayerState_Motion.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal_Equip\LocalPlayerState_Normal_Equip_Motion.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\MeleeWeaponTrail\Scripts\Interpolate.cs" />
     <Compile Include="Assets\Scripts\LocalData\DataDefine\SpawnDefine.cs" />
     <Compile Include="Assets\Res\Env\Suntail Village\Scripts\PhysicsObject.cs" />
+    <Compile Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Scripts\WaterFloat.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState_Local\Normal\LocalPlayerState_Crouch.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Combat\BuffGroupScript.cs" />
     <Compile Include="Assets\Scripts\Camera\TP_CameraController.cs" />
@@ -323,51 +325,70 @@
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.MMD4Mecanim.xml" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />
     <None Include="Assets\Art\Effects\Red_clue\Slash_effects\Documentaion\How to use.txt" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Mask8Toon.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuNNDV1.MMD4Mecanim.xml" />
     <None Include="Assets\Res\Shader\UI\Circular.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\DragonEggs_Shader.shader" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\NiloZOffset.hlsl" />
     <None Include="Assets\Res\Env\Suntail Village\Demo\Fonts\Fonts License.txt" />
     <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\MobileBloom\Resources\Slashes_Bloom.shader" />
     <None Include="Assets\Res\Shader\UI\CustomRoundCornerShader.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Color4x4.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuNNDV1.xml" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\SimpleURPToonLitOutlineExample.shader" />
-    <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_SpotLit.shader" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBark.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Mask4Toon.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\RzFX_BloodSpray\Shader\Rz_SpotLit.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Mask4Realistic.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Dragons\Common\Eyes\Dragon_Eyes.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Golem Shader.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBark.shader" />
     <None Include="Assets\Res\Env\Suntail Village\Shaders\Suntail_Water.shader" />
     <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.xml" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Fur.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Color3x3.shader" />
     <None Include="Assets\Res\Env\Suntail Village\Shaders\Suntail_Surface.shader" />
     <None Include="Assets\HotUpdate\HybridCLRGenerate\link.xml" />
-    <None Include="Assets\Art\joker-Combat\MeleeWeaponTrail\README.txt" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeavesOptimized.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\MeleeWeaponTrail\README.txt" />
+    <None Include="Assets\Art\Unit\Protofactor\Sci Fi\SciFiCharactersMegaPackVol3\RobotsPackVol3\LightQuadrupedMech\READ_ME.txt" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Color4x3.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeavesOptimized.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Wind Shader.shader" />
     <None Include="Assets\Res\Env\Suntail Village\URP Shaders\Important.txt" />
     <None Include="Assets\Res\Model\Unit\Suriyun\README.txt" />
     <None Include="Assets\Art\Unit\明日香紧身作战服\明日香.xml" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\SimpleURPToonLitOutlineExample_Shared.hlsl" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\NiloInvLerpRemap.hlsl" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\AnisotropicCircular.shader" />
     <None Include="Assets\Res\Model\Unit\牛头人\BOSS\Bull\Shader\Cartoon.shader" />
     <None Include="Assets\Res\Env\Suntail Village\Documentation\Readme.txt" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_PBR_TopBlend.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Content\Shaders\FG_PBR_TopBlend.shader" />
     <None Include="Assets\Art\Unit\明日香紧身作战服\使用规则.txt" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuV1武器.xml" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\MWater2.shader" />
     <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\MobileBloom\Resources\Slashes_Bloom_Inc.cginc" />
     <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\Slash_AnimBlended.shader" />
     <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\SlashBird.shader" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\WavingGrass.shader" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBarkOptimized.shader" />
-    <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_MeshMask.shader" />
+    <None Include="Assets\Art\Unit\IdaFaber\Shaders\Double-sided.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Resources\WavingGrass.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorBarkOptimized.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\RzFX_BloodSpray\Shader\Rz_MeshMask.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Gradient4.shader" />
     <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\SlashShader.shader" />
     <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\SceneResources\Other\CullOffMobileDiffuse.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Color4x4 Unlit.shader" />
     <None Include="Assets\Art\Unit\绛雨\jiangyuV1武器.MMD4Mecanim.xml" />
-    <None Include="Assets\Art\joker-Combat\RzFX_BloodSpray\Shader\Rz_NoiseDissolve.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\RzFX_BloodSpray\Shader\Rz_NoiseDissolve.shader" />
     <None Include="Assets\Res\Env\Suntail Village\Shaders\Suntail_Foliage.shader" />
     <None Include="Assets\Res\UI\Fonts\zh-cn.txt" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeaves.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Resources\TreeCreator\TreeCreatorLeaves.shader" />
     <None Include="Assets\Art\Weapon\水仙十字之剑\水仙十字之剑.MMD4Mecanim.xml" />
     <None Include="Assets\Res\Shader\UnityURPToonLitShaderExample-master\NiloOutlineUtil.hlsl" />
     <None Include="Assets\Art\Effects\OrdosFX\Magic Slashes FX\Shaders\SlashParticles.shader" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_Triplanar_BumpSpec.shader" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_Skybox_Rotating.shader" />
-    <None Include="Assets\Art\joker-Combat\Flooded_Grounds\Content\Shaders\FG_PBR_Water.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Content\Shaders\FG_Triplanar_BumpSpec.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Shaders\Mask8Realistic.shader" />
+    <None Include="Assets\Art\Unit\Malbers Animations\Common\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Content\Shaders\FG_Skybox_Rotating.shader" />
+    <None Include="Assets\Art\Unit\joker-Combat\Flooded_Grounds\Content\Shaders\FG_PBR_Water.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1274,10 +1295,6 @@
       <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Toonshader">
-      <HintPath>Library\ScriptAssemblies\Unity.Toonshader.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1332,10 +1349,6 @@
     </Reference>
     <Reference Include="PPv2URPConverters">
       <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Toonshader.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Toonshader.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
@@ -1482,10 +1495,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.FilmInternalUtilities.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.FilmInternalUtilities.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
       <Private>False</Private>
@@ -1572,10 +1581,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.FilmInternalUtilities">
-      <HintPath>Library\ScriptAssemblies\Unity.FilmInternalUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
