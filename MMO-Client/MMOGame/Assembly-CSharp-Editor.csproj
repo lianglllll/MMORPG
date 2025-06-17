@@ -60,8 +60,12 @@
     <Analyzer Include="D:\MygameTools\2022.3.59f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Art\Model\Unit\Malbers Animations\Common\Scripts\Editor\Menu\MalbersMenu.cs" />
+    <Compile Include="Assets\Editor\Animation\EditorAnimDisplayWindow.cs" />
     <Compile Include="Assets\HotUpdate\Editor\HybridCLR\BuildPlayerCommand.cs" />
-    <Compile Include="Assets\Art\Unit\Malbers Animations\Common\Scripts\Editor\Menu\MalbersMenu.cs" />
+    <Compile Include="Assets\Editor\Animation\AnimationPreviewPlayer.cs" />
+    <Compile Include="Assets\Editor\Gizmos\DrawRangeGizmo.cs" />
+    <Compile Include="Assets\Editor\Animation\IMGUI_SkillTester.cs" />
     <Compile Include="Assets\HotUpdate\Editor\HybridCLR\BuildAssetsCommand.cs" />
   </ItemGroup>
   <ItemGroup>
